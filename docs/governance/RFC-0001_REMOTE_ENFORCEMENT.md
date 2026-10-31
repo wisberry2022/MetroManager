@@ -31,3 +31,9 @@ ENFORCEMENT.md의 구체 사양대로 main 보호와 squash-only를 활성화한
 ## 후속 Owner 결정
 
 2026-10-31 DEC-0001로 DEV-002의 commit/main 통합/push가 승인되었다. 해당 Git 반영 승인 조건은 해소되었으며, 원격 보호 설정·플랜·독립 인증 확인은 계속 OPEN이다.
+
+## DEV-003 적용 결과
+
+2026-10-31 공개 개인 저장소임을 확인하고 PR #1로 부서 정책을 통합했다. 기존 Git 인증의 관리자 API로 main 보호(PR, 필수 검사 policy/department-policy, strict, enforce_admins, 선형 이력, 강제 push/삭제 금지)와 squash-only를 적용했다. PR #2에서 잘못된 제목의 검사 실패 및 병합 blocked 상태를 확인했다. 원격 접근/요금제 확인/보호 활성화 항목은 해소했다.
+
+남은 OPEN 범위는 동일 계정의 실제 부서 구별, 별도 리뷰 계정/App 구성, 향후 부서별 권한 위임 범위이다. 현재 필수 리뷰 수는 0이며 Owner 승인 원칙은 유지한다. 독립 리뷰가 기술적으로 강제된 것으로 보고하지 않는다.

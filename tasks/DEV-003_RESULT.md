@@ -36,3 +36,18 @@
 동일 계정의 DEV 사칭까지 기술적으로 막으려면 계정/App 분리가 필요하다. 현재 자기 PR 승인은 불가능하므로 필수 리뷰 0 + PR/필수 검사로 운영하며 Owner의 승인 원칙은 유지한다. CODEOWNERS 자체는 디렉터리 쓰기 권한이 아니다. 서버 보호를 바꿀 수 있는 관리자 본인까지 영구적으로 제한하는 구조는 아니다.
 
 ChatGPT 타 부서에 자동 메시지는 전송하지 않는다. 각 채팅의 지침에 DEPARTMENT_WORKFLOW의 시작 문구를 적용하고 원격 문서를 명시적으로 읽어야 한다. 기존 HQ DRAFT 및 과거 승인 문서는 이동하거나 승인 상태를 변경하지 않았다.
+
+## 원격 적용 후속 기록
+
+- PR #1: policy CI 성공 후 squash 통합, main SHA `4254dd5aad0fadee9ce3a2b165f7e3489595c658`.
+- main 보호 적용 및 API 읽기 확인: PR 필수, policy/department-policy 필수, strict=true, enforce_admins=true, 선형 이력, force push/삭제 금지, 대화 해결 필수.
+- 저장소 병합 방식: squash만 허용, merge commit/rebase merge/auto-merge 비활성.
+- 필수 리뷰 0: 현재 동일 계정 구조를 반영. 독립 승인·부서 신원 분리는 후속 조건이다.
+- 이 후속 결과 문서는 GitHub 플러그인의 create_branch와 update_file(Contents API)로 작업 브랜치에 직접 기록했다. 로컬 훅 없는 API 쓰기의 실제 경로를 검증한다.
+- 후속 PR에서 department-policy 정상 실행과 잘못된 제목 거부를 확인하고 최종 결과를 채팅에 보고한다.
+
+### 원격 부정 사례 검증
+
+PR #2의 비정형 제목에서 policy와 department-policy가 모두 failure로 종료했다. department-policy 실행 41167652663의 job 124438598511 로그에서 `Expected [부서][type] TASK-ID 설명` 오류를 확인했다. 같은 시점 PR API의 mergeable_state는 blocked였다. 코드는 정상이고 제목만 잘못된 사례이며, 제목 복구 후 다시 검사한다.
+
+이 후속 커밋은 GitHub 플러그인의 create_tree/create_commit/update_ref(expected_sha, force=false)로 문서 4개를 원자적으로 갱신하여 다중 파일 API 경로도 검증한다.
