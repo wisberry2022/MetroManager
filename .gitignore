@@ -19,3 +19,8 @@
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# Repository tooling environment
+/.venv/
+__pycache__/
+*.pyc

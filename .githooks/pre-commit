@@ -1,0 +1,9 @@
+#!/bin/sh
+set -eu
+if [ -x .venv/Scripts/python.exe ]; then
+  exec .venv/Scripts/python.exe tools/policy.py pre-commit
+elif [ -x .venv/bin/python ]; then
+  exec .venv/bin/python tools/policy.py pre-commit
+fi
+echo 'Create .venv and install tools/requirements-dev.txt first.' >&2
+exit 1

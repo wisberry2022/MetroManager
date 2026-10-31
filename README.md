@@ -25,3 +25,7 @@ Windows x86_64용 2D 픽셀 아트 경영 시뮬레이션 프로젝트입니다.
 Git은 공식 산출물의 단일 원본입니다. 최신 커밋 여부와 문서 승인 여부는 별개입니다. 승인된 티켓 범위에서 작업한 후 변경 파일과 검증 증거를 결과 보고서로 제출하고, Owner가 검토·승인 후 커밋합니다. Development Agent는 추가 승인 없이 커밋·푸시·병합·릴리스하지 않습니다.
 
 HQ·Planning·Design의 별도 ChatGPT 채팅 및 프로젝트 소스는 Git과 자동 동기화되지 않습니다. 인수인계에는 경로, 버전, 승인 상태, 기준 커밋 SHA를 명시하십시오.
+
+## 코드와 Git 검사
+
+신규 개발은 `docs/engineering/CODE_CONVENTIONS.md`와 `GIT_WORKFLOW.md`를 따릅니다. 로컬 환경 설치와 GitHub 강제 적용 절차·미적용 사항은 `docs/engineering/ENFORCEMENT.md`에 있습니다. 작업 시작 전에 해당 문서와 AGENTS.md를 읽고 검사 환경을 확인하십시오.
