@@ -1,5 +1,7 @@
 # 검사 설치와 강제 적용
 
+DEV-003 추가: GitHub 플러그인의 API 쓰기는 로컬 훅을 실행하지 않는다. 전 부서의 메시지·경로·브랜치 검사와 신뢰 경계는 `DEPARTMENT_WORKFLOW.md`를 따른다. main 필수 검사에는 `policy`와 `department-policy`를 함께 지정한다. 후자는 base 코드만 실행하는 pull_request_target 검사다. 현재 연결 계정이 Owner 한 개이므로 독립 리뷰 계정이 준비되기 전에는 필수 승인 수 0 + PR/필수 CI/Owner의 명시적 병합 승인으로 운영하고, 별도 리뷰 계정 도입 시 1 이상으로 올린다. 동일 계정의 자기 PR 승인은 GitHub에서 허용되지 않는다.
+
 - DEV-002 / v1.0 / REVIEW / 2026-10-31
 
 ## 로컬 설치 (clone/worktree별 확인)

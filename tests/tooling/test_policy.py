@@ -21,13 +21,13 @@ class PolicyTests(unittest.TestCase):
                 policy.branch_task(bad)
 
     def test_message(self):
-        policy.message_check("fix(core): DEV-003 문제 수정\n\n영향과 검증입니다.", "DEV-003")
-        for bad in ("free text", "fix(core): DEV-003 제목만", "fix(core): DEV-004 다른 티켓\n\n본문"):
+        policy.message_check("[DEV][fix] DEV-003 문제 수정\n\n영향과 검증입니다.", "DEV-003")
+        for bad in ("free text", "[DEV][fix] DEV-003 제목만", "[DEV][fix] DEV-004 다른 티켓\n\n본문"):
             with self.subTest(bad=bad), self.assertRaises(ValueError):
                 policy.message_check(bad, "DEV-003")
 
     def test_pr_title(self):
-        policy.message_check("ci(policy): DEV-002 검사 추가", "DEV-002", title_only=True)
+        policy.message_check("[DEV][ci] DEV-002 검사 추가", "DEV-002", title_only=True)
 
     def test_ticket(self):
         policy.ticket_check("DEV-002", ["tasks/DEV-002_REPOSITORY_POLICY.md"])

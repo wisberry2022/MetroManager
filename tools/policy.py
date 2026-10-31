@@ -10,39 +10,13 @@ import subprocess
 import sys
 import tempfile
 
-TASK = r"(?:DEV|PLN|DSG|PM)-[0-9]{3,}"
-BRANCH = re.compile(rf"codex/({TASK})-[a-z0-9]+(?:-[a-z0-9]+)*")
-SUBJECT = re.compile(
-    rf"(?:feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)"
-    rf"\([a-z][a-z0-9-]*\)!?: ({TASK}) \S[^\r\n]*"
-)
+from department_policy import branch_task, message_check, ticket_check, range_check, staged_check
+
 TEXT_SUFFIXES = {".gd", ".py", ".yml", ".yaml", ".json", ".toml", ".cfg"}
 
 
 def git(*args):
     return subprocess.check_output(["git", *args])
-
-
-def branch_task(branch):
-    match = BRANCH.fullmatch(branch)
-    if not match:
-        raise ValueError(f"Invalid work branch: {branch}; use codex/DEV-002-description")
-    return match.group(1)
-
-
-def message_check(message, task, title_only=False):
-    lines = message.strip().splitlines()
-    match = SUBJECT.fullmatch(lines[0]) if lines else None
-    if not match or match.group(1) != task or len(lines[0]) > 100:
-        raise ValueError("Subject must be type(scope): TASK-ID description (<=100 characters)")
-    if not title_only:
-        if len(lines) < 3 or lines[1] or not any(line.strip() for line in lines[2:]):
-            raise ValueError("Add a blank line and a body explaining effect and validation")
-
-
-def ticket_check(task, names):
-    if not any(re.fullmatch(rf"tasks/{re.escape(task)}_(?!RESULT\.md$).+\.md", p) for p in names):
-        raise ValueError(f"Missing task document for {task}")
 
 
 def paths(mode):
@@ -101,12 +75,7 @@ def check(mode="worktree"):
 
 
 def commits_check(base, head, task):
-    commits = git("rev-list", f"{base}..{head}").decode().splitlines()
-    for sha in commits:
-        parents = git("rev-list", "--parents", "-n", "1", sha).decode().split()
-        if len(parents) > 2:
-            raise ValueError(f"Merge commit forbidden on work branch: {sha}")
-        message_check(git("show", "-s", "--format=%B", sha).decode("utf-8"), task)
+    range_check(base, head, task)
 
 
 def push_target(local_sha, remote_ref, remote_sha):
@@ -158,6 +127,7 @@ def main():
         task = branch_task(git("branch", "--show-current").decode().strip())
         ticket_check(task, paths("staged"))
         if args.command == "pre-commit":
+            staged_check(task)
             check("staged")
         else:
             message_check(Path(args.message_file).read_text(encoding="utf-8"), task)
