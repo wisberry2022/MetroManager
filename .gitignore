@@ -1,3 +1,21 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+
+# Local build output (source assets and export presets remain trackable)
+/build/
+/builds/
+
+# Local secrets and developer scratch files
+/.env
+/.env.local
+/.local/
+/tmp/
+*.tmp
+*.swp
+*~
+
+# OS-generated metadata
+Thumbs.db
+desktop.ini
+.DS_Store
