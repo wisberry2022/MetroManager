@@ -1,6 +1,6 @@
 # DEV-003: 플러그인 및 전 부서 변경 통제
 
-- 상태: IN_PROGRESS / 담당: Convention Team / 착수 승인자: Owner
+- 상태: REVIEW / 담당: Convention Team / 착수 승인자: Owner
 - 근거: 2026-10-31 본 채팅의 조사 및 적용 가능 시 즉시 적용 지시.
 - 기준 SHA: 8405c455233121a6ad44195c2680a6a25e3f1a82
 - 목적: GitHub API 쓰기의 로컬 훅 우회를 조사하고 부서 커밋/브랜치/경로를 검사한다.

@@ -45,3 +45,9 @@ ChatGPT 타 부서에 자동 메시지는 전송하지 않는다. 각 채팅의 
 - 필수 리뷰 0: 현재 동일 계정 구조를 반영. 독립 승인·부서 신원 분리는 후속 조건이다.
 - 이 후속 결과 문서는 GitHub 플러그인의 create_branch와 update_file(Contents API)로 작업 브랜치에 직접 기록했다. 로컬 훅 없는 API 쓰기의 실제 경로를 검증한다.
 - 후속 PR에서 department-policy 정상 실행과 잘못된 제목 거부를 확인하고 최종 결과를 채팅에 보고한다.
+
+### 원격 부정 사례 검증
+
+PR #2의 비정형 제목에서 policy와 department-policy가 모두 failure로 종료했다. department-policy 실행 41167652663의 job 124438598511 로그에서 `Expected [부서][type] TASK-ID 설명` 오류를 확인했다. 같은 시점 PR API의 mergeable_state는 blocked였다. 코드는 정상이고 제목만 잘못된 사례이며, 제목 복구 후 다시 검사한다.
+
+이 후속 커밋은 GitHub 플러그인의 create_tree/create_commit/update_ref(expected_sha, force=false)로 문서 4개를 원자적으로 갱신하여 다중 파일 API 경로도 검증한다.
