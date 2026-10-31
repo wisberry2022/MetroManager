@@ -4,7 +4,8 @@
 - 등록일: 2026-10-31 (Asia/Seoul)
 - 연관 기획 작업: PLN-001
 - 기준 커밋: `e18b047848108383acdcef47250ee81393df2058`
-- 작업 브랜치: `codex/DEV-004-gate2-second-review`
+- 작업 브랜치: `codex/DEV-004-gate2-second-review-current`
+- PR 작성 기준 main: `68f8aeeae0c651240a1bf63550962c1d1aa6b7d3`. 기획 검토 기준 SHA는 위 e18b047을 유지한다.
 - ID 등록: 원격 main의 기존 DEV-001~003 및 브랜치·이력을 조사한 뒤, 이번 Owner 직접 요청을 DEV-004로 기록한다. 새 게임 구현 업무를 발주하거나 기획 티켓으로 부서를 대체하지 않는다.
 
 ## 승인 근거와 범위
@@ -44,3 +45,5 @@
 - `tasks/DEV-004_RESULT.md`
 
 Owner의 승인된 작업 범위 안에서만 제출하며 문서 병합 여부와 Gate 2 승인은 별개다.
+
+첫 제출 브랜치 `codex/DEV-004-gate2-second-review`와 PR #8 작성 중 main에 HQ 문서 2개가 추가되었다. GIT_WORKFLOW에 따라 공유 이력을 변경하지 않고 최신 main에서 대체 브랜치로 검토 커밋을 옮겼다. C/D·승인 기록·정책 파일은 두 main 기준 사이에 변경되지 않았다. 이번 대체 브랜치도 동일한 DEV-004 승인 범위다.

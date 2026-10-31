@@ -5,7 +5,8 @@
 - 작업 티켓: [DEV-004_GATE2_SECOND_REVIEW.md](DEV-004_GATE2_SECOND_REVIEW.md)
 - 결과 보고서: [Gate 2 2차 개발 검토](../docs/engineering/reviews/DEV-004_GATE2_SECOND_REVIEW.md)
 - 기준 SHA: `e18b047848108383acdcef47250ee81393df2058`
-- 작업 브랜치: `codex/DEV-004-gate2-second-review` / PR base: `main`
+- 작업 브랜치: `codex/DEV-004-gate2-second-review-current` / PR base: `main`
+- PR 작성 기준 main: `68f8aeeae0c651240a1bf63550962c1d1aa6b7d3` (검토 대상의 기준은 e18b047 유지)
 - Owner 허용 범위: 현재 채팅의 2차 검토 요청에 따른 읽기·보고서 작성·작업 브랜치 commit/push·PR 생성·검사 확인. main 병합·릴리스는 포함하지 않음.
 
 ## 검토 결과
@@ -67,3 +68,9 @@
 - 문서 보고 상태: REVIEW. HQ 통합 검수와 Owner 정책·병합 결정은 대기.
 - 미해결/RFC: 보고서 3절 RFC-DEV-004-01. Planning의 상세 명세 보완과 Owner의 정책 결정 필요.
 - 명세 변경 필요: 후속 C/D의 미결정 연결 규칙·검수 입력 보완 필요. Gate 1·8개 영역 변경 필요 없음.
+
+## 동시 main 갱신 대응
+
+첫 브랜치 `codex/DEV-004-gate2-second-review`의 `2d1c0cd1043b9d038ed73a7562f32c4214e8dedd`를 푸시하고 PR #8을 작성하는 동안, main에 HQ의 PM-005 보고서 2개가 `68f8aee...`로 추가되었다. `git diff --name-status e18b047848108383acdcef47250ee81393df2058 origin/main`으로 확인했으며 기획 검토 대상·정책·게임 코드에는 변경이 없었다.
+
+공유 브랜치 amend/rebase/force push 또는 main merge를 하지 않고, 규칙에 따라 최신 main의 대체 브랜치에 기존 검토 커밋을 cherry-pick했다. 검토 내용은 동일하며 이 절과 티켓의 제출 브랜치·기준만 보완한다. PR #8은 대체 관계를 기록하고 닫으며, 최종 대체 PR 및 최신 head 검사 결과를 제출 응답과 PR 본문에 기록한다. 다른 부서의 문서는 보존한다.
