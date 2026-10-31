@@ -1,0 +1,26 @@
+name: Department boundary gate
+on:
+  pull_request_target:
+    branches: [main]
+    types: [opened, synchronize, reopened, edited, ready_for_review]
+permissions:
+  contents: read
+jobs:
+  department-policy:
+    name: department-policy
+    runs-on: ubuntu-latest
+    steps:
+      # Only trusted base code executes. The PR is fetched as Git objects, never checked out.
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Fetch PR objects without executing PR content
+        env:
+          PR_NUMBER: ${{ github.event.number }}
+        run: git fetch origin "refs/pull/$PR_NUMBER/head"
+      - run: python -I tools/department_policy.py
