@@ -6,19 +6,28 @@
 - GitHub API 제출 절차 사용: 최신 main 기반 단일 부모 커밋, docs/planning/만 변경, force=false. 실제 PR/커밋/원격 검사 결과는 PR 본문에 기록한다.
 
 - 작업: PLN-001 / Planning → HQ·OWNER
-- 버전: **v0.7-draft / 2026-10-31**
+- 버전: **v0.8-draft / 2026-11-01**
 - 상태: **DRAFT — OWNER 정책 선택 반영, 제안 수치 OWNER 승인 반영, 세칙·승인방식 및 부서 검토 대기**
 - Gate 2 최종 승인 PENDING / 최종 상정 BLOCKED. 새 개정본 부서 재검토 NOT_REVIEWED.
 - 원격 기준 main: `fa3cecff660c2bb7f68f9b381e66feaa13c0b1b0`. 작업 브랜치 제출본이며 main 병합은 별도 승인.
 - 승인 근거: [OWNER 답변 원문·선택 매핑](sources/PLN-001_GATE2_OWNER_DECISIONS.md), 후보12 후속 답변 포함.
 
+## 최신 Owner SEM 승인·HQ 보완사항 (2026-11-01)
+- **적용 범위는 MVP 쉬움 난이도·시철 고정**이다. Gate 1 및 PAR-01~05 수치 승인 유지. 다른 난이도/주체로 자동 확장하지 않는다.
+- **SEM-01 Owner 채택:** 운영비 발생/실제 지급 분리, B 미지급 시 신규 승차 제한·이동 중 승객 도착 허용. 완료 운임은 도착 시 자유현금 유입과 동시에 B 우선 자동 정산. B=0·다음 운행 구간 비용 충당 시 신규 승차 재개.
+- **중요한 최종 범위 정정:** 미지급 즉시/6개월 경과의 **신규 사업 계약 제한은 둘 다 MVP 제외**, [IDEA-003](idea-library/PLN-IDEA-003.md)에 보존. 일반 사업 자격·가용 현금·K 예약 검사는 유지.
+- **SEM-02 Owner 채택:** 정부 제한잔액 R과 자기 공사 예약금 K는 별개 보호 대상. 미지급·공정 중단으로 자동 해제하거나 전용하지 않음. [플레이어 직접 계약 취소](idea-library/PLN-IDEA-002.md)는 MVP 제외.
+- **SEM-03 Owner 최종 승인:** T 시각 비용 누적→자정 마감/새 날짜→계약/지급→기성/완공→시험/개통→도착 완료 운임 인식→B 자동 정산→영업 상태/신규 탑승 판정. 후순위 운임의 계약 시점 선사용 금지; 시간 분할/배속 결과 재현은 Dev 검증 대상.
+- 이후 회사 방침으로 [자동 정산 ON/OFF](idea-library/PLN-IDEA-001.md)하는 기능은 MVP 외 Library 보관.
+- **APP-01 Owner 승인 PENDING.** SEM 승인이나 PR 제출로 Gate 2 최종 승인·구현 착수로 간주하지 않는다. 개발·디자인 3차 CONDITIONAL 및 HQ CONDITIONALLY HOLD 기준은 c0c5f547. 본 개정의 후속 검토 미완료.
+
 ## 1. 산출물·기준 원본
 | 문서 | 버전/상태 | 역할 |
 |---|---|---|
 | [A](https://github.com/wisberry2022/MetroManager/blob/fa3cecff660c2bb7f68f9b381e66feaa13c0b1b0/docs/planning/PLN-001-A.md) / [B](https://github.com/wisberry2022/MetroManager/blob/fa3cecff660c2bb7f68f9b381e66feaa13c0b1b0/docs/planning/PLN-001-B.md) | v0.3 / Gate 1 OWNER_APPROVED | 읽기 전용 기준, 이번 변경 없음 |
-| [C](PLN-001-C.md) | v0.4-draft | 정책 반영 MVP 범위/검수 명세 |
-| D | v0.7-draft | 회신·잔여 승인·인수인계 |
-| [DATA-v1](PLN-001_GATE2_DATA_v1_DRAFT.md) | v1.1-draft / 수치 OWNER_APPROVED | 새 수치·세칙·승인방식과 정답 예시 |
+| [C](PLN-001-C.md) | v0.5-draft | 정책 반영 MVP 범위/검수 명세 |
+| D | v0.8-draft | 회신·잔여 승인·인수인계 |
+| [DATA-v1](PLN-001_GATE2_DATA_v1_DRAFT.md) | v1.2-draft / PAR 수치 승인·SEM Owner 결정 반영 | 새 수치·세칙·승인방식과 정답 예시 |
 | [OWNER 기록](sources/PLN-001_GATE2_OWNER_DECISIONS.md) | 직접 답변 증빙 | 1~12 및 후보12 확정 |
 | [작업 결과](tasks/PLN-001_GATE2_OWNER_RESULT.md) | REVIEW | 변경/검증/잔여·게시 상태 |
 
@@ -47,6 +56,14 @@
 답변12의 재승인 요청 후 OWNER가 제안 수치를 그대로 사용한다고 회신했다. 수치 승인은 완료됐고 세칙·전체 승인방식과 Gate 2 최종 승인은 구분한다.
 후보6/노선6~8 충돌은 RFC-PLN-001-G2-01로 추적했고 후보12 답변으로 해소됐다. 동별 배분·좌표·연결·슬롯 정답은 여전히 데이터 승인 대상.
 Gate 1 유지: 모드 배타성, 쉬움 시철 관할, 정부 매출/공사 용도 제한, 시설 유지비 면제/운임100%, 시청/정부 분리, 제출 총횟수, 파산24/12/6/3개월·지원5/4/3/2회·회복 초기화·인피니트OFF, 극한 운임25/25/50, 공고 전 허가. 음수 사업성 거부는 이번4b 선택으로 추가된 MVP 규칙이며 과거 Gate 1 승인으로 소급하지 않는다.
+
+### SEM 승인·검증 인계 표
+| 항목 | 승인/검수 상태 | 남은 책임 |
+|---|---|---|
+| SEM-01 | OWNER_DECIDED / 구현 미검증 | Dev: 운임 유입·B 정산·기존 승객/계약 자금 상태·회복 불능 경계; Design: 제한/복구 UI |
+| SEM-02 | OWNER_DECIDED / 구현 미검증 | Dev: 공정 중단·기성 K 차감·취소 검증 사건; Design: 공정 상태·이유 |
+| SEM-03 | OWNER_DECIDED / 구현 미검증 | Dev: T 사건·자정/분할 재현; Design: 발생/지급/예상/실적/보고 기준 |
+| APP-01 | OWNER_PENDING | HQ 승인 절차 통합 → Owner 승인 요청 |
 
 ## 4. 부서 회신·추적·요청
 | 부서 | 현재 확보한 2차 회신 | 이번 개정본에 대한 상태 |
@@ -82,6 +99,12 @@ TD-01~06 및 DD-01~08은 각 부서 소관 답변으로 반영한다. 개발 구
 디자인 20~31 작업일(160~248시간, 디자이너1명·8시간/일)은 **이전 작은 도시/노선 가정의 조건부 추정**이다. 과거15~25 대비 +5~6일이지만 현재 확대 규모의 추가분은 미산정. 기존1셸+7패널+3대화상자/소스24~36도 보장치 아님. 엔진 통합/외부 사용자 연구/승인 변경/대기 제외. 개발 M/L과 합산하여 출시일을 만들지 않는다.
 이번 문서는 전달용이며 부서 채팅 발송·실행 업무 배정은 하지 않았다.
 
+### 최신 3차 부서 검토 및 HQ F01~03 대응
+- Development c0c5f547 기준 보고: CONDITIONAL. 원칙의 구현 가능성을 인정하지만 수정 SEM/계약·정산·재현성·잔여 운행비·확대 공수와 기기/성능 목표는 후속 확인 필요.
+- Design 같은 기준 보고: CONDITIONAL. DSG-R06 문서 수준 RESOLVED, 다른 7개 PARTIAL. 상태 의미 데이터 계약·밀집 지도·고충실도 스펙·24~40일 예비 견적(미실측) 재검토 필요.
+- HQ: CONDITIONAL / 최종 승인 보류. **PLN-G2-F01**은 Owner 채택 및 제외 규칙을 C §5-5~6/DATA §4~5에, **F02**는 C/R/F/K/A/B 및 상태·비용/현금·예상/실적·현재/과거 의미를 C §5-8/후속 표에, **F03**은 C v0.5/D v0.8/DATA v1.2·Owner 승인 범위·8개 영역/11 MUST/AC-01~10/두 VP·Library 분리에 반영했다.
+- 잔여: APP-01 미승인, 미지급 상태와 계약 자금 검산, UI 데이터 공급 계약, PC/성능·지도·제작 규모, HQ 블로커 최종 해소 판정. 이전 CONDITIONAL을 임의로 RESOLVED 변경하지 않는다.
+
 ## 5. 블로커·범위·후속 고도화
 | ID | 이번 기획 추적 상태 | 해소 증거/잔여 담당 |
 |---|---|---|
@@ -112,7 +135,7 @@ TD-01~06 및 DD-01~08은 각 부서 소관 답변으로 반영한다. 개발 구
 |---|---|
 | Gate 1 | 원격 A/B v0.3 승인 기준 보존, 수정 없음 |
 | 정책 선택 | 이번1~12 및 후보12 직접 답변 반영 |
-| 데이터 수치/세칙/승인방식 | 수치 OWNER_APPROVED / 세칙·전체 승인방식 검토 대기 |
+| 데이터 수치/세칙/승인방식 | PAR 수치 OWNER_APPROVED / SEM-01~03 OWNER_DECIDED / APP-01 OWNER_PENDING |
 | 이전2차 회신 | 수령/CONDITIONAL |
 | 이번 개정본 부서 검토/HQ 최종 통합 | NOT_REVIEWED / PENDING |
 | Gate 2 | 최종 승인 PENDING, 상정 BLOCKED |
@@ -127,3 +150,5 @@ TD-01~06 및 DD-01~08은 각 부서 소관 답변으로 반영한다. 개발 구
 - [ ] OWNER Gate 2 최종 승인.
 
 v0.3 Gate1 → v0.4-draft 최초Gate2 → v0.5-draft 1차 회신통합(PR#5) → v0.6-draft OWNER 정책·2차 회신 반영 → **v0.7-draft 제안 수치 승인·PR 제출**.
+
+**v0.8-draft / 2026-11-01:** SEM Owner 채택·6개월 제재 MVP 제외·Library 및 PLN-G2-F01~03 추적. 다음 Dev/Design/HQ 재검토 전 Gate 2 최종 승인 PENDING.
