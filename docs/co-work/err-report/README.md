@@ -11,3 +11,4 @@ Owner는 2026-11-01 현 Planning Codex 대화에서 “docs/co-work/err-report �
 | ID | 내용 | 상태 |
 | --- | --- | --- |
 | [ERR-20261101-001](ERR-20261101-001_PR35_BRANCH_UPDATE.md) | PR #35 main 동기화 merge commit 후 필수 CI 실패 | 기획 복구·경로 등록 완료 / DEV-009 예방 검수 추적 |
+| [ERR-20261101-002](ERR-20261101-002_UPDATE_BRANCH_AND_PARALLEL_PR.md) | PR #52/#53 Update branch CI 실패와 #55 병합 후 #56 공통 현황 충돌·대체 PR 반복 | DEV-012 충돌 복구 제출 / Convention Team 프로세스 개선 검토 요청 OPEN |
