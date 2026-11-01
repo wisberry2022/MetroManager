@@ -60,3 +60,14 @@ Godot 로드 과정의 .godot 캐시는 무시 경로이며 추적 게임 파일
 - 이전 Git HTTPS 인증 실패가 확인돼 base tree 보존·단일 부모 커밋·새 작업 브랜치의 GitHub API 방식으로 제출한다. 로컬 검증 트리와 동일성 확인 후 로컬 브랜치를 원격 head로 정렬한다. 실제 SHA·PR·CI 결과는 PR 본문 기록. main 병합 없음.
 
 - 동시 main 갱신 대응: #30의 Design 문서2개가 main 8ef9762에 병합됐음을 확인하고 미공유 단일 DEV 커밋을 최신 main 위로 rebase했다. 분석 근거4bdf65f/고정 Design head는 보존하며 제출 base만8ef9762로 갱신. 타 부서 변경 보존, merge commit·force push 없음.
+
+## Gate 3-1 분석 정리 — 2026-11-01 / REVIEW
+
+- 현재 산출물: [Gate 3-1 개발 분석 v1.0](../gate3/DEV-006_GATE3_1_ANALYSIS.md). 기준 main b1a8a1f981d066fce6f5ca516e821e4ff018daf8, codex/DEV-006-gate3-1-analysis.
+- Owner의 이번 조건부 PR 지시 범위/원문은 티켓 마지막 절을 따른다. 디자인의 수용은 #25 댓글6555800425이며 #24 개발 답변보다 먼저 게시됐다. 나중의 별도 수용으로 꾸미지 않고 양측 범위 일치로 판단했다.
+- 변경7파일: Gate 3-1 신규 분석, 기존 계획/계약/인계, 티켓/본 결과/작업현황. 계약 v0.2.1은 §2 UI-DC01~07 그룹 표 정리 및 Planning 의미 재확인 상태 갱신만이며 공급 의미·승인 규칙 변경 없음.
+- 결과: W01 선행→W02/W03 병행→최소 UI, 시간 조작/읽기 전용 장부·예측·지도/목록 연계 및 자동/GUI/빌드/VP 증거 구분. 추가 분석·부서/Owner 질문 없이 제출 가능. 실제 실행·목업·제품 목표는 필요한 시점의 후속 조건이다.
+- 실제 검증: .venv/Scripts/python.exe tools/policy.py doctor PASS; 같은 Python의 tools/policy.py check PASS(worktree130/GDScript0), -m unittest discover -s tests/tooling -v 23/23 PASS. check/테스트는 알려진 sandbox 임시 폴더 정리 제약 때문에 권한 승인 후 실행했다. bad_script.gd 파싱 오류는 부정 입력 테스트의 예상 출력이며 전체 OK. 문서 UTF-8/LF/링크·그룹ID·diff/부서 경로·원문 보존 검사는 제출 전에 별도 확인하며 실제 결과·원격 head/PR/CI는 PR 본문에 기록한다.
+- 이번 게임 자동/회귀·Godot 로드·실제 게임 진입/GUI·Windows 빌드·성능·사용성·VP: 각각 NOT_RUN(문서 전용 작업). 이전 headless PASS/도구 테스트와 구분한다.
+- Git 공유는 기존 base tree 보존·단일 부모·전용 작업 브랜치·force=false의 GitHub API를 사용한다. API는 로컬 훅을 실행하지 않으므로 로컬 검사 및 원격 policy/department-policy를 별도로 확인한다.
+- 미해결: 현재 분석 제출 차단 없음. 후속 실행 티켓/공급 fixture/목업·제품 목표/사용성은 분석 문서 §5에서 책임/시점을 유지. 명세 변경 필요 없음, Issue OPEN 유지·main 병합 미수행.

@@ -47,3 +47,13 @@
 - 현재 산출물: [분석 인수인계 v1.0](../gate3/DEV-006_ANALYSIS_HANDOFF.md), UI 계약 v0.2, 개발 계획 v0.2. 최초 승인/제출 절은 과거 PR #27 기록으로 보존한다.
 
 - 제출 직전 기준 갱신: #30 병합 main 8ef97626ba96844648a6de2e2cb9654e6816ce40에서 동일 승인 분석 범위를 제출한다. 분석 고정 기준4bdf65f는 보존, 미공유 커밋만 rebase하여 Design 변경 보존.
+
+## Gate 3-1 분석 제출 승인 (2026-11-01)
+
+- Owner 원문(현재 채팅): “개발 에이전트. 디자인 에이전트로부터 회신이 왔으니 재확인부탁드립니다. 회신에 이슈가 없고, 현재 단계에서 더 분석 및 타부서,OWNER 확인 요청할 것이 없다면 현재 분석 결과를 정리하여 PR 생성해주세요”
+- 조건 충족: 디자인 #25 댓글6555800425의 DSG_SCOPE_ACCEPTED와 개발 #24 댓글6555812161 대조, Planning #26 댓글6555112937 확인. 추가 의미/범위 충돌·현재 분석 전 새 질문 없음.
+- 대상: wisberry2022/MetroManager / DEV-006 후속 / base b1a8a1f981d066fce6f5ca516e821e4ff018daf8 / codex/DEV-006-gate3-1-analysis.
+- 허용 동작·기간: 아래 개발 문서7개 작성/정정·검증, commit·작업 브랜치 원격 공유·base=main PR 생성·필수 CI 확인·Issue #25 결과 연결까지 이번 제출에 한정. 이전 일회성 승인을 재사용하지 않는다.
+- 변경 경로: gate3/DEV-006_GATE3_1_ANALYSIS.md 신규, gate3/DEV-006_DEVELOPMENT_PLAN.md·DEV-006_UI_DATA_CONTRACT.md·DEV-006_ANALYSIS_HANDOFF.md, tasks의 본 티켓·DEV-006_RESULT.md, collaboration/WORK_STATUS.md(모두 docs/engineering/ 아래).
+- 제외: 게임 코드/씬/아트·설정·승인 규칙·CI/도구/정책·타 부서 문서 수정, main 직접 쓰기/병합·강제 push·릴리스·실제 Stage 착수.
+- 수용 기준: PM-010-DEV 9항목을 계획/선행/증거/환경·차단 시점·L1 정정/권한에 연결하고 디자인 수용 근거를 보존한다. 실제 검증은 결과 문서와 PR head의 CI로 확인한다. REVIEW 제출이며 DONE/실행 승인 아님.
