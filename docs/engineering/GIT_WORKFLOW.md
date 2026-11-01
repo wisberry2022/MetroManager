@@ -36,6 +36,14 @@ PR #35의 실패는 merge commit의 부모 수로 확인됐으며 디자인 브�
 
 ## 커밋 형식
 
+DEV-009 예방 검수안: 로컬에서는 `pre-merge-commit`으로 자동 merge commit을 차단하고,
+수동 커밋에서도 MERGE_HEAD가 남아 있으면 거부한다. 작업 파일·merge 상태를 자동 폐기하지 않는다.
+제출 전 fetch 후 커밋한 HEAD에 `.venv/Scripts/python.exe tools/policy.py preflight`를 실행한다.
+pre-push도 fetch된 origin/main 포함 여부와 기존 커밋/부서 검사를 확인한다.
+origin/main보다 뒤처지면 main merge/공유 이력 재작성 대신 기존 새 브랜치·대체 PR 절차를 따른다.
+사전 검사 뒤 main이 진전하는 경합은 서버 필수 검사와 Owner 검수로 다시 확인한다.
+GitHub API/UI에는 로컬 훅이 적용되지 않는다. [플러그인·로컬 제출 안내](GITHUB_SUBMISSION.md)를 함께 읽는다.
+
 DEV-003부터 모든 부서는 `DEPARTMENT_WORKFLOW.md`의 부서·티켓·디렉터리 매핑을 따른다. 아래 형식이 DEV-002 형식을 대체한다.
 
 ```text

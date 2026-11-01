@@ -13,6 +13,11 @@ import tempfile
 from department_policy import branch_task, message_check, ticket_check, range_check, staged_check
 
 TEXT_SUFFIXES = {".gd", ".py", ".yml", ".yaml", ".json", ".toml", ".cfg"}
+MERGE_REJECTION = (
+    "Merge commits are forbidden on work branches. Do not use merge-style Update branch. "
+    "Preserve your work, create a new codex/<TASK-ID>-<description> branch from latest main, "
+    "and submit only the approved changes in a replacement PR; do not force-push."
+)
 
 
 def git(*args):
@@ -78,6 +83,34 @@ def commits_check(base, head, task):
     range_check(base, head, task)
 
 
+def reject_pending_merge():
+    merge_head = git("rev-parse", "--git-path", "MERGE_HEAD").decode().strip()
+    if Path(merge_head).is_file():
+        raise ValueError(MERGE_REJECTION)
+
+
+def submission_check(base, head, task):
+    result = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", base, head], capture_output=True,
+    )
+    if result.returncode == 1:
+        raise ValueError(
+            "Work branch does not contain the fetched origin/main. " + MERGE_REJECTION
+        )
+    result.check_returncode()
+    commits_check(base, head, task)
+
+
+def preflight():
+    reject_pending_merge()
+    task = branch_task(git("branch", "--show-current").decode().strip())
+    base = git("rev-parse", "--verify", "origin/main").decode().strip()
+    head = git("rev-parse", "HEAD").decode().strip()
+    submission_check(base, head, task)
+    print(f"PASS: committed submission task={task}, base={base}, head={head}")
+    print("Fetch origin first. Remote freshness, working files, CI and Owner approval are not verified.")
+
+
 def push_target(local_sha, remote_ref, remote_sha):
     if set(local_sha) == {"0"}:
         raise ValueError("Deletion requires separate Owner-controlled maintenance")
@@ -95,7 +128,7 @@ def pre_push():
         task = push_target(local_sha, remote_ref, remote_sha)
         # All branch commits, including previously pushed ones, must pass.
         base = git("rev-parse", "--verify", "origin/main").decode().strip()
-        commits_check(base, local_sha, task)
+        submission_check(base, local_sha, task)
         names = git("ls-tree", "-r", "--name-only", local_sha).decode("utf-8").splitlines()
         ticket_check(task, names)
     print("PASS: push ref/commit checks; Owner authorization must be verified separately")
@@ -105,7 +138,7 @@ def doctor():
     result = subprocess.run(["git", "config", "--get", "core.hooksPath"], capture_output=True, text=True)
     if result.stdout.strip() != ".githooks":
         raise ValueError("Hooks inactive: run python tools/install_hooks.py")
-    for name in ("pre-commit", "commit-msg", "pre-push"):
+    for name in ("pre-commit", "pre-merge-commit", "commit-msg", "pre-push"):
         file_check(f".githooks/{name}", Path(f".githooks/{name}").read_bytes())
     if importlib.metadata.version("gdtoolkit") != "4.5.0":
         raise ValueError("gdtoolkit 4.5.0 required")
@@ -114,7 +147,9 @@ def doctor():
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("command", choices=["check", "pre-commit", "commit-msg", "pre-push", "doctor", "ci"])
+    parser.add_argument("command", choices=[
+        "check", "preflight", "pre-commit", "pre-merge-commit", "commit-msg", "pre-push", "doctor", "ci",
+    ])
     parser.add_argument("message_file", nargs="?")
     args = parser.parse_args()
     if args.command == "check":
@@ -123,7 +158,12 @@ def main():
         doctor()
     elif args.command == "pre-push":
         pre_push()
+    elif args.command == "preflight":
+        preflight()
+    elif args.command == "pre-merge-commit":
+        raise ValueError(MERGE_REJECTION)
     elif args.command in {"pre-commit", "commit-msg"}:
+        reject_pending_merge()
         task = branch_task(git("branch", "--show-current").decode().strip())
         ticket_check(task, paths("staged"))
         if args.command == "pre-commit":

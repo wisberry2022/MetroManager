@@ -65,3 +65,11 @@ Process completed with exit code 1.
 - 기획 복구 완료 증거: 대체 PR/head와 필수 CI 결과를 해당 PR에 기록.
 - 공용 보고서: 독립 PR로 등록·검수 요청. base에 공용 경로 허용이 반영되기 전 통합은 BLOCKED로 표시.
 - Convention 재발 방지 완료: 담당 DEV 변경·Owner 승인·main 반영·검증 증거까지 확보했을 때 별도 판정. 보고서 작성만으로 해결/DONE 아님.
+
+## 7. Convention Team 후속 확인 — DEV-009 (2026-11-01)
+
+- 기준 main: `ac04302f2bdab75aab49f0950bce92f115ec8047`. 원래 조사 본문은 당시 상태로 보존한다.
+- 복구·경로: 기획 복구 PR #36 통합, 정책 DEV-008/PR #39 통합, 본 보고서는 대체 PR #40으로 main 반영 확인. 원래 Draft #37은 미병합 종료다. 위 PENDING/진행 중 문구는 최초 관찰 시점 기록이다.
+- 재발 예방 검수안: DEV-009에서 로컬 pre-merge-commit과 수동 merge 커밋 거부, fetch된 main 포함/작업 이력 사전 검사 및 pre-push 연결을 추가한다. 플러그인/API는 로컬 훅을 실행하지 않으므로 부모·티켓·경로·최신 main 대조와 새 브랜치/대체 PR 안내를 적용한다.
+- 최신 절차·기술적 한계: [GitHub 제출 사전 확인](../../engineering/GITHUB_SUBMISSION.md). 서버/UI의 merge 생성 자체를 새 로컬 훅이 막는다고 표현하지 않는다. GitHub의 allow_update_branch=false도 모든 조건에서 버튼 제거를 보장하지 않는다.
+- 이번 DEV 변경은 Owner 요청에 따른 구현·PR 검수 제출이다. 원격 CI는 제출 PR 본문, 로컬 검증·변경 파일·미해결은 [DEV-009 결과](../../engineering/tasks/DEV-009_RESULT.md)에 기록한다. main 반영·최종 검수 전 재발 방지 DONE으로 판정하지 않는다.

@@ -17,6 +17,8 @@
 - HQ는 docs/hq/, 기획은 docs/planning/, 디자인은 docs/design/, INF는 docs/infra/ 안에서 작업한다. 타 부서 산출물·개발 소스·CI·도구의 수정/삭제 금지. 개발은 docs/engineering/과 승인된 개발 범위를 담당한다.
 - 예외는 Owner 결정에 따른 base 브랜치의 path_exceptions.json 기록으로 제한한다. 본인 브랜치의 예외 추가는 효력이 없다. 실제 부서 사칭은 같은 계정만으로 기술적으로 식별할 수 없음을 인정한다.
 - main 병합에는 policy와 department-policy 검사를 확인한다. 원격 보호 설정의 적용 여부와 권한 위임 여부는 별도로 확인한다.
+- GitHub의 merge 방식 Update branch/API 동기화를 사용하지 않는다. 공유 브랜치가 최신 main보다 뒤처지면 승인된 자기 변경만 최신 main의 새 작업 브랜치로 옮겨 대체 PR을 제출한다.
+- 로컬 제출은 fetch·커밋 후 `.venv/Scripts/python.exe tools/policy.py preflight`로 검사한다. 플러그인 전용 작업은 `docs/engineering/GITHUB_SUBMISSION.md`의 원격 SHA·부모·경로 사전 확인 절차를 따른다. PASS는 Git 실행 승인이나 원격 최신 상태 보장이 아니다.
 
 ## 공용 협업 오류 보고 (DEV-008 검수안)
 

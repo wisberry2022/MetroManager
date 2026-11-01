@@ -18,6 +18,13 @@
 - 미실행은 NOT_RUN + 사유:
 - 결과 보고서 경로:
 
+## Git 이력 사전 확인
+
+- 확인한 최신 main SHA / 제출 head SHA:
+- 로컬: fetch·커밋 후 policy.py preflight 결과 / API 전용: main 포함·부모 1개·티켓/경로 대조 결과:
+- merge 방식 Update branch 미사용. main이 진전한 공유 브랜치는 새 브랜치·대체 PR로 제출:
+- 기존 PR 대체 시 원래 PR 링크·내용 보존 근거:
+
 ## 검토
 
 - 미해결 문제 / RFC / 명세 변경 필요 여부:
