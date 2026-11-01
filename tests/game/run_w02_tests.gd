@@ -4,6 +4,7 @@ const Clock = preload("res://scripts/simulation/game_clock.gd")
 const Ledger = preload("res://scripts/model/company_ledger.gd")
 const Pipeline = preload("res://scripts/simulation/minute_pipeline.gd")
 const Queue = preload("res://scripts/simulation/command_queue.gd")
+const MidnightFixture = preload("res://tests/game/w02_midnight_fixture.gd")
 
 var _checks: int = 0
 var _failures: int = 0
@@ -21,6 +22,7 @@ func _run() -> void:
 		_test_ledger()
 		_test_contract_order()
 		_test_midnight_and_replay()
+		_test_midnight_composite()
 		_test_commands()
 	print("W02_TEST_RESULT checks=", _checks, " failures=", _failures)
 	quit(0 if _failures == 0 else 1)
@@ -162,6 +164,175 @@ func _test_midnight_and_replay() -> void:
 	# 실제 업무시간 제약과 자정 장부 fixture는 별도로 검증한다.
 	_expect("midnight_effect_deferred", same_midnight.commands.due(1440).size(), 0)
 	_expect("next_business_start", same_midnight.commands.due(1800).size(), 1)
+
+
+func _test_midnight_composite() -> void:
+	var reference: Dictionary = {}
+	for speed: int in [1, 2, 4]:
+		for split: bool in [false, true]:
+			var pipeline := MidnightFixture.new()
+			pipeline.clock.set_speed(speed)
+			var event := {
+				"operating_cost": 3, "construction": [{"project": "MIDNIGHT", "amount": 60}]
+			}
+			_expect("composite_fixture", pipeline.set_fixture(1440, event), true)
+			_expect("composite_duplicate_fixture", pipeline.set_fixture(1440, event), false)
+			var command := _contract("PLAYER", "OTHER", 1440, 80, 80)
+			var pending := pipeline.commands.submit(command, 1439)
+			_expect("composite_player_deferred", pending.effective_at, 1800)
+			_expect("composite_duplicate_command", pipeline.commands.submit(command, 1439), pending)
+			pipeline.clock.paused = true
+			pipeline.advance_usec(1000000)
+			_expect("composite_paused_clock", pipeline.clock.minute, 1439)
+			_expect("composite_paused_funds", pipeline.ledger.snapshot().cash, 100)
+			_expect("composite_paused_no_payment", pipeline.payment_dispatches, 0)
+			pipeline.clock.paused = false
+			var chunks: Array[int] = [1000000]
+			if split:
+				chunks.assign([4, 996, 50000, 199000, 750000])
+			for elapsed: int in chunks:
+				pipeline.advance_usec(elapsed / speed)
+			_assert_midnight_composite(pipeline, pending)
+			var actual := _composite_state(pipeline)
+			if reference.is_empty():
+				reference = actual
+				print("W02_MIDNIGHT_EVIDENCE ", JSON.stringify(actual))
+			_expect("composite_split_speed_equivalence", actual, reference)
+			_assert_midnight_idempotence(pipeline, pending)
+
+
+func _assert_midnight_composite(pipeline: MidnightFixture, pending: Dictionary) -> void:
+	_expect("composite_minute", pipeline.clock.minute, 1441)
+	_expect("composite_phase", pipeline.snapshot().observation_phase, "T_COMPLETE")
+	_expect("composite_internal_payment", pipeline.payment_result.accepted, true)
+	_expect("composite_internal_dispatch_once", pipeline.payment_dispatches, 1)
+	_expect("composite_closed_before_payment", pipeline.closed_before_payment.day_id, 1)
+	_expect("composite_closing_cash", pipeline.closed_before_payment.closing_funds.cash, 97)
+	_expect("composite_pre_payment_cash", pipeline.before_payment.cash, 97)
+	_funds(pipeline.ledger, [117, 20, 97, 0, 97, 0])
+	var day1 := pipeline.reports.report(1)
+	var expected_day1 := {
+		"day_id": 1,
+		"operating_cost": 3,
+		"construction_cost": 0,
+		"fare": 0,
+		"government": 0,
+		"payment": 3,
+		"debt_payment": 0,
+		"construction_payment": 0,
+		"closing_funds":
+		{
+			"cash": 97,
+			"restricted_by_project": {},
+			"reserved_by_project": {},
+			"restricted": 0,
+			"reserved": 0,
+			"free_cash": 97,
+			"available_cash": 97,
+			"unpaid": 0
+		}
+	}
+	_expect("composite_day1_exact", day1, expected_day1)
+	_expect(
+		"composite_day2_exact",
+		pipeline.reports.current(2),
+		{
+			"day_id": 2,
+			"operating_cost": 0,
+			"construction_cost": 60,
+			"fare": 0,
+			"government": 80,
+			"payment": 0,
+			"debt_payment": 0,
+			"construction_payment": 60
+		}
+	)
+	_expect("composite_day2_not_closed", pipeline.reports.report(2), {})
+	_expect(
+		"composite_positive_entries",
+		_positive_entries(pipeline),
+		[
+			{"kind": "operating_cost", "amount": 3, "effective_at": 1439},
+			{"kind": "payment", "amount": 3, "effective_at": 1439},
+			{"kind": "government", "amount": 80, "effective_at": 1440},
+			{"kind": "construction_cost", "amount": 60, "effective_at": 1440},
+			{"kind": "construction_payment", "amount": 60, "effective_at": 1440}
+		]
+	)
+	_expect("composite_close_once", pipeline.close_calls(), {1: 1})
+	_expect("composite_player_still_pending", pipeline.commands.result("PLAYER"), {})
+	_expect("composite_no_midnight_player", pipeline.commands.due(1440), [])
+	_expect("composite_player_pending_unchanged", pending.effective_at, 1800)
+	var phases: Array[String] = []
+	for item: Dictionary in pipeline.snapshot().trace:
+		if item.effective_at == 1440:
+			phases.append(item.phase)
+	_expect(
+		"composite_stage_order",
+		phases,
+		[
+			"PREVIOUS_INTERVAL",
+			"CONTRACT",
+			"PROGRESS",
+			"VALIDATION",
+			"ARRIVAL",
+			"SETTLEMENT",
+			"BOARDING"
+		]
+	)
+
+
+func _assert_midnight_idempotence(pipeline: MidnightFixture, pending: Dictionary) -> void:
+	var before := _composite_state(pipeline)
+	var report := pipeline.reports.report(1)
+	report.closing_funds.cash = -1
+	_expect("composite_report_copy", pipeline.reports.report(1), before.closed_report)
+	_expect("composite_requery", _composite_state(pipeline), before)
+	_expect("composite_closed_fixture", pipeline.set_fixture(1440, {"operating_cost": 3}), false)
+	_expect(
+		"composite_duplicate_payment",
+		pipeline.ledger.contract("MIDNIGHT", 80, 80, 1441).reason,
+		"DUPLICATE_PROJECT"
+	)
+	var duplicate := _contract("PLAYER", "OTHER", 1440, 80, 80)
+	_expect("composite_pending_requery", pipeline.commands.submit(duplicate, 1441), pending)
+	_expect("composite_duplicate_no_effect", _composite_state(pipeline), before)
+	pipeline.advance_usec(0)
+	_expect("composite_zero_advance", _composite_state(pipeline), before)
+	pipeline.advance_usec(5000000)
+	_expect("composite_later_report_frozen", pipeline.reports.report(1), before.closed_report)
+	_expect("composite_later_funds", pipeline.ledger.snapshot(), before.pipeline.funds)
+	_expect(
+		"composite_later_no_positive_duplicate",
+		_positive_entries(pipeline),
+		before.positive_entries
+	)
+	_expect("composite_later_close_once", pipeline.close_calls(), {1: 1})
+	_expect("composite_later_payment_once", pipeline.payment_dispatches, 1)
+	_expect("composite_later_day2", pipeline.reports.current(2), before.current_report)
+
+
+func _positive_entries(pipeline: MidnightFixture) -> Array[Dictionary]:
+	var entries: Array[Dictionary] = []
+	for entry: Dictionary in pipeline.ledger.entries():
+		if entry.amount > 0:
+			entries.append(entry)
+	return entries
+
+
+func _composite_state(pipeline: MidnightFixture) -> Dictionary:
+	var clock := pipeline.clock.snapshot()
+	clock.erase("speed")
+	return {
+		"clock_without_speed": clock,
+		"pipeline": pipeline.snapshot(),
+		"closed_report": pipeline.reports.report(1),
+		"current_report": pipeline.reports.current(2),
+		"entries": pipeline.ledger.entries(),
+		"positive_entries": _positive_entries(pipeline),
+		"close_calls": pipeline.close_calls(),
+		"payment_dispatches": pipeline.payment_dispatches
+	}
 
 
 func _test_commands() -> void:

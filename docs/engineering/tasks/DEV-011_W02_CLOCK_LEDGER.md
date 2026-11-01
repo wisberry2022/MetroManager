@@ -71,3 +71,24 @@ Owner에게 요청: `wisberry2022/MetroManager` / DEV-011 / 위 브랜치·§1~3
 - 원격 실패 head `42a82c2340a52b0ca8baa863796a46b214c21c1e`는 부모2개인 main 병합 커밋이다. 실제 department-policy 로그의 `Expected single-parent work commit`와 부모 목록을 확인했다. 기능 코드 오류나 보호/CI 완화가 필요한 사안이 아니다.
 - 이번 명시 재생성 요청에 따라 승인된 DEV-011 변경만 최신 main `88496d0c3bcef8d59e76c9977ee6ff07d01339fe`의 새 브랜치 `codex/DEV-011-w02-clock-ledger-recovery`에 옮긴다. 원래 공유 브랜치/실패 이력은 보존하고 force push·Update branch·main Merge·정책/CI 변경은 하지 않는다. 신규 게임 기능/규칙 변경 없음.
 - 허용 범위: 기존 티켓의 코드/데이터/테스트·문서 경로 그대로, 이력 복구/검증·Commit·작업 브랜치 공유·대체 PR/CI·기존 PR 대체 관계 기록 및 미병합 종료까지 이번 재제출에 한정한다. 후속 재검토는 같은 승인 범위 안에서 수행한다.
+
+## Issue #48 자정 복합 경계 회귀 보완 — 2026-11-01
+
+- 근거: [Planning 보완 요청](https://github.com/wisberry2022/MetroManager/issues/48#issuecomment-6557554353), [DEV 정적 확인](https://github.com/wisberry2022/MetroManager/issues/48#issuecomment-6557654283). 기존 81단언은 자정의 양수 비용·정부 지급·기성을 결합한 실행 증거가 아니었음을 인정한다.
+- Owner 현재 채팅 승인 원문: “Issue #48의 자정 복합 경계 회귀 테스트 보완과 Commit·Push·PR 생성을 승인합니다. 기존 승인 규칙과 시간 외 계약 이연을 유지하며 해당 범위만 작업하고, 검증 후 PR 생성해주세요. main 병합은 별도 승인하겠습니다.”
+- 저장소 `wisberry2022/MetroManager` / 작업 DEV-011 / 기준 main `87342cd5c29a3047695c11bfd7f2b76415cdf4d8` / 브랜치 `codex/DEV-011-w02-midnight-regression-submit` / 독립 worktree. 유효 범위는 이번 회귀 보완과 동일 범위 PR 검수 대응까지다.
+- 허용: 아래 5파일의 테스트 보완·검증·Commit·해당 작업 브랜치 일반 Push 또는 규정 API 공유·base=main PR·CI 확인/결과 인계. main 병합·릴리스/배포·강제 push·정책/CI·타 부서·게임 규칙 변경은 제외한다. 기존 승인만 재사용한 것이 아니라 이번 명시 추가 승인을 근거로 한다.
+
+| 변경 경로 | 이번 변경 |
+| --- | --- |
+| `tests/game/run_w02_tests.gd` | 기존 러너에 자정 복합·일괄/분할/배속·중복/조회/마감 회귀 추가 |
+| `tests/game/w02_midnight_fixture.gd`, `.gd.uid` | 테스트 전용 Pipeline 단계 사건 공급·실제 생성 UID |
+| 본 DEV-011 티켓, `docs/engineering/tasks/DEV-011_RESULT.md` | 승인·범위·검증/기대/실제·잔여 기록 |
+
+제품 `scripts/`·씬·데이터·프로젝트 설정·CommandQueue는 읽기 전용으로 보존한다. 테스트 전용 Pipeline은 기존 `_stage`를 super로 호출한 뒤 T=1440 CONTRACT 단계에만 이미 확정된 내부 지급 사건을 공급하고, 기성60은 기존 set_fixture 입력으로 처리한다. 플레이어 신규 계약은 원래 큐를 통과하며 자정 요청의 효력1800 이연을 같은 실행에서 별도 확인한다. 테스트 사건을 GUI에 노출하거나 실제 W04~06 기능으로 취급하지 않는다.
+
+검수: C100/R=K=B=0·T=1439 → 이전 구간 비용3/지급3·마감 C97 → 새 날짜 정부80·같은 사업 기성60 → C117/R20/F97/K0/A97/B0. 전일/당일 보고·원장 effective_at·마감1회·이후 고정보고 불변, 1/2/4배속×일괄/부분분 분할 6조합의 전체 원장/상태 일치, 중복 입력·재조회·정지/재개·지속 진행의 양수 거래 중복 방지를 검증한다. 상세 실제 결과는 결과 문서 및 제출 SHA의 PR 기록을 따른다.
+
+이번 보완은 기존 승인 의미의 회귀 증거 추가이며 L3 정책 변경은 없다. 결과는 REVIEW이고 Planning의 해당 증거 확인·HQ/Owner S1-05/06 부분 인수와 main 병합은 별도다. W03·Design 독립 준비를 차단하지 않는다.
+
+- 제출 기준 갱신: 작업 중 DEV-014/PR #60이 main 804fc58f81f81638e8ca4f16ab0e77029be02683에 병합됐다. 미공유 5파일을 그대로 새 제출 브랜치로 옮겼다. 게임 소스·기존 게임 테스트·프로젝트 설정은 두 base 사이 동일하므로 실제 엔진 결과는 같은 blob의 검증이며, 변경된 정책 도구는 최신 base에서 전체 회귀를 다시 실행한다. 실제 제출 SHA와 최신 정책 결과는 PR에 기록한다.
