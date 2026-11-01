@@ -6,6 +6,8 @@
 - 커밋: `[DEV][chore] DEV-003 부서별 검사 규칙을 적용합니다` + 빈 줄 + 본문
 - [코드 컨벤션](CODE_CONVENTIONS.md), [Git 전략](GIT_WORKFLOW.md), [설치](ENFORCEMENT.md), [전 부서/플러그인 규칙](DEPARTMENT_WORKFLOW.md)을 따릅니다.
 
+- [INF 등록·초기 게시 절차](INF_ONBOARDING.md): DEV-007 검수안, INF 소관·README 게시 원본·원격 검증 순서.
+
 ## 데스크톱·랩탑 협업
 
 - [개발 협업 공간](collaboration/README.md): 환경별 현황, 작업 중복 방지와 인계·인수 절차.

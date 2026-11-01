@@ -13,11 +13,12 @@ DEPARTMENTS = {
     "PM": ("HQ", "docs/hq/"),
     "PLN": ("기획", "docs/planning/"),
     "DSG": ("디자인", "docs/design/"),
+    "INF": ("INF", "docs/infra/"),
 }
-TASK = r"(?:DEV|PM|PLN|DSG)-[0-9]{3,}"
+TASK = r"(?:DEV|PM|PLN|DSG|INF)-[0-9]{3,}"
 BRANCH = re.compile(rf"codex/({TASK})-[a-z0-9]+(?:-[a-z0-9]+)*")
 SUBJECT = re.compile(
-    rf"\[(HQ|기획|디자인|DEV)\]\[(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)\] "
+    rf"\[(HQ|기획|디자인|DEV|INF)\]\[(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)\] "
     rf"({TASK}) (\S[^\r\n]*)"
 )
 EXCEPTIONS = "docs/governance/path_exceptions.json"

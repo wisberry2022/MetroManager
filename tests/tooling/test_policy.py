@@ -56,6 +56,20 @@ class PolicyTests(unittest.TestCase):
     def test_new_work_branch(self):
         self.assertEqual(policy.push_target("a" * 40, "refs/heads/codex/DEV-002-policy", "0" * 40), "DEV-002")
 
+    def test_inf_push_uses_existing_protected_ref_rules(self):
+        self.assertEqual(
+            policy.push_target("a" * 40, "refs/heads/codex/INF-101-handoff", "0" * 40),
+            "INF-101",
+        )
+        for local, ref in (("a" * 40, "refs/heads/main"),
+                           ("a" * 40, "refs/tags/INF-101"),
+                           ("0" * 40, "refs/heads/codex/INF-101-handoff")):
+            with self.subTest(ref=ref), self.assertRaises(ValueError):
+                policy.push_target(local, ref, "0" * 40)
+        with patch.object(policy.subprocess, "run", side_effect=subprocess.CalledProcessError(1, "git")):
+            with self.assertRaises(subprocess.CalledProcessError):
+                policy.push_target("a" * 40, "refs/heads/codex/INF-101-handoff", "b" * 40)
+
     def test_staged_snapshot_cannot_hide_bad_gdscript(self):
         previous = Path.cwd()
         with tempfile.TemporaryDirectory() as directory:

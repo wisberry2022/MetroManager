@@ -1,2 +1,4 @@
 # Owner review is enforced only after server-side code-owner review is required.
 * @wisberry2022
+# INF continuity/diagnostic policy remains subject to Owner review. Not a write ACL.
+/docs/infra/ @wisberry2022

@@ -28,6 +28,6 @@ HQ·Planning·Design의 별도 ChatGPT 채팅 및 프로젝트 소스는 Git과 
 
 ## 코드와 Git 검사
 
-HQ·기획·디자인·DEV의 GitHub 플러그인 작업은 [부서별 작업 규칙](docs/engineering/DEPARTMENT_WORKFLOW.md)을 먼저 읽습니다. 부서 문서 위치는 `docs/hq/`, `docs/planning/`, `docs/design/`, `docs/engineering/`입니다.
+HQ·기획·디자인·DEV·INF의 GitHub 플러그인 작업은 [부서별 작업 규칙](docs/engineering/DEPARTMENT_WORKFLOW.md)을 먼저 읽습니다. 부서 문서 위치는 `docs/hq/`, `docs/planning/`, `docs/design/`, `docs/engineering/`, `docs/infra/`입니다. INF 등록은 DEV-007 검수·main 반영 후 적용하며 초기 게시 절차는 `docs/engineering/INF_ONBOARDING.md`를 따릅니다.
 
 신규 개발은 `docs/engineering/CODE_CONVENTIONS.md`와 `GIT_WORKFLOW.md`를 따릅니다. 로컬 환경 설치와 GitHub 강제 적용 절차·미적용 사항은 `docs/engineering/ENFORCEMENT.md`에 있습니다. 작업 시작 전에 해당 문서와 AGENTS.md를 읽고 검사 환경을 확인하십시오.

@@ -11,12 +11,19 @@
 
 ## 전 부서·GitHub 플러그인 공통 (DEV-003)
 
-- HQ/기획/디자인/DEV 모두 `docs/engineering/DEPARTMENT_WORKFLOW.md`와 자기 부서 README를 읽는다. ChatGPT 플러그인은 자동 지침 주입/로컬 훅 실행을 보장하지 않으므로 도구로 직접 읽는다.
-- 커밋/PR 제목은 `[부서][type] TASK-ID 작업 내용`. 부서는 HQ/기획/디자인/DEV, 티켓은 각각 PM/PLN/DSG/DEV. 빈 줄 뒤 변경 효과·검증 본문을 작성한다.
+- HQ/기획/디자인/DEV/INF 모두 `docs/engineering/DEPARTMENT_WORKFLOW.md`와 자기 부서 README를 읽는다. ChatGPT 플러그인은 자동 지침 주입/로컬 훅 실행을 보장하지 않으므로 도구로 직접 읽는다.
+- 커밋/PR 제목은 `[부서][type] TASK-ID 작업 내용`. 부서는 HQ/기획/디자인/DEV/INF, 티켓은 각각 PM/PLN/DSG/DEV/INF. 빈 줄 뒤 변경 효과·검증 본문을 작성한다.
 - 모든 부서는 `codex/<TASK-ID>-<description>` 작업 브랜치에 공유하고 플러그인 쓰기 도구의 branch를 생략하지 않는다. main 직접 수정 금지. DEV-002의 초기 예외는 재사용하지 않는다.
-- HQ는 docs/hq/, 기획은 docs/planning/, 디자인은 docs/design/ 안에서 작업한다. 타 부서 산출물·개발 소스·CI·도구의 수정/삭제 금지. 개발은 docs/engineering/과 승인된 개발 범위를 담당한다.
+- HQ는 docs/hq/, 기획은 docs/planning/, 디자인은 docs/design/, INF는 docs/infra/ 안에서 작업한다. 타 부서 산출물·개발 소스·CI·도구의 수정/삭제 금지. 개발은 docs/engineering/과 승인된 개발 범위를 담당한다.
 - 예외는 Owner 결정에 따른 base 브랜치의 path_exceptions.json 기록으로 제한한다. 본인 브랜치의 예외 추가는 효력이 없다. 실제 부서 사칭은 같은 계정만으로 기술적으로 식별할 수 없음을 인정한다.
 - main 병합에는 policy와 department-policy 검사를 확인한다. 원격 보호 설정의 적용 여부와 권한 위임 여부는 별도로 확인한다.
+
+## INF 등록 (DEV-007 검수안)
+
+- INF는 컨텍스트 건전성·세션 연속성·후임 인계 정책과 검증을 담당한다. 게임 규칙·디자인·개발 코드·HQ 일정/Stage 결정은 소관이 아니다.
+- INF 티켓은 `docs/infra/tasks/INF-NNN_*.md`, 브랜치는 `codex/INF-NNN-description`, 제목은 `[INF][type] INF-NNN 작업 내용`이다. 개별 Owner 승인 범위에서만 Commit/Push/PR을 수행한다.
+- 공개 Git에는 최소화된 진단 상태·근거만 기록한다. 내부 대화 원문·상세 세션 평가는 Owner 제한 보관한다.
+- 등록의 원격 적용은 DEV-007의 Owner 검수·main 병합 후다. 초기 README 게시와 실제 INF PR 검증은 `docs/engineering/INF_ONBOARDING.md`를 따른다. 이 문서는 포괄 Git 권한을 부여하지 않는다.
 
 ## 코드·Git 운영 (DEV-002)
 
