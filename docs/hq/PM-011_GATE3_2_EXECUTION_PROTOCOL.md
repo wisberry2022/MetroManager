@@ -1,0 +1,67 @@
+# PM-011 — Gate 3-2 실행 협업·품질 검증 보완 지침
+
+- **ID:** PM-011-OPS / v1.0 / 2026-11-01 / 담당: HQ(PM)
+- **효력:** [Owner 승인 Stage 1 계획](PM-011_GATE3_2_APPROVED_PLAN.md)의 **운영상 보충**. PM-008의 L1/L2/L3, 최소 Markdown 티켓 및 2개 CI, Owner main Merge·주요 정책 변경 최종 승인을 유지. 본 지침은 새로운 예외 권한을 만들지 않음.
+- **단계:** `BACKLOG→APPROVED→IN_PROGRESS→REVIEW→DONE`는 티켓 관리 상태. `IMPLEMENTED / VERIFIED / ACCEPTED`는 별도 **품질 증거 단계**. PR 게시·문서 병합만으로 완료 처리 금지.
+
+## 0. Gate 3-2 착수 전 지침 수신·세션 확인
+
+1. [PM-010 공통 지침](PM-010_GATE3_1_REQUESTS.md)과 본인 부서 [PLN](requests/PM-010_PLANNING_CHECKLIST.md) / [DSG](requests/PM-010_DESIGN_CHECKLIST.md) / [DEV](requests/PM-010_DEVELOPMENT_CHECKLIST.md) 체크리스트를 확인한다. PM-010은 PR #32로 `main`에 병합됐고 기존 #24/#25/#26 회신이 수신 증거가 될 수 있다.
+2. [승인 Stage 1](PM-011_GATE3_2_APPROVED_PLAN.md), 본 절차 및 PM-011 자기 부서 착수 요청을 **최신 main** 기준으로 확인한다. Planning은 [후임 전환 기록](PM-011_PLANNING_SUCCESSION_RECORD.md)도 확인한다.
+3. **Gate 3-2의 신규 실행 작업 착수 전에** [Planning #26](https://github.com/wisberry2022/MetroManager/issues/26) / [Design #24](https://github.com/wisberry2022/MetroManager/issues/24) / [Development #25](https://github.com/wisberry2022/MetroManager/issues/25)의 소관 Issue에 `PM-010 수신(과거 근거 링크 가능) / PM-011 숙지 / 현재 main SHA / 담당 역할 / 첫 안전 작업 / 해당 티켓 Git 권한 상태`를 짧게 남긴다.
+4. 이는 **수신 확인**이지 Gate 3-1 재심사·별도 장문 보고서나 새로운 기술 승인 게이트가 아니다. 미확인 세션의 신규 실행만 보류하고 타 부서 독립 작업 전체를 차단하지 않는다. 게임 구현/에셋 제작·Commit/Push/PR은 **개별 Owner 티켓 승인**이 별도로 필요하다.
+5. Planning의 현재 담당은 후임 Game Designer이며 기존 현직은 신규 담당에서 제외된다. 과거 Git 권한의 자동 승계 금지.
+
+## 1. 첫 Stage의 최소 작업 인계 계약
+
+**불필요한 단계/보고서를 늘리지 않고**, 승인 티켓/Issue에 최소 다음 사항을 연결한다.
+
+| 필드 | 필수 내용 |
+| --- | --- |
+| 식별·책임 | 담당 소관 부서, 정식 작업 ID, 관련 Stage W01/02/03/최소 UI, 연결 Issue, 기반 main SHA |
+| 범위·금지 | 포함/비범위, 기획 AC와 Stage S1-01~09 일부 대응, 새 정책·과도한 범용화 금지 |
+| 협업 | 실제 필요한 입력 공급자→소비자, **소비 또는 통합 차단 시점**, L1/L2/L3 |
+| 검증 | 독립 실행/자동 규칙/GUI 조작 등 필요한 실제 명령·초기/기대/실제·로그/캡처, NOT_RUN |
+| 권한 | Owner 승인 원문, 경로/브랜치, Commit/Push/PR 각 여부, 유효 기간/종료·금지 동작 |
+| 제출 | PR/head SHA, `policy`+`department-policy` 결과, 잔여 결함·회귀 영향 |
+
+기술 세부 구현/Godot 노드/클래스·에셋 실제 파일 규격은 각 소관 팀이 승인된 티켓에서 결정한다. HQ는 완료 증거와 통합 차단을 확인할 뿐 전문 결정을 대행하지 않는다.
+
+## 2. 병렬 작업과 공급·소비 확인
+
+1. **W01 실행 기반이 W02/W03 착수 의존성의 핵심.** DSG의 정보구조·상태·저충실도 시안은 승인된 범위에서 병렬 진행.
+2. 실제 UI 통합 이전에 DEV가 안정 ID/게임분/snapshot_revision·기대/실제 fixture·허용 행동/사유를 공급하고, DSG는 **영향 화면/상태만** 확인한다. 기획 의미에 새로운 차이가 있으면 PLN에 한정 질의.
+3. **수용 범위는 revision과 실제 검증 수준을 함께 표기.** 기존 UI-DC-01~07의 정적 `DESIGN_SEMANTIC_ACCEPTED`를 새로운 화면/실제 데이터 `ACCEPTED`로 자동 변경하지 않는다.
+4. 입력 미수신/계약 미해결은 **그 화면 통합 티켓만 PENDING/BLOCKED**; 다른 팀의 승인된 독립 작업을 무차별 중지시키지 않는다.
+5. 작업 완료는 Issue/PR 링크와 간단한 전달 문구로 알린다. 일반 L1에 장문의 별도 보고서 강제 금지.
+
+## 3. 리뷰 라우팅과 에스컬레이션
+
+| 분류 | 결정·검토 루트 |
+| --- | --- |
+| **L1** 승인 범위 내 부서 내부 변경 | 해당 부서 자체 검증, 티켓/PR 및 CI |
+| **L2** 다른 부서 데이터 의미·화면 상태·에셋 계약에 영향 | **영향받는 부서에 직접** 협의·필요 행만 검토, 관련 Issue/PR 기록 |
+| **L3** 승인된 게임 규칙/MVP 범위 변경 또는 중대한 공통 시간·원장/부서 충돌 | 해당 변경은 진행 중단·범위/대안/회귀 영향 작성→HQ 통합 검토→필요한 Owner 결정 |
+
+**W02는 문서상 L3 위험 영역**이다. 기존 SEM-01~03·CLOSE-01을 그대로 구현하는 것 자체가 항상 재승인 대상이라는 뜻은 아니며, **실행 티켓에서 경제/시각 회귀 영향과 인수 기준을 명시**한다. 실제 정책·수치·순서 변경이 필요하면 Owner 판단 전 변경 금지.
+
+## 4. 실제 구현 검증을 분리
+
+- **도구/정책:** 로컬 훅·doctor/check/정책 테스트 vs 원격 `policy`·`department-policy`. API 쓰기 시 로컬 훅은 `NOT_RUN`으로 밝힌다.
+- **엔진:** Godot 버전/프로젝트 headless 로드 vs **게임 메인 진입/Windows GUI 동작**은 다른 증거.
+- **기능:** 정적 fixture 기대값 vs Godot 규칙 자동/회귀 실행 vs 실제 사용자 입력→화면 결과는 별도.
+- **전략적 인수:** Stage 1의 S1-01~09 부분 합격 vs 전체 MVP AC-01~10 및 VP-01·02의 독립 E2E 합격은 별도.
+- 실패/미실행을 성공으로 치환하지 않는다. 관련 버전/시드/command_id/effective_at/입력·기대·실제·로그를 기록하며, 정적 UI 캡처만으로 실제 조작 PASS 선언 금지.
+
+## 5. Git 병렬 안전선
+
+- 작업마다 최신 `main`과 승인 티켓을 확인하고 독립 `codex/<TASK-ID>-...` 브랜치 사용. Windows 각 환경·AI 세션의 미공유 로컬 작업과 worktree는 담당 DEV가 확인. 별도 세션의 작업 디렉터리/브랜치를 임의 변경하거나 정리하지 않는다.
+- GitHub **Update branch(Merge)**로 작업 브랜치에 main을 병합하지 않는다. PR #35의 다중 부모/CI 실패 사례를 반복하지 않도록, 이미 공개한 브랜치에서 강제 rebase/force-push 대신 최신 main의 **새 브랜치에 승인 변경만 재제출**한다. 사유·대체 PR·정확한 SHA를 남긴다.
+- 공용 오류 보고 경로는 [DEV-008 운영 규칙](../engineering/SHARED_ERROR_REPORTS.md)에 따른다. 게임 업무와 직접 관련 없는 과거 협업 오류 PR을 불필요한 실행 블로커로 만들지 않는다.
+- **main Merge·릴리스/배포는 Owner 별도 승인.** 이 HQ 문서에는 공통 CI/정책 도구/타 부서 파일 수정 권한이 없다.
+
+## 6. Stage 주간 검토와 종료
+
+매 점검 주기 HQ에는 **완료 증거 1~3개 / 실제 차단·재현 이슈 / 다음 우선순위 1~3개 / 필요 Owner 선택**만 전달한다. 사람 맨먼스·인일로 자동 일정을 약속하지 않는다.
+
+Stage 종료 시 `S1-01~09`의 실제 증거, 필요한 DEV/DSG L2 수용, PLN 규칙 변경 여부·미검증 영역, 차기 VS-01/VS-02 후속 의무를 HQ가 정리하여 Owner가 Stage 결과를 최종 수용한다. 첫 Stage 완료 후 PM-008 시범운영의 중복 검토/전달 비용/CI·권한/게임 검증 누락을 회고한다.
