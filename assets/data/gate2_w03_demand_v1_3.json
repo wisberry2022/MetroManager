@@ -1,0 +1,21 @@
+{
+  "data_version": "1.3",
+  "source": {
+    "path": "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
+    "commit": "604751d79bba86cad179ca6434a5ec5b42640d71",
+    "section": "4"
+  },
+  "daily_demand": {
+    "D01": 2000,
+    "D02": 1500,
+    "D03": 1200,
+    "D04": 800,
+    "D05": 600,
+    "D06": 400,
+    "D07": 300,
+    "D08": 200
+  },
+  "capacity_per_minute": 10,
+  "fare": 100,
+  "operating_cost_per_minute": 100
+}
