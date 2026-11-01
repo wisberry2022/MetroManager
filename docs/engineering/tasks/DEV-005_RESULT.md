@@ -58,3 +58,26 @@ Gate 1은 승인됐고 Gate 2는 Owner가 전달한 최신 DEV/Design 재검토�
 - 다음 순서: 승인된 DEV-005 커밋·작업 브랜치 push·PR 및 CI 확인 → Owner 검수 → DESKTOP 직접 인수 확인. 기획 보완과 게임 개발은 해당 담당·승인 티켓 범위에서 진행한다.
 
 이번 보고는 검수 요청이며 DEV-005 DONE·공식 운영 규정 승인·Gate 2 최종 승인 처리 요청을 대신하지 않는다.
+
+## 후속 환경 정보 정정 — 2026-11-01 / REVIEW
+
+- 근거: 이번 채팅에서 Owner가 프로젝트 상위 Godot 실행 폴더 및 디자인 작업용 Pixelorama clone을 안내하고 LAPTOP.md 정정을 요청함.
+- 작업 기준: DEV-005 / HEAD=37e660f5788b1c29a48ae8720c3d14396cc897a6, fetch 후 원격 DEV-005 head 일치.
+- 변경 파일: collaboration/environments/LAPTOP.md, collaboration/DEV-005_PROJECT_STATUS.md, 본 보고서. Godot 경로·실제 버전·Pixelorama 소스 위치와 버전 확인 범위를 기록하고 최초 PATH 기반 미확인 표현을 정정.
+- 증거: `../godot/Godot_v4.7.2-stable_win64_console.exe --headless --version` → `4.7.2.stable.official.ed1daf0bf` (PASS). GUI/콘솔 실행 파일 모두 존재.
+- Pixelorama: `git -C ../Pixelorama status --short --branch` → master...origin/master, clean. HEAD=`fae9327992f1506f340b920e0fa6515a88298079`, origin=`https://github.com/Orama-Interactive/Pixelorama.git`, describe=`v1.2.3-64-gfae93279`. project.godot에는 v1.2.4-rc2/4.7 표기. 버전 태그와 소스 설정값을 구분.
+- 최초 sandbox의 상위 Pixelorama Git 접근은 Permission denied. 허용된 권한으로 동일 읽기 검사를 재실행해 위 결과 확인. 도구·별도 저장소 수정 없음.
+- doctor / `.venv/Scripts/python.exe tools/policy.py check` / `git diff --check` PASS. 변경 문서 3개 UTF-8·LF·개행·상대 링크 검사 PASS. 게임/도구 자동 테스트 재실행은 NOT_RUN(환경 기록 정정만 수행).
+- MetroManager 및 Pixelorama 프로젝트 로드·플레이·빌드·디자인 에셋 제작: 각각 NOT_RUN. 버전 명령 실행과 구분.
+- 미해결: 실제 프로젝트 로드·Pixelorama 사용 검증은 미실행. 명세 변경 필요 없음.
+- 최초 정정은 미커밋 상태였으며, 후속 Owner 지시로 이번 정정의 commit/작업 브랜치 공유/PR 제출이 승인됐다. PR #13 병합 완료를 확인해 별도 후속 PR로 제출한다. main 병합·릴리스 승인 없음.
+
+### 환경 정정 후속 PR 제출 승인·검증
+
+- Owner 원문(이번 채팅, 2026-11-01): “개발 에이전트. 수정본을 PR 생성해주세요 현재 소스트리 확인 시 아직 미커밋 파일이 3개가 남아있습니다”
+- 허용: DEV-005 환경 정정 3개 파일의 commit/작업 브랜치 공유/PR 생성·CI 확인. 대상 wisberry2022/MetroManager, 브랜치 codex/DEV-005-laptop-environment-correction. 이번 제출까지 유효하며 main 병합·강제 push·릴리스 제외.
+- 제출 기준: 최신 main e5b61f2457b1930a5e0f0e2e1d3f705dd42ed93d. 기존 PR #13은 병합 완료, 미커밋 변경을 보존한 채 최신 main에서 후속 브랜치 생성.
+- 제출 방식: 앞선 Git HTTPS 인증 실패가 확인되어 연결된 GitHub API의 base tree 보존·단일 부모 commit·새 작업 브랜치 방식 사용. 로컬 커밋의 검사 통과 및 API 제출 트리 동일성을 확인하고 제출 뒤 원격 head로 로컬을 맞춘다. 정확한 SHA·PR URL·CI는 후속 PR 본문에 기록한다.
+- 검사: doctor / policy check / 문서 3개 UTF-8·LF·개행·공백·상대 링크 및 diff 검사 PASS. 문서 전용 변경으로 게임/도구 자동 테스트 재실행 NOT_RUN. 원격 policy/department-policy 결과는 제출 후 실제 확인한다.
+- Godot 버전 명령 PASS는 이전 정정 시 직접 확인한 증거이며 이번 제출에서 다시 프로젝트를 열거나 Pixelorama를 실행하지 않음. Godot 로드·게임 플레이·빌드·성능·디자인 도구 사용은 각각 NOT_RUN.
+- 문서의 최초 현황 분석은 dc06e48 시점 스냅샷이다. 이번 main에는 Gate 2 최종 승인(PLN-001_GATE2_FINAL_APPROVAL.md)과 Gate 3 운영 문서가 추가됐음을 확인했다. 이번 PR은 환경 정보 정정에 한정하며 Gate 3 분석·구현을 착수하지 않는다.

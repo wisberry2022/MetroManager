@@ -2,6 +2,7 @@
 
 - 작성: LAPTOP Project Leader / 2026-11-01 (Asia/Seoul) / REVIEW
 - 조사 기준: `dc06e48b1dbc7745dcb0a29e424cd0416767ab38` (fetch 후 로컬 HEAD=origin/main).
+- 스냅샷 주의: 본문 Gate 상태는 위 dc06e48 및 당시 전달 자료 기준이다. 환경 정정 제출 기준 main e5b61f2에는 [Gate 2 최종 Owner 승인](../../planning/PLN-001_GATE2_FINAL_APPROVAL.md)과 Gate 3 운영 기록이 추가됐다. 현재 단계는 최신 승인 기록을 우선하며 이번 정정은 환경 정보만 갱신한다.
 - 방법: Git 추적 파일, 승인 원문 보존 문서, 기획 A/B/C/D/DATA, 부서 검토·결과, Godot 설정, 정책 코드·CI 조사. 다른 PC의 채팅·미공유 파일은 조사 범위 밖이다.
 
 ## 판단
@@ -41,7 +42,7 @@ SEM의 최신 의미는 운영비 발생/지급/미지급 B 분리, B>0 시 새 
 | tests/tooling/ | 정책 도구 테스트 2파일 | 게임 경제/시간/E2E 테스트가 아님 |
 | .github/workflows/ | policy: PR 코드·테스트; department-policy: 신뢰한 base 코드의 경로/이력 검사 | 원격 실제 보호 설정·최근 실행 결과를 파일 존재만으로 단정하지 않음 |
 
-코드 컨벤션의 Godot 4.7.2 표현, project.godot의 4.7 기능 표기와 랩탑 실제 설치 버전은 구별해야 한다. 이번 PATH에서 godot/godot4는 발견하지 못했으며 설치 자체가 없다고 단정하지 않는다. 엔진·렌더러를 변경하지 않았다.
+코드 컨벤션의 Godot 4.7.2 표현, project.godot의 4.7 기능 표기와 실제 실행 버전은 구별한다. 최초 PATH 검색에서는 godot/godot4를 찾지 못했으나, Owner 안내 후 ../godot의 콘솔 실행 파일에서 `4.7.2.stable.official.ed1daf0bf`를 확인했다. 별도 ../Pixelorama clone도 디자인 도구 소스로 확인했다. 실행 경로·소스 버전·미실행 범위는 [LAPTOP 환경 기록](environments/LAPTOP.md)을 따른다. 엔진·렌더러를 변경하지 않았다.
 
 ## 검토 이력과 최신성 한계
 
