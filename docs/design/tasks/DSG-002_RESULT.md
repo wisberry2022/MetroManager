@@ -3,7 +3,7 @@
 - 프로젝트: MetroManager
 - 담당: Design / Art Director & UI/UX Designer
 - 작성일: 2026-11-01
-- 버전: v0.4 / 상태: REVIEW — Gate 3-0 분석 및 UI-DC-01~07 정적 의미 수용, 실제 목업·제작·통합 인수 전
+- 버전: v0.5 / 상태: REVIEW — Gate 3-0 의미 수용 및 Gate 3-1 첫 Stage 디자인 계획 제출, 실제 목업·제작·인수 전
 - 작업 추적: [GitHub Issue #24](https://github.com/wisberry2022/MetroManager/issues/24)
 - 기준 저장소: `wisberry2022/MetroManager` / `main` SHA `ca597ec541647aa2e9701ec93972e8763eae066d`
 - 승인 기준: [Gate 2 최종 승인](https://github.com/wisberry2022/MetroManager/blob/ca597ec541647aa2e9701ec93972e8763eae066d/docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md) / C v0.6, D v0.9, DATA v1.3
@@ -161,3 +161,13 @@
 - 검증 결과: 문서·댓글·정상/실패 정적 fixture의 의미 일치, 불일치 행/추가 의미 질문 없음. 명세 변경 필요 없음; C v0.6 / D v0.9 / DATA v1.3 / SEM-01~03·CLOSE-01 유지. 새로운 Planning 전면 검토나 HQ L3 요청 없음.
 - 구분: DEV_CONFIRMED + DESIGN_SEMANTIC_ACCEPTED는 정적 공급·소비 수용 증거다. 최종 공동 구현/통합 인수 ACCEPTED, 실제 AC/VP PASS, Owner 승인/DONE은 선언하지 않는다. DEV 저장소 v0.1 문구 동기화는 소관 후속이며 새 정책 결정의 선행조건이 아니다.
 - 제출/검증: 디자인 경로2개만, 기존 브랜치 head를 단일 부모로 추가, base tree 보존·expected_sha 확인·force=false. 원격 CI는 이번 head 기준 확인. API 경로이므로 로컬 훅·policy.py doctor/check NOT_RUN. Godot 자동게임테스트/로드/플레이/Windows 빌드/성능/사용성 각각 NOT_RUN. 실제 목업/PNG NOT_CREATED. main merge·릴리스 미수행.
+
+## 12. Gate 3-1 최초 Stage 디자인 계획·개발 확인 및 Owner 결정 (2026-11-01, v0.5)
+
+- 원격 기준 `main` `177c2e4af3e15e15b15888c40eecb0f3ea983213`. HQ [PM-010 디자인 체크리스트](../../hq/requests/PM-010_DESIGN_CHECKLIST.md) / [Gate 3-1 요청](../../hq/PM-010_GATE3_1_REQUESTS.md).
+- [디자인팀 최초 회신](https://github.com/wisberry2022/MetroManager/issues/24#issuecomment-6555464641), [개발팀 상세 확인](https://github.com/wisberry2022/MetroManager/issues/24#issuecomment-6555812161), [Design의 #25 수용](https://github.com/wisberry2022/MetroManager/issues/25#issuecomment-6555800425), [Owner Stage 최소 UI/종료기준 동의](https://github.com/wisberry2022/MetroManager/issues/24#issuecomment-6555874135).
+- Development [Gate 3-1 분석 문서](../../engineering/gate3/DEV-006_GATE3_1_ANALYSIS.md), [UI 공급 계약 v0.2.1](../../engineering/gate3/DEV-006_UI_DATA_CONTRACT.md), [PR #33](https://github.com/wisberry2022/MetroManager/pull/33) 병합 내용을 정적 대조. 현재 추가 UI 의미/규칙 질문이나 부서 충돌 없음.
+- 후속 Stage 문서: [DSG-002_GATE3_1_DESIGN_STAGE_PLAN.md](DSG-002_GATE3_1_DESIGN_STAGE_PLAN.md). 첫 Stage의 **최소 실제 조작 UI + 자동 검증·UI 조작 증거**를 포함하고 범위 밖 전체 게임 화면/에셋 제작을 제외한다.
+- **최종 분석 판정:** `DESIGN_STAGE_PLAN_READY / DEV_STAGE_UI_BOUNDARY_CONFIRMED / OWNER_MINIMAL_UI_SCOPE_AGREED`. 정적 계획 인수 입력이며 `GAME_IMPLEMENTED`/ `UX_PASS`/ `AC_VP_PASS` 아님.
+- **권한 경계:** Owner의 이 턴 PR 작성 요청에 따른 디자인 문서 브랜치·Commit/Push/PR 제출. 첫 Stage 실제 코드/씬/아트 제작, W02 L3 실행·main Merge·릴리스는 별도 Owner 승인이 필요.
+- **검증:** 문서·Issue·승인 원문 정적 대조 DONE. 해당 Stage의 Godot GUI 진입·게임/자동 규칙·조작·Windows 빌드·성능·외부 사용성 **NOT_RUN**, 이미지/에셋 **NOT_CREATED**. 새로운 게임 규칙 변경 없음.
