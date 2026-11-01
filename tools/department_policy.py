@@ -22,6 +22,10 @@ SUBJECT = re.compile(
     rf"({TASK}) (\S[^\r\n]*)"
 )
 EXCEPTIONS = "docs/governance/path_exceptions.json"
+# Only direct Markdown reports and their index are shared across departments.
+SHARED_REPORT = re.compile(
+    r"docs/co-work/err-report/(?:README\.md|ERR-[0-9]{8}-[0-9]{3,}_[^/\\]+\.md)"
+)
 DEV_ROOTS = ("scripts/", "scenes/", "assets/", "tests/", "tools/", ".github/", ".githooks/",
              "docs/engineering/", "docs/governance/", "docs/templates/")
 DEV_FILES = {"AGENTS.md", "README.md", ".editorconfig", ".gitattributes", ".gitignore",
@@ -91,6 +95,7 @@ def path_check(task, names, exceptions=None, today=None):
         if task.startswith("DEV-"):
             allowed = (name.startswith(DEV_ROOTS) or name in DEV_FILES
                        or bool(re.fullmatch(r"tasks/DEV-[0-9]{3,}_[^/]+\.md", name)))
+        allowed = allowed or SHARED_REPORT.fullmatch(name) is not None
         if not allowed and name not in extra:
             raise ValueError(f"{department(task)[0]} cannot modify {name}; use own directory or approved base exception")
 
@@ -126,7 +131,12 @@ def range_check(base, head, task):
     for sha in commits:
         parents = git("rev-list", "--parents", "-n", "1", sha).decode().split()
         if len(parents) != 2:
-            raise ValueError(f"Expected single-parent work commit: {sha}")
+            raise ValueError(
+                f"Expected single-parent work commit: {sha}. "
+                "Do not merge main into a work branch. For a shared branch, create a new "
+                "codex/<TASK-ID>-<description> branch from latest main and submit a replacement PR "
+                "with only the approved changes; do not force-push."
+            )
         message_check(git("show", "-s", "--format=%B", sha).decode("utf-8"), task)
         changed = changed_paths(parents[1], sha)
         path_check(task, changed, grants)
