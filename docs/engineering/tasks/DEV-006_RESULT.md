@@ -1,5 +1,7 @@
 # DEV-006 — Gate 3-0 개발 분석 결과
 
+현재 분석 통합 산출물은 [인수인계 v1.0](../gate3/DEV-006_ANALYSIS_HANDOFF.md)과 본 문서 마지막의 분석 통합 후속 제출 절을 따른다. 앞부분은 최초 PR #27의 제출/검증 이력이다.
+
 - 담당: Development / LAPTOP / 2026-11-01 / REVIEW / L2 계획 제안
 - [티켓·Owner 착수 근거](DEV-006_GATE3_DEVELOPMENT_PLAN.md), 기준 `ca597ec541647aa2e9701ec93972e8763eae066d`.
 - 추적: [Issue #25](https://github.com/wisberry2022/MetroManager/issues/25), 산출물 검수·외부 계약 상태·PR 제출을 구분해 추적.
@@ -36,7 +38,7 @@
 
 Godot 로드 과정의 .godot 캐시는 무시 경로이며 추적 게임 파일·설정·아이콘·타 부서 문서를 수정하지 않았다.
 
-## 미해결과 다음 인계
+## 최초 제출 시 미해결과 다음 인계 (이력)
 
 - UI 의미 계약 v0.1은 L2 초안이다. Design 수용과 Planning 의미 확인은 PENDING이며 P05/06/07/다음사업 통합 전 합의한다.
 - 지도 경계 도형·밀집 목업, PC/뷰포트·폰트/표시 상한·FPS 목표, 외부 사용성 표본/비용은 해당 부서/Owner의 G3 이월 조건이다. 순수 규칙 분석 전체를 차단하지 않는다.
@@ -44,3 +46,17 @@ Godot 로드 과정의 .godot 캐시는 무시 경로이며 추적 게임 파일
 - DEV-006 분석 문서의 원격 제출은 이번 Owner 직접 승인에 따라 진행한다. 승인 원문·허용 범위는 티켓의 후속 원격 제출 승인 절을 따른다. Design/Planning 계약 수용·HQ Stage 통합은 별도 PENDING이다.
 - 게임 기획 명세 변경 필요: 현재 없음. 모호성/부서 경계 변경 발견 시 Issue RFC로 상정하며 담당과 차단 시점을 기록한다.
 - 이번 보고는 검수 요청이며 DONE·ACCEPTED·최종 계약 수용·게임 구현 완료가 아니다.
+
+## 분석 통합 후속 제출 — 2026-11-01 / REVIEW
+
+- Owner 승인·경로·기간은 티켓의 분석 통합 후속 제출 승인 절을 따른다. 기준 main 4bdf65f9b832ab8235f818441bddae6423951585, 브랜치 codex/DEV-006-gate3-analysis-consolidation.
+- 변경6파일: gate3/DEV-006_ANALYSIS_HANDOFF.md 신규, gate3/DEV-006_UI_DATA_CONTRACT.md v0.2 및 DEV-006_DEVELOPMENT_PLAN.md v0.2, tasks의 DEV-006 티켓·본 결과, collaboration/WORK_STATUS.md.
+- #25/#24의 개발 결정·답변을 파일로 동기화했고 Design PR #30 head 47fe5923c8ff730dbbf6c03daace304e96a856bc에서 UI-DC-01~07 DESIGN_SEMANTIC_ACCEPTED·미해결 의미 질문 없음을 확인했다. 최초 조회 당시 미병합이었으나 제출 직전 main 8ef97626ba96844648a6de2e2cb9654e6816ce40에 #30 병합을 확인했다. 최종 구현 인수/Planning 후속 ACCEPT를 대리 선언하지 않는다.
+- PLN-R01 계약 단계/현재 안내 분리·R02 같은T/비영업 판정·R03 공급/소비/행동/fixture·R04 예측/cohort/시각/명령 연결·R05 표시도형/판정 원본 분리 정리. 새 게임 정책 변경·부서 전체 재검토/L3 상정 필요 없음.
+- 정적 산술 검산: 자기약정80000/부족1000/후순위운임 뒤80000, B정산500→C320/R20/F300/B0, 12:00/00:09 영업조건, cohort8→2. 게임 실행 검증과 구분한다.
+- doctor·policy check PASS(worktree121파일/GDScript0), 정책 도구 테스트23/23 PASS. 문서6개 UTF-8/LF/공백/링크·11 MUST/10 AC/2 VP/UI-DC-01~07 매핑·원문 보존 및 diff 검사 PASS. 정적 금액/시각/cohort 검산 PASS. bad_script.gd 오류는 부정 입력 거부 테스트의 예상 출력이며 전체 OK.
+- 이번 Godot 프로젝트 로드·게임 자동테스트·실제 플레이/GUI·Windows 빌드·성능·사용성: 각각 NOT_RUN. 문서 전용 통합이며 이전 headless 로드/도구 테스트 증거와 구분한다.
+- 추가 외부 질의 없이 분석 산출물 제출 가능. 실제 공급/fixture·지도 목업·기기/표현/사용성 목표·실행 티켓/Stage의 기존 후속 의무는 인수인계표에 유지한다. 게임 명세 변경 필요 없음.
+- 이전 Git HTTPS 인증 실패가 확인돼 base tree 보존·단일 부모 커밋·새 작업 브랜치의 GitHub API 방식으로 제출한다. 로컬 검증 트리와 동일성 확인 후 로컬 브랜치를 원격 head로 정렬한다. 실제 SHA·PR·CI 결과는 PR 본문 기록. main 병합 없음.
+
+- 동시 main 갱신 대응: #30의 Design 문서2개가 main 8ef9762에 병합됐음을 확인하고 미공유 단일 DEV 커밋을 최신 main 위로 rebase했다. 분석 근거4bdf65f/고정 Design head는 보존하며 제출 base만8ef9762로 갱신. 타 부서 변경 보존, merge commit·force push 없음.
