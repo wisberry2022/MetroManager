@@ -1,26 +1,91 @@
-# [PLN-001-D] HQ 제출용 콘셉트/MVP 통합 인수인계서
-## 현재 승인·제출 범위 (2026-10-31)
-- OWNER가 DATA-v1.0-draft의 제안 수치를 그대로 사용하도록 승인했다. 수치값은 변경하지 않았다.
-- 수치 승인과 부서 타당성 검토, 추가 연결 세칙(SEM-01~03), 전체 승인방식(APP-01), Gate 2 최종 승인을 구분한다. 수치 외 세칙의 별도 승인을 확대 추정하지 않으며 이번 PR에서 함께 검토한다.
-- 현재 문서는 DRAFT/REVIEW. HQ·개발·디자인 재검토를 위한 commit·작업 브랜치 업로드·PR 생성이 승인됐다. main 병합·자동 병합·릴리스는 승인되지 않았다.
-- GitHub API 제출 절차 사용: 최신 main 기반 단일 부모 커밋, docs/planning/만 변경, force=false. 실제 PR/커밋/원격 검사 결과는 PR 본문에 기록한다.
+# [PLN-001-D] HQ 제출용 콘셉트/MVP 최종 승인 인수인계서
 
-- 작업: PLN-001 / Planning → HQ·OWNER
-- 버전: **v0.8-draft / 2026-11-01**
-- 상태: **DRAFT — OWNER 정책 선택 반영, 제안 수치 OWNER 승인 반영, 세칙·승인방식 및 부서 검토 대기**
-- Gate 2 최종 승인 PENDING / 최종 상정 BLOCKED. 새 개정본 부서 재검토 NOT_REVIEWED.
-- 원격 기준 main: `fa3cecff660c2bb7f68f9b381e66feaa13c0b1b0`. 작업 브랜치 제출본이며 main 병합은 별도 승인.
-- 승인 근거: [OWNER 답변 원문·선택 매핑](sources/PLN-001_GATE2_OWNER_DECISIONS.md), 후보12 후속 답변 포함.
+- **문서 v0.9 / 2026-11-01 / OWNER_APPROVED**
+- 작업 PLN-001 / Planning → Owner·HQ·Development·Design
+- 승인 전 기준 main `f76db01ae7b2a094d587e288681b12ebc324bc04`, 3차 부서 검토 기준 `dc06e48b1dbc7745dcb0a29e424cd0416767ab38`.
+- **Gate 2 OWNER_APPROVED / APP-01 OWNER_DECIDED.** MVP 쉬움·시철, Gate 1/PAR/SEM/CLOSE 승인 보존.
+- 구현·기술/디자인 검증·Gate 3 티켓·Git Merge/릴리스는 별도 승인.
+- [최종 승인 기록](PLN-001_GATE2_FINAL_APPROVAL.md) · [Gate 3 인계](tasks/PLN-001_GATE2_FINAL_HANDOFF.md) · [Owner 결정 이력](sources/PLN-001_GATE2_OWNER_DECISIONS.md)
 
-## 최신 Owner SEM 승인·HQ 보완사항 (2026-11-01)
-- **적용 범위는 MVP 쉬움 난이도·시철 고정**이다. Gate 1 및 PAR-01~05 수치 승인 유지. 다른 난이도/주체로 자동 확장하지 않는다.
-- **SEM-01 Owner 채택:** 운영비 발생/실제 지급 분리, B 미지급 시 신규 승차 제한·이동 중 승객 도착 허용. 완료 운임은 도착 시 자유현금 유입과 동시에 B 우선 자동 정산. B=0·다음 운행 구간 비용 충당 시 신규 승차 재개.
-- **중요한 최종 범위 정정:** 미지급 즉시/6개월 경과의 **신규 사업 계약 제한은 둘 다 MVP 제외**, [IDEA-003](idea-library/PLN-IDEA-003.md)에 보존. 일반 사업 자격·가용 현금·K 예약 검사는 유지.
-- **SEM-02 Owner 채택:** 정부 제한잔액 R과 자기 공사 예약금 K는 별개 보호 대상. 미지급·공정 중단으로 자동 해제하거나 전용하지 않음. [플레이어 직접 계약 취소](idea-library/PLN-IDEA-002.md)는 MVP 제외.
-- **SEM-03 Owner 최종 승인:** T 시각 비용 누적→자정 마감/새 날짜→계약/지급→기성/완공→시험/개통→도착 완료 운임 인식→B 자동 정산→영업 상태/신규 탑승 판정. 후순위 운임의 계약 시점 선사용 금지; 시간 분할/배속 결과 재현은 Dev 검증 대상.
-- 이후 회사 방침으로 [자동 정산 ON/OFF](idea-library/PLN-IDEA-001.md)하는 기능은 MVP 외 Library 보관.
-- **APP-01 Owner 승인 PENDING.** SEM 승인이나 PR 제출로 Gate 2 최종 승인·구현 착수로 간주하지 않는다. 개발·디자인 3차 CONDITIONAL 및 HQ CONDITIONALLY HOLD 기준은 c0c5f547. 본 개정의 후속 검토 미완료.
+## 1. 승인 기준선 및 연결 버전
 
+| 문서 | 승인된 버전·상태 | 용도 |
+|---|---|---|
+| PLN-001-A/B | Gate 1 v0.3 / OWNER_APPROVED | 원안·핵심 루프, 수정 없음 |
+| [PLN-001-C](PLN-001-C.md) | **v0.6 / OWNER_APPROVED** | MVP 8영역/11 MUST/AC·VP, SEM·CLOSE 규칙 |
+| [DATA](PLN-001_GATE2_DATA_v1_DRAFT.md) | **v1.3 / OWNER_APPROVED** (경로명 DRAFT는 기존 참조 유지) | PAR 수치·SEM/T 경계·정답 사례 |
+| PLN-001-D | **v0.9 / OWNER_APPROVED** | 본 최종 인수인계 |
+| [Owner 결정](sources/PLN-001_GATE2_OWNER_DECISIONS.md) | 누적 원문·결정 이력 | Gate 1/PAR/SEM/CLOSE/APP/Gate 2 |
+| [최종 승인](PLN-001_GATE2_FINAL_APPROVAL.md) | v1.0 | 공식 Owner 승인 원문·범위 |
+| [Gate 3 인계](tasks/PLN-001_GATE2_FINAL_HANDOFF.md) | v1.0 | 부서 담당·차단 시점·검증 조건 |
+
+## 2. 최종 결론
+
+1. **Gate 2 OWNER_APPROVED**. HQ PM-006 조건부 수용에 근거하여 Owner가 공식 승인했다.
+2. Gate 1·MVP 8개 영역·MUST 11개·AC-01~10·독립 VP-01/VP-02 및 PAR-01~05 수치 원안 유지.
+3. SEM-01~03, CLOSE-01~03 Owner 결정 완료. 잔여 승객 도착 추가 운영비0, 운임 B 자동 정산, R/K 보호 및 T 사건 순서 확정.
+4. MVP 쉬움·시철 고정. 미지급 신규 사업 계약 제재(즉시/6개월)·직접 계약 취소·정산 토글은 Idea Library BACKLOG.
+5. APP-01 조건부 이월 방식 채택. 실제 구현 검증·UI 계약·성능·WBS는 책임과 차단 시점 지정 후 Gate 3/인수로 이월.
+
+## 3. Owner 승인 정책과 경계
+
+| 항목 | 현재 상태 | 인계 |
+|---|---|---|
+| Gate 1 / QD·P | OWNER_APPROVED | 변경 없음 |
+| G2-Q01~08 / PAR-01~05 | POLICY_DECIDED / PAR OWNER_APPROVED | 기존 데이터 수치 및 기능 범위 유지 |
+| SEM-01~03 | OWNER_DECIDED | 운행·정산·자금보호·자정 처리 |
+| CLOSE-01 | OWNER_DECIDED | 기존 승객 잔여 도착 추가비용 0 |
+| CLOSE-02 | OWNER_DECIDED | 현행 본문과 과거 승인·검토 기록 구분 |
+| CLOSE-03 / APP-01 | OWNER_DECIDED | Gate 3 책임·선행 조건·완료 증거 이월 |
+| Gate 2 | **OWNER_APPROVED** | 공식 기획 승인; 게임 구현·릴리스 승인 아님 |
+
+## 4. 최신 부서 회신 및 업무 인수
+
+| 부서 | 최신 판정 | 후속 책임 |
+|---|---|---|
+| Development | **CONDITIONAL — RESOLVED5 / PARTIAL3 / BLOCKED0** | 비용·원장/분할 재현·UI 데이터 공급·성공 시드/WBS·대상 PC 대안 |
+| Design | **CONDITIONAL — RESOLVED1 / PARTIAL7 / BLOCKED0** | 지도·역 밀집/가독성 목업, 상태 의미 UI, 에셋/성능·WBS |
+| HQ | **CONDITIONAL — PM-006 HQ 조건부 승인** | 블로커 이월·Gate 3 티켓/일정 통합 |
+| Owner | **Gate 2 OWNER_APPROVED** | Gate 3 개별 착수·예산·성능 목표는 별도 의사결정 |
+
+기존 검토 파일을 소급 수정하지 않는다. 당시의 `NOT_REVIEWED`, `DEV-R05 BLOCKED`는 이력으로 보존한다.
+
+## 5. BLOCK-G2-01~07 및 조건부 이월
+
+| ID | HQ PM-006 상태 | 후속 |
+|---|---|---|
+| BLOCK-G2-01 | RESOLVED | 종료 |
+| BLOCK-G2-02 | PARTIAL | G3-02 지도/역 목업 검증 |
+| BLOCK-G2-03 | RESOLVED | 설계 수준 종료; 실행 검증 별도 |
+| BLOCK-G2-04 | CONDITIONALLY_RESOLVED | CLOSE-01 규칙 확정, Dev 원장/시간 G3-01/05 |
+| BLOCK-G2-05 | PARTIAL | G3-03 성능·기기/표현 조건 |
+| BLOCK-G2-06 | PARTIAL | G3-05 시드·두 VP 실행 |
+| BLOCK-G2-07 | PARTIAL | G3-04 WBS·G3-06 사용성 |
+
+자세한 부서 책임·선행 이벤트·완료 증거는 [Gate 3 최종 인수인계](tasks/PLN-001_GATE2_FINAL_HANDOFF.md) §4 참조.
+
+## 6. Gate 2 완료 및 다음 단계 승인 제한
+
+- APP-01 조건부 이월 절차 **OWNER_DECIDED**. 실플레이 E2E가 Gate 2 기획 승인 선행 조건은 아니다.
+- **Gate 2 OWNER_APPROVED**, Owner 원문 기록 완료. HQ 재심사 의무 반복 없음(별도 Owner 요청 시 제외).
+- 실제 게임 Godot/Windows 빌드·AC/VP 재현·성능·사용성 검증은 MVP 구현 후 인수 단계에서 확보하며 현재 NOT_RUN.
+- Gate 3 착수·예산·일정, Git Merge/릴리스 등은 해당 Owner 승인/저장소 정책을 준수.
+- 지원 PC/목표 FPS/외부 사용성 표본/예산은 부서 대안→HQ 조정→Owner 승인 예정.
+
+## 7. 변경 이력 및 검증
+
+| 버전 | 이력 |
+|---|---|
+| v0.7-draft | PAR 승인 수치 반영·PR 제출 당시 |
+| v0.8-draft | SEM 승인·Idea Library 분리 당시 |
+| **v0.9** | **Owner Gate 2 공식 승인**, CLOSE-01~03/APP-01 및 최신 HQ·부서 상태 정합화 |
+
+- 정적 문서·소스 승인 기록 검토. Godot/실플레이/Windows 빌드/FPS **NOT_RUN**.
+- 본 원격 제출은 Owner의 PR 생성 승인을 근거로 하며 main 병합·구현·릴리스는 요청하지 않는다.
+
+### 과거 D 이전 §1~6 승인 대기 및 부서 회신 — SUPERSEDED / 감사 이력
+
+```markdown
 ## 1. 산출물·기준 원본
 | 문서 | 버전/상태 | 역할 |
 |---|---|---|
@@ -129,7 +194,11 @@ TD-01~06 및 DD-01~08은 각 부서 소관 답변으로 반영한다. 개발 구
 4. PC/해상도/상한/성능은 양 부서 제안 후 OWNER 선택. 외부 사용성 표본/성공률/예산도 Design/HQ 제안 후 별도 선택. 내부 두 VP 관찰은 수요/심사 이유/개통 재무효과 설명 여부 기록.
 5. HQ가 잔여 위험·BLOCK 해소·인력/공수/의존성을 통합, OWNER Gate 2 최종 승인 이후 Gate 3 일정안.
 완성 게임 E2E PASS를 Gate 2 문서 승인 선행으로 요구하지 않는다. 실제 MVP 인수에서는 두 VP의 독립 실행·AC 증거를 요구한다.
+```
 
+### 과거 D 이전 §7 승인 대기 및 검증 — SUPERSEDED / 감사 이력
+
+```markdown
 ## 7. 변경 이력·완료 조건
 | 항목 | 현재 |
 |---|---|
@@ -152,3 +221,31 @@ TD-01~06 및 DD-01~08은 각 부서 소관 답변으로 반영한다. 개발 구
 v0.3 Gate1 → v0.4-draft 최초Gate2 → v0.5-draft 1차 회신통합(PR#5) → v0.6-draft OWNER 정책·2차 회신 반영 → **v0.7-draft 제안 수치 승인·PR 제출**.
 
 **v0.8-draft / 2026-11-01:** SEM Owner 채택·6개월 제재 MVP 제외·Library 및 PLN-G2-F01~03 추적. 다음 Dev/Design/HQ 재검토 전 Gate 2 최종 승인 PENDING.
+```
+
+### 과거 D 이전 서두 제출 상태 — SUPERSEDED / 감사 이력
+
+```markdown
+# [PLN-001-D] HQ 제출용 콘셉트/MVP 통합 인수인계서
+## 현재 승인·제출 범위 (2026-10-31)
+- OWNER가 DATA-v1.0-draft의 제안 수치를 그대로 사용하도록 승인했다. 수치값은 변경하지 않았다.
+- 수치 승인과 부서 타당성 검토, 추가 연결 세칙(SEM-01~03), 전체 승인방식(APP-01), Gate 2 최종 승인을 구분한다. 수치 외 세칙의 별도 승인을 확대 추정하지 않으며 이번 PR에서 함께 검토한다.
+- 현재 문서는 DRAFT/REVIEW. HQ·개발·디자인 재검토를 위한 commit·작업 브랜치 업로드·PR 생성이 승인됐다. main 병합·자동 병합·릴리스는 승인되지 않았다.
+- GitHub API 제출 절차 사용: 최신 main 기반 단일 부모 커밋, docs/planning/만 변경, force=false. 실제 PR/커밋/원격 검사 결과는 PR 본문에 기록한다.
+
+- 작업: PLN-001 / Planning → HQ·OWNER
+- 버전: **v0.8-draft / 2026-11-01**
+- 상태: **DRAFT — OWNER 정책 선택 반영, 제안 수치 OWNER 승인 반영, 세칙·승인방식 및 부서 검토 대기**
+- Gate 2 최종 승인 PENDING / 최종 상정 BLOCKED. 새 개정본 부서 재검토 NOT_REVIEWED.
+- 원격 기준 main: `fa3cecff660c2bb7f68f9b381e66feaa13c0b1b0`. 작업 브랜치 제출본이며 main 병합은 별도 승인.
+- 승인 근거: [OWNER 답변 원문·선택 매핑](sources/PLN-001_GATE2_OWNER_DECISIONS.md), 후보12 후속 답변 포함.
+
+## 최신 Owner SEM 승인·HQ 보완사항 (2026-11-01)
+- **적용 범위는 MVP 쉬움 난이도·시철 고정**이다. Gate 1 및 PAR-01~05 수치 승인 유지. 다른 난이도/주체로 자동 확장하지 않는다.
+- **SEM-01 Owner 채택:** 운영비 발생/실제 지급 분리, B 미지급 시 신규 승차 제한·이동 중 승객 도착 허용. 완료 운임은 도착 시 자유현금 유입과 동시에 B 우선 자동 정산. B=0·다음 운행 구간 비용 충당 시 신규 승차 재개.
+- **중요한 최종 범위 정정:** 미지급 즉시/6개월 경과의 **신규 사업 계약 제한은 둘 다 MVP 제외**, [IDEA-003](idea-library/PLN-IDEA-003.md)에 보존. 일반 사업 자격·가용 현금·K 예약 검사는 유지.
+- **SEM-02 Owner 채택:** 정부 제한잔액 R과 자기 공사 예약금 K는 별개 보호 대상. 미지급·공정 중단으로 자동 해제하거나 전용하지 않음. [플레이어 직접 계약 취소](idea-library/PLN-IDEA-002.md)는 MVP 제외.
+- **SEM-03 Owner 최종 승인:** T 시각 비용 누적→자정 마감/새 날짜→계약/지급→기성/완공→시험/개통→도착 완료 운임 인식→B 자동 정산→영업 상태/신규 탑승 판정. 후순위 운임의 계약 시점 선사용 금지; 시간 분할/배속 결과 재현은 Dev 검증 대상.
+- 이후 회사 방침으로 [자동 정산 ON/OFF](idea-library/PLN-IDEA-001.md)하는 기능은 MVP 외 Library 보관.
+- **APP-01 Owner 승인 PENDING.** SEM 승인이나 PR 제출로 Gate 2 최종 승인·구현 착수로 간주하지 않는다. 개발·디자인 3차 CONDITIONAL 및 HQ CONDITIONALLY HOLD 기준은 c0c5f547. 본 개정의 후속 검토 미완료.
+```
