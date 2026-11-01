@@ -1,4 +1,6 @@
-# Git 운영 규칙 v1.1
+# Git 운영 규칙 v1.2 검수안
+
+- DEV-014 / 2026-11-01 / REVIEW: 아래 무충돌 base-sync 예외와 병렬 제출 개선은 Owner 검수·main 반영 후 적용. force push·main 직접 쓰기·squash/필수 CI/Owner 병합 규칙은 유지한다.
 
 - 작업: DEV-002 / 담당: Convention Team / 날짜: 2026-10-31 / 상태: REVIEW
 - Owner의 이번 직접 지시로 전략을 선정하고 구현한다. 기존 HQ 규정의 DRAFT 상태와 승인 권한은 유지한다.
@@ -19,17 +21,20 @@ Git Flow의 상시 develop/release/hotfix 분리는 병행 지원 버전이 없�
 6. Owner의 별도 병합 승인 후 **squash merge**. 최종 squash 제목은 PR 제목, 본문은 변경 효과·검증 및 승인 근거를 포함한다. 자동 병합은 사용하지 않는다.
 7. 병합 후 fetch/pull --ff-only로 main 동기화. 결과와 main SHA를 보고한다. 작업 브랜치 삭제는 해당 브랜치 종료 승인 범위에 있을 때만 수행한다.
 
-작업 브랜치에 main을 merge하여 merge commit을 만들지 않는다. 최신 main이 필요하면 미푸시 커밋은 rebase할 수 있다. 이미 공유한 브랜치는 강제 push 대신 최신 main에서 새 작업 브랜치(같은 티켓·새 설명)를 만들고 필요한 커밋을 cherry-pick하여 대체 PR을 제출한다. 기존 PR에 대체 관계를 기록한다. 충돌은 의미와 테스트를 재검토한다.
+일반 작업 커밋은 부모 1개를 유지한다. DEV-014의 검증된 무충돌 base-sync만 부모 2개 예외이며 아래 조건 외 merge commit은 거부한다. 최신 main이 필요하면 미푸시 커밋은 rebase할 수 있다. 이미 공유한 브랜치에서 충돌·검증 불가가 발생하면 강제 push 대신 최신 main에서 새 작업 브랜치(같은 티켓·새 설명)를 만들고 필요한 커밋을 cherry-pick하여 대체 PR을 제출한다. 기존 PR에 대체 관계를 기록한다. 충돌은 의미와 테스트를 재검토한다.
 
-## 최신 main 필요 시 GitHub UI 주의 (DEV-008 검수안)
+## 최신 main 필요 시 GitHub UI와 검증된 base-sync (DEV-014 검수안)
 
-GitHub의 merge 방식 `Update branch`나 main을 작업 브랜치에 병합하는 기능을 사용하지 않는다.
-작업 커밋은 부모 1개여야 하며 서버의 최신 main 기준 검사 요건이 이 규칙을 해제하지 않는다.
-다른 PR이 먼저 병합돼 최신 main이 필요하면 fetch 후 최신 main의 새 작업 브랜치에
-승인된 자기 작업 변경만 cherry-pick하거나 다시 구성하고 대체 PR을 제출한다.
+DEV-014 검수안이 main에 반영된 후에는 무충돌 GitHub `Update branch`로 같은 PR을 유지할 수 있다.
+검사기는 두 번째 부모가 신뢰된 PR base의 조상이고 양쪽이 실제로 분기돼 있으며,
+격리 객체 저장소에서 재계산한 무충돌 merge tree와 제출 tree가 완전히 같은 경우만 base-sync로 인정한다.
+동기화 전후의 모든 일반 작업 커밋은 기존 제목·본문·티켓·부서 경로·파일 모드 검사를 통과해야 한다.
+동기화 커밋의 기본 Git 메시지만 형식 예외로 두며 제목 문구나 작성 계정으로 예외를 판정하지 않는다.
+추가 수정·다른 브랜치·순서가 뒤바뀐 부모·octopus·수동 충돌 해소 merge는 허용하지 않는다.
+충돌 또는 검증 불가 시 최신 main의 새 브랜치에 승인된 변경만 옮겨 대체 PR을 제출한다.
 원래 작업 내용·단일 부모·부서 경로·두 CI를 재검증하고 원래 PR과 대체 관계를 기록한다.
 이미 공유한 브랜치는 강제 push나 rebase로 덮어쓰지 않는다. 기존 PR의 종료와 브랜치 삭제는
-해당 승인 범위를 확인한다. 부모 2개 오류를 검사 면제·merge commit 허용으로 해결하지 않는다.
+해당 승인 범위를 확인한다. 일반 merge 검사를 면제하거나 strict 보호를 끄지 않는다. 승인된 base-sync 규칙으로 정확히 검증되는 경우만 같은 PR을 유지한다.
 
 PR #35의 실패는 merge commit의 부모 수로 확인됐으며 디자인 브랜치 삭제가 직접 원인이라는
 증거는 없다. 실제 UI 클릭 주체·버튼은 미확인으로 남긴다.
@@ -40,7 +45,7 @@ DEV-009 예방 검수안: 로컬에서는 `pre-merge-commit`으로 자동 merge 
 수동 커밋에서도 MERGE_HEAD가 남아 있으면 거부한다. 작업 파일·merge 상태를 자동 폐기하지 않는다.
 제출 전 fetch 후 커밋한 HEAD에 `.venv/Scripts/python.exe tools/policy.py preflight`를 실행한다.
 pre-push도 fetch된 origin/main 포함 여부와 기존 커밋/부서 검사를 확인한다.
-origin/main보다 뒤처지면 main merge/공유 이력 재작성 대신 기존 새 브랜치·대체 PR 절차를 따른다.
+origin/main보다 뒤처지면 검증된 무충돌 GitHub 갱신 후 실제 원격 head를 fetch하여 재검사한다. 충돌·검증 불가 시 새 브랜치·대체 PR을 쓰며 공유 이력을 재작성하지 않는다.
 사전 검사 뒤 main이 진전하는 경합은 서버 필수 검사와 Owner 검수로 다시 확인한다.
 GitHub API/UI에는 로컬 훅이 적용되지 않는다. [플러그인·로컬 제출 안내](GITHUB_SUBMISSION.md)를 함께 읽는다.
 

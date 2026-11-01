@@ -92,3 +92,13 @@ git diff -- docs/engineering/collaboration/WORK_STATUS.md
 ### 종료 조건
 
 Convention Team이 원인·선택지·범위/위험을 답변하고 Owner가 운영 방식을 결정한 뒤, 별도 티켓에서 정상/충돌/동시 head 변경/오래된 base/타 부서 경로/중간 merge commit 사례를 검증한다. 두 필수 CI와 승인 경계를 유지하고, 실제 사용자 동기화 흐름에서 재발 또는 반복 작업이 어떻게 줄었는지 증거를 남긴다. W03 대체 PR의 CI 성공은 즉시 복구 증거일 뿐 이 개선 요청의 종료 근거가 아니다.
+
+## 6. Convention Team 후속 — DEV-014 (2026-11-01)
+
+- 기준 main `87342cd5c29a3047695c11bfd7f2b76415cdf4d8`, 기존 리포트의 관찰·로그·복구 기록은 보존한다.
+- 단순 사용 금지·로컬 훅만으로는 GitHub Update branch와 strict 최신성 요구 사이의 반복을 해소하지 못했음을 확인했다.
+- 제한적 수정 검수안: 일반 작업 커밋의 단일 부모/티켓·메시지·부서/모드 검사를 유지하고, 신뢰된 base 부모·격리 재계산 무충돌 merge tree가 정확히 일치하는 동기화만 허용한다. 추가 수정·외부 부모·수동 충돌 해소·octopus는 거부한다. 같은 PR/브랜치에 덧붙이는 정상 갱신은 이력을 재작성하지 않는다.
+- 실제 #52/#53 head를 동일 당시 base로 후보 검사에 재생해 각각 work=1 / verified_base_sync=1 PASS. 과거 원격 failure나 실제 운영 CI가 수정된 것은 아니다.
+- WORK_STATUS의 기존 행은 보존하고 개별 티켓/결과·Issue/PR을 상태 정본으로 안내했다. 병렬 PR마다 공통 표 행 추가를 기본 변경 범위로 요구하지 않고 통합 담당이 순차 집계한다. 실제 내용 충돌을 자동 선택하는 기능은 아니다.
+- [검증 조건·대안·RFC-DEV-014-01](../../engineering/VERIFIED_BASE_SYNC.md), [실행 증거·미해결](../../engineering/tasks/DEV-014_RESULT.md). 기존 두 필수 CI·strict·Owner 병합·squash·force push 금지를 유지한다.
+- 현재 로컬 수정/정책 검수안이며 Owner의 정책 검수·DEV 제출/통합·이후 승인된 실제 Update branch 원격 검증 전까지 RFC-DEV-012-ERR-002는 OPEN으로 둔다. 재발 방지 DONE을 선언하지 않는다.

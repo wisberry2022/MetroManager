@@ -26,7 +26,7 @@ python -m venv .venv
 | commit-msg | 티켓 일치·제목 형식·본문 | 승인/의미 판정 아님 |
 | pre-push | main/tag/삭제/비정상 브랜치 차단, fast-forward, 커밋 형식, fetch된 main 포함 | 로컬 설정으로 우회 가능; fetch 이후 원격 변경은 서버 검사로 재확인 |
 | PR CI policy | PR 코드·스타일·테스트 검사 | PR에서 수정 가능하므로 단독 신뢰하지 않음 |
-| department-policy | base의 코드로 부서·메시지·경로·커밋 검사 | 같은 계정의 실제 부서 신원은 식별 못함 |
+| department-policy | base의 코드로 부서·메시지·경로·일반 커밋 및 검증된 base-sync 검사(DEV-014 검수안) | 같은 계정의 실제 부서 신원은 식별 못함 |
 | 원격 main 보호 | 필수 PR·독립 리뷰·필수 CI·관리자 우회 금지 | 저장소 플랜·권한·서버 설정 필요 |
 
 pre-push는 커밋/대상 ref를 검사하고 코드 정합성은 pre-commit과 PR CI에서 검사한다. 작업 브랜치의 원격 업로드 자체를 GitHub main 보호가 차단하는 것은 아니다. 잘못된 변경의 main 유입을 차단하는 구조이다.
@@ -36,6 +36,17 @@ DEV-009의 새 훅을 사용하려면 각 clone/worktree에서 install_hooks.py�
 읽는 사전 검사이며 fetch·쓰기·승인 판정을 하지 않는다. GitHub 직접 사용 절차와 실제 차단 범위는
 [GITHUB_SUBMISSION.md](GITHUB_SUBMISSION.md)에 기록한다. allow_update_branch=false만으로 Update branch가
 모든 상황에서 사라진다고 주장하지 않으며 strict 필수 검사나 보호를 완화하지 않는다.
+
+## DEV-014 검증된 base-sync 검수안
+
+기존 두 필수 CI를 보존하며 base-only 검사기가 동기화 예외를 tree로 검증한다.
+임시 bare object 저장소만 사용하고 원본 refs/index/worktree는 변경하지 않는다.
+Git 환경 변수를 재설정하고 system/global/source-local 설정·외부 merge driver를 가져오지 않는다.
+PR 코드를 checkout/실행하지 않는다. 재계산 충돌·지원되지 않는 Git·tree 불일치는 fail-closed다.
+`git merge-tree --write-tree`가 지원되는 Git이 필요하며 현재 로컬 2.41에서 검증한다.
+로컬 자동/수동 merge 생성 훅은 계속 거부한다. GitHub의 깨끗한 동기화 결과를 fetch한 뒤 preflight/pre-push가 같은 규칙으로 검증한다.
+main 선형 이력은 최종 squash로 유지한다. strict·필수 검사·관리자 보호를 낮추거나 force push하지 않는다.
+이 변경이 main에 반영되기 전 기존 PR에서 Update branch를 시험하지 않는다.
 
 ## GitHub 원격 적용 사양
 

@@ -14,9 +14,10 @@ from department_policy import branch_task, message_check, ticket_check, range_ch
 
 TEXT_SUFFIXES = {".gd", ".py", ".yml", ".yaml", ".json", ".toml", ".cfg"}
 MERGE_REJECTION = (
-    "Merge commits are forbidden on work branches. Do not use merge-style Update branch. "
-    "Preserve your work, create a new codex/<TASK-ID>-<description> branch from latest main, "
-    "and submit only the approved changes in a replacement PR; do not force-push."
+    "Merge commits are forbidden locally. Preserve your work. "
+    "After the verified-base-sync policy is on main, a clean GitHub Update branch "
+    "can retain the PR. For conflicts or unverifiable changes, use a replacement PR "
+    "from latest main with only the approved changes; do not force-push."
 )
 
 
@@ -95,7 +96,9 @@ def submission_check(base, head, task):
     )
     if result.returncode == 1:
         raise ValueError(
-            "Work branch does not contain the fetched origin/main. " + MERGE_REJECTION
+            "Work branch does not contain the fetched origin/main. "
+            "Use a verified clean GitHub base update, then fetch and recheck the actual head. "
+            "For conflicts use a replacement PR; do not force-push."
         )
     result.check_returncode()
     commits_check(base, head, task)
