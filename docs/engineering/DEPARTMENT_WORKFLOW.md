@@ -45,6 +45,11 @@ HQ/기획/디자인/INF의 티켓·결과도 각 부서의 `tasks/<ID>_TITLE.md`
 5. 공유는 브랜치/커밋 URL로 가능하다. 통합할 때 base=main의 PR을 만들고 `policy`, `department-policy` 결과를 확인한다. 실패하면 같은 브랜치에서 수정한다. 부서 밖 파일을 건드린 커밋은 최종 트리에서 되돌려도 실패하므로 최신 main에서 새 브랜치에 허용 변경만 다시 준비한다.
 6. 병합 승인 이후 squash merge. 플러그인 쓰기 권한을 정책상 승인으로 간주하지 않는다. “추후 push 가능하게 할 예정”은 미래 모든 작업의 포괄 위임 기록이 아니다.
 
+DEV-009 예방 검수안: 쓰기 전에 [GitHub 제출 사전 확인](GITHUB_SUBMISSION.md)을 적용한다.
+head ref의 expected SHA, 최신 main 포함 여부, base 이후 모든 커밋의 부모 1개·티켓/부서·변경 경로를 대조한다.
+merge 방식 Update branch/API 동기화는 사용하지 않으며, 최신 main이 필요하면 새 브랜치·대체 PR 절차를 따른다.
+로컬 훅 없는 API 방식도 같은 규칙을 적용하고 확인 불가 상태를 PASS로 표시하지 않는다.
+
 ## 디렉터리 경계
 
 HQ/기획/디자인/INF는 기본 경로 아래 파일의 추가·수정·삭제만 허용한다. 소스·씬·에셋·project.godot·tools·.github·.githooks·AGENTS.md·다른 부서 문서 변경은 거부한다. rename은 원래 경로의 삭제와 새 경로의 추가 모두 검사한다. 중간 커밋도 검사하며 symlink/submodule은 허용하지 않는다.

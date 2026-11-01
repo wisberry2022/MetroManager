@@ -8,6 +8,7 @@
 
 - [INF 등록·초기 게시 절차](INF_ONBOARDING.md): DEV-007 검수안, INF 소관·README 게시 원본·원격 검증 순서.
 - [공용 협업 오류 보고](SHARED_ERROR_REPORTS.md): DEV-008 검수안, PR #37 경로 등록·보고 규칙·안전한 재제출 절차.
+- [GitHub 제출 사전 확인](GITHUB_SUBMISSION.md): DEV-009 예방 검수안, 로컬 merge 차단·preflight·플러그인/API 안전한 갱신.
 
 ## 데스크톱·랩탑 협업
 

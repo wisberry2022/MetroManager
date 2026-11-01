@@ -22,13 +22,20 @@ python -m venv .venv
 | AGENTS.md | 작업마다 규칙·승인·검증 확인 의무 | 모델 지침, 보안 경계 아님 |
 | EditorConfig | 문자·개행·들여쓰기 | 에디터 지원 필요 |
 | pre-commit | 작업 브랜치·스테이징 티켓·스테이징 코드 검사 | --no-verify로 우회 가능 |
+| pre-merge-commit (DEV-009 검수안) | 로컬 자동 merge commit 생성 거부; 수동 커밋도 MERGE_HEAD로 거부 | fast-forward·서버 API/UI는 실행하지 않음; 훅은 보안 경계 아님 |
 | commit-msg | 티켓 일치·제목 형식·본문 | 승인/의미 판정 아님 |
-| pre-push | main/tag/삭제/비정상 브랜치 차단, fast-forward, 커밋 형식 | 로컬 설정으로 우회 가능; 서버 최신 상태는 Git이 재확인 |
+| pre-push | main/tag/삭제/비정상 브랜치 차단, fast-forward, 커밋 형식, fetch된 main 포함 | 로컬 설정으로 우회 가능; fetch 이후 원격 변경은 서버 검사로 재확인 |
 | PR CI policy | PR 코드·스타일·테스트 검사 | PR에서 수정 가능하므로 단독 신뢰하지 않음 |
 | department-policy | base의 코드로 부서·메시지·경로·커밋 검사 | 같은 계정의 실제 부서 신원은 식별 못함 |
 | 원격 main 보호 | 필수 PR·독립 리뷰·필수 CI·관리자 우회 금지 | 저장소 플랜·권한·서버 설정 필요 |
 
 pre-push는 커밋/대상 ref를 검사하고 코드 정합성은 pre-commit과 PR CI에서 검사한다. 작업 브랜치의 원격 업로드 자체를 GitHub main 보호가 차단하는 것은 아니다. 잘못된 변경의 main 유입을 차단하는 구조이다.
+
+DEV-009의 새 훅을 사용하려면 각 clone/worktree에서 install_hooks.py와 doctor를 다시 실행한다.
+기존 커스텀 pre-merge-commit 훅은 자동 교체하지 않는다. preflight는 커밋된 HEAD와 로컬 origin/main만
+읽는 사전 검사이며 fetch·쓰기·승인 판정을 하지 않는다. GitHub 직접 사용 절차와 실제 차단 범위는
+[GITHUB_SUBMISSION.md](GITHUB_SUBMISSION.md)에 기록한다. allow_update_branch=false만으로 Update branch가
+모든 상황에서 사라진다고 주장하지 않으며 strict 필수 검사나 보호를 완화하지 않는다.
 
 ## GitHub 원격 적용 사양
 
