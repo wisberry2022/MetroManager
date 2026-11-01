@@ -3,7 +3,7 @@
 - 프로젝트: MetroManager
 - 담당: Design / Art Director & UI/UX Designer
 - 작성일: 2026-11-01
-- 버전: v0.3 / 상태: REVIEW — Gate 3-0 분석 및 디자인팀 자체 표현 결정 문서화, 실제 목업·제작 승인 전
+- 버전: v0.4 / 상태: REVIEW — Gate 3-0 분석 및 UI-DC-01~07 정적 의미 수용, 실제 목업·제작·통합 인수 전
 - 작업 추적: [GitHub Issue #24](https://github.com/wisberry2022/MetroManager/issues/24)
 - 기준 저장소: `wisberry2022/MetroManager` / `main` SHA `ca597ec541647aa2e9701ec93972e8763eae066d`
 - 승인 기준: [Gate 2 최종 승인](https://github.com/wisberry2022/MetroManager/blob/ca597ec541647aa2e9701ec93972e8763eae066d/docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md) / C v0.6, D v0.9, DATA v1.3
@@ -121,7 +121,7 @@
 
 **종합 판정: Gate 3-0 디자인 분석 초안 제출 가능 / 제작 단계는 별도 승인·입력 계약 필요.** HQ는 Stage 통합 시 위 L2 데이터 계약과 기기 규격을 교차 의존성으로 등록해 주기 바란다.
 
-**2026-11-01 후속:** [DSG-002 디자인팀 자체 결정 명세](DSG-002_UI_PRESENTATION_DECISIONS.md)에 PLN-R02·R05 자체 결정 및 R03·R04 UI 소비 기준을 분리하여 기록한다. 해당 문서가 본 보고서의 기존 잠정 표현보다 최신이다. DEV의 UI 공급 계약 수용은 여전히 PENDING이다.
+**2026-11-01 후속:** [DSG-002 디자인팀 자체 결정 명세](DSG-002_UI_PRESENTATION_DECISIONS.md)에 PLN-R02·R05 자체 결정 및 R03·R04 UI 소비 기준을 분리하여 기록한다. 해당 문서가 본 보고서의 기존 잠정 표현보다 최신이다. UI-DC-01~07은 결정서 v0.2 §9의 고정 복합 revision으로 DESIGN_SEMANTIC_ACCEPTED이며 실제 공급 구현·공동 인수는 PENDING이다.
 
 ## 9. 원격 제출 보충 (2026-11-01)
 
@@ -133,7 +133,7 @@
 - **판정:** 분석 문서 **REVIEW**, 제작/실행 **NOT_STARTED**. 최종 DONE·main 병합·릴리스 권한은 Owner에게 있다.
 
 
-## 10. 디자인 자체 결정·기획 피드백 반영 이력 (2026-11-01)
+## 10. 디자인 자체 결정·기획 피드백 반영 이력 (2026-11-01, v0.3 당시 기록)
 
 - Owner 지시: 기획팀 [Issue #24 검토 댓글](https://github.com/wisberry2022/MetroManager/issues/24#issuecomment-6554796711)에 대한 자체 결정은 원격 문서로 관리하고 PR 제출. DEV 답변이 필요한 항목은 보류.
 - 디자인팀 결정 근거: [Issue #24 디자인 회신](https://github.com/wisberry2022/MetroManager/issues/24#issuecomment-6554855720); Git 기준 `4bdf65f9b832ab8235f818441bddae6423951585`, 원본 본 보고서 Blob `121fa8edc970ceb31c4758f0669ca850aedb95f8`.
@@ -141,3 +141,23 @@
 - 수정: UI-DC-06 표의 “다음 T 탑승 재개”를 **동일 T의 정산 후 조건 판정**으로 정정. 기존 Gate 2 SEM-01~03/CLOSE-01 규칙 자체는 변경하지 않음.
 - 진행 수준: **DESIGN_DECIDED / DEV_SUPPLY_PENDING / MOCKUP_NOT_RUN**. P05/P06/P07/다음 사업 통합 티켓 전에는 같은 계약 revision의 DEV 응답 및 fixture 대조 필요. 성능·사용성·Godot 실행 **NOT_RUN**.
 - 이번 후속 PR은 `docs/design/` 내부의 본 문서와 신규 결정 문서만 포함. 실제 에셋·게임 코드 수정, main 병합은 수행하지 않음.
+
+## 11. 개발 회신 검토·동일 revision 수용 보완 (2026-11-01, v0.4)
+
+- Owner의 현 요청 범위: DSG-002 디자인팀으로 Issue #24 최신 DEV 코멘트·PR #30·DEV-006 동일 revision 대조, 디자인 소관 문서 보완을 기존 브랜치에 단일 부모 커밋으로 제출하고 원격 CI 확인. force push·main merge 금지. 이번 제출·보고까지의 권한이며 타 부서 문서/구현/후속 제작을 포함하지 않는다.
+- 변경 파일: 본 결과서와 [UI 표현 결정서 v0.2 §9](DSG-002_UI_PRESENTATION_DECISIONS.md#9-dev-회신-대조디자인-수용-기록-2026-11-01-v02). §10의 DEV 대기는 이전 제출 이력이며 현재 판정은 본 절을 따른다.
+- 공급 고정 기준: main `4bdf65f9b832ab8235f818441bddae6423951585` / DEV UI 계약 v0.1 Blob `a6410b13914812d92369a7ac1286b90172935dfd` + [#25 `DEV006-UI-v0.2-decision-1`](https://github.com/wisberry2022/MetroManager/issues/25#issuecomment-6554863216) + [#24 DEV 회신](https://github.com/wisberry2022/MetroManager/issues/24#issuecomment-6554936447). 저장소 v0.1 단독 수용이 아니며 DEV 파일은 수정하지 않는다.
+- 디자인 대조 시작 PR head: `4c20924e2fec28b00c4f7ded16d408f80faa573d`, 결과 v0.3 Blob `2e4d7f99f922f2e488665973485096ed37b1725a`, 결정서 v0.1 Blob `76a703895216f0f4bd5b65cdf40b47cd53648bd1`. 이번 제출 head/파일 행·CI의 정확한 증거는 [PR #30](https://github.com/wisberry2022/MetroManager/pull/30)에서 공유한다.
+
+| 항목 / UI-DC·AC | 이번 Design 판정·근거 | 잔여 |
+|---|---|---|
+| R02 / 06, AC-08·10 | DESIGN_SEMANTIC_ACCEPTED. FX-R02-A/B를 같은T 정산·영업중 허용/00:09 제한에 연결 | 실제 공급·화면/게임 실행 NOT_RUN |
+| R03 / 01~07, AC-01~10 | DESIGN_SEMANTIC_ACCEPTED. 결정서 §9.2 전행 공급→단위/시점→화면→상태/사유/행동→정상·실패 fixture 정적 대조 | P05/P06/P07/다음사업 통합 티켓의 입력으로 수용 기록 사용, 구현 fixture와 인수 별도 |
+| R04 / 02·06·07, AC-04·08·10 | DESIGN_SEMANTIC_ACCEPTED. 현재 봉투 재사용/예측 입력·결과 revision·생성시각/cohort ETA·실제완료/UI 로컬시각 분리 | 구체 타입·실공급 fixture는 DEV 후속, 실행 검증 NOT_RUN |
+| R01 연계 / 05·07, AC-06·08·09·10 | FX-R01-A의 계약 당시 부족1000 거부와 후순위 운임 후 현재80000 분리. 명령 당시 결과/현재 버튼·STATE_CHANGED·중복 결과 UX 결정 | Planning 소관 승인 의미 확인을 대신 완료 처리하지 않음 |
+| R05 / 01, AC-01·02·04 | 표시도형/관할 판정 분리의 공급 일치. 추상지도·목록 동일ID 유지 | 목업·클릭/밀집·동등조작 NOT_RUN, 상세 에셋 확정 전 검증 |
+| UI-DC-08 | 이번 의미 수용 제외, 제품 목표 선택은 유지 | Design/DEV 대안→HQ→Owner; 폰트/뷰포트/FPS/연출·사용성 기준 미결 |
+
+- 검증 결과: 문서·댓글·정상/실패 정적 fixture의 의미 일치, 불일치 행/추가 의미 질문 없음. 명세 변경 필요 없음; C v0.6 / D v0.9 / DATA v1.3 / SEM-01~03·CLOSE-01 유지. 새로운 Planning 전면 검토나 HQ L3 요청 없음.
+- 구분: DEV_CONFIRMED + DESIGN_SEMANTIC_ACCEPTED는 정적 공급·소비 수용 증거다. 최종 공동 구현/통합 인수 ACCEPTED, 실제 AC/VP PASS, Owner 승인/DONE은 선언하지 않는다. DEV 저장소 v0.1 문구 동기화는 소관 후속이며 새 정책 결정의 선행조건이 아니다.
+- 제출/검증: 디자인 경로2개만, 기존 브랜치 head를 단일 부모로 추가, base tree 보존·expected_sha 확인·force=false. 원격 CI는 이번 head 기준 확인. API 경로이므로 로컬 훅·policy.py doctor/check NOT_RUN. Godot 자동게임테스트/로드/플레이/Windows 빌드/성능/사용성 각각 NOT_RUN. 실제 목업/PNG NOT_CREATED. main merge·릴리스 미수행.

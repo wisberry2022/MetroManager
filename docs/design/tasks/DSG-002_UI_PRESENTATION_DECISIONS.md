@@ -1,8 +1,8 @@
 # DSG-002 — Gate 3-0 UI 표현·상태 및 지도 시안 결정서
 
-- 문서 ID: DSG-002-UI-DEC / 버전: **v0.1 / 2026-11-01**
+- 문서 ID: DSG-002-UI-DEC / 버전: **v0.2 / 2026-11-01**
 - 담당: Design / Art Director & UI/UX Designer
-- 상태: **DESIGN_DECIDED (표현 원칙) / DEV_SUPPLY_PENDING (의미 계약) / MOCKUP_NOT_RUN**
+- 상태: **DESIGN_DECIDED (표현 원칙) / DESIGN_SEMANTIC_ACCEPTED (01~07 정적 의미 수용) / MOCKUP_NOT_RUN**
 - 작업: [DSG-002 Issue #24](https://github.com/wisberry2022/MetroManager/issues/24) / [DSG-002 결과](DSG-002_RESULT.md)
 - 기획 검토: [PLN-R02~05](https://github.com/wisberry2022/MetroManager/issues/24#issuecomment-6554796711)
 - 디자인팀 회신: [Issue #24 — 결정·협의 분리](https://github.com/wisberry2022/MetroManager/issues/24#issuecomment-6554855720)
@@ -14,9 +14,9 @@
 
 | 기획 의견 | 디자인팀 판정 | 직접 결정한 내용 | 외부 검토·후속 완료 |
 |---|---|---|---|
-| **PLN-R02 · P0** | **DESIGN_DECIDED** | `다음 T` 표현 폐기, **같은 T의 정산 후 신규 탑승 판정**. B 잔액과 영업 상태를 분리 표현 | DEV가 동일 T의 권위 있는 허용·이유 값을 공급하는지 대조 (L2) |
-| **PLN-R03 · P0** | **DESIGN_MAPPED** | UI-DC-01~07의 화면별 의미 소비·상태/사유/허용행동 표시 원칙 확정 | DEV 동일 계약 revision·정상/실패 fixture 검토 전 **CROSS_ACCEPT_PENDING** (L2) |
-| **PLN-R04 · P1** | **DESIGN_DECIDED / DATA_PENDING** | 예측과 데이터 시간 출처, 실적·집계 단위, 조회/게임시각을 분리 표현 | DEV 예측 수명·집계 ETA/생성시각 공급 의미 회신 (L2) |
+| **PLN-R02 · P0** | **DESIGN_DECIDED** | `다음 T` 표현 폐기, **같은 T의 정산 후 신규 탑승 판정**. B 잔액과 영업 상태를 분리 표현 | DEV 동일 revision 대조 완료, FX-R02-A/B 정적 의미 수용; 실제 실행 NOT_RUN |
+| **PLN-R03 · P0** | **DESIGN_MAPPED** | UI-DC-01~07의 화면별 의미 소비·상태/사유/허용행동 표시 원칙 확정 | §9 고정 revision·fixture 대조로 **DESIGN_SEMANTIC_ACCEPTED**; 실행·공동 인수 별도 |
+| **PLN-R04 · P1** | **DESIGN_SEMANTIC_ACCEPTED** | 예측과 데이터 시간 출처, 실적·집계 단위, 조회/게임시각을 분리 표현 | §9 기존 봉투/추가 공급 의미 수용; 실제 공급 구현·UI 검증 NOT_RUN |
 | **PLN-R05 · P1** | **DESIGN_DECIDED** | DATA 좌표 기반 **추상 구획 지도 시안** 및 지도·역 목록 동등 조작 | 실제 밀집·가독성 목업은 NOT_RUN; 최종 에셋/뷰포트는 별도 (L2) |
 
 ## 2. PLN-R02 — 신규 탑승 제한·동일 T 정산 및 재개 표현
@@ -74,9 +74,9 @@ UI-DC-06의 구 표현 `다음 T 탑승 재개`는 한 틱 추가 지연으로 �
 
 ## 4. PLN-R03 — 공용 화면/상태/행동의 디자인 소비 계약
 
-**상태:** DESIGN_MAPPED; **DEV 계약 v0.1과의 최종 양방향 수용은 PENDING**. 기술 enum/API·서버 계약을 본 문서에서 확정하지 않는다. 가능한 행동은 공급받은 `allowed_actions`, 사유는 `reason_codes`를 UX 문구로 표현하되 같은 `snapshot_revision`/관측 단계만 함께 쓴다.
+**상태:** DESIGN_SEMANTIC_ACCEPTED; v0.1 고정 원문 + `DEV006-UI-v0.2-decision-1` + #24 개발 회신의 UI-DC-01~07 의미를 §9에서 대조·수용했다. 공동 구현/인수 ACCEPTED는 별도다. 기술 enum/API·서버 계약을 본 문서에서 확정하지 않는다. 가능한 행동은 공급받은 `allowed_actions`, 사유는 `reason_codes`를 UX 문구로 표현하되 같은 `snapshot_revision`/관측 단계만 함께 쓴다.
 
-| UI-DC / 기능·AC | 소비 화면·레이아웃 구역 | 표현/동작 원칙 (디자인 결정) | DEV/Planning 의미 공급·fixture 대기 |
+| UI-DC / 기능·AC | 소비 화면·레이아웃 구역 | 표현/동작 원칙 (디자인 결정) | §9에서 수용한 공급 의미·정적 fixture |
 |---|---|---|---|
 | 01 / ADM/CITY/PROP · AC-01·02·04 | S01 지도·P03 우측 상세/역 목록 | 브레드크럼, 관할/역 순서, 오류 역/연결 강조, 조작 가능 상태 표시 | 행정ID·부모/역좌표·간선 및 유효·거부 사유, 6·8·5·9/중복·단절·타 관할 |
 | 02 / CITY/PROP/OPS · AC-04·08 | P03 비교표·P06 예상/실적 영역 | 계획 revision·단위·대상기간 명시; 재계산 상태/자료없음/0 분리 | 예측 상태와 이전 결과 유효성/생성시각, 계획 변경·재계산 fixture |
@@ -88,21 +88,21 @@ UI-DC-06의 구 표현 `다음 T 탑승 재개`는 한 틱 추가 지연으로 �
 
 - **공통 레이아웃:** S01 상단 HUD(회사/관할·게임시각·자금), 중앙 도시맵, 좌측 레이어/사업, 우측 상세/순서, 하단 알림·다음 행동. 참조 시안 `1280×720` / HUD 상단 56px / 좌측 224px / 우측 312px / 하단 80px. *제품 확정 픽셀 규격 아님*.
 - **공통 컴포넌트 재사용:** 상태 배지/사유+다음 행동 카드, 예상·실적/기간 라벨, 목록 행·버튼/되돌리기, 현재/과거 탭, 오류/자료없음/0 표기를 S01/P01~P07/D01~D03에서 재사용.
-- **명령 상태:** 접수 대기/승인/거부를 구분하고, 오래된 revision에서 거부될 때 원인 안내 및 새 스냅샷 다시 조회(DEV 명령 응답 지원 시). UI에서 승인되지 않은 행동을 임의 추가하지 않는다.
+- **명령 상태:** `접수/대기` → `효력 당시 수락/거부`와 `현재 가능한 행동`을 분리한다. 봉투 revision 변경만으로 모든 명령을 거부하지 않으며, 실제 의미 변경·자금 부족 등 공급 사유에 따라 안내한다(§9.3). UI에서 승인되지 않은 행동을 임의 추가하지 않는다.
 
 ## 5. PLN-R04 — 예측·도착시각·생성/조회 시각 표시 기준
 
 **공통 기존 계약(초안)으로 소비 가능한 것:** `rules_version/data_version`, `snapshot_revision`, `simulation_minute/day_id`, `observation_phase`, `entity_id/plan_revision`, `period_start/end`, `available/value`. UI는 같은 revision·관측 단계의 안정값만 한 화면에서 비교하며, 이전 계산 결과를 현재 계획 값처럼 설명하지 않는다.
 
-| 상황 | 화면 표현 결정 | DEV가 확인해야 할 공급 의미(필드명 강제 아님) |
+| 상황 | 화면 표현 결정 | 수용한 공급 의미(§9, 구체 타입은 후속 DEV 계약) |
 |---|---|---|
-| 계획 변경→예측 재계산 대기/진행 | `예상 결과 갱신 중`, 이전 결과가 있다면 “이전 계획의 예상값”으로 분리 | 처리 상태·결과의 plan_revision 및 이전 결과 유효/만료 여부 |
+| 계획 변경→예측 재계산 대기/진행 | `예상 결과 갱신 중`, 이전 결과가 있다면 “이전 계획의 예상값”으로 분리 | prediction_input_revision·prediction_status·결과 입력revision/현재입력 유효성. 계획revision만으로 계산 상태 추측 금지 |
 | 예측 완료 | `계획 버전 N 기준 예상`, 대상 기간·통행 단위·생성 게임 시각(공급된 경우에만) | 완료 상태·결과 생성 게임 시각·유효 revision |
 | 예측 실패/미제공 | 실패 이유 제공 시 `예상 계산 실패`; 미계산은 `자료 없음`. **0으로 대체 금지** | 계산 실패 reason·available=false 구분 |
 | 이동 중 승객의 도착 시각 | `게임분 기준 도착 예정` + 집계 단위; **개별 시민별 ETA를 약속하지 않음** | 노선/도착 게임분별 예상 완료 인원 등 집계 단위, 미제공 여부 |
-| 현재 스냅샷 vs 기록 생성/조회 | `현재 표시 기준 게임시각`, `자료 생성 게임시각`(있는 경우), `과거 확정 보고일`을 구분 | 자료 생성시각이 봉투로 가능한지; 조회 이벤트 자체는 게임 사건 아님 |
+| 현재 스냅샷 vs 기록 생성/조회 | `현재 표시 기준 게임시각`, `자료 생성 게임시각`(있는 경우), `과거 확정 보고일`을 구분 | 현재 snapshot 생성은 simulation_minute/day_id 재사용. 과거 예측 생성·입력 기준시각·event T는 별도 보존; 조회는 게임 사건 아님 |
 | 값 0 vs 자료 없음 vs 오류 | `0`, `자료 없음`, `불러오기 실패: 사유`를 구별 | available/reason 및 오류 구분 |
-| 오래된 상태·명령 거부 | `정보 갱신 필요` 경고, 입력 재확인 후 재시도 유도 | `result_revision/effective_at/reason` 공급 및 stale 동작 |
+| 오래된 상태·명령 거부 | 당시 결과·현재 행동 분리. STATE_CHANGED이면 `정보가 변경되었습니다. 확인 후 다시 입력해 주세요` | command_id/effective_at/decision_phase/decision_snapshot_revision/result_revision/reason, §9.3 |
 
 새로운 개별 시민 시뮬레이션·지연 허용 규칙·예측 정확도 지표를 추가하지 않는다. 표시/재계산에 필요한 입력의 공급 방식은 DEV가 결정한다.
 
@@ -127,14 +127,14 @@ UI-DC-06의 구 표현 `다음 T 탑승 재개`는 한 틱 추가 지연으로 �
 
 | 대상 / 조건 | 증거 및 DONE 조건 | 현재 |
 |---|---|---|
-| R02 동일 T 문구·라벨 | 같은 T에 B 정산/영업 상태 분리, 00:09 B0·탑승 불가 표시 가이드 | **DESIGN_DECIDED / DEV 공급 확인 PENDING** |
-| R03 UI-DC01~07 계약 수용 | DEV의 동일 계약 revision·권위 있는 T/reason/allowed_actions 및 정상·실패 fixture 대조; P05/P06/P07/다음 사업 통합 티켓 확정 전 | **CROSS_ACCEPT_PENDING** |
-| R04 예측/도착·시각 공급 | DEV가 기존 봉투로 충족 가능한 의미와 추가 공급 의미를 회신·검증 | **DEV_FIELDS_PENDING** |
+| R02 동일 T 문구·라벨 | 같은 T에 B 정산/영업 상태 분리, 00:09 B0·탑승 불가 표시 가이드 | **DESIGN_SEMANTIC_ACCEPTED / 실행 NOT_RUN** |
+| R03 UI-DC01~07 계약 수용 | DEV의 동일 계약 revision·권위 있는 T/reason/allowed_actions 및 정상·실패 fixture 대조; P05/P06/P07/다음 사업 통합 티켓 확정 전 | **DESIGN_SEMANTIC_ACCEPTED / 통합 인수 PENDING** |
+| R04 예측/도착·시각 공급 | §9의 기존 봉투/추가 필드·FX-R04 정적 대조 완료; 구현과 실제 화면 검증 필요 | **DESIGN_SEMANTIC_ACCEPTED / 구현 NOT_RUN** |
 | R05 지도·역 조작 | 4구·8동/후보12/6·8역/5·9·단절·중복·타관할 fixture로 실제 목업·클릭 대조 | **MOCKUP_NOT_RUN** |
 | 제품 시각·기기 규격 | Dev/Design PC·뷰포트·FPS/동시 연출 대안 및 Owner 최종 선택 | **OWNER_DECISION_PENDING** |
 | 실제 사용자 관찰 | VP 인지성 검증 설계·표본·합격선/예산 별도 승인 | **NOT_RUN** |
 
-**미해결 질문:** (1) DEV 계약 개정판 revision과 R02 동시 T 허용 상태, (2) 예측 상태/생성 시각/집계 ETA 공급 의미, (3) 지도 경계 도형/클릭 판정의 개발 입력 형식, (4) 목표 PC·뷰포트·폰트/FPS·동시 연출 상한, (5) 외부 사용성 표본·예산·합격 기준. 답이 없는 항목을 임의 완결 처리하지 않는다.
+**잔여:** (1) DEV 소관 저장소 v0.1 문구의 후속 동기화 및 구체 enum/Godot 타입·실공급 fixture, (2) 지도·목록 안정 ID/클릭/밀집 목업 검증(경계 도형은 관할 입력의 선행조건 아님), (3) 목표 PC·뷰포트·폰트/FPS·동시 연출 상한, (4) 외부 사용성 표본·예산·합격 기준, (5) 구현/통합 AC·VP 검증. R02/R03/R04의 의미 질문은 §9 기준으로 해소했다. 문서 동기화는 DEV 후속 소관이며 새 의미 결정을 요구하지 않는다.
 
 **검증 기록:** Gate 2/DSG-002/DEV-006 문서와 Issue 댓글 정적 대조만 **DONE**. 디자인/에셋 제작, 화면 조작, Godot 실행, 자동게임테스트, 실플레이 AC/VP, Windows 빌드, 성능·가독성·사용성 실측은 **NOT_RUN**. 이번 문서는 기획/개발의 소유 결정을 변경하지 않는다.
 
@@ -143,3 +143,54 @@ UI-DC-06의 구 표현 `다음 T 탑승 재개`는 한 틱 추가 지연으로 �
 - 2026-11-01 v0.1: [Issue #24 디자인 회신](https://github.com/wisberry2022/MetroManager/issues/24#issuecomment-6554855720)을 디자인팀 자체 판단과 DEV 교차 입력 대기로 분리해 공식 문서화.
 - Owner 요청 범위: 이번 **디자인팀 자체 결정의 문서 기록 + 작업 브랜치 Commit/Push/PR 생성**. `main` Merge·릴리스·디자인 에셋 제작 승인은 별도.
 - L1 내부 표현 결정을 문서화해도 L2 데이터 공급 계약이 자동 ACCEPTED 되는 것은 아니다. **게임 규칙 변경이나 중대한 부서 충돌이 발견될 때에만 HQ L3/RFC에 상정**한다.
+
+## 9. DEV 회신 대조·디자인 수용 기록 (2026-11-01, v0.2)
+
+### 9.1 고정 revision과 수용 범위
+
+- 대조 원본: main `4bdf65f9b832ab8235f818441bddae6423951585`의 [DEV-006 UI 계약 v0.1](https://github.com/wisberry2022/MetroManager/blob/4bdf65f9b832ab8235f818441bddae6423951585/docs/engineering/gate3/DEV-006_UI_DATA_CONTRACT.md), Blob `a6410b13914812d92369a7ac1286b90172935dfd`.
+- 필수 보강: [#25 개발 결정·fixture](https://github.com/wisberry2022/MetroManager/issues/25#issuecomment-6554863216), revision **`DEV006-UI-v0.2-decision-1`** 및 [#24 개발 공급·명령 연결 회신](https://github.com/wisberry2022/MetroManager/issues/24#issuecomment-6554936447). v0.1 단독 수용이나 원격 v0.2 파일 존재를 뜻하지 않는다. 위 댓글 내용이 바뀌면 같은 이름으로 자동 재수용하지 않고 차이만 대조한다.
+- 디자인 대조 시작점: PR #30 head `4c20924e2fec28b00c4f7ded16d408f80faa573d`; 본 결정서 v0.1 Blob `76a703895216f0f4bd5b65cdf40b47cd53648bd1`, 결과 v0.3 Blob `2e4d7f99f922f2e488665973485096ed37b1725a`. 개발 회신의 DSG 결과 v0.2 이후 v0.3 정정과 본 v0.2 결정을 함께 대조했다.
+- **Design 판정: UI-DC-01~07 DESIGN_SEMANTIC_ACCEPTED.** 아래 정상·실패 fixture의 문서상 초기/기대값과 소비 상태가 일치한다. 공급 의미의 미해결 행/필드는 발견하지 못했다. DEV_CONFIRMED와 디자인 정적 수용의 양측 증거이며, 실제 공급 구현·Godot fixture·공동 통합 인수·Owner 최종 승인/DONE을 대신하지 않는다.
+- UI-DC-08의 PC/뷰포트/폰트/FPS/동시연출 상한은 수용 범위 밖이다. 승인 C v0.6 / D v0.9 / DATA v1.3 / SEM-01~03·CLOSE-01 변경 필요 없음. Planning 전면 재검토·HQ L3 요청 없음.
+
+### 9.2 동일 revision 공급→소비→상태/행동→fixture 대조
+
+전 행은 위 복합 기준 revision을 사용한다. 현재 패널 값·사유·행동은 동일 snapshot_revision/관측단계에서 읽고, 명령 당시 기록·과거 보고·이전 예측은 출처를 명시해 분리한다. 아래 실제 실행값은 전부 **NOT_RUN**, 판정은 **정적 의미 일치**다.
+
+| UI-DC / 화면·AC | 공급 의미·단위/시점 | 디자인 상태·사유·허용 행동 | 대조한 정상·실패/경계 fixture |
+|---|---|---|---|
+| 01 / S01·P03 / AC-01·02·04 | 안정 행정/역/동/간선 ID, 좌표km, 계획revision, 관할·잠금 reason/allowed_actions | 지도/목록 동일 대상·명령·오류 강조. 편집 허용 시 선택/제거/정렬/되돌리기, 무효 계획 제출 불가 | 후보12의 고유6/8 유효; 5/9·중복/재방문·단절·별도 관할외는 사유 표시/제출 차단; 소속시 공고0건은 빈 목록. 실제12후보를 관할외로 재분류하지 않음 |
+| 02 / P03·P06 / AC-04·08 | 입력revision·기간, 통행/통화/분/km, 예측상태·결과 유효성·입력/생성 게임시각 | 미계산/계산중/실패/유효0 분리, 유효 현재값만 제출 판단에 표시. 계획잠금 시 편집 불가 | FX-R04: rev7 READY/available=true/value=0 → rev8 계산중 available=false → 실패/이유 → rev8 완료. rev7 늦은 응답은 현재값을 덮지 않음 |
+| 03 / P01·P02·P04·D01 / AC-02·03·05 | 기관·사업/공고/회차·효력분, 점수/동점순위·설득잔여·사실유효/소비 | 시청 거부: `계획 수정`/`시청 재제출`; 정부 보류: 허용 시 `설득` 1회; 정부 실패: 적격 신규 사실 없으면 `정부 재접수` 비활성+사유. 마감/탈락은 같은 회차 재응찰 불가 | 시청 -1 거부/0·+1 승인; 정부 적합/보류/부적합·설득 성공/실패·신규사실 전후/재사용; 입찰86/80·동점·마감/중복·낙찰. 낙찰 뒤 정부심사 버튼 없음 |
+| 04 / P05·D03 / AC-06·07 | 단계·비용정수/누적기성·경과/잔여게임분·결함·시험결과 revision/유효성 | 공정 자금중단/시간정지/안전실패/수리/재시험/개통 분리. 공급 허용 때만 재개·수리·재시험. 미검증 영업·직접 계약취소 없음 | 표준 정상; 자금중단 시 R/K 보호; 빠른공사 안전실패 → 수리20000/30분 → 안전60분; 조건변경 시 영향 시험 무효 표시. UI가 자금·시간만 보고 복구 허용하지 않음 |
+| 05 / P07·다음사업 / AC-08·09·10 | C/R/F/K/A/B 정수통화·발생비/현금지급/정산T, 고정 보고일/ID, 별도 계약 판정시 자금 | 현재/과거 탭과 `당시 계약 결과`/`현재 향후 여력` 분리. A=max(0,F−ΣK) 유지, B 우선의무는 별도 공급 사유 | 제한금 C20/R20 비용3·지급0/B3; C50/K48 비용3 → C48/B1, 운임11·정산1 → C58/B0/A10. FX-R01-A: 계약시79000<80000·부족1000 거부/거래0건, 후순위 운임1000 뒤 현재80000이어도 과거 거부 유지 |
+| 06 / P06·P07·HUD·다음사업 / AC-07·08·09·10 | 영업·boarding_allowed/사유, 이동중 재고·완료 구간수, cohort 예정도착/실제완료T, 계약결과 별도 | 정산완료/승차허용/기존도착/계약결과 각각 표시. B>0이면 신규제한·기존도착 지속. B0 단독 재개 금지 | FX-R02-A: 12:00 C20/R20/F0/K0/A0/B500 + 운임800 − 정산500 → C320/R20/F300/K0/A300/B0, 다음비용100·기타조건 충족 때 같은T 허용. FX-R02-B: 00:09 동일 자금이지만 OUTSIDE_SERVICE_HOURS. 이동중0/수요0/용량부족 별도 |
+| 07 / HUD·P06·P07 / AC-08·10 | 현재 snapshot 생성 simulation_minute/day_id, event ID/effective_at/순서, 과거보고일, UI 로컬 조회시각 별도 | PAUSED와 업무단계 분리. 표시/재조회로 시간·운임·정산·사실소비 재실행 금지 | 23:59→00:09 전일보고 불변/당일운임800·지급500/추가잔여비0; 일시정지 재조회·일괄/분할/배속·역순수신. 실제 동등성은 실행 검증 대기 |
+
+### 9.3 명령 결과·오래된 화면의 UX 결정
+
+- 결과 카드는 `command_id + effective_at + decision_phase + decision_snapshot_revision + result_revision + reason`에 연결한다. `접수/대기`, `효력 당시 수락/거부`, `현재 상태/새 입력 가능`을 별도 표시한다.
+- 늦은 거부 응답은 해당 명령 기록에만 추가하고 최신 snapshot의 허용 버튼을 덮지 않는다. FX-R01-A는 `당시 자기부담금 1,000 부족으로 계약 거부`와 `현재 향후 약정 여력 80,000`을 병기하며 자동 재시도/성공 소급 변경을 하지 않는다.
+- expected_snapshot_revision은 입력 근거다. 시계 진행으로 봉투 revision만 바뀌었다고 일괄 거부하지 않는다. 계획revision·회차·계약조건 등 확인한 의미가 달라진 STATE_CHANGED는 갱신·재확인 안내, 실제 부족/마감/관할오류는 해당 사유로 안내한다. UI가 변경 금액/계획을 대신 확정하지 않는다.
+- 동일 command_id 재수신은 기존 결과 표시만 갱신한다. 새 시도는 현재 상태를 확인한 사용자의 명시적 새 입력이며, 과거 거부를 재클릭/새로고침으로 성공 처리하지 않는다. 구체 enum·명령 타입은 DEV 소관이다.
+- 정적 경계 대조: 대기→효력수락/거부, 거부 후 현재허용, STATE_CHANGED 후 재확인, 동일 ID 중복, 지연/역순 결과를 위 규칙에 연결했다. 실제 입력·네트워크·경제효과 검증은 NOT_RUN.
+
+### 9.4 예측·cohort·시간의 확정 소비 방식
+
+- 기존 봉투 재사용: snapshot_revision은 현재 묶음 일관성, simulation_minute/day_id는 그 snapshot 생성 게임시각, plan_revision·period_start/end·observation_phase·available/value는 계획/기간/현재완결·과거/없음·0 구분이다. 같은 뜻의 현재 생성시각 필드를 추가 요구하지 않는다.
+- 추가 공급 수용: prediction_input_revision, NOT_CALCULATED/CALCULATING/READY/FAILED, prediction_reason, 결과 소속 입력revision·입력기준 게임시각·결과생성 게임시각·현재입력 유효성. READY이며 현재입력 일치/유효한 값만 현재 예측으로 소비한다. 이전값은 `이전 결과 / 입력 버전 / 기간` 별도 비교용이며 제출판정에 사용하지 않는다.
+- 미계산은 `자료 없음: 미계산`, 계산중은 `예상 결과 갱신 중`, 실패는 `예상 계산 실패: 사유`, READY/available=true/value=0은 `0`으로 표시한다. 동기 계산은 READY/FAILED로 직접 종료 가능하며 로딩 연출을 위해 대기시간을 만들지 않는다.
+- ETA는 노선/출발역/도착역/탑승게임분/예정도착게임분/운임조건이 같은 통행의 count 집계다. `이동 중 8명 / 도착 예정 12:05 6명, 12:06 2명`처럼 표시한다. 12:05 실제완료6 이후 이동중2가 공급되며 cohort 합계와 in_transit_count 일치를 검수한다. 일정 미제공은 `도착 예정 자료 없음: 사유`; 8명 전체를 한 시각 도착으로 합치지 않는다.
+- 예정은 현재 모델 일정이며 실제 완료 effective_at과 구별한다. 최신 revision을 반영하되 정시보장·오차 수치·개별 시민 객체/애니메이션 요구를 추가하지 않는다. UI 로컬 수신/표시 시각은 필요시 진단용이고 예측 생성시각/event T/보고일을 덮거나 게임시간·난수·경제효과에 역사용하지 않는다.
+
+### 9.5 종료·잔여와 제출 증거
+
+- R02: 동일T/00:09·계약 독립 표현의 정적 공급 대조 해소.
+- R03: UI-DC-01~07 공급·소비·상태·사유·행동·fixture 대조 해소. P05/P06/P07/다음사업 통합 티켓 입력으로 이 고정 revision 및 디자인 수용 기록을 사용한다. 실제 공급값·실행 fixture·화면 조작 검증은 통합 인수의 후속 의무다.
+- R04: 예측/ETA/시간의 부족 의미 해소. 필드명·엔진 타입 확정과 구현은 DEV 후속 소관이다.
+- R05: 지도도형/안정ID 공급 의미 일치, 실제 목업·밀집/클릭·목록 동등성 NOT_RUN. 상세 지도·역 에셋 확정 전에 검증한다.
+- UI-DC-08 제품 목표/외부 사용성 기준은 기존 Design+DEV 대안→HQ→Owner 선택을 유지한다. 새 부서 일괄 검토나 정책 재승인 요청 없음.
+- 검증: 고정 원문·댓글·정적 fixture 의미 대조만 완료. Godot 자동게임테스트/프로젝트 로드/플레이/Windows 빌드/성능/사용성은 각각 NOT_RUN. API 제출로 로컬 훅 및 policy.py doctor/check는 NOT_RUN; 원격 policy/department-policy는 PR #30의 이번 head 결과로 확인·보고한다.
+- 제출: 기존 `codex/DSG-002-ui-presentation-decisions`의 현재 head를 단일 부모로 문서2개만 추가 커밋한다. 공유 이력 보존, expected_sha 확인·force=false, main 병합 없음. 정확한 제출 SHA/CI는 [PR #30](https://github.com/wisberry2022/MetroManager/pull/30)에 기록한다.
+- v0.2 이력: #24 개발 회신을 반영한 디자인 의미 수용 및 명령 결과·예측/cohort 소비 보완. 티켓 상태는 REVIEW, 공동 구현 인수와 Owner 승인/DONE은 별도다.
