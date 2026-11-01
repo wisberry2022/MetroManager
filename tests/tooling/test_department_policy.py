@@ -1,6 +1,7 @@
 """Boundary regressions, including API-style Git object commits (no hooks)."""
 
 import datetime
+import json
 import os
 from pathlib import Path
 import subprocess
@@ -11,6 +12,7 @@ from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "tools"))
 import department_policy as gate
+import policy
 
 
 class DepartmentTests(unittest.TestCase):
@@ -32,7 +34,7 @@ class DepartmentTests(unittest.TestCase):
             gate.ticket_check(task, [root + "tasks/" + task + "_BRIEF.md"])
 
     def test_non_dev_denied_source_policy_and_other_department(self):
-        for task in ("PM-101", "PLN-101", "DSG-101"):
+        for task in ("PM-101", "PLN-101", "DSG-101", "INF-101"):
             for name in ("project.godot", "scripts/game.gd", "tools/policy.py", "AGENTS.md",
                          ".github/workflows/policy.yml", "docs/governance/path_exceptions.json",
                          "docs/engineering/notes.md", "tasks/DEV-001_RESULT.md"):
@@ -40,8 +42,33 @@ class DepartmentTests(unittest.TestCase):
                     gate.path_check(task, [name])
 
     def test_dev_cannot_edit_other_department_artifact(self):
-        with self.assertRaises(ValueError):
-            gate.path_check("DEV-003", ["docs/planning/economy.md"])
+        for name in ("docs/planning/economy.md", "docs/infra/README.md",
+                     "docs/infra/continuity.md"):
+            with self.subTest(name=name), self.assertRaises(ValueError):
+                gate.path_check("DEV-003", [name])
+
+    def test_inf_ticket_and_signature_boundaries(self):
+        self.assertEqual(gate.branch_task("codex/INF-101-session-handoff"), "INF-101")
+        gate.message_check("[INF][docs] INF-101 인계 규칙", "INF-101", title_only=True)
+        for names in ([], ["docs/infra/tasks/INF-101_RESULT.md"],
+                      ["docs/infra/tasks/INF-102_POLICY.md"],
+                      ["docs/engineering/tasks/INF-101_POLICY.md"]):
+            with self.subTest(names=names), self.assertRaises(ValueError):
+                gate.ticket_check("INF-101", names)
+        for message in ("[DEV][docs] INF-101 인계\n\n본문",
+                        "[INF][docs] DEV-101 인계\n\n본문",
+                        "[INF][docs] INF-102 인계\n\n본문",
+                        "[INF][docs] INF-101 인계"):
+            with self.subTest(message=message), self.assertRaises(ValueError):
+                gate.message_check(message, "INF-101")
+
+    def test_inf_denied_other_departments_and_path_escape(self):
+        for name in ("docs/hq/brief.md", "docs/planning/brief.md", "docs/design/brief.md",
+                     "docs/infra/../hq/brief.md", "docs/infrastructure/brief.md",
+                     "/docs/infra/brief.md", "docs/infra\\brief.md",
+                     ".github/CODEOWNERS"):
+            with self.subTest(name=name), self.assertRaises(ValueError):
+                gate.path_check("INF-101", [name])
 
     def test_rename_checks_old_and_new_path(self):
         with self.assertRaises(ValueError):
@@ -65,6 +92,53 @@ class DepartmentTests(unittest.TestCase):
         with patch.object(gate, "git", return_value=b"120000 blob abc\tdocs/hq/link\0"):
             with self.assertRaises(ValueError):
                 gate.modes_check("HEAD", ["docs/hq/link"])
+
+    def test_inf_pr_runs_both_ci_entry_points(self):
+        previous = Path.cwd()
+        with tempfile.TemporaryDirectory() as folder:
+            try:
+                os.chdir(folder)
+                subprocess.run(["git", "init", "-q"], check=True)
+
+                def commit(parent, message):
+                    tree = gate.git("write-tree").decode().strip()
+                    args = ["git", "-c", "user.name=Policy Test",
+                            "-c", "user.email=test@example.invalid", "commit-tree", tree]
+                    if parent:
+                        args += ["-p", parent]
+                    return subprocess.check_output(args, input=message.encode()).decode().strip()
+
+                Path("seed.md").write_text("base\n", encoding="utf-8")
+                subprocess.run(["git", "add", "seed.md"], check=True)
+                base = commit(None, "Historical seed")
+                Path("docs/infra/tasks").mkdir(parents=True)
+                Path("docs/infra/tasks/INF-101_HANDOFF.md").write_text("Ticket\n", encoding="utf-8")
+                Path("docs/infra/README.md").write_text("Infra\n", encoding="utf-8")
+                subprocess.run(["git", "add", "docs"], check=True)
+                title = "[INF][docs] INF-101 인계 규칙"
+                head = commit(base, title + "\n\n인계 범위와 검증을 기록합니다.")
+                event = {"pull_request": {"title": title, "base": {"sha": base},
+                         "head": {"sha": head, "ref": "codex/INF-101-handoff"}}}
+                Path("event.json").write_text(json.dumps(event) + "\n", encoding="utf-8")
+                with patch.dict(os.environ, {"GITHUB_EVENT_PATH": str(Path("event.json").resolve())}):
+                    gate.main()
+                    with patch.object(sys, "argv", ["policy.py", "ci"]):
+                        policy.main()
+                    event["pull_request"]["head"]["ref"] = "main"
+                    Path("event.json").write_text(json.dumps(event) + "\n", encoding="utf-8")
+                    with self.assertRaises(ValueError):
+                        gate.main()
+                    with patch.object(sys, "argv", ["policy.py", "ci"]):
+                        with self.assertRaises(ValueError):
+                            policy.main()
+                Path("docs/hq").mkdir()
+                Path("docs/hq/brief.md").write_text("Forbidden\n", encoding="utf-8")
+                subprocess.run(["git", "add", "docs"], check=True)
+                bad = commit(head, title + "\n\n타 부서 변경 거부 검증")
+                with self.assertRaises(ValueError):
+                    gate.range_check(base, bad, "INF-101")
+            finally:
+                os.chdir(previous)
 
     def test_api_commits_and_self_granted_exception(self):
         previous = Path.cwd()
