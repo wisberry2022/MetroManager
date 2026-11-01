@@ -3,10 +3,11 @@
 import datetime
 import json
 import os
-from pathlib import PurePosixPath
+from pathlib import Path, PurePosixPath
 import re
 import subprocess
 import sys
+import tempfile
 
 DEPARTMENTS = {
     "DEV": ("DEV", "docs/engineering/"),
@@ -122,26 +123,89 @@ def modes_check(ref, names):
             raise ValueError("Changed symlinks/submodules are not allowed; request a reviewed policy change")
 
 
+def is_ancestor(older, newer):
+    result = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", older, newer], capture_output=True,
+    )
+    if result.returncode == 1:
+        return False
+    result.check_returncode()
+    return True
+
+
+def clean_merge_tree(first, second):
+    """Recompute in an isolated object-only repo; no checkout, refs or PR code execution.
+
+    Global/system/source-local merge drivers are deliberately not imported. Git's
+    built-in clean merge result is required; conflicts and unsupported Git fail closed.
+    """
+    for sha in (first, second):
+        if not re.fullmatch(r"[0-9a-f]{40}", sha):
+            raise ValueError("Invalid merge parent SHA")
+    objects = Path(git("rev-parse", "--git-path", "objects").decode().strip()).resolve()
+    alternate = objects.as_posix()
+    if "\n" in alternate or "\r" in alternate:
+        raise ValueError("Unsupported object directory")
+    env = {key: value for key, value in os.environ.items() if not key.startswith("GIT_")}
+    env.update(GIT_CONFIG_NOSYSTEM="1", GIT_CONFIG_GLOBAL=os.devnull,
+               GIT_ATTR_NOSYSTEM="1", GIT_NO_REPLACE_OBJECTS="1")
+    with tempfile.TemporaryDirectory(prefix="metro-verified-sync-") as folder:
+        try:
+            subprocess.run(["git", "init", "--bare", "--quiet", folder], env=env,
+                           check=True, capture_output=True, timeout=30)
+            (Path(folder) / "objects/info/alternates").write_text(
+                alternate + "\n", encoding="utf-8", newline="\n",
+            )
+            result = subprocess.run(
+                ["git", "-C", folder, "merge-tree", "--write-tree", first, second],
+                env=env, capture_output=True, timeout=30,
+            )
+        except (OSError, subprocess.SubprocessError):
+            raise ValueError("Unable to verify base-sync tree; Git merge-tree --write-tree required") from None
+        if result.returncode != 0:
+            raise ValueError("Base-sync is conflicting or cannot be verified; preserve work and use a replacement PR")
+        tree = result.stdout.splitlines()[0].decode("ascii") if result.stdout else ""
+        if not re.fullmatch(r"[0-9a-f]{40}", tree):
+            raise ValueError("Invalid verified merge tree")
+        return tree
+
+
+def verified_base_sync(base, sha, parents):
+    if len(parents) != 2:
+        raise ValueError(f"Expected single-parent work commit or verified base-sync merge: {sha}; use a replacement PR")
+    first, second = parents
+    if (not is_ancestor(second, base) or is_ancestor(first, second)
+            or is_ancestor(second, first)):
+        raise ValueError(f"Expected single-parent work commit: {sha}; merge parent is not a new trusted base; use a replacement PR")
+    expected = clean_merge_tree(first, second)
+    actual = git("rev-parse", f"{sha}^{{tree}}").decode().strip()
+    if actual != expected:
+        raise ValueError(f"Base-sync tree differs from the clean merge: {sha}; use a replacement PR")
+
+
 def range_check(base, head, task):
     grants = load_exceptions(base)
     ticket_check(task, names_at(head))
     commits = git("rev-list", f"{base}..{head}").decode().splitlines()
     if not commits:
         raise ValueError("No task commits to validate")
+    work_count, sync_count = 0, 0
     for sha in commits:
         parents = git("rev-list", "--parents", "-n", "1", sha).decode().split()
         if len(parents) != 2:
-            raise ValueError(
-                f"Expected single-parent work commit: {sha}. "
-                "Do not merge main into a work branch. For a shared branch, create a new "
-                "codex/<TASK-ID>-<description> branch from latest main and submit a replacement PR "
-                "with only the approved changes; do not force-push."
-            )
+            verified_base_sync(base, sha, parents[1:])
+            sync_count += 1
+            continue
         message_check(git("show", "-s", "--format=%B", sha).decode("utf-8"), task)
         changed = changed_paths(parents[1], sha)
         path_check(task, changed, grants)
         modes_check(sha, changed)
-    print(f"PASS: department={department(task)[0]}, commits={len(commits)}, task={task}")
+        work_count += 1
+    if not work_count or (sync_count and not changed_paths(base, head)):
+        raise ValueError("Expected single-parent work commit or effective verified base-sync; "
+                         "no task changes; use a replacement PR")
+    print(f"PASS: department={department(task)[0]}, commits={len(commits)}, task={task}, "
+          f"work={work_count}, verified_base_sync={sync_count}")
 
 
 def staged_check(task):

@@ -21,8 +21,8 @@
 ## Git 이력 사전 확인
 
 - 확인한 최신 main SHA / 제출 head SHA:
-- 로컬: fetch·커밋 후 policy.py preflight 결과 / API 전용: main 포함·부모 1개·티켓/경로 대조 결과:
-- merge 방식 Update branch 미사용. main이 진전한 공유 브랜치는 새 브랜치·대체 PR로 제출:
+- 로컬: fetch·커밋 후 policy.py preflight 결과 / API 전용: main 포함·일반 작업 부모 1개·검증된 base-sync·티켓/경로 대조 결과:
+- DEV-014 적용 후 무충돌 Update branch 사용 시 verified_base_sync 수·실제 head CI 결과. 충돌·검증 불가 시 대체 PR:
 - 기존 PR 대체 시 원래 PR 링크·내용 보존 근거:
 
 ## 검토
