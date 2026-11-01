@@ -3,7 +3,7 @@
 - 프로젝트: MetroManager
 - 담당: Design / Art Director & UI/UX Designer
 - 작성일: 2026-11-01
-- 버전: v0.2 / 상태: REVIEW — Gate 3-0 분석 결과 PR 제출, 실제 디자인·제작 승인 전
+- 버전: v0.3 / 상태: REVIEW — Gate 3-0 분석 및 디자인팀 자체 표현 결정 문서화, 실제 목업·제작 승인 전
 - 작업 추적: [GitHub Issue #24](https://github.com/wisberry2022/MetroManager/issues/24)
 - 기준 저장소: `wisberry2022/MetroManager` / `main` SHA `ca597ec541647aa2e9701ec93972e8763eae066d`
 - 승인 기준: [Gate 2 최종 승인](https://github.com/wisberry2022/MetroManager/blob/ca597ec541647aa2e9701ec93972e8763eae066d/docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md) / C v0.6, D v0.9, DATA v1.3
@@ -80,7 +80,7 @@
 | UI-DC-03 / P0 | Planning 확인 + Development 공급 | 심사 기관/회차/판정/사유코드/허용행동/차단 이유/설득 잔여·낙찰 우선순위 | P01/P02/P04, AC-03·05 | 성공/탈락/보류/불가의 행동 매트릭스 |
 | UI-DC-04 / P0 | Development 공급 + Planning 의미 확인 | 기성/시범/안전/개통 단계, 남은 게임시간, 결함/자금 중단/복구행동/효력시각 | P05, AC-06·07 | 정상/중단/안전실패/재시험 상태 스냅샷 |
 | UI-DC-05 / P0 | Development 공급 + Planning 의미 확인 | `C/Rᵢ/F/Kᵢ/A/B`의 기준 시점·단위·유효값, ‘비용 발생/현금 지급/미지급 정산’ 사건과 과거 보고 구분 | P07/다음 사업, AC-08~10 | 정상·미지급·완납·정산·자정·새 사업 가능 상태 fixture |
-| UI-DC-06 / P0 | Development 공급 + Planning 의미 확인 | 신규 탑승 허용 여부/기존 이동중 인원/완료 인원/도착 시간/승차 가능 여부 및 계약 허용 여부를 별개 공급 | P06/P07, AC-08~10 | `B>0`, 도착 수익 정산, 다음 T 탑승 재개 예제 |
+| UI-DC-06 / P0 | Development 공급 + Planning 의미 확인 | 신규 탑승 허용 여부/기존 이동중 인원/완료 인원/도착 시간/승차 가능 여부 및 계약 허용 여부를 별개 공급 | P06/P07, AC-08~10 | `B>0`, 동일 T 도착 운임→B 우선 정산→같은 T 신규 탑승 가능 여부 판정, 영업 외 00:09에는 B=0이어도 신규 탑승 불가 |
 | UI-DC-07 / P1 | Development 공급 | 이벤트 시각 T/보고 마감일/데이터 생성 시점/조회 시점/프레임 연출 동기화 의미 | HUD/P06/P07, AC-08·10 | 23:59→00:09 및 큰 시간 분할/재조회 사례 |
 | UI-DC-08 / P1 | Development와 공동 | 표시할 열차/승하차 동시 상한·정지/시험 연출 기준 및 기기/뷰포트 성능 예산 | S01/P06, AC-07·08 | 측정 장면·FPS 목표 대안과 Owner 선택 |
 
@@ -121,6 +121,8 @@
 
 **종합 판정: Gate 3-0 디자인 분석 초안 제출 가능 / 제작 단계는 별도 승인·입력 계약 필요.** HQ는 Stage 통합 시 위 L2 데이터 계약과 기기 규격을 교차 의존성으로 등록해 주기 바란다.
 
+**2026-11-01 후속:** [DSG-002 디자인팀 자체 결정 명세](DSG-002_UI_PRESENTATION_DECISIONS.md)에 PLN-R02·R05 자체 결정 및 R03·R04 UI 소비 기준을 분리하여 기록한다. 해당 문서가 본 보고서의 기존 잠정 표현보다 최신이다. DEV의 UI 공급 계약 수용은 여전히 PENDING이다.
+
 ## 9. 원격 제출 보충 (2026-11-01)
 
 - **Owner 후속 승인:** “디자이너 에이전트 PR 생성해주시기 바랍니다.” 기존 DSG-002 Gate 3-0 분석 결과의 원격 제출에 한정한다.
@@ -129,3 +131,13 @@
 - **추적:** [Issue #24](https://github.com/wisberry2022/MetroManager/issues/24). 실제 PR 번호·커밋 SHA·CI 판정은 GitHub PR에서 조회한다.
 - **검증:** Markdown/링크/소관 경계 정적 점검만 수행. GitHub API 경로이므로 로컬 훅 및 `tools/policy.py doctor/check`는 **NOT_RUN**. Godot 로드·실제 UX 테스트·게임 플레이·빌드·성능 측정은 **NOT_RUN**.
 - **판정:** 분석 문서 **REVIEW**, 제작/실행 **NOT_STARTED**. 최종 DONE·main 병합·릴리스 권한은 Owner에게 있다.
+
+
+## 10. 디자인 자체 결정·기획 피드백 반영 이력 (2026-11-01)
+
+- Owner 지시: 기획팀 [Issue #24 검토 댓글](https://github.com/wisberry2022/MetroManager/issues/24#issuecomment-6554796711)에 대한 자체 결정은 원격 문서로 관리하고 PR 제출. DEV 답변이 필요한 항목은 보류.
+- 디자인팀 결정 근거: [Issue #24 디자인 회신](https://github.com/wisberry2022/MetroManager/issues/24#issuecomment-6554855720); Git 기준 `4bdf65f9b832ab8235f818441bddae6423951585`, 원본 본 보고서 Blob `121fa8edc970ceb31c4758f0669ca850aedb95f8`.
+- 신규 문서: [DSG-002_UI_PRESENTATION_DECISIONS.md](DSG-002_UI_PRESENTATION_DECISIONS.md). **R02(동일 T 정산 이후 탑승 판정), R05(시각 경계 vs 행정 관할 분리)** 디자인 표현 결정; R03/R04는 UI 소비 원칙 결정 및 개발 공급 계약 협의 대기.
+- 수정: UI-DC-06 표의 “다음 T 탑승 재개”를 **동일 T의 정산 후 조건 판정**으로 정정. 기존 Gate 2 SEM-01~03/CLOSE-01 규칙 자체는 변경하지 않음.
+- 진행 수준: **DESIGN_DECIDED / DEV_SUPPLY_PENDING / MOCKUP_NOT_RUN**. P05/P06/P07/다음 사업 통합 티켓 전에는 같은 계약 revision의 DEV 응답 및 fixture 대조 필요. 성능·사용성·Godot 실행 **NOT_RUN**.
+- 이번 후속 PR은 `docs/design/` 내부의 본 문서와 신규 결정 문서만 포함. 실제 에셋·게임 코드 수정, main 병합은 수행하지 않음.
