@@ -4,6 +4,14 @@
 - **효력:** [Owner 승인 Stage 1 계획](PM-011_GATE3_2_APPROVED_PLAN.md)의 **운영상 보충**. PM-008의 L1/L2/L3, 최소 Markdown 티켓 및 2개 CI, Owner main Merge·주요 정책 변경 최종 승인을 유지. 본 지침은 새로운 예외 권한을 만들지 않음.
 - **단계:** `BACKLOG→APPROVED→IN_PROGRESS→REVIEW→DONE`는 티켓 관리 상태. `IMPLEMENTED / VERIFIED / ACCEPTED`는 별도 **품질 증거 단계**. PR 게시·문서 병합만으로 완료 처리 금지.
 
+## 0. Gate 3-2 착수 전 지침 수신·세션 확인
+
+1. [PM-010 공통 지침](PM-010_GATE3_1_REQUESTS.md)과 본인 부서 [PLN](requests/PM-010_PLANNING_CHECKLIST.md) / [DSG](requests/PM-010_DESIGN_CHECKLIST.md) / [DEV](requests/PM-010_DEVELOPMENT_CHECKLIST.md) 체크리스트를 확인한다. PM-010은 PR #32로 `main`에 병합됐고 기존 #24/#25/#26 회신이 수신 증거가 될 수 있다.
+2. [승인 Stage 1](PM-011_GATE3_2_APPROVED_PLAN.md), 본 절차 및 PM-011 자기 부서 착수 요청을 **최신 main** 기준으로 확인한다. Planning은 [후임 전환 기록](PM-011_PLANNING_SUCCESSION_RECORD.md)도 확인한다.
+3. **Gate 3-2의 신규 실행 작업 착수 전에** [Planning #26](https://github.com/wisberry2022/MetroManager/issues/26) / [Design #24](https://github.com/wisberry2022/MetroManager/issues/24) / [Development #25](https://github.com/wisberry2022/MetroManager/issues/25)의 소관 Issue에 `PM-010 수신(과거 근거 링크 가능) / PM-011 숙지 / 현재 main SHA / 담당 역할 / 첫 안전 작업 / 해당 티켓 Git 권한 상태`를 짧게 남긴다.
+4. 이는 **수신 확인**이지 Gate 3-1 재심사·별도 장문 보고서나 새로운 기술 승인 게이트가 아니다. 미확인 세션의 신규 실행만 보류하고 타 부서 독립 작업 전체를 차단하지 않는다. 게임 구현/에셋 제작·Commit/Push/PR은 **개별 Owner 티켓 승인**이 별도로 필요하다.
+5. Planning의 현재 담당은 후임 Game Designer이며 기존 현직은 신규 담당에서 제외된다. 과거 Git 권한의 자동 승계 금지.
+
 ## 1. 첫 Stage의 최소 작업 인계 계약
 
 **불필요한 단계/보고서를 늘리지 않고**, 승인 티켓/Issue에 최소 다음 사항을 연결한다.

@@ -22,6 +22,11 @@
 
 **이번 Gate 3-2 착수는 단계 전환과 티켓별 실행 승인 준비를 의미한다.** 권한이 명시된 개별 티켓은 별도 Owner 승인 후 실제 제작에 착수한다. 부서가 이미 승인된 독립 티켓을 보유했다면 그 유효 범위를 검증하고 중복 승인을 요구하지 않는다.
 
+## 1.1 Planning 담당 전환과 착수 전 확인
+
+- 2026-11-01 Owner의 현직 신규업무 종료·후임 전환 통지와 [PLN-002 #26](https://github.com/wisberry2022/MetroManager/issues/26), [Gate 3-1 PR #36](https://github.com/wisberry2022/MetroManager/pull/36)을 근거로 **Gate 3-1 Planning 공식 담당자는 후임 Game Designer**이다. [HQ 공개 전환 기록](PM-011_PLANNING_SUCCESSION_RECORD.md) 참조. 현직은 신규 업무에서 제외되고 과거 이력 확인용으로 보존하며, 구 세션의 Git 권한은 자동 승계되지 않는다.
+- 기획·디자인·개발은 Gate 3-2 신규 실행 전에 병합된 [PM-010](PM-010_GATE3_1_REQUESTS.md)의 자기 부서 체크리스트와 PM-011 계획·착수 요청을 최신 main에서 읽고 기존 Issue에 **수신 확인, 확인 SHA, 담당, 티켓별 권한 상태**를 남긴다. 기존 Gate 3-1 회신을 재활용하며 전체 재검토는 요구하지 않는다. 자세한 절차는 [실행 지침 §0](PM-011_GATE3_2_EXECUTION_PROTOCOL.md).
+
 ## 2. Stage 1 목표와 포함·제외
 
 **목표:** 실제 실행 가능한 최소 Godot 게임 진입, 승인 데이터·권위 있는 시각/경제 원장·행정/노선/예측을 테스트로 검증하고, 최소한의 사용자 조작 UI에서 시간 진행과 후보역/노선 편집·예측·현재 자금을 확인하는 것.

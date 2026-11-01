@@ -6,6 +6,12 @@
 - **필독:** [Owner 승인된 Stage 1](../PM-011_GATE3_2_APPROVED_PLAN.md), [협업·검증 절차](../PM-011_GATE3_2_EXECUTION_PROTOCOL.md), [PM-008](../PM-008.md), 최신 `main`의 `AGENTS.md`·`docs/engineering/DEPARTMENT_WORKFLOW.md`·부서 README. 각 부서는 실제 착수 전에 최신 main SHA 확인.
 - **간단 회신:** 소관 실행 티켓 후보/단계, 포함·제외, 첫 검증 증거, 선행·공급/소비 및 차단 시점, L1/L2/L3, Owner가 승인할 작업 경로/브랜치/Commit·Push·PR·유효조건, 미해결 여부. 기존 분석 링크로 중복 내용 대체.
 
+## 착수 전 PM-010·PM-011 수신 확인
+
+- `main`에 이미 병합된 [PM-010 개발팀 체크리스트](PM-010_DEVELOPMENT_CHECKLIST.md)와 [PM-010 공통](../PM-010_GATE3_1_REQUESTS.md), [PM-011 승인 계획](../PM-011_GATE3_2_APPROVED_PLAN.md)·[협업 절차 §0](../PM-011_GATE3_2_EXECUTION_PROTOCOL.md) 및 본 요청서를 확인한다.
+- 기존 [Issue #25](https://github.com/wisberry2022/MetroManager/issues/25)의 Gate 3-1 회신 링크로 PM-010 과거 수신을 증빙해도 되며, **Stage 3-2 신규 실행 전에** `PM-010 수신 / PM-011 숙지 / main SHA / Development Project Leader / 첫 안전 작업 및 새 Git 승인 상태`를 같은 Issue에 간략히 기록한다. 이전 분석 전체 반복 불필요.
+- 읽기·수신 확인은 실제 제작이나 Commit/Push/PR의 Owner 권한을 대체하지 않는다.
+
 ## 최초 착수의 우선순위
 
 1. **W01 먼저:** 기존 승인 데이터/회사 초기 상태·안정 ID와 Godot 메인 진입/자동검사 기반을 **구현 가능한 최소 단위**로 분할해 정식 DEV 실행 티켓과 Owner 승인 요청을 제출한다. 별도 메뉴·범용 프레임워크 신설은 필수가 아니다.
