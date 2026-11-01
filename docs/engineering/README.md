@@ -7,6 +7,7 @@
 - [코드 컨벤션](CODE_CONVENTIONS.md), [Git 전략](GIT_WORKFLOW.md), [설치](ENFORCEMENT.md), [전 부서/플러그인 규칙](DEPARTMENT_WORKFLOW.md)을 따릅니다.
 
 - [INF 등록·초기 게시 절차](INF_ONBOARDING.md): DEV-007 검수안, INF 소관·README 게시 원본·원격 검증 순서.
+- [공용 협업 오류 보고](SHARED_ERROR_REPORTS.md): DEV-008 검수안, PR #37 경로 등록·보고 규칙·안전한 재제출 절차.
 
 ## 데스크톱·랩탑 협업
 

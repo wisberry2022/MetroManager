@@ -63,6 +63,16 @@ DEV가 `docs/infra/`를 수정할 수 있도록 허용 경로를 넓히지 않�
 
 ## 강제 적용의 범위
 
+DEV-008 검수안(2026-11-01): 공용 협업 오류 보고만 아래 예외로 허용한다.
+모든 부서는 승인된 자기 부서 티켓으로 `docs/co-work/err-report/README.md` 및
+같은 디렉터리의 `ERR-YYYYMMDD-NNN_요약.md`를 관리할 수 있다. 요약은 비어 있지 않은
+파일명이며 한국어도 허용한다. 경로 구분자·상위 탐색은 금지하고 Markdown 직속 파일만 허용한다.
+다른 `docs/co-work/` 경로·하위 디렉터리·코드/설정 파일은 포함하지 않는다.
+부서별 기존 티켓·메시지·단일 부모·symlink/submodule 거부 및 base 예외 목록 규칙은 유지한다.
+공용 경로에 티켓을 두거나 타 부서 티켓을 사용하는 방식은 허용하지 않는다.
+내용의 승인·기존 보고서 변경 범위는 Owner/담당 부서가 검토하며, 경로 검사는 승인 진위나 실제 부서 신원을 판정하지 않는다.
+보고 양식·적용 순서는 [공용 오류 보고 안내](SHARED_ERROR_REPORTS.md)를 따른다.
+
 - 로컬 Git: pre-commit/commit-msg/pre-push에서 같은 부서 검사 실행.
 - 플러그인: GitHub Contents/Git Data API는 로컬 훅을 호출하지 않는다. 커밋이 만들어져 작업 브랜치에 올라간 뒤 원격 PR 검사를 사용한다.
 - `department-policy`: pull_request_target의 base SHA에서 검사 코드를 가져온다. PR의 Git 객체만 읽으며 PR 코드·테스트·설정 파일을 실행하지 않는다. 권한은 contents:read, checkout 자격증명 저장 없음, 외부 의존성 없음.

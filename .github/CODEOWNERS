@@ -2,3 +2,5 @@
 * @wisberry2022
 # INF continuity/diagnostic policy remains subject to Owner review. Not a write ACL.
 /docs/infra/ @wisberry2022
+# Shared error reports retain Owner review; this pattern grants no write permission.
+/docs/co-work/err-report/ @wisberry2022
