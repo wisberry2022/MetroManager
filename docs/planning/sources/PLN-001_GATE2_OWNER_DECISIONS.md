@@ -64,3 +64,16 @@
 - MVP 이후 Library: IDEA-001 미지급 자동정산 플레이어 회사 방침 ON/OFF, IDEA-002 플레이어 공사 계약 직접 취소, IDEA-003 6개월 연체 신규 사업 계약 제재. 미래 의향이며 기능·파라미터 최종 승인은 별도다.
 - APP-01 승인 절차는 **OWNER_PENDING**. 위 SEM 승인·이번 PR 지시를 APP-01 또는 Gate 2 전체 승인으로 확대하지 않는다.
 - Owner의 이번 작업 범위는 C/D/DATA/Library 포함 문서 수정 및 Git 푸시 수칙에 따른 브랜치 Commit/Push·PR 생성까지다. **main merge·릴리스·게임 구현 착수 제외.**
+
+## CLOSE-01~03 / APP-01 및 Gate 2 공식 Owner 최종 결정 — 2026-11-01
+
+### Owner 승인 원문
+> 기획 에이전트. Gate2 최종 승인을 허가합니다. 정리하여 Gate2 산출물의 상태와 내용을 최신화해주세요.
+
+### 현재 효력과 적용 범위
+- **CLOSE-01 A안 OWNER_DECIDED:** 신규 승차를 허용한 서비스 구간 비용 100/게임분이 그 구간의 기존 승객 잔여 목적지 도착까지 포함. 영업 종료·신규 승차 제한 뒤 잔여 도착에 **추가 운영비0**. 정상 서비스 구간 비용 면제 아님.
+- **CLOSE-02 A안 OWNER_DECIDED:** C/D/DATA 본문·상태표는 최신 결정 우선, 과거 제출·PR·검토 상태 원문은 이력으로 보존.
+- **CLOSE-03 / APP-01 A안 OWNER_DECIDED:** UI 의미 계약·지도 가독성·성능·WBS·실플레이 검증은 Gate 3/인수로 담당·선행 조건·완료 증거에 따라 이월. Gate 2 승인과 각 구현·Git 권한은 분리.
+- **Gate 2 공식 Owner 최종 승인: OWNER_APPROVED.** 2026-11-01 승인 원문을 별도로 보존하며 완료 게임 검증, Gate 3 착수, 원격 Merge/릴리스 승인으로 확대하지 않음.
+- 적용 범위: **MVP 쉬움 난이도·시철 고정**. Gate 1 A/B v0.3, PAR-01~05 수치·SEM-01~03 기획 규칙 보존, Idea Library 세 건 MVP 제외.
+- 참조: [Gate 2 승인 기록](../PLN-001_GATE2_FINAL_APPROVAL.md) 및 [Gate 3 최종 인계](../tasks/PLN-001_GATE2_FINAL_HANDOFF.md).
