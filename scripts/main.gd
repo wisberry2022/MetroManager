@@ -1,13 +1,16 @@
 extends Control
-## 승인 데이터의 초기화 결과만 관찰하는 W01 메인 진입점.
+## W01 초기화 실패 경계를 보존하며 W07 최소 S01을 연결한다.
 
 const DataLoader = preload("res://scripts/data/gate2_data_loader.gd")
 const CompanyState = preload("res://scripts/model/initial_company_state.gd")
+const Session = preload("res://scripts/ui/stage1_session.gd")
+const Stage1 = preload("res://scenes/stage1.tscn")
 
 @onready var _status: Label = $Margin/Status
 
 
 func _ready() -> void:
+	get_window().title = "MetroManager · S01"
 	var loaded := DataLoader.load_data()
 	if not loaded.ok:
 		_fail(loaded.errors)
@@ -17,27 +20,12 @@ func _ready() -> void:
 		_fail(initialized.errors)
 		return
 	var state: Dictionary = initialized.state
-	_status.text = (
-		(
-			"MetroManager — W01\n초기화 완료 / DATA %s\n"
-			+ "도시 %s / 1도 · 1시 · 4구 · 8동 · 후보역 12\n"
-			+ "시작일 %d / 06:00 (초기값)\n"
-			+ "C %d / R 0 / F %d / K 0 / A %d / B %d\n"
-			+ "이행능력 %d / 재무점수 %d\n\nW01 초기 상태 확인 — 시간 진행·거래·노선 조작 미구현"
-		)
-		% [
-			state.data_version,
-			state.city_id,
-			state.day_id,
-			state.cash,
-			state.free_cash,
-			state.available_cash,
-			state.unpaid,
-			state.capability,
-			state.financial_score,
-		]
-	)
+	var view := Stage1.instantiate()
+	view.session = Session.new(loaded.data, state)
+	$Margin.hide()
+	add_child(view)
 	print("W01_INIT_OK ", JSON.stringify(state))
+	print("W07_INIT_OK S01_MINIMUM_UI")
 
 
 func _fail(errors: Array) -> void:
