@@ -1,0 +1,366 @@
+extends MarginContainer
+## 기본 도형/컨트롤의 최소 S01. 화면은 공급값만 소비한다.
+
+const Session = preload("res://scripts/ui/stage1_session.gd")
+const MapView = preload("res://scripts/ui/stage1_map.gd")
+
+var session: Session
+var map_view: MapView
+var controls: Dictionary = {}
+var candidate_buttons: Dictionary = {}
+var plan_list: ItemList
+var shown: Dictionary = {}
+var _labels: Dictionary = {}
+var _sequence: int = 0
+var _displayed_revision: int = -1
+var _last_usec: int = 0
+var _refresh_usec: int = 0
+var _selected_id: String = ""
+var _candidates: GridContainer
+var _list_stops: Array = []
+
+
+func _ready() -> void:
+	for side: String in ["left", "right", "top", "bottom"]:
+		add_theme_constant_override("margin_" + side, 12)
+	var scroll := ScrollContainer.new()
+	add_child(scroll)
+	var root := VBoxContainer.new()
+	root.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.add_child(root)
+	_label(root, "title", "MetroManager · S01 노선 계획")
+	var hud := HBoxContainer.new()
+	root.add_child(hud)
+	for action: String in ["pause", "resume"]:
+		_button(hud, action, "정지" if action == "pause" else "재개", action)
+	for speed: int in [1, 2, 4]:
+		_button(hud, "speed%d" % speed, "%d×" % speed, "speed", {"value": speed})
+	_label(hud, "clock", "게임 시간 확인 중")
+	var work := HBoxContainer.new()
+	root.add_child(work)
+	var left := VBoxContainer.new()
+	left.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	work.add_child(left)
+	_label(left, "map_hint", "후보역 / 번호: 선택 순서 / 굵은 선: 계획 / 오류는 목록 사유 확인")
+	map_view = MapView.new()
+	map_view.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	map_view.station_requested.connect(_select_station)
+	left.add_child(map_view)
+	_label(left, "legend", "관할: P01 > C01 · DATA 소속 기준 / 도형은 추상 배치")
+	var right := VBoxContainer.new()
+	right.custom_minimum_size.x = 360
+	work.add_child(right)
+	_label(right, "candidates_title", "후보역 목록 · 지도와 같은 선택")
+	_candidates = GridContainer.new()
+	_candidates.columns = 4
+	right.add_child(_candidates)
+	_build_candidates()
+	_label(right, "selection", "선택한 역 없음")
+	plan_list = ItemList.new()
+	plan_list.name = "PlanList"
+	plan_list.custom_minimum_size = Vector2(350, 125)
+	plan_list.item_selected.connect(_plan_selected)
+	right.add_child(plan_list)
+	var edit := HBoxContainer.new()
+	right.add_child(edit)
+	_button(edit, "up", "위로", "reorder", {"direction": -1})
+	_button(edit, "down", "아래로", "reorder", {"direction": 1})
+	_button(edit, "remove", "제거", "remove")
+	_button(edit, "undo", "되돌리기", "undo")
+	_button(edit, "predict", "예측 계산", "predict")
+	_label(right, "validation", "계획 확인 중")
+	_label(root, "prediction", "예측: 미계산")
+	_label(root, "previous", "")
+	_label(root, "funds", "현재 자금 확인 중")
+	_label(root, "report", "확정 보고 없음")
+	_label(root, "feedback", "후보역을 선택해 노선을 편집하세요.")
+	_label(root, "scope", "계획 편집/예측 단계 · 실제 계약·시공·영업 기능 없음")
+	_last_usec = Time.get_ticks_usec()
+	present(session.snapshot())
+
+
+func _process(_delta: float) -> void:
+	if session == null:
+		return
+	var now := Time.get_ticks_usec()
+	session.advance_usec(maxi(0, now - _last_usec))
+	_refresh_usec += now - _last_usec
+	_last_usec = now
+	if _refresh_usec >= 200000:
+		_refresh_usec = 0
+		present(session.snapshot())
+
+
+func _button(
+	parent: Node, id: String, text: String, action: String, payload: Dictionary = {}
+) -> void:
+	var button := Button.new()
+	button.name = id
+	button.text = text
+	button.pressed.connect(_act.bind(action, payload))
+	parent.add_child(button)
+	controls[id] = button
+
+
+func _label(parent: Node, id: String, text: String) -> void:
+	var label := Label.new()
+	label.name = id
+	label.text = text
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	parent.add_child(label)
+	_labels[id] = label
+
+
+func _select_station(id: String) -> void:
+	_selected_id = id
+	_act("select", {"station_id": id})
+
+
+func _plan_selected(index: int) -> void:
+	_selected_id = shown.plan.station_ids[index]
+	present(session.snapshot())
+
+
+func _act(action: String, payload: Dictionary = {}) -> void:
+	_sequence += 1
+	var command := payload.duplicate(true)
+	command.merge({"command_id": "ui-%d-%d" % [get_instance_id(), _sequence], "action": action})
+	var current := session.snapshot()
+	if action in ["remove", "reorder"]:
+		command.station_id = _selected_id
+		command.expected_plan_revision = current.plan.plan_revision
+	if action == "reorder":
+		command.from = current.plan.station_ids.find(_selected_id)
+		command.to = command.from + command.direction
+	var result := session.dispatch(command)
+	print("W07_COMMAND ", JSON.stringify(result))
+	present(session.snapshot())
+
+
+func present(state: Dictionary) -> bool:
+	if state.view_revision < _displayed_revision:
+		return false
+	_displayed_revision = state.view_revision
+	shown = state.duplicate(true)
+	var clock: Dictionary = state.clock
+	_labels.title.text = (
+		"MetroManager · S01 노선 계획"
+		+ (" · 검증 전용: " + state.fixture_label if not state.fixture_label.is_empty() else "")
+	)
+	_labels.clock.text = (
+		"게임일 %d %02d:%02d · %s · %d×"
+		% [
+			clock.day_id,
+			(clock.simulation_minute / 60) % 24,
+			clock.simulation_minute % 60,
+			"일시정지" if clock.paused else "진행 중",
+			clock.speed
+		]
+	)
+	controls.pause.disabled = not state.allowed_actions.pause
+	controls.resume.disabled = not state.allowed_actions.resume
+	for speed: int in [1, 2, 4]:
+		controls["speed%d" % speed].text = ("[%d×]" if speed == clock.speed else "%d×") % speed
+	_render_plan(state)
+	_render_finance(state)
+	_render_prediction(state.prediction)
+	var result: Dictionary = state.command_result
+	if not result.is_empty():
+		_labels.feedback.text = (
+			"마지막 요청: %s · %s · 당시 게임분 %d"
+			% [
+				"처리됨" if result.accepted else "거부됨",
+				reason_text(result.get("reason", "")),
+				result.effective_at
+			]
+		)
+	return true
+
+
+func _render_plan(state: Dictionary) -> void:
+	var route: Dictionary = state.plan
+	map_view.present(state)
+	if _list_stops != route.station_ids:
+		_list_stops = route.station_ids.duplicate()
+		plan_list.clear()
+		for index: int in route.station_ids.size():
+			var id: String = route.station_ids[index]
+			plan_list.add_item("%d. %s" % [index + 1, id])
+	for index: int in route.station_ids.size():
+		if route.station_ids[index] == _selected_id:
+			plan_list.select(index)
+	var selected: int = route.station_ids.find(_selected_id)
+	controls.up.disabled = not route.allowed_actions.edit or selected <= 0
+	controls.down.disabled = (
+		not route.allowed_actions.edit or selected < 0 or selected >= route.station_ids.size() - 1
+	)
+	controls.remove.disabled = not route.allowed_actions.edit or selected < 0
+	controls.undo.disabled = not route.allowed_actions.undo
+	controls.predict.disabled = not state.allowed_actions.predict
+	for id: String in candidate_buttons:
+		candidate_buttons[id].disabled = not route.allowed_actions.edit
+		var number: int = route.station_ids.find(id)
+		candidate_buttons[id].text = "%d.%s" % [number + 1, id] if number >= 0 else id
+	var reasons: Array[String] = []
+	for code: String in route.validation.reason_codes:
+		reasons.append(reason_text(code))
+	_labels.validation.text = (
+		"%d역 · 계획판 %d · %s\n%s"
+		% [
+			route.station_ids.size(),
+			route.plan_revision,
+			"유효" if route.validation.valid else "계획 조건 미충족",
+			" / ".join(reasons)
+		]
+	)
+	_labels.selection.text = "선택: " + (_selected_id if not _selected_id.is_empty() else "없음")
+	for station: Dictionary in state.stations:
+		if station.id == _selected_id:
+			var path: Array[String] = [station.id]
+			var cursor: String = station.neighborhood_id
+			while not cursor.is_empty():
+				path.push_front(cursor)
+				cursor = state.administration[cursor].parent_id
+			_labels.selection.text += " / " + " > ".join(path)
+	if route.locked:
+		_labels.validation.text += " · 편집 잠금"
+
+
+func _render_finance(state: Dictionary) -> void:
+	var funds: Dictionary = state.current.funds
+	_labels.funds.text = (
+		"현재 자금 · 게임분 %d · 게임 통화 단위\nC 총현금 %d / R 제한 %d / F 자유 %d / K 예약 %d / A 신규약정 가용 %d / B 미지급 %d"
+		% [
+			state.current.simulation_minute,
+			funds.cash,
+			funds.restricted,
+			funds.free_cash,
+			funds.reserved,
+			funds.available_cash,
+			funds.unpaid
+		]
+	)
+	var report: Dictionary = state.report
+	if report.available:
+		var value: Dictionary = report.value
+		_labels.report.text = (
+			"확정 과거 보고 · 마감일 %d · %s\n운영비 %d / 지급 %d / 운임 %d / 마감 현금 %d"
+			% [
+				report.day_id,
+				report.display_key,
+				value.operating_cost,
+				value.payment,
+				value.fare,
+				value.closing_funds.cash
+			]
+		)
+	else:
+		_labels.report.text = (
+			"확정 보고 없음 (미마감)"
+			if report.status == "UNAVAILABLE"
+			else ("보고 조회 실패: " + reason_text(report.reason))
+		)
+	if not state.coherent:
+		_labels.funds.text = "현재 상태 확인 중: 게임 시각 불일치"
+
+
+func _render_prediction(prediction: Dictionary) -> void:
+	_labels.prediction.text = (
+		"예측: %s · 입력판 %d / 계획판 %d"
+		% [
+			(
+				{
+					"NOT_CALCULATED": "미계산",
+					"CALCULATING": "계산 중",
+					"READY": "계산 완료",
+					"FAILED": "계산 실패"
+				}
+				. get(prediction.prediction_status, prediction.prediction_status)
+			),
+			prediction.prediction_input_revision,
+			prediction.plan_revision
+		]
+	)
+	if prediction.available:
+		_labels.prediction.text += "\n" + _prediction_value(prediction.current)
+	elif prediction.prediction_status == "FAILED":
+		_labels.prediction.text += " · 자료 없음: " + reason_text(prediction.reason)
+	else:
+		_labels.prediction.text += " · 자료 없음 / 예측 계산을 선택하세요"
+	_labels.previous.text = ""
+	if not prediction.previous.is_empty():
+		_labels.previous.text = (
+			"이전 입력판 %d (비교용): %s"
+			% [prediction.previous.input_revision, _prediction_value(prediction.previous)]
+		)
+
+
+func _prediction_value(result: Dictionary) -> String:
+	var value: Dictionary = result.value
+	return (
+		(
+			"예측 기간 [%d, %d) 게임분 · %d km / 종단 %d 게임분\n"
+			+ "요청 %d / 탑승 %d / 완료 %d 통행 · 예상 운임 %d / 운영비 %d (실적 아님) · 생성 게임분 %d"
+		)
+		% [
+			value.period_start,
+			value.period_end,
+			value.distance_km,
+			value.end_to_end_minutes,
+			value.totals.requested,
+			value.totals.boarded,
+			value.totals.completed,
+			value.totals.predicted_fare,
+			value.totals.operating_cost,
+			result.generated_minute
+		]
+	)
+
+
+func reason_text(code: String) -> String:
+	return (
+		{
+			"": "현재 상태를 확인하세요",
+			"STATION_COUNT": "서로 다른 역 6~8개가 필요합니다",
+			"DUPLICATE_STATION": "이미 선택한 역입니다",
+			"DISCONNECTED": "이어지지 않은 역 구간이 있습니다",
+			"OUTSIDE_JURISDICTION": "관할에 없는 역입니다",
+			"PLAN_LOCKED": "계획이 잠겨 있습니다",
+			"NO_UNDO_HISTORY": "되돌릴 이력이 없습니다",
+			"UNDO_FAILED": "되돌리기 실패: 상태를 다시 확인하세요",
+			"STATE_CHANGED": "계획이 변경됐습니다. 다시 확인하세요",
+			"INVALID_SPEED": "배속은 1·2·4만 가능합니다",
+			"INVALID_PLAN": "계획 조건을 먼저 확인하세요",
+			"INVALID_INPUT": "예측 입력을 확인하세요",
+			"STATION_NOT_SELECTED": "선택된 노선 역이 아닙니다",
+			"INVALID_INDEX": "이동할 순서를 확인하세요"
+		}
+		. get(code, "정보를 확인하지 못했습니다: " + code)
+	)
+
+
+func reset_observation() -> void:
+	_displayed_revision = -1
+	_selected_id = ""
+	_list_stops = []
+	plan_list.clear()
+	_labels.feedback.text = "후보역을 선택해 노선을 편집하세요."
+	_last_usec = Time.get_ticks_usec()
+	_build_candidates()
+	present(session.snapshot())
+
+
+func _build_candidates() -> void:
+	for child: Node in _candidates.get_children():
+		_candidates.remove_child(child)
+		child.queue_free()
+	candidate_buttons.clear()
+	for station: Dictionary in session.snapshot().stations:
+		var id: String = station.id
+		var button := Button.new()
+		button.text = id
+		button.name = "List_" + id
+		button.pressed.connect(_select_station.bind(id))
+		_candidates.add_child(button)
+		candidate_buttons[id] = button
