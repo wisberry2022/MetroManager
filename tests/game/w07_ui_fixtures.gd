@@ -21,6 +21,7 @@ const CASES: Array[String] = [
 	"QA-M02",
 	"QA-M02-8",
 	"QA-M02-EXTERNAL",
+	"QA-M02-DISCONNECTED",
 	"QA-M03",
 	"QA-M04",
 	"QA-P01",
@@ -79,6 +80,8 @@ static func create(case_id: String) -> Session:
 		fill(session, ROUTE)
 	if case_id == "QA-M02-8":
 		fill(session, ROUTE_8)
+	if case_id == "QA-M02-DISCONNECTED":
+		fill(session, ["S01", "S03", "S04", "S08", "S12", "S11"])
 	if case_id == "QA-M03":
 		session.plan.lock(true)
 	if case_id.begins_with("QA-P"):
