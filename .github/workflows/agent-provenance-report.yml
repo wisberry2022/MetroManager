@@ -1,0 +1,30 @@
+name: Agent provenance report
+on:
+  pull_request_target:
+    branches: [main]
+    types: [opened, synchronize, reopened, edited, ready_for_review]
+permissions:
+  contents: read
+jobs:
+  agent-provenance-report:
+    name: agent-provenance-report
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      # Only merged base code executes; the PR is fetched as objects, never checked out.
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Fetch PR data objects
+        env:
+          PR_NUMBER: ${{ github.event.number }}
+        run: |
+          case "$PR_NUMBER" in ''|*[!0-9]*) exit 1 ;; esac
+          git fetch origin "refs/pull/$PR_NUMBER/head"
+      - name: Report declarations without enforcing
+        run: python -I tools/agent_provenance_ci.py
