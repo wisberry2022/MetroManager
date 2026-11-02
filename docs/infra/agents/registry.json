@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "registry_version": "1.0-owner-approved-initial",
+  "registry_state": "OWNER_APPROVED_PENDING_MAIN_MERGE",
+  "repository": "wisberry2022/MetroManager",
+  "prepared_by": "INF",
+  "source_main_sha": "293b5f956316f2be877e547fbfc223b9446f82bd",
+  "approval_decision_ref": "OWNER_DIRECT_INF_2026-11-02_INITIAL_REGISTRY_APPROVAL",
+  "approval_decision_date": "2026-11-02",
+  "status_semantics": "Owner approved all eight initial Agent-ID assignments including independent DESKTOP Project Leader. ACTIVE is an owner-approved lifecycle state, not a verified technical session identity. Provenance enforcement is not enabled until separately approved.",
+  "activation_time_policy": "Existing legacy agents have activated_at=null, with historical dates in role_observed_on. On every future successor activation record the actual Owner-approved effective timestamp as offset-aware ISO 8601 after INF acceptance and PM switch confirmation; never infer it from commit or workflow run time.",
+  "agents": [
+    {
+      "agent_id": "AGT-PM-0001",
+      "department": "PM",
+      "generation": 1,
+      "status": "ACTIVE",
+      "role": "HQ / Project Manager",
+      "session_scope": "HQ-PM-CURRENT",
+      "session_kind": "CHATGPT",
+      "predecessor_agent_id": null,
+      "activated_at": null,
+      "retired_at": null,
+      "role_observed_on": "2026-10-31",
+      "role_retirement_observed_on": null,
+      "owner_approval_ref": "docs/hq/PM-008.md",
+      "agent_id_activation_approval_ref": "OWNER_DIRECT_INF_2026-11-02_INITIAL_REGISTRY_APPROVAL",
+      "handoff_ref": null,
+      "role_evidence_refs": [
+        "docs/hq/PM-008.md",
+        "docs/hq/PM-011_GATE3_2_EXECUTION_PROTOCOL.md"
+      ],
+      "record_version": 1,
+      "notes": "Owner-approved initial Agent-ID; existing HQ role retained."
+    },
+    {
+      "agent_id": "AGT-PLN-0001",
+      "department": "PLN",
+      "generation": 1,
+      "status": "RETIRED",
+      "role": "Game Designer / predecessor",
+      "session_scope": "PLANNING-PREDECESSOR",
+      "session_kind": "CHATGPT",
+      "predecessor_agent_id": null,
+      "activated_at": null,
+      "retired_at": null,
+      "role_observed_on": "2026-10-31",
+      "role_retirement_observed_on": "2026-11-01",
+      "owner_approval_ref": "docs/hq/PM-011_PLANNING_SUCCESSION_RECORD.md",
+      "agent_id_activation_approval_ref": "OWNER_DIRECT_INF_2026-11-02_INITIAL_REGISTRY_APPROVAL",
+      "handoff_ref": "HOF-20261101-PLN-CURRENT-UNASSIGNED",
+      "role_evidence_refs": [
+        "docs/hq/PM-011_PLANNING_SUCCESSION_RECORD.md",
+        "docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md"
+      ],
+      "record_version": 1,
+      "notes": "No new work; previous session kept AVAILABLE_FOR_QUERY. Exact retirement timestamp unavailable."
+    },
+    {
+      "agent_id": "AGT-PLN-0002",
+      "department": "PLN",
+      "generation": 2,
+      "status": "ACTIVE",
+      "role": "Game Designer / successor",
+      "session_scope": "PLANNING-SUCCESSOR-CURRENT",
+      "session_kind": "CHATGPT",
+      "predecessor_agent_id": "AGT-PLN-0001",
+      "activated_at": null,
+      "retired_at": null,
+      "role_observed_on": "2026-11-01",
+      "role_retirement_observed_on": null,
+      "owner_approval_ref": "docs/hq/PM-011_PLANNING_SUCCESSION_RECORD.md",
+      "agent_id_activation_approval_ref": "OWNER_DIRECT_INF_2026-11-02_INITIAL_REGISTRY_APPROVAL",
+      "handoff_ref": "HOF-20261101-PLN-CURRENT-UNASSIGNED",
+      "role_evidence_refs": [
+        "docs/hq/PM-011_PLANNING_SUCCESSION_RECORD.md",
+        "docs/planning/tasks/PLN-002_RESULT.md",
+        "https://github.com/wisberry2022/MetroManager/issues/26"
+      ],
+      "record_version": 1,
+      "notes": "INF acceptance completed; PM_SWITCH_CONFIRMED and Owner transfer acknowledged. Exact historical activation time unavailable."
+    },
+    {
+      "agent_id": "AGT-DSG-0001",
+      "department": "DSG",
+      "generation": 1,
+      "status": "ACTIVE",
+      "role": "Art Director & UI/UX Designer",
+      "session_scope": "DESIGN-CURRENT",
+      "session_kind": "CHATGPT",
+      "predecessor_agent_id": null,
+      "activated_at": null,
+      "retired_at": null,
+      "role_observed_on": "2026-10-31",
+      "role_retirement_observed_on": null,
+      "owner_approval_ref": "docs/design/tasks/DSG-002_RESULT.md",
+      "agent_id_activation_approval_ref": "OWNER_DIRECT_INF_2026-11-02_INITIAL_REGISTRY_APPROVAL",
+      "handoff_ref": null,
+      "role_evidence_refs": [
+        "docs/design/tasks/DSG-002_RESULT.md",
+        "https://github.com/wisberry2022/MetroManager/pull/61"
+      ],
+      "record_version": 1,
+      "notes": "Design role evidenced; private session identifiers not published."
+    },
+    {
+      "agent_id": "AGT-DEV-0001",
+      "department": "DEV",
+      "generation": 1,
+      "status": "ACTIVE",
+      "role": "Development Project Leader / LAPTOP (Project Leader B)",
+      "session_scope": "DEVELOPMENT-PROJECT-LEADER-LAPTOP-INCLUDING-B",
+      "session_kind": "CODEX",
+      "predecessor_agent_id": null,
+      "activated_at": null,
+      "retired_at": null,
+      "role_observed_on": "2026-11-01",
+      "role_retirement_observed_on": null,
+      "owner_approval_ref": "docs/engineering/collaboration/environments/LAPTOP.md",
+      "agent_id_activation_approval_ref": "OWNER_DIRECT_INF_2026-11-02_INITIAL_REGISTRY_APPROVAL",
+      "handoff_ref": null,
+      "role_evidence_refs": [
+        "docs/engineering/collaboration/environments/LAPTOP.md",
+        "docs/engineering/tasks/DEV-011_W02_CLOCK_LEDGER.md",
+        "docs/engineering/tasks/DEV-012_W03_ROUTE_PREDICTION.md"
+      ],
+      "record_version": 1,
+      "notes": "Owner confirmed Project Leader B and LAPTOP Project Leader are the same session; separate from DESKTOP and Convention Team."
+    },
+    {
+      "agent_id": "AGT-DEV-0002",
+      "department": "DEV",
+      "generation": 1,
+      "status": "ACTIVE",
+      "role": "Development Convention Team / Git policy & CI",
+      "session_scope": "DEVELOPMENT-CONVENTION-TEAM",
+      "session_kind": "CODEX",
+      "predecessor_agent_id": null,
+      "activated_at": null,
+      "retired_at": null,
+      "role_observed_on": "2026-11-01",
+      "role_retirement_observed_on": null,
+      "owner_approval_ref": "docs/engineering/tasks/DEV-013_AGENT_PROVENANCE_FOUNDATION.md",
+      "agent_id_activation_approval_ref": "OWNER_DIRECT_INF_2026-11-02_INITIAL_REGISTRY_APPROVAL",
+      "handoff_ref": null,
+      "role_evidence_refs": [
+        "docs/engineering/tasks/DEV-013_AGENT_PROVENANCE_FOUNDATION.md",
+        "docs/engineering/provenance/DEV-013_IMPLEMENTATION_PLAN.md",
+        "docs/engineering/tasks/DEV-014_RESULT.md"
+      ],
+      "record_version": 1,
+      "notes": "Independent operating agent, not a Project Leader generation."
+    },
+    {
+      "agent_id": "AGT-DEV-0003",
+      "department": "DEV",
+      "generation": 1,
+      "status": "ACTIVE",
+      "role": "Development Project Leader / DESKTOP independent session",
+      "session_scope": "DEVELOPMENT-PROJECT-LEADER-DESKTOP",
+      "session_kind": "CODEX",
+      "predecessor_agent_id": null,
+      "activated_at": null,
+      "retired_at": null,
+      "role_observed_on": "2026-11-02",
+      "role_retirement_observed_on": null,
+      "owner_approval_ref": "OWNER_DIRECT_INF_2026-11-02_DESKTOP_PROJECT_LEADER_CONFIRMATION",
+      "agent_id_activation_approval_ref": "OWNER_DIRECT_INF_2026-11-02_INITIAL_REGISTRY_APPROVAL",
+      "handoff_ref": null,
+      "role_evidence_refs": [
+        "docs/engineering/collaboration/environments/DESKTOP.md",
+        "docs/engineering/collaboration/README.md"
+      ],
+      "record_version": 1,
+      "notes": "Owner verified DESKTOP is an independent session. Historical DESKTOP environment file is NOT_CONFIRMED; local state and exact activation timestamp not measured."
+    },
+    {
+      "agent_id": "AGT-INF-0001",
+      "department": "INF",
+      "generation": 1,
+      "status": "ACTIVE",
+      "role": "AI Infrastructure Manager / agent continuity and succession",
+      "session_scope": "INF-CURRENT",
+      "session_kind": "CHATGPT",
+      "predecessor_agent_id": null,
+      "activated_at": null,
+      "retired_at": null,
+      "role_observed_on": "2026-11-01",
+      "role_retirement_observed_on": null,
+      "owner_approval_ref": "docs/infra/tasks/INF-001_CONTEXT_GOVERNANCE.md",
+      "agent_id_activation_approval_ref": "OWNER_DIRECT_INF_2026-11-02_INITIAL_REGISTRY_APPROVAL",
+      "handoff_ref": null,
+      "role_evidence_refs": [
+        "docs/infra/README.md",
+        "docs/infra/tasks/INF-001_CONTEXT_GOVERNANCE.md",
+        "docs/engineering/tasks/DEV-007_INF_DEPARTMENT_REGISTRATION.md"
+      ],
+      "record_version": 1,
+      "notes": "Owner-approved independent INF role; Git operations still subject to ticket-specific approval."
+    }
+  ],
+  "unresolved_identity_checks": [
+    {
+      "subject": "Private session identifiers / DESKTOP local environment",
+      "reason": "Owner confirmed independent roles, but private exact session IDs and DESKTOP local inventory are separately controlled/unverified. This does not block initial Agent-ID assignment.",
+      "proposed_agent_id": null
+    }
+  ]
+}
