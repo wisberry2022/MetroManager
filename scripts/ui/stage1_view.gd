@@ -18,6 +18,7 @@ var _refresh_usec: int = 0
 var _selected_id: String = ""
 var _candidates: GridContainer
 var _list_stops: Array = []
+var _focus_feedback: String = ""
 
 
 func _ready() -> void:
@@ -50,7 +51,7 @@ func _ready() -> void:
 	var right := VBoxContainer.new()
 	right.custom_minimum_size.x = 360
 	work.add_child(right)
-	_label(right, "candidates_title", "후보역 목록 · 지도와 같은 선택")
+	_label(right, "candidates_title", "후보역 · 미포함 역: 추가 / 포함 역: 정보 선택")
 	_candidates = GridContainer.new()
 	_candidates.columns = 4
 	right.add_child(_candidates)
@@ -69,6 +70,7 @@ func _ready() -> void:
 	_button(edit, "undo", "되돌리기", "undo")
 	_button(edit, "predict", "예측 계산", "predict")
 	_label(right, "validation", "계획 확인 중")
+	_label(right, "connections", "")
 	_label(root, "prediction", "예측: 미계산")
 	_label(root, "previous", "")
 	_label(root, "funds", "현재 자금 확인 중")
@@ -114,15 +116,37 @@ func _label(parent: Node, id: String, text: String) -> void:
 
 func _select_station(id: String) -> void:
 	_selected_id = id
+	if id in session.snapshot().plan.station_ids:
+		_focus_station(id)
+		return
 	_act("select", {"station_id": id})
 
 
 func _plan_selected(index: int) -> void:
-	_selected_id = shown.plan.station_ids[index]
+	_focus_station(shown.plan.station_ids[index])
+
+
+func _focus_station(id: String) -> void:
+	_selected_id = id
+	var before: Dictionary = session.snapshot()
+	_focus_feedback = "정보 선택: %s · 노선 변경 없음 · 계획판 %d" % [id, before.plan.plan_revision]
 	present(session.snapshot())
+	plan_list.ensure_current_is_visible()
+	print(
+		"W07_FOCUS ",
+		JSON.stringify(
+			{
+				"station_id": id,
+				"plan_revision_before": before.plan.plan_revision,
+				"plan_revision_after": session.snapshot().plan.plan_revision,
+				"command_dispatched": false
+			}
+		)
+	)
 
 
 func _act(action: String, payload: Dictionary = {}) -> void:
+	_focus_feedback = ""
 	_sequence += 1
 	var command := payload.duplicate(true)
 	command.merge({"command_id": "ui-%d-%d" % [get_instance_id(), _sequence], "action": action})
@@ -175,12 +199,14 @@ func present(state: Dictionary) -> bool:
 				result.effective_at
 			]
 		)
+	if not _focus_feedback.is_empty():
+		_labels.feedback.text = _focus_feedback
 	return true
 
 
 func _render_plan(state: Dictionary) -> void:
 	var route: Dictionary = state.plan
-	map_view.present(state)
+	map_view.present(state, _selected_id)
 	if _list_stops != route.station_ids:
 		_list_stops = route.station_ids.duplicate()
 		plan_list.clear()
@@ -199,7 +225,10 @@ func _render_plan(state: Dictionary) -> void:
 	controls.undo.disabled = not route.allowed_actions.undo
 	controls.predict.disabled = not state.allowed_actions.predict
 	for id: String in candidate_buttons:
-		candidate_buttons[id].disabled = not route.allowed_actions.edit
+		candidate_buttons[id].disabled = (
+			not route.allowed_actions.edit and id not in route.station_ids
+		)
+		candidate_buttons[id].button_pressed = id == _selected_id
 		var number: int = route.station_ids.find(id)
 		candidate_buttons[id].text = "%d.%s" % [number + 1, id] if number >= 0 else id
 	var reasons: Array[String] = []
@@ -225,6 +254,26 @@ func _render_plan(state: Dictionary) -> void:
 			_labels.selection.text += " / " + " > ".join(path)
 	if route.locked:
 		_labels.validation.text += " · 편집 잠금"
+	_render_connections(state)
+
+
+func _render_connections(state: Dictionary) -> void:
+	# 기존 지도와 같은 DATA 간선으로 오류 위치만 설명한다. 유효성은 원본 Plan 판정이다.
+	var stops: Array = state.plan.station_ids
+	var gaps: Array[String] = []
+	for index: int in range(1, stops.size()):
+		var a: String = stops[index - 1]
+		var b: String = stops[index]
+		if [a, b] not in state.edges and [b, a] not in state.edges:
+			gaps.append("%d. %s → %d. %s: 연결 간선 없음" % [index, a, index + 1, b])
+	_labels.connections.text = ""
+	if not gaps.is_empty():
+		_labels.connections.text = "연결 오류 · " + " / ".join(gaps)
+		_labels.connections.text += (
+			"\n수정: 역을 선택해 위로/아래로 순서 조정 또는 제거 후 연결된 역 추가"
+			if state.plan.allowed_actions.edit
+			else "\n현재 편집 잠금 · 역 정보 선택 가능"
+		)
 
 
 func _render_finance(state: Dictionary) -> void:
@@ -343,6 +392,7 @@ func reason_text(code: String) -> String:
 func reset_observation() -> void:
 	_displayed_revision = -1
 	_selected_id = ""
+	_focus_feedback = ""
 	_list_stops = []
 	plan_list.clear()
 	_labels.feedback.text = "후보역을 선택해 노선을 편집하세요."
@@ -361,6 +411,7 @@ func _build_candidates() -> void:
 		var button := Button.new()
 		button.text = id
 		button.name = "List_" + id
+		button.toggle_mode = true
 		button.pressed.connect(_select_station.bind(id))
 		_candidates.add_child(button)
 		candidate_buttons[id] = button

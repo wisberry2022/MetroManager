@@ -1,5 +1,7 @@
 # DEV-015 — W07 최소 S01 UI 구현·검증 결과
 
+§1~5는 PR #65 최초 제출 시점 기록이다. 병합 후 발견된 두 결함·증거 형식 오류와 최신 수정 검증은 §6을 우선 확인한다. 최초 제출의 무결함/프로젝트 로드 진술을 현재 판정으로 재사용하지 않는다.
+
 - 담당: Development Project Leader / LAPTOP, 2026-11-02. 상태: REVIEW / DEV 검증 완료 / Design 실제 인수 PENDING.
 - 승인: [실행 티켓](DEV-015_STAGE1_UI_INTEGRATION.md) §8의 Owner 개별 구현·Commit·Push·PR 승인. [Issue #63](https://github.com/wisberry2022/MetroManager/issues/63). main 병합은 별도 승인이다.
 - 제출 기준 main: `682a4f10f2cfe14bed6984e87bff75c05f37d8b5`. 최초 기준 `293b5f956316f2be877e547fbfc223b9446f82bd` 이후 INF 문서4개만 fast-forward 수용했다. 기존 게임 모델·정책 코드 변경 없음. 실제 제출 head/tree·필수 CI는 PR에서 확인한다.
@@ -97,3 +99,44 @@ Windows / Intel Iris Xe / D3D12의 실제 Godot 창에서 실행했다. 검증�
 ## 5. 제출 검증 기록
 
 커밋 전 최종 check/전체 정책 회귀와 커밋 후 fetch/preflight, 원격 head·부모·tree·경로 및 policy/department-policy 결과를 PR·Issue #63에 연결한다. API 공유는 로컬 훅을 실행하지 않으므로 로컬 정상 커밋의 검사와 원격 필수 CI를 각각 확인한다.
+
+## 6. 2026-11-02 Design 검수 두 결함 후속
+
+담당 AGT-DEV-0001 / LAPTOP. 기준 main `2ae5161a8d61a77b69b71dac09c9cfc1c3fa0df5`, 브랜치 `codex/DEV-015-ui-review-fixes`. Owner의 이번 조치 지시와 티켓 §4/8의 동일 범위 검수 대응 승인에 따른다. [Design 증거 판정 #59](https://github.com/wisberry2022/MetroManager/issues/59#issuecomment-6577275089), [구체 요청 #63](https://github.com/wisberry2022/MetroManager/issues/63#issuecomment-6577283763)을 읽었다. Owner QA ZIP 원문은 이번에 직접 열람하지 않았으며 그 묶음의 검증 판정은 Design 회신을 출처로 한다.
+
+### 수정과 범위
+
+- **DSG-QA-01:** 이미 포함된 역의 지도/후보 목록 재클릭은 로컬 정보 포커스로 처리한다. 새 역 클릭만 기존 추가 명령을 보낸다. 안내 문구로 두 의도를 구분하며 지도·후보 버튼·노선 행의 선택을 일치시키고 선택 행으로 스크롤한다. 포커스는 모델 조회 외 명령을 보내지 않아 계획/예측/장부/command_result 및 revision을 바꾸지 않는다. 잠금 중에는 포함된 역 정보 선택을 허용하되 새 역 추가·제거/정렬/undo는 비활성을 유지한다.
+- **DSG-QA-02:** 지도와 동일 DATA 간선을 이용해 연결 오류의 양 끝 ID·순서·간선 없음 사유를 목록 바로 아래 텍스트에 제공한다. 실제 허용 행동에 맞춰 순서 조정/제거/추가 또는 현재 잠금 안내를 표시한다. 색만 의존하지 않는다. 원본 Plan 유효성/단절 편집 수락 의미는 유지한다.
+- **증거 형식 정정:** 최초7장과 이번5장 모두 Computer Use 응답의 실제 바이트가 JPEG였으나 PNG 확장자로 저장됐음을 발견했다. 최초 editor 재임포트는 종료0이어도 `Not a PNG file`/ERR_FILE_CORRUPT를 출력했다. 이를 로드 정상으로 간주하지 않는다. Godot의 JPEG decoder→PNG writer로 기존 디코딩 픽셀/크기를 보존해 변환했으며 화면 내용/수치·발생 시점을 편집하지 않았다. 변환 뒤12장의 실제 PNG signature·CRC와 엔진 재임포트를 확인했다. 기존7장은 최초 사건의 증거이며 새 코드 증거로 소급하지 않는다.
+- 변경 파일: `scripts/ui/stage1_map.gd`, `stage1_view.gd`; `tests/game/run_w07_tests.gd`, `w07_ui_fixtures.gd`; 본 결과·실행 티켓; 기존7개 증거와 아래 신규5개 증거. 총18개 파일. `.png.import` 등 로컬 생성 캐시는 제출하지 않는다.
+
+### 자동·로드·실제 GUI 구분
+
+기존 §2 명령을 최신 코드에 실행했다. W01 **219**, W02 **309**, W03 **101**, W07 **273** 단언 실패0·종료0(합계902). 신규70개는 포커스의 전체 세션 snapshot 불변·양쪽 선택·잠금 경계·정상/단절 위치·복구/undo 등을 검증한다. 의도적 실패 종료1(예상), 제품 main headless 종료0. 최종 editor headless 재임포트 종료0·ERROR/WARNING 없음. format/lint·doctor PASS, 정책 전체 **80개 PASS / 315.675초 / 종료0**. DEV-016 main 반영으로 기존57개 대비23개가 추가됐으며 도구/검사는 수정하지 않았다. 최종 check/커밋·원격 head/preflight/CI는 제출 PR에 연결한다.
+
+실제 Windows Godot4.7.2 / D3D12 / Intel Iris Xe / 검증 실행기 `--resolution 1180x840`에서 다음을 직접 클릭했다. 해상도는 제품 사양 승격이 아니다. 검증용 fixture는20개(기존19+정확한 MAP-07 변형1), QA ID는14개 그대로다. 이번 실행기의 마지막 정상 종료코드는0이다. 최초 QA 환경의 shader cache 진단 원인을 규명하거나 전체 성능 정상으로 판정한 것은 아니다.
+
+| 실제 입력·초기 → 기대/실제 | 증거 |
+| --- | --- |
+| 빈 계획/T01 공통 초기에서 지도 S01 추가→마커 재클릭→후보 재클릭→제거: 추가 명령1회/plan1, 포커스2회1→1·명령 없음, 제거 plan2. 이 부분은 자동 스크롤 최종 한 줄 보완 전 실행 로그로만 보존 | 로컬 gui-review-first.log, 최종6역 포커스는 아래 재검증 |
+| QA-M02 정상6역에서 S12 마커→후보 S12 재클릭: 두 번 모두6→6, 명령 없음, 선택 행6 자동 스크롤, 오류 없음 | [포커스](../evidence/DEV-015_REVIEW_FOCUS.png) |
+| 선택 S12 위로→단절 구간4.S04→5.S12 설명→undo: plan7→8, 정상6역 복구·오류 설명 제거 | [정상 복구](../evidence/DEV-015_REVIEW_NORMAL_RESTORED.png) |
+| QA-M02-DISCONNECTED 정확한 MAP-07 `S01→S03→S04→S08→S12→S11`/plan6 → S01 정보 선택: plan6 유지, 지도 단절선과 `1. S01 → 2. S03: 연결 간선 없음`·수정 안내 일치 | [MAP-07](../evidence/DEV-015_REVIEW_MAP07_GAP.png) |
+| 위 상태 S01 제거: plan7, 특정 단절 설명 사라짐. 5역 최소 조건 실패는 그대로 유지(유효로 오표시하지 않음) | [복구 경계](../evidence/DEV-015_REVIEW_MAP07_REPAIR.png) |
+| QA-M03 잠금6역에서 S01 클릭: plan6→6/명령 없음, 정보 선택·행/버튼 상태 표시, 편집 비활성 | [잠금 포커스](../evidence/DEV-015_REVIEW_LOCKED_FOCUS.png) |
+
+최종 실행기 로그 발췌(게임분360):
+
+```text
+W07_FOCUS station_id=S12 plan_revision_before=6 plan_revision_after=6 command_dispatched=false (지도/후보 각1회)
+W07_COMMAND ui-42664461879-1 reorder accepted=true plan_revision=7 reason_codes=[DISCONNECTED]
+W07_COMMAND ui-42664461879-2 undo accepted=true plan_revision=8
+W07_FOCUS station_id=S01 plan_revision_before=6 plan_revision_after=6 command_dispatched=false (MAP-07)
+W07_COMMAND ui-42664461879-3 remove accepted=true plan_revision=7 reason_codes=[STATION_COUNT]
+W07_FOCUS station_id=S01 plan_revision_before=6 plan_revision_after=6 command_dispatched=false (잠금)
+```
+
+재현: §3의 GUI 실행기에서 QA-M02 / QA-M02-DISCONNECTED / QA-M03 선택. 첫 사례의 S12를 지도·후보에서 재클릭하고 위로/undo, 둘째 사례의 S01을 선택/제거한다. 신규 `W07_FOCUS`는 정보 선택 관찰 로그이며 command_id/모델 명령으로 꾸미지 않는다. `W07_COMMAND`와 분리해 포커스/모델 변경을 추적한다. 원시 로그는 `.local/verification/`에 보존한다.
+
+**남은 사항:** 두 건은 DEV 수정/회귀·실제 GUI 확인 완료이며 Design 독립 재수용은 PENDING이다. 이번 검증을 14개 QA 전체 ACCEPTED로 승격하지 않는다. 9역 다양한 경계·지연 시간 명령/동일 command_id GUI·키보드 전 과정·다양한 DPI·자정 전체 시퀀스·별도 제품 main 수동 검증·빌드/export·성능/외부 사용성/전체 VP는 이번 NOT_RUN으로 유지한다. 수정 후5역 결과 관찰은 전체5역 시나리오 인수가 아니다. 기획/모델·신규 디자인 명세 변경 필요 없음. main 병합·Stage 종료·Issue 자동 종료 없음.

@@ -15,7 +15,7 @@ func _ready() -> void:
 	resized.connect(_layout_markers)
 
 
-func present(state: Dictionary) -> void:
+func present(state: Dictionary, focused_id: String = "") -> void:
 	_stations = state.stations
 	_edges = state.edges
 	_stops = state.plan.station_ids
@@ -30,13 +30,15 @@ func present(state: Dictionary) -> void:
 		if not markers.has(id):
 			var button := Button.new()
 			button.name = "Map_" + id
+			button.toggle_mode = true
 			button.pressed.connect(func() -> void: station_requested.emit(id))
 			add_child(button)
 			markers[id] = button
 		var number: int = _stops.find(id)
 		markers[id].text = "%d. %s" % [number + 1, id] if number >= 0 else id
 		markers[id].tooltip_text = "%s / %s · 목록에서도 선택 가능" % [id, station.neighborhood_id]
-		markers[id].disabled = not _enabled
+		markers[id].disabled = not _enabled and id not in _stops
+		markers[id].button_pressed = id == focused_id
 	_layout_markers()
 	queue_redraw()
 

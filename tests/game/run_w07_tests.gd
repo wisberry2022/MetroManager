@@ -20,6 +20,7 @@ func _run() -> void:
 		_test_plan_and_prediction()
 		_test_reports()
 		await _test_views()
+		await _test_review_fixes()
 	print("W07_TEST_RESULT checks=", _checks, " failures=", _failures)
 	quit(0 if _failures == 0 else 1)
 
@@ -225,6 +226,57 @@ func _test_views() -> void:
 			_expect(
 				"render_error", view.find_child("report", true, false).text.contains("조회 실패"), true
 			)
+		view.queue_free()
+		await process_frame
+
+
+func _test_review_fixes() -> void:
+	for case_id: String in ["QA-M01", "QA-M02", "QA-M03", "QA-M02-DISCONNECTED"]:
+		var view := Stage1.instantiate()
+		view.session = Fixtures.create(case_id)
+		root.add_child(view)
+		view.set_process(false)
+		await process_frame
+		if case_id == "QA-M01":
+			view.map_view.markers.S01.pressed.emit()
+		var before: Dictionary = view.session.snapshot()
+		for source: Button in [view.map_view.markers.S01, view.candidate_buttons.S01]:
+			_expect("included_focus_enabled_" + case_id, source.disabled, false)
+			source.pressed.emit()
+			_expect("focus_no_model_command_" + case_id, view.session.snapshot(), before)
+			_expect("focus_selects_row_" + case_id, view.plan_list.is_selected(0), true)
+			_expect("focus_map_marked_" + case_id, view.map_view.markers.S01.button_pressed, true)
+			_expect("focus_list_marked_" + case_id, view.candidate_buttons.S01.button_pressed, true)
+			_expect(
+				"focus_feedback_" + case_id,
+				view.find_child("feedback", true, false).text.begins_with("정보 선택: S01"),
+				true
+			)
+		view.present(view.session.snapshot())
+		_expect(
+			"focus_feedback_survives_refresh",
+			view.find_child("feedback", true, false).text.begins_with("정보 선택: S01"),
+			true
+		)
+		var connections: Label = view.find_child("connections", true, false)
+		if case_id == "QA-M03":
+			_expect("locked_focus_keeps_remove_disabled", view.controls.remove.disabled, true)
+			_expect("locked_new_station_disabled", view.candidate_buttons.S05.disabled, true)
+		elif case_id == "QA-M02-DISCONNECTED":
+			_expect(
+				"map07_still_invalid", view.shown.plan.validation.reason_codes, ["DISCONNECTED"]
+			)
+			_expect("map07_pair", connections.text.contains("1. S01 → 2. S03: 연결 간선 없음"), true)
+			_expect("map07_action", connections.text.contains("순서 조정 또는 제거"), true)
+			view.controls.remove.pressed.emit()
+			_expect("map07_repair_removes_error", connections.text, "")
+			_expect("map07_repair_keeps_count_failure", view.shown.plan.validation.valid, false)
+			view.controls.undo.pressed.emit()
+			_expect("map07_undo_restores_pair", connections.text.contains("1. S01 → 2. S03"), true)
+		else:
+			_expect("normal_no_connection_error", connections.text, "")
+			view.controls.remove.pressed.emit()
+			_expect("focused_remove_works", "S01" in view.shown.plan.station_ids, false)
 		view.queue_free()
 		await process_frame
 
