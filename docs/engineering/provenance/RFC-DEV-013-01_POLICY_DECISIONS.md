@@ -1,6 +1,8 @@
 # RFC-DEV-013-01 — Agent Identity·Provenance 도입 결정 요청
 
-- 상태: OPEN / 2026-11-01 / 요청: Convention Team / 연관: DEV-013, INF-002.
+- 상태: OPEN (부분 회신 수신) / 2026-11-02 갱신 / 요청: Convention Team / 연관: DEV-013, INF-002, DEV-016.
+- INF-002 PR #64/main `682a4f10f2cfe14bed6984e87bff75c05f37d8b5`에서 8개 초기 등록·직무 구분·레거시 null 시각을 확인했다. 아래 최초 질문/응답 이력은 보존하며, 미등록·미승인 표시는 당시 상태다. 초기 등록 승인과 Q04~Q10 전체 계약 승인을 혼동하지 않는다.
+- 최신 항목별 판단·남은 결정은 [DEV-016 검토/RFC](DEV-016_INF_REVIEW_AND_ROLLOUT.md)에 기록했다. Q01의 초기 ID/독립 역할, Q02의 실제 필드/초기 null 정책, Q03의 실제 main 등록은 회신 확인. 이벤트/최종 기록 계약·강제 적용 등 나머지는 OPEN이다.
 - 응답 책임: INF(식별/등록/세대), Owner(정식 채택·활성화·Git/강제), HQ/PM(전환·Stage 영향).
 - 근거: Owner의 현재 분석/계획·worktree 구현 착수 요청, INF-002 v1.0, 현재 채팅으로 전달된 INF 정책 제안 회신.
 - 최신 조사 기준 main: `88496d0c3bcef8d59e76c9977ee6ff07d01339fe`. 요청서/INF 회신은 제안 상태이며 실제 registry와 ACTIVE ID·enforce SHA는 아직 없다.

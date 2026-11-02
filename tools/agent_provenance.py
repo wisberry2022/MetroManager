@@ -207,13 +207,19 @@ def audit(base, head, task, branch, title, body, registry_path, manifest_path):
             allowed.append(f"tasks/{task}_PROVENANCE.json")
         require(manifest_path in allowed, "MANIFEST_LOCATION")
         authors, all_contributors = set(), set()
-        commits = git("rev-list", "--reverse", f"{base}..{head}").decode().splitlines()
+        commits = git("rev-list", "--reverse", "--topo-order", f"{base}..{head}").decode().splitlines()
         last = None
         for sha in commits:
+            parents = git("rev-list", "--parents", "-n", "1", sha).decode().split()[1:]
+            if len(parents) == 2:
+                # The shared gate already proved this exact clean base-sync tree.
+                # Imported trusted files are not re-attributed to the task agent.
+                continue
+            snapshot_base = git("merge-base", base, sha).decode().strip()
             last, people = declaration(git("show", "-s", "--format=%B", sha).decode("utf-8"), task, agents)
             authors.add(last)
             all_contributors.update(people)
-            manifest_check(blob(sha, manifest_path), manifest_path, base, sha, task,
+            manifest_check(blob(sha, manifest_path), manifest_path, snapshot_base, sha, task,
                            last, authors, pr_contributors | all_contributors, agents)
         require(primary == last, "PR_PRIMARY_MISMATCH")
         require(all_contributors <= pr_contributors, "PR_CONTRIBUTORS_MISSING")
@@ -239,7 +245,7 @@ def main():
     print(json.dumps({"mode": "REPORT_ONLY", "protocol": "draft-v1",
                       "result": "DIAGNOSTICS" if diagnostics else "DECLARATION_CONSISTENT",
                       "diagnostics": diagnostics, "identity_authenticated": False}))
-    # Always report-only; not wired into hooks, CI, or branch protection.
+    # Always report-only; direct CLI and CI adapter never enforce branch protection.
     return 0
 
 

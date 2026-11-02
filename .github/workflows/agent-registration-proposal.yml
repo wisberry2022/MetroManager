@@ -1,0 +1,79 @@
+name: Agent registration proposal
+on:
+  workflow_dispatch:
+    inputs:
+      task:
+        description: Owner-approved INF task ID
+        required: true
+        type: string
+      department:
+        description: Candidate department
+        required: true
+        type: choice
+        options: [PM, PLN, DSG, DEV, INF]
+      role:
+        description: Reviewed public role
+        required: true
+        type: string
+      scope:
+        description: Reviewed public role pseudonym; no private session URL
+        required: true
+        type: string
+      predecessor:
+        description: Registered predecessor Agent-ID
+        required: true
+        type: string
+      candidate_ref:
+        description: Public Owner candidate designation reference
+        required: true
+        type: string
+      handoff_ref:
+        description: Public handoff reference; acceptance is verified later by INF
+        required: true
+        type: string
+      git_approval_ref:
+        description: Separate Owner authorization for this commit/push/PR operation
+        required: true
+        type: string
+      actor:
+        description: Current registered ACTIVE INF operator Agent-ID
+        required: true
+        default: AGT-INF-0001
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: agent-registration-single-writer
+  cancel-in-progress: false
+jobs:
+  propose:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Create only a PENDING review PR
+        env:
+          AGENT_REGISTRATION_TOKEN: ${{ secrets.AGENT_REGISTRATION_TOKEN }}
+          TASK: ${{ inputs.task }}
+          DEPARTMENT: ${{ inputs.department }}
+          ROLE: ${{ inputs.role }}
+          SCOPE: ${{ inputs.scope }}
+          PREDECESSOR: ${{ inputs.predecessor }}
+          CANDIDATE_REF: ${{ inputs.candidate_ref }}
+          HANDOFF_REF: ${{ inputs.handoff_ref }}
+          GIT_APPROVAL_REF: ${{ inputs.git_approval_ref }}
+          ACTOR: ${{ inputs.actor }}
+        run: |
+          python tools/agent_registration_pr.py --submit \
+            --base "$(git rev-parse HEAD)" --task "$TASK" --department "$DEPARTMENT" \
+            --role "$ROLE" --scope "$SCOPE" --predecessor "$PREDECESSOR" \
+            --candidate-ref "$CANDIDATE_REF" --handoff-ref "$HANDOFF_REF" \
+            --git-approval-ref "$GIT_APPROVAL_REF" --actor "$ACTOR"
