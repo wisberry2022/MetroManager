@@ -1,6 +1,6 @@
 # DEV-015 — W07 최소 S01 UI 구현·검증 결과
 
-§1~5는 PR #65 최초 제출 시점 기록이다. 병합 후 발견된 두 결함·증거 형식 오류와 최신 수정 검증은 §6을 우선 확인한다. 최초 제출의 무결함/프로젝트 로드 진술을 현재 판정으로 재사용하지 않는다.
+§1~5는 PR #65 최초 제출 시점 기록이다. PR #67 검수 수정은 §6, 최신 R-01·R-02 보완은 §7을 우선 확인한다. 최초 제출의 무결함/프로젝트 로드 진술을 현재 판정으로 재사용하지 않는다.
 
 - 담당: Development Project Leader / LAPTOP, 2026-11-02. 상태: REVIEW / DEV 검증 완료 / Design 실제 인수 PENDING.
 - 승인: [실행 티켓](DEV-015_STAGE1_UI_INTEGRATION.md) §8의 Owner 개별 구현·Commit·Push·PR 승인. [Issue #63](https://github.com/wisberry2022/MetroManager/issues/63). main 병합은 별도 승인이다.
@@ -140,3 +140,67 @@ W07_FOCUS station_id=S01 plan_revision_before=6 plan_revision_after=6 command_di
 재현: §3의 GUI 실행기에서 QA-M02 / QA-M02-DISCONNECTED / QA-M03 선택. 첫 사례의 S12를 지도·후보에서 재클릭하고 위로/undo, 둘째 사례의 S01을 선택/제거한다. 신규 `W07_FOCUS`는 정보 선택 관찰 로그이며 command_id/모델 명령으로 꾸미지 않는다. `W07_COMMAND`와 분리해 포커스/모델 변경을 추적한다. 원시 로그는 `.local/verification/`에 보존한다.
 
 **남은 사항:** 두 건은 DEV 수정/회귀·실제 GUI 확인 완료이며 Design 독립 재수용은 PENDING이다. 이번 검증을 14개 QA 전체 ACCEPTED로 승격하지 않는다. 9역 다양한 경계·지연 시간 명령/동일 command_id GUI·키보드 전 과정·다양한 DPI·자정 전체 시퀀스·별도 제품 main 수동 검증·빌드/export·성능/외부 사용성/전체 VP는 이번 NOT_RUN으로 유지한다. 수정 후5역 결과 관찰은 전체5역 시나리오 인수가 아니다. 기획/모델·신규 디자인 명세 변경 필요 없음. main 병합·Stage 종료·Issue 자동 종료 없음.
+
+## 7. R-01·R-02 잔여 보완 — 2026-11-08
+
+담당 AGT-DEV-0001 / LAPTOP. Owner의 이번 개별 구현·Commit·Push·PR 승인 원문과 범위는 티켓 §10에 기록했다. 기준 main `55b5e360d22c10e865cb71a17eb9ba73268ffece`, 브랜치 `codex/DEV-015-stage1-residual-evidence`. [Design 최종 의미 수용](https://github.com/wisberry2022/MetroManager/issues/63#issuecomment-6714166944)을 확인한 뒤 구현했다. 상태는 DEV_VERIFIED / DESIGN_FINAL_ACCEPTANCE_PENDING이며 Stage DONE이 아니다.
+
+### 변경·공급 의미
+
+총11개 파일: scripts/ui/stage1_session.gd·stage1_view.gd, tests/game/w07_ui_fixtures.gd·run_w07_tests.gd, 본 결과·기존 티켓, 신규 DEV-015_R01_*.png 5장이다. W02/W03 모델·기존 W01~03 검사·씬·project.godot·assets·타 부서 산출물·정책/CI는 변경하지 않았다.
+
+- R-01: 기존 `reports.current(current.day_id)` 사본에서 `daily_activity`를 공급한다. day_id/simulation_minute/snapshot_revision을 기존 current와 같은 동기 완료 관측에서 묶고 operating_cost/payment/debt_payment 원본을 보존하며 cash_payment는 두 지급 기록의 합이다. 공급·UI 조회에 await/tick/sync/settle/close를 추가하지 않았다.
+- 기존 현재 자금 아래에 `당일 운영비(미마감)`·게임일/게임분·정수 통화 단위·발생 누계/현금 지급 누계를 표시한다. B는 기존 현재 원장 잔액 그대로다. 지급은 **당일 기록된 즉시 지급+후정산**이며 당일 발생비만의 지급액이 아니다. 정부금·운임·construction_payment는 합산하지 않는다. 과거 보고는 별도 마감일/표시용 키/마감 현금으로 유지한다.
+- F02-K 원장 직접 주입 직후 fixture 준비에서만 reports.sync(entries)를 호출한다. 신규 거래/경제 사건·제품 디버그 버튼을 추가하지 않았다. 자료 누락/오류는 확인 실패, 관측분·revision 불일치는 확인 중으로 표시하며 정상0과 구분한다.
+- R-02: 기존 PredictionState 코드는 변경하지 않았다. 실제 유효6역의 예측값으로 rev7 READY→입력8 CALCULATING을 구성하고 fail(7)을 거부한 뒤 입력8 READY에서 다시 fail(7)을 거부하는 전체 snapshot 동등성 검사를 추가했다. 현재 fail(8)의 FAILED/사유/이전 결과 보존을 양성 대조한다. 잘못된5역 계획에 READY를 강제하지 않는다.
+- R-03: 현재 게임 RNG 비사용/기존 조회 부작용 근거는 Design이 `CURRENT_SCOPE_SATISFIED_BY_EVIDENCE`로 수용했다. 이번 RNG 상태 실행검사를 수행하거나 게임 RNG를 도입하지 않았다. 향후 RNG 최초 통합 전 책임·시험 추적은 HQ/Owner 범위다.
+
+### 자동검사·로드
+
+작업 worktree의 전용 .venv, Godot `4.7.2.stable.official.ed1daf0bf`를 사용했다. §2의 기존 명령으로 실제 실행했으며 `.local/verification/`에 원시 로그를 보존했다.
+
+| 구분 | 실제 결과 |
+| --- | --- |
+| 기존 W01/W02/W03 | 219 / 309 / 101 단언, 실패0·각 종료0 |
+| W07 | **322 단언, 실패0·종료0** (기존273+신규49). 합계951 |
+| W07 의도적 실패 | 예상 종료1 |
+| 프로젝트 editor headless | 최초/증거 추가 후 최종 로드 모두 종료0, SCRIPT ERROR/ERROR/WARNING 없음 |
+| 제품 main headless | 종료0, W01_INIT_OK·W07_INIT_OK |
+| doctor·format/lint | PASS |
+| 정책 check | PASS: worktree files=377 / GDScript=22 |
+| 전체 정책 회귀 | 80개 PASS / 251.673초 / 종료0 |
+| 커밋 후 preflight/원격 CI | 실제 제출 SHA 및 결과를 PR·Issue #63에 연결 |
+
+R-01 자동 경계: 3/2/B1과 C48/K48/A0; 완료 관측의 분/revision 일치; 반복 sync의 이중집계 없음; 사본 변경 격리·연속 조회/원장 entries 불변; 일부러 미동기화한 테스트 원장에 대해 조회가 sync를 수행하지 않음; F03의 당일 발생0/payment0/debt_payment500/총지급500/B0; 종류별 보고 투영 입력으로 다른 지급/운임/정부금 제외; 자정1440에서 당일2일0/전일1일3·2 분리 및 후속 당일 비용에도 과거 보고 불변; 0/자료없음/시각·revision 불일치·복구 표시. 보고 투영 입력은 공급 종류 구분용 자동 데이터이며 제품 경제 사건이 아니다.
+
+R-02 실제 자동 로그:
+
+```text
+CALCULATING: fail(7) accepted=false, input 8→8, snapshot_equal=true
+before_sha256=after_sha256=6f93fc105e3d43e7851b34de4a46fe773da8078c38fe5f351680ad37212dac02
+READY: fail(7) accepted=false, input 8→8, snapshot_equal=true
+before_sha256=after_sha256=51f618461a604f1511ece5dfcbd2881663d65f670eb3905d1e8f4440a54fac96
+current fail(8): accepted=true, FAILED/CURRENT_FAILURE/available=false/current={}, previous preserved
+```
+
+`_test_late_failure`는 status/reason/available/current/previous/input·plan revision/input_minute를 포함한 전체 prediction snapshot을 비교한다. 해시는 이 실행 내 JSON 전후 동일성의 부가 증거이며 실행 간 전역 식별자로 사용하지 않는다. 마지막 현재 fail 결과는 해당 함수의 명명된 단언으로 검증한다. late-fail GUI 버튼/수동 주입은 **NOT_RUN**이고 필수 증거는 승인된 직접 자동검사다.
+
+### 실제 GUI (새 실행)
+
+Windows native / D3D12 Intel Iris Xe. 기존 실행기로 `--path . --resolution 1440x900 --script tests/game/run_w07_gui_cases.gd`, 제품은 `--path . --resolution 1440x900`으로 별도 실행했다. 사례 메뉴 실제 클릭과 스크롤·제품 정지를 Computer Use로 수행했다. 1440x900은 이번 검증 창 요청값이며 제품 사양 승인이 아니다. 캡처는 게임 창의722x480 logical pixel이다.
+
+| 실제 선택/관찰 | 기대·실제 / 증거 |
+| --- | --- |
+| 초기 QA-T01 | 게임일1/분360·당일 실제0/0·B0 / [0](../evidence/DEV-015_R01_ZERO.png) |
+| QA-F02-K 메뉴 클릭 | 일1/분360, 당일 발생3/현금 지급2, 현재 C48/K48/A0/B1. 미마감 보고없음과 구분 / [예약 보호](../evidence/DEV-015_R01_RESERVED.png) |
+| QA-F02 메뉴 클릭 | 일1/분360, 당일0/0이지만 기존 미지급 B3, C20/R20/F0/A0. B가 당일 발생−지급이 아님 / [제한 보호](../evidence/DEV-015_R01_RESTRICTED.png) |
+| QA-F03 클릭·아래로 스크롤 | 일2/분1451, 당일 발생0/현금 지급500·현재 C320/B0, 전일 마감1일/C20/운영비0/지급0 분리 / [현재·과거](../evidence/DEV-015_R01_CURRENT_CLOSED.png) |
+| 별도 제품 main 실행·정지 클릭 | 분427에서 정지, 현재 자금/당일 관측분427·당일0/0 일치, 검증 사례 선택 도구 없음 / [제품](../evidence/DEV-015_R01_PRODUCT.png) |
+
+검증 GUI/제품 GUI 각각 정상 창 닫기 후 **종료0**, stdout/stderr ERROR/WARNING 없음. 제품 실제 정지 로그는 `ui-39325795817-1`, effective_at427, plan_revision0, result_revision69다. 사례 로그는 QA-T01→F02-K→F02→F03이며 재무 변경 버튼을 추가·사용하지 않았다. 비용 발생/상환 사건은 fixture 로드 전에 준비된 값이며 GUI에서 실제 영업 사건을 발생시킨 것으로 주장하지 않는다. 자정 시간경과는 자동검사이고 이번 GUI는 자정 이후 fixture 관찰이다.
+
+Computer Use의 실제 JPEG 응답은 로컬 제외 경로에 올바른 .jpg로 원본 보존한 후 Godot decoder/PNG writer로 변환했다. 5장의 디코딩 픽셀 동일·PNG signature/CRC·엔진 임포트를 확인하고 게임 창 외 화면은 포함하지 않는다. 변환은 내용/수치/레이아웃을 수정하지 않는다.
+
+### 미해결·인계
+
+R-01은 합의된 구현/자동·GUI 증거 확보, R-02는 새 직접 fail 회귀 확보로 DEV 검증 완료다. Design이 이 수정 SHA에서 R-01/02를 최종 재검수하고 DSG-005의 전체 수용 의견을 갱신할 단계다. 기존 두 결함 PASS와 R-03 현재 범위 수용은 유지한다. 자동/GUI 일부 성공을 Stage1 DONE으로 확대하지 않는다. 신규 명세 변경 필요 없음. 빌드/export·성능/FPS·외부 사용성/전체 VP는 이번 NOT_RUN. 미래 RNG 시험·후속 상세 재무는 별도 HQ/Owner 추적 사항이다. main 병합·Issue 종료·릴리스는 수행하지 않았다.

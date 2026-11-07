@@ -44,6 +44,7 @@ func advance_usec(elapsed: int) -> void:
 func snapshot() -> Dictionary:
 	var clock := pipeline.clock.snapshot()
 	var current := pipeline.snapshot()
+	var daily := pipeline.reports.current(current.day_id)
 	var day: int = current.day_id - 1
 	var report := pipeline.reports.report(day) if day > 0 else {}
 	var report_state := (
@@ -56,6 +57,16 @@ func snapshot() -> Dictionary:
 		"data_version": current.data_version,
 		"clock": clock,
 		"current": current,
+		"daily_activity":
+		{
+			"day_id": daily.day_id,
+			"simulation_minute": current.simulation_minute,
+			"snapshot_revision": current.snapshot_revision,
+			"operating_cost": daily.operating_cost,
+			"payment": daily.payment,
+			"debt_payment": daily.debt_payment,
+			"cash_payment": daily.payment + daily.debt_payment
+		},
 		"coherent": clock.simulation_minute == current.simulation_minute,
 		"report":
 		{

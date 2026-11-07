@@ -19,8 +19,11 @@ func _run() -> void:
 		_test_time_and_commands()
 		_test_plan_and_prediction()
 		_test_reports()
+		_test_daily_activity()
+		_test_late_failure()
 		await _test_views()
 		await _test_review_fixes()
+		await _test_residual_views()
 	print("W07_TEST_RESULT checks=", _checks, " failures=", _failures)
 	quit(0 if _failures == 0 else 1)
 
@@ -157,6 +160,188 @@ func _test_reports() -> void:
 	_expect("report_error", Fixtures.create("QA-F04").snapshot().report.status, "FAILED")
 	var reserved: Dictionary = Fixtures.create("QA-F02-K").snapshot().current.funds
 	_expect("reserved_current", [reserved.cash, reserved.reserved, reserved.unpaid], [48, 48, 1])
+
+
+func _test_daily_activity() -> void:
+	var session := Fixtures.create("QA-F02-K")
+	var state := session.snapshot()
+	_expect(
+		"R01_accrued_paid_unpaid",
+		[
+			state.daily_activity.operating_cost,
+			state.daily_activity.cash_payment,
+			state.current.funds.unpaid
+		],
+		[3, 2, 1]
+	)
+	_expect(
+		"R01_reserved_preserved",
+		[
+			state.current.funds.cash,
+			state.current.funds.reserved,
+			state.current.funds.available_cash
+		],
+		[48, 48, 0]
+	)
+	_expect(
+		"R01_same_minute", state.daily_activity.simulation_minute, state.clock.simulation_minute
+	)
+	_expect(
+		"R01_same_revision", state.daily_activity.snapshot_revision, state.current.snapshot_revision
+	)
+	var entries := session.pipeline.ledger.entries()
+	var current := session.pipeline.reports.current(1)
+	session.pipeline.reports.sync(entries)
+	session.pipeline.reports.sync(entries)
+	_expect("R01_sync_not_double_counted", session.pipeline.reports.current(1), current)
+	_expect("R01_query_repeat", session.snapshot(), state)
+	_expect("R01_query_keeps_entries", session.pipeline.ledger.entries(), entries)
+	var copy := session.snapshot()
+	copy.daily_activity.operating_cost = 999
+	_expect("R01_isolated_daily_copy", session.snapshot(), state)
+	var unsynced := Fixtures.create("QA-T01")
+	unsynced.pipeline.ledger.operating_cost(1, 360)
+	unsynced.snapshot()
+	_expect("R01_query_does_not_sync", unsynced.pipeline.reports.current(1).operating_cost, 0)
+	var settled := Fixtures.create("QA-F03").snapshot()
+	_expect(
+		"R01_old_debt_payment",
+		[
+			settled.daily_activity.operating_cost,
+			settled.daily_activity.payment,
+			settled.daily_activity.debt_payment,
+			settled.daily_activity.cash_payment,
+			settled.current.funds.unpaid
+		],
+		[0, 0, 500, 500, 0]
+	)
+	# 공급 집계의 종류 분리만 검증하는 보고 입력. 신규 경제 사건 구현이 아니다.
+	var projection := Fixtures.create("QA-T01")
+	var records: Array[Dictionary] = []
+	for pair: Array in [
+		["operating_cost", 3],
+		["payment", 2],
+		["debt_payment", 5],
+		["construction_payment", 40],
+		["fare", 60],
+		["government", 70]
+	]:
+		records.append({"kind": pair[0], "amount": pair[1], "effective_at": 360})
+	projection.pipeline.reports.sync(records)
+	_expect("R01_payment_kinds_only", projection.snapshot().daily_activity.cash_payment, 7)
+	session.pipeline.clock.minute = 1439
+	session.pipeline.clock.paused = false
+	session.advance_usec(500000)
+	session.pipeline.clock.paused = true
+	state = session.snapshot()
+	_expect(
+		"R01_midnight_day",
+		[state.current.day_id, state.daily_activity.day_id, state.report.day_id],
+		[2, 2, 1]
+	)
+	_expect(
+		"R01_new_day_zero",
+		[state.daily_activity.operating_cost, state.daily_activity.cash_payment],
+		[0, 0]
+	)
+	_expect(
+		"R01_closed_prior_cost",
+		[state.report.value.operating_cost, state.report.value.payment],
+		[3, 2]
+	)
+	var closed: Dictionary = state.report.duplicate(true)
+	session.pipeline.ledger.operating_cost(2, 1440)
+	session.pipeline.reports.sync(session.pipeline.ledger.entries())
+	_expect("R01_new_day_cost", session.snapshot().daily_activity.operating_cost, 2)
+	_expect("R01_closed_report_immutable", session.snapshot().report, closed)
+	print("W07_R01_RESULT accrued=3 paid=2 unpaid=1 midnight_day2=0 prior_day1=3/2")
+
+
+func _test_late_failure() -> void:
+	var session := Fixtures.create("QA-M02")
+	_expect("R02_valid_six_stations", session.plan.snapshot().validation.valid, true)
+	_do(session, "predict")
+	var value: Dictionary = session.prediction.snapshot().current.value.duplicate(true)
+	_expect("R02_input_seven", session.prediction.snapshot().prediction_input_revision, 7)
+	session.prediction.change_input(session.plan.snapshot().plan_revision, 8, 361)
+	session.prediction.begin()
+	var before := session.prediction.snapshot()
+	_expect("R02_calculating", before.prediction_status, "CALCULATING")
+	var accepted := session.prediction.fail(7, "STALE_FAILURE")
+	_expect("R02_late_fail_calculating_rejected", accepted, false)
+	_expect("R02_late_fail_calculating_unchanged", session.prediction.snapshot(), before)
+	_log_late_failure("CALCULATING", accepted, before, session.prediction.snapshot())
+	_expect("R02_complete_valid_eight", session.prediction.complete(8, value, 362), true)
+	before = session.prediction.snapshot()
+	_expect(
+		"R02_ready_eight", [before.prediction_status, before.current.input_revision], ["READY", 8]
+	)
+	accepted = session.prediction.fail(7, "STALE_FAILURE")
+	_expect("R02_late_fail_ready_rejected", accepted, false)
+	_expect("R02_late_fail_ready_unchanged", session.prediction.snapshot(), before)
+	_log_late_failure("READY", accepted, before, session.prediction.snapshot())
+	_expect("R02_current_failure_accepted", session.prediction.fail(8, "CURRENT_FAILURE"), true)
+	var failed := session.prediction.snapshot()
+	_expect(
+		"R02_current_failure_state",
+		[failed.prediction_status, failed.reason, failed.available, failed.current],
+		["FAILED", "CURRENT_FAILURE", false, {}]
+	)
+	_expect("R02_current_failure_keeps_previous", failed.previous, before.previous)
+
+
+func _log_late_failure(
+	status: String, accepted: bool, before: Dictionary, after: Dictionary
+) -> void:
+	print(
+		"W07_R02_LATE_FAIL ",
+		JSON.stringify(
+			{
+				"status": status,
+				"accepted": accepted,
+				"input_before": before.prediction_input_revision,
+				"input_after": after.prediction_input_revision,
+				"before_sha256": JSON.stringify(before).sha256_text(),
+				"after_sha256": JSON.stringify(after).sha256_text(),
+				"snapshot_equal": before == after
+			}
+		)
+	)
+
+
+func _test_residual_views() -> void:
+	for case_id: String in ["QA-F02-K", "QA-F03", "QA-F01"]:
+		var view := Stage1.instantiate()
+		view.session = Fixtures.create(case_id)
+		root.add_child(view)
+		view.set_process(false)
+		await process_frame
+		var state: Dictionary = view.session.snapshot()
+		var label: Label = view.find_child("activity", true, false)
+		var expected := {
+			"QA-F02-K": "발생 누계 3 / 현금 지급 누계 2",
+			"QA-F03": "발생 누계 0 / 현금 지급 누계 500",
+			"QA-F01": "발생 누계 0 / 현금 지급 누계 0"
+		}
+		_expect("R01_ui_" + case_id, label.text.contains(expected[case_id]), true)
+		_expect("R01_ui_unclosed_" + case_id, label.text.contains("미마감"), true)
+		var invalid := state.duplicate(true)
+		invalid.daily_activity = {}
+		view.present(invalid)
+		_expect("R01_no_data_not_zero", label.text, "당일 운영비 확인 실패: 자료 없음/오류")
+		invalid = state.duplicate(true)
+		invalid.daily_activity.simulation_minute += 1
+		view.present(invalid)
+		_expect("R01_wrong_minute_not_displayed", label.text, "당일 운영비 확인 중: 관측 시점 불일치")
+		invalid = state.duplicate(true)
+		invalid.daily_activity.snapshot_revision += 1
+		view.present(invalid)
+		_expect("R01_wrong_revision_not_displayed", label.text, "당일 운영비 확인 중: 관측 시점 불일치")
+		view.present(state)
+		_expect("R01_view_recovery", label.text.contains(expected[case_id]), true)
+		_expect("R01_ui_read_only", view.session.snapshot(), state)
+		view.queue_free()
+		await process_frame
 
 
 func _test_views() -> void:

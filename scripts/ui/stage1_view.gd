@@ -74,6 +74,7 @@ func _ready() -> void:
 	_label(root, "prediction", "예측: 미계산")
 	_label(root, "previous", "")
 	_label(root, "funds", "현재 자금 확인 중")
+	_label(root, "activity", "당일 운영비 확인 중")
 	_label(root, "report", "확정 보고 없음")
 	_label(root, "feedback", "후보역을 선택해 노선을 편집하세요.")
 	_label(root, "scope", "계획 편집/예측 단계 · 실제 계약·시공·영업 기능 없음")
@@ -312,6 +313,27 @@ func _render_finance(state: Dictionary) -> void:
 		)
 	if not state.coherent:
 		_labels.funds.text = "현재 상태 확인 중: 게임 시각 불일치"
+	_render_activity(state)
+
+
+func _render_activity(state: Dictionary) -> void:
+	var daily: Dictionary = state.get("daily_activity", {})
+	for key: String in ["operating_cost", "payment", "debt_payment", "cash_payment"]:
+		if not daily.get(key) is int or daily[key] < 0:
+			_labels.activity.text = "당일 운영비 확인 실패: 자료 없음/오류"
+			return
+	if (
+		not state.coherent
+		or daily.get("day_id") != state.current.day_id
+		or daily.get("simulation_minute") != state.current.simulation_minute
+		or daily.get("snapshot_revision") != state.current.snapshot_revision
+	):
+		_labels.activity.text = "당일 운영비 확인 중: 관측 시점 불일치"
+		return
+	_labels.activity.text = (
+		"당일 운영비(미마감) · 게임일 %d / 게임분 %d · 게임 통화 정수 단위\n발생 누계 %d / 현금 지급 누계 %d"
+		% [daily.day_id, daily.simulation_minute, daily.operating_cost, daily.cash_payment]
+	)
 
 
 func _render_prediction(prediction: Dictionary) -> void:
