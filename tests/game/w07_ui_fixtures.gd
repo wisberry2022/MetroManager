@@ -67,6 +67,8 @@ static func create(case_id: String) -> Session:
 	session.pipeline.clock.paused = true
 	if case_id == "QA-F02-K":
 		session.pipeline.ledger.operating_cost(3, 360)
+		# 직접 원장 주입은 fixture 준비에서만 기존 보고 집계에 반영한다.
+		session.pipeline.reports.sync(session.pipeline.ledger.entries())
 	if case_id == "QA-F03":
 		session.pipeline.set_fixture(1449, {"arrival_fare": 800, "eligible": true})
 		session.pipeline.clock.paused = false

@@ -101,3 +101,13 @@ Owner 승인 요청: `wisberry2022/MetroManager` / DEV-015 / 위 브랜치·경�
 - 최신 기준 `2ae5161a8d61a77b69b71dac09c9cfc1c3fa0df5`, 새 독립 브랜치 `codex/DEV-015-ui-review-fixes`. 병합된 이전 브랜치/공유 이력을 재작성하지 않는다.
 - 대상: DSG-QA-01 기존 역 정보 포커스, DSG-QA-02 MAP-07 오류 구간의 목록 텍스트. 기존 UI2개·W07 검사/fixture·본 티켓/결과·동일 DEV-015 증거 경로만 수정한다. 증거 형식 불일치 보정도 동일 경로에서 수행한다.
 - 기존 모델/게임 규칙·기획/디자인/INF/정책/CI는 수정하지 않는다. Design 재검수 PENDING, 추가 게임 명세 결정 필요 없음. 결과의 최신 검수 대응 기록은 DEV-015_RESULT.md §6에 있다.
+
+## 10. R-01·R-02 잔여 보완 실행 승인
+
+- Owner 현재 채팅 원문: “개발 에이전트. Issue #63에 제안한 DEV-015 R-01·R-02 보완 구현 및 Commit·Push·PR 생성을 승인합니다. Design의 지급 집계 의미 최종 회신을 확인한 뒤 해당 범위만 작업하고 검증 후 PR 생성해주세요. main 병합은 별도 승인하겠습니다.”
+- 승인 범위는 [Issue #63 실행안](https://github.com/wisberry2022/MetroManager/issues/63#issuecomment-6714020757)과 [L2 보완](https://github.com/wisberry2022/MetroManager/issues/63#issuecomment-6714029325). [Design 지급 의미 최종 회신](https://github.com/wisberry2022/MetroManager/issues/63#issuecomment-6714166944)을 확인한 뒤 착수했다. 2026-11-08 / AGT-DEV-0001 / LAPTOP.
+- 기준 main `55b5e360d22c10e865cb71a17eb9ba73268ffece`, 독립 브랜치 `codex/DEV-015-stage1-residual-evidence`. 승인 기간은 이번 두 잔여의 구현·검증·동일 범위 재검수/Git 제출까지다.
+- 포함 경로: scripts/ui/stage1_session.gd·stage1_view.gd, tests/game/w07_ui_fixtures.gd·run_w07_tests.gd, 본 티켓·DEV-015_RESULT.md, 최소 docs/engineering/evidence/DEV-015_*.png. Commit·일반 Push/정책 API 공유·base main PR을 허용한다. main 병합·공유 이력 재작성/강제 push·릴리스/배포는 제외한다.
+- R-01: 동일 완료 관측의 당일 미마감 operating_cost, payment, debt_payment와 지급 합계(payment+debt_payment)를 공급·표시한다. B는 기존 현재 잔액이며 발생−지급으로 만들지 않는다. F02-K 원장 직접 주입의 sync는 fixture 준비 단계에만 넣는다. 조회 중 sync/settle/close 금지.
+- R-02: 기존 PredictionState는 읽기 전용으로 유지하고 W07에서 rev8 계산중/유효6역 READY의 늦은 fail(7) 거부·전체 snapshot 보존, 현재 fail(8) 대조를 자동 실행한다. 제품/검증 GUI에 late-fail 버튼을 추가하지 않는다.
+- W02/W03 모델·기존 검사·씬/project.godot·assets·기획/디자인/INF·정책/CI는 변경하지 않는다. 기존 두 GUI 결함의 수용을 유지한다. R-03은 Design이 현재 RNG 비사용 범위의 증거를 수용했으며 이번에 RNG를 도입하지 않는다. 실제 결과는 DEV-015_RESULT.md §7에 기록한다.
