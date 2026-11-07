@@ -1,0 +1,21 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+W07_COMMAND {"accepted":true,"action":"select","command_id":"ui-63887640063-1","effective_at":360,"plan_revision":1,"result_revision":2,"validation":{"allowed_actions":{"submit":false},"reason_codes":["STATION_COUNT"],"valid":false}}
+W07_COMMAND {"accepted":true,"action":"select","command_id":"ui-63887640063-2","effective_at":360,"plan_revision":2,"result_revision":3,"validation":{"allowed_actions":{"submit":false},"reason_codes":["STATION_COUNT"],"valid":false}}
+W07_COMMAND {"accepted":true,"action":"undo","command_id":"ui-63887640063-3","effective_at":360,"plan_revision":3,"reason":"","result_revision":4}
+W07_COMMAND {"accepted":false,"action":"select","command_id":"ui-73299658239-1","effective_at":360,"plan_revision":0,"reason":"OUTSIDE_JURISDICTION","result_revision":2}
+W07_COMMAND {"accepted":true,"action":"select","command_id":"ui-82795562495-1","effective_at":360,"plan_revision":1,"result_revision":2,"validation":{"allowed_actions":{"submit":false},"reason_codes":["STATION_COUNT"],"valid":false}}
+W07_COMMAND {"accepted":true,"action":"select","command_id":"ui-100059317759-1","effective_at":360,"plan_revision":1,"result_revision":2,"validation":{"allowed_actions":{"submit":false},"reason_codes":["STATION_COUNT"],"valid":false}}
+W07_FOCUS {"command_dispatched":false,"plan_revision_after":1,"plan_revision_before":1,"station_id":"S01"}
+W07_FOCUS {"command_dispatched":false,"plan_revision_after":1,"plan_revision_before":1,"station_id":"S01"}
+W07_COMMAND {"accepted":true,"action":"remove","command_id":"ui-100059317759-2","effective_at":360,"plan_revision":2,"result_revision":3,"validation":{"allowed_actions":{"submit":false},"reason_codes":["STATION_COUNT"],"valid":false}}
+W07_FOCUS {"command_dispatched":false,"plan_revision_after":6,"plan_revision_before":6,"station_id":"S01"}
+W07_FOCUS {"command_dispatched":false,"plan_revision_after":6,"plan_revision_before":6,"station_id":"S01"}
+W07_COMMAND {"accepted":true,"action":"remove","command_id":"ui-103129548287-1","effective_at":360,"plan_revision":7,"result_revision":8,"validation":{"allowed_actions":{"submit":false},"reason_codes":["STATION_COUNT"],"valid":false}}
+W07_FOCUS {"command_dispatched":false,"plan_revision_after":6,"plan_revision_before":6,"station_id":"S01"}
+W07_FOCUS {"command_dispatched":false,"plan_revision_after":6,"plan_revision_before":6,"station_id":"S01"}
+W07_FOCUS {"command_dispatched":false,"plan_revision_after":6,"plan_revision_before":6,"station_id":"S01"}
+W07_FOCUS {"command_dispatched":false,"plan_revision_after":6,"plan_revision_before":6,"station_id":"S01"}
+W07_COMMAND {"accepted":true,"action":"remove","command_id":"ui-109488113151-1","effective_at":360,"plan_revision":7,"result_revision":8,"validation":{"allowed_actions":{"submit":false},"reason_codes":["STATION_COUNT"],"valid":false}}
+W07_COMMAND {"accepted":true,"action":"undo","command_id":"ui-109488113151-2","effective_at":360,"plan_revision":8,"reason":"","result_revision":9}
+W07_TEST_RESULT checks=273 failures=0

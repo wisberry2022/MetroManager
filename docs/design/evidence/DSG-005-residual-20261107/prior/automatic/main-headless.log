@@ -1,0 +1,4 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+W01_INIT_OK {"available_cash":1000000,"capability":80,"cash":1000000,"city_id":"C01","data_version":"1.3","day_id":1,"financial_score":100,"free_cash":1000000,"reserved_by_project":{},"restricted_by_project":{},"simulation_minute":360,"unpaid":0}
+W07_INIT_OK S01_MINIMUM_UI

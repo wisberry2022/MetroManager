@@ -1,0 +1,15 @@
+{
+  "started": "2026-11-07T08:52:18.1356157+09:00",
+  "pid": 18136,
+  "exe": "<USER_HOME>\\OneDrive\\바탕 화면\\develop\\game-dev\\godot\\Godot_v4.7.2-stable_win64_console.exe",
+  "arguments": [
+    "--path",
+    "\"<USER_HOME>\\OneDrive\\바탕 화면\\develop\\game-dev\\MetroManager\\.local\\worktrees\\DSG-005-pr67-20261107\"",
+    "--log-file",
+    "\"<USER_HOME>\\.codex\\visualizations\\2026\\11\\02\\01a19c2c-8ceb-7460-9ff8-daed47e499c7\\DSG005-residual\\gui-20261107-085218-089\\godot.log\""
+  ],
+  "cwd": "<USER_HOME>\\OneDrive\\바탕 화면\\develop\\game-dev\\MetroManager\\.local\\worktrees\\DSG-005-pr67-20261107",
+  "sha": "bc495d66e99414e6e734df45de283e5d186829c5",
+  "grade": "GUI launch only; actual input requires Computer Use or human",
+  "run": "<USER_HOME>\\.codex\\visualizations\\2026\\11\\02\\01a19c2c-8ceb-7460-9ff8-daed47e499c7\\DSG005-residual\\gui-20261107-085218-089"
+}
