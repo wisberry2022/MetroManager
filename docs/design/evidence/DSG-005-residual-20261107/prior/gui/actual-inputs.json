@@ -1,0 +1,81 @@
+[
+  {
+    "t": 1794007103065,
+    "case": "A",
+    "input": "map S12",
+    "xy": [
+      888,
+      427
+    ]
+  },
+  {
+    "t": 1794007109351,
+    "case": "A",
+    "input": "candidate S12"
+  },
+  {
+    "t": 1794007115337,
+    "case": "A/D",
+    "input": "move S12 up"
+  },
+  {
+    "t": 1794007121034,
+    "case": "A/D",
+    "input": "Undo"
+  },
+  {
+    "t": 1794007145532,
+    "case": "C",
+    "input": "map S01"
+  },
+  {
+    "t": 1794007151795,
+    "case": "C",
+    "input": "remove S01"
+  },
+  {
+    "t": 1794007158256,
+    "case": "C",
+    "input": "Undo"
+  },
+  {
+    "t": 1794007168073,
+    "case": "B",
+    "input": "map S01"
+  },
+  {
+    "t": 1794007174524,
+    "case": "B",
+    "input": "disabled new S05 attempt"
+  },
+  {
+    "t": 1794007187026,
+    "case": "M04",
+    "input": "candidate S01 (occluded marker)"
+  },
+  {
+    "t": 1794007201958,
+    "case": "M01",
+    "input": "map S01 add"
+  },
+  {
+    "t": 1794007204018,
+    "case": "M01",
+    "input": "candidate S02 add"
+  },
+  {
+    "t": 1794007215012,
+    "case": "M01",
+    "input": "S02 move up"
+  },
+  {
+    "t": 1794007217099,
+    "case": "M01",
+    "input": "Undo"
+  },
+  {
+    "t": 1794007233743,
+    "case": "M02-8",
+    "input": "add S03 ninth station"
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "new_capture_count": 63,
+  "prior_capture_count": 21,
+  "image_decode": "PASS JPEG signature + System.Drawing decode",
+  "new_gui_error_warning_lines": 0,
+  "auto_assertions": "902 prior run; NOT rerun",
+  "recommendation": "ACCEPTANCE_PENDING"
+}

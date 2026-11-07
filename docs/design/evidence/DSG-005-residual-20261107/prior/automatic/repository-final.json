@@ -1,0 +1,25 @@
+{
+  "recorded": "2026-11-07T07:48:12.2914238+09:00",
+  "original_head": "293b5f956316f2be877e547fbfc223b9446f82bd",
+  "original_status": [],
+  "qa_head": "bc495d66e99414e6e734df45de283e5d186829c5",
+  "qa_branch": null,
+  "qa_status": [
+    "?? docs/engineering/evidence/DEV-015_CURRENT_AND_CLOSED_REPORT.png.import",
+    "?? docs/engineering/evidence/DEV-015_MAP_LIST_UNDO.png.import",
+    "?? docs/engineering/evidence/DEV-015_OVERLAP_LIST_FALLBACK.png.import",
+    "?? docs/engineering/evidence/DEV-015_READY_ZERO.png.import",
+    "?? docs/engineering/evidence/DEV-015_REVIEW_FOCUS.png.import",
+    "?? docs/engineering/evidence/DEV-015_REVIEW_LOCKED_FOCUS.png.import",
+    "?? docs/engineering/evidence/DEV-015_REVIEW_MAP07_GAP.png.import",
+    "?? docs/engineering/evidence/DEV-015_REVIEW_MAP07_REPAIR.png.import",
+    "?? docs/engineering/evidence/DEV-015_REVIEW_NORMAL_RESTORED.png.import",
+    "?? docs/engineering/evidence/DEV-015_STALE_RESPONSE_REJECTED.png.import",
+    "?? docs/engineering/evidence/DEV-015_TIME_CONTROLS.png.import",
+    "?? docs/engineering/evidence/DEV-015_VALID_ROUTE_PREDICTION.png.import"
+  ],
+  "qa_tracked_diff": [],
+  "origin_main": "bc495d66e99414e6e734df45de283e5d186829c5",
+  "target_in_origin_exit": 0,
+  "later_commits": []
+}

@@ -1,0 +1,17 @@
+{
+  "started": "2026-11-07T08:48:10.6670958+09:00",
+  "pid": 17748,
+  "exe": "<USER_HOME>\\OneDrive\\바탕 화면\\develop\\game-dev\\godot\\Godot_v4.7.2-stable_win64_console.exe",
+  "arguments": [
+    "--path",
+    "\"<USER_HOME>\\OneDrive\\바탕 화면\\develop\\game-dev\\MetroManager\\.local\\worktrees\\DSG-005-pr67-20261107\"",
+    "--script",
+    "res://tests/game/run_w07_gui_cases.gd",
+    "--log-file",
+    "\"<USER_HOME>\\OneDrive\\바탕 화면\\develop\\game-dev\\MetroManager\\.local\\qa67-gui-recovery-20261107\\gui-20261107-084810-603\\godot.log\""
+  ],
+  "cwd": "<USER_HOME>\\OneDrive\\바탕 화면\\develop\\game-dev\\MetroManager\\.local\\worktrees\\DSG-005-pr67-20261107",
+  "sha": "bc495d66e99414e6e734df45de283e5d186829c5",
+  "grade": "GUI launch only; actual input requires Computer Use or human",
+  "run": "<USER_HOME>\\OneDrive\\바탕 화면\\develop\\game-dev\\MetroManager\\.local\\qa67-gui-recovery-20261107\\gui-20261107-084810-603"
+}

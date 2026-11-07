@@ -1,0 +1,14 @@
+{
+  "recorded": "2026-11-07T08:22:32.2359046+09:00",
+  "sha": "bc495d66e99414e6e734df45de283e5d186829c5",
+  "qa_tracked_diff": [],
+  "original_status": [],
+  "captures": 21,
+  "format": "JPEG; signature and System.Drawing decode verified",
+  "gui_errors_warnings": 0,
+  "gui_process_still_running": false,
+  "gui_exit_code": null,
+  "exit_note": "Close-window input sent; process absence checked. Exit code was not retained by original asynchronous launcher: UNVERIFIED",
+  "actual_GUI": "PASS within report scope",
+  "DSG005_overall": "NOT_ACCEPTED; remaining scope unchanged"
+}

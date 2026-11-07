@@ -1,0 +1,300 @@
+[
+  {
+    "time": "2026-11-06T23:48:42.394Z",
+    "action": "T-resume",
+    "x": 94,
+    "y": 134
+  },
+  {
+    "time": "2026-11-06T23:48:44.493Z",
+    "action": "T-speed2",
+    "x": 193,
+    "y": 134
+  },
+  {
+    "time": "2026-11-06T23:48:46.564Z",
+    "action": "T-speed4",
+    "x": 232,
+    "y": 134
+  },
+  {
+    "time": "2026-11-06T23:48:48.603Z",
+    "action": "T-speed1",
+    "x": 146,
+    "y": 134
+  },
+  {
+    "time": "2026-11-06T23:48:50.642Z",
+    "action": "T-pause",
+    "x": 37,
+    "y": 134
+  },
+  {
+    "time": "2026-11-06T23:49:05.883Z",
+    "action": "picker-F02",
+    "x": 480,
+    "y": 40
+  },
+  {
+    "time": "2026-11-06T23:49:12.408Z",
+    "action": "F02-restricted",
+    "x": 413,
+    "y": 218
+  },
+  {
+    "time": "2026-11-06T23:49:14.077Z",
+    "action": "F02-K-reserved",
+    "x": 700,
+    "y": 40
+  },
+  {
+    "time": "2026-11-06T23:49:15.792Z",
+    "action": "F03-current-closed",
+    "x": 700,
+    "y": 40
+  },
+  {
+    "time": "2026-11-06T23:49:17.443Z",
+    "action": "F04-query-error",
+    "x": 700,
+    "y": 40
+  },
+  {
+    "time": "2026-11-06T23:49:19.145Z",
+    "action": "F04-zero",
+    "x": 700,
+    "y": 40
+  },
+  {
+    "time": "2026-11-06T23:49:30.855Z",
+    "action": "picker-P01",
+    "x": 480,
+    "y": 40
+  },
+  {
+    "time": "2026-11-06T23:49:32.999Z",
+    "action": "P01-ready-zero",
+    "x": 416,
+    "y": 622
+  },
+  {
+    "time": "2026-11-06T23:49:39.186Z",
+    "action": "P01-failed",
+    "x": 700,
+    "y": 40
+  },
+  {
+    "time": "2026-11-06T23:49:41.258Z",
+    "action": "P02-previous",
+    "x": 700,
+    "y": 40
+  },
+  {
+    "time": "2026-11-06T23:49:43.343Z",
+    "action": "P02-late-ready-rejected",
+    "x": 871,
+    "y": 40
+  },
+  {
+    "time": "2026-11-06T23:49:55.206Z",
+    "action": "picker-valid-prediction",
+    "x": 480,
+    "y": 40
+  },
+  {
+    "time": "2026-11-06T23:49:57.418Z",
+    "action": "P01-valid-route",
+    "x": 413,
+    "y": 622
+  },
+  {
+    "time": "2026-11-06T23:49:59.429Z",
+    "action": "P01-recalculate-valid",
+    "x": 1294,
+    "y": 482
+  },
+  {
+    "time": "2026-11-06T23:50:08.139Z",
+    "action": "P01-select-for-edit",
+    "x": 1196,
+    "y": 243
+  },
+  {
+    "time": "2026-11-06T23:50:10.181Z",
+    "action": "P01-edit-invalidates",
+    "x": 1119,
+    "y": 482
+  },
+  {
+    "time": "2026-11-06T23:50:12.234Z",
+    "action": "P01-undo-valid",
+    "x": 1194,
+    "y": 482
+  },
+  {
+    "time": "2026-11-06T23:50:14.324Z",
+    "action": "P01-current-recalculated",
+    "x": 1291,
+    "y": 482
+  },
+  {
+    "time": "2026-11-06T23:50:16.359Z",
+    "action": "picker-X01",
+    "x": 480,
+    "y": 40
+  },
+  {
+    "time": "2026-11-06T23:50:18.516Z",
+    "action": "X01-initial",
+    "x": 414,
+    "y": 725
+  },
+  {
+    "time": "2026-11-06T23:50:28.144Z",
+    "action": "X01-setup-add",
+    "x": 82,
+    "y": 190
+  },
+  {
+    "time": "2026-11-06T23:50:30.184Z",
+    "action": "X01-map-query1",
+    "x": 82,
+    "y": 190
+  },
+  {
+    "time": "2026-11-06T23:50:32.229Z",
+    "action": "X01-list-query",
+    "x": 993,
+    "y": 156
+  },
+  {
+    "time": "2026-11-06T23:50:34.322Z",
+    "action": "X01-map-query2",
+    "x": 82,
+    "y": 190
+  },
+  {
+    "time": "2026-11-06T23:50:38.424Z",
+    "action": "picker-external",
+    "x": 480,
+    "y": 40
+  },
+  {
+    "time": "2026-11-06T23:50:40.523Z",
+    "action": "M02-external-initial",
+    "x": 429,
+    "y": 489
+  },
+  {
+    "time": "2026-11-06T23:50:49.939Z",
+    "action": "EXTERNAL-candidate-reject",
+    "x": 1018,
+    "y": 342
+  },
+  {
+    "time": "2026-11-06T23:50:54.113Z",
+    "action": "picker-keyboard",
+    "x": 480,
+    "y": 40
+  },
+  {
+    "time": "2026-11-06T23:50:56.171Z",
+    "action": "M01-keyboard-start",
+    "x": 418,
+    "y": 389
+  },
+  {
+    "time": "2026-11-06T23:51:07.311Z",
+    "action": "K-seed-S01",
+    "x": 83,
+    "y": 245
+  },
+  {
+    "time": "2026-11-06T23:51:09.359Z",
+    "action": "K Tab"
+  },
+  {
+    "time": "2026-11-06T23:51:11.365Z",
+    "action": "K Return"
+  },
+  {
+    "time": "2026-11-06T23:51:21.430Z",
+    "action": "K Tab x23"
+  },
+  {
+    "time": "2026-11-06T23:51:28.603Z",
+    "action": "K list Up"
+  },
+  {
+    "time": "2026-11-06T23:51:38.418Z",
+    "action": "K Space up button"
+  },
+  {
+    "time": "2026-11-06T23:51:42.512Z",
+    "action": "K Return remove"
+  },
+  {
+    "time": "2026-11-06T23:51:53.304Z",
+    "action": "K Tab Space Undo"
+  },
+  {
+    "time": "2026-11-06T23:53:25.498Z",
+    "action": "product-resume",
+    "x": 94,
+    "y": 90
+  },
+  {
+    "time": "2026-11-06T23:53:27.576Z",
+    "action": "product-speed2",
+    "x": 193,
+    "y": 90
+  },
+  {
+    "time": "2026-11-06T23:53:29.598Z",
+    "action": "product-speed4",
+    "x": 232,
+    "y": 90
+  },
+  {
+    "time": "2026-11-06T23:53:31.659Z",
+    "action": "product-speed1",
+    "x": 146,
+    "y": 90
+  },
+  {
+    "time": "2026-11-06T23:53:33.701Z",
+    "action": "product-pause-final",
+    "x": 37,
+    "y": 90
+  },
+  {
+    "time": "2026-11-06T23:54:12.246Z",
+    "action": "picker-F03-day",
+    "x": 480,
+    "y": 40
+  },
+  {
+    "time": "2026-11-06T23:54:13.923Z",
+    "action": "F03-day2-top",
+    "x": 417,
+    "y": 287
+  },
+  {
+    "time": "2026-11-06T23:54:15.690Z",
+    "action": "picker-normal-predict",
+    "x": 480,
+    "y": 40
+  },
+  {
+    "time": "2026-11-06T23:54:17.347Z",
+    "action": "M02-predict-initial",
+    "x": 419,
+    "y": 422
+  },
+  {
+    "time": "2026-11-06T23:54:19.039Z",
+    "action": "M02-positive-prediction",
+    "x": 1290,
+    "y": 539
+  }
+]

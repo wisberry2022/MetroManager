@@ -1,0 +1,42 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+D3D12 12_0 - Forward+ - Using Device #0: Intel - Intel(R) Iris(R) Xe Graphics
+
+W07_CASE_READY QA-T01
+W07_COMMAND {"accepted":true,"action":"resume","command_id":"ui-47898953269-1","effective_at":360,"plan_revision":0,"reason":"","result_revision":2}
+W07_COMMAND {"accepted":true,"action":"speed","command_id":"ui-47898953269-2","effective_at":365,"plan_revision":0,"reason":"","result_revision":8}
+W07_COMMAND {"accepted":true,"action":"speed","command_id":"ui-47898953269-3","effective_at":374,"plan_revision":0,"reason":"","result_revision":18}
+W07_COMMAND {"accepted":true,"action":"speed","command_id":"ui-47898953269-4","effective_at":394,"plan_revision":0,"reason":"","result_revision":39}
+W07_COMMAND {"accepted":true,"action":"pause","command_id":"ui-47898953269-5","effective_at":399,"plan_revision":0,"reason":"","result_revision":45}
+W07_CASE_READY QA-F02
+W07_CASE_READY QA-F02-K
+W07_CASE_READY QA-F03
+W07_CASE_READY QA-F04
+W07_CASE_READY QA-F04-ZERO
+W07_CASE_READY QA-P01
+W07_CASE_READY QA-P01-FAIL
+W07_CASE_READY QA-P02
+W07_LATE_RESPONSE accepted=false
+W07_CASE_READY QA-P01
+W07_COMMAND {"accepted":true,"action":"predict","command_id":"ui-47898953269-6","effective_at":360,"plan_revision":6,"reason":"","result_revision":9}
+W07_FOCUS {"command_dispatched":false,"plan_revision_after":6,"plan_revision_before":6,"station_id":"S12"}
+W07_COMMAND {"accepted":true,"action":"remove","command_id":"ui-47898953269-7","effective_at":360,"plan_revision":7,"result_revision":10,"validation":{"allowed_actions":{"submit":false},"reason_codes":["STATION_COUNT"],"valid":false}}
+W07_COMMAND {"accepted":true,"action":"undo","command_id":"ui-47898953269-8","effective_at":360,"plan_revision":8,"reason":"","result_revision":11}
+W07_COMMAND {"accepted":true,"action":"predict","command_id":"ui-47898953269-9","effective_at":360,"plan_revision":8,"reason":"","result_revision":12}
+W07_CASE_READY QA-X01
+W07_COMMAND {"accepted":true,"action":"select","command_id":"ui-47898953269-10","effective_at":360,"plan_revision":1,"result_revision":2,"validation":{"allowed_actions":{"submit":false},"reason_codes":["STATION_COUNT"],"valid":false}}
+W07_FOCUS {"command_dispatched":false,"plan_revision_after":1,"plan_revision_before":1,"station_id":"S01"}
+W07_FOCUS {"command_dispatched":false,"plan_revision_after":1,"plan_revision_before":1,"station_id":"S01"}
+W07_FOCUS {"command_dispatched":false,"plan_revision_after":1,"plan_revision_before":1,"station_id":"S01"}
+W07_CASE_READY QA-M02-EXTERNAL
+W07_COMMAND {"accepted":false,"action":"select","command_id":"ui-47898953269-11","effective_at":360,"plan_revision":0,"reason":"OUTSIDE_JURISDICTION","result_revision":2}
+W07_CASE_READY QA-M01
+W07_COMMAND {"accepted":true,"action":"select","command_id":"ui-47898953269-12","effective_at":360,"plan_revision":1,"result_revision":2,"validation":{"allowed_actions":{"submit":false},"reason_codes":["STATION_COUNT"],"valid":false}}
+W07_COMMAND {"accepted":true,"action":"select","command_id":"ui-47898953269-13","effective_at":360,"plan_revision":2,"result_revision":3,"validation":{"allowed_actions":{"submit":false},"reason_codes":["STATION_COUNT"],"valid":false}}
+W07_FOCUS {"command_dispatched":false,"plan_revision_after":2,"plan_revision_before":2,"station_id":"S01"}
+W07_FOCUS {"command_dispatched":false,"plan_revision_after":2,"plan_revision_before":2,"station_id":"S02"}
+W07_COMMAND {"accepted":true,"action":"reorder","command_id":"ui-47898953269-14","effective_at":360,"plan_revision":3,"result_revision":4,"validation":{"allowed_actions":{"submit":false},"reason_codes":["STATION_COUNT"],"valid":false}}
+W07_COMMAND {"accepted":true,"action":"remove","command_id":"ui-47898953269-15","effective_at":360,"plan_revision":4,"result_revision":5,"validation":{"allowed_actions":{"submit":false},"reason_codes":["STATION_COUNT"],"valid":false}}
+W07_COMMAND {"accepted":true,"action":"undo","command_id":"ui-47898953269-16","effective_at":360,"plan_revision":5,"reason":"","result_revision":6}
+W07_CASE_READY QA-F03
+W07_CASE_READY QA-M02
+W07_COMMAND {"accepted":true,"action":"predict","command_id":"ui-47898953269-17","effective_at":360,"plan_revision":6,"reason":"","result_revision":8}

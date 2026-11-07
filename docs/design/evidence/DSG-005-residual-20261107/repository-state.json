@@ -1,0 +1,11 @@
+{
+  "recorded": "2026-11-07T08:57:16.9089838+09:00",
+  "qa_head": "bc495d66e99414e6e734df45de283e5d186829c5",
+  "qa_tracked_diff": [],
+  "original_status": [],
+  "remote_main": "bc495d66e99414e6e734df45de283e5d186829c5\trefs/heads/main",
+  "original_head": "293b5f956316f2be877e547fbfc223b9446f82bd",
+  "gui_exit_codes": "UNVERIFIED; asynchronous launcher",
+  "fixture_process_exists": false,
+  "product_process_exists": false
+}
