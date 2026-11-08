@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "task_id": "DEV-018",
+  "primary_agent_id": "AGT-DEV-0001",
+  "base_sha": "b48dd82a9b93d062d1a3bcfdf8750cb260c83e3e",
+  "artifacts": [
+    {
+      "path": "assets/data/stage2_tenders_v1_3.json",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-018_W04A_BID_CONTRACT.md#9-선행-회신-확인-및-실행-승인-적용",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6716236853"
+      ],
+      "blob_sha": "0b3015302859e0a55004c246c7f26070060326b6"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-018_SUPPLY_AND_VALIDATION.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-018_W04A_BID_CONTRACT.md#9-선행-회신-확인-및-실행-승인-적용",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6716236853"
+      ],
+      "blob_sha": "92be296b59cb90354b9c54fe3bc3b446e3ad1560"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-018_VALIDATION.json",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-018_W04A_BID_CONTRACT.md#9-선행-회신-확인-및-실행-승인-적용",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6716236853"
+      ],
+      "blob_sha": "7e2fdff3102e30a1958e267416f4462859ee4f71"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-018_W04A_FIXTURES.json",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-018_W04A_BID_CONTRACT.md#9-선행-회신-확인-및-실행-승인-적용",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6716236853"
+      ],
+      "blob_sha": "441919266977cfb1af4a7de842eba62e95d13111"
+    },
+    {
+      "path": "docs/engineering/gate3/DEV-018_STAGE2_EXECUTION_BREAKDOWN.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-018_W04A_BID_CONTRACT.md#9-선행-회신-확인-및-실행-승인-적용",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6716236853"
+      ],
+      "blob_sha": "a472c2c6a5bb6d7d98e3f1cfb8b04ec266499742"
+    },
+    {
+      "path": "docs/engineering/tasks/DEV-018_RESULT.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-018_W04A_BID_CONTRACT.md#9-선행-회신-확인-및-실행-승인-적용",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6716236853"
+      ],
+      "blob_sha": "1c9c3cd7fc61cdd1d0686be1431b6eca6140468f"
+    },
+    {
+      "path": "docs/engineering/tasks/DEV-018_W04A_BID_CONTRACT.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-018_W04A_BID_CONTRACT.md#9-선행-회신-확인-및-실행-승인-적용",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6716236853"
+      ],
+      "blob_sha": "0fe5e990abf3898458c08f09cdd9223a7160b335"
+    },
+    {
+      "path": "scripts/data/tender_data_loader.gd",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-018_W04A_BID_CONTRACT.md#9-선행-회신-확인-및-실행-승인-적용",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6716236853"
+      ],
+      "blob_sha": "617ff589fd2cc6d33d51ad95bb02e93daf996d71"
+    },
+    {
+      "path": "scripts/data/tender_data_loader.gd.uid",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-018_W04A_BID_CONTRACT.md#9-선행-회신-확인-및-실행-승인-적용",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6716236853"
+      ],
+      "blob_sha": "2dea037e868894a02aa3df6aa3604bf2a6cc71de"
+    },
+    {
+      "path": "scripts/model/public_tender.gd",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-018_W04A_BID_CONTRACT.md#9-선행-회신-확인-및-실행-승인-적용",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6716236853"
+      ],
+      "blob_sha": "48c45d76f44457de322e2d39dd6b37f8ab786411"
+    },
+    {
+      "path": "scripts/model/public_tender.gd.uid",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-018_W04A_BID_CONTRACT.md#9-선행-회신-확인-및-실행-승인-적용",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6716236853"
+      ],
+      "blob_sha": "e877dd3b9d242deadb1eb57fbe8222f4552c01fd"
+    },
+    {
+      "path": "scripts/simulation/minute_pipeline.gd",
+      "change_type": "modify",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-018_W04A_BID_CONTRACT.md#9-선행-회신-확인-및-실행-승인-적용",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6716236853"
+      ],
+      "blob_sha": "38402aa256cb30cf89f0ded207b9ea38399a3cf7",
+      "old_blob_sha": "a139e763007a98be0b174ead2f6344342b6806e5"
+    },
+    {
+      "path": "scripts/simulation/tender_service.gd",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-018_W04A_BID_CONTRACT.md#9-선행-회신-확인-및-실행-승인-적용",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6716236853"
+      ],
+      "blob_sha": "9f7bf17b2cd001c27a846d96ef67cd497759b09e"
+    },
+    {
+      "path": "scripts/simulation/tender_service.gd.uid",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-018_W04A_BID_CONTRACT.md#9-선행-회신-확인-및-실행-승인-적용",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6716236853"
+      ],
+      "blob_sha": "dd44aa9540767de66f47addbb85ea41b8d90fad4"
+    },
+    {
+      "path": "tests/game/run_w04a_tests.gd",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-018_W04A_BID_CONTRACT.md#9-선행-회신-확인-및-실행-승인-적용",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6716236853"
+      ],
+      "blob_sha": "dc33cafeff3559c9e59257c52796b61bed18915c"
+    },
+    {
+      "path": "tests/game/run_w04a_tests.gd.uid",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-018_W04A_BID_CONTRACT.md#9-선행-회신-확인-및-실행-승인-적용",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6716236853"
+      ],
+      "blob_sha": "5b7d1d35460941fba4ad764ff460ba177593db35"
+    },
+    {
+      "path": "tests/game/w04a_fixtures.gd",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-018_W04A_BID_CONTRACT.md#9-선행-회신-확인-및-실행-승인-적용",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6716236853"
+      ],
+      "blob_sha": "d0d8e9fe53538bd5e3563636921f680e8bfb7a97"
+    },
+    {
+      "path": "tests/game/w04a_fixtures.gd.uid",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-018_W04A_BID_CONTRACT.md#9-선행-회신-확인-및-실행-승인-적용",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6716236853"
+      ],
+      "blob_sha": "8af844df929cf8a4e120b10f1d824b5f9c3f21c6"
+    }
+  ]
+}

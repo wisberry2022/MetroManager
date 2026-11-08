@@ -1,0 +1,86 @@
+{
+  "schema_version": "DEV-018-W04A-1",
+  "rules_version": "C0.6-D0.9-DATA1.3",
+  "data_version": "1.3",
+  "source": {
+    "path": "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
+    "commit": "b48dd82a9b93d062d1a3bcfdf8750cb260c83e3e",
+    "semantics_comment": 6716236853
+  },
+  "tenders": [
+    {
+      "tender_id": "B01",
+      "round_id": "B01-R1",
+      "project_id": "P-A",
+      "city_id": "C01",
+      "issuer_id": "CITY_HALL",
+      "station_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S08",
+        "S12"
+      ],
+      "opens_at": 360,
+      "closes_at": 1800,
+      "fare": 100,
+      "government": 800000,
+      "duration_minutes": 2880,
+      "standard_cost": 600000,
+      "competitor_capability": 80,
+      "competitor_financial_score": 80,
+      "tie_priority": [
+        "COMPETITOR",
+        "PLAYER"
+      ]
+    },
+    {
+      "tender_id": "B02",
+      "round_id": "B02-R1",
+      "project_id": "P-B",
+      "city_id": "C01",
+      "issuer_id": "NATIONAL_GOVERNMENT",
+      "station_ids": [
+        "S01",
+        "S05",
+        "S09",
+        "S10",
+        "S11",
+        "S12"
+      ],
+      "opens_at": 360,
+      "closes_at": 1800,
+      "fare": 100,
+      "government": 800000,
+      "duration_minutes": 2880,
+      "standard_cost": 600000,
+      "competitor_capability": 80,
+      "competitor_financial_score": 80,
+      "tie_priority": [
+        "COMPETITOR",
+        "PLAYER"
+      ]
+    },
+    {
+      "tender_id": "B-X",
+      "round_id": "B-X-R1",
+      "project_id": "EXTERNAL",
+      "city_id": "EXTERNAL_CITY",
+      "issuer_id": "EXTERNAL_TEST_ONLY",
+      "station_ids": [],
+      "opens_at": 360,
+      "closes_at": 1800,
+      "fare": 100,
+      "government": 800000,
+      "duration_minutes": 2880,
+      "standard_cost": 600000,
+      "competitor_capability": 80,
+      "competitor_financial_score": 80,
+      "tie_priority": [
+        "COMPETITOR",
+        "PLAYER"
+      ]
+    }
+  ]
+}
