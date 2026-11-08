@@ -113,6 +113,7 @@ def agent_check(agent, agents, department=None):
 
 def declaration(text, task, agents):
     require(isinstance(text, str) and len(text.encode("utf-8")) <= LIMIT, "METADATA_SIZE")
+    text = text.replace("\r\n", "\n")  # GitHub/Windows transport, same strict footer grammar.
     footer = text.rstrip().split("\n\n")[-1].splitlines()
     fields = {}
     for line in footer:
@@ -186,22 +187,41 @@ def manifest_check(raw, manifest_path, base, head, task, primary, declared, cont
     require(covered == set(actual), "MANIFEST_COVERAGE")
 
 
-def audit(base, head, task, branch, title, body, registry_path, manifest_path):
-    """Returns diagnostic codes, never user-provided values or file contents."""
+def required_blob(ref, path, missing_code):
+    safe_path(path)
+    require(bool(git("ls-tree", "-z", ref, "--", path)), missing_code)
+    return blob(ref, path)
+
+
+def audit_detailed(base, head, task, branch, title, body, registry_path, manifest_path):
+    """Fixed codes/stages and validated Git coordinates; never dump metadata/errors."""
+    stage, commit_sha, diagnostic_path = "input", None, None
+
+    def result(code=None):
+        detail = {"code": code, "stage": stage}
+        if commit_sha is not None:
+            detail["commit_sha"] = commit_sha
+        if diagnostic_path is not None:
+            detail["path"] = diagnostic_path
+        return {"diagnostics": [code] if code else [], "diagnostic_details": [detail] if code else []}
+
     try:
-        require(SHA.fullmatch(base) is not None and SHA.fullmatch(head) is not None, "COMMIT_SHA")
+        require(isinstance(base, str) and SHA.fullmatch(base) is not None
+                and isinstance(head, str) and SHA.fullmatch(head) is not None, "COMMIT_SHA")
+        stage = "pr_metadata"
         require(gate.branch_task(branch) == task, "BRANCH_TASK")
         gate.message_check(title, task, title_only=True)
+        stage = "existing_policy"
         with redirect_stdout(io.StringIO()):
             gate.range_check(base, head, task)
+        stage = "registry"
         safe_path(registry_path)
         require(registry_path.startswith("docs/infra/"), "REGISTRY_LOCATION")
-        try:
-            trusted = blob(base, registry_path)
-        except subprocess.CalledProcessError:
-            return ["REGISTRY_NOT_CONFIGURED"]
+        trusted = required_blob(base, registry_path, "REGISTRY_NOT_CONFIGURED")
         agents = registry(trusted)
+        stage = "pr_declaration"
         primary, pr_contributors = declaration(body, task, agents)
+        stage = "manifest_location"
         allowed = [f"{gate.department(task)[1]}tasks/{task}_PROVENANCE.json"]
         if task.startswith("DEV-"):
             allowed.append(f"tasks/{task}_PROVENANCE.json")
@@ -210,24 +230,37 @@ def audit(base, head, task, branch, title, body, registry_path, manifest_path):
         commits = git("rev-list", "--reverse", "--topo-order", f"{base}..{head}").decode().splitlines()
         last = None
         for sha in commits:
+            commit_sha = sha
+            stage, diagnostic_path = "commit_graph", None
             parents = git("rev-list", "--parents", "-n", "1", sha).decode().split()[1:]
             if len(parents) == 2:
                 # The shared gate already proved this exact clean base-sync tree.
                 # Imported trusted files are not re-attributed to the task agent.
                 continue
             snapshot_base = git("merge-base", base, sha).decode().strip()
+            stage = "commit_declaration"
             last, people = declaration(git("show", "-s", "--format=%B", sha).decode("utf-8"), task, agents)
             authors.add(last)
             all_contributors.update(people)
-            manifest_check(blob(sha, manifest_path), manifest_path, snapshot_base, sha, task,
+            stage, diagnostic_path = "commit_manifest", manifest_path
+            manifest_check(required_blob(sha, manifest_path, "MANIFEST_NOT_FOUND"), manifest_path, snapshot_base, sha, task,
                            last, authors, pr_contributors | all_contributors, agents)
+        stage, commit_sha, diagnostic_path = "pr_consistency", None, None
         require(primary == last, "PR_PRIMARY_MISMATCH")
         require(all_contributors <= pr_contributors, "PR_CONTRIBUTORS_MISSING")
-        return []
+        return result()
     except Invalid as error:
-        return [str(error)]
-    except (ValueError, OSError, subprocess.CalledProcessError, UnicodeError, RecursionError):
-        return ["INPUT_OR_EXISTING_POLICY_INVALID"]
+        return result(str(error))
+    except (OSError, subprocess.CalledProcessError):
+        return result("GIT_READ_FAILED")
+    except (ValueError, TypeError, KeyError, UnicodeError, RecursionError):
+        return result("INPUT_OR_EXISTING_POLICY_INVALID" if stage == "existing_policy"
+                      else "PROVENANCE_INPUT_INVALID")
+
+
+def audit(base, head, task, branch, title, body, registry_path, manifest_path):
+    """Backward compatible code list; use audit_detailed for stage/evidence context."""
+    return audit_detailed(base, head, task, branch, title, body, registry_path, manifest_path)["diagnostics"]
 
 
 def main():
@@ -238,13 +271,15 @@ def main():
     try:
         require(Path(args.pr_body_file).stat().st_size <= LIMIT, "METADATA_SIZE")
         body = Path(args.pr_body_file).read_text(encoding="utf-8")
-        diagnostics = audit(args.base, args.head, args.task, args.branch, args.title,
-                            body, args.registry, args.manifest)
+        details = audit_detailed(args.base, args.head, args.task, args.branch, args.title,
+                                 body, args.registry, args.manifest)
     except (OSError, UnicodeError, Invalid):
-        diagnostics = ["PR_METADATA_UNREADABLE"]
-    print(json.dumps({"mode": "REPORT_ONLY", "protocol": "draft-v1",
-                      "result": "DIAGNOSTICS" if diagnostics else "DECLARATION_CONSISTENT",
-                      "diagnostics": diagnostics, "identity_authenticated": False}))
+        details = {"diagnostics": ["PR_METADATA_UNREADABLE"],
+                   "diagnostic_details": [{"code": "PR_METADATA_UNREADABLE", "stage": "pr_body_file"}]}
+    print(json.dumps({"mode": "REPORT_ONLY", "protocol": "draft-v1", **details,
+                      "result": "DIAGNOSTICS" if details["diagnostics"] else "DECLARATION_CONSISTENT",
+                      "identity_authenticated": False, "approval_authenticated": False,
+                      "enforcement_enabled": False}))
     # Always report-only; direct CLI and CI adapter never enforce branch protection.
     return 0
 

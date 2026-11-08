@@ -1,5 +1,7 @@
 # Agent Provenance — DEV-013 실험·설계 진입점
 
+- [DEV-017 실제 Actions 진단·INF 회신](DEV-017_OPERATIONS_REVIEW.md), [무쓰기 등록 실행 계획](DEV-017_REGISTRATION_RUN_PLAN.md), [등록부 계약 RFC](RFC-DEV-017-01_REGISTRY_CONTRACT.md): 2026-11-08 후속 로컬 검수안. 원격 실행·ENFORCE 승인 아님.
+
 - 상태: DESIGN_PROPOSAL / REPORT_ONLY 시제품. INF-002의 실제 등록부는 main에 반영되었으며 생산 강제 적용은 별도 승인 대상이다.
 - [DEV-016 PENDING 등록 PR 자동 생성 보완](DEV-016_REGISTRATION_PR_AUTOMATION.md): 후속 INF 요구 반영, prepare-only 기본·main 수동 기동 후보·원격 실행 미수행.
 - [DEV-016 INF 회신 검토·등록부 도구·보고 CI 후보](DEV-016_INF_REVIEW_AND_ROLLOUT.md): 현재 로컬 검수안, 자동 활성화/ENFORCE 없음.

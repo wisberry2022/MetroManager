@@ -19,7 +19,9 @@ STEPS = registry.REGISTRATION_STEPS
 
 
 class SubmissionError(ValueError):
-    pass
+    def __init__(self, code, recovery_context=None):
+        super().__init__(code)
+        self.recovery_context = recovery_context
 
 
 class NoRedirect(HTTPRedirectHandler):
@@ -47,7 +49,10 @@ class GitHub:
             if len(raw) > 4 * protocol.LIMIT:
                 raise SubmissionError("API_RESPONSE_TOO_LARGE")
             return json.loads(raw.decode("utf-8"))
-        except (HTTPError, URLError, OSError, ValueError) as error:
+        except HTTPError as error:
+            code = f"API_HTTP_{error.code}" if type(error.code) is int and 100 <= error.code <= 599 else "API_REQUEST_FAILED"
+            raise SubmissionError(code) from None
+        except (URLError, OSError, ValueError) as error:
             if isinstance(error, SubmissionError):
                 raise
             raise SubmissionError("API_REQUEST_FAILED") from None
@@ -147,26 +152,43 @@ def validate_plan(plan):
 def publish(client, plan):
     ensure_workflow(plan["base"])
     validate_plan(plan)
+    progress = {"stage": "remote_base", "branch": plan["branch"],
+                "branch_creation_attempted": False, "pr_creation_attempted": False}
+    try:
+        return _publish_prepared(client, plan, progress)
+    except (protocol.Invalid, SubmissionError, OSError, ValueError, TypeError, KeyError) as error:
+        code = str(error) if isinstance(error, (protocol.Invalid, SubmissionError)) else "REGISTRATION_INPUT_INVALID"
+        raise SubmissionError(code, progress) from None
+
+
+def _publish_prepared(client, plan, progress):
     base = plan["base"]
 
     def current_main():
         return sha(client.request("GET", "git/ref/heads/main")["object"]["sha"])
 
     protocol.require(current_main() == base, "PROPOSAL_STALE_BASE")
+    progress["stage"] = "open_registration_scan"
     no_pending_registration(client)
+    progress["stage"] = "tree_creation"
     commit = client.request("GET", f"git/commits/{base}")
     tree = sha(client.request("POST", "git/trees", {
         "base_tree": sha(commit["tree"]["sha"]),
         "tree": [{"path": path, "mode": "100644", "type": "blob", "content": content}
                  for path, content in plan["files"].items()]})["sha"])
+    progress["stage"] = "commit_creation"
     head = sha(client.request("POST", "git/commits", {
         "message": plan["title"] + "\n\n" + plan["body"] + "\n", "tree": tree, "parents": [base]})["sha"])
+    progress.update(stage="base_recheck", proposed_head_sha=head)
     protocol.require(current_main() == base, "PROPOSAL_STALE_BASE")
     # Create only. Existing branches are never updated/deleted and force is never used.
+    progress.update(stage="branch_creation", branch_creation_attempted=True)
     created = client.request("POST", "git/refs", {"ref": "refs/heads/" + plan["branch"], "sha": head})
     protocol.require(created.get("ref") == "refs/heads/" + plan["branch"]
                      and created.get("object", {}).get("sha") == head, "API_REF_INVALID")
+    progress["stage"] = "post_branch_base_recheck"
     protocol.require(current_main() == base, "BASE_CHANGED_BRANCH_RETAINED")
+    progress.update(stage="pr_creation", pr_creation_attempted=True)
     pr = client.request("POST", "pulls", {"base": "main", "head": plan["branch"],
                        "title": plan["title"], "body": plan["body"], "draft": True,
                        "maintainer_can_modify": False})
@@ -200,8 +222,11 @@ def main():
     except (protocol.Invalid, SubmissionError, OSError, ValueError, TypeError, KeyError,
             subprocess.CalledProcessError) as error:
         code = str(error) if isinstance(error, (protocol.Invalid, SubmissionError)) else "REGISTRATION_INPUT_INVALID"
-        print(json.dumps({"result": "DIAGNOSTICS", "diagnostics": [code],
-                          "remote_state_requires_review": bool(args.submit)}))
+        result = {"result": "DIAGNOSTICS", "diagnostics": [code],
+                  "remote_state_requires_review": bool(args.submit)}
+        if isinstance(error, SubmissionError) and error.recovery_context is not None:
+            result["recovery_context"] = error.recovery_context
+        print(json.dumps(result))
         return 1
 
 

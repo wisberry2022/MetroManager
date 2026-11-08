@@ -1,0 +1,149 @@
+{
+  "review_date": "2026-11-08",
+  "requested_main": "fba3fd575c83e1eae234dc77aa9207898e0849b3",
+  "observed_main": "fba3fd575c83e1eae234dc77aa9207898e0849b3",
+  "runs": [
+    {
+      "run_id": 41447976166,
+      "job_id": 125285739634,
+      "actions_url": "https://github.com/wisberry2022/MetroManager/actions/runs/41447976166/job/125285739634",
+      "pr_number": 67,
+      "base_sha": "2ae5161a8d61a77b69b71dac09c9cfc1c3fa0df5",
+      "head_sha": "a77ece72c38e63a27248f9139b471e617d565a72",
+      "workflow_path": ".github/workflows/agent-provenance-report.yml",
+      "job_conclusion": "success",
+      "original_logged_diagnostic": "INPUT_OR_EXISTING_POLICY_INVALID",
+      "baseline_audit_replay": [
+        "INPUT_OR_EXISTING_POLICY_INVALID"
+      ],
+      "candidate_audit_replay": {
+        "diagnostics": [
+          "MANIFEST_NOT_FOUND"
+        ],
+        "diagnostic_details": [
+          {
+            "code": "MANIFEST_NOT_FOUND",
+            "stage": "commit_manifest",
+            "commit_sha": "a77ece72c38e63a27248f9139b471e617d565a72",
+            "path": "docs/engineering/tasks/DEV-015_PROVENANCE.json"
+          }
+        ]
+      },
+      "existing_department_policy_replay": "PASS",
+      "canonical_manifest": "docs/engineering/tasks/DEV-015_PROVENANCE.json",
+      "manifest_exists_at_head": false,
+      "pr_body_sha256": "e109a46be1a302989f3a860674130695d1096b534535127151507a898ab5e8be",
+      "pr_title_sha256": "29ef2e7e86bbd0e46fa5bfc92349982085a73bd7b8a59a307d2f63581cb87f9c",
+      "original_event_payload_available": false,
+      "metadata_source": "current public PR snapshot; not a preserved historical event",
+      "base_checker_blob_sha": "79dcda79493be1cd47f45b57409093512ac327b3"
+    },
+    {
+      "run_id": 42424360330,
+      "job_id": 128559346129,
+      "actions_url": "https://github.com/wisberry2022/MetroManager/actions/runs/42424360330/job/128559346129",
+      "pr_number": 69,
+      "base_sha": "55b5e360d22c10e865cb71a17eb9ba73268ffece",
+      "head_sha": "dd2f1b4f2644b1c2a5f197302dcdf68473ec05bf",
+      "workflow_path": ".github/workflows/agent-provenance-report.yml",
+      "job_conclusion": "success",
+      "original_logged_diagnostic": "INPUT_OR_EXISTING_POLICY_INVALID",
+      "baseline_audit_replay": [
+        "INPUT_OR_EXISTING_POLICY_INVALID"
+      ],
+      "candidate_audit_replay": {
+        "diagnostics": [
+          "MANIFEST_NOT_FOUND"
+        ],
+        "diagnostic_details": [
+          {
+            "code": "MANIFEST_NOT_FOUND",
+            "stage": "commit_manifest",
+            "commit_sha": "dd2f1b4f2644b1c2a5f197302dcdf68473ec05bf",
+            "path": "docs/engineering/tasks/DEV-015_PROVENANCE.json"
+          }
+        ]
+      },
+      "existing_department_policy_replay": "PASS",
+      "canonical_manifest": "docs/engineering/tasks/DEV-015_PROVENANCE.json",
+      "manifest_exists_at_head": false,
+      "pr_body_sha256": "f0794934e1713d7343e728f6ea98ad360a7ecdb1aad2943bbf66e7ee94e0fe4e",
+      "pr_title_sha256": "5177565ffb1dacda18f04f5e5168279d81a22672cf67216fa4f6c39a68438d9b",
+      "original_event_payload_available": false,
+      "metadata_source": "current public PR snapshot; not a preserved historical event",
+      "base_checker_blob_sha": "79dcda79493be1cd47f45b57409093512ac327b3"
+    },
+    {
+      "run_id": 42315780526,
+      "job_id": 128227894565,
+      "actions_url": "https://github.com/wisberry2022/MetroManager/actions/runs/42315780526/job/128227894565",
+      "pr_number": 68,
+      "base_sha": "bc495d66e99414e6e734df45de283e5d186829c5",
+      "head_sha": "a497bdec7bb4f2be956621a6fceca0af43bdfd6b",
+      "workflow_path": ".github/workflows/agent-provenance-report.yml",
+      "job_conclusion": "success",
+      "original_logged_diagnostic": "TRAILER_BLOCK",
+      "baseline_audit_replay": [
+        "TRAILER_BLOCK"
+      ],
+      "candidate_audit_replay": {
+        "diagnostics": [
+          "TRAILER_BLOCK"
+        ],
+        "diagnostic_details": [
+          {
+            "code": "TRAILER_BLOCK",
+            "stage": "pr_declaration"
+          }
+        ]
+      },
+      "existing_department_policy_replay": "PASS",
+      "canonical_manifest": "docs/design/tasks/DSG-005_PROVENANCE.json",
+      "manifest_exists_at_head": false,
+      "pr_body_sha256": "0893b44b9d46829f91f74768001476d8fb28eee7aec3934d3b75384004b4463e",
+      "pr_title_sha256": "8f29e0e90e62c4eff362490027e56112d81bfb7f05b8922c5a2f5c25ba80b737",
+      "original_event_payload_available": false,
+      "metadata_source": "current public PR snapshot; not a preserved historical event",
+      "base_checker_blob_sha": "79dcda79493be1cd47f45b57409093512ac327b3"
+    },
+    {
+      "run_id": 42315909404,
+      "job_id": 128228319377,
+      "actions_url": "https://github.com/wisberry2022/MetroManager/actions/runs/42315909404/job/128228319377",
+      "pr_number": 68,
+      "base_sha": "bc495d66e99414e6e734df45de283e5d186829c5",
+      "head_sha": "a497bdec7bb4f2be956621a6fceca0af43bdfd6b",
+      "workflow_path": ".github/workflows/agent-provenance-report.yml",
+      "job_conclusion": "success",
+      "original_logged_diagnostic": "TRAILER_BLOCK",
+      "baseline_audit_replay": [
+        "TRAILER_BLOCK"
+      ],
+      "candidate_audit_replay": {
+        "diagnostics": [
+          "TRAILER_BLOCK"
+        ],
+        "diagnostic_details": [
+          {
+            "code": "TRAILER_BLOCK",
+            "stage": "pr_declaration"
+          }
+        ]
+      },
+      "existing_department_policy_replay": "PASS",
+      "canonical_manifest": "docs/design/tasks/DSG-005_PROVENANCE.json",
+      "manifest_exists_at_head": false,
+      "pr_body_sha256": "0893b44b9d46829f91f74768001476d8fb28eee7aec3934d3b75384004b4463e",
+      "pr_title_sha256": "8f29e0e90e62c4eff362490027e56112d81bfb7f05b8922c5a2f5c25ba80b737",
+      "original_event_payload_available": false,
+      "metadata_source": "current public PR snapshot; not a preserved historical event",
+      "base_checker_blob_sha": "79dcda79493be1cd47f45b57409093512ac327b3"
+    }
+  ],
+  "registration_dispatch_total_at_review": 0,
+  "open_prs_at_review": 0,
+  "limitations": [
+    "Original event PR-body snapshots unavailable; immutable Git objects and logged base/head confirmed.",
+    "No remote workflow rerun, PR edit, ID allocation or registration performed."
+  ]
+}
