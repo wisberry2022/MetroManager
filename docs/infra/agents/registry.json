@@ -14,24 +14,52 @@
       "agent_id": "AGT-PM-0001",
       "department": "PM",
       "generation": 1,
-      "status": "ACTIVE",
+      "status": "RETIRED",
       "role": "HQ / Project Manager",
       "session_scope": "HQ-PM-CURRENT",
       "session_kind": "CHATGPT",
       "predecessor_agent_id": null,
       "activated_at": null,
-      "retired_at": null,
+      "retired_at": "2026-11-08T17:24:00+09:00",
       "role_observed_on": "2026-10-31",
-      "role_retirement_observed_on": null,
+      "role_retirement_observed_on": "2026-11-08",
       "owner_approval_ref": "docs/hq/PM-008.md",
       "agent_id_activation_approval_ref": "OWNER_DIRECT_INF_2026-11-02_INITIAL_REGISTRY_APPROVAL",
       "handoff_ref": null,
       "role_evidence_refs": [
         "docs/hq/PM-008.md",
-        "docs/hq/PM-011_GATE3_2_EXECUTION_PROTOCOL.md"
+        "docs/hq/PM-011_GATE3_2_EXECUTION_PROTOCOL.md",
+        "docs/infra/tasks/INF-005_PM_SUCCESSION.md#owner-transfer"
+      ],
+      "record_version": 2,
+      "notes": "Owner-approved initial Agent-ID; existing HQ role retained. Owner approved end of new HQ/PM assignments effective 2026-11-08T17:24:00+09:00; INF-005 retires this role without changing historical identity, approvals, authorship or legacy activated_at=null. Former session is retained for reference subject to access."
+    },
+    {
+      "agent_id": "AGT-PM-0002",
+      "department": "PM",
+      "generation": 2,
+      "status": "ACTIVE",
+      "role": "HQ / Project Manager / successor",
+      "session_scope": "HQ-PM-SUCCESSOR-CURRENT",
+      "session_kind": "CODEX",
+      "predecessor_agent_id": "AGT-PM-0001",
+      "activated_at": "2026-11-08T17:25:00+09:00",
+      "retired_at": null,
+      "role_observed_on": "2026-11-08",
+      "role_retirement_observed_on": null,
+      "owner_approval_ref": "docs/infra/tasks/INF-005_PM_SUCCESSION.md#owner-transfer",
+      "agent_id_activation_approval_ref": "docs/infra/tasks/INF-005_PM_SUCCESSION.md#owner-transfer",
+      "handoff_ref": "docs/infra/tasks/INF-005_PM_SUCCESSION.md#handoff-acceptance",
+      "role_evidence_refs": [
+        "docs/infra/tasks/INF-005_PM_SUCCESSION.md#handoff-acceptance",
+        "docs/infra/tasks/INF-005_PM_SUCCESSION.md#owner-transfer",
+        "docs/hq/PM-008.md",
+        "docs/hq/PM-014_STAGE2_VS01_EXECUTION_PLAN.md",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6719007539",
+        "https://github.com/wisberry2022/MetroManager/issues/76#issuecomment-6719137242"
       ],
       "record_version": 1,
-      "notes": "Owner-approved initial Agent-ID; existing HQ role retained."
+      "notes": "Owner-appointed second-generation HQ/PM successor after INF independent handoff acceptance. Owner directly confirmed responsibility transition because the retiring PM is the affected party. Former PM responsibility ends at 17:24 KST and successor begins at 17:25 KST (different explicit effective timestamps). ACTIVE is lifecycle status, not technical identity authentication or automatic inheritance of ticket-specific Commit/Push/PR permissions."
     },
     {
       "agent_id": "AGT-PLN-0001",
