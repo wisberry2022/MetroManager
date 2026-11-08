@@ -1,0 +1,87 @@
+{
+  "task_id": "DEV-018",
+  "base_sha": "b48dd82a9b93d062d1a3bcfdf8750cb260c83e3e",
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "source_sha256": {
+    "assets/data/stage2_tenders_v1_3.json": "f52e5304a3e656c8ea8b1fb78d2c2de48de89d0023a05ff6cdcf8f2afbd97141",
+    "scripts/data/tender_data_loader.gd": "e1082d08e5610dff382def2e76a2b3c33e765710f99ce936a5c55fc994725bde",
+    "scripts/model/public_tender.gd": "f0bd86d9ce78efb15903b56c5dfb9affaf823f90aae93fe1f857bd2b89404576",
+    "scripts/simulation/tender_service.gd": "c0b7e22ee44e51bd29891c440967b7ac698ac5f6317f284181ad592bd4961192",
+    "scripts/simulation/minute_pipeline.gd": "f5d98cd4b358532c4f90d511057a8ea576a11788916c43a229ad215e7288b010",
+    "tests/game/run_w04a_tests.gd": "297d671fe651bb379395016c587d648ed70acade2f003ea13ba277219abf76d0",
+    "tests/game/w04a_fixtures.gd": "35b5d440200cccc3b174ab9eefc2a71f9eb4a1b91e11174281ca17646b75e9ac"
+  },
+  "regressions": [
+    {
+      "name": "w01",
+      "exit_code": 0,
+      "lines": [
+        "W01_TEST_RESULT checks=219 failures=0"
+      ]
+    },
+    {
+      "name": "w02",
+      "exit_code": 0,
+      "lines": [
+        "W02_TEST_RESULT checks=309 failures=0"
+      ]
+    },
+    {
+      "name": "w03",
+      "exit_code": 0,
+      "lines": [
+        "W03_TEST_RESULT checks=101 failures=0"
+      ]
+    },
+    {
+      "name": "w07",
+      "exit_code": 0,
+      "lines": [
+        "W07_R01_RESULT accrued=3 paid=2 unpaid=1 midnight_day2=0 prior_day1=3/2",
+        "W07_R02_LATE_FAIL {\"accepted\":false,\"after_sha256\":\"6f93fc105e3d43e7851b34de4a46fe773da8078c38fe5f351680ad37212dac02\",\"before_sha256\":\"6f93fc105e3d43e7851b34de4a46fe773da8078c38fe5f351680ad37212dac02\",\"input_after\":8,\"input_before\":8,\"snapshot_equal\":true,\"status\":\"CALCULATING\"}",
+        "W07_R02_LATE_FAIL {\"accepted\":false,\"after_sha256\":\"51f618461a604f1511ece5dfcbd2881663d65f670eb3905d1e8f4440a54fac96\",\"before_sha256\":\"51f618461a604f1511ece5dfcbd2881663d65f670eb3905d1e8f4440a54fac96\",\"input_after\":8,\"input_before\":8,\"snapshot_equal\":true,\"status\":\"READY\"}",
+        "W07_TEST_RESULT checks=322 failures=0"
+      ]
+    },
+    {
+      "name": "w04a_failure",
+      "exit_code": 1,
+      "lines": [
+        "FAIL intentional_failure actual=true expected=false",
+        "W04A_TEST_RESULT checks=1 failures=1"
+      ]
+    },
+    {
+      "name": "product",
+      "exit_code": 0,
+      "lines": []
+    }
+  ],
+  "tooling": {
+    "command": ".venv/Scripts/python.exe -m unittest discover -s tests/tooling -v",
+    "tests": 89,
+    "exit_code": 0,
+    "summary": "Ran 89 tests in 325.805s / OK"
+  },
+  "project_load": {
+    "command": "godot --headless --editor --path . --quit",
+    "exit_code": 0,
+    "script_errors": 0
+  },
+  "w04a_gui": "NOT_RUN / DEV-019",
+  "VS-01": "NOT_RUN / DEV-024",
+  "Windows_export": "NOT_RUN",
+  "w04a": {
+    "command": "godot --headless --path . --script tests/game/run_w04a_tests.gd -- --evidence=res://docs/engineering/evidence/DEV-018_W04A_FIXTURES.json",
+    "checks": 204,
+    "failures": 0,
+    "exit_code": 0,
+    "log_summary": "W04A_TEST_RESULT checks=204 failures=0"
+  },
+  "policy_check": {
+    "command": ".venv/Scripts/python.exe tools/policy.py check",
+    "result": "PASS",
+    "files_before_manifest": 411,
+    "GDScript": 27
+  }
+}

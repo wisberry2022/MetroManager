@@ -5,6 +5,9 @@ extends RefCounted
 const Clock = preload("res://scripts/simulation/game_clock.gd")
 const Queue = preload("res://scripts/simulation/command_queue.gd")
 const Ledger = preload("res://scripts/model/company_ledger.gd")
+const Tenders = preload("res://scripts/simulation/tender_service.gd")
+const TenderLoader = preload("res://scripts/data/tender_data_loader.gd")
+const CompanyLoader = preload("res://scripts/data/gate2_data_loader.gd")
 const Reports = preload("res://scripts/model/daily_ledger_report.gd")
 
 var clock: Clock
@@ -12,6 +15,7 @@ var commands: Queue = Queue.new()
 var ledger: Ledger
 var reports: Reports = Reports.new()
 var target_revisions: Dictionary = {}
+var _tenders: Tenders
 var _events: Dictionary = {}
 var _revision: int = 0
 var _trace: Array[Dictionary] = []
@@ -21,6 +25,31 @@ var _boarding: Dictionary = {}
 func _init(initial: Dictionary = {}, start_minute: int = 360) -> void:
 	clock = Clock.new(start_minute)
 	ledger = Ledger.new(initial)
+
+
+## W04A 제품 공급의 명시적 진입점. 실패한 데이터로 부분 사업 상태를 설치하지 않는다.
+func enable_tenders(data: Dictionary = {}) -> Dictionary:
+	if _tenders != null:
+		return {"accepted": false, "reason": "TENDERS_ALREADY_ENABLED"}
+	var loaded := TenderLoader.load_data() if data.is_empty() else TenderLoader.validate_data(data)
+	var company := CompanyLoader.load_data()
+	if not loaded.ok or not company.ok:
+		return {"accepted": false, "reason": "INVALID_TENDER_INPUT"}
+	var service := Tenders.new(ledger, company.data.initial_company, loaded.data)
+	if not service.valid():
+		return {"accepted": false, "reason": "INVALID_TENDER_INPUT"}
+	_tenders = service
+	return {"accepted": true}
+
+
+func submit_bid(command: Dictionary) -> Dictionary:
+	if _tenders == null:
+		return {"accepted": false, "reason": "TENDERS_NOT_ENABLED"}
+	return _tenders.submit(command, clock.minute)
+
+
+func bid_result(command_id: String) -> Dictionary:
+	return {} if _tenders == null else _tenders.result(command_id)
 
 
 ## 테스트 전용 주입점이며 제품 UI에 연결하지 않는다.
@@ -41,7 +70,7 @@ func advance_usec(elapsed: int) -> void:
 
 
 func snapshot() -> Dictionary:
-	return {
+	var value := {
 		"data_version": "1.3",
 		"simulation_minute": clock.minute,
 		"day_id": clock.minute / 1440 + 1,
@@ -51,6 +80,9 @@ func snapshot() -> Dictionary:
 		"boarding": _boarding.duplicate(true),
 		"trace": _trace.duplicate(true)
 	}
+	if _tenders != null:
+		value["tenders"] = _tenders.snapshot(clock.minute, _revision)
+	return value
 
 
 func _tick(minute: int) -> void:
@@ -86,6 +118,8 @@ func _tick(minute: int) -> void:
 		)
 		_revision += 1
 		commands.finish(command.command_id, result)
+	if _tenders != null:
+		_revision += _tenders.process_contract_phase(minute, _revision)
 	_stage(minute, "PROGRESS")
 	for payment: Dictionary in input.get("construction", []):
 		ledger.construction_payment(payment.project, payment.amount, minute)
