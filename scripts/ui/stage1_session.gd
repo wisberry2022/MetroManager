@@ -5,6 +5,7 @@ const Pipeline = preload("res://scripts/simulation/minute_pipeline.gd")
 const Network = preload("res://scripts/model/administrative_network.gd")
 const Plan = preload("res://scripts/model/route_plan.gd")
 const Prediction = preload("res://scripts/model/prediction_state.gd")
+const Tender = preload("res://scripts/model/public_tender.gd")
 const Predictor = preload("res://scripts/simulation/demand_predictor.gd")
 
 var pipeline: Pipeline
@@ -251,7 +252,29 @@ func _tender_snapshot(current: Dictionary) -> Dictionary:
 		"reason": _tender_error,
 		"snapshot": current.get("tenders", {}).duplicate(true),
 		"funds": current.funds.duplicate(true),
+		"evaluation_criteria": _evaluation_criteria(current.get("tenders", {})),
 		"requests": requests,
 		"next_effective_at": current.simulation_minute + 1,
 		"fixture_label": fixture_label
 	}
+
+
+## 고정 경쟁자 재무점수의 단위를 기존 점수 API 입력에 맞춘다. 회사 현금/원장은 사용하지 않는다.
+func _evaluation_criteria(envelope: Dictionary) -> Dictionary:
+	var criteria: Dictionary = {}
+	for row: Dictionary in envelope.get("tenders", []):
+		var terms: Dictionary = row.terms
+		var capability: Variant = terms.get("competitor_capability")
+		var financial: Variant = terms.get("competitor_financial_score")
+		if not capability is int or not financial is int:
+			continue
+		if capability < 0 or capability > 100 or financial < 0 or financial > 100:
+			continue
+		var score := Tender.score(financial * 10000, capability)
+		criteria[terms.tender_id] = {
+			"competitor_display_score": score.display_score,
+			"competitor_capability": capability,
+			"competitor_financial_score": financial,
+			"tie_priority": terms.tie_priority.duplicate()
+		}
+	return criteria

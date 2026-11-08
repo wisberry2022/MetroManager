@@ -61,12 +61,13 @@ func _ready() -> void:
 	add_child(_list)
 	_button(self, "detail", "선택 공고 상세 확인", _open_detail)
 	_label("summary", "공고를 선택하세요.")
+	_label("criteria", "")
+	_label("timing", "")
+	_label("eligibility", "")
 	var actions := HBoxContainer.new()
 	add_child(actions)
 	_button(actions, "submit", "응찰 요청", _request)
 	_button(actions, "handoff", "P05 인계 정보 확인", _handoff)
-	_label("timing", "")
-	_label("eligibility", "")
 	_label("request", "")
 	_label("decision", "")
 	_label("contract", "")
@@ -254,6 +255,7 @@ func _render() -> void:
 	controls.back.text = "목록으로" if page == "P02" else "공고 상세로"
 	for key: String in [
 		"summary",
+		"criteria",
 		"timing",
 		"eligibility",
 		"request",
@@ -295,6 +297,7 @@ func _render_row(row: Dictionary) -> void:
 	)
 	if page == "P01":
 		return
+	_render_criteria(row)
 	var pending := false
 	var request_lines: Array[String] = []
 	for record: Dictionary in _history.values():
@@ -336,11 +339,11 @@ func _render_row(row: Dictionary) -> void:
 		% [terms.closes_at, shown.next_effective_at]
 	)
 	labels.eligibility.text = (
-		"현재 상태: %s · 자격: %s\n현재 행동 사유: %s · 계획: 고정/읽기 전용"
+		"현재 상태: %s · 자격: %s · 계획: 고정/읽기 전용\n현재 행동 사유\n%s"
 		% [
 			STATES.get(row.state, row.state),
 			"충족" if row.eligibility.eligible else "미충족",
-			" / ".join(row.reason_codes) if not row.reason_codes.is_empty() else "현재 거부 사유 없음"
+			_current_reasons(row.reason_codes)
 		]
 	)
 	if not row.receipt.is_empty():
@@ -367,7 +370,7 @@ func _render_row(row: Dictionary) -> void:
 		]
 	)
 	if page == "P05":
-		for id: String in ["timing", "eligibility", "request", "decision"]:
+		for id: String in ["criteria", "timing", "eligibility", "request", "decision"]:
 			labels[id].text = ""
 		labels.handoff.text = (
 			(
@@ -398,6 +401,43 @@ func _render_row(row: Dictionary) -> void:
 				}
 			)
 		)
+
+
+func _render_criteria(row: Dictionary) -> void:
+	var value: Dictionary = shown.get("evaluation_criteria", {}).get(row.terms.tender_id, {})
+	var lines: Array[String] = ["공고의 공개 평가 기준"]
+	if row.decision.is_empty():
+		lines.append("입찰 결과는 아직 확정되지 않았습니다.")
+	lines.append("평가 시점: 공고 마감 시점의 자격·자금 상태")
+	lines.append("자유현금 F = 현재 현금 C − 사업별 제한자금 R의 합계 (F의 실제 평가값은 마감 시점 기준)")
+	lines.append("재무점수 = F ÷ 10,000을 0~100점 범위로 제한")
+	lines.append("공개점수 = (7 × 이행능력 점수 + 3 × 재무점수) ÷ 10")
+	if value.is_empty():
+		lines.append("경쟁자 평가 자료 없음")
+	else:
+		lines.append(
+			(
+				"경쟁자 공개점수 %s점 (이행능력 %d점 / 재무점수 %d점)"
+				% [
+					exact_decimal(value.competitor_display_score),
+					value.competitor_capability,
+					value.competitor_financial_score
+				]
+			)
+		)
+	var priority: Array[String] = []
+	for role: String in row.terms.tie_priority:
+		priority.append({"COMPETITOR": "경쟁자", "PLAYER": "플레이어"}.get(role, role))
+	lines.append("동점 시 우선순위: " + " → ".join(priority))
+	lines.append("실제 낙찰 여부는 마감 시점 판정으로 결정됩니다. 이 기준은 현재 플레이어의 확정 결과가 아닙니다.")
+	labels.criteria.text = "\n".join(lines)
+
+
+func _current_reasons(codes: Array) -> String:
+	var lines: Array[String] = []
+	for code: String in codes:
+		lines.append(_reason(code))
+	return "\n".join(lines) if not lines.is_empty() else "현재 거부 사유 없음"
 
 
 func _render_decision(decision: Dictionary) -> void:
@@ -483,7 +523,7 @@ func _issuer(id: String) -> String:
 
 
 func _reason(id: String) -> String:
-	return REASONS.get(id, id if not id.is_empty() else "")
+	return REASONS.get(id, "행동 제한 사유를 확인할 수 없습니다 (코드: %s)" % id if not id.is_empty() else "")
 
 
 func _hide_empty_labels() -> void:

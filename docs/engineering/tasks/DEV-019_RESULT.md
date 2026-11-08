@@ -44,3 +44,7 @@
 S2-02/03 GUI·S2-08 W04A부분·S2-11 증거 제출이다. Design L2 착수 수용과 독립 GUI 최종 수용은 별개다. P05 인계 PARTIAL, 실제공사/영업·VS01완주·전체Stage2 DONE은 후속이다.
 
 fetch·정상훅Commit·preflight·일반Push·PR 두 필수CI는 실제 제출시점 SHA로 확인해 Issue75/PR에 추가한다. 강제Push·공유이력재작성·main병합·릴리스·타티켓 실행은 수행하지 않는다. Owner 수용/DONE은 별도다.
+
+## 독립 QA 후속 보완
+
+PR84 main 반영 후 Owner 제공 DSG-010 독립 QA는 PASS7/FAIL1/PARTIAL4, QA001 사전 평가정보 누락으로 재검수 필요를 권고했다. 기존 개발검증 PASS를 Design 수용으로 간주하지 않는다. Owner가 별도 승인한 QA001·002 보완은 [보완 결과](DEV-019_QA_FIX_RESULT.md)를 따른다. 최초 제출 결과와 후속 수정·재실행을 구분한다.

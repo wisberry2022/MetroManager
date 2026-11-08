@@ -18,7 +18,8 @@ const CASES: Array[String] = [
 	"PAYMENT_MISSING",
 	"BUSY",
 	"DURATION",
-	"BEFORE_START"
+	"BEFORE_START",
+	"REASON_FALLBACK"
 ]
 
 
@@ -87,6 +88,14 @@ static func packet(session: Session, case_id: String) -> Dictionary:
 			value.snapshot.available = false
 		"PAYMENT_MISSING":
 			value.snapshot.tenders[0].business_contract.government_payment = {}
+		"REASON_FALLBACK":
+			value.snapshot.tenders[0].reason_codes = [
+				"ROUND_CLOSED",
+				"UNKNOWN_TEST_ONLY_LONG_DIAGNOSTIC_REASON_CODE",
+				"PROJECT_IN_PROGRESS"
+			]
+			value.snapshot.tenders[0].allowed_actions.submit_bid = false
+
 		"DURATION":
 			var row: Dictionary = value.snapshot.tenders[0]
 			row.eligibility = Tender.new(row.terms).eligibility("C01", false, 2881)

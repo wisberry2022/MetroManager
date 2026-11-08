@@ -59,3 +59,13 @@ P05는 유효 사업계약·정부지급을 확인한 뒤 ID/효력/R·현재자
 | Q11~12 | 계약/지급1회·현재/당시·미지급자료·P05부작용0 자동, 제품계약/지급/P05읽기전용 GUI. Q12는PARTIAL |
 
 개발자의 GUI 관찰은 디자인 독립 검수를 대체하지 않는다. 전체A01-Q01~12/S2-02·03·08/Stage2 DONE을 자기선언하지 않는다. W04B·실제W05/W06·VS01완주·Windows export/성능·전체MVP는 NOT_RUN. 최종명령·소스해시·로그·PNG·head/CI는 결과와 PR에 기록한다.
+
+## QA-001·QA-002 후속 보완 / RFC-DEV-019-02
+
+Design [문구·배치 회신](https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859)에 따라 P02 고정조건 다음·현재 자격/행동 및 응찰 버튼 이전에 읽기 전용 공개 평가기준을 표시한다. 미응찰에서도 경쟁자 고정점수/구성과 terms.tie_priority를 읽을 수 있다. 제목은 고정이며 decision이 비었을 때만 미확정 안내를 표시한다. 실제 마감 판정 사본·현재자금·접수이력은 기존처럼 분리한다.
+
+Session tender_ui에 evaluation_criteria: Dictionary[tender_id, Dictionary]를 추가한다. competitor_display_score는 {numerator:int, denominator:int}, competitor_capability/competitor_financial_score는 점 단위 int, tie_priority는 고정 역할 배열이다. 공고 terms에서 검증된 경쟁자 능력/재무점수(정수0~100)를 읽으며 미유효 입력은 해당 행을 생략한다. 기존 PublicTender.score의 입력 단위에 맞춰 고정 경쟁자 재무점수×10000을 전달한다. 이는 회사 현금이 아니며 회사 원장/자격/시각/낙찰을 변경하거나 플레이어 점수를 미리 계산하지 않는다. View는 유리수 문자열만 표시하고 누락은 “경쟁자 평가 자료 없음”으로 구분한다. 기존 DEV018 snapshot 봉투와 terms/schema/UI revision은 보존한다.
+
+현재 reason_codes는 기존 한국어 매핑으로 공급 순서대로 한 줄씩 표시한다. 미등록은 “행동 제한 사유를 확인할 수 없습니다 (코드: …)”로 표시한다. 원 snapshot의 코드와 allowed_actions는 변경하지 않는다. 과거 요청 사유와 현재 사유를 혼합하지 않는다.
+
+검증 전용 CASES에 REASON_FALLBACK을 추가했다. 종료/미등록 긴 코드/사업 진행 중의 다중 사유 packet과 비활성 행동만 공급하며 모델 경제 상태는 바꾸지 않는다. 제품 main에서 해당 fixture를 참조하지 않는다. [보완 결과](../tasks/DEV-019_QA_FIX_RESULT.md) 및 [증거](DEV-019_QA_FIX_VALIDATION.json). P05는 기존 읽기 전용 인계 / Q12 PARTIAL이며 공사 기능은 추가하지 않는다.
