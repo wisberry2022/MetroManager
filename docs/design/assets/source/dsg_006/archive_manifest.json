@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "task_id": "DSG-006",
+  "prepared_by_agent_id": "AGT-DSG-0003",
+  "prepared_on": "2026-11-08",
+  "base_sha": "7735ccff22952dabdf1371c2b29d81b620f4a9c0",
+  "status": "OWNER_APPROVED_SUBMISSION_MAIN_PUBLICATION_PENDING",
+  "final_spec_status": "FINAL_SPEC_PENDING",
+  "original_attribution": "Historical Track B authorship and then-unregistered Agent status preserved. Current preparer identity does not retroactively activate the original author.",
+  "historical_reference": "docs/design/tasks/DSG-006_RESULT.md#6",
+  "manifest_self_hash": "not included to avoid self-reference",
+  "files": [
+    {
+      "path": "docs/design/tasks/DSG-006_VISUAL_ARCHIVE_PREPARATION.md",
+      "role": "new_document",
+      "bytes": 6993,
+      "sha256": "c32257adcccb69cbaf992ed70e6ce45048f29eac549cf22477779503b0ebbc09"
+    },
+    {
+      "path": "docs/design/tasks/DSG-006_TRACK_B_PROGRESS_SNAPSHOT.md",
+      "role": "new_document",
+      "bytes": 7038,
+      "sha256": "c4751ad16519e1d8a5508608a5b82d6ff6910d4dcc745629e793e56e098419fd"
+    },
+    {
+      "path": "docs/design/tasks/DSG-006_VISUAL_ARCHIVE_RESULT.md",
+      "role": "new_document",
+      "bytes": 5771,
+      "sha256": "2d8d42e426be80739dde19dde21a92c08b629a8e55dd5a039c5683faaea1fcf6"
+    },
+    {
+      "path": "docs/design/assets/source/dsg_006/metro-concept-comparison.html",
+      "role": "source_byte_exact",
+      "bytes": 19344,
+      "sha256": "f8f4db0e7361c102bb17201b7faeb22fd1ddad91778f31cd85b3fdbc827af0aa"
+    },
+    {
+      "path": "docs/design/assets/source/dsg_006/metro-four-more-concepts.html",
+      "role": "source_byte_exact",
+      "bytes": 22136,
+      "sha256": "4efa91904ef3a963d4f14009adb7238dd441a74dbbd07667dc116955c0089676"
+    },
+    {
+      "path": "docs/design/assets/source/dsg_006/archive_viewer.html",
+      "role": "derived_viewer",
+      "bytes": 48119,
+      "sha256": "f643593cbd595f2ba158692c58d03b3f9531bcd3d95a4f2cb265af92f8c0e7c7"
+    },
+    {
+      "path": "docs/design/assets/exports/dsg_006/first_three_default.png",
+      "role": "derived_capture",
+      "bytes": 98592,
+      "sha256": "e26d72a9330411292ca84174b8833f6104f40ada829b9c35d3e64475c4de5aaa"
+    },
+    {
+      "path": "docs/design/assets/exports/dsg_006/diorama_default.png",
+      "role": "derived_capture",
+      "bytes": 95484,
+      "sha256": "b42b05f4899944082ee494a85aff36a157b11fc339fe13050a48daebbc3a96dc"
+    }
+  ],
+  "source_groups": [
+    {
+      "file": "metro-concept-comparison.html",
+      "label": "최초 3안",
+      "source_sha256": "f8f4db0e7361c102bb17201b7faeb22fd1ddad91778f31cd85b3fdbc827af0aa",
+      "bytes": 19344,
+      "variants": [
+        "생활 도시",
+        "철도 관제반",
+        "도시 계획 도면"
+      ]
+    },
+    {
+      "file": "metro-four-more-concepts.html",
+      "label": "추가 4안",
+      "source_sha256": "4efa91904ef3a963d4f14009adb7238dd441a74dbbd07667dc116955c0089676",
+      "bytes": 22136,
+      "variants": [
+        "철도 모형 디오라마",
+        "역무실 업무 책상",
+        "레트로 PC 경영",
+        "공공교통 안내"
+      ]
+    }
+  ],
+  "viewer_limitations": [
+    "new host wrapper, not pixel-exact reconstruction of prior chat",
+    "no openai widget state persistence or host events",
+    "no Tweak background detail toggle; original defaults retained",
+    "no game connection or production spec acceptance"
+  ],
+  "browser_validation": {
+    "checks": 173,
+    "runtime_exceptions": 0,
+    "widths_css_px": [
+      1200,
+      760
+    ],
+    "variants": 7,
+    "scenes": [
+      "normal",
+      "warning"
+    ],
+    "tested_information_focus": "S12",
+    "horizontal_overflow_observations": 0,
+    "captures": [
+      {
+        "file": "first_three_default.png",
+        "width": 1200,
+        "height": 1444,
+        "group": "0",
+        "variant": "0",
+        "scene": "normal",
+        "focus": "S03"
+      },
+      {
+        "file": "diorama_default.png",
+        "width": 1200,
+        "height": 1446,
+        "group": "1",
+        "variant": "0",
+        "scene": "normal",
+        "focus": "S03"
+      }
+    ],
+    "evidence_scope": "new local viewer only, not historical QA or actual Godot"
+  },
+  "not_run": [
+    "GAME_AUTOMATED_TESTS",
+    "GODOT_LOAD",
+    "PRODUCT_GUI",
+    "TARGET_PC_PERFORMANCE",
+    "FONT_DPI_FILTER_ACCEPTANCE",
+    "WINDOWS_BUILD",
+    "EXTERNAL_USABILITY",
+    "MAIN_PUBLICATION"
+  ]
+}

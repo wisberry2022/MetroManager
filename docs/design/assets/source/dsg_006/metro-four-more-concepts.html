@@ -1,0 +1,218 @@
+<div id="metro-more" aria-label="DSG-006 추가 콘셉트 네 가지 비교">
+  <div class="viz-controls" role="group" aria-label="공통 비교 장면">
+    <button type="button" class="btn btn-primary" aria-pressed="true" data-case="normal">장면 A · 기본 계획</button>
+    <button type="button" class="btn" aria-pressed="false" data-case="warning">장면 B · 잠금·조회 실패</button>
+    <span class="text-small">DSG-006 · CONCEPT_ONLY / NON_PRODUCTION</span>
+  </div>
+  <div class="viz-carousel" aria-label="추가 비주얼 콘셉트 4안" data-previous-label="이전 시안" data-next-label="다음 시안">
+    <section data-variant="철도 모형 디오라마"><div class="product model" data-type="model" aria-label="철도 모형 디오라마 시안"></div></section>
+    <section data-variant="역무실 업무 책상" hidden><div class="product desk" data-type="desk" aria-label="역무실 업무 책상 시안"></div></section>
+    <section data-variant="레트로 PC 경영" hidden><div class="product retro" data-type="retro" aria-label="레트로 PC 경영 시안"></div></section>
+    <section data-variant="공공교통 안내" hidden><div class="product transit" data-type="transit" aria-label="공공교통 안내 시안"></div></section>
+  </div>
+</div>
+<style>
+#metro-more > .viz-controls {margin-bottom:14px;padding-right:90px}
+#metro-more .product {--bg:#e7dfcf;--panel:#fcf8ec;--ink:#273e37;--sub:#53675d;--border:#9ba996;--map:#a9c58c;--route:#164f42;--onroute:#fff9e9;--warn:#8a3512;--warnbg:#f8e3c1;--detail:1;--accent:#ca8a53;color-scheme:light;background:var(--bg);color:var(--ink);font:14px/1.5 'Malgun Gothic','Segoe UI',sans-serif;padding:20px;min-height:1030px;box-sizing:border-box;border:1px solid var(--border)}
+#metro-more .product * {box-sizing:border-box}
+#metro-more .product h2,#metro-more .product h3,#metro-more .product p {margin:0}
+#metro-more .product h2 {font-size:24px;font-weight:600;letter-spacing:-.04em}
+#metro-more .product h3 {font-size:14px;font-weight:600}
+#metro-more .brand {display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+#metro-more .micro {font-size:11px;letter-spacing:.15em;color:var(--sub)}
+#metro-more .subtitle {font-size:12px;color:var(--sub)}
+#metro-more .swatches {display:flex;gap:4px;margin-top:6px;justify-content:flex-end}
+#metro-more .swatches i {width:18px;height:6px;background:var(--ink)}
+#metro-more .swatches i:nth-child(2) {background:var(--route)}
+#metro-more .swatches i:nth-child(3) {background:var(--accent)}
+#metro-more .hud {display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding:12px 14px;background:var(--panel);border:1px solid var(--border)}
+#metro-more .clock {font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}
+#metro-more .time-buttons {display:flex;gap:4px;flex-wrap:wrap}
+#metro-more .product button {font:inherit;padding:5px 9px;border:1px solid var(--border);border-radius:0;color:var(--ink);background:var(--panel)}
+#metro-more .product button:disabled {opacity:.6}
+#metro-more .product button:focus-visible {outline:3px solid var(--ink);outline-offset:3px}
+#metro-more .time-buttons .chosen {background:var(--ink);color:var(--panel)}
+#metro-more .workspace {display:grid;grid-template-columns:minmax(0,1fr) 252px;gap:16px;margin-top:16px;align-items:start}
+#metro-more .map-window {min-width:0;background:var(--panel);border:1px solid var(--border)}
+#metro-more .window-title {padding:9px 12px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;gap:6px;flex-wrap:wrap}
+#metro-more .window-title span {font-size:12px;color:var(--sub)}
+#metro-more .board {margin:12px;position:relative;background:var(--map);border:5px solid #7d9474;border-bottom:12px solid #687e60}
+#metro-more .map {position:relative;height:336px;isolation:isolate}
+#metro-more .landscape {position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;pointer-events:none;opacity:var(--detail)}
+#metro-more .net {position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+#metro-more .edge {fill:none;stroke:var(--border);stroke-width:1;vector-effect:non-scaling-stroke}
+#metro-more .rail-base {fill:none;stroke:#eadfbb;stroke-width:13;vector-effect:non-scaling-stroke}
+#metro-more .rail {fill:none;stroke:var(--route);stroke-width:5;vector-effect:non-scaling-stroke}
+#metro-more .locked .rail {stroke-dasharray:10 6}
+#metro-more .station {position:absolute;transform:translate(-50%,-50%);width:56px;min-height:38px;z-index:2;padding:3px!important;border:2px solid var(--ink)!important;font-size:13px!important;font-weight:600!important}
+#metro-more .station.in-plan {background:var(--route);color:var(--onroute)}
+#metro-more .station.selected {outline:3px solid var(--accent);outline-offset:4px}
+#metro-more .locked .station:not(.in-plan) {border-style:dashed!important}
+#metro-more .model .station {border-bottom-width:5px!important;box-shadow:3px 4px 0 #5f7757}
+#metro-more .model .station.in-plan:before {content:'';position:absolute;left:5px;right:5px;top:-7px;height:5px;background:#b87449;box-shadow:3px -3px 0 #b87449;pointer-events:none}
+#metro-more .district {position:absolute;font-size:11px;color:var(--ink);background:var(--panel);padding:2px 5px;z-index:1}
+#metro-more .district.nw {top:5px;left:5px} #metro-more .district.ne {top:5px;right:5px}
+#metro-more .district.sw {bottom:5px;left:5px} #metro-more .district.se {bottom:5px;right:5px}
+#metro-more .map-caption {padding:0 12px 10px;font-size:12px;color:var(--sub)}
+#metro-more .map-legend {display:flex;gap:5px 14px;flex-wrap:wrap;padding:9px 12px;border-top:1px solid var(--border);font-size:12px}
+#metro-more .selection {background:var(--panel);border-top:1px solid var(--border);padding:10px 12px;min-height:66px}
+#metro-more .selection span {display:block;color:var(--sub);font-size:12px;overflow-wrap:anywhere}
+#metro-more .panel {background:var(--panel);border:1px solid var(--border);padding:12px}
+#metro-more .panel+.panel {margin-top:12px}
+#metro-more .route-list {display:grid;grid-template-columns:repeat(2,1fr);gap:5px;margin:10px 0}
+#metro-more .route-list button {text-align:left;font-size:12px;min-height:38px;padding:5px}
+#metro-more .route-list button.selected {border:2px solid var(--ink);background:var(--bg)}
+#metro-more .edit-buttons {display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}
+#metro-more .edit-buttons button {font-size:12px}
+#metro-more .prediction {margin-top:8px!important}
+#metro-more .funds {padding:12px;background:var(--panel);border:1px solid var(--border);margin-top:16px}
+#metro-more .funds-title {display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;margin-bottom:10px}
+#metro-more .money {display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+#metro-more .money span {display:block;font-size:12px;color:var(--sub)}
+#metro-more .money b {font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+#metro-more .report {margin-top:10px;padding-top:8px;border-top:1px solid var(--border);font-size:12px}
+#metro-more .notice {margin-top:14px;background:var(--panel);border-left:5px solid var(--route);padding:10px 12px;min-height:73px}
+#metro-more .notice strong {display:block;font-weight:600}
+#metro-more .notice.warning {background:var(--warnbg);color:var(--warn);border:2px dashed var(--warn)}
+#metro-more .footer {display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;padding-top:12px;font-size:11px;color:var(--sub)}
+#metro-more .desk {--bg:#635247;--panel:#f6efd9;--ink:#343d35;--sub:#596557;--border:#b9ad8c;--map:#e7dec1;--route:#385848;--onroute:#fcf6df;--accent:#a2573e;padding:24px;border:8px solid #4e4036}
+#metro-more .desk .brand {background:#273c35;color:#f7edcd;padding:12px;border:3px solid #b4a17a;margin-bottom:14px}
+#metro-more .desk .brand .micro,#metro-more .desk .brand .subtitle {color:#e1d5af}
+#metro-more .desk .brand h2 {font-family:Georgia,'Malgun Gothic',serif;letter-spacing:.06em}
+#metro-more .desk .hud {border:3px double var(--ink);background:var(--panel)}
+#metro-more .desk .workspace {grid-template-columns:minmax(0,1fr) 240px;gap:20px}
+#metro-more .desk .map-window {border-top:10px solid #c3b798;box-shadow:5px 6px 0 #433c30}
+#metro-more .desk .board {border:1px solid #9c957b;margin:14px;background:var(--map)}
+#metro-more .desk .panel {border:0;border-top:8px solid #c7b991;box-shadow:4px 5px 0 #433c30}
+#metro-more .desk .panel h3 {border-bottom:2px solid var(--ink);padding-bottom:6px}
+#metro-more .desk .station {background:#f9f2dc;border:1px solid var(--ink)!important;border-bottom:3px solid var(--ink)!important}
+#metro-more .desk .station.in-plan {background:var(--route)}
+#metro-more .desk .funds {border:3px double var(--ink)}
+#metro-more .desk .money>div {border-bottom:1px solid var(--border);padding-bottom:5px}
+#metro-more .desk .footer {color:#f3e7c6}
+#metro-more .retro {--bg:#788e96;--panel:#d4d7cd;--ink:#172b37;--sub:#3e515a;--border:#7a8586;--map:#87aa76;--route:#234cb0;--onroute:#fffef0;--accent:#aa5b27;font-family:Consolas,'Malgun Gothic',monospace;padding:10px;border:3px outset #e7ebdb}
+#metro-more .retro .brand {background:#183c6c;color:#f6f5dc;padding:8px 12px;margin-bottom:0}
+#metro-more .retro .brand .micro,#metro-more .retro .brand .subtitle {color:#d7e8ef}
+#metro-more .retro .brand h2 {font-size:19px;letter-spacing:0}
+#metro-more .retro .hud {margin-top:6px;border:2px outset #e6e8da}
+#metro-more .retro .workspace {gap:8px;grid-template-columns:minmax(0,1fr) 245px;margin-top:8px}
+#metro-more .retro .map-window,#metro-more .retro .panel,#metro-more .retro .funds {border:3px outset #e8ebdd}
+#metro-more .retro .window-title {background:#183c6c;color:#f5f3dc;font-weight:600;padding:5px 8px}
+#metro-more .retro .window-title span {color:#d7e8ef}
+#metro-more .retro .board {border:3px inset #e8ebdd;margin:8px}
+#metro-more .retro .panel {padding:8px}
+#metro-more .retro .panel h3 {background:#586e78;color:#fffde8;padding:4px 6px;margin:-5px -5px 8px}
+#metro-more .retro button {border:2px outset #edf0e2}
+#metro-more .retro .station {border:2px outset #dce5cf!important}
+#metro-more .retro .funds {margin-top:8px}
+#metro-more .retro .notice {border:2px inset #e4e6d8}
+#metro-more .transit {--bg:#f8f7ef;--panel:#fffef7;--ink:#182b38;--sub:#4c606a;--border:#aab5b6;--map:#f1f2e8;--route:#007b69;--onroute:#fffef5;--accent:#e7b339;padding:24px;border-top:12px solid var(--route)}
+#metro-more .transit .brand h2 {font-size:29px;font-weight:700}
+#metro-more .transit .brand {border-bottom:3px solid var(--ink);padding-bottom:14px}
+#metro-more .transit .hud {background:var(--ink);color:var(--panel);border:0}
+#metro-more .transit .hud .subtitle {color:#c9d8d9}
+#metro-more .transit .time-buttons button {background:#f7f7eb;color:#182b38}
+#metro-more .transit .time-buttons button.chosen {background:#e7b339;color:#182b38}
+#metro-more .transit .workspace {grid-template-columns:minmax(0,1fr) 236px;gap:24px}
+#metro-more .transit .map-window {border:0}
+#metro-more .transit .window-title {border:0;border-left:6px solid var(--route);padding:3px 10px;margin:6px 0 14px}
+#metro-more .transit .board {border:0;margin:0;background:var(--map)}
+#metro-more .transit .landscape {display:none}
+#metro-more .transit .rail-base {stroke:#f1f2e8;stroke-width:16}
+#metro-more .transit .rail {stroke-width:9}
+#metro-more .transit .station {border-radius:20px;width:58px;border:3px solid var(--route)!important;font-family:'Segoe UI','Malgun Gothic',sans-serif!important}
+#metro-more .transit .panel {border:0;border-top:5px solid var(--ink);padding:12px 0}
+#metro-more .transit .panel+.panel {margin-top:14px}
+#metro-more .transit .route-list {grid-template-columns:1fr;margin-left:12px;border-left:4px solid var(--route);padding-left:12px;gap:3px}
+#metro-more .transit .route-list button {border:0;border-bottom:1px solid var(--border);min-height:30px;padding:2px 6px}
+#metro-more .transit .route-list button.selected {background:var(--route);color:var(--onroute)}
+#metro-more .transit .map-caption {padding:10px 0}
+#metro-more .transit .money>div {border-top:3px solid var(--route);padding-top:5px}
+#metro-more .transit .funds {border:0;padding:12px 0}
+@media(max-width:780px){
+ #metro-more .workspace,#metro-more .desk .workspace,#metro-more .retro .workspace,#metro-more .transit .workspace {grid-template-columns:minmax(0,1fr)}
+ #metro-more .sidebar {display:grid;grid-template-columns:1fr 1fr;gap:12px}
+ #metro-more .panel+.panel {margin-top:0!important}
+ #metro-more .money {grid-template-columns:repeat(3,minmax(0,1fr))}
+ #metro-more .transit .route-list {grid-template-columns:1fr 1fr}
+ #metro-more .product {min-height:1320px}
+}
+@media(max-width:490px){
+ #metro-more .product {padding:10px;min-height:1710px}
+ #metro-more .desk {border-width:4px}
+ #metro-more .sidebar {grid-template-columns:minmax(0,1fr)}
+ #metro-more .money {grid-template-columns:repeat(2,minmax(0,1fr))}
+ #metro-more .board,#metro-more .desk .board {margin:5px;border-left-width:1px;border-right-width:1px}
+ #metro-more .product h2,#metro-more .transit .brand h2 {font-size:21px}
+ #metro-more .station {width:48px;font-size:12px!important}
+ #metro-more .transit .station {width:48px}
+ #metro-more .micro {letter-spacing:.06em}
+}
+@media(pointer:coarse){#metro-more .product button {min-height:44px}}
+</style>
+<script>
+(() => {
+ const root=document.getElementById('metro-more');
+ const meta={model:['TABLETOP RAILWAY','철도 모형 디오라마','작은 도시를 조립하는 즐거움'],desk:['METROMANAGER / STATION OFFICE','역무실 업무 책상','지도판 · 업무철 · 회사 장부'],retro:['METROMANAGER.EXE / CITY C01','레트로 PC 경영 시뮬레이션','픽셀 도시와 정밀한 업무 도구'],transit:['C01 / METRO MANAGEMENT','공공교통 안내 디자인','큰 글자 · 노선 기호 · 명료한 안내']};
+ const stops=['S01','S02','S03','S04','S08','S12'];
+ const stations=Array.from({length:12},(_,i)=>{const d=i<8?i+1:i-3;return{id:'S'+String(i+1).padStart(2,'0'),x:i%4,y:Math.floor(i/4),d:'D'+String(d).padStart(2,'0'),g:'G'+String(Math.ceil(d/2)).padStart(2,'0')};});
+ const funds=[['총 현금 C','1,000,000'],['제한 자금 R','0'],['자유 자금 F','1,000,000'],['공사 예약 K','0'],['약정 가용 A','1,000,000'],['운영 미지급 B','0']];
+ let state={scene:'normal',focus:'S03'};
+ function restore(value){const s=value?.modelContent;if(s?.task!=='DSG-006-extra')return;state.scene=s.scene==='warning'?'warning':'normal';state.focus=stations.some(p=>p.id===s.focus)?s.focus:'S03';}
+ restore(window.openai?.widgetState);
+ const edges=stations.flatMap(s=>{const p=`${50+s.x*100} ${50+s.y*100}`;return[(s.x<3?`<path class="edge" d="M${p} h100"/>`:''),(s.y<2?`<path class="edge" d="M${p} v100"/>`:'')];}).join('');
+ const markers=stations.map(s=>{const n=stops.indexOf(s.id);return `<button type="button" class="station cursor-interaction ${n>=0?'in-plan':''}" data-station="${s.id}" style="left:${12.5+s.x*25}%;top:${(s.y+.5)/3*100}%" aria-label="${s.id}, ${s.g}, ${s.d}, ${n>=0?'계획 순서 '+(n+1):'미선택 후보'}, 정보 보기">${n>=0?(n+1)+' ':''}${s.id}</button>`;}).join('');
+ const map=`<div class="map" role="group" aria-label="C01의 후보역 12개, 4열 3행의 추상 배치"><canvas class="landscape" width="400" height="300" aria-hidden="true"></canvas><svg class="net" viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true">${edges}<path class="rail-base" d="M50 50 H350 V250"/><path class="rail" d="M50 50 H350 V250"/></svg>${markers}<span class="district nw">G01</span><span class="district ne">G02</span><span class="district sw">G03</span><span class="district se">G04</span></div>`;
+ root.querySelectorAll('[data-type]').forEach(el=>{
+  const m=meta[el.dataset.type];
+  el.innerHTML=`<div class="brand"><div><div class="micro">${m[0]}</div><h2>${m[1]}</h2></div><div><div class="subtitle">${m[2]}</div><div class="swatches" aria-hidden="true"><i></i><i></i><i></i></div></div></div>
+  <div class="hud"><div><div class="subtitle">회사 · 시철 / 관할 · C01</div><div class="clock">1일 06:00 · 일시정지</div></div><div class="time-buttons" aria-label="시간 조작 외관 예시"><button disabled>정지</button><button disabled>재개</button><button disabled class="chosen">1×</button><button disabled>2×</button><button disabled>4×</button></div></div>
+  <div class="workspace"><div class="map-window"><div class="window-title"><h3>도시 지도 · C01</h3><span>행정 레이어 / 후보 12역</span></div><div class="board">${map}</div><div class="map-caption">좌표 기반 추상 배치 · 구획은 관할 판정 도형이 아님</div><div class="map-legend"><span>번호 · 계획 순서</span><span>가는 선 · 후보 연결</span><span>굵은 선 · 계획</span><span class="lock-key" hidden>점선 · 편집 불가</span></div><div class="selection" aria-live="polite"></div></div>
+  <div class="sidebar"><div class="panel"><h3>노선 계획 · P-A 예시</h3><div class="subtitle">고유 6역 / 계획 연결 확인</div><div class="route-list">${stops.map((id,i)=>`<button type="button" class="cursor-interaction" data-station="${id}" aria-label="계획 순서 ${i+1}, ${id}, 정보 보기">${String(i+1).padStart(2,'0')} · ${id}</button>`).join('')}</div><div class="edit-buttons"><button disabled>위로</button><button disabled>아래로</button><button disabled>제거</button><button disabled>되돌리기</button></div><div class="subtitle">편집 버튼 · 외관 예시</div></div>
+  <div class="panel"><h3>예측 · 현재 계획</h3><p class="prediction"></p><div class="subtitle">예측과 실제 운행·실적 구분</div><div class="edit-buttons"><button disabled>예측 계산</button></div></div></div></div>
+  <div class="funds"><div class="funds-title"><h3>현재 자금 · 1일 06:00</h3><span class="subtitle">게임 통화 단위 / 읽기 전용</span></div><div class="money">${funds.map(([k,v])=>`<div><span>${k}</span><b>${v}</b></div>`).join('')}</div><div class="report">과거 확정 보고 · 확정 보고 없음 / 현재 자금과 별도</div></div>
+  <div class="notice" aria-live="polite"></div><div class="footer"><span>DSG-006 · CONCEPT_ONLY / NON_PRODUCTION</span><span>동일 고정 데이터 · PROVISIONAL / 제품 규격 미확정</span></div>`;
+  paint(el);
+ });
+ function paint(el){
+  const canvas=el.querySelector('canvas');const c=canvas.getContext('2d');const type=el.dataset.type;
+  c.imageSmoothingEnabled=false;
+  if(type==='desk'){
+   c.fillStyle='#b8b195';for(let x=0;x<=400;x+=20)c.fillRect(x,0,1,300);for(let y=0;y<=300;y+=20)c.fillRect(0,y,400,1);
+   c.fillStyle='#cec5a9';for(let i=0;i<12;i++){let x=(i%4)*100+12,y=Math.floor(i/4)*100+18;c.fillRect(x,y,23,14);c.fillRect(x+49,y+60,22,11);}return;
+  }
+  if(type==='transit')return;
+  c.fillStyle=type==='retro'?'#8db27a':'#b3cb91';c.fillRect(0,0,400,300);
+  c.fillStyle=type==='retro'?'#849d72':'#a2bb81';for(let y=0;y<300;y+=12)for(let x=0;x<400;x+=12)if((x+y)%36===0)c.fillRect(x,y,3,3);
+  c.fillStyle='#c8c5a5';for(let x=50;x<400;x+=100)c.fillRect(x-10,0,20,300);for(let y=50;y<300;y+=100)c.fillRect(0,y-9,400,18);
+  c.fillStyle='#e3dec0';for(let x=50;x<400;x+=100)for(let y=0;y<300;y+=16)c.fillRect(x,y,1,8);
+  for(let i=0;i<12;i++){
+   let x=(i%4)*100+8,y=Math.floor(i/4)*100+10;
+   c.fillStyle='#769167';c.fillRect(x+4,y+9,25,20);
+   c.fillStyle=type==='retro'?'#bfc7b1':'#eee1ba';c.fillRect(x,y+6,23,19);
+   c.fillStyle=['#b07552','#657f82','#927552'][i%3];c.fillRect(x-2,y,27,8);c.fillRect(x+2,y-3,19,3);
+   c.fillStyle='#5a7066';c.fillRect(x+4,y+11,4,5);c.fillRect(x+14,y+11,4,5);
+   c.fillStyle='#557c51';c.fillRect(x+68,y+67,9,10);c.fillRect(x+65,y+71,15,6);c.fillStyle='#6a6246';c.fillRect(x+71,y+77,3,5);
+   if(type==='model'){c.fillStyle='#f1e5bd';c.fillRect(x+63,y+12,17,12);c.fillStyle='#72878b';c.fillRect(x+61,y+8,21,6);}
+  }
+ }
+ function render(){
+  const warning=state.scene==='warning';const s=stations.find(p=>p.id===state.focus);
+  root.querySelectorAll('[data-case]').forEach(b=>{const active=b.dataset.case===state.scene;b.setAttribute('aria-pressed',String(active));b.classList.toggle('btn-primary',active);});
+  root.querySelectorAll('.product').forEach(el=>{
+   el.querySelector('.map').classList.toggle('locked',warning);el.querySelector('.lock-key').hidden=!warning;
+   el.querySelectorAll('[data-station]').forEach(b=>{const selected=b.dataset.station===state.focus;b.classList.toggle('selected',selected);b.setAttribute('aria-pressed',String(selected));});
+   el.querySelector('.selection').innerHTML=`<strong>정보 선택 · ${s.id}</strong><span>P01 &gt; C01 &gt; ${s.g} &gt; ${s.d} &gt; ${s.id}</span>`;
+   el.querySelector('.prediction').textContent=warning?'! 예측 조회 실패 · 현재값 확인 불가':'자료 없음 · 아직 계산하지 않음';
+   const notice=el.querySelector('.notice');notice.classList.toggle('warning',warning);
+   notice.innerHTML=warning?'<strong>! 편집 불가 · 최신 허용 상태를 확인할 수 없음</strong>다음 행동 · 최신 상태 재조회 / 역 정보 열람 유지 / 과거 명령 결과 · 없음':'<strong>계획 편집 단계 · 사업 계약·개통 상태와 구분</strong>다음 행동 · 역 정보 확인 / 과거 명령 결과 · 없음';
+  });
+ }
+ function persist(){window.openai?.setWidgetState?.({modelContent:{task:'DSG-006-extra',scene:state.scene,focus:state.focus},privateContent:null}).catch(()=>{});}
+ root.querySelectorAll('[data-case]').forEach(b=>b.addEventListener('click',()=>{state.scene=b.dataset.case;render();persist();}));
+ root.querySelectorAll('[data-station]').forEach(b=>b.addEventListener('click',()=>{state.focus=b.dataset.station;render();persist();}));
+ window.addEventListener('openai:set_globals',e=>{restore(e.detail?.globals?.widgetState);render();});
+ render();
+ if(globalThis.Tweak){root.querySelectorAll('.product').forEach(el=>{const design={detail:true};const tweak=new Tweak({container:el,onChange:()=>el.style.setProperty('--detail',design.detail?'1':'0')});tweak.addToggle(design,'detail',{label:'지도 배경 디테일'});});}
+})();
+</script>
