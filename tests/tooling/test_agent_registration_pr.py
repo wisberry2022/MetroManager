@@ -159,6 +159,23 @@ class RegistrationPRTests(unittest.TestCase):
                 self.assertFalse(any("merge" in path or (data and data.get("force"))
                                      for _, path, data in api.calls))
 
+    def test_partial_failure_has_stage_and_possible_refs_without_claiming_success(self):
+        with repository("INF", rows=[full_row("INF")]) as f, workflow():
+            plan = prepare(f)
+            for api, stage, branch_attempted, pr_attempted in [
+                    (FakeGitHub(f.base, ["d" * 40]), "remote_base", False, False),
+                    (FakeGitHub(f.base, fail_ref=True), "branch_creation", True, False),
+                    (FakeGitHub(f.base, fail_pr=True), "pr_creation", True, True)]:
+                with self.subTest(stage=stage), self.assertRaises(writer.SubmissionError) as caught:
+                    writer.publish(api, plan)
+                context = caught.exception.recovery_context
+                self.assertEqual(context["stage"], stage)
+                self.assertEqual(context["branch"], plan["branch"])
+                self.assertEqual(context["branch_creation_attempted"], branch_attempted)
+                self.assertEqual(context["pr_creation_attempted"], pr_attempted)
+                self.assertNotIn("PRIVATE", json.dumps(context))
+                self.assertNotIn("pr_created", context)  # An attempted request is not a success receipt.
+
     def test_plan_tampering_cannot_write_other_paths_or_activate(self):
         with repository("INF", rows=[full_row("INF")]) as f, workflow():
             original = prepare(f)
@@ -191,10 +208,19 @@ class RegistrationPRTests(unittest.TestCase):
             list(writer.pages(Endless(), "pulls?state=open", 1))
 
     def test_api_errors_and_redirects_never_leak_tokens_or_raw_responses(self):
+        with patch.object(writer, "build_opener") as opener:
+            with self.assertRaisesRegex(writer.SubmissionError, "WRITER_TOKEN_MISSING"):
+                writer.GitHub(None)
+            opener.assert_not_called()
         client = writer.GitHub("PRIVATE-FAKE-TOKEN")
         with patch.object(client.opener, "open", side_effect=HTTPError("PRIVATE-URL", 403, "PRIVATE-BODY", {}, None)):
-            with self.assertRaisesRegex(writer.SubmissionError, "^API_REQUEST_FAILED$"):
+            with self.assertRaisesRegex(writer.SubmissionError, "^API_HTTP_403$"):
                 client.request("GET", "git/ref/heads/main")
+        for status in (401, 409, 422, 429):
+            with self.subTest(status=status), patch.object(client.opener, "open",
+                    side_effect=HTTPError("PRIVATE-URL", status, "PRIVATE-BODY", {}, None)):
+                with self.assertRaisesRegex(writer.SubmissionError, f"^API_HTTP_{status}$"):
+                    client.request("GET", "git/ref/heads/main")
         with self.assertRaisesRegex(writer.SubmissionError, "API_REDIRECT_REFUSED"):
             writer.NoRedirect().redirect_request(None, None, 302, "", {}, "https://example.invalid")
 

@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "task_id": "DEV-017",
+  "primary_agent_id": "AGT-DEV-0002",
+  "base_sha": "fba3fd575c83e1eae234dc77aa9207898e0849b3",
+  "artifacts": [
+    {
+      "path": "docs/engineering/provenance/DEV-017_ACTIONS_REPLAY.json",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-017_PROVENANCE_OPERATIONS.md"
+      ],
+      "blob_sha": "770ab00530bcd60999c14dc7c6f815a63c0a6cda"
+    },
+    {
+      "path": "docs/engineering/provenance/DEV-017_OPERATIONS_REVIEW.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-017_PROVENANCE_OPERATIONS.md"
+      ],
+      "blob_sha": "45c3cf83685ae645c9254bb86fe3bf4f860d689a"
+    },
+    {
+      "path": "docs/engineering/provenance/DEV-017_REGISTRATION_RUN_PLAN.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-017_PROVENANCE_OPERATIONS.md"
+      ],
+      "blob_sha": "dc8b1db1fcabf62e65402434d838ae3bbdf32f9d"
+    },
+    {
+      "path": "docs/engineering/provenance/DEV-017_SOURCE_HASHES.json",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-017_PROVENANCE_OPERATIONS.md"
+      ],
+      "blob_sha": "029b137b00e24cd4504c2e76e566c18d2992dc0b"
+    },
+    {
+      "path": "docs/engineering/provenance/README.md",
+      "change_type": "modify",
+      "agent_id": "AGT-DEV-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-017_PROVENANCE_OPERATIONS.md"
+      ],
+      "blob_sha": "b9e5ea536d234bdee79a5749c68fc1e8706c5136",
+      "old_blob_sha": "5ee63db58378ffc34cd397f4302c6ff720c7c39a"
+    },
+    {
+      "path": "docs/engineering/provenance/RFC-DEV-017-01_REGISTRY_CONTRACT.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-017_PROVENANCE_OPERATIONS.md"
+      ],
+      "blob_sha": "05713be54c8d68b43a5db353fa43c794a69afa26"
+    },
+    {
+      "path": "docs/engineering/tasks/DEV-017_PROVENANCE_OPERATIONS.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-017_PROVENANCE_OPERATIONS.md"
+      ],
+      "blob_sha": "bf288944b8dba56ae154ff130b7b37f86bec35d1"
+    },
+    {
+      "path": "docs/engineering/tasks/DEV-017_RESULT.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-017_PROVENANCE_OPERATIONS.md"
+      ],
+      "blob_sha": "10fd194ee279eb6769c9cb6d8ab787e7f2ea96a8"
+    },
+    {
+      "path": "tests/tooling/test_agent_registration_pr.py",
+      "change_type": "modify",
+      "agent_id": "AGT-DEV-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-017_PROVENANCE_OPERATIONS.md"
+      ],
+      "blob_sha": "c58c7452c49d1be528d39eb12a7de202e8c335d2",
+      "old_blob_sha": "3a091c2a5d7dd7993766c60a9db63f6206ea6ca1"
+    },
+    {
+      "path": "tests/tooling/test_provenance_operations.py",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-017_PROVENANCE_OPERATIONS.md"
+      ],
+      "blob_sha": "d382b2370e14fe336445c8e37c4138d3a57288f8"
+    },
+    {
+      "path": "tools/agent_provenance.py",
+      "change_type": "modify",
+      "agent_id": "AGT-DEV-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-017_PROVENANCE_OPERATIONS.md"
+      ],
+      "blob_sha": "4af4a8423962e3b59997c84614fd299dc4c6629b",
+      "old_blob_sha": "79dcda79493be1cd47f45b57409093512ac327b3"
+    },
+    {
+      "path": "tools/agent_provenance_ci.py",
+      "change_type": "modify",
+      "agent_id": "AGT-DEV-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-017_PROVENANCE_OPERATIONS.md"
+      ],
+      "blob_sha": "348838fbad3226b1c48cf83fea9d5da4113107ca",
+      "old_blob_sha": "7aa0d7a8ccfb9d03eabff3b8775ad37bbd160987"
+    },
+    {
+      "path": "tools/agent_registration_pr.py",
+      "change_type": "modify",
+      "agent_id": "AGT-DEV-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-017_PROVENANCE_OPERATIONS.md"
+      ],
+      "blob_sha": "5586f391b3d0c59778717e30edc74f30ca05de23",
+      "old_blob_sha": "0363eea5a77bf112eb228dff8719acef33c99e36"
+    },
+    {
+      "path": "tools/agent_registry.py",
+      "change_type": "modify",
+      "agent_id": "AGT-DEV-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-017_PROVENANCE_OPERATIONS.md"
+      ],
+      "blob_sha": "b4b5d297bfe07212a5aadabe0f9305148b5a74dd",
+      "old_blob_sha": "efe2d1049c41e02fa95cd2480b7116cb7f154fdf"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "base_sha": "fba3fd575c83e1eae234dc77aa9207898e0849b3",
+  "change_commit_sha": null,
+  "sha256": {
+    "tools/agent_provenance.py": "16b6d3049b3d16a1c55e0c6a7d99551c9587e02a9abc5f1b5aee109251a451da",
+    "tools/agent_provenance_ci.py": "e7ba4cf6112aaea806ad178474fa07742e588181b6e86abd530a21cb3f37f582",
+    "tools/agent_registry.py": "e0ff396c35b3f35029b3873c7c87bc4fe02b130e8d0b968ee5f347091d0bcff1",
+    "tools/agent_registration_pr.py": "43706f73b50719c73bd6daea215f7241fafa4ba654c405c425767f583ad4fd2f",
+    "tests/tooling/test_agent_registration_pr.py": "20f02c6b2c98c7276493c1a0fcde7a3f2b0b099c5caf954d8667b4732cbf8fd1",
+    "tests/tooling/test_provenance_operations.py": "c85e25b97ecd5e7043d0856576db1ebebbdadbd909b57e50a60f25778f59c45a"
+  },
+  "unchanged_workflow_blobs": {
+    ".github/workflows/policy.yml": "c478cd91ecec1cfa3b041761c4a6414afe6d4c22",
+    ".github/workflows/department-policy.yml": "3a0f66ca2d1dc8063a17cf0903ff38f82a292e4a",
+    ".github/workflows/agent-provenance-report.yml": "68900f9f13de7719a5fd0a5f82e35a664733d382",
+    ".github/workflows/agent-registration-proposal.yml": "ce18fc7522ea66b21af889878abe72ca27b79ad3"
+  },
+  "snapshot_stage": "LOCAL_REVIEW_BEFORE_SUBMISSION",
+  "working_tree_uncommitted_at_snapshot": true
+}

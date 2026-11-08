@@ -94,7 +94,7 @@ def bootstrap_legacy(base):
 def trusted(base):
     protocol.require(protocol.SHA.fullmatch(base) is not None, "COMMIT_SHA")
     legacy = bootstrap_legacy(base)
-    data, agents = validate(protocol.blob(base, REGISTRY), legacy)
+    data, agents = validate(protocol.required_blob(base, REGISTRY, "REGISTRY_NOT_CONFIGURED"), legacy)
     return data, agents, legacy
 
 
