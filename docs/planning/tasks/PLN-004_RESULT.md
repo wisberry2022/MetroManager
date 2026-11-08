@@ -2,10 +2,10 @@
 
 - **담당:** Planning / 현행 후임 Game Designer
 - **작업:** PLN-004 / 2026-11-08
-- **상태:** \`REVIEW / OWNER_PR_MERGE_APPROVAL_PENDING / POST_MVP_IMPLEMENTATION_NOT_STARTED\`
+- **상태:** `REVIEW / OWNER_PR_MERGE_APPROVAL_PENDING / POST_MVP_IMPLEMENTATION_NOT_STARTED`
 - **근거:** Owner가 2026-11-08 현재 대화에서 회사 내부 상태값 정의의 후임 인계 및 **별도 PR** 제출을 명시 요청.
-- **기준 main:** \`98d56eb97f8a030912bea534ff1c330e9c40188e\`.
-- **브랜치:** \`codex/PLN-004-post-mvp-company-states\`.
+- **기준 main:** `98d56eb97f8a030912bea534ff1c330e9c40188e`.
+- **브랜치:** `codex/PLN-004-post-mvp-company-states`.
 
 ## 변경 결과
 
@@ -38,4 +38,4 @@
 
 이번 제출은 **후임 읽기용 공식 기획 기준 문서의 PR 검수 요청**이며, 승인된 상태값의 실제 구현·배포/Stage 완료 또는 후임 Planning의 권한 자동 승계를 뜻하지 않는다.
 
-\`main\` 병합·릴리스/실제 구현 및 FIN 외 후속 상세 수치 승인은 Owner/담당 부서의 별도 결정으로 진행한다.
+`main` 병합·릴리스/실제 구현 및 FIN 외 후속 상세 수치 승인은 Owner/담당 부서의 별도 결정으로 진행한다.

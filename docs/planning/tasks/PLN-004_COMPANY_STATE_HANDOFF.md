@@ -1,9 +1,9 @@
 # PLN-004 — POST-MVP 회사 내부 상태값 후임 인계 작업
 
-- **작성/담당:** Planning / 현행 후임 Game Designer (\`AGT-PLN-0002\` 역할 기준)
-- **기준 main:** \`98d56eb97f8a030912bea534ff1c330e9c40188e\` (제출 시점 재확인 대상)
+- **작성/담당:** Planning / 현행 후임 Game Designer (`AGT-PLN-0002` 역할 기준)
+- **기준 main:** `98d56eb97f8a030912bea534ff1c330e9c40188e` (제출 시점 재확인 대상)
 - **일자:** 2026-11-08 / 문서 버전 v1.0
-- **상태:** \`OWNER_DOCUMENT_PR_REQUESTED / REVIEW / SUCCESSION_HANDOFF_PREPARED\`
+- **상태:** `OWNER_DOCUMENT_PR_REQUESTED / REVIEW / SUCCESSION_HANDOFF_PREPARED`
 - **개별 Owner 지시:** 현재까지 확정된 회사 내부 상태값 정의를 후임 에이전트가 확인할 수 있도록 **별도 PR 생성 요청** (2026-11-08 현재 Planning 대화).
 - **범위:** 승인된 과거 Owner 결정의 문서화. 새로운 게임 규칙·점수·재무 거래/입찰 판정·이벤트를 승인하거나 구현하지 않음.
 - **공식 본문:** [PLN-004_POST_MVP_COMPANY_STATE_V0_7.md](../PLN-004_POST_MVP_COMPANY_STATE_V0_7.md)
@@ -24,15 +24,15 @@
 - Stage 2 W04A/05/06·기존 재무/시간/입찰 원장 및 화면/테스트 수정.
 - 신규 상태값의 실제 구현, 자동/GUI 테스트, 새로운 난이도·이벤트·평판/부채 시스템 구현.
 - 다른 부서 문서/등록부/정책/CI/Git 훅/도구 수정.
-- \`main\` 직접 Push·Merge·릴리스·배포; 후임 Planning 세대교체·Agent-ID 등록 자체(Infra/HQ/Owner 소관).
+- `main` 직접 Push·Merge·릴리스·배포; 후임 Planning 세대교체·Agent-ID 등록 자체(Infra/HQ/Owner 소관).
 
 ## 실제 제출 파일 (기획 경로 전용)
 
-- \`docs/planning/PLN-004_POST_MVP_COMPANY_STATE_V0_7.md\`
-- \`docs/planning/tasks/PLN-004_COMPANY_STATE_HANDOFF.md\`
-- \`docs/planning/tasks/PLN-004_RESULT.md\`
+- `docs/planning/PLN-004_POST_MVP_COMPANY_STATE_V0_7.md`
+- `docs/planning/tasks/PLN-004_COMPANY_STATE_HANDOFF.md`
+- `docs/planning/tasks/PLN-004_RESULT.md`
 
-브랜치 제안: \`codex/PLN-004-post-mvp-company-states\`; base=\`main\`. 하나의 동일 부모 커밋·문서만; PR 검수 후 Owner 결정 전 병합하지 않는다.
+브랜치 제안: `codex/PLN-004-post-mvp-company-states`; base=`main`. 하나의 동일 부모 커밋·문서만; PR 검수 후 Owner 결정 전 병합하지 않는다.
 
 ## 기획·부서 연계
 
@@ -50,7 +50,7 @@
 - 승인/제안/미승인/NOT_RUN을 항목별로 구별한다.
 - FIN-01~06 산식과 0/5/10 기준, FIN-07 미완성 상태를 혼동하지 않는다.
 - 현재 MVP의 C/R/F/K/A/B, 공개입찰 0~100 재무점수, 0~100 시민 만족도 독립 유지.
-- 파일 경로가 기획 소관에 한정되고 정상 커밋/PR 및 원격 \`policy\`/\`department-policy\` 검사를 확인한다.
+- 파일 경로가 기획 소관에 한정되고 정상 커밋/PR 및 원격 `policy`/`department-policy` 검사를 확인한다.
 - 후임이 재승인 없이 읽고 후속 지표 기획에 착수할 수 있다. 공식 기능 구현/검증 PASS와는 구분한다.
 
 ## 후속 미결 사항
