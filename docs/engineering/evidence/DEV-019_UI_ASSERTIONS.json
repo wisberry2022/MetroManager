@@ -1,0 +1,1117 @@
+{
+  "assertions": [
+    {
+      "actual": "86",
+      "expected": "86",
+      "label": "exact_decimal",
+      "passed": true
+    },
+    {
+      "actual": "80",
+      "expected": "80",
+      "label": "exact_decimal",
+      "passed": true
+    },
+    {
+      "actual": "79.99997",
+      "expected": "79.99997",
+      "label": "exact_decimal",
+      "passed": true
+    },
+    {
+      "actual": "80.0001",
+      "expected": "80.0001",
+      "label": "exact_decimal",
+      "passed": true
+    },
+    {
+      "actual": "0",
+      "expected": "0",
+      "label": "exact_decimal",
+      "passed": true
+    },
+    {
+      "actual": "100",
+      "expected": "100",
+      "label": "exact_decimal",
+      "passed": true
+    },
+    {
+      "actual": "자료 없음",
+      "expected": "자료 없음",
+      "label": "exact_decimal",
+      "passed": true
+    },
+    {
+      "actual": "자료 없음",
+      "expected": "자료 없음",
+      "label": "exact_decimal",
+      "passed": true
+    },
+    {
+      "actual": "B01",
+      "expected": "B01",
+      "label": "Q01_selected",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "expected": 0,
+      "label": "Q01_selection_no_command",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q02_fixed_terms",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q02_fixed_plan",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "expected": 0,
+      "label": "Q02_no_edits",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q12_before_disabled",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q05_pending",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q05_pending_no_receipt",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q09_pending_disabled",
+      "passed": true
+    },
+    {
+      "actual": 1,
+      "expected": 1,
+      "label": "Q09_no_second_command",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q09_idempotent",
+      "passed": true
+    },
+    {
+      "actual": "d48f8f3520e926077cee7c9483975b13bde45020b0d01435f7d0362a6a08c8b8",
+      "expected": "d48f8f3520e926077cee7c9483975b13bde45020b0d01435f7d0362a6a08c8b8",
+      "label": "pause_no_effect",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q05_received",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q07_score86",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q07_awarded",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q11_contract",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q11_payment",
+      "passed": true
+    },
+    {
+      "actual": 1800000,
+      "expected": 1800000,
+      "label": "Q11_funds",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "Q12_allowed",
+      "passed": true
+    },
+    {
+      "actual": "P05",
+      "expected": "P05",
+      "label": "Q12_partial_page",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q12_not_constructed",
+      "passed": true
+    },
+    {
+      "actual": "2dd5f9c30960dba9ace2b1fd634ac4466700329dbc32f5e8d22d4122d14c9f8d",
+      "expected": "2dd5f9c30960dba9ace2b1fd634ac4466700329dbc32f5e8d22d4122d14c9f8d",
+      "label": "Q12_navigation_no_effect",
+      "passed": true
+    },
+    {
+      "actual": "P02",
+      "expected": "P02",
+      "label": "Q12_back",
+      "passed": true
+    },
+    {
+      "actual": "B01",
+      "expected": "B01",
+      "label": "Q01_list_back_selection",
+      "passed": true
+    },
+    {
+      "actual": "2dd5f9c30960dba9ace2b1fd634ac4466700329dbc32f5e8d22d4122d14c9f8d",
+      "expected": "2dd5f9c30960dba9ace2b1fd634ac4466700329dbc32f5e8d22d4122d14c9f8d",
+      "label": "Q11_refresh_no_effect",
+      "passed": true
+    },
+    {
+      "actual": "B02",
+      "expected": "B02",
+      "label": "Q01_selected",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "expected": 0,
+      "label": "Q01_selection_no_command",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q02_fixed_terms",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q02_fixed_plan",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "expected": 0,
+      "label": "Q02_no_edits",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q12_before_disabled",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q05_pending",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q05_pending_no_receipt",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q09_pending_disabled",
+      "passed": true
+    },
+    {
+      "actual": 1,
+      "expected": 1,
+      "label": "Q09_no_second_command",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q09_idempotent",
+      "passed": true
+    },
+    {
+      "actual": "d48f8f3520e926077cee7c9483975b13bde45020b0d01435f7d0362a6a08c8b8",
+      "expected": "d48f8f3520e926077cee7c9483975b13bde45020b0d01435f7d0362a6a08c8b8",
+      "label": "pause_no_effect",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q05_received",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q07_score86",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q07_awarded",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q11_contract",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q11_payment",
+      "passed": true
+    },
+    {
+      "actual": 1800000,
+      "expected": 1800000,
+      "label": "Q11_funds",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "Q12_allowed",
+      "passed": true
+    },
+    {
+      "actual": "P05",
+      "expected": "P05",
+      "label": "Q12_partial_page",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q12_not_constructed",
+      "passed": true
+    },
+    {
+      "actual": "84ad5be0699fd54522a54dc458ac47a4d9bee1a933fba69e8702930cd141bb05",
+      "expected": "84ad5be0699fd54522a54dc458ac47a4d9bee1a933fba69e8702930cd141bb05",
+      "label": "Q12_navigation_no_effect",
+      "passed": true
+    },
+    {
+      "actual": "P02",
+      "expected": "P02",
+      "label": "Q12_back",
+      "passed": true
+    },
+    {
+      "actual": "B02",
+      "expected": "B02",
+      "label": "Q01_list_back_selection",
+      "passed": true
+    },
+    {
+      "actual": "84ad5be0699fd54522a54dc458ac47a4d9bee1a933fba69e8702930cd141bb05",
+      "expected": "84ad5be0699fd54522a54dc458ac47a4d9bee1a933fba69e8702930cd141bb05",
+      "label": "Q11_refresh_no_effect",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q04_06_pending",
+      "passed": true
+    },
+    {
+      "actual": "d1824cbbf90f597031930662995b38be407fcbe5e6c0eac150df3265d116f41a",
+      "expected": "d1824cbbf90f597031930662995b38be407fcbe5e6c0eac150df3265d116f41a",
+      "label": "Q04_pause",
+      "passed": true
+    },
+    {
+      "actual": "NOT_OPEN",
+      "expected": "NOT_OPEN",
+      "label": "Q04_06_reason",
+      "passed": true
+    },
+    {
+      "actual": 359,
+      "expected": 359,
+      "label": "Q04_06_effective",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q04_06_pending",
+      "passed": true
+    },
+    {
+      "actual": "92129d0c3454ba4a8c57a05d83493b1f45ab9fdfdac048d766de965576493482",
+      "expected": "92129d0c3454ba4a8c57a05d83493b1f45ab9fdfdac048d766de965576493482",
+      "label": "Q04_pause",
+      "passed": true
+    },
+    {
+      "actual": "NOT_OPEN",
+      "expected": "NOT_OPEN",
+      "label": "Q04_06_reason",
+      "passed": true
+    },
+    {
+      "actual": 359,
+      "expected": 359,
+      "label": "Q04_06_effective",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q04_06_pending",
+      "passed": true
+    },
+    {
+      "actual": "c05b80d13cf8c7daf16be803bc193b7ddbaf8819a0dc1edd6d82fd6038187ec2",
+      "expected": "c05b80d13cf8c7daf16be803bc193b7ddbaf8819a0dc1edd6d82fd6038187ec2",
+      "label": "Q04_pause",
+      "passed": true
+    },
+    {
+      "actual": "NOT_OPEN",
+      "expected": "NOT_OPEN",
+      "label": "Q04_06_reason",
+      "passed": true
+    },
+    {
+      "actual": 359,
+      "expected": 359,
+      "label": "Q04_06_effective",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q04_06_pending",
+      "passed": true
+    },
+    {
+      "actual": "403083507c0ca73efd107daa29d2a22b9f09d05823a33fe168d1c2a9485f25ef",
+      "expected": "403083507c0ca73efd107daa29d2a22b9f09d05823a33fe168d1c2a9485f25ef",
+      "label": "Q04_pause",
+      "passed": true
+    },
+    {
+      "actual": "",
+      "expected": "",
+      "label": "Q04_06_reason",
+      "passed": true
+    },
+    {
+      "actual": 360,
+      "expected": 360,
+      "label": "Q04_06_effective",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q04_06_pending",
+      "passed": true
+    },
+    {
+      "actual": "116b8a98a48afedcd87cf91ef37f62cedfc131eb1ff6cfc534e8e65c8e628891",
+      "expected": "116b8a98a48afedcd87cf91ef37f62cedfc131eb1ff6cfc534e8e65c8e628891",
+      "label": "Q04_pause",
+      "passed": true
+    },
+    {
+      "actual": "",
+      "expected": "",
+      "label": "Q04_06_reason",
+      "passed": true
+    },
+    {
+      "actual": 360,
+      "expected": 360,
+      "label": "Q04_06_effective",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q04_06_pending",
+      "passed": true
+    },
+    {
+      "actual": "0c7dc9051c5be1addac0b9d1ccefaf477ca284cf53e6bc9625ea117bbb2166c7",
+      "expected": "0c7dc9051c5be1addac0b9d1ccefaf477ca284cf53e6bc9625ea117bbb2166c7",
+      "label": "Q04_pause",
+      "passed": true
+    },
+    {
+      "actual": "",
+      "expected": "",
+      "label": "Q04_06_reason",
+      "passed": true
+    },
+    {
+      "actual": 360,
+      "expected": 360,
+      "label": "Q04_06_effective",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q04_06_pending",
+      "passed": true
+    },
+    {
+      "actual": "4e5c937b126975c22d942316268dad4fb6fdb8be6d349e3422ed1511be508eca",
+      "expected": "4e5c937b126975c22d942316268dad4fb6fdb8be6d349e3422ed1511be508eca",
+      "label": "Q04_pause",
+      "passed": true
+    },
+    {
+      "actual": "",
+      "expected": "",
+      "label": "Q04_06_reason",
+      "passed": true
+    },
+    {
+      "actual": 1439,
+      "expected": 1439,
+      "label": "Q04_06_effective",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q04_06_pending",
+      "passed": true
+    },
+    {
+      "actual": "f6cc9e1a2b0d01849fc936700c9a36652e4d2b364d73b28af5b7aa60780efc35",
+      "expected": "f6cc9e1a2b0d01849fc936700c9a36652e4d2b364d73b28af5b7aa60780efc35",
+      "label": "Q04_pause",
+      "passed": true
+    },
+    {
+      "actual": "",
+      "expected": "",
+      "label": "Q04_06_reason",
+      "passed": true
+    },
+    {
+      "actual": 1439,
+      "expected": 1439,
+      "label": "Q04_06_effective",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q04_06_pending",
+      "passed": true
+    },
+    {
+      "actual": "86a087c1029fcd0deda5a80b1a3344219de9620a2598592387de67be8c65c920",
+      "expected": "86a087c1029fcd0deda5a80b1a3344219de9620a2598592387de67be8c65c920",
+      "label": "Q04_pause",
+      "passed": true
+    },
+    {
+      "actual": "",
+      "expected": "",
+      "label": "Q04_06_reason",
+      "passed": true
+    },
+    {
+      "actual": 1439,
+      "expected": 1439,
+      "label": "Q04_06_effective",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q04_06_pending",
+      "passed": true
+    },
+    {
+      "actual": "bf88b4ef16162c8a5ddd1fbbdd5f70ebbcaa239b6178c606d908f173454a0a70",
+      "expected": "bf88b4ef16162c8a5ddd1fbbdd5f70ebbcaa239b6178c606d908f173454a0a70",
+      "label": "Q04_pause",
+      "passed": true
+    },
+    {
+      "actual": "",
+      "expected": "",
+      "label": "Q04_06_reason",
+      "passed": true
+    },
+    {
+      "actual": 1440,
+      "expected": 1440,
+      "label": "Q04_06_effective",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q04_06_pending",
+      "passed": true
+    },
+    {
+      "actual": "4f207d8ff7d04a85722a371aebef627ff5f5f33be279b3d318aa543da23112ad",
+      "expected": "4f207d8ff7d04a85722a371aebef627ff5f5f33be279b3d318aa543da23112ad",
+      "label": "Q04_pause",
+      "passed": true
+    },
+    {
+      "actual": "",
+      "expected": "",
+      "label": "Q04_06_reason",
+      "passed": true
+    },
+    {
+      "actual": 1440,
+      "expected": 1440,
+      "label": "Q04_06_effective",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q04_06_pending",
+      "passed": true
+    },
+    {
+      "actual": "f76c73565ec18cb2734b8b760eecd1504b918673e87987aee92778a4d5d41d79",
+      "expected": "f76c73565ec18cb2734b8b760eecd1504b918673e87987aee92778a4d5d41d79",
+      "label": "Q04_pause",
+      "passed": true
+    },
+    {
+      "actual": "",
+      "expected": "",
+      "label": "Q04_06_reason",
+      "passed": true
+    },
+    {
+      "actual": 1440,
+      "expected": 1440,
+      "label": "Q04_06_effective",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q04_06_pending",
+      "passed": true
+    },
+    {
+      "actual": "98bd3f859d89758089a7d1c61785f4d10c1d73c0fe575c38e77fe69338ecec99",
+      "expected": "98bd3f859d89758089a7d1c61785f4d10c1d73c0fe575c38e77fe69338ecec99",
+      "label": "Q04_pause",
+      "passed": true
+    },
+    {
+      "actual": "",
+      "expected": "",
+      "label": "Q04_06_reason",
+      "passed": true
+    },
+    {
+      "actual": 1799,
+      "expected": 1799,
+      "label": "Q04_06_effective",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q04_06_pending",
+      "passed": true
+    },
+    {
+      "actual": "7c59f931b06ca7c282d31ade9826179011c5f6b330b747b19c36d26ec7c0f49e",
+      "expected": "7c59f931b06ca7c282d31ade9826179011c5f6b330b747b19c36d26ec7c0f49e",
+      "label": "Q04_pause",
+      "passed": true
+    },
+    {
+      "actual": "",
+      "expected": "",
+      "label": "Q04_06_reason",
+      "passed": true
+    },
+    {
+      "actual": 1799,
+      "expected": 1799,
+      "label": "Q04_06_effective",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q04_06_pending",
+      "passed": true
+    },
+    {
+      "actual": "583dae03f4205cf8b4bf905b82e0d1d445aa421f6b9f4a19fc84b3d4e1f0b3bf",
+      "expected": "583dae03f4205cf8b4bf905b82e0d1d445aa421f6b9f4a19fc84b3d4e1f0b3bf",
+      "label": "Q04_pause",
+      "passed": true
+    },
+    {
+      "actual": "",
+      "expected": "",
+      "label": "Q04_06_reason",
+      "passed": true
+    },
+    {
+      "actual": 1799,
+      "expected": 1799,
+      "label": "Q04_06_effective",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q04_06_pending",
+      "passed": true
+    },
+    {
+      "actual": "8bb17d4db8cdd164d9ea36981ab582c4be4f6f28da2f8490698f08ce0fa6ae0c",
+      "expected": "8bb17d4db8cdd164d9ea36981ab582c4be4f6f28da2f8490698f08ce0fa6ae0c",
+      "label": "Q04_pause",
+      "passed": true
+    },
+    {
+      "actual": "OPEN",
+      "expected": "OPEN",
+      "label": "deadline_model_open",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "deadline_pending_not_closed",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "deadline_timing",
+      "passed": true
+    },
+    {
+      "actual": "ROUND_CLOSED",
+      "expected": "ROUND_CLOSED",
+      "label": "Q04_06_reason",
+      "passed": true
+    },
+    {
+      "actual": 1800,
+      "expected": 1800,
+      "label": "Q04_06_effective",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q06_text",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q06_disabled",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q04_06_pending",
+      "passed": true
+    },
+    {
+      "actual": "7be2ede4f017445b57d5e65a8eb356e6b21c04deb44a679c23e5d452a73b0fc5",
+      "expected": "7be2ede4f017445b57d5e65a8eb356e6b21c04deb44a679c23e5d452a73b0fc5",
+      "label": "Q04_pause",
+      "passed": true
+    },
+    {
+      "actual": "OPEN",
+      "expected": "OPEN",
+      "label": "deadline_model_open",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "deadline_pending_not_closed",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "deadline_timing",
+      "passed": true
+    },
+    {
+      "actual": "ROUND_CLOSED",
+      "expected": "ROUND_CLOSED",
+      "label": "Q04_06_reason",
+      "passed": true
+    },
+    {
+      "actual": 1800,
+      "expected": 1800,
+      "label": "Q04_06_effective",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q06_text",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q06_disabled",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q04_06_pending",
+      "passed": true
+    },
+    {
+      "actual": "3d43855c54d85f938d5faf48744607c957843d5142dde694c689d03dfe322fd1",
+      "expected": "3d43855c54d85f938d5faf48744607c957843d5142dde694c689d03dfe322fd1",
+      "label": "Q04_pause",
+      "passed": true
+    },
+    {
+      "actual": "OPEN",
+      "expected": "OPEN",
+      "label": "deadline_model_open",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "deadline_pending_not_closed",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "deadline_timing",
+      "passed": true
+    },
+    {
+      "actual": "ROUND_CLOSED",
+      "expected": "ROUND_CLOSED",
+      "label": "Q04_06_reason",
+      "passed": true
+    },
+    {
+      "actual": 1800,
+      "expected": 1800,
+      "label": "Q04_06_effective",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q06_text",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q06_disabled",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q04_06_pending",
+      "passed": true
+    },
+    {
+      "actual": "2157404f12bcb695f8e8a7710853c92ba9c769ca40d06556ffab48ec4fe6d31c",
+      "expected": "2157404f12bcb695f8e8a7710853c92ba9c769ca40d06556ffab48ec4fe6d31c",
+      "label": "Q04_pause",
+      "passed": true
+    },
+    {
+      "actual": "ROUND_CLOSED",
+      "expected": "ROUND_CLOSED",
+      "label": "Q04_06_reason",
+      "passed": true
+    },
+    {
+      "actual": 1801,
+      "expected": 1801,
+      "label": "Q04_06_effective",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q06_text",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q06_disabled",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q04_06_pending",
+      "passed": true
+    },
+    {
+      "actual": "75b1bccfa62d1884b9c88a3dc89ba4be70840d58ad67c8f9311d96a347b8079a",
+      "expected": "75b1bccfa62d1884b9c88a3dc89ba4be70840d58ad67c8f9311d96a347b8079a",
+      "label": "Q04_pause",
+      "passed": true
+    },
+    {
+      "actual": "ROUND_CLOSED",
+      "expected": "ROUND_CLOSED",
+      "label": "Q04_06_reason",
+      "passed": true
+    },
+    {
+      "actual": 1801,
+      "expected": 1801,
+      "label": "Q04_06_effective",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q06_text",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q06_disabled",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q04_06_pending",
+      "passed": true
+    },
+    {
+      "actual": "6508262301a2f9ec29d2a40ab80e0b72f33c64810e73449c71651401ba132b0a",
+      "expected": "6508262301a2f9ec29d2a40ab80e0b72f33c64810e73449c71651401ba132b0a",
+      "label": "Q04_pause",
+      "passed": true
+    },
+    {
+      "actual": "ROUND_CLOSED",
+      "expected": "ROUND_CLOSED",
+      "label": "Q04_06_reason",
+      "passed": true
+    },
+    {
+      "actual": 1801,
+      "expected": 1801,
+      "label": "Q04_06_effective",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q06_text",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q06_disabled",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q01_empty",
+      "passed": true
+    },
+    {
+      "actual": 2,
+      "expected": 2,
+      "label": "Q01_recover",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q01_error",
+      "passed": true
+    },
+    {
+      "actual": 2,
+      "expected": 2,
+      "label": "Q01_recover",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q10_unavailable",
+      "passed": true
+    },
+    {
+      "actual": 2,
+      "expected": 2,
+      "label": "Q01_recover",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q03_disabled",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q03_disabled",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q08_tie",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q08_priority",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q08_no_contract",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q08_fraction",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q11_missing_payment",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "Q10_stale_rejected",
+      "passed": true
+    },
+    {
+      "actual": "385f1d903cddf505a1ad31c80aa2e44cb06d31d102970a917a476b134411a9a7",
+      "expected": "385f1d903cddf505a1ad31c80aa2e44cb06d31d102970a917a476b134411a9a7",
+      "label": "Q10_current_preserved",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "Q10_button_preserved",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "Q10_late_pending_rejected",
+      "passed": true
+    },
+    {
+      "actual": "385f1d903cddf505a1ad31c80aa2e44cb06d31d102970a917a476b134411a9a7",
+      "expected": "385f1d903cddf505a1ad31c80aa2e44cb06d31d102970a917a476b134411a9a7",
+      "label": "Q10_late_does_not_change_current",
+      "passed": true
+    },
+    {
+      "actual": "STATE_CHANGED",
+      "expected": "STATE_CHANGED",
+      "label": "Q10_changed_reason",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "host_opens",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "host_returns",
+      "passed": true
+    },
+    {
+      "actual": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "expected": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "label": "host_preserves_plan",
+      "passed": true
+    }
+  ],
+  "checks": 185,
+  "exit_code": 0,
+  "failures": 0
+}

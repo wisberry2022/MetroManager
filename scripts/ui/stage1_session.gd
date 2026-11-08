@@ -20,6 +20,9 @@ var _input_revision: int = 1
 var _last_command: String = ""
 var _results: Dictionary = {}
 var _report_scope: String
+var _tender_enabled: bool = false
+var _tender_error: String = ""
+var _bid_requests: Dictionary = {}
 
 
 func _init(data: Dictionary, initial: Dictionary, parameters: Dictionary = {}) -> void:
@@ -90,7 +93,8 @@ func snapshot() -> Dictionary:
 			"predict": plan.snapshot().validation.valid
 		},
 		"command_result": _results.get(_last_command, {}).duplicate(true),
-		"fixture_label": fixture_label
+		"fixture_label": fixture_label,
+		"tender_ui": _tender_snapshot(current)
 	}
 
 
@@ -191,3 +195,63 @@ func _predict() -> Dictionary:
 	else:
 		prediction.fail(_input_revision, value.reason)
 	return {"accepted": value.ok, "reason": value.get("reason", "")}
+
+
+## 명시적 제품 UI 진입. 입찰 모델의 경제·시각 규칙은 재구현하지 않는다.
+func enable_tender_ui() -> Dictionary:
+	if _tender_enabled:
+		return {"accepted": true}
+	var result := pipeline.enable_tenders()
+	_tender_enabled = result.get("accepted", false)
+	_tender_error = result.get("reason", "")
+	revision += 1
+	return result
+
+
+## 조회/재조회는 게임 시각·명령·원장 효과를 발생시키지 않는다.
+func refresh_tenders() -> void:
+	if not _tender_enabled:
+		enable_tender_ui()
+	revision += 1
+
+
+## 확인한 대상/회차/계획 판을 그대로 명령에 묶는다. 실제 효력은 현재 완료분 이후다.
+func request_bid(id: String, tender_id: String, confirmed: Dictionary) -> Dictionary:
+	if _bid_requests.has(id):
+		var previous: Dictionary = pipeline.bid_result(id)
+		return previous if not previous.is_empty() else _bid_requests[id].result.duplicate(true)
+	var command := {
+		"command_id": id,
+		"tender_id": tender_id,
+		"round_id": confirmed.get("round_id", ""),
+		"target_revision": confirmed.get("target_revision", -1),
+		"plan_revision": confirmed.get("plan_revision", -1),
+		"expected_snapshot_revision": confirmed.get("snapshot_revision", -1),
+		"requested_at": pipeline.clock.minute,
+		"effective_at": pipeline.clock.minute + 1
+	}
+	var result := pipeline.submit_bid(command)
+	_bid_requests[id] = {"command": command.duplicate(true), "result": result.duplicate(true)}
+	revision += 1
+	print("DEV019_BID_REQUEST ", JSON.stringify({"command": command, "result": result}))
+	return result.duplicate(true)
+
+
+func _tender_snapshot(current: Dictionary) -> Dictionary:
+	var requests: Array[Dictionary] = []
+	for entry: Dictionary in _bid_requests.values():
+		var record := entry.duplicate(true)
+		var result := pipeline.bid_result(record.command.command_id)
+		if not result.is_empty():
+			record.result = result
+		requests.append(record)
+	return {
+		"view_revision": revision,
+		"status": "READY" if _tender_enabled else "FAILED",
+		"reason": _tender_error,
+		"snapshot": current.get("tenders", {}).duplicate(true),
+		"funds": current.funds.duplicate(true),
+		"requests": requests,
+		"next_effective_at": current.simulation_minute + 1,
+		"fixture_label": fixture_label
+	}

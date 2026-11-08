@@ -1,0 +1,307 @@
+{
+  "schema_version": 1,
+  "task_id": "DEV-019",
+  "primary_agent_id": "AGT-DEV-0001",
+  "base_sha": "3aad051c46230fae04314e082dcf5b39a1a1004f",
+  "artifacts": [
+    {
+      "path": "docs/engineering/evidence/DEV-019_DEADLINE_BEFORE.png",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+      ],
+      "blob_sha": "2462418d3eabaf050af27f17ac5d6a0cdf1efaec"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-019_DEADLINE_PENDING.png",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+      ],
+      "blob_sha": "26b4cda51603f7ca6691512a44789847c02df7d1"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-019_DEADLINE_REJECTED.png",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+      ],
+      "blob_sha": "f86adee51fbeb98c3667ad4a120bf25c1c016fab"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-019_FRACTION_RESULT.png",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+      ],
+      "blob_sha": "69951b6ba32e701e8df85f5dea8a599357c5a9ac"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-019_PRODUCT_AWARD.png",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+      ],
+      "blob_sha": "f7d68996b9abcfb0c55b43829181c5917fa2faea"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-019_PRODUCT_KEYBOARD_BACK.png",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+      ],
+      "blob_sha": "62ef010429919466f0ceff510bde2e9e4376fbc0"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-019_PRODUCT_LIST.png",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+      ],
+      "blob_sha": "9775b19510e0c74ee04aa57c243d6ae921185ce8"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-019_PRODUCT_P05.png",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+      ],
+      "blob_sha": "2a62cccd44bd6e463e43116700dacf74bfd54a16"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-019_PRODUCT_RECEIPT.png",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+      ],
+      "blob_sha": "e5259058683495b9791cfb4d8091901aaae06102"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-019_QUERY_ERROR.png",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+      ],
+      "blob_sha": "124d157ace56f7a9e0dbb60a7024636a0eb0f28e"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-019_QUERY_RECOVERED.png",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+      ],
+      "blob_sha": "3f8d744fbcd1ca306560984a8e22660d260c386c"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-019_UI_ASSERTIONS.json",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+      ],
+      "blob_sha": "7a6637785773af9b21fd908c39e07e89c336d665"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-019_UI_CONTRACT.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+      ],
+      "blob_sha": "8a06708d038462381d4d4780ff568d310dd759fe"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-019_VALIDATION.json",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+      ],
+      "blob_sha": "f18f90fbe9a630240cb2a7215ba6f001e7a14e0c"
+    },
+    {
+      "path": "docs/engineering/tasks/DEV-019_RESULT.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+      ],
+      "blob_sha": "8a644a92d254dc5b297811323d87243a5de96e10"
+    },
+    {
+      "path": "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+      ],
+      "blob_sha": "5ad1ab6c41d63a0d552420235938a0aeedb20d93"
+    },
+    {
+      "path": "scenes/tender_panel.tscn",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+      ],
+      "blob_sha": "975b33c27b7b364df09dcc2954825162aac639ab"
+    },
+    {
+      "path": "scripts/ui/stage1_session.gd",
+      "change_type": "modify",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+      ],
+      "blob_sha": "9248811c3659e85433eb55e7a82c95417e72b53a",
+      "old_blob_sha": "705e46adaae7096a4b81b074bc9de3c6da07cfd4"
+    },
+    {
+      "path": "scripts/ui/stage1_view.gd",
+      "change_type": "modify",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+      ],
+      "blob_sha": "da19c527d9fbd3b224d5bdd76bd8f50761837382",
+      "old_blob_sha": "f75efcd99c3704cde4635ffa97be2e8838fe6393"
+    },
+    {
+      "path": "scripts/ui/tender_view.gd",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+      ],
+      "blob_sha": "4f051bdaf142c982bed1aaae57a3359f28ba8a86"
+    },
+    {
+      "path": "scripts/ui/tender_view.gd.uid",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+      ],
+      "blob_sha": "5fd60bdeea285332c88b607cf041ffa64e7f836b"
+    },
+    {
+      "path": "tests/game/run_tender_gui_cases.gd",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+      ],
+      "blob_sha": "f1e38e4b62f6f48927688b47efa3c083a6c39537"
+    },
+    {
+      "path": "tests/game/run_tender_gui_cases.gd.uid",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+      ],
+      "blob_sha": "fc6157b962183b6cf73512213005a51b59af1dc9"
+    },
+    {
+      "path": "tests/game/run_tender_ui_tests.gd",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+      ],
+      "blob_sha": "1feb10e599c11d1933d8f5d148df86fa9cf6ded6"
+    },
+    {
+      "path": "tests/game/run_tender_ui_tests.gd.uid",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+      ],
+      "blob_sha": "3794f0eb47d8f4ee4007ecad2966f79c420d73a4"
+    },
+    {
+      "path": "tests/game/w019_ui_fixtures.gd",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+      ],
+      "blob_sha": "5abecba11c8d261b00180aed240b73254cb1929a"
+    },
+    {
+      "path": "tests/game/w019_ui_fixtures.gd.uid",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+      ],
+      "blob_sha": "fd04f4cbc4609897223864106533ab17ececab18"
+    }
+  ]
+}

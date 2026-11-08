@@ -2,6 +2,7 @@ extends MarginContainer
 ## 기본 도형/컨트롤의 최소 S01. 화면은 공급값만 소비한다.
 
 const Session = preload("res://scripts/ui/stage1_session.gd")
+const TenderPanel = preload("res://scenes/tender_panel.tscn")
 const MapView = preload("res://scripts/ui/stage1_map.gd")
 
 var session: Session
@@ -10,6 +11,7 @@ var controls: Dictionary = {}
 var candidate_buttons: Dictionary = {}
 var plan_list: ItemList
 var shown: Dictionary = {}
+var tender_view: VBoxContainer
 var _labels: Dictionary = {}
 var _sequence: int = 0
 var _displayed_revision: int = -1
@@ -19,6 +21,7 @@ var _selected_id: String = ""
 var _candidates: GridContainer
 var _list_stops: Array = []
 var _focus_feedback: String = ""
+var _planning_sections: Array[Node] = []
 
 
 func _ready() -> void:
@@ -37,6 +40,18 @@ func _ready() -> void:
 	for speed: int in [1, 2, 4]:
 		_button(hud, "speed%d" % speed, "%d×" % speed, "speed", {"value": speed})
 	_label(hud, "clock", "게임 시간 확인 중")
+	var navigation := Button.new()
+	navigation.name = "OpenTenders"
+	navigation.text = "공공입찰 목록 열기"
+	navigation.pressed.connect(_open_tenders)
+	root.add_child(navigation)
+	controls["open_tenders"] = navigation
+	tender_view = TenderPanel.instantiate()
+	tender_view.visible = false
+	tender_view.bid_requested.connect(_bid_requested)
+	tender_view.refresh_requested.connect(_refresh_tenders)
+	tender_view.exit_requested.connect(_close_tenders)
+	root.add_child(tender_view)
 	var work := HBoxContainer.new()
 	root.add_child(work)
 	var left := VBoxContainer.new()
@@ -77,7 +92,14 @@ func _ready() -> void:
 	_label(root, "activity", "당일 운영비 확인 중")
 	_label(root, "report", "확정 보고 없음")
 	_label(root, "feedback", "후보역을 선택해 노선을 편집하세요.")
-	_label(root, "scope", "계획 편집/예측 단계 · 실제 계약·시공·영업 기능 없음")
+	_label(root, "scope", "노선 계획/예측 · 공공입찰은 위 목록에서 확인 · 시공/영업은 후속 단계")
+	var after_panel := false
+	for section: Node in root.get_children():
+		if after_panel:
+			_planning_sections.append(section)
+		if section == tender_view:
+			after_panel = true
+	session.enable_tender_ui()
 	_last_usec = Time.get_ticks_usec()
 	present(session.snapshot())
 
@@ -187,6 +209,7 @@ func present(state: Dictionary) -> bool:
 	controls.resume.disabled = not state.allowed_actions.resume
 	for speed: int in [1, 2, 4]:
 		controls["speed%d" % speed].text = ("[%d×]" if speed == clock.speed else "%d×") % speed
+	tender_view.present(state.tender_ui)
 	_render_plan(state)
 	_render_finance(state)
 	_render_prediction(state.prediction)
@@ -437,3 +460,30 @@ func _build_candidates() -> void:
 		button.pressed.connect(_select_station.bind(id))
 		_candidates.add_child(button)
 		candidate_buttons[id] = button
+
+
+func _open_tenders() -> void:
+	for section: Control in _planning_sections:
+		section.hide()
+	tender_view.show()
+	controls.open_tenders.hide()
+	present(session.snapshot())
+	tender_view.controls.refresh.grab_focus()
+
+
+func _close_tenders() -> void:
+	tender_view.hide()
+	for section: Control in _planning_sections:
+		section.show()
+	controls.open_tenders.show()
+	controls.open_tenders.grab_focus()
+
+
+func _bid_requested(id: String, tender_id: String, confirmed: Dictionary) -> void:
+	session.request_bid(id, tender_id, confirmed)
+	present(session.snapshot())
+
+
+func _refresh_tenders() -> void:
+	session.refresh_tenders()
+	present(session.snapshot())
