@@ -131,6 +131,33 @@
       "notes": "Owner-approved Track A successor after INF handoff acceptance and HQ PM_SWITCH_CONFIRMED. Effective activation uses the approved HQ timestamp. Track B DSG-006/007 ownership and AGT-DSG-0003 reservation are separate. ACTIVE does not authenticate a technical session or inherit Commit/Push/PR permissions; each new task requires its own authorization."
     },
     {
+      "agent_id": "AGT-DSG-0003",
+      "department": "DSG",
+      "generation": 1,
+      "status": "ACTIVE",
+      "role": "Visual Design / Art Director / Stage 2 Track B independent session",
+      "session_scope": "DESIGN-TRACK-B-INDEPENDENT-CURRENT",
+      "session_kind": "CHATGPT",
+      "predecessor_agent_id": null,
+      "activated_at": "2026-11-08T16:25:00+09:00",
+      "retired_at": null,
+      "role_observed_on": "2026-11-08",
+      "role_retirement_observed_on": null,
+      "owner_approval_ref": "docs/infra/tasks/INF-004_TRACK_B_AGENT_REGISTRATION.md#owner-continuity",
+      "agent_id_activation_approval_ref": "docs/infra/tasks/INF-004_TRACK_B_AGENT_REGISTRATION.md#owner-activation",
+      "handoff_ref": null,
+      "role_evidence_refs": [
+        "docs/infra/tasks/INF-003_TRACK_A_DESIGNER_SUCCESSION.md",
+        "docs/infra/tasks/INF-004_TRACK_B_AGENT_REGISTRATION.md#inf-review",
+        "docs/infra/tasks/INF-004_TRACK_B_AGENT_REGISTRATION.md#owner-continuity",
+        "docs/design/tasks/DSG-006_VISUAL_CONCEPT_EXPLORATION.md",
+        "docs/design/tasks/DSG-007_MVP_DESIGN_SYSTEM.md",
+        "docs/design/tasks/DSG-008_S01_SCREEN_DESIGN.md"
+      ],
+      "record_version": 1,
+      "notes": "Owner-approved first registration of the existing independent Track B session continuously responsible for DSG-006, DSG-007 and DSG-008. INF-003 reserved this ID; this is not a successor to Track A AGT-DSG-0001 or AGT-DSG-0002. Owner confirmed continuity and waived separate HQ confirmation. activated_at is the explicit Owner-approved effective time, not a historical authorship, commit or merge timestamp. Existing artifacts and approval history are preserved. ACTIVE is a lifecycle declaration, not technical identity authentication or blanket design/Git authorization."
+    },
+    {
       "agent_id": "AGT-DEV-0001",
       "department": "DEV",
       "generation": 1,
