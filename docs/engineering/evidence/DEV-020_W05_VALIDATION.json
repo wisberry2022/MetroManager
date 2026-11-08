@@ -1,0 +1,1374 @@
+{
+  "VS01": "NOT_RUN",
+  "W05_GUI": "NOT_RUN",
+  "Windows_export": "NOT_RUN",
+  "assertions": [
+    {
+      "actual": 1802,
+      "expected": 1802,
+      "label": "standard_start",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "expected": 0,
+      "label": "start_no_work",
+      "passed": true
+    },
+    {
+      "actual": "B01-R1-BUSINESS-CONSTRUCTION",
+      "expected": "B01-R1-BUSINESS-CONSTRUCTION",
+      "label": "separate_contract_id",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "856f4d886ecd8e087ed198fa7910172802f6843ad4cf2f057290f5de02f44c11"
+      },
+      "expected": {
+        "json_sha256": "856f4d886ecd8e087ed198fa7910172802f6843ad4cf2f057290f5de02f44c11"
+      },
+      "label": "preopen_boarding_blocked",
+      "passed": true
+    },
+    {
+      "actual": 1,
+      "expected": 1,
+      "label": "standard_elapsed_1",
+      "passed": true
+    },
+    {
+      "actual": 208,
+      "expected": 208,
+      "label": "standard_floor_1",
+      "passed": true
+    },
+    {
+      "actual": 208,
+      "expected": 208,
+      "label": "standard_paid_1",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "expected": 0,
+      "label": "standard_due_1",
+      "passed": true
+    },
+    {
+      "actual": 2,
+      "expected": 2,
+      "label": "standard_elapsed_2",
+      "passed": true
+    },
+    {
+      "actual": 416,
+      "expected": 416,
+      "label": "standard_floor_2",
+      "passed": true
+    },
+    {
+      "actual": 416,
+      "expected": 416,
+      "label": "standard_paid_2",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "expected": 0,
+      "label": "standard_due_2",
+      "passed": true
+    },
+    {
+      "actual": 3,
+      "expected": 3,
+      "label": "standard_elapsed_3",
+      "passed": true
+    },
+    {
+      "actual": 625,
+      "expected": 625,
+      "label": "standard_floor_3",
+      "passed": true
+    },
+    {
+      "actual": 625,
+      "expected": 625,
+      "label": "standard_paid_3",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "expected": 0,
+      "label": "standard_due_3",
+      "passed": true
+    },
+    {
+      "actual": 2879,
+      "expected": 2879,
+      "label": "standard_elapsed_2879",
+      "passed": true
+    },
+    {
+      "actual": 599791,
+      "expected": 599791,
+      "label": "standard_floor_2879",
+      "passed": true
+    },
+    {
+      "actual": 599791,
+      "expected": 599791,
+      "label": "standard_paid_2879",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "expected": 0,
+      "label": "standard_due_2879",
+      "passed": true
+    },
+    {
+      "actual": 2880,
+      "expected": 2880,
+      "label": "standard_elapsed_2880",
+      "passed": true
+    },
+    {
+      "actual": 600000,
+      "expected": 600000,
+      "label": "standard_floor_2880",
+      "passed": true
+    },
+    {
+      "actual": 600000,
+      "expected": 600000,
+      "label": "standard_paid_2880",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "expected": 0,
+      "label": "standard_due_2880",
+      "passed": true
+    },
+    {
+      "actual": "COMPLETED",
+      "expected": "COMPLETED",
+      "label": "standard_completed",
+      "passed": true
+    },
+    {
+      "actual": 4682,
+      "expected": 4682,
+      "label": "standard_completion_time",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "128332c993f568c2868c40e335a61a6a790b0b6c64ea916285f3af2fab42218b"
+      },
+      "expected": {
+        "json_sha256": "128332c993f568c2868c40e335a61a6a790b0b6c64ea916285f3af2fab42218b"
+      },
+      "label": "standard_funds",
+      "passed": true
+    },
+    {
+      "actual": 1,
+      "expected": 1,
+      "label": "government_once",
+      "passed": true
+    },
+    {
+      "actual": 600000,
+      "expected": 600000,
+      "label": "construction_accrual_total",
+      "passed": true
+    },
+    {
+      "actual": 600000,
+      "expected": 600000,
+      "label": "construction_payment_total",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "not_automatically_open",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "expected": 0,
+      "label": "no_fare",
+      "passed": true
+    },
+    {
+      "actual": "BUILDING",
+      "expected": "BUILDING",
+      "label": "delayed_no_backdate",
+      "passed": true
+    },
+    {
+      "actual": 4880,
+      "expected": 4880,
+      "label": "delayed_complete",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "same_minute_contract_start",
+      "passed": true
+    },
+    {
+      "actual": 4681,
+      "expected": 4681,
+      "label": "owner_example_4681",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "disabled_enable",
+      "passed": true
+    },
+    {
+      "actual": "CONSTRUCTION_NOT_ENABLED",
+      "expected": "CONSTRUCTION_NOT_ENABLED",
+      "label": "disabled_submit",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "enable_once",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "1a65c70db9f2219852a3e0373282aa490cc2bed4501bb6d49e6b4962e188f8e3"
+      },
+      "expected": {
+        "json_sha256": "1a65c70db9f2219852a3e0373282aa490cc2bed4501bb6d49e6b4962e188f8e3"
+      },
+      "label": "pending_idempotent",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "contract_accepted",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "dc9d5d700ed621ea390ff3b1875ddfff41ca203e241d2612bc19ab2e6630cae3"
+      },
+      "expected": {
+        "json_sha256": "dc9d5d700ed621ea390ff3b1875ddfff41ca203e241d2612bc19ab2e6630cae3"
+      },
+      "label": "contract_no_government_repay",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "591b3601fdf1135eb7b93d16074fb7c8e7c4d7d21d1786209f6fb045b9345b53"
+      },
+      "expected": {
+        "json_sha256": "591b3601fdf1135eb7b93d16074fb7c8e7c4d7d21d1786209f6fb045b9345b53"
+      },
+      "label": "final_idempotent",
+      "passed": true
+    },
+    {
+      "actual": "CONSTRUCTION_CONTRACT_EXISTS",
+      "expected": "CONSTRUCTION_CONTRACT_EXISTS",
+      "label": "new_id_duplicate_contract",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "premature_safety",
+      "passed": true
+    },
+    {
+      "actual": "STATE_CHANGED",
+      "expected": "STATE_CHANGED",
+      "label": "stale_revision",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "expected": 0,
+      "label": "stale_no_progress",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "time_only_revision",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "9b568be18a8bcd439d9b65e0fce332e118f96fffe88893f8cc4047066aa1279e"
+      },
+      "expected": {
+        "json_sha256": "9b568be18a8bcd439d9b65e0fce332e118f96fffe88893f8cc4047066aa1279e"
+      },
+      "label": "read_no_effect",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "c30a18e9a67efe00dda0c243f63bf0f9873fce08d78a27cb62eef26b8cc14828"
+      },
+      "expected": {
+        "json_sha256": "c30a18e9a67efe00dda0c243f63bf0f9873fce08d78a27cb62eef26b8cc14828"
+      },
+      "label": "read_ledger_no_effect",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "invalid_type_project_id",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "invalid_type_business_contract_id",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "invalid_type_action",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "invalid_type_requested_at",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "invalid_type_effective_at",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "invalid_type_target_revision",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "invalid_type_expected_snapshot_revision",
+      "passed": true
+    },
+    {
+      "actual": "FIXED_TERMS",
+      "expected": "FIXED_TERMS",
+      "label": "fixed_terms",
+      "passed": true
+    },
+    {
+      "actual": "CLOSED_EFFECTIVE_TIME",
+      "expected": "CLOSED_EFFECTIVE_TIME",
+      "label": "no_backdating",
+      "passed": true
+    },
+    {
+      "actual": "UNKNOWN_CONSTRUCTION_PROJECT",
+      "expected": "UNKNOWN_CONSTRUCTION_PROJECT",
+      "label": "unknown_project",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "no_business_source",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "expected": {
+        "json_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "label": "no_business_no_partial",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "invalid_payment_link_available",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "invalid_payment_link_ledger_entry_index",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "invalid_payment_link_restricted_project_id",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "invalid_payment_link_amount",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "nonzero_k_contract",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "64490e3b800ee29e3df0fc81c23c4986a612ed14cab27b55037e8c03b4f8ad31"
+      },
+      "expected": {
+        "json_sha256": "64490e3b800ee29e3df0fc81c23c4986a612ed14cab27b55037e8c03b4f8ad31"
+      },
+      "label": "nonzero_k_before",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "nonzero_k_first",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "9e8644015bc472c0502eb57b5ff4f9f531dc5e210adbd2a8a648ae2130104d85"
+      },
+      "expected": {
+        "json_sha256": "9e8644015bc472c0502eb57b5ff4f9f531dc5e210adbd2a8a648ae2130104d85"
+      },
+      "label": "nonzero_k_decrease",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "nonzero_k_final",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "2d78d7abd4f6d6a8be482e0f8e24b59c687c2fd1ca68f76a051d199efea6dd70"
+      },
+      "expected": {
+        "json_sha256": "2d78d7abd4f6d6a8be482e0f8e24b59c687c2fd1ca68f76a051d199efea6dd70"
+      },
+      "label": "nonzero_k_zero",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "two_project_payment",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "0540a915200746a0d40ffa8a009436730eb5c759fde95ecee0d03af0a93fb495"
+      },
+      "expected": {
+        "json_sha256": "0540a915200746a0d40ffa8a009436730eb5c759fde95ecee0d03af0a93fb495"
+      },
+      "label": "two_project_funds",
+      "passed": true
+    },
+    {
+      "actual": 40,
+      "expected": 40,
+      "label": "other_restricted_unchanged",
+      "passed": true
+    },
+    {
+      "actual": 10,
+      "expected": 10,
+      "label": "other_reserved_unchanged",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "cannot_spend_other_R",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "f45aa2c5d3db9f8afe3ac6874909a1f3cce185fc3fa9fd9a26527be53df02a4f"
+      },
+      "expected": {
+        "json_sha256": "f45aa2c5d3db9f8afe3ac6874909a1f3cce185fc3fa9fd9a26527be53df02a4f"
+      },
+      "label": "protected_no_effect",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "repair_atomic_9999",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "6a3f51ce2a686f0377358adaa3bc74cfaf2c5c4b64bb02c4c4b918e24a128af4"
+      },
+      "expected": {
+        "json_sha256": "6a3f51ce2a686f0377358adaa3bc74cfaf2c5c4b64bb02c4c4b918e24a128af4"
+      },
+      "label": "repair_failure_unchanged",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "expected": {
+        "json_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "label": "repair_failure_no_entries",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "repair_atomic_10000",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "expected": 0,
+      "label": "repair_R_first",
+      "passed": true
+    },
+    {
+      "actual": 30000,
+      "expected": 30000,
+      "label": "repair_other_R",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "0bb8b905ce69fa3279bd3e9417ebcc62dfc7f1ac686b007e5beda5b0a850d536"
+      },
+      "expected": {
+        "json_sha256": "0bb8b905ce69fa3279bd3e9417ebcc62dfc7f1ac686b007e5beda5b0a850d536"
+      },
+      "label": "repair_K_unchanged",
+      "passed": true
+    },
+    {
+      "actual": 7,
+      "expected": 7,
+      "label": "repair_B_unchanged",
+      "passed": true
+    },
+    {
+      "actual": 416,
+      "expected": 416,
+      "label": "first_two_paid",
+      "passed": true
+    },
+    {
+      "actual": 3,
+      "expected": 3,
+      "label": "failed_progress_preserved",
+      "passed": true
+    },
+    {
+      "actual": 625,
+      "expected": 625,
+      "label": "failed_accrual_preserved",
+      "passed": true
+    },
+    {
+      "actual": 416,
+      "expected": 416,
+      "label": "failed_paid",
+      "passed": true
+    },
+    {
+      "actual": 209,
+      "expected": 209,
+      "label": "failed_due",
+      "passed": true
+    },
+    {
+      "actual": "SUSPENDED",
+      "expected": "SUSPENDED",
+      "label": "failed_suspended",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "expected": 0,
+      "label": "failed_not_B",
+      "passed": true
+    },
+    {
+      "actual": 3,
+      "expected": 3,
+      "label": "stopped_progress",
+      "passed": true
+    },
+    {
+      "actual": "CONSTRUCTION_PAYMENT_DUE",
+      "expected": "CONSTRUCTION_PAYMENT_DUE",
+      "label": "resume_still_insufficient",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "recovery_existing_payment",
+      "passed": true
+    },
+    {
+      "actual": 625,
+      "expected": 625,
+      "label": "recovery_no_reaccrual",
+      "passed": true
+    },
+    {
+      "actual": 625,
+      "expected": 625,
+      "label": "recovery_paid_once",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "expected": 0,
+      "label": "recovery_due_zero",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "expected": 0,
+      "label": "recovery_cost_zero",
+      "passed": true
+    },
+    {
+      "actual": "SUSPENDED",
+      "expected": "SUSPENDED",
+      "label": "100pct_not_completed",
+      "passed": true
+    },
+    {
+      "actual": 2880,
+      "expected": 2880,
+      "label": "100pct_preserved",
+      "passed": true
+    },
+    {
+      "actual": 209,
+      "expected": 209,
+      "label": "100pct_final_due",
+      "passed": true
+    },
+    {
+      "actual": null,
+      "expected": null,
+      "label": "100pct_no_completed_time",
+      "passed": true
+    },
+    {
+      "actual": "COMPLETED",
+      "expected": "COMPLETED",
+      "label": "STANDARD_complete",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "STANDARD_before_open",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "STANDARD_open_rejected",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "STANDARD_trial_start",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "STANDARD_overlap_rejected",
+      "passed": true
+    },
+    {
+      "actual": "RUNNING",
+      "expected": "RUNNING",
+      "label": "STANDARD_trial_59",
+      "passed": true
+    },
+    {
+      "actual": "PASSED",
+      "expected": "PASSED",
+      "label": "STANDARD_trial_60",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "STANDARD_safety_start",
+      "passed": true
+    },
+    {
+      "actual": "RUNNING",
+      "expected": "RUNNING",
+      "label": "STANDARD_safety_59",
+      "passed": true
+    },
+    {
+      "actual": "PASSED",
+      "expected": "PASSED",
+      "label": "STANDARD_safety_pass",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "STANDARD_open",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "STANDARD_service_ready",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "STANDARD_open_duplicate_new_id",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "expected": 0,
+      "label": "STANDARD_no_product_fare",
+      "passed": true
+    },
+    {
+      "actual": "COMPLETED",
+      "expected": "COMPLETED",
+      "label": "FAST_complete",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "FAST_before_open",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "FAST_open_rejected",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "FAST_trial_start",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "FAST_overlap_rejected",
+      "passed": true
+    },
+    {
+      "actual": "RUNNING",
+      "expected": "RUNNING",
+      "label": "FAST_trial_59",
+      "passed": true
+    },
+    {
+      "actual": "PASSED",
+      "expected": "PASSED",
+      "label": "FAST_trial_60",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "FAST_safety_start",
+      "passed": true
+    },
+    {
+      "actual": "RUNNING",
+      "expected": "RUNNING",
+      "label": "FAST_safety_59",
+      "passed": true
+    },
+    {
+      "actual": "FAILED",
+      "expected": "FAILED",
+      "label": "fast_first_failure",
+      "passed": true
+    },
+    {
+      "actual": 1,
+      "expected": 1,
+      "label": "fast_one_defect",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "273c21a08fc31c9b5f2d936267d3bdba519c52bb7c1d84c5656109f40bc10556"
+      },
+      "expected": {
+        "json_sha256": "273c21a08fc31c9b5f2d936267d3bdba519c52bb7c1d84c5656109f40bc10556"
+      },
+      "label": "fast_initial_funds",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "fast_repair_start",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "9fbc96054729793fd8f606b7e0a8c6846d2ad8776b646321216d5447ca78674d"
+      },
+      "expected": {
+        "json_sha256": "9fbc96054729793fd8f606b7e0a8c6846d2ad8776b646321216d5447ca78674d"
+      },
+      "label": "fast_repair_funds",
+      "passed": true
+    },
+    {
+      "actual": 1,
+      "expected": 1,
+      "label": "repair_29",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "expected": 0,
+      "label": "repair_30",
+      "passed": true
+    },
+    {
+      "actual": "NOT_STARTED",
+      "expected": "NOT_STARTED",
+      "label": "retest_required",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "retest_start",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "expected": 0,
+      "label": "no_repeated_defect",
+      "passed": true
+    },
+    {
+      "actual": "PASSED",
+      "expected": "PASSED",
+      "label": "FAST_safety_pass",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "FAST_open",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "FAST_service_ready",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "label": "FAST_open_duplicate_new_id",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "expected": 0,
+      "label": "FAST_no_product_fare",
+      "passed": true
+    },
+    {
+      "actual": 208,
+      "expected": 208,
+      "label": "progress_first_accrual",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "expected": 0,
+      "label": "progress_same_minute_no_repeat",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "expected": 0,
+      "label": "progress_no_backdate",
+      "passed": true
+    },
+    {
+      "actual": 1,
+      "expected": 1,
+      "label": "progress_once_elapsed",
+      "passed": true
+    },
+    {
+      "actual": "RUNNING",
+      "expected": "RUNNING",
+      "label": "direct_trial59",
+      "passed": true
+    },
+    {
+      "actual": "NOT_STARTED",
+      "expected": "NOT_STARTED",
+      "label": "invalidated_trial",
+      "passed": true
+    },
+    {
+      "actual": "NOT_STARTED",
+      "expected": "NOT_STARTED",
+      "label": "late_old_validation_ignored",
+      "passed": true
+    },
+    {
+      "actual": "PREREQUISITE_NOT_MET",
+      "expected": "PREREQUISITE_NOT_MET",
+      "label": "invalidated_cannot_open",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "0a312d5abdeeca69c3bac7876ba3cf7c39d34bcc7ff43b7a397b07d6d48cc5bc"
+      },
+      "expected": {
+        "json_sha256": "0a312d5abdeeca69c3bac7876ba3cf7c39d34bcc7ff43b7a397b07d6d48cc5bc"
+      },
+      "label": "pause_no_effect",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "expected": 0,
+      "label": "partial_minute_no_work",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "4a064eb4b323fb447e9b5fb1e9ad5ef74d3efe6fc071098569c3bcaeb4c2daeb"
+      },
+      "expected": {
+        "json_sha256": "4a064eb4b323fb447e9b5fb1e9ad5ef74d3efe6fc071098569c3bcaeb4c2daeb"
+      },
+      "label": "speed_split_1_false",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "0a312d5abdeeca69c3bac7876ba3cf7c39d34bcc7ff43b7a397b07d6d48cc5bc"
+      },
+      "expected": {
+        "json_sha256": "0a312d5abdeeca69c3bac7876ba3cf7c39d34bcc7ff43b7a397b07d6d48cc5bc"
+      },
+      "label": "pause_no_effect",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "4a064eb4b323fb447e9b5fb1e9ad5ef74d3efe6fc071098569c3bcaeb4c2daeb"
+      },
+      "expected": {
+        "json_sha256": "4a064eb4b323fb447e9b5fb1e9ad5ef74d3efe6fc071098569c3bcaeb4c2daeb"
+      },
+      "label": "speed_split_1_true",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "0a312d5abdeeca69c3bac7876ba3cf7c39d34bcc7ff43b7a397b07d6d48cc5bc"
+      },
+      "expected": {
+        "json_sha256": "0a312d5abdeeca69c3bac7876ba3cf7c39d34bcc7ff43b7a397b07d6d48cc5bc"
+      },
+      "label": "pause_no_effect",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "expected": 0,
+      "label": "partial_minute_no_work",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "4a064eb4b323fb447e9b5fb1e9ad5ef74d3efe6fc071098569c3bcaeb4c2daeb"
+      },
+      "expected": {
+        "json_sha256": "4a064eb4b323fb447e9b5fb1e9ad5ef74d3efe6fc071098569c3bcaeb4c2daeb"
+      },
+      "label": "speed_split_2_false",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "0a312d5abdeeca69c3bac7876ba3cf7c39d34bcc7ff43b7a397b07d6d48cc5bc"
+      },
+      "expected": {
+        "json_sha256": "0a312d5abdeeca69c3bac7876ba3cf7c39d34bcc7ff43b7a397b07d6d48cc5bc"
+      },
+      "label": "pause_no_effect",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "4a064eb4b323fb447e9b5fb1e9ad5ef74d3efe6fc071098569c3bcaeb4c2daeb"
+      },
+      "expected": {
+        "json_sha256": "4a064eb4b323fb447e9b5fb1e9ad5ef74d3efe6fc071098569c3bcaeb4c2daeb"
+      },
+      "label": "speed_split_2_true",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "0a312d5abdeeca69c3bac7876ba3cf7c39d34bcc7ff43b7a397b07d6d48cc5bc"
+      },
+      "expected": {
+        "json_sha256": "0a312d5abdeeca69c3bac7876ba3cf7c39d34bcc7ff43b7a397b07d6d48cc5bc"
+      },
+      "label": "pause_no_effect",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "expected": 0,
+      "label": "partial_minute_no_work",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "4a064eb4b323fb447e9b5fb1e9ad5ef74d3efe6fc071098569c3bcaeb4c2daeb"
+      },
+      "expected": {
+        "json_sha256": "4a064eb4b323fb447e9b5fb1e9ad5ef74d3efe6fc071098569c3bcaeb4c2daeb"
+      },
+      "label": "speed_split_4_false",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "0a312d5abdeeca69c3bac7876ba3cf7c39d34bcc7ff43b7a397b07d6d48cc5bc"
+      },
+      "expected": {
+        "json_sha256": "0a312d5abdeeca69c3bac7876ba3cf7c39d34bcc7ff43b7a397b07d6d48cc5bc"
+      },
+      "label": "pause_no_effect",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "4a064eb4b323fb447e9b5fb1e9ad5ef74d3efe6fc071098569c3bcaeb4c2daeb"
+      },
+      "expected": {
+        "json_sha256": "4a064eb4b323fb447e9b5fb1e9ad5ef74d3efe6fc071098569c3bcaeb4c2daeb"
+      },
+      "label": "speed_split_4_true",
+      "passed": true
+    },
+    {
+      "actual": 183333,
+      "expected": 183333,
+      "label": "midnight_previous_accrual",
+      "passed": true
+    },
+    {
+      "actual": 208,
+      "expected": 208,
+      "label": "midnight_newday_payment",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "e5382508aa7c405a45548c0a52eae00614e757a591331ab857aa01d2479547ef"
+      },
+      "expected": {
+        "json_sha256": "e5382508aa7c405a45548c0a52eae00614e757a591331ab857aa01d2479547ef"
+      },
+      "label": "closed_report_immutable",
+      "passed": true
+    },
+    {
+      "actual": 3240,
+      "expected": 3240,
+      "label": "contract_night_deferred",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+      },
+      "expected": {
+        "json_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+      },
+      "label": "night_contract_pending",
+      "passed": true
+    },
+    {
+      "actual": 3240,
+      "expected": 3240,
+      "label": "deferred_actual_time",
+      "passed": true
+    },
+    {
+      "actual": 2940,
+      "expected": 2940,
+      "label": "night_start_allowed",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "expected": 0,
+      "label": "night_start_no_backdate",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "bff62566bf0601e54eaa08130272f764d46e523d0d4c307451aea0724deed0d9"
+      },
+      "expected": {
+        "json_sha256": "bff62566bf0601e54eaa08130272f764d46e523d0d4c307451aea0724deed0d9"
+      },
+      "label": "fixed_phase_order",
+      "passed": true
+    },
+    {
+      "actual": "RUNNING",
+      "expected": "RUNNING",
+      "label": "independent_safety59",
+      "passed": true
+    },
+    {
+      "actual": "PASSED",
+      "expected": "PASSED",
+      "label": "independent_safety60",
+      "passed": true
+    },
+    {
+      "actual": "RUNNING",
+      "expected": "RUNNING",
+      "label": "retest59",
+      "passed": true
+    },
+    {
+      "actual": "PASSED",
+      "expected": "PASSED",
+      "label": "retest60",
+      "passed": true
+    },
+    {
+      "actual": "REPAIR_FUNDS_INSUFFICIENT",
+      "expected": "REPAIR_FUNDS_INSUFFICIENT",
+      "label": "repair_no_later_fare_prespend",
+      "passed": true
+    },
+    {
+      "actual": {
+        "json_sha256": "b92b035ebcfa33952082498710dc908eb44dcd4d3430f585799ad112e6045bad"
+      },
+      "expected": {
+        "json_sha256": "b92b035ebcfa33952082498710dc908eb44dcd4d3430f585799ad112e6045bad"
+      },
+      "label": "repair_no_partial_cash",
+      "passed": true
+    },
+    {
+      "actual": "",
+      "expected": "",
+      "label": "repair_not_started",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "expected": 0,
+      "label": "repair_unpaid_zero",
+      "passed": true
+    },
+    {
+      "actual": 2941,
+      "expected": 2941,
+      "label": "repair24h_allowed",
+      "passed": true
+    },
+    {
+      "actual": "repair",
+      "expected": "repair",
+      "label": "repair_valid_started",
+      "passed": true
+    },
+    {
+      "actual": 20000,
+      "expected": 20000,
+      "label": "repair_funded_full",
+      "passed": true
+    },
+    {
+      "actual": 20000,
+      "expected": 20000,
+      "label": "same_phase_duplicate_no_payment",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "label": "resume24h_valid",
+      "passed": true
+    },
+    {
+      "actual": 625,
+      "expected": 625,
+      "label": "resume_existing_due_paid",
+      "passed": true
+    },
+    {
+      "actual": 3,
+      "expected": 3,
+      "label": "resume_no_new_accrual_same_T",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "expected": 0,
+      "label": "resume_cost_not_repeated",
+      "passed": true
+    },
+    {
+      "actual": 4,
+      "expected": 4,
+      "label": "resume_next_interval_progress",
+      "passed": true
+    }
+  ],
+  "checks": 191,
+  "engine": {
+    "build": "official",
+    "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+    "hex": 263938,
+    "major": 4,
+    "minor": 7,
+    "patch": 2,
+    "status": "stable",
+    "string": "4.7.2-stable (official)",
+    "timestamp": 0
+  },
+  "exit_code": 0,
+  "failures": 0,
+  "rules": "RFC-DEV-020-01-OWNER-20261108",
+  "task_id": "DEV-020",
+  "execution": {
+    "base_sha": "98d56eb97f8a030912bea534ff1c330e9c40188e",
+    "submission_base_sha": "02146a027a373b6a2d42fa40c581812e84ad6c44",
+    "command": "Godot_v4.7.2-stable_win64_console.exe --headless --path . --log-file .local/w05-verified.log --script tests/game/run_w05_tests.gd -- --evidence",
+    "logs": {
+      "w05-verified": {
+        "sha256": "0532646e667204878cdc6ff359da9fb84bb2b8feadf2f39e69b0ca7fe470876f",
+        "exit_code": 0,
+        "stdout": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nW05_SECTION standard\nW05_SECTION commands\nW05_SECTION funds\nW05_SECTION suspension\nW05_SECTION validation\nW05_SECTION time\nW05_TEST_RESULT checks=191 failures=0\n"
+      },
+      "project-load": {
+        "sha256": "ab4a8e3bf519571f939adad1d8ee4e233212cc3b0bfaa44431b27d654e4e8084",
+        "exit_code": 0
+      },
+      "run_w01_tests.stdout": {
+        "sha256": "b9d8fcb6fe9a6a6bd7c7b3d6c8ebf28fcbd067ceeb3c2462ef7c63baaaf7e4df",
+        "exit_code": 0
+      },
+      "run_w02_tests.stdout": {
+        "sha256": "65566b680f39334a0c970ed6a328551863fee5d89e4c7ea5a284e89b1955f40a",
+        "exit_code": 0
+      },
+      "run_w03_tests.stdout": {
+        "sha256": "e106f7aa57e133af5012c6bd05580ffa9e1c2932482dc5d855c0e658be5ac1a5",
+        "exit_code": 0
+      },
+      "run_w04a_tests.stdout": {
+        "sha256": "57498132f2da6fd3c9278a84fb54ddfc1a82c2cae07a184c5fe56c20dcea6ff8",
+        "exit_code": 0
+      },
+      "run_w07_tests.stdout": {
+        "sha256": "95cee6b68e4f04082c2b5d99ea6da4bae0fe3f240b6be9277c702552eb1874d5",
+        "exit_code": 0
+      },
+      "run_tender_ui_tests.stdout": {
+        "sha256": "5bec944412e19b41f9fd10eeb443cd000a9cfbdb43fe17067f9e7b927974d030",
+        "exit_code": 0
+      }
+    },
+    "regressions": {
+      "W01": 219,
+      "W02": 309,
+      "W03": 101,
+      "W04A": 204,
+      "W07": 322,
+      "DEV019_UI": 235
+    },
+    "regression_assertions": 1390,
+    "tooling_tests": {
+      "command": ".venv/Scripts/python.exe -m unittest discover -s tests/tooling -v",
+      "count": 89,
+      "exit_code": 0,
+      "log_sha256": "19fbf7064bdcdb5747b0d48d48aafc08fbe3df98294364102c3500654818b7a3"
+    },
+    "intentional_failure_probe": {
+      "checks": 1,
+      "failures": 1,
+      "expected_exit_code": 1,
+      "actual_exit_code": 1
+    },
+    "validated_source_blobs": {
+      "scripts/model/construction_project.gd": "c6cfc8fd0b4c450f66e53a4b5c97f065df9c20bf",
+      "scripts/simulation/construction_service.gd": "fb3377a76c85e1156f23d04dd96869848932dfe5",
+      "tests/game/run_w05_tests.gd": "5d3fd6701df242da186a2553a98808075ace5a7b",
+      "tests/game/w05_fixtures.gd": "0ed46f607be759c04a9dd811d61ede2a149ac146",
+      "scripts/simulation/minute_pipeline.gd": "912c25825dbb86a2ebdc95b9b73e220f9beb8e06",
+      "scripts/model/company_ledger.gd": "f6c0f753d7498e089758ef435e26e1164a782998"
+    }
+  }
+}

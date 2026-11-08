@@ -94,7 +94,7 @@ func contract(project: String, government: int, total_cost: int, minute: int) ->
 	return {"accepted": true, "reason": "", "decision_funds": before}
 
 
-func construction_payment(project: String, amount: int, minute: int) -> bool:
+func construction_payment(project: String, amount: int, minute: int, accrue: bool = true) -> bool:
 	if (
 		amount < 0
 		or minute < 0
@@ -105,10 +105,45 @@ func construction_payment(project: String, amount: int, minute: int) -> bool:
 		return false
 	var restricted: int = _restricted[project]
 	var own := maxi(0, amount - restricted)
-	if own > int(_reserved[project]) or amount > _cash:
+	if not can_pay_construction(project, amount):
 		return false
 	_restricted[project] = maxi(0, restricted - amount)
 	_reserved[project] -= own
+	_cash -= amount
+	if accrue:
+		_record("construction_cost", amount, minute)
+	_record("construction_payment", amount, minute)
+	return true
+
+
+func can_pay_construction(project: String, amount: int) -> bool:
+	if amount < 0 or not _restricted.has(project) or not _reserved.has(project):
+		return false
+	var own := maxi(0, amount - int(_restricted[project]))
+	var funds := snapshot()
+	var own_cash: int = (
+		_cash - int(funds.restricted) - int(funds.reserved) + int(_reserved[project])
+	)
+	return own <= int(_reserved[project]) and own <= own_cash and amount <= _cash
+
+
+## W05 발생과 현금 지급을 분리한다. 운영 미지급 B에는 합산하지 않는다.
+func construction_accrual(amount: int, minute: int) -> bool:
+	if amount < 0 or minute < 0 or minute < _latest_minute:
+		return false
+	if amount > 0:
+		_record("construction_cost", amount, minute)
+	return true
+
+
+## Owner R02: 자기 R 우선, 부족분은 A만 사용. 전액 불가 시 모든 효과 0.
+func repair_payment(project: String, amount: int, minute: int) -> bool:
+	if amount < 0 or minute < 0 or minute < _latest_minute or not _restricted.has(project):
+		return false
+	var from_restricted := mini(amount, int(_restricted[project]))
+	if amount - from_restricted > int(snapshot().available_cash) or amount > _cash:
+		return false
+	_restricted[project] -= from_restricted
 	_cash -= amount
 	_record("construction_cost", amount, minute)
 	_record("construction_payment", amount, minute)

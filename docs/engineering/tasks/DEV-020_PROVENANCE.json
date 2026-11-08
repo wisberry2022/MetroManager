@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "task_id": "DEV-020",
+  "primary_agent_id": "AGT-DEV-0001",
+  "base_sha": "02146a027a373b6a2d42fa40c581812e84ad6c44",
+  "artifacts": [
+    {
+      "path": "scripts/model/construction_project.gd",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-020_W05_CONSTRUCTION_MODEL.md#12-planning-owner-결정-수신기존-승인으로-구현-재개",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6719007539"
+      ],
+      "blob_sha": "c6cfc8fd0b4c450f66e53a4b5c97f065df9c20bf"
+    },
+    {
+      "path": "scripts/model/construction_project.gd.uid",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-020_W05_CONSTRUCTION_MODEL.md#12-planning-owner-결정-수신기존-승인으로-구현-재개",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6719007539"
+      ],
+      "blob_sha": "97dc1437be0e9889df1fb2f70093136848784c2a"
+    },
+    {
+      "path": "scripts/simulation/construction_service.gd",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-020_W05_CONSTRUCTION_MODEL.md#12-planning-owner-결정-수신기존-승인으로-구현-재개",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6719007539"
+      ],
+      "blob_sha": "fb3377a76c85e1156f23d04dd96869848932dfe5"
+    },
+    {
+      "path": "scripts/simulation/construction_service.gd.uid",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-020_W05_CONSTRUCTION_MODEL.md#12-planning-owner-결정-수신기존-승인으로-구현-재개",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6719007539"
+      ],
+      "blob_sha": "d8768f5a333303d6e6f25bdc3f571853a593a569"
+    },
+    {
+      "path": "tests/game/run_w05_tests.gd",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-020_W05_CONSTRUCTION_MODEL.md#12-planning-owner-결정-수신기존-승인으로-구현-재개",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6719007539"
+      ],
+      "blob_sha": "5d3fd6701df242da186a2553a98808075ace5a7b"
+    },
+    {
+      "path": "tests/game/run_w05_tests.gd.uid",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-020_W05_CONSTRUCTION_MODEL.md#12-planning-owner-결정-수신기존-승인으로-구현-재개",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6719007539"
+      ],
+      "blob_sha": "879669dcf5b0f0e059fbcb77b7d7e0c0c86ab2d1"
+    },
+    {
+      "path": "tests/game/w05_fixtures.gd",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-020_W05_CONSTRUCTION_MODEL.md#12-planning-owner-결정-수신기존-승인으로-구현-재개",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6719007539"
+      ],
+      "blob_sha": "0ed46f607be759c04a9dd811d61ede2a149ac146"
+    },
+    {
+      "path": "tests/game/w05_fixtures.gd.uid",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-020_W05_CONSTRUCTION_MODEL.md#12-planning-owner-결정-수신기존-승인으로-구현-재개",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6719007539"
+      ],
+      "blob_sha": "850ce4784d80b6982e12ce7a5fd35d1ef89e9438"
+    },
+    {
+      "path": "scripts/simulation/minute_pipeline.gd",
+      "change_type": "modify",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-020_W05_CONSTRUCTION_MODEL.md#12-planning-owner-결정-수신기존-승인으로-구현-재개",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6719007539"
+      ],
+      "blob_sha": "912c25825dbb86a2ebdc95b9b73e220f9beb8e06",
+      "old_blob_sha": "38402aa256cb30cf89f0ded207b9ea38399a3cf7"
+    },
+    {
+      "path": "scripts/model/company_ledger.gd",
+      "change_type": "modify",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-020_W05_CONSTRUCTION_MODEL.md#12-planning-owner-결정-수신기존-승인으로-구현-재개",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6719007539"
+      ],
+      "blob_sha": "f6c0f753d7498e089758ef435e26e1164a782998",
+      "old_blob_sha": "201f766a5e8e72dc4b595298349cac84209d4f2a"
+    },
+    {
+      "path": "docs/engineering/tasks/DEV-020_W05_CONSTRUCTION_MODEL.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-020_W05_CONSTRUCTION_MODEL.md#12-planning-owner-결정-수신기존-승인으로-구현-재개",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6719007539"
+      ],
+      "blob_sha": "6ce94ea2e7af42c9953112ac566e170a3dd35efb"
+    },
+    {
+      "path": "docs/engineering/tasks/DEV-020_RESULT.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-020_W05_CONSTRUCTION_MODEL.md#12-planning-owner-결정-수신기존-승인으로-구현-재개",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6719007539"
+      ],
+      "blob_sha": "858f2bdf88cadfd053d425aac4ad1880270df767"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-020_W05_SUPPLY_AND_VALIDATION.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-020_W05_CONSTRUCTION_MODEL.md#12-planning-owner-결정-수신기존-승인으로-구현-재개",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6719007539"
+      ],
+      "blob_sha": "d138efc6f0d09765e81ca8bb4ea4fcdbad0d8644"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-020_W05_FIXTURES.json",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-020_W05_CONSTRUCTION_MODEL.md#12-planning-owner-결정-수신기존-승인으로-구현-재개",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6719007539"
+      ],
+      "blob_sha": "de56345bcb927d50bd2fadf377c1d8ebd81443d9"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-020_W05_VALIDATION.json",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-020_W05_CONSTRUCTION_MODEL.md#12-planning-owner-결정-수신기존-승인으로-구현-재개",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6719007539"
+      ],
+      "blob_sha": "66433dbdc262ac2a7231736c97206eca6d44a08f"
+    }
+  ]
+}

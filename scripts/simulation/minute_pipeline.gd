@@ -9,6 +9,7 @@ const Tenders = preload("res://scripts/simulation/tender_service.gd")
 const TenderLoader = preload("res://scripts/data/tender_data_loader.gd")
 const CompanyLoader = preload("res://scripts/data/gate2_data_loader.gd")
 const Reports = preload("res://scripts/model/daily_ledger_report.gd")
+const Construction = preload("res://scripts/simulation/construction_service.gd")
 
 var clock: Clock
 var commands: Queue = Queue.new()
@@ -16,6 +17,7 @@ var ledger: Ledger
 var reports: Reports = Reports.new()
 var target_revisions: Dictionary = {}
 var _tenders: Tenders
+var _construction: Construction
 var _events: Dictionary = {}
 var _revision: int = 0
 var _trace: Array[Dictionary] = []
@@ -52,6 +54,24 @@ func bid_result(command_id: String) -> Dictionary:
 	return {} if _tenders == null else _tenders.result(command_id)
 
 
+## 모델 공급만 활성화한다. 실제 P05 화면 연결은 DEV-021 소관이다.
+func enable_construction() -> Dictionary:
+	if _tenders == null or _construction != null:
+		return {"accepted": false, "reason": "CONSTRUCTION_ENABLE_PREREQUISITE"}
+	_construction = Construction.new(ledger)
+	return {"accepted": true}
+
+
+func submit_construction(command: Dictionary) -> Dictionary:
+	if _construction == null:
+		return {"accepted": false, "reason": "CONSTRUCTION_NOT_ENABLED"}
+	return _construction.submit(command, clock.minute)
+
+
+func construction_result(command_id: String) -> Dictionary:
+	return {} if _construction == null else _construction.result(command_id)
+
+
 ## 테스트 전용 주입점이며 제품 UI에 연결하지 않는다.
 func set_fixture(minute: int, input: Dictionary) -> bool:
 	if minute <= clock.minute or _events.has(minute):
@@ -82,6 +102,10 @@ func snapshot() -> Dictionary:
 	}
 	if _tenders != null:
 		value["tenders"] = _tenders.snapshot(clock.minute, _revision)
+	if _construction != null:
+		value["construction"] = _construction.snapshot(
+			clock.minute, _revision, _tenders.snapshot(clock.minute, _revision)
+		)
 	return value
 
 
@@ -89,6 +113,8 @@ func _tick(minute: int) -> void:
 	var input: Dictionary = _events.get(minute, {})
 	_stage(minute, "PREVIOUS_INTERVAL")
 	ledger.operating_cost(input.get("operating_cost", 0), minute - 1)
+	if _construction != null:
+		_construction.accrue(minute)
 	reports.sync(ledger.entries())
 	if minute % 1440 == 0:
 		reports.close(minute / 1440, ledger.snapshot())
@@ -120,19 +146,32 @@ func _tick(minute: int) -> void:
 		commands.finish(command.command_id, result)
 	if _tenders != null:
 		_revision += _tenders.process_contract_phase(minute, _revision)
+	_construction_phase("CONTRACT", minute)
 	_stage(minute, "PROGRESS")
 	for payment: Dictionary in input.get("construction", []):
 		ledger.construction_payment(payment.project, payment.amount, minute)
+	_construction_phase("PROGRESS", minute)
 	_stage(minute, "VALIDATION")
+	_construction_phase("VALIDATION", minute)
 	_stage(minute, "ARRIVAL")
 	ledger.fare(input.get("arrival_fare", 0), minute)
 	_stage(minute, "SETTLEMENT")
 	ledger.settle(minute)
 	_stage(minute, "BOARDING")
-	_boarding = ledger.boarding(minute, input.get("next_cost", 100), input.get("eligible", false))
+	var eligible: bool = input.get("eligible", false)
+	if _construction != null:
+		eligible = eligible and _construction.service_ready()
+	_boarding = ledger.boarding(minute, input.get("next_cost", 100), eligible)
 	reports.sync(ledger.entries())
 	_events.erase(minute)
 	_revision += 1
+
+
+func _construction_phase(phase: String, minute: int) -> void:
+	if _construction != null:
+		_revision += _construction.process_phase(
+			phase, minute, _revision, _tenders.snapshot(minute, _revision)
+		)
 
 
 func _stage(minute: int, phase: String) -> void:
