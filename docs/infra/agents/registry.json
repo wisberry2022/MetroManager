@@ -84,24 +84,51 @@
       "agent_id": "AGT-DSG-0001",
       "department": "DSG",
       "generation": 1,
-      "status": "ACTIVE",
+      "status": "RETIRED",
       "role": "Art Director & UI/UX Designer",
       "session_scope": "DESIGN-CURRENT",
       "session_kind": "CHATGPT",
       "predecessor_agent_id": null,
       "activated_at": null,
-      "retired_at": null,
+      "retired_at": "2026-11-08T15:49:28+09:00",
       "role_observed_on": "2026-10-31",
-      "role_retirement_observed_on": null,
+      "role_retirement_observed_on": "2026-11-08",
       "owner_approval_ref": "docs/design/tasks/DSG-002_RESULT.md",
       "agent_id_activation_approval_ref": "OWNER_DIRECT_INF_2026-11-02_INITIAL_REGISTRY_APPROVAL",
       "handoff_ref": null,
       "role_evidence_refs": [
         "docs/design/tasks/DSG-002_RESULT.md",
-        "https://github.com/wisberry2022/MetroManager/pull/61"
+        "https://github.com/wisberry2022/MetroManager/pull/61",
+        "docs/infra/tasks/INF-003_TRACK_A_DESIGNER_SUCCESSION.md#owner-activation"
+      ],
+      "record_version": 2,
+      "notes": "Design role evidenced; private session identifiers not published. Owner approved Track A retirement and succession to AGT-DSG-0002 under INF-003. retired_at is the HQ-confirmed responsibility-switch effective time, not an inferred outage time. Historical identity, activation null and authorship are preserved; no new Track A assignments. Track B is independent."
+    },
+    {
+      "agent_id": "AGT-DSG-0002",
+      "department": "DSG",
+      "generation": 2,
+      "status": "ACTIVE",
+      "role": "Art Director & UI/UX Designer / Stage 2 Track A successor",
+      "session_scope": "DESIGN-TRACK-A-SUCCESSOR-CURRENT",
+      "session_kind": "CHATGPT",
+      "predecessor_agent_id": "AGT-DSG-0001",
+      "activated_at": "2026-11-08T15:49:28+09:00",
+      "retired_at": null,
+      "role_observed_on": "2026-11-08",
+      "role_retirement_observed_on": null,
+      "owner_approval_ref": "docs/infra/tasks/INF-003_TRACK_A_DESIGNER_SUCCESSION.md#owner-activation",
+      "agent_id_activation_approval_ref": "docs/infra/tasks/INF-003_TRACK_A_DESIGNER_SUCCESSION.md#owner-activation",
+      "handoff_ref": "docs/infra/tasks/INF-003_TRACK_A_DESIGNER_SUCCESSION.md#handoff-acceptance",
+      "role_evidence_refs": [
+        "docs/infra/tasks/INF-003_TRACK_A_DESIGNER_SUCCESSION.md#pm-switch",
+        "docs/hq/PM-014_STAGE2_VS01_EXECUTION_PLAN.md",
+        "docs/design/tasks/DSG-010_A01_P01_P02_DESIGN.md",
+        "docs/design/tasks/DSG-010_A01_QA_PLAN.md",
+        "https://github.com/wisberry2022/MetroManager/issues/81"
       ],
       "record_version": 1,
-      "notes": "Design role evidenced; private session identifiers not published."
+      "notes": "Owner-approved Track A successor after INF handoff acceptance and HQ PM_SWITCH_CONFIRMED. Effective activation uses the approved HQ timestamp. Track B DSG-006/007 ownership and AGT-DSG-0003 reservation are separate. ACTIVE does not authenticate a technical session or inherit Commit/Push/PR permissions; each new task requires its own authorization."
     },
     {
       "agent_id": "AGT-DEV-0001",
