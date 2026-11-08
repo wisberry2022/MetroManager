@@ -3,6 +3,7 @@ extends MarginContainer
 
 const Session = preload("res://scripts/ui/stage1_session.gd")
 const TenderPanel = preload("res://scenes/tender_panel.tscn")
+const ConstructionPanel = preload("res://scenes/construction_panel.tscn")
 const MapView = preload("res://scripts/ui/stage1_map.gd")
 
 var session: Session
@@ -12,6 +13,7 @@ var candidate_buttons: Dictionary = {}
 var plan_list: ItemList
 var shown: Dictionary = {}
 var tender_view: VBoxContainer
+var construction_view: VBoxContainer
 var _labels: Dictionary = {}
 var _sequence: int = 0
 var _displayed_revision: int = -1
@@ -51,7 +53,14 @@ func _ready() -> void:
 	tender_view.bid_requested.connect(_bid_requested)
 	tender_view.refresh_requested.connect(_refresh_tenders)
 	tender_view.exit_requested.connect(_close_tenders)
+	tender_view.construction_requested.connect(_open_construction)
 	root.add_child(tender_view)
+	construction_view = ConstructionPanel.instantiate()
+	construction_view.hide()
+	construction_view.command_requested.connect(_construction_requested)
+	construction_view.refresh_requested.connect(_refresh_construction)
+	construction_view.exit_requested.connect(_close_construction)
+	root.add_child(construction_view)
 	var work := HBoxContainer.new()
 	root.add_child(work)
 	var left := VBoxContainer.new()
@@ -92,14 +101,15 @@ func _ready() -> void:
 	_label(root, "activity", "당일 운영비 확인 중")
 	_label(root, "report", "확정 보고 없음")
 	_label(root, "feedback", "후보역을 선택해 노선을 편집하세요.")
-	_label(root, "scope", "노선 계획/예측 · 공공입찰은 위 목록에서 확인 · 시공/영업은 후속 단계")
+	_label(root, "scope", "노선 계획/예측 · 공공입찰 → 사업 인계 → 공사·검증·개통 · 실제 영업은 W06 후속")
 	var after_panel := false
 	for section: Node in root.get_children():
-		if after_panel:
+		if after_panel and section != construction_view:
 			_planning_sections.append(section)
 		if section == tender_view:
 			after_panel = true
 	session.enable_tender_ui()
+	session.enable_construction_ui()
 	_last_usec = Time.get_ticks_usec()
 	present(session.snapshot())
 
@@ -210,6 +220,7 @@ func present(state: Dictionary) -> bool:
 	for speed: int in [1, 2, 4]:
 		controls["speed%d" % speed].text = ("[%d×]" if speed == clock.speed else "%d×") % speed
 	tender_view.present(state.tender_ui)
+	construction_view.present(state.construction_ui)
 	_render_plan(state)
 	_render_finance(state)
 	_render_prediction(state.prediction)
@@ -486,4 +497,29 @@ func _bid_requested(id: String, tender_id: String, confirmed: Dictionary) -> voi
 
 func _refresh_tenders() -> void:
 	session.refresh_tenders()
+	present(session.snapshot())
+
+
+func _open_construction(project_id: String) -> void:
+	tender_view.hide()
+	construction_view.select_project(project_id)
+	construction_view.show()
+	present(session.snapshot())
+	construction_view.controls.back.grab_focus()
+
+
+func _close_construction() -> void:
+	construction_view.hide()
+	tender_view.show()
+	present(session.snapshot())
+	tender_view.controls.construction.grab_focus()
+
+
+func _construction_requested(id: String, action: String, confirmed: Dictionary) -> void:
+	session.request_construction(id, action, confirmed)
+	present(session.snapshot())
+
+
+func _refresh_construction() -> void:
+	session.refresh_construction()
 	present(session.snapshot())
