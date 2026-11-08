@@ -1,0 +1,244 @@
+<div id="metro-concepts" aria-label="DSG-006 공통 콘셉트 비교">
+  <div class="viz-controls" role="group" aria-label="공통 비교 장면">
+    <button class="btn btn-primary" type="button" data-scene="normal" aria-pressed="true">장면 A · 기본 계획</button>
+    <button class="btn" type="button" data-scene="warning" aria-pressed="false">장면 B · 잠금·조회 실패</button>
+    <span class="text-small">DSG-006 · CONCEPT_ONLY / NON_PRODUCTION · PROVISIONAL</span>
+  </div>
+  <div class="viz-carousel" aria-label="MetroManager 비주얼 콘셉트 3안" data-previous-label="이전 콘셉트" data-next-label="다음 콘셉트">
+    <section data-variant="생활 도시" aria-label="생활 도시 콘셉트">
+      <div class="mm city" data-concept="city"></div>
+    </section>
+    <section data-variant="철도 관제반" aria-label="철도 관제반 콘셉트" hidden>
+      <div class="mm dispatch" data-concept="dispatch"></div>
+    </section>
+    <section data-variant="도시 계획 도면" aria-label="도시 계획 도면 콘셉트" hidden>
+      <div class="mm atlas" data-concept="atlas"></div>
+    </section>
+  </div>
+</div>
+<style>
+#metro-concepts .viz-controls { margin-bottom: 12px; padding-right: 90px; }
+#metro-concepts .mm {
+  --paper: #f5f0dd; --ink: #233d36; --secondary: #526259; --line: #a4b49d;
+  --land: #dbe4c5; --block: #b9cba3; --roof: #a46647; --window: #f4daab;
+  --panel: #fffae9; --route: #185b4d; --route-ink: #fffbe7;
+  --warning: #7a300c; --warn-bg: #fce7ca; --active: #eed39a;
+  color-scheme: light; background: var(--paper); color: var(--ink);
+  font: 14px/1.5 'Malgun Gothic', 'Segoe UI', sans-serif;
+  border: 2px solid var(--ink); padding: 16px;
+  box-sizing: border-box; min-height: 1030px;
+}
+#metro-concepts .dispatch {
+  --paper: #17252d; --ink: #e5eee6; --secondary: #b6c8c6; --line: #677d84;
+  --land: #1d3039; --block: #334b55; --panel: #20343e;
+  --route: #f1c66f; --route-ink: #1d3039; --warning: #ffcc91; --warn-bg: #432c20;
+  --active: #374c53; color-scheme: dark;
+  font-family: 'Consolas', 'Malgun Gothic', monospace;
+}
+#metro-concepts .atlas {
+  --paper: #f3ead7; --ink: #243c52; --secondary: #526070; --line: #9aa6a7;
+  --land: #eee7d4; --block: #d6d3be; --panel: #faf3e4;
+  --route: #844b36; --route-ink: #fff6e4; --warning: #89371a; --warn-bg: #f5dfbd;
+  --active: #dedfc9; border: 4px double var(--ink);
+}
+#metro-concepts .mm * { box-sizing: border-box; }
+#metro-concepts .mm h2 { font: 600 22px/1.3 'Malgun Gothic', sans-serif; margin: 0; }
+#metro-concepts .mm h3 { font: 600 14px/1.5 'Malgun Gothic', sans-serif; margin: 0 0 8px; }
+#metro-concepts .mm p { margin: 0; }
+#metro-concepts .eyebrow { color: var(--secondary); letter-spacing: .12em; font-size: 12px; margin-bottom: 4px; }
+#metro-concepts .masthead { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 14px; flex-wrap: wrap; }
+#metro-concepts .edition { color: var(--secondary); font-size: 12px; text-align: right; }
+#metro-concepts .hud { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding: 12px; border: 1px solid var(--line); background: var(--panel); }
+#metro-concepts .hud strong { font-size: 18px; font-weight: 600; }
+#metro-concepts .hud .context { color: var(--secondary); font-size: 12px; }
+#metro-concepts .times { display: flex; gap: 4px; flex-wrap: wrap; }
+#metro-concepts .mm button { font: inherit; border: 1px solid var(--line); background: var(--panel); color: var(--ink); padding: 5px 9px; border-radius: 0; }
+#metro-concepts .mm button:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+#metro-concepts .mm button:disabled { opacity: .65; }
+#metro-concepts .mm button.current { background: var(--active); border: 2px solid var(--ink); }
+#metro-concepts .work { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 14px; margin-top: 14px; align-items: start; }
+#metro-concepts .map-section { min-width: 0; }
+#metro-concepts .map-head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+#metro-concepts .map-head span { font-size: 12px; color: var(--secondary); }
+#metro-concepts .districts { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); font-size: 12px; background: var(--panel); }
+#metro-concepts .districts span { padding: 4px 8px; }
+#metro-concepts .districts span + span { border-left: 1px dashed var(--ink); }
+#metro-concepts .map { height: 330px; position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(3, 110px); background: var(--land); border-left: 1px solid var(--line); border-right: 1px solid var(--line); isolation: isolate; }
+#metro-concepts .map > svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+#metro-concepts .edge { stroke: var(--line); stroke-width: 1; fill: none; vector-effect: non-scaling-stroke; }
+#metro-concepts .route { stroke: var(--route); stroke-width: 6; fill: none; vector-effect: non-scaling-stroke; }
+#metro-concepts .dispatch .route { stroke-width: 4; }
+#metro-concepts .atlas .route { stroke-width: 6; stroke-dasharray: 10 3; }
+#metro-concepts .map.locked .route { stroke-dasharray: 10 6; }
+#metro-concepts .cell { position: relative; min-width: 0; }
+#metro-concepts .cell:before { content: ''; position: absolute; left: 13%; top: 8px; width: 18px; height: 13px; background: var(--block); box-shadow: 30px 71px 0 var(--block), 5px 65px 0 var(--block); opacity: var(--detail-visible, 1); }
+#metro-concepts .city .cell:before { border-top: 5px solid var(--roof); border-right: 4px solid var(--window); }
+#metro-concepts .cell:after { content: ''; position: absolute; right: 12%; top: 13px; width: 10px; height: 10px; background: var(--block); box-shadow: -5px 5px 0 var(--block); opacity: var(--detail-visible, 1); }
+#metro-concepts .dispatch .cell:before { width: 22px; height: 7px; border: 1px solid var(--line); background: transparent; box-shadow: none; top: 14px; }
+#metro-concepts .dispatch .cell:after { display: none; }
+#metro-concepts .atlas .cell:before { width: 25px; height: 18px; background: transparent; border: 1px solid var(--line); box-shadow: 32px 70px 0 var(--block); }
+#metro-concepts .atlas .cell:after { width: 18px; height: 14px; background: transparent; border: 1px dashed var(--line); box-shadow: none; }
+#metro-concepts .station { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 2; width: 52px; height: 38px; padding: 0 !important; border: 2px solid var(--ink) !important; font-size: 15px !important; }
+#metro-concepts .station.chosen { background: var(--route); color: var(--route-ink); }
+#metro-concepts .station.focused { outline: 3px solid var(--ink); outline-offset: 4px; }
+#metro-concepts .dispatch .station { width: 48px; height: 32px; border-width: 1px !important; }
+#metro-concepts .atlas .station { width: 46px; height: 36px; border: 3px double var(--ink) !important; }
+#metro-concepts .map.locked .station:not(.chosen) { border-style: dashed !important; }
+#metro-concepts .sid { position: absolute; top: calc(50% + 28px); left: 0; width: 100%; text-align: center; z-index: 2; font-size: 12px; font-weight: 600; }
+#metro-concepts .legend { font-size: 12px; padding: 9px; border: 1px solid var(--line); background: var(--panel); }
+#metro-concepts .legend span { display: inline-block; margin-right: 10px; }
+#metro-concepts .focus-detail { padding: 10px; border-bottom: 2px solid var(--ink); min-height: 72px; background: var(--panel); }
+#metro-concepts .focus-detail small { display: block; color: var(--secondary); font-size: 12px; }
+#metro-concepts .info { border: 1px solid var(--line); padding: 12px; background: var(--panel); }
+#metro-concepts .info + .info { margin-top: 10px; }
+#metro-concepts .stops { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; margin: 10px 0; }
+#metro-concepts .stops button { min-height: 40px; padding: 4px; font-size: 12px; }
+#metro-concepts .stops button[data-focus='true'] { background: var(--active); outline: 2px solid var(--ink); }
+#metro-concepts .commands { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+#metro-concepts .small { font-size: 12px; color: var(--secondary); }
+#metro-concepts .status { border-left: 4px solid var(--route); margin-top: 14px; padding: 10px 12px; background: var(--panel); min-height: 75px; }
+#metro-concepts .status.warning { border: 2px dashed var(--warning); color: var(--warning); background: var(--warn-bg); }
+#metro-concepts .status strong { display: block; font-weight: 600; }
+#metro-concepts .finance { margin-top: 14px; border: 1px solid var(--line); background: var(--panel); padding: 12px; }
+#metro-concepts .money { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
+#metro-concepts .money div { border-left: 2px solid var(--line); padding-left: 8px; }
+#metro-concepts .money span { font-size: 12px; color: var(--secondary); display: block; }
+#metro-concepts .money b { font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+#metro-concepts .report { border-top: 1px solid var(--line); margin-top: 12px; padding-top: 8px; font-size: 12px; }
+#metro-concepts .foot { display: flex; flex-wrap: wrap; gap: 8px 16px; justify-content: space-between; border-top: 1px solid var(--line); margin-top: 14px; padding-top: 9px; color: var(--secondary); font-size: 12px; }
+#metro-concepts .dispatch .work { grid-template-columns: 230px minmax(0, 1fr); }
+#metro-concepts .dispatch .map-section { grid-column: 2; grid-row: 1; }
+#metro-concepts .dispatch .side { grid-column: 1; grid-row: 1; }
+#metro-concepts .dispatch .hud { border-top: 4px solid var(--route); }
+#metro-concepts .dispatch .finance { margin-top: 10px; }
+#metro-concepts .dispatch .stops { grid-template-columns: repeat(2, 1fr); }
+#metro-concepts .atlas .map-section { border: 3px double var(--ink); padding: 10px; }
+#metro-concepts .atlas .hud { border-width: 0 0 2px; border-color: var(--ink); background: transparent; }
+#metro-concepts .atlas .info { border-top: 3px double var(--ink); }
+#metro-concepts .atlas .eyebrow { letter-spacing: .22em; }
+#metro-concepts [hidden] { display: none !important; }
+@media(max-width: 780px) {
+  #metro-concepts .work, #metro-concepts .dispatch .work { grid-template-columns: minmax(0, 1fr); }
+  #metro-concepts .dispatch .map-section, #metro-concepts .dispatch .side { grid-column: auto; grid-row: auto; }
+  #metro-concepts .side { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  #metro-concepts .info + .info { margin-top: 0; }
+  #metro-concepts .money { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  #metro-concepts .mm { min-height: 1310px; }
+}
+@media(max-width: 490px) {
+  #metro-concepts .mm { padding: 10px; min-height: 1670px; }
+  #metro-concepts .side { grid-template-columns: minmax(0, 1fr); }
+  #metro-concepts .money { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #metro-concepts .mm h2 { font-size: 20px; }
+  #metro-concepts .edition { text-align: left; }
+  #metro-concepts .atlas .map-section { padding: 3px; }
+  #metro-concepts .cell:before, #metro-concepts .cell:after { opacity: .5; }
+}
+@media(pointer: coarse) { #metro-concepts .mm button { min-height: 44px; } }
+</style>
+<script>
+(() => {
+  const root = document.getElementById('metro-concepts');
+  const names = {
+    city: ['LIVING CITY / C01', '생활 도시', '도시의 일상 · 작은 건물 · 명확한 운영 정보'],
+    dispatch: ['RAIL CONTROL / C01', '철도 관제반', '기능 도식 · 신호 모듈 · 높은 정보 대비'],
+    atlas: ['CIVIC ATLAS / C01', '도시 계획 도면', '도면 선 · 구획 해칭 · 편집 문서의 질서']
+  };
+  const stations = Array.from({length: 12}, (_, i) => {
+    const n = i + 1;
+    const d = n <= 8 ? n : n - 4;
+    return { id: 'S' + String(n).padStart(2, '0'), d: 'D' + String(d).padStart(2, '0'), g: 'G' + String(Math.ceil(d / 2)).padStart(2, '0'), x: i % 4, y: Math.floor(i / 4) };
+  });
+  const route = ['S01', 'S02', 'S03', 'S04', 'S08', 'S12'];
+  const funds = [['총 현금 C','1,000,000'], ['제한 자금 R','0'], ['자유 자금 F','1,000,000'], ['공사 예약 K','0'], ['약정 가용 A','1,000,000'], ['운영 미지급 B','0']];
+  let scene = 'normal';
+  let focused = 'S03';
+  let saved = window.openai?.widgetState;
+  if (saved?.modelContent?.scene === 'warning') scene = 'warning';
+  if (stations.some(s => s.id === saved?.modelContent?.focused)) focused = saved.modelContent.focused;
+  const edgePaths = stations.flatMap(s => {
+    const p = `${s.x * 100 + 50} ${s.y * 100 + 50}`;
+    const paths = [];
+    if(s.x < 3) paths.push(`<path class="edge" d="M${p} h100"/>`);
+    if(s.y < 2) paths.push(`<path class="edge" d="M${p} v100"/>`);
+    return paths;
+  }).join('');
+  const map = `<svg viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true">${edgePaths}<path class="route" d="M50 50 H350 V250"/></svg>` + stations.map(s => {
+    const n = route.indexOf(s.id);
+    return `<div class="cell"><button type="button" class="station ${n >= 0 ? 'chosen' : ''}" data-station="${s.id}" aria-label="${s.id}, ${s.g}, ${s.d}, ${n >= 0 ? '계획 순서 ' + (n + 1) : '후보역'}, 정보 보기">${n >= 0 ? (n + 1) : '□'}</button><span class="sid">${s.id}</span></div>`;
+  }).join('');
+  for (const el of root.querySelectorAll('[data-concept]')) {
+    const [eyebrow, title, subtitle] = names[el.dataset.concept];
+    el.innerHTML = `
+      <div class="masthead"><div><div class="eyebrow">${eyebrow}</div><h2>${title}</h2></div><div class="edition">${subtitle}<br>CONCEPT_ONLY · NON_PRODUCTION</div></div>
+      <div class="hud"><div><div class="context">회사 · 시철 / 관할 · C01</div><strong>1일 06:00 · 일시정지</strong></div><div class="times" aria-label="시간 조작 외관 예시"><button disabled>정지</button><button disabled>재개</button><button disabled class="current">1×</button><button disabled>2×</button><button disabled>4×</button></div></div>
+      <div class="work">
+        <div class="map-section">
+          <div class="map-head"><h3>도시 지도 · C01 / 후보 12역</h3><span>강조 레이어 · 행정</span></div>
+          <div class="districts"><span>G01 · D01 / D02</span><span>G02 · D03 / D04</span></div>
+          <div class="map" role="group" aria-label="C01 추상 지도, 4열 3행, 선택 노선 S01 S02 S03 S04 S08 S12">${map}</div>
+          <div class="districts"><span>G03 · D05 / D06</span><span>G04 · D07 / D08</span></div>
+          <div class="legend"><span>□ 후보</span><span>1–6 계획 순서</span><span>굵은 선 · 계획 연결</span><span data-lock-legend hidden>점선 · 편집 불가</span></div>
+          <div class="focus-detail" aria-live="polite"></div>
+          <div class="small" style="margin-top:8px">좌표 기반 추상 배치 · 구획은 관할 판정 도형이 아님</div>
+        </div>
+        <div class="side">
+          <div class="info"><h3>노선 계획 · P-A 예시</h3><p>고유 6역 · 계획 연결 확인</p><div class="small">선택 순서 / 역 정보 보기</div>
+            <div class="stops">${route.map((id,i)=>`<button type="button" data-station="${id}" aria-label="계획 순서 ${i+1}, ${id}, 정보 보기">${i+1} · ${id}</button>`).join('')}</div>
+            <div class="commands"><button disabled>위로</button><button disabled>아래로</button><button disabled>제거</button><button disabled>되돌리기</button></div><div class="small">편집 버튼은 외관 예시</div>
+          </div>
+          <div class="info"><h3>예측 · 현재 계획</h3><p class="prediction"></p><div class="small">예측은 실제 운행·실적과 구분</div><div class="commands"><button disabled>예측 계산</button></div></div>
+        </div>
+      </div>
+      <div class="finance"><h3>현재 자금 · 1일 06:00 <span class="small">게임 통화 단위 / 읽기 전용</span></h3><div class="money">${funds.map(([label,value])=>`<div><span>${label}</span><b>${value}</b></div>`).join('')}</div><div class="report">과거 확정 보고 · 확정 보고 없음 / 현재 자금과 별도</div></div>
+      <div class="status" aria-live="polite"></div>
+      <div class="foot"><span>같은 고정 비교 데이터 · 제품과 연결되지 않은 시안</span><span>PROVISIONAL · 반응형 비교 / 제품 규격 미확정</span></div>`;
+  }
+  function render() {
+    const warning = scene === 'warning';
+    const s = stations.find(s => s.id === focused);
+    root.querySelectorAll('[data-scene]').forEach(button => {
+      const active = button.dataset.scene === scene;
+      button.setAttribute('aria-pressed', String(active));
+      button.classList.toggle('btn-primary', active);
+    });
+    root.querySelectorAll('.mm').forEach(el => {
+      el.querySelector('.map').classList.toggle('locked', warning);
+      el.querySelector('[data-lock-legend]').hidden = !warning;
+      el.querySelectorAll('[data-station]').forEach(button => {
+        const active = button.dataset.station === focused;
+        button.classList.toggle('focused', active && button.classList.contains('station'));
+        button.dataset.focus = String(active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+      el.querySelector('.focus-detail').innerHTML = `<strong>정보 선택 · ${s.id}</strong><small>P01 &gt; C01 &gt; ${s.g} &gt; ${s.d} &gt; ${s.id}</small>`;
+      el.querySelector('.prediction').textContent = warning ? '! 예측 조회 실패 · 현재값 확인 불가' : '자료 없음 · 아직 계산하지 않음';
+      const status = el.querySelector('.status');
+      status.classList.toggle('warning', warning);
+      status.innerHTML = warning
+        ? '<strong>! 편집 불가 · 최신 허용 상태를 확인할 수 없음</strong>다음 행동 · 최신 상태 재조회. 역 정보 열람 유지 / 과거 명령 결과 · 없음'
+        : '<strong>계획 편집 단계 · 사업 계약·개통 상태와 구분</strong>다음 행동 · 역 정보 확인 / 과거 명령 결과 · 없음';
+    });
+  }
+  function persist() {
+    window.openai?.setWidgetState?.({modelContent:{task:'DSG-006',scene,focused},privateContent:null}).catch(()=>{});
+  }
+  root.querySelectorAll('[data-scene]').forEach(button => button.addEventListener('click', () => { scene = button.dataset.scene; render(); persist(); }));
+  root.querySelectorAll('[data-station]').forEach(button => button.addEventListener('click', () => { focused = button.dataset.station; render(); persist(); }));
+  window.addEventListener('openai:set_globals', event => {
+    const next = event.detail?.globals?.widgetState?.modelContent;
+    if (!next) return;
+    scene = next.scene === 'warning' ? 'warning' : 'normal';
+    focused = stations.some(s => s.id === next.focused) ? next.focused : 'S03';
+    render();
+  });
+  render();
+  if(globalThis.Tweak) {
+    const settings = {backgroundDetail:true};
+    const tweak = new Tweak({container:root, onChange:()=>{
+      root.querySelectorAll('.cell').forEach(el=>el.style.setProperty('--detail-visible', settings.backgroundDetail ? '1' : '0'));
+    }});
+    tweak.addToggle(settings, 'backgroundDetail', {label:'배경 디테일 표시'});
+  }
+})();
+</script>
