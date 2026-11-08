@@ -279,6 +279,21 @@
       ],
       "record_version": 1,
       "notes": "Owner-approved independent INF role; Git operations still subject to ticket-specific approval."
+    },
+    {
+      "agent_id": "AGT-PLN-0003",
+      "department": "PLN",
+      "generation": 3,
+      "status": "PENDING",
+      "role": "Game Designer / Planning / third-generation successor candidate",
+      "session_scope": "PLANNING-GENERATION-3-SUCCESSOR-CURRENT",
+      "session_kind": "UNCONFIRMED",
+      "predecessor_agent_id": "AGT-PLN-0002",
+      "activated_at": null,
+      "retired_at": null,
+      "owner_approval_ref": "docs/infra/tasks/INF-006_AGENT_REGISTRATION.md#candidate-preparation",
+      "handoff_ref": "docs/infra/tasks/INF-006_AGENT_REGISTRATION.md#inf-acceptance",
+      "record_version": 1
     }
   ],
   "unresolved_identity_checks": [
