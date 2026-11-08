@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "task_id": "DSG-010",
+  "primary_agent_id": "AGT-DSG-0001",
+  "base_sha": "b48dd82a9b93d062d1a3bcfdf8750cb260c83e3e",
+  "artifacts": [
+    {
+      "path": "docs/design/tasks/DSG-010_A01_TENDER_CONTRACT.md",
+      "change_type": "add",
+      "agent_id": "AGT-DSG-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/design/tasks/DSG-010_A01_TENDER_CONTRACT.md"
+      ],
+      "blob_sha": "7503fbce3f28440bbc10ab50da696c4cbbdceccd"
+    },
+    {
+      "path": "docs/design/tasks/DSG-010_A01_P01_P02_DESIGN.md",
+      "change_type": "add",
+      "agent_id": "AGT-DSG-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/design/tasks/DSG-010_A01_TENDER_CONTRACT.md"
+      ],
+      "blob_sha": "7b0fb3d729c583c6f5b3684e2a3d033c22ccf0a7"
+    },
+    {
+      "path": "docs/design/tasks/DSG-010_A01_QA_PLAN.md",
+      "change_type": "add",
+      "agent_id": "AGT-DSG-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/design/tasks/DSG-010_A01_TENDER_CONTRACT.md"
+      ],
+      "blob_sha": "75f411233518af587f0c09e562c17bd7289dca77"
+    },
+    {
+      "path": "docs/design/tasks/DSG-010_RESULT.md",
+      "change_type": "add",
+      "agent_id": "AGT-DSG-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/design/tasks/DSG-010_A01_TENDER_CONTRACT.md"
+      ],
+      "blob_sha": "086760c7a1ab85c9c1c849863ab5f512ddb554d1"
+    }
+  ]
+}
