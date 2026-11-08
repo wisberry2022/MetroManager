@@ -122,3 +122,21 @@ Owner의 재개 원문: “디자이너 에이전트가 Issue #81에 마감 직�
 ## 11. 실제 결과 제출
 
 [DEV-019_RESULT.md](DEV-019_RESULT.md), [UI 공급/검수 계약](../evidence/DEV-019_UI_CONTRACT.md), [자동단언](../evidence/DEV-019_UI_ASSERTIONS.json), [실제 검증/GUI/소스해시](../evidence/DEV-019_VALIDATION.json)를 제출한다. Design 표현/소비 착수 조건은 실제 회신으로 해소됐으나 독립 GUI 인수는 여전히 대기다. Owner 수용/DONE·main 병합은 별도다. 위 준비/차단 당시 기록을 현재 미승인/미착수 상태로 해석하지 않는다.
+
+## 12. QA-001·QA-002 보완 승인 및 L2 협의 대기
+
+- 기준 main: `06274e8557a8bbe4d8880fd02aac892c15e49f98` (PR #84 병합). 후속 브랜치 `codex/DEV-019-qa-public-criteria`, 기존 작업물은 보존한다.
+- Owner 현재 직접 원문: “개발 에이전트. DEV-019의 QA-001·QA-002 보완 구현 및 Commit·Push·PR 생성을 승인합니다. Design과 문구·배치를 L2 협의한 뒤 해당 범위만 수정하고 검증 후 PR 생성해주세요. P05는 읽기 전용 인계로 유지하며 main 병합은 별도 승인하겠습니다.”
+- 위 두 결함의 구현·검증·정상 Commit/일반 Push/PR은 승인됐으나 표현 구현은 Design L2 회신 확인 후 진행한다. main 병합·릴리스/배포·W05 및 다른 티켓은 제외한다.
+- Owner 제공 독립 QA ZIP SHA256 `1e273b7457a71a3ef972affafba9950cafc36f22e3d4322f25e00f68bccd8169`. 내부 manifest 123개 해시 일치, 기준 SHA의 UI 소스와 제출본 일치 확인. 보고 권고 DESIGN_L2_REJECTED / RETEST_REQUIRED, PASS7/FAIL1/PARTIAL4. 로그의 UI185+기존1155단언0실패는 독립 QA 실행 이력이며 이번 재실행 결과가 아니다.
+- QA001(L2 인수차단): 응찰 전 공개 평가기준·경쟁자 점수·동점순위 소비 누락. QA002(L1): 현재 행동 사유의 원시 enum 가독성. 경제/시간/낙찰 모델 결함으로 확대하지 않는다.
+- [RFC-DEV-019-02 구체 문구·배치안](https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717493892), [Issue75 승인/착수 조건](https://github.com/wisberry2022/MetroManager/issues/75#issuecomment-6717496880). 현재 OPEN / DESIGN_RESPONSE_PENDING. 제안을 Design 수용으로 취급하지 않는다.
+- 제안: 고정조건 다음·현재 자격/요청 이전의 읽기 전용 공개 평가기준, 고정 경쟁자 점수·terms 순위, 기존 한국어 사유 매핑/줄바꿈. 마감 후 실제 판정은 별도 사본. 구체 표현은 L2 회신에 따른다.
+- 검증 예정: 독립 B01/B02의 미응찰 공개정보, 판정 전후 출처 분리, 정상86:80/동점80:80/소수79.99997, BUSY/DURATION/시작전·마감후 한국어 사유, 기본/최대화 줄바꿈·기존 키보드·pending/마감·읽기 전용 P05 회귀. 자동검사·엔진 로드·개발 GUI·Design 독립 재검수를 구분한다.
+- 상태: 준비 티켓만 갱신. 신규 코드/테스트/씬 수정·자동검사/로드/GUI 재실행·Commit/Push/PR은 NOT_RUN. 이전 독립 QA의 PARTIAL/하위 NOT_RUN을 이번 보완으로 자동 완료 처리하지 않는다.
+
+## 13. QA 보완 L2 회신 수신·구현
+
+[Design 회신6717520859](https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859)을 직접 확인했다. RFC_DEV_019_02_DESIGN_COPY_LAYOUT_ACCEPTED_WITH_CONDITIONS / DEV_FIX_SCOPE_READY / DESIGN_INDEPENDENT_RETEST_REQUIRED. §12의 대기는 해소됐다. 재무점수 상·하한 제한 명시, 판정 전 미확정 안내/판정 후 제거, 미등록 사유 설명+코드 조건을 반영한다. Owner의 기존 개별 구현·Commit/Push/PR 승인과 P05 읽기 전용·main 별도 경계가 유효하다.
+
+실제 결과는 [QA 보완 결과](DEV-019_QA_FIX_RESULT.md), [자동 단언](../evidence/DEV-019_QA_FIX_ASSERTIONS.json), [실행·GUI 증거](../evidence/DEV-019_QA_FIX_VALIDATION.json)를 따른다. 독립 Design 재검수·수용/DONE은 별도다.

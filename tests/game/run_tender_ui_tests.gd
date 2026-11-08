@@ -19,6 +19,8 @@ func _run() -> void:
 		_expect("intentional_failure", false, true)
 	else:
 		_test_decimal()
+		await _test_public_criteria()
+		await _test_current_reasons()
 		await _test_normal()
 		await _test_boundaries()
 		await _test_states()
@@ -73,6 +75,121 @@ func _choose(panel: View, index: int = 0) -> void:
 		. emit(index)
 	)
 	panel.controls.detail.pressed.emit()
+
+
+func _test_public_criteria() -> void:
+	for index: int in [0, 1]:
+		var session := FX.create()
+		var before := session.pipeline.snapshot()
+		var panel := _panel(session)
+		_choose(panel, index)
+		var text: String = panel.labels.criteria.text
+		_expect("QA001_before_visible", panel.labels.criteria.visible, true)
+		for required: String in [
+			"공고의 공개 평가 기준",
+			"입찰 결과는 아직 확정되지 않았습니다.",
+			"공고 마감 시점의 자격·자금 상태",
+			"사업별 제한자금 R의 합계",
+			"F ÷ 10,000을 0~100점 범위로 제한",
+			"(7 × 이행능력 점수 + 3 × 재무점수) ÷ 10",
+			"경쟁자 공개점수 80점 (이행능력 80점 / 재무점수 80점)",
+			"동점 시 우선순위: 경쟁자 → 플레이어"
+		]:
+			_expect("QA001_prebid_content", required in text, true)
+		_expect("QA001_no_predicted86", "86" in text, false)
+		_expect(
+			"QA001_after_terms",
+			panel.labels.summary.get_index() < panel.labels.criteria.get_index(),
+			true
+		)
+		_expect(
+			"QA001_before_eligibility",
+			panel.labels.criteria.get_index() < panel.labels.eligibility.get_index(),
+			true
+		)
+		_expect(
+			"QA001_before_submit",
+			panel.labels.criteria.get_index() < panel.controls.submit.get_parent().get_index(),
+			true
+		)
+		_expect("QA001_no_side_effect", session.pipeline.snapshot(), before)
+		panel.controls.submit.pressed.emit()
+		FX.advance_to(session, 1800)
+		panel.present(session.snapshot().tender_ui)
+		_expect("QA001_fixed_after_decision", "경쟁자 공개점수 80점" in panel.labels.criteria.text, true)
+		_expect("QA001_remove_unconfirmed", "아직 확정되지" in panel.labels.criteria.text, false)
+		_expect("QA001_separate_actual", "공개점수 86 : 80점" in panel.labels.decision.text, true)
+		panel.queue_free()
+		await process_frame
+	var supplied := FX.create("FRACTION")
+	var envelope: Dictionary = supplied.snapshot().tender_ui.snapshot
+	envelope.tenders[0].terms.competitor_capability = 60
+	envelope.tenders[0].terms.competitor_financial_score = 20
+	var custom := supplied._evaluation_criteria(envelope)
+	_expect(
+		"QA001_authority_model_score", View.exact_decimal(custom.B01.competitor_display_score), "48"
+	)
+	envelope.tenders[0].terms.competitor_financial_score = -1
+	_expect(
+		"QA001_invalid_input_omitted", supplied._evaluation_criteria(envelope).has("B01"), false
+	)
+	envelope.tenders[0].terms.competitor_financial_score = 80.0
+	_expect("QA001_noninteger_omitted", supplied._evaluation_criteria(envelope).has("B01"), false)
+	var session := FX.create()
+	var panel := _panel(session)
+	_choose(panel)
+	FX.advance_to(session, 1800)
+	panel.present(session.snapshot().tender_ui)
+	_expect("QA001_not_submitted_confirmed", "아직 확정되지" in panel.labels.criteria.text, false)
+	var packet: Dictionary = session.snapshot().tender_ui
+	packet.snapshot.tenders[0].terms.tie_priority.reverse()
+	panel.present(packet)
+	_expect("QA001_priority_from_terms", "플레이어 → 경쟁자" in panel.labels.criteria.text, true)
+	packet.evaluation_criteria = {}
+	panel.present(packet)
+	_expect("QA001_missing_not80", "경쟁자 평가 자료 없음" in panel.labels.criteria.text, true)
+	panel.queue_free()
+	await process_frame
+
+
+func _test_current_reasons() -> void:
+	for pair: Array in [
+		["BUSY", "다른 사업 진행 중"], ["DURATION", "공기 이행 불가"], ["BEFORE_START", "접수기간 시작 전"]
+	]:
+		var session := FX.create(pair[0])
+		var panel := _panel(session)
+		panel.present(FX.packet(session, pair[0]))
+		_choose(panel)
+		_expect("QA002_known_korean", pair[1] in panel.labels.eligibility.text, true)
+		_expect("QA002_authority_disabled", panel.controls.submit.disabled, true)
+		panel.queue_free()
+		await process_frame
+	var session := FX.create()
+	var panel := _panel(session)
+	_choose(panel)
+	var packet: Dictionary = session.snapshot().tender_ui
+	packet.snapshot.tenders[0].reason_codes = [
+		"ROUND_CLOSED", "UNKNOWN_TEST_ONLY", "PROJECT_IN_PROGRESS"
+	]
+	packet.snapshot.tenders[0].allowed_actions.submit_bid = false
+	panel.present(packet)
+	_expect(
+		"QA002_ordered_lines",
+		(
+			"접수기간 종료\n행동 제한 사유를 확인할 수 없습니다 (코드: UNKNOWN_TEST_ONLY)\n다른 사업 진행 중"
+			in panel.labels.eligibility.text
+		),
+		true
+	)
+	_expect(
+		"QA002_raw_preserved",
+		panel.shown.snapshot.tenders[0].reason_codes,
+		packet.snapshot.tenders[0].reason_codes
+	)
+	_expect("QA002_no_history_mix", "UNKNOWN_TEST_ONLY" in panel.labels.request.text, false)
+	_expect("QA002_button_authority", panel.controls.submit.disabled, true)
+	panel.queue_free()
+	await process_frame
 
 
 func _test_normal() -> void:

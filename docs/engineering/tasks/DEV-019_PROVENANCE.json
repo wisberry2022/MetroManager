@@ -2,194 +2,208 @@
   "schema_version": 1,
   "task_id": "DEV-019",
   "primary_agent_id": "AGT-DEV-0001",
-  "base_sha": "3aad051c46230fae04314e082dcf5b39a1a1004f",
+  "base_sha": "06274e8557a8bbe4d8880fd02aac892c15e49f98",
   "artifacts": [
     {
-      "path": "docs/engineering/evidence/DEV-019_DEADLINE_BEFORE.png",
+      "path": "docs/engineering/evidence/DEV-019_QAFIX_B01_BEFORE.jpg",
       "change_type": "add",
       "agent_id": "AGT-DEV-0001",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
       ],
-      "blob_sha": "2462418d3eabaf050af27f17ac5d6a0cdf1efaec"
+      "blob_sha": "08e7f3024aaa0223d1a1d903e95875fec8e2f08a"
     },
     {
-      "path": "docs/engineering/evidence/DEV-019_DEADLINE_PENDING.png",
+      "path": "docs/engineering/evidence/DEV-019_QAFIX_B02_AFTER_CRITERIA.jpg",
       "change_type": "add",
       "agent_id": "AGT-DEV-0001",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
       ],
-      "blob_sha": "26b4cda51603f7ca6691512a44789847c02df7d1"
+      "blob_sha": "a2c8aa31aee7d713a3db4a636a62b47dc1e244b8"
     },
     {
-      "path": "docs/engineering/evidence/DEV-019_DEADLINE_REJECTED.png",
+      "path": "docs/engineering/evidence/DEV-019_QAFIX_B02_BEFORE.jpg",
       "change_type": "add",
       "agent_id": "AGT-DEV-0001",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
       ],
-      "blob_sha": "f86adee51fbeb98c3667ad4a120bf25c1c016fab"
+      "blob_sha": "e790ed684df12d4771c145a8c63d7bcf318f386f"
     },
     {
-      "path": "docs/engineering/evidence/DEV-019_FRACTION_RESULT.png",
+      "path": "docs/engineering/evidence/DEV-019_QAFIX_B02_RESULT.jpg",
       "change_type": "add",
       "agent_id": "AGT-DEV-0001",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
       ],
-      "blob_sha": "69951b6ba32e701e8df85f5dea8a599357c5a9ac"
+      "blob_sha": "716b72d54dbf78be1b3292e4c2fa3ccc5548ae2d"
     },
     {
-      "path": "docs/engineering/evidence/DEV-019_PRODUCT_AWARD.png",
+      "path": "docs/engineering/evidence/DEV-019_QAFIX_DEADLINE_BEFORE.jpg",
       "change_type": "add",
       "agent_id": "AGT-DEV-0001",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
       ],
-      "blob_sha": "f7d68996b9abcfb0c55b43829181c5917fa2faea"
+      "blob_sha": "1e41fbdd994c0118a1fe8ca8ae29979d4ccfa507"
     },
     {
-      "path": "docs/engineering/evidence/DEV-019_PRODUCT_KEYBOARD_BACK.png",
+      "path": "docs/engineering/evidence/DEV-019_QAFIX_DEADLINE_REJECTED.jpg",
       "change_type": "add",
       "agent_id": "AGT-DEV-0001",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
       ],
-      "blob_sha": "62ef010429919466f0ceff510bde2e9e4376fbc0"
+      "blob_sha": "a0ce67c553f0a9876efb2162706e22201f29525e"
     },
     {
-      "path": "docs/engineering/evidence/DEV-019_PRODUCT_LIST.png",
+      "path": "docs/engineering/evidence/DEV-019_QAFIX_DEFAULT_SCROLL.jpg",
       "change_type": "add",
       "agent_id": "AGT-DEV-0001",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
       ],
-      "blob_sha": "9775b19510e0c74ee04aa57c243d6ae921185ce8"
+      "blob_sha": "3f17601b5675f005ff5567232ceb3dccfd574fb6"
     },
     {
-      "path": "docs/engineering/evidence/DEV-019_PRODUCT_P05.png",
+      "path": "docs/engineering/evidence/DEV-019_QAFIX_DEFAULT_WIDTH.jpg",
       "change_type": "add",
       "agent_id": "AGT-DEV-0001",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
       ],
-      "blob_sha": "2a62cccd44bd6e463e43116700dacf74bfd54a16"
+      "blob_sha": "dd936e983ec9c08aa040de7b73fdf0125690703a"
     },
     {
-      "path": "docs/engineering/evidence/DEV-019_PRODUCT_RECEIPT.png",
+      "path": "docs/engineering/evidence/DEV-019_QAFIX_P05_READONLY.jpg",
       "change_type": "add",
       "agent_id": "AGT-DEV-0001",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
       ],
-      "blob_sha": "e5259058683495b9791cfb4d8091901aaae06102"
+      "blob_sha": "0189314bc01b99588f8c293244309933a4f53c24"
     },
     {
-      "path": "docs/engineering/evidence/DEV-019_QUERY_ERROR.png",
+      "path": "docs/engineering/evidence/DEV-019_QAFIX_PRODUCT_B01_BEFORE.jpg",
       "change_type": "add",
       "agent_id": "AGT-DEV-0001",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
       ],
-      "blob_sha": "124d157ace56f7a9e0dbb60a7024636a0eb0f28e"
+      "blob_sha": "f5f3d933542c325fbb4f2e3e32eeffe7af961fa2"
     },
     {
-      "path": "docs/engineering/evidence/DEV-019_QUERY_RECOVERED.png",
+      "path": "docs/engineering/evidence/DEV-019_QAFIX_PRODUCT_B02_BEFORE.jpg",
       "change_type": "add",
       "agent_id": "AGT-DEV-0001",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
       ],
-      "blob_sha": "3f8d744fbcd1ca306560984a8e22660d260c386c"
+      "blob_sha": "4f74c4d0fb8c6f14fd0abc511b6719481e0524cb"
     },
     {
-      "path": "docs/engineering/evidence/DEV-019_UI_ASSERTIONS.json",
+      "path": "docs/engineering/evidence/DEV-019_QAFIX_REASON_FALLBACK.jpg",
       "change_type": "add",
       "agent_id": "AGT-DEV-0001",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
       ],
-      "blob_sha": "7a6637785773af9b21fd908c39e07e89c336d665"
+      "blob_sha": "24af137b6d195e77cccb76b41be42bd7ef4ff8e2"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-019_QA_FIX_ASSERTIONS.json",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+      ],
+      "blob_sha": "d5da56ff2fba25854513544df750cd06eb5c92a1"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-019_QA_FIX_VALIDATION.json",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0001",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+      ],
+      "blob_sha": "a362a7bb0c2bd57f6375f05559c4e40aa228d5e5"
     },
     {
       "path": "docs/engineering/evidence/DEV-019_UI_CONTRACT.md",
-      "change_type": "add",
+      "change_type": "modify",
       "agent_id": "AGT-DEV-0001",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
       ],
-      "blob_sha": "8a06708d038462381d4d4780ff568d310dd759fe"
+      "blob_sha": "3cf8a5d2d2506a9bfd432be258cd40138159a844",
+      "old_blob_sha": "8a06708d038462381d4d4780ff568d310dd759fe"
     },
     {
-      "path": "docs/engineering/evidence/DEV-019_VALIDATION.json",
+      "path": "docs/engineering/tasks/DEV-019_QA_FIX_RESULT.md",
       "change_type": "add",
       "agent_id": "AGT-DEV-0001",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
       ],
-      "blob_sha": "f18f90fbe9a630240cb2a7215ba6f001e7a14e0c"
+      "blob_sha": "082070d7439e36a5aa97fe77e17a729a71dbccf3"
     },
     {
       "path": "docs/engineering/tasks/DEV-019_RESULT.md",
-      "change_type": "add",
+      "change_type": "modify",
       "agent_id": "AGT-DEV-0001",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
       ],
-      "blob_sha": "8a644a92d254dc5b297811323d87243a5de96e10"
+      "blob_sha": "8466dc61fe2fb63b361cbdde04a0f88da58eeba7",
+      "old_blob_sha": "8a644a92d254dc5b297811323d87243a5de96e10"
     },
     {
       "path": "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md",
-      "change_type": "add",
+      "change_type": "modify",
       "agent_id": "AGT-DEV-0001",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
       ],
-      "blob_sha": "5ad1ab6c41d63a0d552420235938a0aeedb20d93"
-    },
-    {
-      "path": "scenes/tender_panel.tscn",
-      "change_type": "add",
-      "agent_id": "AGT-DEV-0001",
-      "contributors": [],
-      "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
-      ],
-      "blob_sha": "975b33c27b7b364df09dcc2954825162aac639ab"
+      "blob_sha": "9ca38b390c39de91cd87d327890c12feb27f6009",
+      "old_blob_sha": "5ad1ab6c41d63a0d552420235938a0aeedb20d93"
     },
     {
       "path": "scripts/ui/stage1_session.gd",
@@ -197,111 +211,47 @@
       "agent_id": "AGT-DEV-0001",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
       ],
-      "blob_sha": "9248811c3659e85433eb55e7a82c95417e72b53a",
-      "old_blob_sha": "705e46adaae7096a4b81b074bc9de3c6da07cfd4"
+      "blob_sha": "af777b326e23a3710327ed3ad8ceda28d6de2ec4",
+      "old_blob_sha": "9248811c3659e85433eb55e7a82c95417e72b53a"
     },
     {
-      "path": "scripts/ui/stage1_view.gd",
+      "path": "scripts/ui/tender_view.gd",
       "change_type": "modify",
       "agent_id": "AGT-DEV-0001",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
       ],
-      "blob_sha": "da19c527d9fbd3b224d5bdd76bd8f50761837382",
-      "old_blob_sha": "f75efcd99c3704cde4635ffa97be2e8838fe6393"
-    },
-    {
-      "path": "scripts/ui/tender_view.gd",
-      "change_type": "add",
-      "agent_id": "AGT-DEV-0001",
-      "contributors": [],
-      "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
-      ],
-      "blob_sha": "4f051bdaf142c982bed1aaae57a3359f28ba8a86"
-    },
-    {
-      "path": "scripts/ui/tender_view.gd.uid",
-      "change_type": "add",
-      "agent_id": "AGT-DEV-0001",
-      "contributors": [],
-      "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
-      ],
-      "blob_sha": "5fd60bdeea285332c88b607cf041ffa64e7f836b"
-    },
-    {
-      "path": "tests/game/run_tender_gui_cases.gd",
-      "change_type": "add",
-      "agent_id": "AGT-DEV-0001",
-      "contributors": [],
-      "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
-      ],
-      "blob_sha": "f1e38e4b62f6f48927688b47efa3c083a6c39537"
-    },
-    {
-      "path": "tests/game/run_tender_gui_cases.gd.uid",
-      "change_type": "add",
-      "agent_id": "AGT-DEV-0001",
-      "contributors": [],
-      "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
-      ],
-      "blob_sha": "fc6157b962183b6cf73512213005a51b59af1dc9"
+      "blob_sha": "cea4496ca1f6ec4881d10748d81d8bc108bf110a",
+      "old_blob_sha": "4f051bdaf142c982bed1aaae57a3359f28ba8a86"
     },
     {
       "path": "tests/game/run_tender_ui_tests.gd",
-      "change_type": "add",
+      "change_type": "modify",
       "agent_id": "AGT-DEV-0001",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
       ],
-      "blob_sha": "1feb10e599c11d1933d8f5d148df86fa9cf6ded6"
-    },
-    {
-      "path": "tests/game/run_tender_ui_tests.gd.uid",
-      "change_type": "add",
-      "agent_id": "AGT-DEV-0001",
-      "contributors": [],
-      "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
-      ],
-      "blob_sha": "3794f0eb47d8f4ee4007ecad2966f79c420d73a4"
+      "blob_sha": "5b78ab3c112ce62c2fc9a9a787888b997e6e6ff0",
+      "old_blob_sha": "1feb10e599c11d1933d8f5d148df86fa9cf6ded6"
     },
     {
       "path": "tests/game/w019_ui_fixtures.gd",
-      "change_type": "add",
+      "change_type": "modify",
       "agent_id": "AGT-DEV-0001",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
       ],
-      "blob_sha": "5abecba11c8d261b00180aed240b73254cb1929a"
-    },
-    {
-      "path": "tests/game/w019_ui_fixtures.gd.uid",
-      "change_type": "add",
-      "agent_id": "AGT-DEV-0001",
-      "contributors": [],
-      "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#8-owner-실행git-승인-수신-및-잔여-선행조건",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6716760279"
-      ],
-      "blob_sha": "fd04f4cbc4609897223864106533ab17ececab18"
+      "blob_sha": "e5e0931cf7c7eba7f534d66642d41a8b2607aa32",
+      "old_blob_sha": "5abecba11c8d261b00180aed240b73254cb1929a"
     }
   ]
 }

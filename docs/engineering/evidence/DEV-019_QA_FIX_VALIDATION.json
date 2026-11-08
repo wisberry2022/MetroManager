@@ -1,0 +1,1285 @@
+{
+  "task_id": "DEV-019",
+  "scope": [
+    "DSG010-QA-001",
+    "DSG010-QA-002"
+  ],
+  "base_sha": "06274e8557a8bbe4d8880fd02aac892c15e49f98",
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "design_l2_reply": "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859",
+  "source_hashes": [
+    {
+      "path": "scripts/ui/stage1_session.gd",
+      "gui_execution_sha256": "87065f40c5a1939b1468aa6b65e7bd28f0f95082ab52f0a7c73efc845e2b34bb",
+      "submission_sha256": "87065f40c5a1939b1468aa6b65e7bd28f0f95082ab52f0a7c73efc845e2b34bb",
+      "difference": "identical"
+    },
+    {
+      "path": "scripts/ui/tender_view.gd",
+      "gui_execution_sha256": "81f105f853e32f918042605799d6fe332158a795c6fe3e4b5fa067616fc699f5",
+      "submission_sha256": "9f9fbb112dd73509a14744b6833ad477bdfaff99718cd63dbbeacf5d84dc8231",
+      "difference": "LF normalization only"
+    },
+    {
+      "path": "tests/game/run_tender_ui_tests.gd",
+      "gui_execution_sha256": "f7458ba6152e02bd758e5ece3d3773cb4c2faa5a5c4517c41df728a54974cd44",
+      "submission_sha256": "f7458ba6152e02bd758e5ece3d3773cb4c2faa5a5c4517c41df728a54974cd44",
+      "difference": "identical"
+    },
+    {
+      "path": "tests/game/w019_ui_fixtures.gd",
+      "gui_execution_sha256": "a3488aff7fad28d89b2101e8b9ed7316e093b05938456f0d995355f7c1341e76",
+      "submission_sha256": "a3488aff7fad28d89b2101e8b9ed7316e093b05938456f0d995355f7c1341e76",
+      "difference": "identical"
+    }
+  ],
+  "automatic_tests": [
+    {
+      "suite": "ui",
+      "command": "godot --headless --path . --script tests/game/run_tender_ui_tests.gd",
+      "result": "DEV019_UI_TEST_RESULT checks=235 failures=0",
+      "exit_code": 0,
+      "log_sha256": "0b3fc6fe7c60dd3813293d0a12e4b03c10a423c8ebb822ebc9b35b7011ca66e5"
+    },
+    {
+      "suite": "w01",
+      "command": "godot --headless --path . --script tests/game/run_w01_tests.gd",
+      "result": "W01_TEST_RESULT checks=219 failures=0",
+      "exit_code": 0,
+      "log_sha256": "b9d8fcb6fe9a6a6bd7c7b3d6c8ebf28fcbd067ceeb3c2462ef7c63baaaf7e4df"
+    },
+    {
+      "suite": "w02",
+      "command": "godot --headless --path . --script tests/game/run_w02_tests.gd",
+      "result": "W02_TEST_RESULT checks=309 failures=0",
+      "exit_code": 0,
+      "log_sha256": "65566b680f39334a0c970ed6a328551863fee5d89e4c7ea5a284e89b1955f40a"
+    },
+    {
+      "suite": "w03",
+      "command": "godot --headless --path . --script tests/game/run_w03_tests.gd",
+      "result": "W03_TEST_RESULT checks=101 failures=0",
+      "exit_code": 0,
+      "log_sha256": "e106f7aa57e133af5012c6bd05580ffa9e1c2932482dc5d855c0e658be5ac1a5"
+    },
+    {
+      "suite": "w04a",
+      "command": "godot --headless --path . --script tests/game/run_w04a_tests.gd",
+      "result": "W04A_TEST_RESULT checks=204 failures=0",
+      "exit_code": 0,
+      "log_sha256": "57498132f2da6fd3c9278a84fb54ddfc1a82c2cae07a184c5fe56c20dcea6ff8"
+    },
+    {
+      "suite": "w07",
+      "command": "godot --headless --path . --script tests/game/run_w07_tests.gd",
+      "result": "W07_TEST_RESULT checks=322 failures=0",
+      "exit_code": 0,
+      "log_sha256": "10b4d6ac50c352e19e9435f7a7f996b7659eea06acd8976e5f6361ce209dc69d"
+    }
+  ],
+  "editor_load": {
+    "command": "godot --headless --editor --path . --quit",
+    "exit_code": 0,
+    "errors": [],
+    "log_sha256": "9f1d92bf73600c29a58ef2ed3bc46596638fb9df38f58a581238cc8e0ffa0f22"
+  },
+  "gui": {
+    "product": {
+      "log_sha256": "83b3e60dcdb1b69354ec0090c2ad1d1b16f4e8521fc965f372369daa68c9db93",
+      "exit_code": 0,
+      "events": [
+        {
+          "type": "DEV019_OBSERVATION",
+          "value": {
+            "funds": {
+              "available_cash": 1000000,
+              "cash": 1000000,
+              "free_cash": 1000000,
+              "reserved": 0,
+              "reserved_by_project": {},
+              "restricted": 0,
+              "restricted_by_project": {},
+              "unpaid": 0
+            },
+            "row": {
+              "allowed_actions": {
+                "enter_p05": false,
+                "submit_bid": true
+              },
+              "business_contract": {},
+              "construction_contract": {
+                "available": false,
+                "status": "NOT_CREATED"
+              },
+              "decision": {},
+              "eligibility": {
+                "checks": {
+                  "duration_feasible": true,
+                  "jurisdiction": true,
+                  "no_active_project": true
+                },
+                "eligible": true,
+                "reason_codes": []
+              },
+              "p05_reason_codes": [
+                "BUSINESS_CONTRACT_NOT_EFFECTIVE"
+              ],
+              "plan_locked": true,
+              "plan_revision": 0,
+              "reason_codes": [],
+              "receipt": {},
+              "state": "OPEN",
+              "target_revision": 0,
+              "terms": {
+                "city_id": "C01",
+                "closes_at": 1800,
+                "competitor_capability": 80,
+                "competitor_financial_score": 80,
+                "duration_minutes": 2880,
+                "fare": 100,
+                "government": 800000,
+                "issuer_id": "CITY_HALL",
+                "opens_at": 360,
+                "project_id": "P-A",
+                "round_id": "B01-R1",
+                "standard_cost": 600000,
+                "station_ids": [
+                  "S01",
+                  "S02",
+                  "S03",
+                  "S04",
+                  "S08",
+                  "S12"
+                ],
+                "tender_id": "B01",
+                "tie_priority": [
+                  "COMPETITOR",
+                  "PLAYER"
+                ]
+              }
+            },
+            "simulation_minute": 586,
+            "snapshot_revision": 1808,
+            "tender_id": "B01"
+          }
+        },
+        {
+          "type": "DEV019_OBSERVATION",
+          "value": {
+            "funds": {
+              "available_cash": 1000000,
+              "cash": 1000000,
+              "free_cash": 1000000,
+              "reserved": 0,
+              "reserved_by_project": {},
+              "restricted": 0,
+              "restricted_by_project": {},
+              "unpaid": 0
+            },
+            "row": {
+              "allowed_actions": {
+                "enter_p05": false,
+                "submit_bid": true
+              },
+              "business_contract": {},
+              "construction_contract": {
+                "available": false,
+                "status": "NOT_CREATED"
+              },
+              "decision": {},
+              "eligibility": {
+                "checks": {
+                  "duration_feasible": true,
+                  "jurisdiction": true,
+                  "no_active_project": true
+                },
+                "eligible": true,
+                "reason_codes": []
+              },
+              "p05_reason_codes": [
+                "BUSINESS_CONTRACT_NOT_EFFECTIVE"
+              ],
+              "plan_locked": true,
+              "plan_revision": 0,
+              "reason_codes": [],
+              "receipt": {},
+              "state": "OPEN",
+              "target_revision": 0,
+              "terms": {
+                "city_id": "C01",
+                "closes_at": 1800,
+                "competitor_capability": 80,
+                "competitor_financial_score": 80,
+                "duration_minutes": 2880,
+                "fare": 100,
+                "government": 800000,
+                "issuer_id": "NATIONAL_GOVERNMENT",
+                "opens_at": 360,
+                "project_id": "P-B",
+                "round_id": "B02-R1",
+                "standard_cost": 600000,
+                "station_ids": [
+                  "S01",
+                  "S05",
+                  "S09",
+                  "S10",
+                  "S11",
+                  "S12"
+                ],
+                "tender_id": "B02",
+                "tie_priority": [
+                  "COMPETITOR",
+                  "PLAYER"
+                ]
+              }
+            },
+            "simulation_minute": 586,
+            "snapshot_revision": 1808,
+            "tender_id": "B02"
+          }
+        }
+      ]
+    },
+    "gui": {
+      "log_sha256": "f72e539c2c0e6b0220f60867979ab4295287808fcf1a345a9c4adf121ad2853c",
+      "exit_code": 0,
+      "events": [
+        {
+          "type": "DEV019_GUI_CASE",
+          "value": "NORMAL"
+        },
+        {
+          "type": "DEV019_OBSERVATION",
+          "value": {
+            "funds": {
+              "available_cash": 1000000,
+              "cash": 1000000,
+              "free_cash": 1000000,
+              "reserved": 0,
+              "reserved_by_project": {},
+              "restricted": 0,
+              "restricted_by_project": {},
+              "unpaid": 0
+            },
+            "row": {
+              "allowed_actions": {
+                "enter_p05": false,
+                "submit_bid": true
+              },
+              "business_contract": {},
+              "construction_contract": {
+                "available": false,
+                "status": "NOT_CREATED"
+              },
+              "decision": {},
+              "eligibility": {
+                "checks": {
+                  "duration_feasible": true,
+                  "jurisdiction": true,
+                  "no_active_project": true
+                },
+                "eligible": true,
+                "reason_codes": []
+              },
+              "p05_reason_codes": [
+                "BUSINESS_CONTRACT_NOT_EFFECTIVE"
+              ],
+              "plan_locked": true,
+              "plan_revision": 0,
+              "reason_codes": [],
+              "receipt": {},
+              "state": "OPEN",
+              "target_revision": 0,
+              "terms": {
+                "city_id": "C01",
+                "closes_at": 1800,
+                "competitor_capability": 80,
+                "competitor_financial_score": 80,
+                "duration_minutes": 2880,
+                "fare": 100,
+                "government": 800000,
+                "issuer_id": "CITY_HALL",
+                "opens_at": 360,
+                "project_id": "P-A",
+                "round_id": "B01-R1",
+                "standard_cost": 600000,
+                "station_ids": [
+                  "S01",
+                  "S02",
+                  "S03",
+                  "S04",
+                  "S08",
+                  "S12"
+                ],
+                "tender_id": "B01",
+                "tie_priority": [
+                  "COMPETITOR",
+                  "PLAYER"
+                ]
+              }
+            },
+            "simulation_minute": 360,
+            "snapshot_revision": 0,
+            "tender_id": "B01"
+          }
+        },
+        {
+          "type": "DEV019_OBSERVATION",
+          "value": {
+            "funds": {
+              "available_cash": 1000000,
+              "cash": 1000000,
+              "free_cash": 1000000,
+              "reserved": 0,
+              "reserved_by_project": {},
+              "restricted": 0,
+              "restricted_by_project": {},
+              "unpaid": 0
+            },
+            "row": {
+              "allowed_actions": {
+                "enter_p05": false,
+                "submit_bid": true
+              },
+              "business_contract": {},
+              "construction_contract": {
+                "available": false,
+                "status": "NOT_CREATED"
+              },
+              "decision": {},
+              "eligibility": {
+                "checks": {
+                  "duration_feasible": true,
+                  "jurisdiction": true,
+                  "no_active_project": true
+                },
+                "eligible": true,
+                "reason_codes": []
+              },
+              "p05_reason_codes": [
+                "BUSINESS_CONTRACT_NOT_EFFECTIVE"
+              ],
+              "plan_locked": true,
+              "plan_revision": 0,
+              "reason_codes": [],
+              "receipt": {},
+              "state": "OPEN",
+              "target_revision": 0,
+              "terms": {
+                "city_id": "C01",
+                "closes_at": 1800,
+                "competitor_capability": 80,
+                "competitor_financial_score": 80,
+                "duration_minutes": 2880,
+                "fare": 100,
+                "government": 800000,
+                "issuer_id": "NATIONAL_GOVERNMENT",
+                "opens_at": 360,
+                "project_id": "P-B",
+                "round_id": "B02-R1",
+                "standard_cost": 600000,
+                "station_ids": [
+                  "S01",
+                  "S05",
+                  "S09",
+                  "S10",
+                  "S11",
+                  "S12"
+                ],
+                "tender_id": "B02",
+                "tie_priority": [
+                  "COMPETITOR",
+                  "PLAYER"
+                ]
+              }
+            },
+            "simulation_minute": 360,
+            "snapshot_revision": 0,
+            "tender_id": "B02"
+          }
+        },
+        {
+          "type": "DEV019_BID_REQUEST",
+          "value": {
+            "command": {
+              "command_id": "bid-ui-44056970834-1",
+              "effective_at": 361,
+              "expected_snapshot_revision": 0,
+              "plan_revision": 0,
+              "requested_at": 360,
+              "round_id": "B02-R1",
+              "target_revision": 0,
+              "tender_id": "B02"
+            },
+            "result": {
+              "command_id": "bid-ui-44056970834-1",
+              "effective_at": 361,
+              "pending": true
+            }
+          }
+        },
+        {
+          "type": "DEV019_OBSERVATION",
+          "value": {
+            "funds": {
+              "available_cash": 1000000,
+              "cash": 1000000,
+              "free_cash": 1000000,
+              "reserved": 0,
+              "reserved_by_project": {},
+              "restricted": 0,
+              "restricted_by_project": {},
+              "unpaid": 0
+            },
+            "row": {
+              "allowed_actions": {
+                "enter_p05": false,
+                "submit_bid": true
+              },
+              "business_contract": {},
+              "construction_contract": {
+                "available": false,
+                "status": "NOT_CREATED"
+              },
+              "decision": {},
+              "eligibility": {
+                "checks": {
+                  "duration_feasible": true,
+                  "jurisdiction": true,
+                  "no_active_project": true
+                },
+                "eligible": true,
+                "reason_codes": []
+              },
+              "p05_reason_codes": [
+                "BUSINESS_CONTRACT_NOT_EFFECTIVE"
+              ],
+              "plan_locked": true,
+              "plan_revision": 0,
+              "reason_codes": [],
+              "receipt": {},
+              "state": "OPEN",
+              "target_revision": 0,
+              "terms": {
+                "city_id": "C01",
+                "closes_at": 1800,
+                "competitor_capability": 80,
+                "competitor_financial_score": 80,
+                "duration_minutes": 2880,
+                "fare": 100,
+                "government": 800000,
+                "issuer_id": "NATIONAL_GOVERNMENT",
+                "opens_at": 360,
+                "project_id": "P-B",
+                "round_id": "B02-R1",
+                "standard_cost": 600000,
+                "station_ids": [
+                  "S01",
+                  "S05",
+                  "S09",
+                  "S10",
+                  "S11",
+                  "S12"
+                ],
+                "tender_id": "B02",
+                "tie_priority": [
+                  "COMPETITOR",
+                  "PLAYER"
+                ]
+              }
+            },
+            "simulation_minute": 360,
+            "snapshot_revision": 0,
+            "tender_id": "B02"
+          }
+        },
+        {
+          "type": "DEV019_OBSERVATION",
+          "value": {
+            "funds": {
+              "available_cash": 1000000,
+              "cash": 1800000,
+              "free_cash": 1000000,
+              "reserved": 0,
+              "reserved_by_project": {
+                "P-B": 0
+              },
+              "restricted": 800000,
+              "restricted_by_project": {
+                "P-B": 800000
+              },
+              "unpaid": 0
+            },
+            "row": {
+              "allowed_actions": {
+                "enter_p05": true,
+                "submit_bid": false
+              },
+              "business_contract": {
+                "attempted_at": 1800,
+                "business_contract_id": "B02-R1-BUSINESS",
+                "construction_contract_available": false,
+                "effective_at": 1800,
+                "government_payment": {
+                  "amount": 800000,
+                  "available": true,
+                  "effective_at": 1800,
+                  "ledger_entry_index": 1439,
+                  "restricted_project_id": "P-B",
+                  "transaction_id": "B02-R1-GOVERNMENT"
+                },
+                "phase_revision": 11517,
+                "project_id": "P-B",
+                "result": {
+                  "accepted": true,
+                  "decision_funds": {
+                    "available_cash": 1000000,
+                    "cash": 1000000,
+                    "free_cash": 1000000,
+                    "reserved": 0,
+                    "reserved_by_project": {},
+                    "restricted": 0,
+                    "restricted_by_project": {},
+                    "unpaid": 0
+                  },
+                  "reason": ""
+                },
+                "result_revision": 11518,
+                "standard_cost": 600000,
+                "status": "EFFECTIVE"
+              },
+              "construction_contract": {
+                "available": false,
+                "status": "NOT_CREATED"
+              },
+              "decision": {
+                "awarded": true,
+                "competitor_comparison": {
+                  "denominator": 10000,
+                  "numerator": 8000000
+                },
+                "decision_phase": "CONTRACT",
+                "effective_at": 1800,
+                "eligibility": {
+                  "checks": {
+                    "duration_feasible": true,
+                    "jurisdiction": true,
+                    "no_active_project": true
+                  },
+                  "eligible": true,
+                  "reason_codes": []
+                },
+                "funds": {
+                  "available_cash": 1000000,
+                  "cash": 1000000,
+                  "free_cash": 1000000,
+                  "reserved": 0,
+                  "reserved_by_project": {},
+                  "restricted": 0,
+                  "restricted_by_project": {},
+                  "unpaid": 0
+                },
+                "phase_revision": 11516,
+                "reason": "",
+                "result_revision": 11517,
+                "score": {
+                  "capability": 80,
+                  "comparison_score": {
+                    "denominator": 10000,
+                    "numerator": 8600000
+                  },
+                  "display_score": {
+                    "denominator": 100000,
+                    "numerator": 8600000
+                  },
+                  "financial_score": {
+                    "denominator": 10000,
+                    "numerator": 1000000
+                  },
+                  "free_cash": 1000000
+                },
+                "terms": {
+                  "city_id": "C01",
+                  "closes_at": 1800,
+                  "competitor_capability": 80,
+                  "competitor_financial_score": 80,
+                  "duration_minutes": 2880,
+                  "fare": 100,
+                  "government": 800000,
+                  "issuer_id": "NATIONAL_GOVERNMENT",
+                  "opens_at": 360,
+                  "project_id": "P-B",
+                  "round_id": "B02-R1",
+                  "standard_cost": 600000,
+                  "station_ids": [
+                    "S01",
+                    "S05",
+                    "S09",
+                    "S10",
+                    "S11",
+                    "S12"
+                  ],
+                  "tender_id": "B02",
+                  "tie_priority": [
+                    "COMPETITOR",
+                    "PLAYER"
+                  ]
+                },
+                "tie_priority": [
+                  "COMPETITOR",
+                  "PLAYER"
+                ]
+              },
+              "eligibility": {
+                "checks": {
+                  "duration_feasible": true,
+                  "jurisdiction": true,
+                  "no_active_project": false
+                },
+                "eligible": false,
+                "reason_codes": [
+                  "PROJECT_IN_PROGRESS"
+                ]
+              },
+              "p05_reason_codes": [],
+              "plan_locked": true,
+              "plan_revision": 0,
+              "reason_codes": [
+                "PROJECT_IN_PROGRESS",
+                "ROUND_CLOSED"
+              ],
+              "receipt": {
+                "accepted": true,
+                "admission_snapshot": {
+                  "command": {
+                    "command_id": "bid-ui-44056970834-1",
+                    "effective_at": 361,
+                    "expected_snapshot_revision": 0,
+                    "plan_revision": 0,
+                    "requested_at": 360,
+                    "round_id": "B02-R1",
+                    "target_revision": 0,
+                    "tender_id": "B02"
+                  },
+                  "eligibility": {
+                    "checks": {
+                      "duration_feasible": true,
+                      "jurisdiction": true,
+                      "no_active_project": true
+                    },
+                    "eligible": true,
+                    "reason_codes": []
+                  },
+                  "funds": {
+                    "available_cash": 1000000,
+                    "cash": 1000000,
+                    "free_cash": 1000000,
+                    "reserved": 0,
+                    "reserved_by_project": {},
+                    "restricted": 0,
+                    "restricted_by_project": {},
+                    "unpaid": 0
+                  },
+                  "score": {
+                    "capability": 80,
+                    "comparison_score": {
+                      "denominator": 10000,
+                      "numerator": 8600000
+                    },
+                    "display_score": {
+                      "denominator": 100000,
+                      "numerator": 8600000
+                    },
+                    "financial_score": {
+                      "denominator": 10000,
+                      "numerator": 1000000
+                    },
+                    "free_cash": 1000000
+                  }
+                },
+                "command_id": "bid-ui-44056970834-1",
+                "decision_phase": "CONTRACT",
+                "effective_at": 361,
+                "expected_snapshot_revision": 0,
+                "pending": false,
+                "phase_revision": 2,
+                "plan_revision": 0,
+                "reason": "",
+                "reason_codes": [],
+                "requested_at": 360,
+                "result_revision": 3,
+                "round_id": "B02-R1",
+                "target_revision": 1,
+                "tender_id": "B02"
+              },
+              "state": "AWARDED",
+              "target_revision": 3,
+              "terms": {
+                "city_id": "C01",
+                "closes_at": 1800,
+                "competitor_capability": 80,
+                "competitor_financial_score": 80,
+                "duration_minutes": 2880,
+                "fare": 100,
+                "government": 800000,
+                "issuer_id": "NATIONAL_GOVERNMENT",
+                "opens_at": 360,
+                "project_id": "P-B",
+                "round_id": "B02-R1",
+                "standard_cost": 600000,
+                "station_ids": [
+                  "S01",
+                  "S05",
+                  "S09",
+                  "S10",
+                  "S11",
+                  "S12"
+                ],
+                "tender_id": "B02",
+                "tie_priority": [
+                  "COMPETITOR",
+                  "PLAYER"
+                ]
+              }
+            },
+            "simulation_minute": 1800,
+            "snapshot_revision": 11524,
+            "tender_id": "B02"
+          }
+        },
+        {
+          "type": "DEV019_GUI_CASE",
+          "value": "REASON_FALLBACK"
+        },
+        {
+          "type": "DEV019_OBSERVATION",
+          "value": {
+            "funds": {
+              "available_cash": 1000000,
+              "cash": 1000000,
+              "free_cash": 1000000,
+              "reserved": 0,
+              "reserved_by_project": {},
+              "restricted": 0,
+              "restricted_by_project": {},
+              "unpaid": 0
+            },
+            "row": {
+              "allowed_actions": {
+                "enter_p05": false,
+                "submit_bid": false
+              },
+              "business_contract": {},
+              "construction_contract": {
+                "available": false,
+                "status": "NOT_CREATED"
+              },
+              "decision": {},
+              "eligibility": {
+                "checks": {
+                  "duration_feasible": true,
+                  "jurisdiction": true,
+                  "no_active_project": true
+                },
+                "eligible": true,
+                "reason_codes": []
+              },
+              "p05_reason_codes": [
+                "BUSINESS_CONTRACT_NOT_EFFECTIVE"
+              ],
+              "plan_locked": true,
+              "plan_revision": 0,
+              "reason_codes": [
+                "ROUND_CLOSED",
+                "UNKNOWN_TEST_ONLY_LONG_DIAGNOSTIC_REASON_CODE",
+                "PROJECT_IN_PROGRESS"
+              ],
+              "receipt": {},
+              "state": "OPEN",
+              "target_revision": 0,
+              "terms": {
+                "city_id": "C01",
+                "closes_at": 1800,
+                "competitor_capability": 80,
+                "competitor_financial_score": 80,
+                "duration_minutes": 2880,
+                "fare": 100,
+                "government": 800000,
+                "issuer_id": "CITY_HALL",
+                "opens_at": 360,
+                "project_id": "P-A",
+                "round_id": "B01-R1",
+                "standard_cost": 600000,
+                "station_ids": [
+                  "S01",
+                  "S02",
+                  "S03",
+                  "S04",
+                  "S08",
+                  "S12"
+                ],
+                "tender_id": "B01",
+                "tie_priority": [
+                  "COMPETITOR",
+                  "PLAYER"
+                ]
+              }
+            },
+            "simulation_minute": 360,
+            "snapshot_revision": 0,
+            "tender_id": "B01"
+          }
+        },
+        {
+          "type": "DEV019_GUI_CASE",
+          "value": "DEADLINE"
+        },
+        {
+          "type": "DEV019_OBSERVATION",
+          "value": {
+            "funds": {
+              "available_cash": 1000000,
+              "cash": 1000000,
+              "free_cash": 1000000,
+              "reserved": 0,
+              "reserved_by_project": {},
+              "restricted": 0,
+              "restricted_by_project": {},
+              "unpaid": 0
+            },
+            "row": {
+              "allowed_actions": {
+                "enter_p05": false,
+                "submit_bid": true
+              },
+              "business_contract": {},
+              "construction_contract": {
+                "available": false,
+                "status": "NOT_CREATED"
+              },
+              "decision": {},
+              "eligibility": {
+                "checks": {
+                  "duration_feasible": true,
+                  "jurisdiction": true,
+                  "no_active_project": true
+                },
+                "eligible": true,
+                "reason_codes": []
+              },
+              "p05_reason_codes": [
+                "BUSINESS_CONTRACT_NOT_EFFECTIVE"
+              ],
+              "plan_locked": true,
+              "plan_revision": 0,
+              "reason_codes": [],
+              "receipt": {},
+              "state": "OPEN",
+              "target_revision": 0,
+              "terms": {
+                "city_id": "C01",
+                "closes_at": 1800,
+                "competitor_capability": 80,
+                "competitor_financial_score": 80,
+                "duration_minutes": 2880,
+                "fare": 100,
+                "government": 800000,
+                "issuer_id": "CITY_HALL",
+                "opens_at": 360,
+                "project_id": "P-A",
+                "round_id": "B01-R1",
+                "standard_cost": 600000,
+                "station_ids": [
+                  "S01",
+                  "S02",
+                  "S03",
+                  "S04",
+                  "S08",
+                  "S12"
+                ],
+                "tender_id": "B01",
+                "tie_priority": [
+                  "COMPETITOR",
+                  "PLAYER"
+                ]
+              }
+            },
+            "simulation_minute": 1799,
+            "snapshot_revision": 0,
+            "tender_id": "B01"
+          }
+        },
+        {
+          "type": "DEV019_BID_REQUEST",
+          "value": {
+            "command": {
+              "command_id": "bid-ui-68098721432-1",
+              "effective_at": 1800,
+              "expected_snapshot_revision": 0,
+              "plan_revision": 0,
+              "requested_at": 1799,
+              "round_id": "B01-R1",
+              "target_revision": 0,
+              "tender_id": "B01"
+            },
+            "result": {
+              "command_id": "bid-ui-68098721432-1",
+              "effective_at": 1800,
+              "pending": true
+            }
+          }
+        },
+        {
+          "type": "DEV019_OBSERVATION",
+          "value": {
+            "funds": {
+              "available_cash": 1000000,
+              "cash": 1000000,
+              "free_cash": 1000000,
+              "reserved": 0,
+              "reserved_by_project": {},
+              "restricted": 0,
+              "restricted_by_project": {},
+              "unpaid": 0
+            },
+            "row": {
+              "allowed_actions": {
+                "enter_p05": false,
+                "submit_bid": true
+              },
+              "business_contract": {},
+              "construction_contract": {
+                "available": false,
+                "status": "NOT_CREATED"
+              },
+              "decision": {},
+              "eligibility": {
+                "checks": {
+                  "duration_feasible": true,
+                  "jurisdiction": true,
+                  "no_active_project": true
+                },
+                "eligible": true,
+                "reason_codes": []
+              },
+              "p05_reason_codes": [
+                "BUSINESS_CONTRACT_NOT_EFFECTIVE"
+              ],
+              "plan_locked": true,
+              "plan_revision": 0,
+              "reason_codes": [],
+              "receipt": {},
+              "state": "OPEN",
+              "target_revision": 0,
+              "terms": {
+                "city_id": "C01",
+                "closes_at": 1800,
+                "competitor_capability": 80,
+                "competitor_financial_score": 80,
+                "duration_minutes": 2880,
+                "fare": 100,
+                "government": 800000,
+                "issuer_id": "CITY_HALL",
+                "opens_at": 360,
+                "project_id": "P-A",
+                "round_id": "B01-R1",
+                "standard_cost": 600000,
+                "station_ids": [
+                  "S01",
+                  "S02",
+                  "S03",
+                  "S04",
+                  "S08",
+                  "S12"
+                ],
+                "tender_id": "B01",
+                "tie_priority": [
+                  "COMPETITOR",
+                  "PLAYER"
+                ]
+              }
+            },
+            "simulation_minute": 1799,
+            "snapshot_revision": 0,
+            "tender_id": "B01"
+          }
+        },
+        {
+          "type": "DEV019_OBSERVATION",
+          "value": {
+            "funds": {
+              "available_cash": 1000000,
+              "cash": 1000000,
+              "free_cash": 1000000,
+              "reserved": 0,
+              "reserved_by_project": {},
+              "restricted": 0,
+              "restricted_by_project": {},
+              "unpaid": 0
+            },
+            "row": {
+              "allowed_actions": {
+                "enter_p05": false,
+                "submit_bid": false
+              },
+              "business_contract": {},
+              "construction_contract": {
+                "available": false,
+                "status": "NOT_CREATED"
+              },
+              "decision": {
+                "awarded": false,
+                "competitor_comparison": {
+                  "denominator": 10000,
+                  "numerator": 8000000
+                },
+                "decision_phase": "CONTRACT",
+                "effective_at": 1800,
+                "eligibility": {
+                  "checks": {
+                    "duration_feasible": true,
+                    "jurisdiction": true,
+                    "no_active_project": true
+                  },
+                  "eligible": true,
+                  "reason_codes": []
+                },
+                "funds": {
+                  "available_cash": 1000000,
+                  "cash": 1000000,
+                  "free_cash": 1000000,
+                  "reserved": 0,
+                  "reserved_by_project": {},
+                  "restricted": 0,
+                  "restricted_by_project": {},
+                  "unpaid": 0
+                },
+                "phase_revision": 3,
+                "reason": "NOT_SUBMITTED",
+                "result_revision": 4,
+                "score": {
+                  "capability": 80,
+                  "comparison_score": {
+                    "denominator": 10000,
+                    "numerator": 8600000
+                  },
+                  "display_score": {
+                    "denominator": 100000,
+                    "numerator": 8600000
+                  },
+                  "financial_score": {
+                    "denominator": 10000,
+                    "numerator": 1000000
+                  },
+                  "free_cash": 1000000
+                },
+                "terms": {
+                  "city_id": "C01",
+                  "closes_at": 1800,
+                  "competitor_capability": 80,
+                  "competitor_financial_score": 80,
+                  "duration_minutes": 2880,
+                  "fare": 100,
+                  "government": 800000,
+                  "issuer_id": "CITY_HALL",
+                  "opens_at": 360,
+                  "project_id": "P-A",
+                  "round_id": "B01-R1",
+                  "standard_cost": 600000,
+                  "station_ids": [
+                    "S01",
+                    "S02",
+                    "S03",
+                    "S04",
+                    "S08",
+                    "S12"
+                  ],
+                  "tender_id": "B01",
+                  "tie_priority": [
+                    "COMPETITOR",
+                    "PLAYER"
+                  ]
+                },
+                "tie_priority": [
+                  "COMPETITOR",
+                  "PLAYER"
+                ]
+              },
+              "eligibility": {
+                "checks": {
+                  "duration_feasible": true,
+                  "jurisdiction": true,
+                  "no_active_project": true
+                },
+                "eligible": true,
+                "reason_codes": []
+              },
+              "p05_reason_codes": [
+                "BUSINESS_CONTRACT_NOT_EFFECTIVE"
+              ],
+              "plan_locked": true,
+              "plan_revision": 0,
+              "reason_codes": [
+                "ROUND_CLOSED"
+              ],
+              "receipt": {},
+              "state": "CLOSED",
+              "target_revision": 1,
+              "terms": {
+                "city_id": "C01",
+                "closes_at": 1800,
+                "competitor_capability": 80,
+                "competitor_financial_score": 80,
+                "duration_minutes": 2880,
+                "fare": 100,
+                "government": 800000,
+                "issuer_id": "CITY_HALL",
+                "opens_at": 360,
+                "project_id": "P-A",
+                "round_id": "B01-R1",
+                "standard_cost": 600000,
+                "station_ids": [
+                  "S01",
+                  "S02",
+                  "S03",
+                  "S04",
+                  "S08",
+                  "S12"
+                ],
+                "tender_id": "B01",
+                "tie_priority": [
+                  "COMPETITOR",
+                  "PLAYER"
+                ]
+              }
+            },
+            "simulation_minute": 1800,
+            "snapshot_revision": 11,
+            "tender_id": "B01"
+          }
+        }
+      ]
+    }
+  },
+  "screenshots": [
+    {
+      "path": "docs/engineering/evidence/DEV-019_QAFIX_B01_BEFORE.jpg",
+      "observed_at": "2026-11-08T05:08:55.900Z",
+      "width": 1440,
+      "height": 852,
+      "sha256": "ba96b75a44329a2baec80568c8e1026845bab8777147b9cc6308566c8d0c83d5"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-019_QAFIX_B02_BEFORE.jpg",
+      "observed_at": "2026-11-08T05:09:08.824Z",
+      "width": 1440,
+      "height": 852,
+      "sha256": "cc4d9c1ddc13e28dc14237b607359e8c3f7cf9b848f5c547a9a21b2a0c74e1d5"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-019_QAFIX_B02_AFTER_CRITERIA.jpg",
+      "observed_at": "2026-11-08T05:09:35.423Z",
+      "width": 1440,
+      "height": 852,
+      "sha256": "a80143db95b8e1ec1ca9cf7dcd8864b23deb4069c8b3734a6132dcd399404fa0"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-019_QAFIX_B02_RESULT.jpg",
+      "observed_at": "2026-11-08T05:09:45.385Z",
+      "width": 1440,
+      "height": 852,
+      "sha256": "9e4375c1be026aa1f1755bf8c4a817f4f493ef10a0366cfddcd5da64fa9084d8"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-019_QAFIX_P05_READONLY.jpg",
+      "observed_at": "2026-11-08T05:09:47.459Z",
+      "width": 1440,
+      "height": 852,
+      "sha256": "1afc473fccad1a58f550c6a9ac28906175d379cff816edb5effa1eb383b7cc74"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-019_QAFIX_REASON_FALLBACK.jpg",
+      "observed_at": "2026-11-08T05:10:13.737Z",
+      "width": 1440,
+      "height": 852,
+      "sha256": "2ebc52aede6cda1b0d2540e54239fedb53b6359217dd4095e99a7285fdfbc229"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-019_QAFIX_DEFAULT_WIDTH.jpg",
+      "observed_at": "2026-11-08T05:10:21.397Z",
+      "width": 578,
+      "height": 354,
+      "sha256": "59a5c39d63fe83e0a6f99e53f2f5f202cca56a01d497589e376d3c6a2b8b4703"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-019_QAFIX_DEFAULT_SCROLL.jpg",
+      "observed_at": "2026-11-08T05:10:22.924Z",
+      "width": 578,
+      "height": 354,
+      "sha256": "74918bef084974d1f8c3627c9f6e6288219b1c766ee6eb998877673ce4b25374"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-019_QAFIX_DEADLINE_BEFORE.jpg",
+      "observed_at": "2026-11-08T05:11:10.114Z",
+      "width": 1440,
+      "height": 852,
+      "sha256": "d18e54a2b88a7abd80f5bc8c9f8031f5093b94f5e2541b1fc4e5b7fbc531bc9a"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-019_QAFIX_DEADLINE_REJECTED.jpg",
+      "observed_at": "2026-11-08T05:11:26.599Z",
+      "width": 1440,
+      "height": 852,
+      "sha256": "e119df7876f6b32e2a5677dd7441b687fd93ba642e596cb1eaab3075ea3f8514"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-019_QAFIX_PRODUCT_B01_BEFORE.jpg",
+      "observed_at": "2026-11-08T05:13:40.754Z",
+      "width": 1440,
+      "height": 852,
+      "sha256": "7e414d862eb5ce50b521bd3f8eb7c6384ae84c113336feb8187c851e68320062"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-019_QAFIX_PRODUCT_B02_BEFORE.jpg",
+      "observed_at": "2026-11-08T05:14:04.109Z",
+      "width": 1440,
+      "height": 852,
+      "sha256": "ffdb456f0cc023f31b7210cbb1f8d6104ddb48de8182d0e6404abc0255d9e75c"
+    }
+  ],
+  "independent_design_retest": "NOT_RUN / REQUIRED",
+  "gui_not_run": [
+    "TIE/FRACTION fresh GUI retest (automatic UI regression passed)",
+    "all previous A01 PARTIAL subcases beyond this fix scope"
+  ],
+  "build": "NOT_RUN",
+  "full_vs01": "NOT_RUN",
+  "p05": "READ_ONLY / A01-Q12 PARTIAL",
+  "tooling_tests": {
+    "initial_command": ".venv/Scripts/python.exe -m unittest discover -s tests/tooling -v",
+    "initial": {
+      "tests": 89,
+      "passed": 88,
+      "failed": 1,
+      "exit_code": 1,
+      "reason": "Git sh.exe NtCreateDirectoryObject 0xC0000022 sandbox access restriction in one temporary-repository hook test",
+      "log_sha256": "f6df833a010ec1d6dc47580ee91c250bb2b875de84e14d8b6ac0373b4ff75f22"
+    },
+    "targeted_retry_command": ".venv/Scripts/python.exe -m unittest discover -s tests/tooling -p test_git_prevention.py -k test_real_merge_and_manual_commit_do_not_create_merge_commit -v",
+    "retry": {
+      "tests": 1,
+      "passed": 1,
+      "failed": 0,
+      "exit_code": 0,
+      "environment": "normal approved execution outside restrictive sandbox",
+      "log_sha256": "23c63e15ce6b67ea748094d3b547739bd4a7d97f1169667d7eeb310223efcf3f"
+    },
+    "conclusion": "All 89 unique test cases passed across initial 88 passes and targeted retry; not a fresh single-run 89/89 claim"
+  },
+  "policy_check": {
+    "result": "PASS",
+    "files": 458,
+    "gdscript": 31,
+    "exit_code": 0
+  }
+}
