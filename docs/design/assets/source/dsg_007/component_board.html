@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DSG-007 · MVP 디오라마 디자인 시스템 v0.1</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:var(--surface-canvas,#e7dfcf);color:var(--text-primary,#273e37);font:16px/1.55 'Malgun Gothic','Segoe UI',sans-serif}button,select{font:inherit}button,select{min-height:44px;border:1px solid var(--border-strong);background:var(--surface-panel);color:var(--text-primary);padding:7px 12px;border-radius:0}button:focus-visible,select:focus-visible{outline:3px solid var(--focus-ring);outline-offset:3px}button:disabled{background:var(--disabled-surface);color:var(--disabled-text);border-style:dashed}button[aria-pressed=true],.primary{background:var(--action-primary);color:var(--action-on-primary);border-color:var(--action-primary)}h1,h2,h3,p{margin:0}h1{font-size:28px;line-height:1.3}h2{font-size:20px;margin-bottom:12px}h3{font-size:16px}small,.small{font-size:12px;color:var(--text-secondary)}strong,b{font-weight:600}.page{max-width:1160px;margin:auto;padding:24px}.masthead{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;border-top:8px solid var(--action-primary);padding-top:16px;margin-bottom:24px}.kicker{font-size:12px;letter-spacing:.14em;color:var(--text-secondary);margin-bottom:8px}.stamp{border:2px solid var(--border-strong);padding:8px 12px;font-size:12px}.section{margin-top:24px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.panel{padding:16px;border:1px solid var(--border-default);background:var(--surface-panel);min-width:0}.panel-title{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:12px}.swatches{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.swatch{font-size:12px;overflow-wrap:anywhere}.swatch i{display:block;height:24px;border:1px solid var(--border-default);margin-bottom:4px}.type-demo{display:grid;gap:8px;margin-top:16px}.type-demo span{display:block}.bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.bar+.bar{margin-top:12px}.focused-example{outline:3px solid var(--focus-ring);outline-offset:3px}.tag{display:inline-block;border:1px solid var(--border-strong);padding:3px 8px;font-size:14px;background:var(--info-surface);color:var(--info-text)}.tag.error{background:var(--error-surface);color:var(--error-text);border-color:var(--error-text)}.tag.warning{background:var(--warning-surface);color:var(--warning-text);border-color:var(--warning-text)}.tag.locked{background:var(--disabled-surface);color:var(--disabled-text);border-style:dashed}.data-table{width:100%;border-collapse:collapse;font-size:14px}.data-table th,.data-table td{text-align:left;vertical-align:top;border-bottom:1px solid var(--border-default);padding:8px 4px;overflow-wrap:anywhere}.data-table th{font-weight:600}.data-table .number{font-variant-numeric:tabular-nums}.controls{display:flex;gap:12px 20px;align-items:center;flex-wrap:wrap;margin-bottom:12px}.controls label{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:14px}.composition{border:2px solid var(--border-strong);padding:16px;background:var(--surface-panel)}.hud{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;border-bottom:1px solid var(--border-default);padding-bottom:12px}.clock{font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}.time-buttons{display:flex;gap:4px;flex-wrap:wrap}.time-buttons button{padding:4px 8px}.work{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:16px;margin-top:16px}.map-wrap{min-width:0}.map-header{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:8px;font-size:14px}.map-board{background:var(--map-ground);border:5px solid var(--map-shade);border-bottom:12px solid var(--map-shade)}.map{position:relative;height:336px;isolation:isolate}.landscape,.network{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.landscape{image-rendering:pixelated}.candidate{stroke:var(--map-candidate-edge);stroke-width:1;fill:none;vector-effect:non-scaling-stroke}.track-base{stroke:var(--surface-inset);stroke-width:12;fill:none;vector-effect:non-scaling-stroke}.track{stroke:var(--map-route);stroke-width:5;fill:none;vector-effect:non-scaling-stroke}.map.locked .track{stroke-dasharray:10 6}.station{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);width:58px;min-height:44px;padding:3px 1px;font-size:14px;z-index:2;border:2px solid var(--border-strong);border-bottom-width:5px;background:var(--surface-panel)}.station.in-plan{background:var(--map-route);color:var(--action-on-primary);border-color:var(--map-route)}.station[data-inspected=true]{outline:3px solid var(--focus-ring);outline-offset:4px}.station:focus-visible{outline-style:dashed}.map.locked .station:not(.in-plan){border-style:dashed}.district{position:absolute;font-size:12px;background:var(--surface-panel);padding:1px 5px;z-index:1}.nw{top:4px;left:4px}.ne{top:4px;right:4px}.sw{bottom:4px;left:4px}.se{bottom:4px;right:4px}.legend{display:flex;gap:4px 12px;flex-wrap:wrap;font-size:12px;padding:8px 0}.selection{padding:8px 12px;border-left:4px solid var(--selection-border);background:var(--selection-surface);min-height:70px}.selection span{display:block;font-size:14px;overflow-wrap:anywhere}.side{background:var(--surface-inset);border:1px solid var(--border-default);padding:12px;min-width:0}.stop-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;margin:8px 0 12px}.stop-list button{padding:4px;font-size:14px}.stop-list button[data-inspected=true]{background:var(--selection-surface);color:var(--text-primary);border:2px solid var(--selection-border)}.edits{display:flex;gap:4px;flex-wrap:wrap}.edits button{font-size:14px;padding:4px 8px}.prediction{border-top:1px solid var(--border-default);margin-top:12px;padding-top:12px}.funds{margin-top:16px}.funds-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:8px}.funds-grid div{border-left:2px solid var(--border-default);padding-left:8px}.funds-grid span{display:block;font-size:14px;color:var(--text-secondary)}.funds-grid b{font-variant-numeric:tabular-nums;white-space:nowrap}.report{border-top:1px solid var(--border-default);margin-top:12px;padding-top:8px;font-size:14px}.feedback{margin-top:12px;padding:10px 12px;background:var(--info-surface);color:var(--info-text);border-left:4px solid var(--info-text)}.feedback.warning{background:var(--warning-surface);color:var(--warning-text);border:2px dashed var(--warning-text)}.feedback strong{display:block}.composition[data-layout=bottom] .work{grid-template-columns:minmax(0,1fr)}.composition[data-layout=bottom] .side{display:grid;grid-template-columns:1fr 1fr;gap:16px}.composition[data-layout=bottom] .prediction{border:0;border-left:1px solid var(--border-default);margin:0;padding:0 0 0 16px}.history{border-left:4px solid var(--error-text);background:var(--error-surface);color:var(--error-text);padding:12px}.current-action{border-left:4px solid var(--info-text);background:var(--info-surface);color:var(--info-text);padding:12px;margin-top:8px}.detail-note{margin-top:12px;font-size:14px}.foot{margin-top:24px;border-top:1px solid var(--border-default);padding-top:12px;font-size:12px;color:var(--text-secondary);display:flex;gap:8px 16px;justify-content:space-between;flex-wrap:wrap}[hidden]{display:none!important}@media(max-width:850px){.work{grid-template-columns:minmax(0,1fr)}.side{display:grid;grid-template-columns:1fr 1fr;gap:12px}.prediction{border:0;border-left:1px solid var(--border-default);margin:0;padding:0 0 0 12px}.grid{grid-template-columns:minmax(0,1fr)}}@media(max-width:520px){.page{padding:12px}.composition{padding:8px}.side,.composition[data-layout=bottom] .side{display:block}.prediction,.composition[data-layout=bottom] .prediction{border:0;border-top:1px solid var(--border-default);padding:12px 0 0;margin-top:12px}.funds-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.swatches{grid-template-columns:repeat(2,minmax(0,1fr))}.station{width:54px;font-size:12px}.data-table{font-size:12px}h1{font-size:24px}}@media print{.page{max-width:none}.controls{display:none}.panel,.composition{break-inside:avoid}.section{break-before:auto}body{print-color-adjust:exact}}
+</style>
+<style>
+.sample-tabs{display:flex;gap:4px;margin-top:14px;border-bottom:2px solid var(--border-strong);padding-bottom:6px;flex-wrap:wrap}.sample-tabs button{font-size:14px}.sample-tabs button[aria-selected=true]{background:var(--selection-surface);color:var(--text-primary);border:2px solid var(--selection-border)}.tab-panel{padding:8px 0;font-size:14px}.funds-grid b{display:block;text-align:right}
+@media(max-width:520px){.funds-grid{grid-template-columns:minmax(0,1fr)}.funds-grid>div{display:flex;align-items:baseline;justify-content:space-between;gap:4px 12px;flex-wrap:wrap}.funds-grid b{margin-left:auto}}
+</style>
+</head>
+<body>
+<main class="page" id="board">
+ <header class="masthead"><div><div class="kicker">METROMANAGER / MVP DIORAMA SYSTEM</div><h1>작은 모형 도시, 명확한 경영 정보</h1><p class="detail-note">DSG-007 · 공통 요소와 상태 · 배치와 독립된 표현 기준</p></div><div class="stamp">v0.1 · PROVISIONAL<br>DESIGN_REFERENCE / NON_PRODUCTION</div></header>
+ <section class="grid" aria-label="기초 표현과 공통 조작">
+  <div class="panel"><h2>역할별 색상 · 글자 위계</h2><div class="swatches" id="swatches"></div><div class="type-demo"><span style="font-size:20px;font-weight:600">제목 · 노선 계획</span><span>본문 · 최신 상태와 허용 행동 확인</span><span style="font-size:14px">데이터 · 총 현금 1,000,000</span><small>보조 · 게임 통화 단위 / 현재 시점</small></div></div>
+  <div class="panel"><h2>버튼 · 상태 · 포커스</h2><div class="bar"><button class="primary" type="button" data-demo-toggle aria-pressed="false">선택 예시</button><button class="focused-example" type="button">포커스 외관</button><button type="button" disabled>편집 불가</button></div><div class="bar"><span class="tag">정보</span><span class="tag warning">! 주의 · 사유</span><span class="tag error">× 실패 · 사유</span><span class="tag locked">잠금 · 사유</span></div><p class="detail-note">선택은 면·테두리, 포커스는 별도 외곽선으로 구별합니다. 비활성 사유는 인접 문구로 유지합니다.</p><div class="sample-tabs" role="tablist" aria-label="현재값과 과거 기록 구획 예시"><button id="tab-current" type="button" role="tab" aria-controls="panel-current" aria-selected="true">현재값</button><button id="tab-history" type="button" role="tab" aria-controls="panel-history" aria-selected="false" tabindex="-1">과거 기록</button><button type="button" role="tab" aria-disabled="true" disabled>보고 미제공</button></div><div id="panel-current" class="tab-panel" role="tabpanel" aria-labelledby="tab-current">현재 자금 · 1일 06:00 / 읽기 전용</div><div id="panel-history" class="tab-panel" role="tabpanel" aria-labelledby="tab-history" hidden>과거 확정 보고 · 확정 보고 없음</div><small>샘플 · 게임 명령 미연결 / 최소 조작 높이 44px는 검토용 가정</small></div>
+ </section>
+ <section class="section grid" aria-label="데이터와 명령 상태">
+  <div class="panel"><h2>값의 의미를 보존하는 상태</h2><table class="data-table"><thead><tr><th>상태</th><th>표현</th><th>구별 기준</th></tr></thead><tbody><tr><td>정상 0</td><td class="number">0</td><td>값이 실제로 공급됨</td></tr><tr><td>자료 없음</td><td>자료 없음 · 미계산</td><td>0으로 대체하지 않음</td></tr><tr><td>조회 실패</td><td>× 불러오기 실패</td><td>원인·가능한 다음 행동</td></tr><tr><td>미확정</td><td>요청 접수 · 처리 대기</td><td>공급된 대기가 있을 때만</td></tr><tr><td>과거 확정</td><td>확정 보고 · 보고일·식별</td><td>현재값과 출처 분리</td></tr></tbody></table></div>
+  <div class="panel"><h2>과거 결과와 현재 행동</h2><div class="history"><strong>이전 요청 · 처리 거부</strong><p>정보가 변경되었습니다. 확인 후 다시 입력해 주세요.</p><small>당시 결과의 예시 · 현재 버튼을 소급 변경하지 않음</small></div><div class="current-action"><strong>현재 · 역 정보 확인 가능</strong><p>최신 허용 행동은 현재 상태 기준으로 표시</p></div><p class="detail-note">이 예시는 지도 장면과 별개의 상태표 견본입니다. 실제 명령·계약·금액을 생성하지 않습니다.</p></div>
+ </section>
+ <section class="section" aria-label="재배치 가능한 조합 예시">
+  <div class="panel-title"><h2>지도·업무 패널 조합</h2><small>완성 S01 배치가 아닌 요소 재사용 예시</small></div>
+  <div class="controls"><label>비교 장면 <select id="scene"><option value="normal">기본 계획</option><option value="warning">편집 불가·예측 조회 실패</option></select></label><label>업무 패널 위치 <select id="layout"><option value="side">지도 오른쪽</option><option value="bottom">지도 아래</option></select></label><label><input id="detail" type="checkbox" checked> 배경 장식</label></div>
+  <div class="composition" id="composition" data-layout="side">
+   <div class="hud"><div><small>시철 / 관할 C01</small><div class="clock">1일 06:00 · 일시정지</div></div><div class="time-buttons" aria-label="시간 조작 외관 예시"><button disabled>정지</button><button disabled>재개</button><button disabled>1×</button><button disabled>2×</button><button disabled>4×</button></div></div>
+   <div class="work"><div class="map-wrap"><div class="map-header"><strong>C01 · 후보 12역</strong><span>행정 레이어</span></div><div class="map-board"><div class="map" id="map" role="group" aria-label="C01 후보역 12개, 4열 3행 추상 배치"><canvas class="landscape" id="landscape" width="400" height="300" aria-hidden="true"></canvas><svg class="network" id="network" viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true"></svg><span class="district nw">G01</span><span class="district ne">G02</span><span class="district sw">G03</span><span class="district se">G04</span></div></div><div class="legend"><span>번호 · 계획 순서</span><span>가는 선 · 후보 연결</span><span>굵은 선 · 계획</span><span id="lock-key" hidden>점선 · 편집 불가</span></div><div class="selection" id="selection" aria-live="polite"></div><small>승인 좌표 기반 추상 배치 · 구획은 관할 판정 도형이 아님</small></div>
+   <aside class="side" id="side"><div><h3>노선 계획 · P-A 예시</h3><small>고유 6역 · 연결 확인 / 미개통 계획</small><div class="stop-list" id="stops"></div><div class="edits"><button disabled>위로</button><button disabled>아래로</button><button disabled>제거</button><button disabled>되돌리기</button></div><small>게임 미연결 · 편집 조작 외관 예시</small></div><div class="prediction"><h3>예측 · 현재 계획</h3><p id="prediction"></p><small>예측과 실제 실적 분리</small><div class="edits"><button disabled>예측 계산</button></div></div></aside></div>
+   <div class="funds"><div class="panel-title"><h3>현재 자금 · 1일 06:00</h3><small>게임 통화 단위 · 읽기 전용</small></div><div class="funds-grid" id="funds"></div><div class="report">과거 확정 보고 · 확정 보고 없음 / 현재 자금과 별도</div></div>
+   <div class="feedback" id="feedback" aria-live="polite"></div>
+  </div>
+ </section>
+ <footer class="foot"><span>DSG-007 v0.1 · 색·크기·글꼴·배율은 PROVISIONAL</span><span>Godot 적용·실제 게임 검수·F-08 기술 협의는 별도</span></footer>
+</main>
+<script type="application/json" id="tokens">{
+  "schema_version": "1.0",
+  "design_version": "0.1",
+  "task_id": "DSG-007",
+  "status": "PROVISIONAL_REVIEW",
+  "scope": "MVP_2D_DIORAMA_DESIGN_REFERENCE",
+  "base_sha": "c81b29585496fd291cfc4aeb443ed3e5ff14c588",
+  "production_ready": false,
+  "colors": {
+    "surface_canvas": "#e7dfcf",
+    "surface_panel": "#fcf8ec",
+    "surface_inset": "#efe8d4",
+    "text_primary": "#273e37",
+    "text_secondary": "#53675d",
+    "border_default": "#98a28b",
+    "border_strong": "#53675d",
+    "action_primary": "#164f42",
+    "action_on_primary": "#fff9e9",
+    "selection_surface": "#d5e5cd",
+    "selection_border": "#164f42",
+    "focus_ring": "#794018",
+    "warning_surface": "#f8e3c1",
+    "warning_text": "#78320c",
+    "error_surface": "#f6ded8",
+    "error_text": "#812d2b",
+    "info_surface": "#e4ebe4",
+    "info_text": "#2d4c40",
+    "disabled_surface": "#e4e2d6",
+    "disabled_text": "#4f5950",
+    "map_ground": "#b3cb91",
+    "map_shade": "#91ac76",
+    "map_candidate_edge": "#526349",
+    "map_route": "#164f42",
+    "map_roof": "#b07552",
+    "map_wall": "#eee1ba",
+    "map_tree": "#557c51"
+  },
+  "spacing_px": {
+    "micro": 2,
+    "tight": 4,
+    "small": 8,
+    "control": 12,
+    "section": 16,
+    "group": 24
+  },
+  "type_px": {
+    "caption": 12,
+    "label": 14,
+    "body": 16,
+    "heading": 20,
+    "title": 28
+  },
+  "geometry_px": {
+    "border": 1,
+    "emphasis_border": 2,
+    "focus_ring": 3,
+    "control_min_height": 44,
+    "station_width": 58,
+    "station_height": 44
+  },
+  "font_stack": "Malgun Gothic, Segoe UI, sans-serif",
+  "contrast_review_targets": {
+    "text": 4.5,
+    "focus_and_map_edge": 3.0,
+    "policy_status": "INTERNAL_PROVISIONAL_TARGET_NOT_PRODUCT_ACCEPTANCE"
+  },
+  "notes": [
+    "Semantic roles and pixel values are separate; layout is not encoded in this file.",
+    "No currency symbol, game rule, authority calculation, input shortcut or Godot resource format is defined.",
+    "Font availability, scaling, import, filtering, target viewport and performance require F-08 review."
+  ]
+}</script>
+<script>
+(() => {
+ const tokens=JSON.parse(document.getElementById('tokens').textContent);
+ Object.entries(tokens.colors).forEach(([key,value])=>document.documentElement.style.setProperty('--'+key.replaceAll('_','-'),value));
+ const swatches=[['surface_panel','패널'],['text_primary','본문'],['action_primary','주요 행동'],['selection_surface','정보 선택'],['focus_ring','포커스'],['warning_surface','주의 바탕'],['error_surface','실패 바탕'],['map_ground','모형 지형']];
+ document.getElementById('swatches').innerHTML=swatches.map(([key,label])=>`<div class="swatch"><i style="background:${tokens.colors[key]}" aria-hidden="true"></i>${label}<br>${tokens.colors[key]}</div>`).join('');
+ const stations=Array.from({length:12},(_,i)=>{const d=i<8?i+1:i-3;return{id:'S'+String(i+1).padStart(2,'0'),x:i%4,y:Math.floor(i/4),d:'D'+String(d).padStart(2,'0'),g:'G'+String(Math.ceil(d/2)).padStart(2,'0')};});
+ const stops=['S01','S02','S03','S04','S08','S12'];
+ const funds=[['총 현금 C','1,000,000'],['제한 자금 R','0'],['자유 자금 F','1,000,000'],['공사 예약 K','0'],['약정 가용 A','1,000,000'],['운영 미지급 B','0']];
+ const map=document.getElementById('map');let inspected='S03';
+ const edges=stations.flatMap(s=>{const p=`${s.x*100+50} ${s.y*100+50}`;return[s.x<3?`<path class="candidate" d="M${p}h100"/>`:'',s.y<2?`<path class="candidate" d="M${p}v100"/>`:''];}).join('');
+ document.getElementById('network').innerHTML=edges+'<path class="track-base" d="M50 50H350V250"/><path class="track" d="M50 50H350V250"/>';
+ stations.forEach(s=>{const n=stops.indexOf(s.id),b=document.createElement('button');b.type='button';b.className='station'+(n>=0?' in-plan':'');b.dataset.station=s.id;b.style.setProperty('--x',(12.5+s.x*25)+'%');b.style.setProperty('--y',((s.y+.5)/3*100)+'%');b.textContent=(n>=0?(n+1)+' ':'')+s.id;b.setAttribute('aria-label',`${s.id}, ${s.g}, ${s.d}, ${n>=0?'계획 순서 '+(n+1):'후보역'}, 정보 보기`);map.appendChild(b);});
+ document.getElementById('stops').innerHTML=stops.map((id,i)=>`<button type="button" data-station="${id}" aria-label="계획 순서 ${i+1}, ${id}, 정보 보기">${i+1} · ${id}</button>`).join('');
+ document.getElementById('funds').innerHTML=funds.map(([key,value])=>`<div><span>${key}</span><b>${value}</b></div>`).join('');
+ function render(){
+  const warning=document.getElementById('scene').value==='warning',s=stations.find(p=>p.id===inspected);
+  map.classList.toggle('locked',warning);document.getElementById('lock-key').hidden=!warning;
+  document.getElementById('composition').dataset.layout=document.getElementById('layout').value;
+  document.getElementById('landscape').hidden=!document.getElementById('detail').checked;
+  document.querySelectorAll('[data-station]').forEach(b=>{b.dataset.inspected=String(b.dataset.station===inspected);b.setAttribute('aria-pressed',String(b.dataset.station===inspected));});
+  document.getElementById('selection').innerHTML=`<strong>정보 선택 · ${s.id}</strong><span>P01 &gt; C01 &gt; ${s.g} &gt; ${s.d} &gt; ${s.id}</span>`;
+  document.getElementById('prediction').textContent=warning?'× 예측 조회 실패 · 현재값 확인 불가':'자료 없음 · 아직 계산하지 않음';
+  const feedback=document.getElementById('feedback');feedback.classList.toggle('warning',warning);feedback.innerHTML=warning?'<strong>! 편집 불가 · 최신 허용 상태 확인 불가</strong>다음 행동 · 최신 상태 재조회 / 역 정보 열람 유지 / 과거 명령 결과 없음':'<strong>계획 편집 단계 · 계약·개통과 구분</strong>다음 행동 · 역 정보 확인 / 과거 명령 결과 없음';
+ }
+ document.querySelectorAll('[data-station]').forEach(b=>b.addEventListener('click',()=>{inspected=b.dataset.station;render();}));
+ ['scene','layout','detail'].forEach(id=>document.getElementById(id).addEventListener('change',render));
+ document.querySelector('[data-demo-toggle]').addEventListener('click',e=>{const b=e.currentTarget,active=b.getAttribute('aria-pressed')==='true';b.setAttribute('aria-pressed',String(!active));b.textContent=active?'선택 예시':'선택됨 · 예시';});
+ const tabs=[document.getElementById('tab-current'),document.getElementById('tab-history')];
+ function selectTab(index){tabs.forEach((tab,i)=>{tab.setAttribute('aria-selected',String(i===index));tab.tabIndex=i===index?0:-1;document.getElementById(tab.getAttribute('aria-controls')).hidden=i!==index;});}
+ tabs.forEach((tab,index)=>{tab.addEventListener('click',()=>selectTab(index));tab.addEventListener('keydown',e=>{let next=index;if(e.key==='ArrowRight')next=(index+1)%tabs.length;else if(e.key==='ArrowLeft')next=(index+tabs.length-1)%tabs.length;else if(e.key==='Home')next=0;else if(e.key==='End')next=tabs.length-1;else return;e.preventDefault();selectTab(next);tabs[next].focus();});});
+ const c=document.getElementById('landscape').getContext('2d'),p=tokens.colors;c.imageSmoothingEnabled=false;c.fillStyle=p.map_ground;c.fillRect(0,0,400,300);
+ c.fillStyle=p.map_shade;for(let y=0;y<300;y+=12)for(let x=0;x<400;x+=12)if((x+y)%36===0)c.fillRect(x,y,3,3);
+ stations.forEach(s=>{const x=s.x*100+10,y=s.y*100+10;c.fillStyle=p.map_shade;c.fillRect(x+4,y+10,24,20);c.fillStyle=p.map_wall;c.fillRect(x,y+6,22,18);c.fillStyle=p.map_roof;c.fillRect(x-2,y,26,7);c.fillRect(x+2,y-3,18,3);c.fillStyle=p.text_secondary;c.fillRect(x+4,y+11,4,5);c.fillRect(x+14,y+11,4,5);c.fillStyle=p.map_tree;c.fillRect(x+65,y+67,14,8);c.fillRect(x+68,y+63,8,12);});
+ render();
+ window.dsg007Snapshot=()=>({scene:document.getElementById('scene').value,layout:document.getElementById('layout').value,inspected,stationIds:stations.map(s=>s.id),orderedStops:[...stops],funds:funds.map(([label,value])=>({label,value})),designVersion:tokens.design_version});
+})();
+</script>
+</body>
+</html>
