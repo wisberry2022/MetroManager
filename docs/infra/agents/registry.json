@@ -88,25 +88,26 @@
       "agent_id": "AGT-PLN-0002",
       "department": "PLN",
       "generation": 2,
-      "status": "ACTIVE",
+      "status": "RETIRED",
       "role": "Game Designer / successor",
       "session_scope": "PLANNING-SUCCESSOR-CURRENT",
       "session_kind": "CHATGPT",
       "predecessor_agent_id": "AGT-PLN-0001",
       "activated_at": null,
-      "retired_at": null,
+      "retired_at": "2026-11-08T18:49:00+09:00",
       "role_observed_on": "2026-11-01",
-      "role_retirement_observed_on": null,
+      "role_retirement_observed_on": "2026-11-08",
       "owner_approval_ref": "docs/hq/PM-011_PLANNING_SUCCESSION_RECORD.md",
       "agent_id_activation_approval_ref": "OWNER_DIRECT_INF_2026-11-02_INITIAL_REGISTRY_APPROVAL",
       "handoff_ref": "HOF-20261101-PLN-CURRENT-UNASSIGNED",
       "role_evidence_refs": [
         "docs/hq/PM-011_PLANNING_SUCCESSION_RECORD.md",
         "docs/planning/tasks/PLN-002_RESULT.md",
-        "https://github.com/wisberry2022/MetroManager/issues/26"
+        "https://github.com/wisberry2022/MetroManager/issues/26",
+        "docs/infra/tasks/INF-007_PLANNING_ACTIVATION.md#owner-transfer"
       ],
-      "record_version": 1,
-      "notes": "INF acceptance completed; PM_SWITCH_CONFIRMED and Owner transfer acknowledged. Exact historical activation time unavailable."
+      "record_version": 2,
+      "notes": "INF acceptance completed; PM_SWITCH_CONFIRMED and Owner transfer acknowledged. Exact historical activation time unavailable. Owner confirmed retirement of this second-generation Planning role effective 2026-11-08T18:49:00+09:00 under INF-007. Original activated_at=null, identity, role history, earlier authorship and approvals are preserved."
     },
     {
       "agent_id": "AGT-DSG-0001",
@@ -284,16 +285,29 @@
       "agent_id": "AGT-PLN-0003",
       "department": "PLN",
       "generation": 3,
-      "status": "PENDING",
+      "status": "ACTIVE",
       "role": "Game Designer / Planning / third-generation successor candidate",
       "session_scope": "PLANNING-GENERATION-3-SUCCESSOR-CURRENT",
       "session_kind": "UNCONFIRMED",
       "predecessor_agent_id": "AGT-PLN-0002",
-      "activated_at": null,
+      "activated_at": "2026-11-08T18:49:00+09:00",
       "retired_at": null,
-      "owner_approval_ref": "docs/infra/tasks/INF-006_AGENT_REGISTRATION.md#candidate-preparation",
+      "owner_approval_ref": "docs/infra/tasks/INF-007_PLANNING_ACTIVATION.md#owner-transfer",
       "handoff_ref": "docs/infra/tasks/INF-006_AGENT_REGISTRATION.md#inf-acceptance",
-      "record_version": 1
+      "record_version": 2,
+      "agent_id_activation_approval_ref": "docs/infra/tasks/INF-007_PLANNING_ACTIVATION.md#owner-transfer",
+      "role_observed_on": "2026-11-08",
+      "role_retirement_observed_on": null,
+      "role_evidence_refs": [
+        "docs/infra/tasks/INF-006_AGENT_REGISTRATION.md#candidate-preparation",
+        "docs/infra/tasks/INF-006_AGENT_REGISTRATION.md#inf-acceptance",
+        "docs/infra/tasks/INF-007_PLANNING_ACTIVATION.md#hq-switch",
+        "docs/hq/PM-011_PLANNING_SUCCESSION_RECORD.md",
+        "docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md",
+        "docs/planning/PLN-004_POST_MVP_COMPANY_STATE_V0_7.md",
+        "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6719007539"
+      ],
+      "notes": "Owner-approved third-generation Planning successor: INF handoff and T1-T10 acceptance verified, HQ AGT-PM-0002 confirmed responsibility and both switch times at 2026-11-08T18:49:00+09:00, and Owner later expressly approved AGT-PLN-0003 ACTIVE / AGT-PLN-0002 RETIRED. Existing PENDING candidate reference remains in role evidence. Public session_kind remains UNCONFIRMED because no verified session-kind declaration is supplied; do not infer technical identity. ACTIVE does not authenticate identity or inherit ticket-specific Git privileges."
     }
   ],
   "unresolved_identity_checks": [
