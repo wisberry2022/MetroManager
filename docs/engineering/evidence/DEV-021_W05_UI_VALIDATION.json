@@ -1,0 +1,271 @@
+{
+  "task_id": "DEV-021",
+  "agent_id": "AGT-DEV-0001",
+  "recorded_at": "2026-11-08T19:32:04.365626+09:00",
+  "implementation_test_base_sha": "7735ccff22952dabdf1371c2b29d81b620f4a9c0",
+  "submission_base_sha": "8a9515a781e8864de211df0ece3a52568df1154a",
+  "execution_state": "BASE_PLUS_APPROVED_UNCOMMITTED_WORKTREE",
+  "tested_source_blobs": {
+    "scripts/ui/stage1_session.gd": "d15c04d00d6ee88fcb36504aeb078c327dddfeea",
+    "scripts/ui/stage1_view.gd": "a5c5c9693ae4f9ca597c3fc8b99cb5337f9544cf",
+    "scripts/ui/tender_view.gd": "5ae73bb5fd756b4d2cc1e6a59e515fb02b1d6892",
+    "scripts/ui/construction_view.gd": "d557484a1ed37a7a1be6e5671c4c8845753f199d",
+    "scripts/ui/construction_view.gd.uid": "ede3d8d021414c300f5350241177cb5aa074e3b5",
+    "scenes/construction_panel.tscn": "a46ef02df62678ceb67a71f136d5bb485e48a071",
+    "tests/game/run_construction_ui_tests.gd": "11aef67a1ad70e79d4ab689d8929b5f3323a54d1",
+    "tests/game/run_construction_ui_tests.gd.uid": "97233e5612c0d9770b4a6125ff7adf0a49bc447a",
+    "tests/game/construction_ui_fixtures.gd": "8abb9de5508a31fef3b769289e9db405e2d3b46e",
+    "tests/game/construction_ui_fixtures.gd.uid": "873887cf397e899d66e291628c3ce7b9a9194dd2",
+    "tests/game/run_construction_gui_cases.gd": "0238c8a9d8e9084890f84cfda9ef103b16d34c6d",
+    "tests/game/run_construction_gui_cases.gd.uid": "4e5ade4161346b9ece5ea6c1212a5025c891dd81"
+  },
+  "ui_automated": {
+    "status": "PASS",
+    "checks": 173,
+    "failures": 0,
+    "required_cases": 10,
+    "exit_code": 0,
+    "engine_errors": 0,
+    "command": "GODOT --headless --path . --script res://tests/game/run_construction_ui_tests.gd -- --evidence"
+  },
+  "regressions": [
+    {
+      "runner": "w01",
+      "exit_code": 0,
+      "engine_errors": 0,
+      "seconds": 0.96,
+      "assertions": 219
+    },
+    {
+      "runner": "w02",
+      "exit_code": 0,
+      "engine_errors": 0,
+      "seconds": 0.9,
+      "assertions": 309
+    },
+    {
+      "runner": "w03",
+      "exit_code": 0,
+      "engine_errors": 0,
+      "seconds": 0.8,
+      "assertions": 101
+    },
+    {
+      "runner": "w04a",
+      "exit_code": 0,
+      "engine_errors": 0,
+      "seconds": 63.29,
+      "assertions": 204
+    },
+    {
+      "runner": "w05",
+      "exit_code": 0,
+      "engine_errors": 0,
+      "seconds": 808.65,
+      "assertions": 191
+    },
+    {
+      "runner": "w07",
+      "exit_code": 0,
+      "engine_errors": 0,
+      "seconds": 4.86,
+      "assertions": 322
+    },
+    {
+      "runner": "tender_ui",
+      "exit_code": 0,
+      "engine_errors": 0,
+      "seconds": 22.49,
+      "assertions": 235
+    }
+  ],
+  "regression_total": 1581,
+  "tooling": {
+    "tests": 89,
+    "status": "PASS",
+    "exit_code": 0
+  },
+  "failure_exit_probe": {
+    "expected_exit": 1,
+    "actual_exit": 1,
+    "intentional_failures": 1
+  },
+  "policy_check": {
+    "status": "PASS",
+    "exit_code": 0
+  },
+  "doctor": {
+    "status": "PASS"
+  },
+  "project_load": {
+    "exit_code": 0,
+    "engine_errors": 0
+  },
+  "product_gui": {
+    "status": "EXECUTED_DEV_VERIFIED",
+    "kind": "NORMAL_PRODUCT_UI",
+    "case": "B01_STANDARD",
+    "receipt_at": 480,
+    "business_effective_at": 1800,
+    "construction_contract_at": 2239,
+    "started_at": 2325,
+    "completed_at": 5205,
+    "trial": [
+      5352,
+      5412
+    ],
+    "safety": [
+      5712,
+      5772
+    ],
+    "opened_at": 5898,
+    "post_construction_funds": {
+      "C": 1200000,
+      "R": 200000,
+      "F": 1000000,
+      "K": 0,
+      "B": 0
+    },
+    "pause_observation": {
+      "minute": 2423,
+      "elapsed": 98,
+      "accrued": 20416,
+      "paid": 20416,
+      "construction_payable": 0
+    },
+    "exit_code": null,
+    "exit_code_status": "NOT_CAPTURED_WINDOW_CLOSURE_OBSERVED",
+    "runtime_note": "Running product predated observation logging and next-minute notice enrichment; functional command path unchanged; final automated UI and supplementary GUI checked final consumer."
+  },
+  "fixture_gui": {
+    "status": "EXECUTED_DEV_VERIFIED",
+    "kind": "TEST_ONLY",
+    "payment_due": {
+      "elapsed": 3,
+      "accrued": 625,
+      "paid": 416,
+      "construction_payable": 209,
+      "B": 0
+    },
+    "fast_repair": {
+      "repair": [
+        3500,
+        3530
+      ],
+      "retest": [
+        3671,
+        3731
+      ],
+      "opened_at": 3823,
+      "repair_paid": 20000,
+      "C": 1060000,
+      "R": 60000,
+      "F": 1000000,
+      "K": 0,
+      "B": 0
+    },
+    "initial_tool_inputs": "NOT_VERIFIED_NO_OBSERVED_EFFECT",
+    "exit_code": null,
+    "exit_code_status": "NOT_CAPTURED_WINDOW_CLOSURE_OBSERVED"
+  },
+  "design_independent_gui": "NOT_RUN_GUI_ACCEPTANCE_PENDING",
+  "A01-Q12": "PARTIAL",
+  "windows_export": "NOT_RUN_OUT_OF_SCOPE",
+  "performance": "NOT_RUN_OUT_OF_SCOPE",
+  "full_vs01": "NOT_RUN_W06_PENDING",
+  "capture_encoding": "Original Sky JPEG pixels re-encoded to actual PNG, no content edits",
+  "git_preflight": "RUN_AFTER_COMMIT_SEE_PR_RECORD",
+  "remote_ci": "RUN_AFTER_PR_SEE_CURRENT_HEAD_CHECKS",
+  "logs": [
+    {
+      "path": ".local/validation/dev021-ui.log",
+      "tracked": false,
+      "sha256": "f89a20b17d23b22661d8dfbfcfe88abf4f618cdaf76ff874330761b329a71e78",
+      "bytes": 231175
+    },
+    {
+      "path": ".local/validation/failure-exit.log",
+      "tracked": false,
+      "sha256": "8554f93ac6b74192990ce47aae4649ff1ab12ef8d49bdabcb447e468334a1920",
+      "bytes": 171
+    },
+    {
+      "path": ".local/validation/tooling.log",
+      "tracked": false,
+      "sha256": "8f6208d12f06ebd4978dcbf3af8632c677048202ad9ad417f18cf7b0037e994c",
+      "bytes": 20803
+    },
+    {
+      "path": ".local/validation/policy-check.log",
+      "tracked": false,
+      "sha256": "e3ee461844fd62679b779bba59816a0db1c3166af9aff2e2c75d615b35b8ad6f",
+      "bytes": 101
+    },
+    {
+      "path": ".local/validation/project-load.log",
+      "tracked": false,
+      "sha256": "a8f37294d45442a3d2cd36c1365c83de0c2c4f4b35ec6df5f673aabd0e890af3",
+      "bytes": 2809
+    },
+    {
+      "path": ".local/validation/dev021-product-clean.log",
+      "tracked": false,
+      "sha256": "52c165bd83659c79f3337e22d67f0c155309f7937919ece7dfbe78d99c644c0b",
+      "bytes": 11068
+    },
+    {
+      "path": ".local/validation/dev021-fast-running-gui.log",
+      "tracked": false,
+      "sha256": "a9eddb2b4407f708e2f3a7df1fa097b95785da34cac902a21b59911895e9b391",
+      "bytes": 89222
+    },
+    {
+      "path": ".local/validation/dev021-fixture-gui.log",
+      "tracked": false,
+      "sha256": "f6b6e294f0d7afac6149ddf32827405fda52084d6a013011f099e67290729c93",
+      "bytes": 10060
+    },
+    {
+      "path": ".local/validation/w01.log",
+      "tracked": false,
+      "sha256": "b9d8fcb6fe9a6a6bd7c7b3d6c8ebf28fcbd067ceeb3c2462ef7c63baaaf7e4df",
+      "bytes": 114
+    },
+    {
+      "path": ".local/validation/w02.log",
+      "tracked": false,
+      "sha256": "65566b680f39334a0c970ed6a328551863fee5d89e4c7ea5a284e89b1955f40a",
+      "bytes": 2732
+    },
+    {
+      "path": ".local/validation/w03.log",
+      "tracked": false,
+      "sha256": "e106f7aa57e133af5012c6bd05580ffa9e1c2932482dc5d855c0e658be5ac1a5",
+      "bytes": 114
+    },
+    {
+      "path": ".local/validation/w04a.log",
+      "tracked": false,
+      "sha256": "57498132f2da6fd3c9278a84fb54ddfc1a82c2cae07a184c5fe56c20dcea6ff8",
+      "bytes": 115
+    },
+    {
+      "path": ".local/validation/w05.log",
+      "tracked": false,
+      "sha256": "9dccae2b9b8c5cf8672db64c480f9241a3128953d2fde617255f3e089016c8fd",
+      "bytes": 243
+    },
+    {
+      "path": ".local/validation/w07.log",
+      "tracked": false,
+      "sha256": "4369c641c43827d536a0659f6acd766448e7e262c97261fceac6dc8954a8ef1c",
+      "bytes": 3729
+    },
+    {
+      "path": ".local/validation/tender_ui.log",
+      "tracked": false,
+      "sha256": "de62e9a9d7fe38643bdbbdcac8793f70ff87c40f9173c3060e32414739393645",
+      "bytes": 156637
+    }
+  ]
+}

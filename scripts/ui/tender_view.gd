@@ -4,6 +4,7 @@ extends VBoxContainer
 signal bid_requested(id: String, tender_id: String, confirmed: Dictionary)
 signal refresh_requested
 signal exit_requested
+signal construction_requested(project_id: String)
 
 const STATES := {
 	"NOT_OPEN": "접수 시작 전",
@@ -68,6 +69,7 @@ func _ready() -> void:
 	add_child(actions)
 	_button(actions, "submit", "응찰 요청", _request)
 	_button(actions, "handoff", "P05 인계 정보 확인", _handoff)
+	_button(self, "construction", "공사·검증·개통 화면 열기", _open_construction)
 	_label("request", "")
 	_label("decision", "")
 	_label("contract", "")
@@ -191,6 +193,12 @@ func _request() -> void:
 	bid_requested.emit("bid-ui-%d-%d" % [get_instance_id(), _sequence], selected_id, confirmed)
 
 
+func _open_construction() -> void:
+	var row := _selected()
+	if not row.is_empty() and not controls.construction.disabled:
+		construction_requested.emit(row.terms.project_id)
+
+
 func _selected() -> Dictionary:
 	for row: Dictionary in _rows:
 		if row.terms.tender_id == selected_id:
@@ -268,6 +276,8 @@ func _render() -> void:
 		labels[key].text = ""
 	controls.submit.visible = page == "P02"
 	controls.handoff.visible = page == "P02"
+	controls.construction.visible = page == "P05"
+	controls.construction.disabled = true
 	controls.submit.disabled = true
 	controls.handoff.disabled = true
 	if row.is_empty() or not _ready_data:
@@ -281,7 +291,10 @@ func _render() -> void:
 func _render_row(row: Dictionary) -> void:
 	var terms: Dictionary = row.terms
 	labels.summary.text = (
-		"%s / %s / %s · %s · 고정 조건 (읽기 전용)\n운임 %d / 정부금 %d / 공기 %d게임분 (계약 효력부터)\n노선: %s · 접수 [%d, %d)게임분"
+		(
+			"%s / %s / %s · %s · 고정 조건 (읽기 전용)\n운임 %d / 정부금 %d"
+			+ " / 공기 %s게임분 (실제 착공 효력부터)\n노선: %s · 접수 [%d, %d)게임분"
+		)
 		% [
 			terms.tender_id,
 			terms.round_id,
@@ -289,7 +302,7 @@ func _render_row(row: Dictionary) -> void:
 			_issuer(terms.issuer_id),
 			terms.fare,
 			terms.government,
-			terms.duration_minutes,
+			_grouped(terms.duration_minutes),
 			" → ".join(terms.station_ids),
 			terms.opens_at,
 			terms.closes_at
@@ -334,6 +347,7 @@ func _render_row(row: Dictionary) -> void:
 		not row.allowed_actions.enter_p05
 		or not row.business_contract.get("government_payment", {}).get("available", false)
 	)
+	controls.construction.disabled = controls.handoff.disabled
 	labels.timing.text = (
 		"마감 T=%d / 지금 요청의 처리 예정 T=%d\n최종 접수 여부는 실제 효력 단계에서 결정됩니다. 요청 전송은 접수 성공 보장이 아닙니다."
 		% [terms.closes_at, shown.next_effective_at]
@@ -375,10 +389,16 @@ func _render_row(row: Dictionary) -> void:
 		labels.handoff.text = (
 			(
 				"P05 읽기 전용 인계\n사업 %s / 공사 계약: NOT_CREATED (미체결)"
-				+ "\n착공·공정·검증 기능은 후속 단계에서 제공됩니다. 이 화면 이동은 계약/지급/착공을 실행하지 않습니다."
+				+ "\n공사·검증·개통은 아래 별도 화면에서 요청합니다. 이 인계 조회는 계약/지급/착공을 실행하지 않습니다."
 			)
 			% terms.project_id
 		)
+		for project: Dictionary in shown.get("construction_projects", []):
+			if project.project_id == terms.project_id:
+				labels.handoff.text = (
+					"P05 사업 인계 · 공사 상태는 공사 화면에서 확인\n공사 계약 %s / %s"
+					% [project.construction_contract_id, project.status]
+				)
 	var signature := JSON.stringify(
 		{
 			"state": row.state,
@@ -529,3 +549,13 @@ func _reason(id: String) -> String:
 func _hide_empty_labels() -> void:
 	for label: Label in labels.values():
 		label.visible = not label.text.is_empty()
+
+
+func _grouped(value: int) -> String:
+	var digits := str(value)
+	var result := ""
+	for index: int in digits.length():
+		if index > 0 and (digits.length() - index) % 3 == 0:
+			result += ","
+		result += digits[index]
+	return result
