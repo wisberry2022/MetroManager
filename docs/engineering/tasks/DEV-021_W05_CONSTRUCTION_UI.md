@@ -1,5 +1,17 @@
 # DEV-021 W05 최소 공사 UI
 
+## OBS-01 후속 실행 승인 (2026-11-14)
+
+- 담당: AGT-DEV-0001 / LAPTOP. 작업은 DEV-021 OBS-01에 한정한다.
+- 패킷: https://github.com/wisberry2022/MetroManager/issues/77#issuecomment-6867246123
+- 기준 main: 4b3f73c5d8b87630cc96eb90f950761f79bb861b
+- 전용 브랜치: codex/DEV-021-obs01-focus-visibility
+- Owner 현재 세션 원문:
+
+> 개발 에이전트. Issue #77의 DEV-021 OBS-01 보완과 승인 패킷에 명시한 15개 경로의 구현·재현/검증·Commit·Push·PR 생성을 승인합니다. 기존 Owner 정책과 Design 한정 수용 범위를 유지하며 OBS-01만 보완하고 검증 후 PR 생성해주세요. main 병합은 별도 승인하겠습니다.
+
+15개 경로 및 동작·유효 범위는 위 고정 패킷을 따른다. 별도 worktree에서 보완 전/후 재현, 자동/로드/실제 및 TEST_ONLY GUI를 구분하고 검증 후 일반 Commit·Push·PR을 제출한다. main 병합·규칙/원장/시간/설정·타 부서/F-08·S01 guard 확대는 제외한다. A02-11/A01-Q12는 Design 독립 재검수 전 PARTIAL이다. 이전 구현 결과·승인·한정 수용을 보존하며 후속 결과는 DEV-021_OBS01_RESULT.md에 기록한다.
+
 - 담당: AGT-DEV-0001 / Development / LAPTOP
 - 상태: REVIEW_REQUESTED / Owner 병합·Design 독립 검수 대기
 - 기준 main: 7735ccff22952dabdf1371c2b29d81b620f4a9c0
