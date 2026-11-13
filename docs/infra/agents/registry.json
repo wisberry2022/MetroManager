@@ -261,25 +261,26 @@
       "agent_id": "AGT-INF-0001",
       "department": "INF",
       "generation": 1,
-      "status": "ACTIVE",
+      "status": "RETIRED",
       "role": "AI Infrastructure Manager / agent continuity and succession",
       "session_scope": "INF-CURRENT",
       "session_kind": "CHATGPT",
       "predecessor_agent_id": null,
       "activated_at": null,
-      "retired_at": null,
+      "retired_at": "2026-11-14T07:47:00+09:00",
       "role_observed_on": "2026-11-01",
-      "role_retirement_observed_on": null,
+      "role_retirement_observed_on": "2026-11-14",
       "owner_approval_ref": "docs/infra/tasks/INF-001_CONTEXT_GOVERNANCE.md",
       "agent_id_activation_approval_ref": "OWNER_DIRECT_INF_2026-11-02_INITIAL_REGISTRY_APPROVAL",
       "handoff_ref": null,
       "role_evidence_refs": [
         "docs/infra/README.md",
         "docs/infra/tasks/INF-001_CONTEXT_GOVERNANCE.md",
-        "docs/engineering/tasks/DEV-007_INF_DEPARTMENT_REGISTRATION.md"
+        "docs/engineering/tasks/DEV-007_INF_DEPARTMENT_REGISTRATION.md",
+        "docs/infra/tasks/INF-008_INFRA_SUCCESSION.md#owner-transfer"
       ],
-      "record_version": 1,
-      "notes": "Owner-approved independent INF role; Git operations still subject to ticket-specific approval."
+      "record_version": 2,
+      "notes": "Owner-approved independent INF role; Git operations still subject to ticket-specific approval. Owner approved retirement effective 2026-11-14T07:47:00+09:00 under INF-008. Historical activated_at=null, identity, authorship, approvals and prior evidence are preserved; the former session remains reference history subject to access."
     },
     {
       "agent_id": "AGT-PLN-0003",
@@ -308,6 +309,34 @@
         "https://github.com/wisberry2022/MetroManager/issues/26#issuecomment-6719007539"
       ],
       "notes": "Owner-approved third-generation Planning successor: INF handoff and T1-T10 acceptance verified, HQ AGT-PM-0002 confirmed responsibility and both switch times at 2026-11-08T18:49:00+09:00, and Owner later expressly approved AGT-PLN-0003 ACTIVE / AGT-PLN-0002 RETIRED. Existing PENDING candidate reference remains in role evidence. Public session_kind remains UNCONFIRMED because no verified session-kind declaration is supplied; do not infer technical identity. ACTIVE does not authenticate identity or inherit ticket-specific Git privileges."
+    },
+    {
+      "agent_id": "AGT-INF-0002",
+      "department": "INF",
+      "generation": 2,
+      "status": "ACTIVE",
+      "role": "AI Infrastructure Manager / agent continuity and succession / second-generation successor",
+      "session_scope": "INF-GENERATION-2-SUCCESSOR-CURRENT",
+      "session_kind": "UNCONFIRMED",
+      "predecessor_agent_id": "AGT-INF-0001",
+      "activated_at": "2026-11-14T07:47:00+09:00",
+      "retired_at": null,
+      "role_observed_on": "2026-11-14",
+      "role_retirement_observed_on": null,
+      "owner_approval_ref": "docs/infra/tasks/INF-008_INFRA_SUCCESSION.md#owner-transfer",
+      "agent_id_activation_approval_ref": "docs/infra/tasks/INF-008_INFRA_SUCCESSION.md#owner-transfer",
+      "handoff_ref": "docs/infra/tasks/INF-008_INFRA_SUCCESSION.md#handoff-acceptance",
+      "role_evidence_refs": [
+        "docs/infra/tasks/INF-008_INFRA_SUCCESSION.md#handoff-acceptance",
+        "docs/infra/tasks/INF-008_INFRA_SUCCESSION.md#hq-switch",
+        "docs/infra/tasks/INF-008_INFRA_SUCCESSION.md#owner-transfer",
+        "docs/infra/README.md",
+        "docs/infra/AGENT_HEALTH_POLICY.md",
+        "docs/hq/PM-014_STAGE2_VS01_EXECUTION_PLAN.md",
+        "docs/engineering/provenance/RFC-DEV-017-01_REGISTRY_CONTRACT.md"
+      ],
+      "record_version": 1,
+      "notes": "Owner-appointed second-generation INF successor after Owner-designated HQ independent acceptance and PM switch confirmation. Both effective timestamps are explicitly 2026-11-14T07:47:00+09:00. Actual INF-008 submission author is AGT-PM-0002 under the Owner's case-specific direction, not either INF agent. session_kind is UNCONFIRMED because lifecycle approval does not authenticate session technology. ACTIVE does not confer inherited ticket-specific Git privileges."
     }
   ],
   "unresolved_identity_checks": [
