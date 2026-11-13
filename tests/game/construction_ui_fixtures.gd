@@ -13,6 +13,8 @@ const CASES: Array[String] = [
 	"RESUME",
 	"FAST_REPAIR",
 	"REPAIR_SHORT",
+	"FOCUS_POST_REPAIR",
+	"FOCUS_OPEN_READY",
 	"ERROR",
 	"UNAVAILABLE",
 	"EMPTY"
@@ -20,6 +22,15 @@ const CASES: Array[String] = [
 
 
 static func create(id: String = "CONTRACT") -> BidFX.Session:
+	if id in ["FOCUS_POST_REPAIR", "FOCUS_OPEN_READY"]:
+		var focus_session := create("FAST_REPAIR")
+		execute(focus_session, "repair", "focus-fixture-repair")
+		BidFX.advance_to(focus_session, 3432)
+		if id == "FOCUS_OPEN_READY":
+			execute(focus_session, "safety", "focus-fixture-retest")
+			BidFX.advance_to(focus_session, 3493)
+		focus_session.fixture_label = "DEV021-" + id
+		return focus_session
 	var session := BidFX.create()
 	session.enable_construction_ui()
 	session.fixture_label = "DEV021-" + id

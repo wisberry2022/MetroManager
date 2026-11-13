@@ -24,16 +24,19 @@ var _candidates: GridContainer
 var _list_stops: Array = []
 var _focus_feedback: String = ""
 var _planning_sections: Array[Node] = []
+var _scroll: ScrollContainer
+var _focus_sequence: int = 0
 
 
 func _ready() -> void:
 	for side: String in ["left", "right", "top", "bottom"]:
 		add_theme_constant_override("margin_" + side, 12)
-	var scroll := ScrollContainer.new()
-	add_child(scroll)
+	_scroll = ScrollContainer.new()
+	add_child(_scroll)
+	_scroll.resized.connect(_focus_resized)
 	var root := VBoxContainer.new()
 	root.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	scroll.add_child(root)
+	_scroll.add_child(root)
 	_label(root, "title", "MetroManager · S01 노선 계획")
 	var hud := HBoxContainer.new()
 	root.add_child(hud)
@@ -60,6 +63,7 @@ func _ready() -> void:
 	construction_view.command_requested.connect(_construction_requested)
 	construction_view.refresh_requested.connect(_refresh_construction)
 	construction_view.exit_requested.connect(_close_construction)
+	construction_view.focus_region_requested.connect(_ensure_focus_region)
 	root.add_child(construction_view)
 	var work := HBoxContainer.new()
 	root.add_child(work)
@@ -488,6 +492,7 @@ func _close_tenders() -> void:
 		section.show()
 	controls.open_tenders.show()
 	controls.open_tenders.grab_focus()
+	_ensure_focus_region(controls.open_tenders)
 
 
 func _bid_requested(id: String, tender_id: String, confirmed: Dictionary) -> void:
@@ -501,6 +506,7 @@ func _refresh_tenders() -> void:
 
 
 func _open_construction(project_id: String) -> void:
+	_scroll.follow_focus = true
 	tender_view.hide()
 	construction_view.select_project(project_id)
 	construction_view.show()
@@ -509,10 +515,12 @@ func _open_construction(project_id: String) -> void:
 
 
 func _close_construction() -> void:
+	_scroll.follow_focus = false
 	construction_view.hide()
 	tender_view.show()
 	present(session.snapshot())
 	tender_view.controls.construction.grab_focus()
+	_ensure_focus_region(tender_view.controls.construction)
 
 
 func _construction_requested(id: String, action: String, confirmed: Dictionary) -> void:
@@ -523,3 +531,43 @@ func _construction_requested(id: String, action: String, confirmed: Dictionary) 
 func _refresh_construction() -> void:
 	session.refresh_construction()
 	present(session.snapshot())
+
+
+func _focus_resized() -> void:
+	if construction_view != null and construction_view.visible:
+		var region: Control = construction_view.focus_region()
+		if region != null:
+			_ensure_focus_region(region)
+
+
+func _ensure_focus_region(region: Control) -> void:
+	# 레이아웃 반영 후에도 같은 대상에 포커스가 있을 때만 스크롤한다.
+	await get_tree().process_frame
+	if not is_instance_valid(region) or not region.is_visible_in_tree():
+		return
+	var owner := get_viewport().gui_get_focus_owner()
+	if owner != null and (owner == region or region.is_ancestor_of(owner)):
+		_scroll.ensure_control_visible(region)
+		await get_tree().process_frame
+		if not is_instance_valid(region) or get_viewport().gui_get_focus_owner() != owner:
+			return
+		_focus_sequence += 1
+		print(
+			"DEV021_OBS01_PRODUCT_FOCUS ",
+			JSON.stringify(
+				{
+					"sequence": _focus_sequence,
+					"fixture_label": session.fixture_label,
+					"minute": session.pipeline.clock.minute,
+					"view_revision": session.revision,
+					"owner_path": str(owner.get_path()),
+					"owner_rect": str(owner.get_global_rect()),
+					"region_path": str(region.get_path()),
+					"region_rect": str(region.get_global_rect()),
+					"scroll_rect": str(_scroll.get_global_rect()),
+					"scroll": _scroll.scroll_vertical,
+					"window_raw": [get_window().size.x, get_window().size.y],
+					"viewport_rect": str(get_viewport().get_visible_rect())
+				}
+			)
+		)

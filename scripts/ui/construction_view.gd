@@ -4,6 +4,7 @@ extends VBoxContainer
 signal command_requested(id: String, action: String, confirmed: Dictionary)
 signal refresh_requested
 signal exit_requested
+signal focus_region_requested(region: Control)
 
 const ACTIONS := {
 	"contract": "공사 계약 요청",
@@ -57,6 +58,8 @@ var _snapshot_revision: int = -1
 var _sequence: int = 0
 var _ready_data: bool = false
 var _last_observation: String = ""
+var _focus_regions: Dictionary = {}
+var _focus_signature: String = ""
 
 
 func _ready() -> void:
@@ -74,6 +77,8 @@ func _ready() -> void:
 	_modes.item_selected.connect(func(_index: int) -> void: _render())
 	add_child(_modes)
 	controls["mode"] = _modes
+	_focus_regions["mode"] = _modes
+	_modes.focus_entered.connect(_request_focus_visibility)
 	for action: String in ACTIONS:
 		var row := VBoxContainer.new()
 		add_child(row)
@@ -99,6 +104,8 @@ func _button(parent: Node, id: String, text: String, callback: Callable) -> void
 	button.pressed.connect(callback)
 	parent.add_child(button)
 	controls[id] = button
+	_focus_regions[id] = parent if id in ACTIONS else button
+	button.focus_entered.connect(_request_focus_visibility)
 
 
 func select_project(id: String) -> void:
@@ -221,6 +228,40 @@ func _render() -> void:
 	_render_history()
 	for label: Label in labels.values():
 		label.visible = not label.text.is_empty()
+	_refresh_focus_visibility()
+
+
+## 행동과 사유 행을 호스트에 전달하며 명령/허용값/시각은 변경하지 않는다.
+func focus_region() -> Control:
+	if not is_inside_tree():
+		return null
+	var owner := get_viewport().gui_get_focus_owner()
+	for id: String in controls:
+		if controls[id] == owner:
+			return _focus_regions[id]
+	return null
+
+
+func _request_focus_visibility() -> void:
+	var region := focus_region()
+	if region != null and region.is_visible_in_tree():
+		focus_region_requested.emit(region)
+
+
+func _refresh_focus_visibility() -> void:
+	var region := focus_region()
+	if region == null:
+		_focus_signature = ""
+		return
+	var owner := get_viewport().gui_get_focus_owner()
+	var reason := ""
+	for id: String in controls:
+		if controls[id] == owner and labels.has(id + "_reason"):
+			reason = labels[id + "_reason"].text
+	var signature := "%s/%s/%s" % [owner.get_instance_id(), owner.get("disabled"), reason]
+	if signature != _focus_signature:
+		_focus_signature = signature
+		_request_focus_visibility()
 
 
 func _render_state() -> void:

@@ -10,6 +10,8 @@ var _checks: int = 0
 var _failures: int = 0
 var _assertions: Array[Dictionary] = []
 var _cases: Array[Dictionary] = []
+var _focus_cases: Array[Dictionary] = []
+var _focus_assertion_start: int = 0
 
 
 func _initialize() -> void:
@@ -17,6 +19,13 @@ func _initialize() -> void:
 
 
 func _run() -> void:
+	var args := OS.get_cmdline_user_args()
+	if "--obs01-only" in args or "--obs01-baseline" in args:
+		await _test_focus_visibility("--obs01-baseline" in args)
+		_write_focus_evidence()
+		print("DEV021_OBS01_TEST_RESULT checks=", _checks, " failures=", _failures)
+		quit(0 if _failures == 0 else 1)
+		return
 	if "--verify-failure-exit" in OS.get_cmdline_user_args():
 		_expect("intentional_failure", false, true)
 	else:
@@ -30,6 +39,8 @@ func _run() -> void:
 		_expect("all_required_cases_completed", _cases.size(), 10)
 		_expect("assertions_executed", _checks > 100, true)
 		_write_evidence()
+		await _test_focus_visibility(false)
+		_write_focus_evidence()
 	print("DEV021_UI_TEST_RESULT checks=", _checks, " failures=", _failures)
 	quit(0 if _failures == 0 else 1)
 
@@ -387,3 +398,168 @@ func _evidence_value(value: Variant) -> Variant:
 	if value is Array:
 		return value.map(_evidence_value)
 	return value
+
+
+func _test_focus_visibility(baseline: bool) -> void:
+	_focus_assertion_start = _assertions.size()
+	var clipped := 0
+	for case_id: String in ["PROGRESS", "FOCUS_POST_REPAIR", "FOCUS_OPEN_READY"]:
+		var session := FX.create(case_id)
+		var model_before: Dictionary = session.snapshot().construction_ui.snapshot
+		for size_value: Vector2i in [Vector2i(1104, 900), Vector2i(1280, 720), Vector2i(1280, 960)]:
+			root.size = size_value
+			var host = Stage.instantiate()
+			host.session = session
+			root.add_child(host)
+			host.set_process(false)
+			host.controls.open_tenders.pressed.emit()
+			host.tender_view.selected_id = "B01"
+			host.tender_view.page = "P05"
+			host.present(session.snapshot())
+			host.tender_view.controls.construction.pressed.emit()
+			await _layout_frames()
+			var panel: View = host.construction_view
+			var scroll: ScrollContainer = host.get_children()[0]
+			var observations: Array[Dictionary] = []
+			for action: String in [
+				"back",
+				"refresh",
+				"contract",
+				"start",
+				"resume",
+				"trial",
+				"safety",
+				"repair",
+				"open"
+			]:
+				var button: Button = panel.controls[action]
+				button.grab_focus()
+				await _layout_frames()
+				var region: Control = button.get_parent() if action in View.ACTIONS else button
+				var visible := _inside_scroll(scroll, region)
+				clipped += int(not visible)
+				observations.append(_focus_observation(scroll, button, region, action))
+				_expect(case_id + "_focus_" + action, root.gui_get_focus_owner() == button, true)
+				if not baseline:
+					_expect(case_id + "_visible_" + action, visible, true)
+			for reverse: bool in [false, true]:
+				for index: int in 14:
+					await _tab_key(reverse)
+					var focus := root.gui_get_focus_owner()
+					_expect("keyboard_has_focus", focus != null, true)
+					if not baseline and focus != null:
+						_expect("keyboard_focus_visible", _inside_scroll(scroll, focus), true)
+			var before: Dictionary = session.snapshot().construction_ui
+			panel.controls.refresh.pressed.emit()
+			host.present(session.snapshot())
+			await _layout_frames()
+			_expect(
+				"refresh_no_model_mutation",
+				session.snapshot().construction_ui.snapshot == before.snapshot,
+				true
+			)
+			_expect(
+				"navigation_no_new_request",
+				session.snapshot().construction_ui.requests,
+				before.requests
+			)
+			panel.controls.back.pressed.emit()
+			await _layout_frames()
+			_expect("return_selected_B01", host.tender_view.selected_id, "B01")
+			if not baseline:
+				_expect(
+					"return_focus_visible",
+					_inside_scroll(scroll, host.tender_view.controls.construction),
+					true
+				)
+			host.tender_view.controls.construction.pressed.emit()
+			await _layout_frames()
+			_expect("reentry_focus", root.gui_get_focus_owner() == panel.controls.back, true)
+			if not baseline:
+				_expect("reentry_visible", _inside_scroll(scroll, panel.controls.back), true)
+			_focus_cases.append(
+				{
+					"case": case_id,
+					"kind": "AUTOMATED_TEST_ONLY_PRODUCT_HOST",
+					"phase": "BASELINE" if baseline else "FIXED",
+					"window_raw": [size_value.x, size_value.y],
+					"observed_window_raw": [root.size.x, root.size.y],
+					"observed_viewport": str(root.get_visible_rect()),
+					"initial": model_before,
+					"observations": observations,
+					"after": session.snapshot().construction_ui.snapshot
+				}
+			)
+			host.free()
+		_expect(
+			"paused_navigation_preserves_model",
+			session.snapshot().construction_ui.snapshot == model_before,
+			true
+		)
+	_expect("focus_required_cases", _focus_cases.size(), 9)
+	if baseline:
+		_expect("baseline_clipped_focus_reproduced", clipped > 0, true)
+	else:
+		_expect("fixed_all_action_rows_visible", clipped, 0)
+	print("DEV021_OBS01_FOCUS phase=", "BASELINE" if baseline else "FIXED", " clipped=", clipped)
+
+
+func _layout_frames() -> void:
+	for frame: int in 4:
+		await process_frame
+
+
+func _tab_key(reverse: bool) -> void:
+	var event := InputEventKey.new()
+	event.keycode = KEY_TAB
+	event.shift_pressed = reverse
+	event.pressed = true
+	Input.parse_input_event(event)
+	var release := event.duplicate() as InputEventKey
+	release.pressed = false
+	Input.parse_input_event(release)
+	await _layout_frames()
+
+
+func _inside_scroll(scroll: ScrollContainer, control: Control) -> bool:
+	var clip := scroll.get_global_rect()
+	if scroll.get_v_scroll_bar().visible:
+		clip.size.x -= scroll.get_v_scroll_bar().size.x
+	if scroll.get_h_scroll_bar().visible:
+		clip.size.y -= scroll.get_h_scroll_bar().size.y
+	return clip.grow(1.0).encloses(control.get_global_rect())
+
+
+func _focus_observation(
+	scroll: ScrollContainer, button: Button, region: Control, action: String
+) -> Dictionary:
+	return {
+		"action": action,
+		"disabled": button.disabled,
+		"focus_path":
+		str(button.get_path()) if root.gui_get_focus_owner() == button else "OTHER_OR_NONE",
+		"button_rect": str(button.get_global_rect()),
+		"region_rect": str(region.get_global_rect()),
+		"scroll_rect": str(scroll.get_global_rect()),
+		"scroll": scroll.scroll_vertical,
+		"region_visible": _inside_scroll(scroll, region)
+	}
+
+
+func _write_focus_evidence() -> void:
+	if "--obs01-evidence" not in OS.get_cmdline_user_args():
+		return
+	var path := "res://docs/engineering/evidence/DEV-021_OBS01_CASES.json"
+	var evidence: Dictionary = {}
+	if FileAccess.file_exists(path):
+		var previous: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+		if previous is Dictionary:
+			evidence = previous
+	var phase := "baseline" if "--obs01-baseline" in OS.get_cmdline_user_args() else "fixed"
+	evidence[phase] = {
+		"cases": _focus_cases, "assertions": _assertions.slice(_focus_assertion_start)
+	}
+	evidence.task_id = "DEV-021"
+	evidence.observation = "OBS-01"
+	var output := FileAccess.open(path, FileAccess.WRITE)
+	output.store_string(JSON.stringify(evidence, "  ") + "\n")

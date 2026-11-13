@@ -13,6 +13,8 @@ var _case_id: String = "CONTRACT"
 var _last_usec: int = 0
 var _refresh_usec: int = 0
 var _old_packet: Dictionary = {}
+var _scroll: ScrollContainer
+var _focus_sequence: int = 0
 
 
 func _initialize() -> void:
@@ -22,12 +24,16 @@ func _initialize() -> void:
 func _build() -> void:
 	root.title = "MetroManager · DEV021 TEST_ONLY"
 	root.size = Vector2i(1100, 900)
-	var scroll := ScrollContainer.new()
-	scroll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	root.add_child(scroll)
+	if "--small" in OS.get_cmdline_user_args():
+		root.size = Vector2i(1104, 900)
+	_scroll = ScrollContainer.new()
+	_scroll.follow_focus = true
+	_scroll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	root.add_child(_scroll)
+	_scroll.resized.connect(_focus_resized)
 	_content = VBoxContainer.new()
 	_content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	scroll.add_child(_content)
+	_scroll.add_child(_content)
 	var title := Label.new()
 	title.text = "DEV021 TEST_ONLY · 검증 전용 시간/자금 입력 · 제품 정상 경로 아님"
 	_content.add_child(title)
@@ -53,7 +59,11 @@ func _build() -> void:
 			_case_id = arg.trim_prefix("--case=")
 	menu.select(FX.CASES.find(_case_id))
 	_load_case(_case_id)
+	root.gui_focus_changed.connect(_focus_changed)
+	root.window_input.connect(_record_input)
 	_last_usec = Time.get_ticks_usec()
+	if "--obs01-self-test" in OS.get_cmdline_user_args():
+		_run_focus_probe.call_deferred()
 
 
 func _button(parent: Node, text: String, callback: Callable) -> void:
@@ -79,6 +89,7 @@ func _load_case(id: String) -> void:
 	_panel.command_requested.connect(_command)
 	_panel.refresh_requested.connect(_refresh)
 	_panel.exit_requested.connect(func() -> void: quit(0))
+	_panel.focus_region_requested.connect(_ensure_focus_region)
 	_present()
 	_log("LOAD_CASE")
 
@@ -174,3 +185,116 @@ func _log(action: String) -> void:
 			}
 		)
 	)
+
+
+func _record_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo:
+		_log_focus.call_deferred("KEY " + event.as_text())
+
+
+func _focus_changed(_control: Control) -> void:
+	_log_focus.call_deferred("FOCUS_CHANGED")
+
+
+func _log_focus(action: String) -> void:
+	_focus_sequence += 1
+	var focus := root.gui_get_focus_owner()
+	var row: Control = focus
+	if focus != null and focus.get_parent() is VBoxContainer and focus.get_parent() != _panel:
+		row = focus.get_parent()
+	var envelope: Dictionary = _session.snapshot().construction_ui.snapshot
+	print(
+		"DEV021_OBS01_GUI ",
+		JSON.stringify(
+			{
+				"sequence": _focus_sequence,
+				"event": action,
+				"fixture": _case_id,
+				"minute": envelope.simulation_minute,
+				"snapshot_revision": envelope.snapshot_revision,
+				"focus_path": str(focus.get_path()) if focus != null else "",
+				"focus_rect": _rect(focus.get_global_rect()) if focus != null else {},
+				"row_rect": _rect(row.get_global_rect()) if row != null else {},
+				"disabled": focus.disabled if focus is BaseButton else null,
+				"scroll_rect": _rect(_scroll.get_global_rect()),
+				"scroll": [_scroll.scroll_horizontal, _scroll.scroll_vertical],
+				"window_raw_size": [root.size.x, root.size.y],
+				"viewport_rect": _rect(root.get_visible_rect()),
+				"canvas_transform": str(root.canvas_transform),
+				"reported_screen_scale": DisplayServer.screen_get_scale(),
+				"reported_screen_dpi": DisplayServer.screen_get_dpi(),
+				"effective_window_dpi": "NOT_VERIFIED",
+				"funds": envelope.funds,
+				"project": FX.row(_session),
+				"requests": _session.snapshot().construction_ui.requests
+			}
+		)
+	)
+
+
+func _rect(value: Rect2) -> Dictionary:
+	return {
+		"x": value.position.x, "y": value.position.y, "width": value.size.x, "height": value.size.y
+	}
+
+
+func _focus_resized() -> void:
+	if _panel != null:
+		var region := _panel.focus_region()
+		if region != null:
+			_ensure_focus_region(region)
+
+
+func _ensure_focus_region(region: Control) -> void:
+	await process_frame
+	if not is_instance_valid(region) or not region.is_visible_in_tree():
+		return
+	var owner := root.gui_get_focus_owner()
+	if owner != null and (owner == region or region.is_ancestor_of(owner)):
+		_scroll.ensure_control_visible(region)
+
+
+func _run_focus_probe() -> void:
+	var failures := 0
+	var checks := 0
+	var before: Dictionary = _session.snapshot().construction_ui.snapshot
+	for window_size: Vector2i in [Vector2i(1104, 900), Vector2i(1280, 720), Vector2i(1280, 960)]:
+		root.size = window_size
+		for action: String in ["back", "refresh", "contract", "safety", "repair", "open"]:
+			_panel.controls[action].grab_focus()
+			for frame: int in 4:
+				await process_frame
+			var region := _panel.focus_region()
+			checks += 1
+			if region == null or not _probe_visible(region):
+				failures += 1
+				printerr("FAIL OBS01_GUI_ROW ", action, " ", window_size)
+		for reverse: bool in [false, true]:
+			for index: int in 16:
+				var key := InputEventKey.new()
+				key.keycode = KEY_TAB
+				key.shift_pressed = reverse
+				key.pressed = true
+				root.push_input(key)
+				key = key.duplicate() as InputEventKey
+				key.pressed = false
+				root.push_input(key)
+				for frame: int in 4:
+					await process_frame
+				var focus := root.gui_get_focus_owner()
+				checks += 1
+				if focus == null or not _probe_visible(focus):
+					failures += 1
+					printerr("FAIL OBS01_GUI_KEYBOARD ", reverse, " ", window_size)
+	checks += 1
+	if _session.snapshot().construction_ui.snapshot != before:
+		failures += 1
+	print("DEV021_OBS01_GUI_TEST_RESULT checks=", checks, " failures=", failures)
+	quit(0 if failures == 0 else 1)
+
+
+func _probe_visible(control: Control) -> bool:
+	var clip := _scroll.get_global_rect()
+	if _scroll.get_v_scroll_bar().visible:
+		clip.size.x -= _scroll.get_v_scroll_bar().size.x
+	return clip.grow(1.0).encloses(control.get_global_rect())
