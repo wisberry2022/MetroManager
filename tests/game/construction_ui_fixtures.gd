@@ -131,3 +131,169 @@ static func packet(session: BidFX.Session, id: String) -> Dictionary:
 		value.snapshot.projects = []
 		value.snapshot.contract_candidates = []
 	return value
+
+
+## Q12 표시 사본. 정상 모델과 합성 표시/이력을 분리하며 제품에서 참조하지 않는다.
+static func q12_text(kind: String, size: int, suffix: String = "_END_A") -> String:
+	var prefix := "TEST_ONLY_LONG_" if kind == "code" else "TEST_ID_"
+	if kind in ["id", "code"]:
+		return (
+			prefix
+			+ "AB09_-".repeat(size).substr(0, size - prefix.length() - suffix.length())
+			+ suffix
+		)
+	var seed: String = {
+		"ko": "한글 표시 확인 ",
+		"mixed": "한글 Metro 0123 / ()[]:_- ",
+		"tight": "한글METRO0123456789",
+		"lf": "한글 Metro 0123 / ()[]:_- "
+	}[kind]
+	var text := seed.repeat(size).substr(0, size)
+	if kind == "lf":
+		text = text.substr(0, 255) + "\n" + text.substr(256, 511) + "\n" + text.substr(768)
+	return text
+
+
+static func q12_specs() -> Array[String]:
+	var ids: Array[String] = []
+	for field: String in ["project", "business", "construction", "payment", "command"]:
+		for size: int in [64, 256]:
+			ids.append("ID-%s-%d" % [field, size])
+	for kind: String in ["ko", "mixed", "lf", "tight"]:
+		ids.append("FAILED-" + kind)
+	for location: String in ["candidate", "action", "history"]:
+		for size: int in [64, 256, 128]:
+			ids.append("REASON-%s-%d" % [location, size])
+	return ids
+
+
+static func q12_display(session: BidFX.Session, case_id: String) -> Dictionary:
+	var value: Dictionary = session.snapshot().construction_ui
+	var texts: Array[Dictionary] = []
+	var envelope: Dictionary = value.snapshot
+	var selected := "P-A"
+	var id_fields: Array[String] = []
+	if case_id.begins_with("ID-"):
+		id_fields.append(case_id.split("-")[1])
+	if case_id in ["LTXT-G01", "LTXT-G07"]:
+		id_fields.assign(["project", "business", "construction", "payment", "command"])
+	var size := int(case_id.get_slice("-", 2)) if case_id.begins_with("ID-") else 256
+	for field: String in id_fields:
+		var text := q12_text("id", size)
+		texts.append(_q12_text_record(field, text))
+		if field == "project":
+			selected = text
+			for map: String in ["restricted_by_project", "reserved_by_project"]:
+				var amount: int = envelope.funds[map].get("P-A", 0)
+				envelope.funds[map].erase("P-A")
+				envelope.funds[map][text] = amount
+		for group: String in ["projects", "contract_candidates"]:
+			for item: Dictionary in envelope[group]:
+				match field:
+					"project":
+						item.project_id = text
+						item.business_contract.project_id = text
+						item.business_contract.government_payment.restricted_project_id = text
+					"business":
+						item.business_contract.business_contract_id = text
+					"construction":
+						if item.has("construction_contract_id"):
+							item.construction_contract_id = text
+					"payment":
+						item.business_contract.government_payment.transaction_id = text
+	var failed: String = (
+		{"LTXT-G02": "ko", "LTXT-G03": "mixed", "LTXT-G03-LF": "lf", "LTXT-G04": "tight"}
+		. get(case_id, case_id.trim_prefix("FAILED-") if case_id.begins_with("FAILED-") else "")
+	)
+	if not failed.is_empty():
+		value.status = "FAILED"
+		value.reason = q12_text(failed, 256 if failed == "ko" else 1024)
+		texts.append(_q12_text_record("packet.reason", value.reason))
+	var location := ""
+	var reason_size := 256
+	if case_id.begins_with("REASON-"):
+		location = case_id.get_slice("-", 1)
+		reason_size = int(case_id.get_slice("-", 2))
+	if case_id == "LTXT-G05":
+		location = "action"
+	if case_id in ["LTXT-G06", "LTXT-G07"]:
+		location = "both"
+		reason_size = 128
+	var codes: Array[String] = ["PREREQUISITE_NOT_MET"]
+	if not location.is_empty():
+		if reason_size == 128:
+			codes.clear()
+		for index: int in 8 if reason_size == 128 else 1:
+			var code := q12_text("code", reason_size, "_%02d" % (index + 1))
+			codes.append(code)
+			texts.append(_q12_text_record(location + ".reason", code))
+		if location == "candidate":
+			envelope.contract_candidates[0].reason_codes = codes
+		if location in ["action", "both"]:
+			envelope.projects[0].action_reason_codes.open = codes
+	# Preserve ID references inside the cloned command history only.
+	for record: Dictionary in value.requests:
+		record.command.project_id = selected
+		if "business" in id_fields:
+			record.command.business_contract_id = q12_text("id", size)
+	if "command" in id_fields or location in ["history", "both"]:
+		for index: int in 2:
+			var id := q12_text("id", size, "_END_A" if index == 0 else "_END_B")
+			texts.append(_q12_text_record("requests.command_id", id))
+			value.requests.append(
+				{
+					"command":
+					{"command_id": id, "project_id": selected, "action": "open", "requested_at": 1},
+					"result":
+					{
+						"command_id": id,
+						"pending": false,
+						"accepted": false,
+						"reason_codes": codes if index == 0 else ["STATE_CHANGED"],
+						"effective_at": 2,
+						"result_revision": 2,
+						"decision_phase": "VALIDATION"
+					}
+				}
+			)
+	return {"packet": value, "selected_id": selected, "inputs": texts, "case_id": case_id}
+
+
+static func _q12_text_record(field: String, text: String) -> Dictionary:
+	return {
+		"field": field,
+		"text": text,
+		"codepoints": text.length(),
+		"utf8_bytes": text.to_utf8_buffer().size(),
+		"sha256": text.sha256_text()
+	}
+
+
+static func q12_session(id: String) -> BidFX.Session:
+	if id.begins_with("Q12-CMD"):
+		return create("CONTRACT")
+	if id.begins_with("Q12-REV"):
+		var session := create("CONTRACT")
+		execute(session, "contract", "q12-setup-contract")
+		return session
+	if id.begins_with("Q12-HIS"):
+		var session := create("CONTRACT")
+		execute(session, "contract", "q12-setup-contract", "FAST")
+		execute(session, "start", "q12-setup-start")
+		BidFX.advance_to(session, int(row(session).started_at) + 1440)
+		return session
+	if id.begins_with("Q12-FIN"):
+		var session := create("FAST_REPAIR")
+		if id != "Q12-FIN-01":
+			var shortage := id == "Q12-FIN-03"
+			var ledger := Ledger.new(
+				{
+					"cash": 29999 if shortage else 30000,
+					"restricted_by_project": {"P-A": 10000, "P-B": 5000},
+					"reserved_by_project": {"P-A": 0, "P-B": 5001 if id == "Q12-FIN-04" else 5000}
+				}
+			)
+			session.pipeline.ledger = ledger
+			session.pipeline.get("_construction").set("_ledger", ledger)
+		return session
+	return create("FOCUS_POST_REPAIR")
