@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "task_id": "DEV-023",
+  "primary_agent_id": "AGT-DEV-0004",
+  "base_sha": "30cc2ea5f6e7c03aebff1315b6fd00530871ebec",
+  "artifacts": [
+    {
+      "path": "docs/engineering/gate3/DEV-023_UI_FIXTURES.json",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-023_W06_OPERATIONS_UI.md",
+        "https://github.com/wisberry2022/MetroManager/issues/79",
+        "docs/engineering/gate3/DEV-022_W06_SUPPLY_AND_VALIDATION.md",
+        "docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md"
+      ],
+      "blob_sha": "bce8c39097d96494c62b4cdbe4a69c9601a13277"
+    },
+    {
+      "path": "docs/engineering/gate3/DEV-023_UI_SUPPLY_AND_EXECUTION_PLAN.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-023_W06_OPERATIONS_UI.md",
+        "https://github.com/wisberry2022/MetroManager/issues/79",
+        "docs/engineering/gate3/DEV-022_W06_SUPPLY_AND_VALIDATION.md",
+        "docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md"
+      ],
+      "blob_sha": "6a0f287ad4562ece2e7227c6b378079f3a84b80a"
+    },
+    {
+      "path": "docs/engineering/gate3/DEV-023_UI_VALIDATION.json",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-023_W06_OPERATIONS_UI.md",
+        "https://github.com/wisberry2022/MetroManager/issues/79",
+        "docs/engineering/gate3/DEV-022_W06_SUPPLY_AND_VALIDATION.md",
+        "docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md"
+      ],
+      "blob_sha": "9731ea9db8400b6d5e54a9093932ad270104b52d"
+    },
+    {
+      "path": "docs/engineering/gate3/DEV-023_UI_VALIDATION_PLAN.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-023_W06_OPERATIONS_UI.md",
+        "https://github.com/wisberry2022/MetroManager/issues/79",
+        "docs/engineering/gate3/DEV-022_W06_SUPPLY_AND_VALIDATION.md",
+        "docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md"
+      ],
+      "blob_sha": "cbf4bf77bf5af3cdefd6cd675516bfca1c2f539f"
+    },
+    {
+      "path": "docs/engineering/tasks/DEV-023_RESULT.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-023_W06_OPERATIONS_UI.md",
+        "https://github.com/wisberry2022/MetroManager/issues/79",
+        "docs/engineering/gate3/DEV-022_W06_SUPPLY_AND_VALIDATION.md",
+        "docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md"
+      ],
+      "blob_sha": "ea221c485b7514396fa393f1223d80b135115ec1"
+    },
+    {
+      "path": "docs/engineering/tasks/DEV-023_W06_OPERATIONS_UI.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-023_W06_OPERATIONS_UI.md",
+        "https://github.com/wisberry2022/MetroManager/issues/79",
+        "docs/engineering/gate3/DEV-022_W06_SUPPLY_AND_VALIDATION.md",
+        "docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md"
+      ],
+      "blob_sha": "048f134d71fa891d75db929ffd3891aebf47c68c"
+    },
+    {
+      "path": "scripts/ui/stage1_session.gd",
+      "change_type": "modify",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-023_W06_OPERATIONS_UI.md",
+        "https://github.com/wisberry2022/MetroManager/issues/79",
+        "docs/engineering/gate3/DEV-022_W06_SUPPLY_AND_VALIDATION.md",
+        "docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md"
+      ],
+      "blob_sha": "b1889ce0355cf299cc05bb5b6edda9fbb1e9da13",
+      "old_blob_sha": "d15c04d00d6ee88fcb36504aeb078c327dddfeea"
+    },
+    {
+      "path": "tests/game/operations_ui_fixtures.gd",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-023_W06_OPERATIONS_UI.md",
+        "https://github.com/wisberry2022/MetroManager/issues/79",
+        "docs/engineering/gate3/DEV-022_W06_SUPPLY_AND_VALIDATION.md",
+        "docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md"
+      ],
+      "blob_sha": "1862718dc66c2076affe38c243feb13df0c84050"
+    },
+    {
+      "path": "tests/game/operations_ui_fixtures.gd.uid",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-023_W06_OPERATIONS_UI.md",
+        "https://github.com/wisberry2022/MetroManager/issues/79",
+        "docs/engineering/gate3/DEV-022_W06_SUPPLY_AND_VALIDATION.md",
+        "docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md"
+      ],
+      "blob_sha": "7fb135072dbdc96f74f5480119b38e9e231bd7ed"
+    },
+    {
+      "path": "tests/game/run_operations_ui_tests.gd",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-023_W06_OPERATIONS_UI.md",
+        "https://github.com/wisberry2022/MetroManager/issues/79",
+        "docs/engineering/gate3/DEV-022_W06_SUPPLY_AND_VALIDATION.md",
+        "docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md"
+      ],
+      "blob_sha": "11688496b33ce0f4c19bc5de8cf74f8b51de2292"
+    },
+    {
+      "path": "tests/game/run_operations_ui_tests.gd.uid",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-023_W06_OPERATIONS_UI.md",
+        "https://github.com/wisberry2022/MetroManager/issues/79",
+        "docs/engineering/gate3/DEV-022_W06_SUPPLY_AND_VALIDATION.md",
+        "docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md"
+      ],
+      "blob_sha": "e27b326f446bcaec8446c443ff61d162d8d45fff"
+    }
+  ]
+}

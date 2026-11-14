@@ -7,6 +7,7 @@ const Plan = preload("res://scripts/model/route_plan.gd")
 const Prediction = preload("res://scripts/model/prediction_state.gd")
 const Tender = preload("res://scripts/model/public_tender.gd")
 const Predictor = preload("res://scripts/simulation/demand_predictor.gd")
+const OPERATIONS_UI_REVISION := "DEV023-UI-1"
 
 var pipeline: Pipeline
 var network: Network
@@ -27,6 +28,9 @@ var _bid_requests: Dictionary = {}
 var _construction_enabled: bool = false
 var _construction_error: String = ""
 var _construction_requests: Dictionary = {}
+var _operations_enabled: bool = false
+var _operations_error: String = ""
+var _finance_day: int = -1
 
 
 func _init(data: Dictionary, initial: Dictionary, parameters: Dictionary = {}) -> void:
@@ -99,7 +103,10 @@ func snapshot() -> Dictionary:
 		"command_result": _results.get(_last_command, {}).duplicate(true),
 		"fixture_label": fixture_label,
 		"tender_ui": _tender_snapshot(current),
-		"construction_ui": _construction_snapshot(current)
+		"construction_ui": _construction_snapshot(current),
+		"operations_ui": _operations_snapshot(current),
+		"finance_ui": _finance_snapshot(current, daily),
+		"next_business_ui": _next_business_snapshot(current)
 	}
 
 
@@ -263,6 +270,361 @@ func _tender_snapshot(current: Dictionary) -> Dictionary:
 		"next_effective_at": current.simulation_minute + 1,
 		"fixture_label": fixture_label
 	}
+
+
+## 명시적 소비 연결. 제품 화면 호출은 Design L2 수용 후 별도로 연결한다.
+func enable_operations_ui() -> Dictionary:
+	if _operations_enabled:
+		return {"accepted": true}
+	var result := enable_construction_ui()
+	if result.get("accepted", false):
+		result = pipeline.enable_operations(network, _parameters)
+	_operations_enabled = result.get("accepted", false)
+	_operations_error = result.get("reason", "")
+	revision += 1
+	return result.duplicate(true)
+
+
+## 과거 보고 선택만 변경한다. 시각·원장·보고 생성을 실행하지 않는다.
+func select_finance_report(day: Variant) -> Dictionary:
+	var current_day: int = pipeline.clock.minute / 1440 + 1
+	if not day is int or day < 1 or day >= current_day:
+		return {"accepted": false, "reason": "INVALID_REPORT_DAY"}
+	if _finance_day != day:
+		_finance_day = day
+		revision += 1
+	return {"accepted": true, "reason": "", "day_id": day}
+
+
+## 확인한 실제 보고를 기준으로 기존 공고를 읽는다. 사업 명령을 발행하지 않는다.
+func query_next_business(confirmed: Dictionary) -> Dictionary:
+	var current := pipeline.snapshot()
+	var packet := _next_business_snapshot(current)
+	var reason := ""
+	if not packet.available:
+		reason = packet.reason_codes[0]
+	elif (
+		confirmed.get("report_key") != packet.report_key
+		or confirmed.get("first_valid_report") != packet.first_valid_report
+	):
+		reason = "STATE_CHANGED"
+	return {
+		"accepted": reason.is_empty(),
+		"reason": reason,
+		"observed_at": current.simulation_minute,
+		"report_key": packet.get("report_key", ""),
+		"first_valid_report": packet.get("first_valid_report", {}).duplicate(true),
+		"tenders": packet.get("tenders", {}).duplicate(true) if reason.is_empty() else {}
+	}
+
+
+func _operations_snapshot(current: Dictionary) -> Dictionary:
+	var packet := _ui_packet(current)
+	packet["snapshot"] = {}
+	if not _operations_enabled:
+		return _inactive_operations(packet)
+	var value: Variant = current.get("operations")
+	if not _valid_operations(value, current):
+		return _ui_failure(packet, "INVALID_OPERATIONS_SUPPLY")
+	packet.snapshot = value.duplicate(true)
+	packet.available = value.available
+	packet.status = "READY" if value.available else "FAILED"
+	packet.reason_codes = value.reason_codes.duplicate()
+	if not packet.available and packet.reason_codes.is_empty():
+		return _ui_failure(packet, "INVALID_OPERATIONS_SUPPLY")
+	return packet
+
+
+func _finance_snapshot(current: Dictionary, daily: Dictionary) -> Dictionary:
+	var packet := _ui_packet(current)
+	var day: int = current.day_id - 1 if _finance_day < 0 else _finance_day
+	packet.merge(
+		{
+			"current_funds": {},
+			"current_activity": {},
+			"report_day_range": {"first": 1, "last": current.day_id - 1},
+			"report_selection": "LATEST_CLOSED" if _finance_day < 0 else "FIXED_DAY",
+			"report": _finance_report(day)
+		}
+	)
+	if (
+		not _same_observation(current, current)
+		or not _valid_funds(current.get("funds"))
+		or not _valid_report_totals(daily, current.day_id)
+		or daily.payment > 9223372036854775807 - daily.debt_payment
+	):
+		return _ui_failure(packet, "INVALID_FINANCE_SUPPLY")
+	packet.current_funds = current.funds.duplicate(true)
+	packet.current_activity = daily.duplicate(true)
+	packet.current_activity["cash_payment"] = daily.payment + daily.debt_payment
+	return packet
+
+
+func _finance_report(day: int) -> Dictionary:
+	var value := pipeline.reports.report(day) if day > 0 else {}
+	var packet := {
+		"status": "UNAVAILABLE",
+		"available": false,
+		"reason_codes": [],
+		"day_id": day,
+		"display_key": "",
+		"value": {}
+	}
+	if not report_error.is_empty():
+		return _ui_failure(packet, report_error)
+	if value.is_empty():
+		packet.reason_codes = ["REPORT_UNAVAILABLE"]
+		return packet
+	if not _valid_report_totals(value, day) or not _valid_funds(value.get("closing_funds")):
+		return _ui_failure(packet, "INVALID_REPORT_SUPPLY")
+	packet.status = "READY"
+	packet.available = true
+	packet.display_key = "%s/day-%d" % [_report_scope, day]
+	packet.value = value.duplicate(true)
+	return packet
+
+
+func _next_business_snapshot(current: Dictionary) -> Dictionary:
+	var packet := _ui_packet(current)
+	packet.merge(
+		{
+			"report_key": "",
+			"first_valid_report": {},
+			"tenders": {},
+			"allowed_actions": {"query": false}
+		}
+	)
+	if not _operations_enabled:
+		return _inactive_operations(packet)
+	var value := pipeline.next_business_query()
+	if (
+		not value.get("available") is bool
+		or not _string_codes(value.get("reason_codes"))
+		or not value.get("allowed_actions") is Dictionary
+		or not value.allowed_actions.get("query") is bool
+		or not value.get("first_valid_report") is Dictionary
+		or not value.get("tenders") is Dictionary
+		or not _same_observation(current, current)
+	):
+		return _ui_failure(packet, "INVALID_NEXT_BUSINESS_SUPPLY")
+	if not value.allowed_actions.query:
+		if value.available or not value.first_valid_report.is_empty():
+			return _ui_failure(packet, "INVALID_NEXT_BUSINESS_SUPPLY")
+		packet.status = "UNAVAILABLE"
+		packet.available = false
+		packet.reason_codes = ["FIRST_VALID_OPERATIONS_REPORT_REQUIRED"]
+		return packet
+	return _ready_business_query(packet, value, current)
+
+
+func _ready_business_query(
+	packet: Dictionary, value: Dictionary, current: Dictionary
+) -> Dictionary:
+	if not _valid_first_report(value.first_valid_report, current.day_id):
+		return _ui_failure(packet, "INVALID_NEXT_BUSINESS_SUPPLY")
+	packet.allowed_actions = value.allowed_actions.duplicate(true)
+	packet.first_valid_report = value.first_valid_report.duplicate(true)
+	packet.report_key = "%s/day-%d" % [_report_scope, value.first_valid_report.day_id]
+	if not value.available:
+		var reason: String = (
+			"TENDER_SUPPLY_UNAVAILABLE" if value.reason_codes.is_empty() else value.reason_codes[0]
+		)
+		return _ui_failure(packet, reason)
+	if (
+		not _same_observation(value.tenders, current)
+		or value.tenders.get("available") != true
+		or not value.tenders.get("tenders") is Array
+	):
+		return _ui_failure(packet, "INVALID_NEXT_BUSINESS_SUPPLY")
+	packet.tenders = value.tenders.duplicate(true)
+	return packet
+
+
+func _ui_packet(current: Dictionary) -> Dictionary:
+	return {
+		"ui_contract_revision": OPERATIONS_UI_REVISION,
+		"view_revision": revision,
+		"status": "READY",
+		"available": true,
+		"reason_codes": [],
+		"fixture_label": fixture_label,
+		"observation":
+		{
+			"data_version": current.get("data_version"),
+			"simulation_minute": current.get("simulation_minute"),
+			"day_id": current.get("day_id"),
+			"snapshot_revision": current.get("snapshot_revision"),
+			"observation_phase": current.get("observation_phase")
+		}
+	}
+
+
+func _inactive_operations(packet: Dictionary) -> Dictionary:
+	packet.available = false
+	packet.status = "UNAVAILABLE" if _operations_error.is_empty() else "FAILED"
+	packet.reason_codes = [
+		"OPERATIONS_NOT_ENABLED" if _operations_error.is_empty() else _operations_error
+	]
+	return packet
+
+
+func _ui_failure(packet: Dictionary, reason: String) -> Dictionary:
+	packet.status = "FAILED"
+	packet.available = false
+	packet.reason_codes = [reason]
+	return packet
+
+
+func _same_observation(value: Dictionary, current: Dictionary) -> bool:
+	if value.get("data_version") != "1.3" or current.get("data_version") != "1.3":
+		return false
+	for key: String in ["simulation_minute", "day_id", "snapshot_revision"]:
+		if not value.get(key) is int or value[key] < 0 or value[key] != current.get(key):
+			return false
+	return (
+		value.day_id == value.simulation_minute / 1440 + 1
+		and current.get("observation_phase") == "T_COMPLETE"
+		and value.get("observation_phase") == "T_COMPLETE"
+	)
+
+
+func _valid_operations(value: Variant, current: Dictionary) -> bool:
+	if not value is Dictionary:
+		return false
+	if (
+		not _same_observation(value, current)
+		or value.get("ui_contract_revision") != "DEV022-W06-UI-1"
+		or not value.get("available") is bool
+		or not value.get("service_ready") is bool
+		or not _string_codes(value.get("reason_codes"))
+		or not value.get("in_transit") is int
+		or value.in_transit < 0
+	):
+		return false
+	for key: String in ["source", "carry", "boarding", "daily", "first_valid_report"]:
+		if not value.get(key) is Dictionary:
+			return false
+	for key: String in ["od_pairs", "cohorts", "satisfaction"]:
+		if not value.get(key) is Array:
+			return false
+	return (
+		_valid_operation_summary(value.daily, current.day_id)
+		and _valid_fraction(value.satisfaction)
+		and _valid_cohorts(value.cohorts)
+		and value.boarding.get("boarding_allowed") is bool
+		and _string_codes(value.boarding.get("reason_codes"))
+	)
+
+
+func _valid_operation_summary(value: Variant, day: int) -> bool:
+	if not value is Dictionary or value.get("day_id") != day:
+		return false
+	for key: String in [
+		"requested",
+		"boarded",
+		"unboarded",
+		"completed",
+		"late_completed",
+		"service_minutes",
+		"opening_in_transit",
+		"closing_in_transit"
+	]:
+		if not value.get(key) is int or value[key] < 0:
+			return false
+	return (
+		value.get("satisfaction_available") is bool
+		and _valid_fraction(value.get("satisfaction_before"))
+		and _valid_fraction(value.get("satisfaction_after"))
+		and _string_codes(value.get("reason_codes"))
+	)
+
+
+func _valid_fraction(value: Variant) -> bool:
+	if not value is Array:
+		return false
+	return (
+		value.is_empty()
+		or (
+			value.size() == 2
+			and value[0] is int
+			and value[1] is int
+			and value[0] >= 0
+			and value[1] > 0
+		)
+	)
+
+
+func _valid_cohorts(rows: Array) -> bool:
+	for row: Variant in rows:
+		if not row is Dictionary or not row.get("od_id") is String or row.od_id.is_empty():
+			return false
+		for key: String in ["boarded_at", "expected_at", "count"]:
+			if not row.get(key) is int or row[key] < 0:
+				return false
+		if row.count == 0 or row.expected_at <= row.boarded_at:
+			return false
+	return true
+
+
+func _valid_report_totals(value: Dictionary, day: int) -> bool:
+	if value.get("day_id") != day:
+		return false
+	for key: String in [
+		"operating_cost",
+		"payment",
+		"debt_payment",
+		"fare",
+		"government",
+		"construction_cost",
+		"construction_payment"
+	]:
+		if not value.get(key) is int or value[key] < 0:
+			return false
+	return not value.has("operations") or _valid_operation_summary(value.operations, day)
+
+
+func _valid_funds(value: Variant) -> bool:
+	if not value is Dictionary:
+		return false
+	for key: String in ["cash", "restricted", "free_cash", "reserved", "available_cash", "unpaid"]:
+		if not value.get(key) is int or value[key] < 0:
+			return false
+	for key: String in ["restricted_by_project", "reserved_by_project"]:
+		if not value.get(key) is Dictionary:
+			return false
+		for id: Variant in value[key]:
+			if not id is String or not value[key][id] is int or value[key][id] < 0:
+				return false
+	return true
+
+
+func _valid_first_report(value: Dictionary, current_day: int) -> bool:
+	for key: String in ["day_id", "service_minutes", "completed", "fare"]:
+		if not value.get(key) is int or value[key] < 1:
+			return false
+	if value.day_id >= current_day:
+		return false
+	var report := pipeline.reports.report(value.day_id)
+	var operations: Variant = report.get("operations")
+	return (
+		operations is Dictionary
+		and report.get("day_id") == value.day_id
+		and report.get("fare") == value.fare
+		and operations.get("day_id") == value.day_id
+		and operations.get("service_minutes") == value.service_minutes
+		and operations.get("completed") == value.completed
+		and value.fare % 100 == 0
+		and value.fare / 100 == value.completed
+	)
+
+
+func _string_codes(value: Variant) -> bool:
+	if not value is Array:
+		return false
+	for code: Variant in value:
+		if not code is String or code.is_empty():
+			return false
+	return true
 
 
 ## 고정 경쟁자 재무점수의 단위를 기존 점수 API 입력에 맞춘다. 회사 현금/원장은 사용하지 않는다.
