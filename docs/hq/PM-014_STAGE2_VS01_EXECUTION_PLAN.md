@@ -7,6 +7,8 @@
 **기준 main:** `626a870d80fb4b68af8fbadb7db876ffacc95120`
 **대상:** Planning, Design, Development, Infrastructure, Convention Team, HQ, Owner
 
+**후속 검수 운영:** [PM-015 GUI 검수·증거 재사용 지침](GUI_REVIEW_PROTOCOL.md). 승인/병합 상태를 확인해 적용하며, 아래 S2 필수 기준과 개별 실행 권한은 유지한다.
+
 > Owner가 승인한 Stage 2 공통 실행 기준이다. 이 HQ 문서 PR의 병합은 별도 승인 대기이며 Stage 2의 구현·인수·DONE을 뜻하지 않는다. 개별 부서 제작/Git 권한은 각 티켓의 유효한 승인 범위에 따른다.
 
 ## 0. 승인 기록과 적용 범위
