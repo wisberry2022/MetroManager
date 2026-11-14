@@ -8,7 +8,7 @@
   "approval_decision_ref": "OWNER_DIRECT_INF_2026-11-02_INITIAL_REGISTRY_APPROVAL",
   "approval_decision_date": "2026-11-02",
   "status_semantics": "Owner approved all eight initial Agent-ID assignments including independent DESKTOP Project Leader. ACTIVE is an owner-approved lifecycle state, not a verified technical session identity. Provenance enforcement is not enabled until separately approved.",
-  "activation_time_policy": "Existing legacy agents have activated_at=null, with historical dates in role_observed_on. On every future successor activation record the actual Owner-approved effective timestamp as offset-aware ISO 8601 after INF acceptance and PM switch confirmation; never infer it from commit or workflow run time.",
+  "activation_time_policy": "Preserve legacy activated_at=null and historical dates in role_observed_on. Under INF-009, ordinary succession uses the initial Owner transfer directive and successor acknowledgement without mandatory INF acceptance, PM confirmation or repeated Owner approval. Record the actual Owner-approved start and end timestamps as offset-aware ISO 8601, separately from acknowledgement, recording and merge times; never infer them from commits or workflow runs. Operational transfer may precede the registry main update; track unrecorded ID assignments and follow docs/infra/agents/REGISTRY_TRANSITION_RULES.md. Git actions require valid explicit authority and existing CI; trusted-base identity authentication is not implied.",
   "agents": [
     {
       "agent_id": "AGT-PM-0001",

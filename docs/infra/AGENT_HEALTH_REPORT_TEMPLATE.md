@@ -1,5 +1,7 @@
 # Agent Health Self-Report — Template
 
+> INF-009: 요청된 건강 진단에만 사용하는 선택 양식이다. [통상 인계](AGENT_HANDOFF_TEMPLATE.md)의 필수 제출물·업무 개시 조건이 아니다. 생략한 평가는 NOT_ASSESSED로 남긴다.
+
 - 보고 ID: `ACHC-YYYYMMDD-ROLE-SESSION`
 - 대상 부서 / 세션 종류(해당하면 LAPTOP/DESKTOP/Codex 스레드): 
 - 작성 시각·시간대: 
