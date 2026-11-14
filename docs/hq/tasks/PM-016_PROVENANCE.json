@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "task_id": "PM-016",
+  "primary_agent_id": "AGT-PM-0002",
+  "base_sha": "9e6154e926d44cdbbb2fb117fb7d3fc56d152eac",
+  "artifacts": [
+    {
+      "path": "docs/hq/STAGE2_ACCEPTANCE_MATRIX.md",
+      "change_type": "add",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "AGT-PM-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-016_STAGE2_ACCEPTANCE_UPDATE.md#요청과-작업-범위",
+        "https://github.com/wisberry2022/MetroManager/issues/75#issuecomment-6876401724",
+        "https://github.com/wisberry2022/MetroManager/issues/77#issuecomment-6873738131"
+      ],
+      "blob_sha": "1dbb0d1dfd93655ba74c3484f068477534e9b164"
+    },
+    {
+      "path": "docs/hq/README.md",
+      "change_type": "modify",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "UNKNOWN",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-016_STAGE2_ACCEPTANCE_UPDATE.md#요청과-작업-범위",
+        "https://github.com/wisberry2022/MetroManager/issues/75#issuecomment-6876401724",
+        "https://github.com/wisberry2022/MetroManager/issues/77#issuecomment-6873738131"
+      ],
+      "blob_sha": "b0ea2486f678ec114b3c6e120d8028bffd56963f",
+      "old_blob_sha": "eda8ddcc11a63ec717edf295e72566838ee909ec"
+    },
+    {
+      "path": "docs/hq/PM-014_STAGE2_VS01_EXECUTION_PLAN.md",
+      "change_type": "modify",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "UNKNOWN",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-016_STAGE2_ACCEPTANCE_UPDATE.md#요청과-작업-범위",
+        "https://github.com/wisberry2022/MetroManager/issues/75#issuecomment-6876401724",
+        "https://github.com/wisberry2022/MetroManager/issues/77#issuecomment-6873738131"
+      ],
+      "blob_sha": "dd91c9a1c67a54da4ed10657ff44d8795480e384",
+      "old_blob_sha": "0b52a54bdfb8601eeaf340ff7f107a2afa3dd9bc"
+    },
+    {
+      "path": "docs/hq/tasks/PM-016_STAGE2_ACCEPTANCE_UPDATE.md",
+      "change_type": "add",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "AGT-PM-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-016_STAGE2_ACCEPTANCE_UPDATE.md#요청과-작업-범위",
+        "https://github.com/wisberry2022/MetroManager/issues/75#issuecomment-6876401724",
+        "https://github.com/wisberry2022/MetroManager/issues/77#issuecomment-6873738131"
+      ],
+      "blob_sha": "6325d2b4ee29e2f63c06d5b73abd9aed49ca4570"
+    },
+    {
+      "path": "docs/hq/tasks/PM-016_RESULT.md",
+      "change_type": "add",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "AGT-PM-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-016_STAGE2_ACCEPTANCE_UPDATE.md#요청과-작업-범위",
+        "https://github.com/wisberry2022/MetroManager/issues/75#issuecomment-6876401724",
+        "https://github.com/wisberry2022/MetroManager/issues/77#issuecomment-6873738131"
+      ],
+      "blob_sha": "bfcbce097e75183b07f8e2b10057f2a25a3aac2d"
+    }
+  ],
+  "notes": "REPORT_ONLY declaration, not identity or approval authentication. Historical authorship and approval records remain in Git. Cited Design and DEV evidence does not imply coauthorship of this commit."
+}
