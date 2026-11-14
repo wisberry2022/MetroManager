@@ -190,25 +190,26 @@
       "agent_id": "AGT-DEV-0001",
       "department": "DEV",
       "generation": 1,
-      "status": "ACTIVE",
+      "status": "RETIRED",
       "role": "Development Project Leader / LAPTOP (Project Leader B)",
       "session_scope": "DEVELOPMENT-PROJECT-LEADER-LAPTOP-INCLUDING-B",
       "session_kind": "CODEX",
       "predecessor_agent_id": null,
       "activated_at": null,
-      "retired_at": null,
+      "retired_at": "2026-11-14T17:37:00+09:00",
       "role_observed_on": "2026-11-01",
-      "role_retirement_observed_on": null,
+      "role_retirement_observed_on": "2026-11-14",
       "owner_approval_ref": "docs/engineering/collaboration/environments/LAPTOP.md",
       "agent_id_activation_approval_ref": "OWNER_DIRECT_INF_2026-11-02_INITIAL_REGISTRY_APPROVAL",
       "handoff_ref": null,
       "role_evidence_refs": [
         "docs/engineering/collaboration/environments/LAPTOP.md",
         "docs/engineering/tasks/DEV-011_W02_CLOCK_LEDGER.md",
-        "docs/engineering/tasks/DEV-012_W03_ROUTE_PREDICTION.md"
+        "docs/engineering/tasks/DEV-012_W03_ROUTE_PREDICTION.md",
+        "docs/infra/tasks/INF-010_DEVELOPMENT_SUCCESSION.md#owner-transfer"
       ],
-      "record_version": 1,
-      "notes": "Owner confirmed Project Leader B and LAPTOP Project Leader are the same session; separate from DESKTOP and Convention Team."
+      "record_version": 2,
+      "notes": "Owner confirmed Project Leader B and LAPTOP Project Leader are the same session; separate from DESKTOP and Convention Team. Owner-directed succession to AGT-DEV-0004 is effective 2026-11-14T17:37:00+09:00; INF-010 records the already effective transition under INF-009. Historical activated_at=null, identity fields, authorship and earlier approval references are preserved."
     },
     {
       "agent_id": "AGT-DEV-0002",
@@ -337,6 +338,32 @@
       ],
       "record_version": 1,
       "notes": "Owner-appointed second-generation INF successor after Owner-designated HQ independent acceptance and PM switch confirmation. Both effective timestamps are explicitly 2026-11-14T07:47:00+09:00. Actual INF-008 submission author is AGT-PM-0002 under the Owner's case-specific direction, not either INF agent. session_kind is UNCONFIRMED because lifecycle approval does not authenticate session technology. ACTIVE does not confer inherited ticket-specific Git privileges."
+    },
+    {
+      "agent_id": "AGT-DEV-0004",
+      "department": "DEV",
+      "generation": 2,
+      "status": "ACTIVE",
+      "role": "Development Project Leader / LAPTOP / second-generation successor",
+      "session_scope": "DEVELOPMENT-PROJECT-LEADER-LAPTOP-INCLUDING-B",
+      "session_kind": "UNCONFIRMED",
+      "predecessor_agent_id": "AGT-DEV-0001",
+      "activated_at": "2026-11-14T17:37:00+09:00",
+      "retired_at": null,
+      "role_observed_on": "2026-11-14",
+      "role_retirement_observed_on": null,
+      "owner_approval_ref": "docs/infra/tasks/INF-010_DEVELOPMENT_SUCCESSION.md#owner-transfer",
+      "agent_id_activation_approval_ref": "docs/infra/tasks/INF-010_DEVELOPMENT_SUCCESSION.md#owner-transfer",
+      "handoff_ref": "docs/infra/tasks/INF-010_DEVELOPMENT_SUCCESSION.md#handoff-record",
+      "role_evidence_refs": [
+        "docs/infra/tasks/INF-010_DEVELOPMENT_SUCCESSION.md#owner-transfer",
+        "docs/infra/tasks/INF-010_DEVELOPMENT_SUCCESSION.md#handoff-record",
+        "docs/engineering/evidence/DEV-019_W04A_PARTIAL_QA_HANDOFF.md",
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md",
+        "docs/engineering/tasks/DEV-026_S01_EXCEPTION_SCOPE.md"
+      ],
+      "record_version": 1,
+      "notes": "Owner-appointed LAPTOP Project Leader successor under INF-009. Handoff HOF-20261114-DEV-AGT-DEV-0001-AGT-DEV-0004 records transfer effective 2026-11-14T17:37:00+09:00 and successor acknowledgement 2026-11-14T17:38:10+09:00; acknowledgement, recording and merge times are distinct. Same LAPTOP role scope; Convention and DESKTOP remain independent. session_kind is UNCONFIRMED because no explicit successor session-kind declaration was verified. Routine ACHC/T1-T10 were not required and are not certified here. ACTIVE is lifecycle status, not identity authentication or a blanket grant of ticket-specific Git authority."
     }
   ],
   "unresolved_identity_checks": [
