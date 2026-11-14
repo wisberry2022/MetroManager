@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "task_id": "PM-015",
+  "primary_agent_id": "AGT-PM-0002",
+  "base_sha": "49590f3f1b870fac2af7c77bb4cf179933699b8d",
+  "artifacts": [
+    {
+      "path": "docs/hq/GUI_REVIEW_PROTOCOL.md",
+      "change_type": "add",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "AGT-PM-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-015_GUI_REVIEW_PROTOCOL.md#owner-요청과-승인-범위",
+        "https://github.com/wisberry2022/MetroManager/issues/77#issuecomment-6873738131",
+        "https://github.com/wisberry2022/MetroManager/issues/75#issuecomment-6718807286"
+      ],
+      "blob_sha": "bb0c2c539eb4af61bc0ae3b5f7eac50c739bce61"
+    },
+    {
+      "path": "docs/hq/README.md",
+      "change_type": "modify",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "UNKNOWN",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-015_GUI_REVIEW_PROTOCOL.md#owner-요청과-승인-범위",
+        "https://github.com/wisberry2022/MetroManager/issues/77#issuecomment-6873738131",
+        "https://github.com/wisberry2022/MetroManager/issues/75#issuecomment-6718807286"
+      ],
+      "blob_sha": "eda8ddcc11a63ec717edf295e72566838ee909ec",
+      "old_blob_sha": "b172f81feed8737130726f675575003ffb81b42d"
+    },
+    {
+      "path": "docs/hq/PM-014_STAGE2_VS01_EXECUTION_PLAN.md",
+      "change_type": "modify",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "UNKNOWN",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-015_GUI_REVIEW_PROTOCOL.md#owner-요청과-승인-범위",
+        "https://github.com/wisberry2022/MetroManager/issues/77#issuecomment-6873738131",
+        "https://github.com/wisberry2022/MetroManager/issues/75#issuecomment-6718807286"
+      ],
+      "blob_sha": "0b52a54bdfb8601eeaf340ff7f107a2afa3dd9bc",
+      "old_blob_sha": "7a48171d379f14d58d92074507f9a65108d360d5"
+    },
+    {
+      "path": "docs/hq/tasks/PM-015_GUI_REVIEW_PROTOCOL.md",
+      "change_type": "add",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "AGT-PM-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-015_GUI_REVIEW_PROTOCOL.md#owner-요청과-승인-범위",
+        "https://github.com/wisberry2022/MetroManager/issues/77#issuecomment-6873738131",
+        "https://github.com/wisberry2022/MetroManager/issues/75#issuecomment-6718807286"
+      ],
+      "blob_sha": "af37108e31f1447b5d392b76b2152547c1854f24"
+    },
+    {
+      "path": "docs/hq/tasks/PM-015_RESULT.md",
+      "change_type": "add",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "AGT-PM-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-015_GUI_REVIEW_PROTOCOL.md#owner-요청과-승인-범위",
+        "https://github.com/wisberry2022/MetroManager/issues/77#issuecomment-6873738131",
+        "https://github.com/wisberry2022/MetroManager/issues/75#issuecomment-6718807286"
+      ],
+      "blob_sha": "50b88d279264133e4d710a9a9823c37730ef792b"
+    }
+  ],
+  "notes": "REPORT_ONLY declaration, not identity or approval authentication. Existing authorship and approval history remain in Git; UNKNOWN does not reassign historical authorship. Design proposal is cited input, not a claim of coauthorship of this commit."
+}
