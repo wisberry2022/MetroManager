@@ -19,7 +19,10 @@ const CASES: Array[String] = [
 	"BUSY",
 	"DURATION",
 	"BEFORE_START",
-	"REASON_FALLBACK"
+	"REASON_FALLBACK",
+	"B_ZERO",
+	"B_ONLY",
+	"OUTSIDE_REASON"
 ]
 
 
@@ -36,6 +39,8 @@ static func create(case_id: String = "NORMAL", minute: int = -1) -> Session:
 		initial.cash = 799999
 	if case_id == "BUSY":
 		initial.restricted_by_project = {"OTHER": 1}
+	if case_id == "B_ONLY":
+		initial.unpaid = 100
 	if minute >= 0:
 		initial.simulation_minute = minute
 	var session := Session.new(data, initial)
@@ -63,6 +68,57 @@ static func confirmed(session: Session, id: String = "B01") -> Dictionary:
 				"snapshot_revision": packet.snapshot.snapshot_revision
 			}
 	return {}
+
+
+## 미노출 대상의 빈 confirmed를 재사용하지 않는 검증 전용 직접 요청.
+static func direct_request(session: Session, command_id: String, target: String) -> Dictionary:
+	var seen := confirmed(session, target)
+	if target == "B-X":
+		seen = {
+			"round_id": "B-X-R1",
+			"plan_revision": 0,
+			"target_revision": 0,
+			"snapshot_revision": session.snapshot().tender_ui.snapshot.snapshot_revision
+		}
+	return session.request_bid(command_id, target, seen)
+
+
+## 실제 경과 입력만 소비하고 종료분 이후 잉여 벽시간은 버린다. 분·결과를 덮어쓰지 않는다.
+static func advance_observed(session: Session, elapsed: int, stop_minute: int = -1) -> Dictionary:
+	var clock := session.pipeline.clock
+	var before := clock.minute
+	var used := maxi(0, elapsed)
+	if clock.paused:
+		used = 0
+	elif stop_minute >= 0:
+		var units := (stop_minute - clock.minute) * 5000000 - clock.remainder
+		var rate := 12 * clock.speed
+		@warning_ignore("integer_division")
+		var remaining_usec: int = (maxi(0, units) + rate - 1) / rate
+		used = mini(used, remaining_usec)
+	session.advance_usec(used)
+	var reached := stop_minute >= 0 and clock.minute >= stop_minute
+	if reached:
+		clock.paused = true
+	return {
+		"before": before,
+		"after": clock.minute,
+		"elapsed_usec": elapsed,
+		"consumed_usec": used,
+		"reached_stop": reached
+	}
+
+
+## 원장·명령·완료 단계·보고를 조회만 한다. 소비 반례는 packet()에서 별도로 공급한다.
+static func observation(session: Session) -> Dictionary:
+	return {
+		"pipeline": session.pipeline.snapshot(),
+		"clock": session.pipeline.clock.snapshot(),
+		"packet": session.snapshot().tender_ui,
+		"ledger": session.pipeline.ledger.entries(),
+		"closed_day1": session.pipeline.reports.report(1),
+		"current_day2": session.pipeline.reports.current(2)
+	}
 
 
 static func advance_to(session: Session, minute: int) -> void:
@@ -99,6 +155,11 @@ static func packet(session: Session, case_id: String) -> Dictionary:
 		"DURATION":
 			var row: Dictionary = value.snapshot.tenders[0]
 			row.eligibility = Tender.new(row.terms).eligibility("C01", false, 2881)
+			row.reason_codes = row.eligibility.reason_codes
+			row.allowed_actions.submit_bid = false
+		"OUTSIDE_REASON":
+			var row: Dictionary = value.snapshot.tenders[0]
+			row.eligibility = Tender.new(row.terms).eligibility("C02", false, 2880)
 			row.reason_codes = row.eligibility.reason_codes
 			row.allowed_actions.submit_bid = false
 	return value

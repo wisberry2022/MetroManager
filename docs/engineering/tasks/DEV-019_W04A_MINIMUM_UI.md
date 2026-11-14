@@ -140,3 +140,25 @@ Owner의 재개 원문: “디자이너 에이전트가 Issue #81에 마감 직�
 [Design 회신6717520859](https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859)을 직접 확인했다. RFC_DEV_019_02_DESIGN_COPY_LAYOUT_ACCEPTED_WITH_CONDITIONS / DEV_FIX_SCOPE_READY / DESIGN_INDEPENDENT_RETEST_REQUIRED. §12의 대기는 해소됐다. 재무점수 상·하한 제한 명시, 판정 전 미확정 안내/판정 후 제거, 미등록 사유 설명+코드 조건을 반영한다. Owner의 기존 개별 구현·Commit/Push/PR 승인과 P05 읽기 전용·main 별도 경계가 유효하다.
 
 실제 결과는 [QA 보완 결과](DEV-019_QA_FIX_RESULT.md), [자동 단언](../evidence/DEV-019_QA_FIX_ASSERTIONS.json), [실행·GUI 증거](../evidence/DEV-019_QA_FIX_VALIDATION.json)를 따른다. 독립 Design 재검수·수용/DONE은 별도다.
+
+## 14. 후임의 Q03·Q04·Q05 잔여 검증 실행
+
+2026-11-14 Owner는 현 개발 세션에 Issue #75·#81을 확인하여 W04A 잔여 QA Q03·04·05를 처리하라고 직접 지시했다. 최신 Design 공급 방식 합의와 위 지시에 따라 기존 테스트 3개·DEV-019 문서/증거 범위에서 구현·검증했다. 이 절은 이전 QA-001/002 제출·저자·승인 이력을 대체하지 않는다.
+
+- 후임 AGT-DEV-0004, predecessor AGT-DEV-0001, generation 2. 전환 효력 `2026-11-14T17:37:00+09:00`, 실제 인수 확인 `2026-11-14T17:38:10+09:00`. 업무상 ACTIVE / REGISTRY_RECORD_PENDING, 후속 등록은 Owner 직접 담당(INF-009).
+- 기준 main `3e8b74c9c3fe7b1aac3ae309da7b62b31b6ef1a6`, 독립 브랜치 `codex/DEV-019-q03-q05-qa`. 원래 main 및 다른 worktree 보존.
+- 포함: `w019_ui_fixtures.gd`, `run_tender_gui_cases.gd`, `run_tender_ui_tests.gd`; 본 티켓·RESULT·PROVENANCE·`DEV-019_W04A_PARTIAL_QA_*` 증거. 제품 모델/UI·데이터·타 부서·정책/CI 수정 없음.
+- [실제 인계·재현·환경 진단·미실행](../evidence/DEV-019_W04A_PARTIAL_QA_HANDOFF.md), [구조화 결과](../evidence/DEV-019_W04A_PARTIAL_QA_RESULTS.json). UI 460단언·관련 회귀 835단언·GUI 20개·원본 대조 441개. 개발 검증이며 Design 독립 수용은 PENDING, 전체 QA PARTIAL 유지.
+- Owner의 티켓별 유효 권한 이전은 반영하되 이 새 범위의 Commit·Push·PR까지 과거 QA-001/002 승인으로 확대하지 않는다. 로컬 산출물을 검수 가능하게 준비했으며 Git 제출은 명시 승인 대기, main 병합은 별도다. 명세 변경 필요 없음.
+
+## 15. Q03·Q04·Q05 Commit·Push·PR 명시 승인
+
+- 승인자·근거: Owner, 2026-11-14 현 개발 세션의 로컬 결과 검토 후 직접 승인. 공개 대화 URL 없음.
+- 승인 원문: “승인합니다. DEV-019 Q03·Q04·Q05 보완 내용을 codex/DEV-019-q03-q05-qa 브랜치에 Commit·Push하고 PR을 생성한 뒤 필수 CI 결과까지 확인해주세요. main 병합은 별도 승인하겠습니다.”
+- 대상: `wisberry2022/MetroManager`, DEV-019의 §14 테스트 3개·검증 문서·증거, `codex/DEV-019-q03-q05-qa` → base `main` PR.
+- 허용: 정상 훅 Commit, 일반 Push, PR 생성, 필수 `policy`·`department-policy` 결과 확인 및 이 승인 범위의 제출 대응. 이 제출·CI 확인 완료 또는 Owner 철회까지 유효하다.
+- 제외: main 직접 쓰기·병합, 강제 Push/공유 이력 재작성, 릴리스·배포, 다른 티켓·게임 명세 변경.
+- §14의 Git 승인 대기는 해소됐다. 제출 전 fetch 결과 base는 `3e8b74c9c3fe7b1aac3ae309da7b62b31b6ef1a6`로 동일하며 전용 `.venv`와 기존 정상 훅을 확인했다. 검증 완료 후 기능 변경 없이 문서의 승인 상태와 LF/출처 대응만 갱신한다. 실제 commit SHA·preflight·원격 CI는 연결 PR 본문에 기록한다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-019
