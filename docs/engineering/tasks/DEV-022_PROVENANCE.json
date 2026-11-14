@@ -1,0 +1,231 @@
+{
+  "schema_version": 1,
+  "task_id": "DEV-022",
+  "primary_agent_id": "AGT-DEV-0004",
+  "base_sha": "f13b97d4871e8c73452134fb64c06e1fc919d779",
+  "artifacts": [
+    {
+      "path": "docs/engineering/gate3/DEV-022_W06_FIXTURES.json",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-022_W06_OPERATIONS_MODEL.md",
+        "https://github.com/wisberry2022/MetroManager/issues/78",
+        "docs/hq/STAGE2_ACCEPTANCE_MATRIX.md",
+        "docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md"
+      ],
+      "blob_sha": "022f7ef32bb7b7a1046f1c5f1985b457eabebcc2"
+    },
+    {
+      "path": "docs/engineering/gate3/DEV-022_W06_SUPPLY_AND_EXECUTION_PLAN.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-022_W06_OPERATIONS_MODEL.md",
+        "https://github.com/wisberry2022/MetroManager/issues/78",
+        "docs/hq/STAGE2_ACCEPTANCE_MATRIX.md",
+        "docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md"
+      ],
+      "blob_sha": "db3e73c3f41fe5d6839b47be3ec7065cabf85eea"
+    },
+    {
+      "path": "docs/engineering/gate3/DEV-022_W06_SUPPLY_AND_VALIDATION.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-022_W06_OPERATIONS_MODEL.md",
+        "https://github.com/wisberry2022/MetroManager/issues/78",
+        "docs/hq/STAGE2_ACCEPTANCE_MATRIX.md",
+        "docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md"
+      ],
+      "blob_sha": "09cc80ef9e234bbaf525d759dba1aba64730ab27"
+    },
+    {
+      "path": "docs/engineering/gate3/DEV-022_W06_VALIDATION.json",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-022_W06_OPERATIONS_MODEL.md",
+        "https://github.com/wisberry2022/MetroManager/issues/78",
+        "docs/hq/STAGE2_ACCEPTANCE_MATRIX.md",
+        "docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md"
+      ],
+      "blob_sha": "d1fbe5abbab75fee2681d97c693f35ee02583470"
+    },
+    {
+      "path": "docs/engineering/gate3/DEV-022_W06_VALIDATION_PLAN.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-022_W06_OPERATIONS_MODEL.md",
+        "https://github.com/wisberry2022/MetroManager/issues/78",
+        "docs/hq/STAGE2_ACCEPTANCE_MATRIX.md",
+        "docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md"
+      ],
+      "blob_sha": "b2ea141d1b2f21f83465abb1557550e672c44ac0"
+    },
+    {
+      "path": "docs/engineering/tasks/DEV-022_RESULT.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-022_W06_OPERATIONS_MODEL.md",
+        "https://github.com/wisberry2022/MetroManager/issues/78",
+        "docs/hq/STAGE2_ACCEPTANCE_MATRIX.md",
+        "docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md"
+      ],
+      "blob_sha": "ee165c8d118cb8bed07bf4ff71646935fc6f1903"
+    },
+    {
+      "path": "docs/engineering/tasks/DEV-022_W06_OPERATIONS_MODEL.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-022_W06_OPERATIONS_MODEL.md",
+        "https://github.com/wisberry2022/MetroManager/issues/78",
+        "docs/hq/STAGE2_ACCEPTANCE_MATRIX.md",
+        "docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md"
+      ],
+      "blob_sha": "baee1cd97a577c4faf94eb7b158a2dfab07d37ae"
+    },
+    {
+      "path": "scripts/model/daily_ledger_report.gd",
+      "change_type": "modify",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-022_W06_OPERATIONS_MODEL.md",
+        "https://github.com/wisberry2022/MetroManager/issues/78",
+        "docs/hq/STAGE2_ACCEPTANCE_MATRIX.md",
+        "docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md"
+      ],
+      "blob_sha": "8f57b87064805cc08d3659b2c484c1e1d13febd8",
+      "old_blob_sha": "34a643e78a4c636beaa99ae9a1c42ba0cbe3f278"
+    },
+    {
+      "path": "scripts/model/operating_line.gd",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-022_W06_OPERATIONS_MODEL.md",
+        "https://github.com/wisberry2022/MetroManager/issues/78",
+        "docs/hq/STAGE2_ACCEPTANCE_MATRIX.md",
+        "docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md"
+      ],
+      "blob_sha": "4bca50db5a95c44322078a341e5205cb7b31c717"
+    },
+    {
+      "path": "scripts/model/operating_line.gd.uid",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-022_W06_OPERATIONS_MODEL.md",
+        "https://github.com/wisberry2022/MetroManager/issues/78",
+        "docs/hq/STAGE2_ACCEPTANCE_MATRIX.md",
+        "docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md"
+      ],
+      "blob_sha": "17a5e9bd21f7ce764eb3ba2d98f598b95fcda7b4"
+    },
+    {
+      "path": "scripts/simulation/minute_pipeline.gd",
+      "change_type": "modify",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-022_W06_OPERATIONS_MODEL.md",
+        "https://github.com/wisberry2022/MetroManager/issues/78",
+        "docs/hq/STAGE2_ACCEPTANCE_MATRIX.md",
+        "docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md"
+      ],
+      "blob_sha": "d20e6aed5cfd61462eba080e85028ccc6437cba3",
+      "old_blob_sha": "912c25825dbb86a2ebdc95b9b73e220f9beb8e06"
+    },
+    {
+      "path": "scripts/simulation/operations_service.gd",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-022_W06_OPERATIONS_MODEL.md",
+        "https://github.com/wisberry2022/MetroManager/issues/78",
+        "docs/hq/STAGE2_ACCEPTANCE_MATRIX.md",
+        "docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md"
+      ],
+      "blob_sha": "714070c5b25ecb6fd162b9805086ae804a0cb057"
+    },
+    {
+      "path": "scripts/simulation/operations_service.gd.uid",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-022_W06_OPERATIONS_MODEL.md",
+        "https://github.com/wisberry2022/MetroManager/issues/78",
+        "docs/hq/STAGE2_ACCEPTANCE_MATRIX.md",
+        "docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md"
+      ],
+      "blob_sha": "28b800b938c175e91784e974b388b62baca9e357"
+    },
+    {
+      "path": "tests/game/run_w06_tests.gd",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-022_W06_OPERATIONS_MODEL.md",
+        "https://github.com/wisberry2022/MetroManager/issues/78",
+        "docs/hq/STAGE2_ACCEPTANCE_MATRIX.md",
+        "docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md"
+      ],
+      "blob_sha": "58a2f6763856df9606407a5781d28dc075444cd3"
+    },
+    {
+      "path": "tests/game/run_w06_tests.gd.uid",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-022_W06_OPERATIONS_MODEL.md",
+        "https://github.com/wisberry2022/MetroManager/issues/78",
+        "docs/hq/STAGE2_ACCEPTANCE_MATRIX.md",
+        "docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md"
+      ],
+      "blob_sha": "90e9cb21cccfe53a6413b6d235c1f4d128a8f119"
+    },
+    {
+      "path": "tests/game/w06_fixtures.gd",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-022_W06_OPERATIONS_MODEL.md",
+        "https://github.com/wisberry2022/MetroManager/issues/78",
+        "docs/hq/STAGE2_ACCEPTANCE_MATRIX.md",
+        "docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md"
+      ],
+      "blob_sha": "e69235b401a5481a940d5a937502c457b41d3e54"
+    },
+    {
+      "path": "tests/game/w06_fixtures.gd.uid",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-022_W06_OPERATIONS_MODEL.md",
+        "https://github.com/wisberry2022/MetroManager/issues/78",
+        "docs/hq/STAGE2_ACCEPTANCE_MATRIX.md",
+        "docs/planning/PLN-001_GATE2_FINAL_APPROVAL.md"
+      ],
+      "blob_sha": "1440badcd6ef74872b8f7e8454652531956bbf73"
+    }
+  ]
+}
