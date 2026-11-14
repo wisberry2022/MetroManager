@@ -16,5 +16,6 @@ HQ의 신규 계획·일정·공유 보고서는 이 디렉터리에 둡니다. 
 
 ## Stage 2 통합 현황
 
-- [S2 통합 인수표·잔여 업무·DEV-022 착수 조건](STAGE2_ACCEPTANCE_MATRIX.md) — 기존 판정 원본을 연결한 HQ 현황입니다. 승인 기준은 PM-014, 실제 수용 범위는 연결된 Issue/PR을 따릅니다.
-- [PM-016 작업 범위](tasks/PM-016_STAGE2_ACCEPTANCE_UPDATE.md) / [검증 결과](tasks/PM-016_RESULT.md). 작성본의 검토·원격 반영 상태를 구별합니다.
+- [S2 통합 인수표·Q12 증거 대조·DEV-023/024 잔여 업무](STAGE2_ACCEPTANCE_MATRIX.md) — 원래 P05 인계·복귀의 대조 완료·종료 가능과 DEV-022 모델 공급·병합 완료를 반영합니다. 제품 UI·VS-01·HQ/Owner 인수는 별도 잔여입니다. 승인 기준은 PM-014, 실제 수용 범위는 연결된 Issue/PR을 따릅니다.
+- 최신 갱신: [PM-017 작업 범위](tasks/PM-017_Q12_W06_ACCEPTANCE_UPDATE.md) / [검증 결과](tasks/PM-017_RESULT.md). 작성본·PR 검토·main 반영 상태를 구별합니다.
+- 최초 작성 이력: [PM-016 작업 범위](tasks/PM-016_STAGE2_ACCEPTANCE_UPDATE.md) / [검증 결과](tasks/PM-016_RESULT.md).
