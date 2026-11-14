@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "task_id": "DEV-026",
+  "primary_agent_id": "AGT-DEV-0004",
+  "base_sha": "2baed0518e5443007c159962bfba46a8eeae5fdb",
+  "artifacts": [
+    {
+      "path": "docs/engineering/gate3/DEV-026_S01_EXCEPTION_CONTRACT.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-026_S01_EXCEPTION_SCOPE.md",
+        "https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-6874170205",
+        "docs/hq/STAGE2_ACCEPTANCE_MATRIX.md"
+      ],
+      "blob_sha": "efc58d8a66f69f8a19c8ea9aa85f54c6da5ae841"
+    },
+    {
+      "path": "docs/engineering/gate3/DEV-026_S01_EXCEPTION_VALIDATION_PLAN.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-026_S01_EXCEPTION_SCOPE.md",
+        "https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-6874170205",
+        "docs/hq/STAGE2_ACCEPTANCE_MATRIX.md"
+      ],
+      "blob_sha": "9ddc3e647f8effd9cbf75522219cd1a9bf995968"
+    },
+    {
+      "path": "docs/engineering/tasks/DEV-026_S01_EXCEPTION_SCOPE.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-026_S01_EXCEPTION_SCOPE.md",
+        "https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-6874170205",
+        "docs/hq/STAGE2_ACCEPTANCE_MATRIX.md"
+      ],
+      "blob_sha": "c6bb6ac25906a1582986c02d6c7119b699d7794c"
+    },
+    {
+      "path": "docs/engineering/tasks/DEV-026_RESULT.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-026_S01_EXCEPTION_SCOPE.md",
+        "https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-6874170205",
+        "docs/hq/STAGE2_ACCEPTANCE_MATRIX.md"
+      ],
+      "blob_sha": "bc1ebd231ce63314f821850ba35c7535ed43e636"
+    }
+  ]
+}
