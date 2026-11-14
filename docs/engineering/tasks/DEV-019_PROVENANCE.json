@@ -1,257 +1,492 @@
 {
   "schema_version": 1,
   "task_id": "DEV-019",
-  "primary_agent_id": "AGT-DEV-0001",
-  "base_sha": "06274e8557a8bbe4d8880fd02aac892c15e49f98",
+  "primary_agent_id": "AGT-DEV-0004",
+  "base_sha": "3e8b74c9c3fe7b1aac3ae309da7b62b31b6ef1a6",
   "artifacts": [
     {
-      "path": "docs/engineering/evidence/DEV-019_QAFIX_B01_BEFORE.jpg",
+      "path": "docs/engineering/evidence/DEV-019_W04A_PARTIAL_QA_HANDOFF.md",
       "change_type": "add",
-      "agent_id": "AGT-DEV-0001",
+      "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#14-후임의-q03q04q05-잔여-검증-실행",
+        "https://github.com/wisberry2022/MetroManager/issues/75#issuecomment-6718807286",
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#15-q03q04q05-commitpushpr-명시-승인"
       ],
-      "blob_sha": "08e7f3024aaa0223d1a1d903e95875fec8e2f08a"
+      "blob_sha": "b25634cd56b3ab097c471a5cb057bf2f7102110b"
     },
     {
-      "path": "docs/engineering/evidence/DEV-019_QAFIX_B02_AFTER_CRITERIA.jpg",
+      "path": "docs/engineering/evidence/DEV-019_W04A_PARTIAL_QA_Q03_B100_AFTER.png",
       "change_type": "add",
-      "agent_id": "AGT-DEV-0001",
+      "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#14-후임의-q03q04q05-잔여-검증-실행",
+        "https://github.com/wisberry2022/MetroManager/issues/75#issuecomment-6718807286",
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#15-q03q04q05-commitpushpr-명시-승인"
       ],
-      "blob_sha": "a2c8aa31aee7d713a3db4a636a62b47dc1e244b8"
+      "blob_sha": "50bdd169762962db8e32a95441d8ad8fb5e906cf"
     },
     {
-      "path": "docs/engineering/evidence/DEV-019_QAFIX_B02_BEFORE.jpg",
+      "path": "docs/engineering/evidence/DEV-019_W04A_PARTIAL_QA_Q03_B100_BEFORE.png",
       "change_type": "add",
-      "agent_id": "AGT-DEV-0001",
+      "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#14-후임의-q03q04q05-잔여-검증-실행",
+        "https://github.com/wisberry2022/MetroManager/issues/75#issuecomment-6718807286",
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#15-q03q04q05-commitpushpr-명시-승인"
       ],
-      "blob_sha": "e790ed684df12d4771c145a8c63d7bcf318f386f"
+      "blob_sha": "5b63bd4ffedd873da2f8646b969aa8b82224dad8"
     },
     {
-      "path": "docs/engineering/evidence/DEV-019_QAFIX_B02_RESULT.jpg",
+      "path": "docs/engineering/evidence/DEV-019_W04A_PARTIAL_QA_Q03_BUSY.png",
       "change_type": "add",
-      "agent_id": "AGT-DEV-0001",
+      "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#14-후임의-q03q04q05-잔여-검증-실행",
+        "https://github.com/wisberry2022/MetroManager/issues/75#issuecomment-6718807286",
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#15-q03q04q05-commitpushpr-명시-승인"
       ],
-      "blob_sha": "716b72d54dbf78be1b3292e4c2fa3ccc5548ae2d"
+      "blob_sha": "37d448a88599e08d62415ec8a05a8c7d9c3d62de"
     },
     {
-      "path": "docs/engineering/evidence/DEV-019_QAFIX_DEADLINE_BEFORE.jpg",
+      "path": "docs/engineering/evidence/DEV-019_W04A_PARTIAL_QA_Q03_BX.png",
       "change_type": "add",
-      "agent_id": "AGT-DEV-0001",
+      "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#14-후임의-q03q04q05-잔여-검증-실행",
+        "https://github.com/wisberry2022/MetroManager/issues/75#issuecomment-6718807286",
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#15-q03q04q05-commitpushpr-명시-승인"
       ],
-      "blob_sha": "1e41fbdd994c0118a1fe8ca8ae29979d4ccfa507"
+      "blob_sha": "ba025f85ff6870eb917115166e0c3842875b419f"
     },
     {
-      "path": "docs/engineering/evidence/DEV-019_QAFIX_DEADLINE_REJECTED.jpg",
+      "path": "docs/engineering/evidence/DEV-019_W04A_PARTIAL_QA_Q03_DURATION.png",
       "change_type": "add",
-      "agent_id": "AGT-DEV-0001",
+      "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#14-후임의-q03q04q05-잔여-검증-실행",
+        "https://github.com/wisberry2022/MetroManager/issues/75#issuecomment-6718807286",
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#15-q03q04q05-commitpushpr-명시-승인"
       ],
-      "blob_sha": "a0ce67c553f0a9876efb2162706e22201f29525e"
+      "blob_sha": "50bba905b50a1595ba1c789c55d7df96ca238fb6"
     },
     {
-      "path": "docs/engineering/evidence/DEV-019_QAFIX_DEFAULT_SCROLL.jpg",
+      "path": "docs/engineering/evidence/DEV-019_W04A_PARTIAL_QA_Q03_OUTSIDE.png",
       "change_type": "add",
-      "agent_id": "AGT-DEV-0001",
+      "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#14-후임의-q03q04q05-잔여-검증-실행",
+        "https://github.com/wisberry2022/MetroManager/issues/75#issuecomment-6718807286",
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#15-q03q04q05-commitpushpr-명시-승인"
       ],
-      "blob_sha": "3f17601b5675f005ff5567232ceb3dccfd574fb6"
+      "blob_sha": "720053caf5cf6c321b287270ad31be19f7059ba9"
     },
     {
-      "path": "docs/engineering/evidence/DEV-019_QAFIX_DEFAULT_WIDTH.jpg",
+      "path": "docs/engineering/evidence/DEV-019_W04A_PARTIAL_QA_Q03_SELECTION_RETURN.png",
       "change_type": "add",
-      "agent_id": "AGT-DEV-0001",
+      "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#14-후임의-q03q04q05-잔여-검증-실행",
+        "https://github.com/wisberry2022/MetroManager/issues/75#issuecomment-6718807286",
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#15-q03q04q05-commitpushpr-명시-승인"
       ],
-      "blob_sha": "dd936e983ec9c08aa040de7b73fdf0125690703a"
+      "blob_sha": "b4c70b3ca66123586540059a9bc2a7f358f0c484"
     },
     {
-      "path": "docs/engineering/evidence/DEV-019_QAFIX_P05_READONLY.jpg",
+      "path": "docs/engineering/evidence/DEV-019_W04A_PARTIAL_QA_Q04_NOT_OPEN.png",
       "change_type": "add",
-      "agent_id": "AGT-DEV-0001",
+      "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#14-후임의-q03q04q05-잔여-검증-실행",
+        "https://github.com/wisberry2022/MetroManager/issues/75#issuecomment-6718807286",
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#15-q03q04q05-commitpushpr-명시-승인"
       ],
-      "blob_sha": "0189314bc01b99588f8c293244309933a4f53c24"
+      "blob_sha": "7ed0ad3dda675c11caf67c7833eff7d8ec18c52d"
     },
     {
-      "path": "docs/engineering/evidence/DEV-019_QAFIX_PRODUCT_B01_BEFORE.jpg",
+      "path": "docs/engineering/evidence/DEV-019_W04A_PARTIAL_QA_Q04_OPEN.png",
       "change_type": "add",
-      "agent_id": "AGT-DEV-0001",
+      "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#14-후임의-q03q04q05-잔여-검증-실행",
+        "https://github.com/wisberry2022/MetroManager/issues/75#issuecomment-6718807286",
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#15-q03q04q05-commitpushpr-명시-승인"
       ],
-      "blob_sha": "f5f3d933542c325fbb4f2e3e32eeffe7af961fa2"
+      "blob_sha": "e5f9adeb9b8f4c15c044883d295a749f97c5863a"
     },
     {
-      "path": "docs/engineering/evidence/DEV-019_QAFIX_PRODUCT_B02_BEFORE.jpg",
+      "path": "docs/engineering/evidence/DEV-019_W04A_PARTIAL_QA_Q05_ACCEPTED_T1800.png",
       "change_type": "add",
-      "agent_id": "AGT-DEV-0001",
+      "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#14-후임의-q03q04q05-잔여-검증-실행",
+        "https://github.com/wisberry2022/MetroManager/issues/75#issuecomment-6718807286",
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#15-q03q04q05-commitpushpr-명시-승인"
       ],
-      "blob_sha": "4f74c4d0fb8c6f14fd0abc511b6719481e0524cb"
+      "blob_sha": "c6a7463d247594be58eb2a1bb3677d46763316c8"
     },
     {
-      "path": "docs/engineering/evidence/DEV-019_QAFIX_REASON_FALLBACK.jpg",
+      "path": "docs/engineering/evidence/DEV-019_W04A_PARTIAL_QA_Q05_REJECTED_T1800.png",
       "change_type": "add",
-      "agent_id": "AGT-DEV-0001",
+      "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#14-후임의-q03q04q05-잔여-검증-실행",
+        "https://github.com/wisberry2022/MetroManager/issues/75#issuecomment-6718807286",
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#15-q03q04q05-commitpushpr-명시-승인"
       ],
-      "blob_sha": "24af137b6d195e77cccb76b41be42bd7ef4ff8e2"
+      "blob_sha": "e1bbdc3b3cf8364da37737ad9681f5d615253227"
     },
     {
-      "path": "docs/engineering/evidence/DEV-019_QA_FIX_ASSERTIONS.json",
+      "path": "docs/engineering/evidence/DEV-019_W04A_PARTIAL_QA_RESULTS.json",
       "change_type": "add",
-      "agent_id": "AGT-DEV-0001",
+      "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#14-후임의-q03q04q05-잔여-검증-실행",
+        "https://github.com/wisberry2022/MetroManager/issues/75#issuecomment-6718807286",
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#15-q03q04q05-commitpushpr-명시-승인"
       ],
-      "blob_sha": "d5da56ff2fba25854513544df750cd06eb5c92a1"
-    },
-    {
-      "path": "docs/engineering/evidence/DEV-019_QA_FIX_VALIDATION.json",
-      "change_type": "add",
-      "agent_id": "AGT-DEV-0001",
-      "contributors": [],
-      "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
-      ],
-      "blob_sha": "a362a7bb0c2bd57f6375f05559c4e40aa228d5e5"
-    },
-    {
-      "path": "docs/engineering/evidence/DEV-019_UI_CONTRACT.md",
-      "change_type": "modify",
-      "agent_id": "AGT-DEV-0001",
-      "contributors": [],
-      "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
-      ],
-      "blob_sha": "3cf8a5d2d2506a9bfd432be258cd40138159a844",
-      "old_blob_sha": "8a06708d038462381d4d4780ff568d310dd759fe"
-    },
-    {
-      "path": "docs/engineering/tasks/DEV-019_QA_FIX_RESULT.md",
-      "change_type": "add",
-      "agent_id": "AGT-DEV-0001",
-      "contributors": [],
-      "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
-      ],
-      "blob_sha": "082070d7439e36a5aa97fe77e17a729a71dbccf3"
+      "blob_sha": "e8d524da5fc3a76cc1aa4679cbba77033489598c"
     },
     {
       "path": "docs/engineering/tasks/DEV-019_RESULT.md",
       "change_type": "modify",
-      "agent_id": "AGT-DEV-0001",
+      "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#14-후임의-q03q04q05-잔여-검증-실행",
+        "https://github.com/wisberry2022/MetroManager/issues/75#issuecomment-6718807286",
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#15-q03q04q05-commitpushpr-명시-승인"
       ],
-      "blob_sha": "8466dc61fe2fb63b361cbdde04a0f88da58eeba7",
-      "old_blob_sha": "8a644a92d254dc5b297811323d87243a5de96e10"
+      "blob_sha": "bcff2691985acef62281f5a848cce80ebebab13a",
+      "old_blob_sha": "8466dc61fe2fb63b361cbdde04a0f88da58eeba7"
     },
     {
       "path": "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md",
       "change_type": "modify",
-      "agent_id": "AGT-DEV-0001",
+      "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#14-후임의-q03q04q05-잔여-검증-실행",
+        "https://github.com/wisberry2022/MetroManager/issues/75#issuecomment-6718807286",
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#15-q03q04q05-commitpushpr-명시-승인"
       ],
-      "blob_sha": "9ca38b390c39de91cd87d327890c12feb27f6009",
-      "old_blob_sha": "5ad1ab6c41d63a0d552420235938a0aeedb20d93"
+      "blob_sha": "3f96e98da801c97f295e5ca0b722dc1205140943",
+      "old_blob_sha": "9ca38b390c39de91cd87d327890c12feb27f6009"
     },
     {
-      "path": "scripts/ui/stage1_session.gd",
+      "path": "tests/game/run_tender_gui_cases.gd",
       "change_type": "modify",
-      "agent_id": "AGT-DEV-0001",
+      "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#14-후임의-q03q04q05-잔여-검증-실행",
+        "https://github.com/wisberry2022/MetroManager/issues/75#issuecomment-6718807286",
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#15-q03q04q05-commitpushpr-명시-승인"
       ],
-      "blob_sha": "af777b326e23a3710327ed3ad8ceda28d6de2ec4",
-      "old_blob_sha": "9248811c3659e85433eb55e7a82c95417e72b53a"
-    },
-    {
-      "path": "scripts/ui/tender_view.gd",
-      "change_type": "modify",
-      "agent_id": "AGT-DEV-0001",
-      "contributors": [],
-      "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
-      ],
-      "blob_sha": "cea4496ca1f6ec4881d10748d81d8bc108bf110a",
-      "old_blob_sha": "4f051bdaf142c982bed1aaae57a3359f28ba8a86"
+      "blob_sha": "84d8bf65145db5dcc47d7317927d10b4663c13d0",
+      "old_blob_sha": "f1e38e4b62f6f48927688b47efa3c083a6c39537"
     },
     {
       "path": "tests/game/run_tender_ui_tests.gd",
       "change_type": "modify",
-      "agent_id": "AGT-DEV-0001",
+      "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#14-후임의-q03q04q05-잔여-검증-실행",
+        "https://github.com/wisberry2022/MetroManager/issues/75#issuecomment-6718807286",
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#15-q03q04q05-commitpushpr-명시-승인"
       ],
-      "blob_sha": "5b78ab3c112ce62c2fc9a9a787888b997e6e6ff0",
-      "old_blob_sha": "1feb10e599c11d1933d8f5d148df86fa9cf6ded6"
+      "blob_sha": "c70f5dee5d59cfe09086f86e39f37d50d80d7100",
+      "old_blob_sha": "5b78ab3c112ce62c2fc9a9a787888b997e6e6ff0"
     },
     {
       "path": "tests/game/w019_ui_fixtures.gd",
       "change_type": "modify",
-      "agent_id": "AGT-DEV-0001",
+      "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
-        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
-        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#14-후임의-q03q04q05-잔여-검증-실행",
+        "https://github.com/wisberry2022/MetroManager/issues/75#issuecomment-6718807286",
+        "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#15-q03q04q05-commitpushpr-명시-승인"
       ],
-      "blob_sha": "e5e0931cf7c7eba7f534d66642d41a8b2607aa32",
-      "old_blob_sha": "5abecba11c8d261b00180aed240b73254cb1929a"
+      "blob_sha": "f8f437a1aca6aba626439e95ea94c920068b3a0f",
+      "old_blob_sha": "e5e0931cf7c7eba7f534d66642d41a8b2607aa32"
     }
-  ]
+  ],
+  "previous_submission": {
+    "schema_version": 1,
+    "task_id": "DEV-019",
+    "primary_agent_id": "AGT-DEV-0001",
+    "base_sha": "06274e8557a8bbe4d8880fd02aac892c15e49f98",
+    "artifacts": [
+      {
+        "path": "docs/engineering/evidence/DEV-019_QAFIX_B01_BEFORE.jpg",
+        "change_type": "add",
+        "agent_id": "AGT-DEV-0001",
+        "contributors": [],
+        "source_refs": [
+          "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+          "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        ],
+        "blob_sha": "08e7f3024aaa0223d1a1d903e95875fec8e2f08a"
+      },
+      {
+        "path": "docs/engineering/evidence/DEV-019_QAFIX_B02_AFTER_CRITERIA.jpg",
+        "change_type": "add",
+        "agent_id": "AGT-DEV-0001",
+        "contributors": [],
+        "source_refs": [
+          "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+          "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        ],
+        "blob_sha": "a2c8aa31aee7d713a3db4a636a62b47dc1e244b8"
+      },
+      {
+        "path": "docs/engineering/evidence/DEV-019_QAFIX_B02_BEFORE.jpg",
+        "change_type": "add",
+        "agent_id": "AGT-DEV-0001",
+        "contributors": [],
+        "source_refs": [
+          "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+          "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        ],
+        "blob_sha": "e790ed684df12d4771c145a8c63d7bcf318f386f"
+      },
+      {
+        "path": "docs/engineering/evidence/DEV-019_QAFIX_B02_RESULT.jpg",
+        "change_type": "add",
+        "agent_id": "AGT-DEV-0001",
+        "contributors": [],
+        "source_refs": [
+          "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+          "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        ],
+        "blob_sha": "716b72d54dbf78be1b3292e4c2fa3ccc5548ae2d"
+      },
+      {
+        "path": "docs/engineering/evidence/DEV-019_QAFIX_DEADLINE_BEFORE.jpg",
+        "change_type": "add",
+        "agent_id": "AGT-DEV-0001",
+        "contributors": [],
+        "source_refs": [
+          "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+          "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        ],
+        "blob_sha": "1e41fbdd994c0118a1fe8ca8ae29979d4ccfa507"
+      },
+      {
+        "path": "docs/engineering/evidence/DEV-019_QAFIX_DEADLINE_REJECTED.jpg",
+        "change_type": "add",
+        "agent_id": "AGT-DEV-0001",
+        "contributors": [],
+        "source_refs": [
+          "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+          "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        ],
+        "blob_sha": "a0ce67c553f0a9876efb2162706e22201f29525e"
+      },
+      {
+        "path": "docs/engineering/evidence/DEV-019_QAFIX_DEFAULT_SCROLL.jpg",
+        "change_type": "add",
+        "agent_id": "AGT-DEV-0001",
+        "contributors": [],
+        "source_refs": [
+          "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+          "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        ],
+        "blob_sha": "3f17601b5675f005ff5567232ceb3dccfd574fb6"
+      },
+      {
+        "path": "docs/engineering/evidence/DEV-019_QAFIX_DEFAULT_WIDTH.jpg",
+        "change_type": "add",
+        "agent_id": "AGT-DEV-0001",
+        "contributors": [],
+        "source_refs": [
+          "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+          "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        ],
+        "blob_sha": "dd936e983ec9c08aa040de7b73fdf0125690703a"
+      },
+      {
+        "path": "docs/engineering/evidence/DEV-019_QAFIX_P05_READONLY.jpg",
+        "change_type": "add",
+        "agent_id": "AGT-DEV-0001",
+        "contributors": [],
+        "source_refs": [
+          "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+          "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        ],
+        "blob_sha": "0189314bc01b99588f8c293244309933a4f53c24"
+      },
+      {
+        "path": "docs/engineering/evidence/DEV-019_QAFIX_PRODUCT_B01_BEFORE.jpg",
+        "change_type": "add",
+        "agent_id": "AGT-DEV-0001",
+        "contributors": [],
+        "source_refs": [
+          "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+          "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        ],
+        "blob_sha": "f5f3d933542c325fbb4f2e3e32eeffe7af961fa2"
+      },
+      {
+        "path": "docs/engineering/evidence/DEV-019_QAFIX_PRODUCT_B02_BEFORE.jpg",
+        "change_type": "add",
+        "agent_id": "AGT-DEV-0001",
+        "contributors": [],
+        "source_refs": [
+          "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+          "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        ],
+        "blob_sha": "4f74c4d0fb8c6f14fd0abc511b6719481e0524cb"
+      },
+      {
+        "path": "docs/engineering/evidence/DEV-019_QAFIX_REASON_FALLBACK.jpg",
+        "change_type": "add",
+        "agent_id": "AGT-DEV-0001",
+        "contributors": [],
+        "source_refs": [
+          "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+          "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        ],
+        "blob_sha": "24af137b6d195e77cccb76b41be42bd7ef4ff8e2"
+      },
+      {
+        "path": "docs/engineering/evidence/DEV-019_QA_FIX_ASSERTIONS.json",
+        "change_type": "add",
+        "agent_id": "AGT-DEV-0001",
+        "contributors": [],
+        "source_refs": [
+          "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+          "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        ],
+        "blob_sha": "d5da56ff2fba25854513544df750cd06eb5c92a1"
+      },
+      {
+        "path": "docs/engineering/evidence/DEV-019_QA_FIX_VALIDATION.json",
+        "change_type": "add",
+        "agent_id": "AGT-DEV-0001",
+        "contributors": [],
+        "source_refs": [
+          "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+          "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        ],
+        "blob_sha": "a362a7bb0c2bd57f6375f05559c4e40aa228d5e5"
+      },
+      {
+        "path": "docs/engineering/evidence/DEV-019_UI_CONTRACT.md",
+        "change_type": "modify",
+        "agent_id": "AGT-DEV-0001",
+        "contributors": [],
+        "source_refs": [
+          "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+          "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        ],
+        "blob_sha": "3cf8a5d2d2506a9bfd432be258cd40138159a844",
+        "old_blob_sha": "8a06708d038462381d4d4780ff568d310dd759fe"
+      },
+      {
+        "path": "docs/engineering/tasks/DEV-019_QA_FIX_RESULT.md",
+        "change_type": "add",
+        "agent_id": "AGT-DEV-0001",
+        "contributors": [],
+        "source_refs": [
+          "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+          "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        ],
+        "blob_sha": "082070d7439e36a5aa97fe77e17a729a71dbccf3"
+      },
+      {
+        "path": "docs/engineering/tasks/DEV-019_RESULT.md",
+        "change_type": "modify",
+        "agent_id": "AGT-DEV-0001",
+        "contributors": [],
+        "source_refs": [
+          "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+          "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        ],
+        "blob_sha": "8466dc61fe2fb63b361cbdde04a0f88da58eeba7",
+        "old_blob_sha": "8a644a92d254dc5b297811323d87243a5de96e10"
+      },
+      {
+        "path": "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md",
+        "change_type": "modify",
+        "agent_id": "AGT-DEV-0001",
+        "contributors": [],
+        "source_refs": [
+          "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+          "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        ],
+        "blob_sha": "9ca38b390c39de91cd87d327890c12feb27f6009",
+        "old_blob_sha": "5ad1ab6c41d63a0d552420235938a0aeedb20d93"
+      },
+      {
+        "path": "scripts/ui/stage1_session.gd",
+        "change_type": "modify",
+        "agent_id": "AGT-DEV-0001",
+        "contributors": [],
+        "source_refs": [
+          "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+          "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        ],
+        "blob_sha": "af777b326e23a3710327ed3ad8ceda28d6de2ec4",
+        "old_blob_sha": "9248811c3659e85433eb55e7a82c95417e72b53a"
+      },
+      {
+        "path": "scripts/ui/tender_view.gd",
+        "change_type": "modify",
+        "agent_id": "AGT-DEV-0001",
+        "contributors": [],
+        "source_refs": [
+          "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+          "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        ],
+        "blob_sha": "cea4496ca1f6ec4881d10748d81d8bc108bf110a",
+        "old_blob_sha": "4f051bdaf142c982bed1aaae57a3359f28ba8a86"
+      },
+      {
+        "path": "tests/game/run_tender_ui_tests.gd",
+        "change_type": "modify",
+        "agent_id": "AGT-DEV-0001",
+        "contributors": [],
+        "source_refs": [
+          "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+          "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        ],
+        "blob_sha": "5b78ab3c112ce62c2fc9a9a787888b997e6e6ff0",
+        "old_blob_sha": "1feb10e599c11d1933d8f5d148df86fa9cf6ded6"
+      },
+      {
+        "path": "tests/game/w019_ui_fixtures.gd",
+        "change_type": "modify",
+        "agent_id": "AGT-DEV-0001",
+        "contributors": [],
+        "source_refs": [
+          "docs/engineering/tasks/DEV-019_W04A_MINIMUM_UI.md#12-qa-001qa-002-보완-승인-및-l2-협의-대기",
+          "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6717520859"
+        ],
+        "blob_sha": "e5e0931cf7c7eba7f534d66642d41a8b2607aa32",
+        "old_blob_sha": "5abecba11c8d261b00180aed240b73254cb1929a"
+      }
+    ]
+  },
+  "succession": {
+    "predecessor": "AGT-DEV-0001",
+    "effective_at": "2026-11-14T17:37:00+09:00",
+    "registry_record_status_at_base": "REGISTRY_RECORD_PENDING",
+    "registration_owner": "Owner"
+  }
 }

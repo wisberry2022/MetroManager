@@ -26,6 +26,9 @@ func _run() -> void:
 		await _test_states()
 		await _test_stale()
 		await _test_host()
+		await _test_q03_supply()
+		await _test_q04_direct()
+		_test_q05_observer()
 		_write_evidence()
 	print("DEV019_UI_TEST_RESULT checks=", _checks, " failures=", _failures)
 	quit(0 if _failures == 0 else 1)
@@ -357,6 +360,202 @@ func _test_host() -> void:
 	_expect("host_preserves_plan", session.plan.snapshot().station_ids, [])
 	host.queue_free()
 	await process_frame
+
+
+func _test_q03_supply() -> void:
+	var session := FX.create("NORMAL", 360)
+	var original := FX.observation(session)
+	var ids: Array = []
+	for row: Dictionary in original.packet.snapshot.tenders:
+		ids.append(row.terms.tender_id)
+	_expect("Q03_EXT_LIST", ids, ["B01", "B02"])
+	var panel := _panel(session)
+	_choose(panel)
+	panel.controls.back.pressed.emit()
+	panel.controls.refresh.pressed.emit()
+	_expect("Q03_list_no_effect", session.pipeline.snapshot(), original.pipeline)
+	_expect("Q03_list_no_request", session.snapshot().tender_ui.requests, [])
+	var pending := FX.direct_request(session, "outside", "B-X")
+	_expect("Q03_EXT_REQUEST_pending", pending.pending, true)
+	_expect(
+		"Q03_EXT_REQUEST_shape", session.snapshot().tender_ui.requests[0].command.round_id, "B-X-R1"
+	)
+	FX.advance_to(session, 361)
+	var control := FX.create("NORMAL", 360)
+	FX.advance_to(control, 361)
+	_expect(
+		"Q03_EXT_REQUEST_reason", session.pipeline.bid_result("outside").reason, "UNKNOWN_TENDER"
+	)
+	_expect(
+		"Q03_EXT_REQUEST_funds_no_effect",
+		session.pipeline.ledger.snapshot(),
+		control.pipeline.ledger.snapshot()
+	)
+	_expect(
+		"Q03_EXT_REQUEST_ledger_no_effect",
+		session.pipeline.ledger.entries(),
+		control.pipeline.ledger.entries()
+	)
+	panel.queue_free()
+	await process_frame
+	for pair: Array in [
+		["BUSY", "PROJECT_IN_PROGRESS", "다른 사업 진행 중"],
+		["DURATION", "DURATION_NOT_FEASIBLE", "공기 이행 불가"],
+		["OUTSIDE_REASON", "OUTSIDE_JURISDICTION", "관할 불일치"]
+	]:
+		session = FX.create(pair[0], 360)
+		original = FX.observation(session)
+		panel = _panel(session)
+		panel.present(FX.packet(session, pair[0]))
+		_choose(panel)
+		_expect(
+			"Q03_" + pair[0] + "_reason", panel.shown.snapshot.tenders[0].reason_codes, [pair[1]]
+		)
+		_expect("Q03_" + pair[0] + "_korean", pair[2] in panel.labels.eligibility.text, true)
+		_expect("Q03_" + pair[0] + "_disabled", panel.controls.submit.disabled, true)
+		_expect("Q03_" + pair[0] + "_observation_no_effect", FX.observation(session), original)
+		_expect(
+			"Q03_" + pair[0] + "_model_eligible",
+			original.packet.snapshot.tenders[0].eligibility.eligible,
+			pair[0] != "BUSY"
+		)
+		if pair[0] == "BUSY":
+			_expect(
+				"Q03_BUSY_real_OTHER", original.pipeline.funds.restricted_by_project, {"OTHER": 1}
+			)
+		panel.queue_free()
+		await process_frame
+	for case_id: String in ["B_ZERO", "B_ONLY"]:
+		session = FX.create(case_id, 360)
+		panel = _panel(session)
+		_choose(panel)
+		var before := FX.observation(session)
+		_expect("Q03_" + case_id + "_cash", before.pipeline.funds.cash, 1000000)
+		_expect("Q03_" + case_id + "_R", before.pipeline.funds.restricted, 0)
+		_expect("Q03_" + case_id + "_K", before.pipeline.funds.reserved, 0)
+		_expect(
+			"Q03_" + case_id + "_B", before.pipeline.funds.unpaid, 100 if case_id == "B_ONLY" else 0
+		)
+		_expect("Q03_" + case_id + "_button", panel.controls.submit.disabled, false)
+		panel.controls.submit.pressed.emit()
+		var request: Dictionary = session.snapshot().tender_ui.requests[0]
+		FX.advance_to(session, 361)
+		var result := session.pipeline.bid_result(request.command.command_id)
+		_expect("Q03_" + case_id + "_accepted", result.accepted, true)
+		_expect(
+			"Q03_" + case_id + "_pre_contract_settlement_B",
+			result.admission_snapshot.funds.unpaid,
+			0
+		)
+		_expect(
+			"Q03_" + case_id + "_pre_contract_settlement_C",
+			result.admission_snapshot.funds.cash,
+			999900 if case_id == "B_ONLY" else 1000000
+		)
+		_expect("Q03_" + case_id + "_after_B", session.pipeline.ledger.snapshot().unpaid, 0)
+		panel.queue_free()
+		await process_frame
+
+
+func _test_q04_direct() -> void:
+	for minute: int in [358, 359, 360]:
+		var session := FX.create("NORMAL", minute)
+		var panel := _panel(session)
+		_choose(panel)
+		_expect(
+			"Q04_" + str(minute) + "_product_guard", panel.controls.submit.disabled, minute < 360
+		)
+		var id := "direct-" + str(minute)
+		if minute == 360:
+			panel.controls.submit.pressed.emit()
+			id = session.snapshot().tender_ui.requests[0].command.command_id
+		else:
+			FX.direct_request(session, id, "B01")
+		var paused := FX.observation(session)
+		FX.advance_observed(session, 5000000, minute + 1)
+		_expect("Q04_" + str(minute) + "_paused", FX.observation(session), paused)
+		FX.direct_request(session, id, "B01")
+		_expect("Q04_" + str(minute) + "_pending_duplicate", FX.observation(session), paused)
+		session.pipeline.clock.paused = false
+		FX.advance_observed(session, 1000000, minute + 1)
+		var result := session.pipeline.bid_result(id)
+		_expect(
+			"Q04_" + str(minute) + "_result", result.reason, "NOT_OPEN" if minute == 358 else ""
+		)
+		_expect("Q04_" + str(minute) + "_effective", result.effective_at, minute + 1)
+		_expect("Q04_" + str(minute) + "_phase", result.decision_phase, "CONTRACT")
+		var after := FX.observation(session)
+		FX.direct_request(session, id, "B01")
+		_expect("Q04_" + str(minute) + "_completed_duplicate", FX.observation(session), after)
+		_expect("Q04_" + str(minute) + "_no_payment", after.pipeline.funds.cash, 1000000)
+		panel.queue_free()
+		await process_frame
+
+
+func _test_q05_observer() -> void:
+	for minute: int in [1438, 1439, 1798, 1799]:
+		var reference: Dictionary = {}
+		for speed: int in [1, 2, 4]:
+			var label := "Q05-%d-%dx" % [minute, speed]
+			var session := FX.create("NORMAL", minute)
+			session.pipeline.clock.set_speed(speed)
+			FX.direct_request(session, "matrix", "B01")
+			var paused := FX.observation(session)
+			FX.advance_observed(session, 1000000, 1800)
+			_expect(label + "_paused_pending", FX.observation(session), paused)
+			session.pipeline.clock.paused = false
+			# 작은 시간 단위 입력의 자동 검사이며 GUI 실벽시간 증거와 구분한다.
+			while session.pipeline.clock.minute < 1800:
+				FX.advance_observed(session, 17000, 1800)
+			var final := FX.observation(session)
+			_expect(label + "_exact_stop", final.pipeline.simulation_minute, 1800)
+			_expect(label + "_complete", final.pipeline.observation_phase, "T_COMPLETE")
+			_expect(label + "_all_phases", final.pipeline.trace[-1].phase, "BOARDING")
+			_expect(label + "_paused_at_stop", final.clock.paused, true)
+			_expect(
+				label + "_reason",
+				session.pipeline.bid_result("matrix").reason,
+				"ROUND_CLOSED" if minute == 1799 else ""
+			)
+			_expect(
+				label + "_effective", session.pipeline.bid_result("matrix").effective_at, minute + 1
+			)
+			_expect(
+				label + "_cash", final.pipeline.funds.cash, 1000000 if minute == 1799 else 1800000
+			)
+			_expect(label + "_R", final.pipeline.funds.restricted, 0 if minute == 1799 else 800000)
+			var economic := {
+				"pipeline": final.pipeline,
+				"ledger": final.ledger,
+				"closed_day1": final.closed_day1,
+				"current_day2": final.current_day2,
+				"requests": final.packet.requests
+			}
+			if reference.is_empty():
+				reference = economic
+			_expect(label + "_speed_equality", economic, reference)
+			FX.advance_observed(session, 90000000, 1800)
+			_expect(label + "_post_stop_immutable", FX.observation(session), final)
+			var control := FX.create("NORMAL", minute)
+			control.pipeline.clock.set_speed(speed)
+			FX.direct_request(control, "matrix", "B01")
+			FX.advance_to(control, 1800)
+			_expect(
+				label + "_observer_no_extra_economy",
+				session.pipeline.snapshot(),
+				control.pipeline.snapshot()
+			)
+			_expect(
+				label + "_observer_no_extra_ledger", final.ledger, control.pipeline.ledger.entries()
+			)
+	var cap := FX.create("NORMAL", 1799)
+	cap.pipeline.clock.set_speed(4)
+	cap.pipeline.clock.paused = false
+	FX.advance_observed(cap, 13000, 1800)
+	_expect("Q05_nonzero_remainder", cap.pipeline.clock.remainder > 0, true)
+	FX.advance_observed(cap, 90000000, 1800)
+	_expect("Q05_oversized_frame_clamped", cap.pipeline.clock.minute, 1800)
+	_expect("Q05_clamp_completed", cap.pipeline.snapshot().trace[-1].effective_at, 1800)
 
 
 func _expect(label: String, actual: Variant, expected: Variant) -> void:

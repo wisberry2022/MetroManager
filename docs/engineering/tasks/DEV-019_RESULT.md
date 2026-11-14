@@ -48,3 +48,22 @@ fetch·정상훅Commit·preflight·일반Push·PR 두 필수CI는 실제 제출�
 ## 독립 QA 후속 보완
 
 PR84 main 반영 후 Owner 제공 DSG-010 독립 QA는 PASS7/FAIL1/PARTIAL4, QA001 사전 평가정보 누락으로 재검수 필요를 권고했다. 기존 개발검증 PASS를 Design 수용으로 간주하지 않는다. Owner가 별도 승인한 QA001·002 보완은 [보완 결과](DEV-019_QA_FIX_RESULT.md)를 따른다. 최초 제출 결과와 후속 수정·재실행을 구분한다.
+
+## 2026-11-14 — 후임 Q03·Q04·Q05 잔여 검증 결과
+
+AGT-DEV-0004가 Owner의 현 세션 지시와 [티켓 §14](DEV-019_W04A_MINIMUM_UI.md#14-후임의-q03q04q05-잔여-검증-실행)에 따라 별도 worktree에서 보완했다. 기준 main `3e8b74c9c3fe7b1aac3ae309da7b62b31b6ef1a6`, 브랜치 `codex/DEV-019-q03-q05-qa`; 미커밋 로컬 결과다. 위 최초 구현·QA-001/002 이력의 작성자와 판단을 변경하지 않는다.
+
+테스트 3개에 실제 Session 직접 요청·초기 상태·실시간 종료 관측·원장/PNG/소스 해시 추출과 자동 단언을 추가했다. 제품 코드는 변경하지 않았다. [잔여 QA 인계](../evidence/DEV-019_W04A_PARTIAL_QA_HANDOFF.md)와 [실행 결과](../evidence/DEV-019_W04A_PARTIAL_QA_RESULTS.json)에 변경 파일·명령·요청/효력·이벤트/원장·환경 진단·NOT_RUN을 기록했다.
+
+UI 자동 460단언, 관련 회귀 835단언, GUI 20개 실행(exit 0), 원본 대조 441개가 통과했다. Q03 B-X 실제 거절은 UNKNOWN_TENDER이고 관할 불일치 표시는 별도 소비 반례다. B=0/100 모두 접수되며 B100 정산으로 C/B가 달라지는 접수 사본을 보존했다. Q04 358→359 거절/359→360 접수/360→361 제품 접수, Q05 네 경계 × 1/2/4배속에서 실제 시간 진행·T1800 완료를 확인했다.
+
+긴 임시 사용자 경로의 셰이더 캐시 생성 진단은 GUI 실행마다 6건 있었고 스크립트 오류는 없었다. 짧은 사용자 경로의 동일 제품 그래픽 로드에서는 오류가 없었다. 이 환경 진단을 원본과 보고에 보존한다. 최종 정책/도구 검사 수치는 JSON validation을 따른다.
+
+개발 기능 검증 PASS / 환경 진단 포함 / Design 독립 재검수 PENDING / 전체 QA PARTIAL. Q12 accepted28과 기존 수용 결과 보존, 명세 변경 필요 없음. 빌드·export·VS01·독립 QA·Commit/Push/PR/원격 CI/preflight는 NOT_RUN. 이 새 범위 Git 제출은 별도 명시 승인 후 수행하며 Owner 수용·DONE·main 병합은 별도다.
+
+### Git 제출 승인 반영
+
+위 NOT_RUN은 로컬 검증 완료 시점의 기록이다. 이후 Owner가 [티켓 §15](DEV-019_W04A_MINIMUM_UI.md#15-q03q04q05-commitpushpr-명시-승인)에서 이 브랜치 Commit·Push·PR·필수 CI 확인을 명시 승인하여 제출 대기가 해소됐다. 같은 base와 기능을 유지하고 실행 원본 대비 LF 정규화 대응을 확인했다. 실제 제출 SHA·preflight와 `policy`/`department-policy`의 완료 결과는 연결 PR 본문에 기록한다. AGT-DEV-0004의 REGISTRY_RECORD_PENDING 및 REPORT_ONLY 한계를 명시하며 main 병합은 별도 승인 전 수행하지 않는다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-019
