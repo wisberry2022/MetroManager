@@ -6,6 +6,8 @@
 - 브랜치: codex/INF-009-lightweight-succession / base: main
 - [검증·결과](INF-009_RESULT.md)
 
+> §1~5는 PR #115의 최초 제출 기록이다. 해당 PR은 main 1f331a232865967a391d535ec9756be9584ecbc0에 병합됐다. 후속 등록 담당에 관한 최신 보완 지시·범위는 §6을 따른다.
+
 ## 1. 문제·제안과 Owner 결정
 
 에이전트 수 증가에 따라 예방적 컨텍스트 교체마다 자기보고·독립 채점·T1~T10·INF 판정·HQ 확인·Owner 재승인을 반복하는 부담을 줄인다. Owner가 인계서 작성을 지시하고 후임에게 전달한 뒤, 전환 정보와 권한이 명확하면 즉시 업무를 시작하도록 변경한다.
@@ -61,3 +63,18 @@ activation_time_policy는 필수 INF acceptance/PM confirmation을 명시한 현
 Convention 후속 검토는 미반영 ID 예약·새 승인 근거·기존 review_sequence/requires와 도구 계약의 정합성이다. 해당 기술 수정·실운영시험은 본 PR에 포함되지 않는다. DEV-017 정상/부정·stale base·API 오류·부분 생성 복구, provenance ENFORCE, 일반 append-only schema, R-INF-01 역사 메타데이터 정리 및 F-12 QA 원본·접근권한·백업 복구 의무는 유지한다.
 
 새 인사 전환 실증·workflow_dispatch·게임 자동검사·Godot 로드·실GUI·빌드/성능은 NOT_RUN이다. 게임 명세 변경은 없으며 운영 명세만 개정한다.
+
+## 6. Owner 직접 후속 등록 보완
+
+- 기준 main: 1f331a232865967a391d535ec9756be9584ecbc0 / 2026-11-14 Asia/Seoul.
+- 브랜치: codex/INF-009-owner-registration / base: main.
+- 상태: OWNER_DIRECTION_CONFIRMED / OWNER_PR_SUBMISSION_AUTHORIZED / MAIN_MERGE_PENDING.
+- [후속 결과](INF-009_OWNER_REGISTRATION_RESULT.md). 최초 PR #115의 승인·검증 기록과 INF-009_RESULT.md는 보존한다.
+
+Owner는 현재 진행 중인 개발 에이전트 인계에서 Agent-ID·업무 전환 시각 등 후속 등록을 직접 수행하겠다고 지시했다. 이어 원격 INF-009에 필요한 수정이 있으면 수정 후 PR을 제출하도록 허용했다. 본 작업은 앞선 INF-009 Commit·Push·PR 승인과 이 후속 지시에 따른 동일 범위 보완이다. 원문은 현재 Owner–INF 대화이며 공개 URL은 제공되지 않았다.
+
+Owner가 직접 등록하거나 지정·승인한 담당자에게 맡길 수 있음을 정책·양식·가이드·전환 규정에 맞춘다. Owner 직접 수행 시 INF의 추가 수행·승인·검수는 필수가 아니고 INF는 중복 등록하지 않으며 요청 시 지원한다. 이번 개발 인계의 담당 지정은 다른 모든 인계의 자동 담당 변경이 아니다.
+
+포함 파일은 README.md, AGENT_HEALTH_POLICY.md, AGENT_HANDOFF_TEMPLATE.md, AGENT_REGISTRY_TEMPLATE.md, PLANNING_SUCCESSION_RUNBOOK.md, agents/REGISTRY_TRANSITION_RULES.md, 본 티켓 및 INF-009_OWNER_REGISTRATION_RESULT.md의 INF Markdown 8개다. 동일 범위 문서 작성·검증·Commit·작업 브랜치 게시·PR·검수 보완까지 수행하며 main 병합은 별도 승인 전 진행하지 않는다.
+
+registry.json·개별 Agent-ID/세대/상태/효력 시각·과거 결과·CI/도구·타 부서 파일은 변경하지 않는다. 개발 인계의 구체 ID·효력 시각·완료 사실을 이 지시만으로 추정하거나 등록 완료로 보고하지 않는다. 기존 ID 중복 방지·시각 구분·권한·Git/필수 CI·공개정보 제한·NOT_RUN 규칙은 유지한다.

@@ -1,7 +1,7 @@
 # Agent Registry — 전환 기록 양식
 
-- ID: INF-REG-TEMPLATE / v1.1 / 2026-11-14 / TEMPLATE_ONLY / 개정 INF-009
-- 소유: INF / 최초 임명·효력·권한 이전: Owner / 담당·의존성 갱신: HQ
+- ID: INF-REG-TEMPLATE / v1.2 / 2026-11-14 / TEMPLATE_ONLY / 개정 INF-009
+- 양식 소유: INF / 최초 임명·효력·권한 이전: Owner / 후속 등록 실행: Owner 또는 지정·승인한 담당자 / 담당·의존성 갱신: HQ
 - [전환 규정](agents/REGISTRY_TRANSITION_RULES.md)이 정본이다. 이 빈 양식은 실제 ID 발급·schema 변경·시험 합격을 뜻하지 않는다.
 - 실제 내용은 Owner 제한 보관이 기본이며 공개 Git에는 필요한 운영 사실만 남긴다.
 
@@ -19,7 +19,7 @@
 | 업무상 기존/후임 상태 | RETIRED / ACTIVE 등 실제 결정 |
 | 별도 건강 진단 | NOT_ASSESSED 또는 실제 근거 |
 | 선택적 수용시험 | NOT_RUN(정책상 생략) 또는 실제 요청·결과 |
-| 후속 등록 책임자·티켓/추적 참조 | |
+| 후속 등록 책임자·티켓/추적 참조 | Owner 직접 수행 / Owner 지정 담당자와 위임 근거 |
 
 ## 후속 등록과 감사 기록
 
@@ -28,6 +28,7 @@
 | REGISTRY_RECORD_PENDING / REGISTRY_RECORDED | | | |
 
 - 통상 전환은 최초 Owner 지시와 후임 확인으로 진행한다. INF 판정·PM 확인·Owner 재승인은 별도 필수 단계가 아니다.
+- Owner 직접 등록은 INF의 추가 수행·승인·검수 없이 진행한다. INF는 중복 등록하지 않고 요청 시 지원한다. 기존 Git 제출·필수 CI·병합 규칙은 유지한다.
 - 업무상 ACTIVE와 main 등록 반영 여부를 구분한다. 건강 상태 NORMAL/WATCH 등은 lifecycle ACTIVE/PENDING/RETIRED와 별도다. 위 기록 상태를 registry.json enum으로 추가하지 않는다.
 - ID는 재사용하지 않고 과거 작성 이력을 보존한다. 번호·generation·계보를 분리한다.
 - activated_at/retired_at은 결정된 효력 시각이고 recorded_at에 해당하는 기록 시각·PR 병합 시각과 다르다. 기존 레거시 null을 추정값으로 채우지 않는다.
