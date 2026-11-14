@@ -1,13 +1,13 @@
 # MetroManager AI Infrastructure — 문서 진입점
 
-- 관리 작업: INF-001, INF-009 / 문서 버전 v1.1 / 개정 2026-11-14
-- 상태: OWNER_POLICY_APPROVED / PR_REVIEW / MAIN_MERGE_PENDING. [INF-009 결정·범위](tasks/INF-009_LIGHTWEIGHT_SUCCESSION.md)에 따라 통상 인계를 간소화한다. 공통 원격 기준은 별도 Owner 병합 승인·main 반영 후 적용한다.
+- 관리 작업: INF-001, INF-009 / 문서 버전 v1.2 / 개정 2026-11-14
+- 상태: 기본 간소화는 PR #115로 main 반영. Owner 직접 등록 보완은 OWNER_DIRECTION_CONFIRMED / PR_REVIEW / MAIN_MERGE_PENDING. [INF-009 결정·범위 §6](tasks/INF-009_LIGHTWEIGHT_SUCCESSION.md#6-owner-직접-후속-등록-보완)을 따른다.
 - 소관: INF (AI Infrastructure Manager), 공식 경로 `docs/infra/`
 - 최초 작성 기준 main: `0303a929b682efb8c75b20eed2994b3a36ecafae` (DEV-007 INF 정책 등록 반영)
 - 참고: `AGENTS.md`, `docs/engineering/DEPARTMENT_WORKFLOW.md`, `docs/engineering/INF_ONBOARDING.md`, `docs/hq/PM-008.md`
 
 ## 책임과 경계
-INF는 ChatGPT·Codex 세션의 **컨텍스트 건전성, 지식 연속성, 인계 양식·등록 이력·예외 복구**를 관리한다. 통상 교체는 Owner 최초 지시 → 인계서 전달 → 후임 원본 확인·업무 시작으로 진행하며 INF·HQ·Owner의 별도 인수 승인을 기다리지 않는다. INF는 후속 정합성을 관리하고 요청 시 상세 검증한다. PM의 Stage·우선순위·의존성 조정, 기획의 규칙, 디자인의 UI/아트, 개발의 코드·Convention의 도구 구현을 대행하지 않는다. Owner는 최초 지시에서 후임·효력 시각·권한 이전을 정하며 main 병합·릴리스는 해당 승인 범위를 유지한다.
+INF는 ChatGPT·Codex 세션의 **컨텍스트 건전성, 지식 연속성, 인계 양식·등록 이력·예외 복구**를 관리한다. 통상 교체는 Owner 최초 지시 → 인계서 전달 → 후임 원본 확인·업무 시작으로 진행하며 INF·HQ·Owner의 별도 인수 승인을 기다리지 않는다. 후속 등록은 Owner가 직접 수행하거나 지정·승인한 담당자에게 맡길 수 있다. Owner가 직접 담당하면 INF는 중복 등록하지 않고 요청 시 정합성 확인·복구를 지원한다. PM의 Stage·우선순위·의존성 조정, 기획의 규칙, 디자인의 UI/아트, 개발의 코드·Convention의 도구 구현을 대행하지 않는다. Owner는 최초 지시에서 후임·효력 시각·권한 이전을 정하며 main 병합·릴리스는 해당 승인 범위를 유지한다.
 
 공식 업무 근거 우선순위: Owner 승인 원문 → Git의 승인 명세(경로·버전·SHA) → 승인 티켓 → 검토 중 문서 → 대화·메모리. **최신 HEAD, PR 게시, CI 통과만으로 승인/DONE이 되지 않는다.**
 
@@ -18,7 +18,7 @@ INF는 ChatGPT·Codex 세션의 **컨텍스트 건전성, 지식 연속성, 인�
 | [AGENT_HEALTH_REPORT_TEMPLATE.md](AGENT_HEALTH_REPORT_TEMPLATE.md) | 요청된 자기 진단에만 사용 | 현직 / 필요 시 INF 교차 확인 |
 | [AGENT_ASSESSMENT_TEMPLATE.md](AGENT_ASSESSMENT_TEMPLATE.md) | 요청된 독립 평가·교체 권고 | 독립 검증자 / Owner 결정 |
 | [AGENT_HANDOFF_TEMPLATE.md](AGENT_HANDOFF_TEMPLATE.md) | 통상 인계와 짧은 후임 확인 | 현직·후임 / 최초 Owner 전환 지시 |
-| [AGENT_REGISTRY_TEMPLATE.md](AGENT_REGISTRY_TEMPLATE.md) | 업무 효력·후속 등록·정정 기록 | INF / Owner 결정 연결 |
+| [AGENT_REGISTRY_TEMPLATE.md](AGENT_REGISTRY_TEMPLATE.md) | 업무 효력·후속 등록·정정 기록 | Owner 또는 지정 담당 / INF 요청 지원 |
 | [agents/REGISTRY_TRANSITION_RULES.md](agents/REGISTRY_TRANSITION_RULES.md) | ID 예약·전환·권한·미반영 기간 규정 | INF 정합성 / Convention 도구 후속 |
 | [PLANNING_SUCCESSION_RUNBOOK.md](PLANNING_SUCCESSION_RUNBOOK.md) | 기획팀 통상 인계 실행 예시 | Planning 작성·후임 확인 |
 | [INF-001 티켓](tasks/INF-001_CONTEXT_GOVERNANCE.md) 및 [검증 기록](tasks/INF-001_RESULT.md) | 변경 근거·증거·검수 | INF / Owner |
