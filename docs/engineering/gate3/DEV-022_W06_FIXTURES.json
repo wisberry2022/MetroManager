@@ -1,0 +1,1711 @@
+{
+  "schema_version": 1,
+  "task_id": "DEV-022",
+  "agent_id": "AGT-DEV-0004",
+  "base_sha": "2507cda419ed27e96c5d64ced7666ed7a2e58227",
+  "dirty": true,
+  "ui_contract_revision": "DEV022-W06-UI-1",
+  "status": "DEV_SUPPLIED_DESIGN_L2_PENDING",
+  "classification": {
+    "MODEL_CHAIN": "Actual bid/construction/trial/safety/open commands in a fresh Pipeline; not a GUI run.",
+    "MODEL_FIXTURE": "Controlled source/ledger/cohort inputs for isolated boundaries; not a product-reachable proof.",
+    "CONSUMER_FIXTURE": "Snapshot copies for later Design review; consumer-only assertions do not prove natural model generation."
+  },
+  "scenarios": {
+    "close01": {
+      "day2": {
+        "boarded": 0,
+        "closing_in_transit": 0,
+        "completed": 8,
+        "day_id": 2,
+        "late_completed": 0,
+        "opening_in_transit": 8,
+        "reason_codes": [],
+        "requested": 0,
+        "satisfaction_after": [],
+        "satisfaction_available": true,
+        "satisfaction_before": [
+          55,
+          1
+        ],
+        "service_minutes": 0,
+        "unboarded": 0
+      },
+      "funds": {
+        "available_cash": 300,
+        "cash": 300,
+        "free_cash": 300,
+        "reserved": 0,
+        "reserved_by_project": {},
+        "restricted": 0,
+        "restricted_by_project": {},
+        "unpaid": 0
+      },
+      "kind": "MODEL_FIXTURE",
+      "previous": {
+        "boarded": 8,
+        "closing_in_transit": 8,
+        "completed": 0,
+        "day_id": 1,
+        "late_completed": 0,
+        "opening_in_transit": 0,
+        "reason_codes": [],
+        "requested": 8,
+        "satisfaction_after": [
+          55,
+          1
+        ],
+        "satisfaction_available": true,
+        "satisfaction_before": [
+          50,
+          1
+        ],
+        "service_minutes": 1,
+        "unboarded": 0
+      }
+    },
+    "first_report_next_query": {
+      "funds": {
+        "available_cash": 1334000,
+        "cash": 1534000,
+        "free_cash": 1334000,
+        "reserved": 0,
+        "reserved_by_project": {
+          "P-A": 0
+        },
+        "restricted": 200000,
+        "restricted_by_project": {
+          "P-A": 200000
+        },
+        "unpaid": 0
+      },
+      "kind": "MODEL_CHAIN",
+      "operations": {
+        "available": true,
+        "boarding": {
+          "boarding_allowed": false,
+          "reason_codes": [
+            "OUTSIDE_SERVICE_HOURS"
+          ]
+        },
+        "carry": {
+          "D01:D02": 5600,
+          "D02:D03": 4200,
+          "D03:D04": 1200,
+          "D08:D01": 5200
+        },
+        "cohorts": [
+          {
+            "boarded_at": 5756,
+            "count": 1,
+            "expected_at": 5763,
+            "od_id": "D08:D01"
+          }
+        ],
+        "daily": {
+          "boarded": 0,
+          "closing_in_transit": 1,
+          "completed": 4,
+          "day_id": 5,
+          "late_completed": 0,
+          "opening_in_transit": 5,
+          "reason_codes": [],
+          "requested": 0,
+          "satisfaction_after": [],
+          "satisfaction_available": true,
+          "satisfaction_before": [
+            55,
+            1
+          ],
+          "service_minutes": 0,
+          "unboarded": 0
+        },
+        "data_version": "1.3",
+        "day_id": 5,
+        "first_valid_report": {
+          "completed": 4291,
+          "day_id": 4,
+          "fare": 429100,
+          "service_minutes": 955
+        },
+        "in_transit": 1,
+        "observation_phase": "T_COMPLETE",
+        "od_pairs": [
+          {
+            "daily_demand": 2000,
+            "destination": "S02",
+            "id": "D01:D02",
+            "minutes": 1,
+            "origin": "S01",
+            "tie": "S01:S02"
+          },
+          {
+            "daily_demand": 1500,
+            "destination": "S03",
+            "id": "D02:D03",
+            "minutes": 1,
+            "origin": "S02",
+            "tie": "S02:S03"
+          },
+          {
+            "daily_demand": 1200,
+            "destination": "S04",
+            "id": "D03:D04",
+            "minutes": 1,
+            "origin": "S03",
+            "tie": "S03:S04"
+          },
+          {
+            "daily_demand": 200,
+            "destination": "S01",
+            "id": "D08:D01",
+            "minutes": 7,
+            "origin": "S08",
+            "tie": "S08:S01"
+          }
+        ],
+        "reason_codes": [],
+        "satisfaction": [
+          55,
+          1
+        ],
+        "service_ready": true,
+        "simulation_minute": 5760,
+        "snapshot_revision": 43210,
+        "source": {
+          "business_contract_id": "B01-R1-BUSINESS",
+          "condition_revision": 0,
+          "construction_contract_id": "B01-R1-BUSINESS-CONSTRUCTION",
+          "opened_at": 4805,
+          "project_id": "P-A",
+          "station_ids": [
+            "S01",
+            "S02",
+            "S03",
+            "S04",
+            "S08",
+            "S12"
+          ]
+        },
+        "ui_contract_revision": "DEV022-W06-UI-1"
+      },
+      "query": {
+        "allowed_actions": {
+          "query": true
+        },
+        "available": true,
+        "first_valid_report": {
+          "completed": 4291,
+          "day_id": 4,
+          "fare": 429100,
+          "service_minutes": 955
+        },
+        "reason_codes": [],
+        "tenders": {
+          "available": true,
+          "data_version": "1.3",
+          "day_id": 5,
+          "errors": [],
+          "observation_phase": "T_COMPLETE",
+          "rules_version": "C0.6-D0.9-DATA1.3",
+          "simulation_minute": 5760,
+          "snapshot_revision": 43210,
+          "tenders": [
+            {
+              "allowed_actions": {
+                "enter_p05": true,
+                "submit_bid": false
+              },
+              "business_contract": {
+                "attempted_at": 1800,
+                "business_contract_id": "B01-R1-BUSINESS",
+                "construction_contract_available": false,
+                "effective_at": 1800,
+                "government_payment": {
+                  "amount": 800000,
+                  "available": true,
+                  "effective_at": 1800,
+                  "ledger_entry_index": 1439,
+                  "restricted_project_id": "P-A",
+                  "transaction_id": "B01-R1-GOVERNMENT"
+                },
+                "phase_revision": 11516,
+                "project_id": "P-A",
+                "result": {
+                  "accepted": true,
+                  "decision_funds": {
+                    "available_cash": 1000000,
+                    "cash": 1000000,
+                    "free_cash": 1000000,
+                    "reserved": 0,
+                    "reserved_by_project": {},
+                    "restricted": 0,
+                    "restricted_by_project": {},
+                    "unpaid": 0
+                  },
+                  "reason": ""
+                },
+                "result_revision": 11517,
+                "standard_cost": 600000,
+                "status": "EFFECTIVE"
+              },
+              "construction_contract": {
+                "available": false,
+                "status": "NOT_CREATED"
+              },
+              "decision": {
+                "awarded": true,
+                "competitor_comparison": {
+                  "denominator": 10000,
+                  "numerator": 8000000
+                },
+                "decision_phase": "CONTRACT",
+                "effective_at": 1800,
+                "eligibility": {
+                  "checks": {
+                    "duration_feasible": true,
+                    "jurisdiction": true,
+                    "no_active_project": true
+                  },
+                  "eligible": true,
+                  "reason_codes": []
+                },
+                "funds": {
+                  "available_cash": 1000000,
+                  "cash": 1000000,
+                  "free_cash": 1000000,
+                  "reserved": 0,
+                  "reserved_by_project": {},
+                  "restricted": 0,
+                  "restricted_by_project": {},
+                  "unpaid": 0
+                },
+                "phase_revision": 11515,
+                "reason": "",
+                "result_revision": 11516,
+                "score": {
+                  "capability": 80,
+                  "comparison_score": {
+                    "denominator": 10000,
+                    "numerator": 8600000
+                  },
+                  "display_score": {
+                    "denominator": 100000,
+                    "numerator": 8600000
+                  },
+                  "financial_score": {
+                    "denominator": 10000,
+                    "numerator": 1000000
+                  },
+                  "free_cash": 1000000
+                },
+                "terms": {
+                  "city_id": "C01",
+                  "closes_at": 1800,
+                  "competitor_capability": 80,
+                  "competitor_financial_score": 80,
+                  "duration_minutes": 2880,
+                  "fare": 100,
+                  "government": 800000,
+                  "issuer_id": "CITY_HALL",
+                  "opens_at": 360,
+                  "project_id": "P-A",
+                  "round_id": "B01-R1",
+                  "standard_cost": 600000,
+                  "station_ids": [
+                    "S01",
+                    "S02",
+                    "S03",
+                    "S04",
+                    "S08",
+                    "S12"
+                  ],
+                  "tender_id": "B01",
+                  "tie_priority": [
+                    "COMPETITOR",
+                    "PLAYER"
+                  ]
+                },
+                "tie_priority": [
+                  "COMPETITOR",
+                  "PLAYER"
+                ]
+              },
+              "eligibility": {
+                "checks": {
+                  "duration_feasible": true,
+                  "jurisdiction": true,
+                  "no_active_project": false
+                },
+                "eligible": false,
+                "reason_codes": [
+                  "PROJECT_IN_PROGRESS"
+                ]
+              },
+              "p05_reason_codes": [],
+              "plan_locked": true,
+              "plan_revision": 0,
+              "reason_codes": [
+                "PROJECT_IN_PROGRESS",
+                "ROUND_CLOSED"
+              ],
+              "receipt": {
+                "accepted": true,
+                "admission_snapshot": {
+                  "command": {
+                    "command_id": "bid-1",
+                    "effective_at": 361,
+                    "expected_snapshot_revision": 0,
+                    "plan_revision": 0,
+                    "requested_at": 360,
+                    "round_id": "B01-R1",
+                    "target_revision": 0,
+                    "tender_id": "B01"
+                  },
+                  "eligibility": {
+                    "checks": {
+                      "duration_feasible": true,
+                      "jurisdiction": true,
+                      "no_active_project": true
+                    },
+                    "eligible": true,
+                    "reason_codes": []
+                  },
+                  "funds": {
+                    "available_cash": 1000000,
+                    "cash": 1000000,
+                    "free_cash": 1000000,
+                    "reserved": 0,
+                    "reserved_by_project": {},
+                    "restricted": 0,
+                    "restricted_by_project": {},
+                    "unpaid": 0
+                  },
+                  "score": {
+                    "capability": 80,
+                    "comparison_score": {
+                      "denominator": 10000,
+                      "numerator": 8600000
+                    },
+                    "display_score": {
+                      "denominator": 100000,
+                      "numerator": 8600000
+                    },
+                    "financial_score": {
+                      "denominator": 10000,
+                      "numerator": 1000000
+                    },
+                    "free_cash": 1000000
+                  }
+                },
+                "command_id": "bid-1",
+                "decision_phase": "CONTRACT",
+                "effective_at": 361,
+                "expected_snapshot_revision": 0,
+                "pending": false,
+                "phase_revision": 2,
+                "plan_revision": 0,
+                "reason": "",
+                "reason_codes": [],
+                "requested_at": 360,
+                "result_revision": 3,
+                "round_id": "B01-R1",
+                "target_revision": 1,
+                "tender_id": "B01"
+              },
+              "state": "AWARDED",
+              "target_revision": 3,
+              "terms": {
+                "city_id": "C01",
+                "closes_at": 1800,
+                "competitor_capability": 80,
+                "competitor_financial_score": 80,
+                "duration_minutes": 2880,
+                "fare": 100,
+                "government": 800000,
+                "issuer_id": "CITY_HALL",
+                "opens_at": 360,
+                "project_id": "P-A",
+                "round_id": "B01-R1",
+                "standard_cost": 600000,
+                "station_ids": [
+                  "S01",
+                  "S02",
+                  "S03",
+                  "S04",
+                  "S08",
+                  "S12"
+                ],
+                "tender_id": "B01",
+                "tie_priority": [
+                  "COMPETITOR",
+                  "PLAYER"
+                ]
+              }
+            },
+            {
+              "allowed_actions": {
+                "enter_p05": false,
+                "submit_bid": false
+              },
+              "business_contract": {},
+              "construction_contract": {
+                "available": false,
+                "status": "NOT_CREATED"
+              },
+              "decision": {
+                "awarded": false,
+                "competitor_comparison": {
+                  "denominator": 10000,
+                  "numerator": 8000000
+                },
+                "decision_phase": "CONTRACT",
+                "effective_at": 1800,
+                "eligibility": {
+                  "checks": {
+                    "duration_feasible": true,
+                    "jurisdiction": true,
+                    "no_active_project": false
+                  },
+                  "eligible": false,
+                  "reason_codes": [
+                    "PROJECT_IN_PROGRESS"
+                  ]
+                },
+                "funds": {
+                  "available_cash": 1000000,
+                  "cash": 1800000,
+                  "free_cash": 1000000,
+                  "reserved": 0,
+                  "reserved_by_project": {
+                    "P-A": 0
+                  },
+                  "restricted": 800000,
+                  "restricted_by_project": {
+                    "P-A": 800000
+                  },
+                  "unpaid": 0
+                },
+                "phase_revision": 11517,
+                "reason": "NOT_SUBMITTED",
+                "result_revision": 11518,
+                "score": {
+                  "capability": 80,
+                  "comparison_score": {
+                    "denominator": 10000,
+                    "numerator": 8600000
+                  },
+                  "display_score": {
+                    "denominator": 100000,
+                    "numerator": 8600000
+                  },
+                  "financial_score": {
+                    "denominator": 10000,
+                    "numerator": 1000000
+                  },
+                  "free_cash": 1000000
+                },
+                "terms": {
+                  "city_id": "C01",
+                  "closes_at": 1800,
+                  "competitor_capability": 80,
+                  "competitor_financial_score": 80,
+                  "duration_minutes": 2880,
+                  "fare": 100,
+                  "government": 800000,
+                  "issuer_id": "NATIONAL_GOVERNMENT",
+                  "opens_at": 360,
+                  "project_id": "P-B",
+                  "round_id": "B02-R1",
+                  "standard_cost": 600000,
+                  "station_ids": [
+                    "S01",
+                    "S05",
+                    "S09",
+                    "S10",
+                    "S11",
+                    "S12"
+                  ],
+                  "tender_id": "B02",
+                  "tie_priority": [
+                    "COMPETITOR",
+                    "PLAYER"
+                  ]
+                },
+                "tie_priority": [
+                  "COMPETITOR",
+                  "PLAYER"
+                ]
+              },
+              "eligibility": {
+                "checks": {
+                  "duration_feasible": true,
+                  "jurisdiction": true,
+                  "no_active_project": false
+                },
+                "eligible": false,
+                "reason_codes": [
+                  "PROJECT_IN_PROGRESS"
+                ]
+              },
+              "p05_reason_codes": [
+                "BUSINESS_CONTRACT_NOT_EFFECTIVE"
+              ],
+              "plan_locked": true,
+              "plan_revision": 0,
+              "reason_codes": [
+                "PROJECT_IN_PROGRESS",
+                "ROUND_CLOSED"
+              ],
+              "receipt": {},
+              "state": "CLOSED",
+              "target_revision": 1,
+              "terms": {
+                "city_id": "C01",
+                "closes_at": 1800,
+                "competitor_capability": 80,
+                "competitor_financial_score": 80,
+                "duration_minutes": 2880,
+                "fare": 100,
+                "government": 800000,
+                "issuer_id": "NATIONAL_GOVERNMENT",
+                "opens_at": 360,
+                "project_id": "P-B",
+                "round_id": "B02-R1",
+                "standard_cost": 600000,
+                "station_ids": [
+                  "S01",
+                  "S05",
+                  "S09",
+                  "S10",
+                  "S11",
+                  "S12"
+                ],
+                "tender_id": "B02",
+                "tie_priority": [
+                  "COMPETITOR",
+                  "PLAYER"
+                ]
+              }
+            }
+          ],
+          "ui_contract_revision": "DEV018-W04A-UI-1"
+        }
+      },
+      "report": {
+        "closing_funds": {
+          "available_cash": 1333600,
+          "cash": 1533600,
+          "free_cash": 1333600,
+          "reserved": 0,
+          "reserved_by_project": {
+            "P-A": 0
+          },
+          "restricted": 200000,
+          "restricted_by_project": {
+            "P-A": 200000
+          },
+          "unpaid": 0
+        },
+        "construction_cost": 75417,
+        "construction_payment": 75625,
+        "day_id": 4,
+        "debt_payment": 0,
+        "fare": 429100,
+        "government": 0,
+        "operating_cost": 95500,
+        "operations": {
+          "boarded": 4296,
+          "closing_in_transit": 5,
+          "completed": 4291,
+          "day_id": 4,
+          "late_completed": 0,
+          "opening_in_transit": 0,
+          "reason_codes": [],
+          "requested": 4296,
+          "satisfaction_after": [
+            55,
+            1
+          ],
+          "satisfaction_available": true,
+          "satisfaction_before": [
+            50,
+            1
+          ],
+          "service_minutes": 955,
+          "unboarded": 0
+        },
+        "payment": 95500
+      }
+    },
+    "full_day_controlled": {
+      "after": {
+        "current_report": {
+          "construction_cost": 0,
+          "construction_payment": 0,
+          "day_id": 2,
+          "debt_payment": 0,
+          "fare": 800,
+          "government": 0,
+          "operating_cost": 0,
+          "operations": {
+            "boarded": 0,
+            "closing_in_transit": 0,
+            "completed": 8,
+            "day_id": 2,
+            "late_completed": 0,
+            "opening_in_transit": 8,
+            "reason_codes": [],
+            "requested": 0,
+            "satisfaction_after": [],
+            "satisfaction_available": true,
+            "satisfaction_before": [
+              55,
+              1
+            ],
+            "service_minutes": 0,
+            "unboarded": 0
+          },
+          "payment": 0
+        },
+        "funds": {
+          "available_cash": 1378000,
+          "cash": 1578000,
+          "free_cash": 1378000,
+          "reserved": 0,
+          "reserved_by_project": {
+            "P-A": 0
+          },
+          "restricted": 200000,
+          "restricted_by_project": {
+            "P-A": 200000
+          },
+          "unpaid": 0
+        },
+        "kind": "MODEL_FIXTURE",
+        "operations": {
+          "available": true,
+          "boarding": {
+            "boarding_allowed": false,
+            "reason_codes": [
+              "OUTSIDE_SERVICE_HOURS"
+            ]
+          },
+          "carry": {
+            "D01:D02": 0,
+            "D02:D03": 0,
+            "D03:D04": 0,
+            "D08:D01": 0
+          },
+          "cohorts": [],
+          "daily": {
+            "boarded": 0,
+            "closing_in_transit": 0,
+            "completed": 8,
+            "day_id": 2,
+            "late_completed": 0,
+            "opening_in_transit": 8,
+            "reason_codes": [],
+            "requested": 0,
+            "satisfaction_after": [],
+            "satisfaction_available": true,
+            "satisfaction_before": [
+              55,
+              1
+            ],
+            "service_minutes": 0,
+            "unboarded": 0
+          },
+          "data_version": "1.3",
+          "day_id": 2,
+          "first_valid_report": {
+            "completed": 4852,
+            "day_id": 1,
+            "fare": 485200,
+            "service_minutes": 1080
+          },
+          "in_transit": 0,
+          "observation_phase": "T_COMPLETE",
+          "od_pairs": [
+            {
+              "daily_demand": 2000,
+              "destination": "S02",
+              "id": "D01:D02",
+              "minutes": 1,
+              "origin": "S01",
+              "tie": "S01:S02"
+            },
+            {
+              "daily_demand": 1500,
+              "destination": "S03",
+              "id": "D02:D03",
+              "minutes": 1,
+              "origin": "S02",
+              "tie": "S02:S03"
+            },
+            {
+              "daily_demand": 1200,
+              "destination": "S04",
+              "id": "D03:D04",
+              "minutes": 1,
+              "origin": "S03",
+              "tie": "S03:S04"
+            },
+            {
+              "daily_demand": 200,
+              "destination": "S01",
+              "id": "D08:D01",
+              "minutes": 7,
+              "origin": "S08",
+              "tie": "S08:S01"
+            }
+          ],
+          "reason_codes": [],
+          "satisfaction": [
+            55,
+            1
+          ],
+          "service_ready": true,
+          "simulation_minute": 1450,
+          "snapshot_revision": 1091,
+          "source": {
+            "business_contract_id": "B01-R1-BUSINESS",
+            "condition_revision": 0,
+            "construction_contract_id": "B01-R1-BUSINESS-CONSTRUCTION",
+            "opened_at": 0,
+            "project_id": "P-A",
+            "station_ids": [
+              "S01",
+              "S02",
+              "S03",
+              "S04",
+              "S08",
+              "S12"
+            ]
+          },
+          "ui_contract_revision": "DEV022-W06-UI-1"
+        },
+        "previous_report": {
+          "closing_funds": {
+            "available_cash": 1377200,
+            "cash": 1577200,
+            "free_cash": 1377200,
+            "reserved": 0,
+            "reserved_by_project": {
+              "P-A": 0
+            },
+            "restricted": 200000,
+            "restricted_by_project": {
+              "P-A": 200000
+            },
+            "unpaid": 0
+          },
+          "construction_cost": 600000,
+          "construction_payment": 600000,
+          "day_id": 1,
+          "debt_payment": 0,
+          "fare": 485200,
+          "government": 800000,
+          "operating_cost": 108000,
+          "operations": {
+            "boarded": 4860,
+            "closing_in_transit": 8,
+            "completed": 4852,
+            "day_id": 1,
+            "late_completed": 0,
+            "opening_in_transit": 0,
+            "reason_codes": [],
+            "requested": 4860,
+            "satisfaction_after": [
+              55,
+              1
+            ],
+            "satisfaction_available": true,
+            "satisfaction_before": [
+              50,
+              1
+            ],
+            "service_minutes": 1080,
+            "unboarded": 0
+          },
+          "payment": 108000
+        }
+      },
+      "kind": "MODEL_FIXTURE",
+      "report": {
+        "closing_funds": {
+          "available_cash": 1377200,
+          "cash": 1577200,
+          "free_cash": 1377200,
+          "reserved": 0,
+          "reserved_by_project": {
+            "P-A": 0
+          },
+          "restricted": 200000,
+          "restricted_by_project": {
+            "P-A": 200000
+          },
+          "unpaid": 0
+        },
+        "construction_cost": 600000,
+        "construction_payment": 600000,
+        "day_id": 1,
+        "debt_payment": 0,
+        "fare": 485200,
+        "government": 800000,
+        "operating_cost": 108000,
+        "operations": {
+          "boarded": 4860,
+          "closing_in_transit": 8,
+          "completed": 4852,
+          "day_id": 1,
+          "late_completed": 0,
+          "opening_in_transit": 0,
+          "reason_codes": [],
+          "requested": 4860,
+          "satisfaction_after": [
+            55,
+            1
+          ],
+          "satisfaction_available": true,
+          "satisfaction_before": [
+            50,
+            1
+          ],
+          "service_minutes": 1080,
+          "unboarded": 0
+        },
+        "payment": 108000
+      }
+    },
+    "invalid_source_consumer": {
+      "current_report": {
+        "construction_cost": 600000,
+        "construction_payment": 600000,
+        "day_id": 1,
+        "debt_payment": 0,
+        "fare": 1200,
+        "government": 800000,
+        "operating_cost": 300,
+        "operations": {
+          "boarded": 12,
+          "closing_in_transit": 0,
+          "completed": 12,
+          "day_id": 1,
+          "late_completed": 0,
+          "opening_in_transit": 0,
+          "reason_codes": [],
+          "requested": 12,
+          "satisfaction_after": [],
+          "satisfaction_available": true,
+          "satisfaction_before": [
+            50,
+            1
+          ],
+          "service_minutes": 3,
+          "unboarded": 0
+        },
+        "payment": 300
+      },
+      "funds": {
+        "available_cash": 1000900,
+        "cash": 1200900,
+        "free_cash": 1000900,
+        "reserved": 0,
+        "reserved_by_project": {
+          "P-A": 0
+        },
+        "restricted": 200000,
+        "restricted_by_project": {
+          "P-A": 200000
+        },
+        "unpaid": 0
+      },
+      "kind": "MODEL_FIXTURE",
+      "operations": {
+        "available": false,
+        "boarding": {
+          "boarding_allowed": false,
+          "reason_codes": [
+            "INVALID_OPERATIONS_SOURCE"
+          ]
+        },
+        "carry": {
+          "D01:D02": 6000,
+          "D02:D03": 1800,
+          "D03:D04": 3600,
+          "D08:D01": 4800
+        },
+        "cohorts": [],
+        "daily": {
+          "boarded": 12,
+          "closing_in_transit": 0,
+          "completed": 12,
+          "day_id": 1,
+          "late_completed": 0,
+          "opening_in_transit": 0,
+          "reason_codes": [],
+          "requested": 12,
+          "satisfaction_after": [],
+          "satisfaction_available": true,
+          "satisfaction_before": [
+            50,
+            1
+          ],
+          "service_minutes": 3,
+          "unboarded": 0
+        },
+        "data_version": "1.3",
+        "day_id": 1,
+        "first_valid_report": {},
+        "in_transit": 0,
+        "observation_phase": "T_COMPLETE",
+        "od_pairs": [
+          {
+            "daily_demand": 2000,
+            "destination": "S02",
+            "id": "D01:D02",
+            "minutes": 1,
+            "origin": "S01",
+            "tie": "S01:S02"
+          },
+          {
+            "daily_demand": 1500,
+            "destination": "S03",
+            "id": "D02:D03",
+            "minutes": 1,
+            "origin": "S02",
+            "tie": "S02:S03"
+          },
+          {
+            "daily_demand": 1200,
+            "destination": "S04",
+            "id": "D03:D04",
+            "minutes": 1,
+            "origin": "S03",
+            "tie": "S03:S04"
+          },
+          {
+            "daily_demand": 200,
+            "destination": "S01",
+            "id": "D08:D01",
+            "minutes": 7,
+            "origin": "S08",
+            "tie": "S08:S01"
+          }
+        ],
+        "reason_codes": [
+          "INVALID_OPERATIONS_SOURCE"
+        ],
+        "satisfaction": [
+          50,
+          1
+        ],
+        "service_ready": false,
+        "simulation_minute": 363,
+        "snapshot_revision": 4,
+        "source": {
+          "business_contract_id": "B01-R1-BUSINESS",
+          "condition_revision": 0,
+          "construction_contract_id": "B01-R1-BUSINESS-CONSTRUCTION",
+          "opened_at": 0,
+          "project_id": "P-A",
+          "station_ids": [
+            "S01",
+            "S02",
+            "S03",
+            "S04",
+            "S08",
+            "S12"
+          ]
+        },
+        "ui_contract_revision": "DEV022-W06-UI-1"
+      },
+      "previous_report": {}
+    },
+    "model_chain_open": {
+      "funds": {
+        "available_cash": 1003200,
+        "cash": 1203200,
+        "free_cash": 1003200,
+        "reserved": 0,
+        "reserved_by_project": {
+          "P-A": 0
+        },
+        "restricted": 200000,
+        "restricted_by_project": {
+          "P-A": 200000
+        },
+        "unpaid": 0
+      },
+      "kind": "MODEL_CHAIN",
+      "open_result": {
+        "accepted": true,
+        "command": {
+          "action": "open",
+          "business_contract_id": "B01-R1-BUSINESS",
+          "command_id": "open",
+          "effective_at": 4805,
+          "expected_snapshot_revision": 35560,
+          "mode": "STANDARD",
+          "project_id": "P-A",
+          "requested_at": 4804,
+          "target_revision": 0
+        },
+        "command_id": "open",
+        "decision_phase": "VALIDATION",
+        "effective_at": 4805,
+        "pending": false,
+        "phase_revision": 35564,
+        "reason": "",
+        "reason_codes": [],
+        "requested_at": 4804,
+        "result_revision": 35565
+      },
+      "operations": {
+        "available": true,
+        "boarding": {
+          "boarding_allowed": true,
+          "reason_codes": []
+        },
+        "carry": {
+          "D01:D02": 4000,
+          "D02:D03": 3000,
+          "D03:D04": 2400,
+          "D08:D01": 6800
+        },
+        "cohorts": [
+          {
+            "boarded_at": 4811,
+            "count": 1,
+            "expected_at": 4818,
+            "od_id": "D08:D01"
+          },
+          {
+            "boarded_at": 4815,
+            "count": 2,
+            "expected_at": 4816,
+            "od_id": "D01:D02"
+          },
+          {
+            "boarded_at": 4815,
+            "count": 2,
+            "expected_at": 4816,
+            "od_id": "D02:D03"
+          },
+          {
+            "boarded_at": 4815,
+            "count": 1,
+            "expected_at": 4816,
+            "od_id": "D03:D04"
+          }
+        ],
+        "daily": {
+          "boarded": 48,
+          "closing_in_transit": 6,
+          "completed": 42,
+          "day_id": 4,
+          "late_completed": 0,
+          "opening_in_transit": 0,
+          "reason_codes": [],
+          "requested": 48,
+          "satisfaction_after": [],
+          "satisfaction_available": true,
+          "satisfaction_before": [
+            50,
+            1
+          ],
+          "service_minutes": 11,
+          "unboarded": 0
+        },
+        "data_version": "1.3",
+        "day_id": 4,
+        "first_valid_report": {},
+        "in_transit": 6,
+        "observation_phase": "T_COMPLETE",
+        "od_pairs": [
+          {
+            "daily_demand": 2000,
+            "destination": "S02",
+            "id": "D01:D02",
+            "minutes": 1,
+            "origin": "S01",
+            "tie": "S01:S02"
+          },
+          {
+            "daily_demand": 1500,
+            "destination": "S03",
+            "id": "D02:D03",
+            "minutes": 1,
+            "origin": "S02",
+            "tie": "S02:S03"
+          },
+          {
+            "daily_demand": 1200,
+            "destination": "S04",
+            "id": "D03:D04",
+            "minutes": 1,
+            "origin": "S03",
+            "tie": "S03:S04"
+          },
+          {
+            "daily_demand": 200,
+            "destination": "S01",
+            "id": "D08:D01",
+            "minutes": 7,
+            "origin": "S08",
+            "tie": "S08:S01"
+          }
+        ],
+        "reason_codes": [],
+        "satisfaction": [
+          50,
+          1
+        ],
+        "service_ready": true,
+        "simulation_minute": 4815,
+        "snapshot_revision": 35649,
+        "source": {
+          "business_contract_id": "B01-R1-BUSINESS",
+          "condition_revision": 0,
+          "construction_contract_id": "B01-R1-BUSINESS-CONSTRUCTION",
+          "opened_at": 4805,
+          "project_id": "P-A",
+          "station_ids": [
+            "S01",
+            "S02",
+            "S03",
+            "S04",
+            "S08",
+            "S12"
+          ]
+        },
+        "ui_contract_revision": "DEV022-W06-UI-1"
+      }
+    },
+    "preopen": {
+      "available": true,
+      "boarding": {
+        "boarding_allowed": false,
+        "reason_codes": [
+          "SERVICE_NOT_READY"
+        ]
+      },
+      "carry": {},
+      "cohorts": [],
+      "daily": {
+        "boarded": 0,
+        "closing_in_transit": 0,
+        "completed": 0,
+        "day_id": 1,
+        "late_completed": 0,
+        "opening_in_transit": 0,
+        "reason_codes": [],
+        "requested": 0,
+        "satisfaction_after": [],
+        "satisfaction_available": true,
+        "satisfaction_before": [
+          50,
+          1
+        ],
+        "service_minutes": 0,
+        "unboarded": 0
+      },
+      "data_version": "1.3",
+      "day_id": 1,
+      "first_valid_report": {},
+      "in_transit": 0,
+      "observation_phase": "T_COMPLETE",
+      "od_pairs": [],
+      "reason_codes": [
+        "SERVICE_NOT_READY"
+      ],
+      "satisfaction": [
+        50,
+        1
+      ],
+      "service_ready": false,
+      "simulation_minute": 380,
+      "snapshot_revision": 160,
+      "source": {},
+      "ui_contract_revision": "DEV022-W06-UI-1"
+    },
+    "recovery": {
+      "current_report": {
+        "construction_cost": 600000,
+        "construction_payment": 600000,
+        "day_id": 1,
+        "debt_payment": 250,
+        "fare": 2500,
+        "government": 800000,
+        "operating_cost": 1002250,
+        "operations": {
+          "boarded": 29,
+          "closing_in_transit": 4,
+          "completed": 25,
+          "day_id": 1,
+          "late_completed": 0,
+          "opening_in_transit": 0,
+          "reason_codes": [],
+          "requested": 29,
+          "satisfaction_after": [],
+          "satisfaction_available": true,
+          "satisfaction_before": [
+            50,
+            1
+          ],
+          "service_minutes": 7,
+          "unboarded": 0
+        },
+        "payment": 1002000
+      },
+      "funds": {
+        "available_cash": 250,
+        "cash": 200250,
+        "free_cash": 250,
+        "reserved": 0,
+        "reserved_by_project": {
+          "P-A": 0
+        },
+        "restricted": 200000,
+        "restricted_by_project": {
+          "P-A": 200000
+        },
+        "unpaid": 0
+      },
+      "kind": "MODEL_FIXTURE",
+      "operations": {
+        "available": true,
+        "boarding": {
+          "boarding_allowed": true,
+          "reason_codes": []
+        },
+        "carry": {
+          "D01:D02": 10400,
+          "D02:D03": 7800,
+          "D03:D04": 8400,
+          "D08:D01": 400
+        },
+        "cohorts": [
+          {
+            "boarded_at": 366,
+            "count": 1,
+            "expected_at": 367,
+            "od_id": "D01:D02"
+          },
+          {
+            "boarded_at": 366,
+            "count": 1,
+            "expected_at": 367,
+            "od_id": "D02:D03"
+          },
+          {
+            "boarded_at": 366,
+            "count": 1,
+            "expected_at": 367,
+            "od_id": "D03:D04"
+          },
+          {
+            "boarded_at": 366,
+            "count": 1,
+            "expected_at": 373,
+            "od_id": "D08:D01"
+          }
+        ],
+        "daily": {
+          "boarded": 29,
+          "closing_in_transit": 4,
+          "completed": 25,
+          "day_id": 1,
+          "late_completed": 0,
+          "opening_in_transit": 0,
+          "reason_codes": [],
+          "requested": 29,
+          "satisfaction_after": [],
+          "satisfaction_available": true,
+          "satisfaction_before": [
+            50,
+            1
+          ],
+          "service_minutes": 7,
+          "unboarded": 0
+        },
+        "data_version": "1.3",
+        "day_id": 1,
+        "first_valid_report": {},
+        "in_transit": 4,
+        "observation_phase": "T_COMPLETE",
+        "od_pairs": [
+          {
+            "daily_demand": 2000,
+            "destination": "S02",
+            "id": "D01:D02",
+            "minutes": 1,
+            "origin": "S01",
+            "tie": "S01:S02"
+          },
+          {
+            "daily_demand": 1500,
+            "destination": "S03",
+            "id": "D02:D03",
+            "minutes": 1,
+            "origin": "S02",
+            "tie": "S02:S03"
+          },
+          {
+            "daily_demand": 1200,
+            "destination": "S04",
+            "id": "D03:D04",
+            "minutes": 1,
+            "origin": "S03",
+            "tie": "S03:S04"
+          },
+          {
+            "daily_demand": 200,
+            "destination": "S01",
+            "id": "D08:D01",
+            "minutes": 7,
+            "origin": "S08",
+            "tie": "S08:S01"
+          }
+        ],
+        "reason_codes": [],
+        "satisfaction": [
+          50,
+          1
+        ],
+        "service_ready": true,
+        "simulation_minute": 366,
+        "snapshot_revision": 7,
+        "source": {
+          "business_contract_id": "B01-R1-BUSINESS",
+          "condition_revision": 0,
+          "construction_contract_id": "B01-R1-BUSINESS-CONSTRUCTION",
+          "opened_at": 0,
+          "project_id": "P-A",
+          "station_ids": [
+            "S01",
+            "S02",
+            "S03",
+            "S04",
+            "S08",
+            "S12"
+          ]
+        },
+        "ui_contract_revision": "DEV022-W06-UI-1"
+      },
+      "previous_report": {}
+    },
+    "restricted": {
+      "current_report": {
+        "construction_cost": 0,
+        "construction_payment": 0,
+        "day_id": 1,
+        "debt_payment": 0,
+        "fare": 0,
+        "government": 0,
+        "operating_cost": 0,
+        "payment": 0
+      },
+      "funds": {
+        "available_cash": 0,
+        "cash": 200000,
+        "free_cash": 0,
+        "reserved": 0,
+        "reserved_by_project": {
+          "P-A": 0
+        },
+        "restricted": 200000,
+        "restricted_by_project": {
+          "P-A": 200000
+        },
+        "unpaid": 0
+      },
+      "kind": "MODEL_FIXTURE",
+      "operations": {
+        "available": true,
+        "boarding": {
+          "boarding_allowed": false,
+          "reason_codes": [
+            "SERVICE_NOT_READY"
+          ]
+        },
+        "carry": {
+          "D01:D02": 0,
+          "D02:D03": 0,
+          "D03:D04": 0,
+          "D08:D01": 0
+        },
+        "cohorts": [],
+        "daily": {
+          "boarded": 0,
+          "closing_in_transit": 0,
+          "completed": 0,
+          "day_id": 1,
+          "late_completed": 0,
+          "opening_in_transit": 0,
+          "reason_codes": [],
+          "requested": 0,
+          "satisfaction_after": [],
+          "satisfaction_available": true,
+          "satisfaction_before": [
+            50,
+            1
+          ],
+          "service_minutes": 0,
+          "unboarded": 0
+        },
+        "data_version": "1.3",
+        "day_id": 1,
+        "first_valid_report": {},
+        "in_transit": 0,
+        "observation_phase": "T_COMPLETE",
+        "od_pairs": [
+          {
+            "daily_demand": 2000,
+            "destination": "S02",
+            "id": "D01:D02",
+            "minutes": 1,
+            "origin": "S01",
+            "tie": "S01:S02"
+          },
+          {
+            "daily_demand": 1500,
+            "destination": "S03",
+            "id": "D02:D03",
+            "minutes": 1,
+            "origin": "S02",
+            "tie": "S02:S03"
+          },
+          {
+            "daily_demand": 1200,
+            "destination": "S04",
+            "id": "D03:D04",
+            "minutes": 1,
+            "origin": "S03",
+            "tie": "S03:S04"
+          },
+          {
+            "daily_demand": 200,
+            "destination": "S01",
+            "id": "D08:D01",
+            "minutes": 7,
+            "origin": "S08",
+            "tie": "S08:S01"
+          }
+        ],
+        "reason_codes": [],
+        "satisfaction": [
+          50,
+          1
+        ],
+        "service_ready": true,
+        "simulation_minute": 359,
+        "snapshot_revision": 0,
+        "source": {
+          "business_contract_id": "B01-R1-BUSINESS",
+          "condition_revision": 0,
+          "construction_contract_id": "B01-R1-BUSINESS-CONSTRUCTION",
+          "opened_at": 0,
+          "project_id": "P-A",
+          "station_ids": [
+            "S01",
+            "S02",
+            "S03",
+            "S04",
+            "S08",
+            "S12"
+          ]
+        },
+        "ui_contract_revision": "DEV022-W06-UI-1"
+      },
+      "previous_report": {}
+    },
+    "sem_contract": {
+      "command": {
+        "command_id": "same-t-contract",
+        "effective_at": 4816,
+        "government": 0,
+        "requested_at": 4815,
+        "target_id": "OTHER",
+        "target_revision": 0,
+        "total_cost": 1003101
+      },
+      "kind": "MODEL_CHAIN",
+      "result": {
+        "accepted": false,
+        "command_id": "same-t-contract",
+        "decision_funds": {
+          "available_cash": 1003100,
+          "cash": 1203100,
+          "free_cash": 1003100,
+          "reserved": 0,
+          "reserved_by_project": {
+            "P-A": 0
+          },
+          "restricted": 200000,
+          "restricted_by_project": {
+            "P-A": 200000
+          },
+          "unpaid": 0
+        },
+        "decision_phase": "CONTRACT",
+        "decision_snapshot_revision": 35651,
+        "effective_at": 4816,
+        "reason": "OWN_FUNDS_INSUFFICIENT",
+        "result_revision": 35652
+      }
+    },
+    "time_equivalence": {
+      "kind": "MODEL_CHAIN",
+      "minute": 4829,
+      "speeds": [
+        1,
+        2,
+        4
+      ]
+    },
+    "zero_demand": {
+      "current_report": {
+        "construction_cost": 600000,
+        "construction_payment": 600000,
+        "day_id": 1,
+        "debt_payment": 0,
+        "fare": 0,
+        "government": 800000,
+        "operating_cost": 100,
+        "operations": {
+          "boarded": 0,
+          "closing_in_transit": 0,
+          "completed": 0,
+          "day_id": 1,
+          "late_completed": 0,
+          "opening_in_transit": 0,
+          "reason_codes": [],
+          "requested": 0,
+          "satisfaction_after": [],
+          "satisfaction_available": true,
+          "satisfaction_before": [
+            50,
+            1
+          ],
+          "service_minutes": 2,
+          "unboarded": 0
+        },
+        "payment": 100
+      },
+      "funds": {
+        "available_cash": 999900,
+        "cash": 1199900,
+        "free_cash": 999900,
+        "reserved": 0,
+        "reserved_by_project": {
+          "P-A": 0
+        },
+        "restricted": 200000,
+        "restricted_by_project": {
+          "P-A": 200000
+        },
+        "unpaid": 0
+      },
+      "kind": "MODEL_FIXTURE",
+      "operations": {
+        "available": true,
+        "boarding": {
+          "boarding_allowed": true,
+          "reason_codes": []
+        },
+        "carry": {
+          "D01:D02": 0,
+          "D02:D03": 0,
+          "D03:D04": 0,
+          "D08:D01": 0
+        },
+        "cohorts": [],
+        "daily": {
+          "boarded": 0,
+          "closing_in_transit": 0,
+          "completed": 0,
+          "day_id": 1,
+          "late_completed": 0,
+          "opening_in_transit": 0,
+          "reason_codes": [],
+          "requested": 0,
+          "satisfaction_after": [],
+          "satisfaction_available": true,
+          "satisfaction_before": [
+            50,
+            1
+          ],
+          "service_minutes": 2,
+          "unboarded": 0
+        },
+        "data_version": "1.3",
+        "day_id": 1,
+        "first_valid_report": {},
+        "in_transit": 0,
+        "observation_phase": "T_COMPLETE",
+        "od_pairs": [
+          {
+            "daily_demand": 0,
+            "destination": "S02",
+            "id": "D01:D02",
+            "minutes": 1,
+            "origin": "S01",
+            "tie": "S01:S02"
+          },
+          {
+            "daily_demand": 0,
+            "destination": "S03",
+            "id": "D02:D03",
+            "minutes": 1,
+            "origin": "S02",
+            "tie": "S02:S03"
+          },
+          {
+            "daily_demand": 0,
+            "destination": "S04",
+            "id": "D03:D04",
+            "minutes": 1,
+            "origin": "S03",
+            "tie": "S03:S04"
+          },
+          {
+            "daily_demand": 0,
+            "destination": "S01",
+            "id": "D08:D01",
+            "minutes": 7,
+            "origin": "S08",
+            "tie": "S08:S01"
+          }
+        ],
+        "reason_codes": [],
+        "satisfaction": [
+          50,
+          1
+        ],
+        "service_ready": true,
+        "simulation_minute": 361,
+        "snapshot_revision": 3,
+        "source": {
+          "business_contract_id": "B01-R1-BUSINESS",
+          "condition_revision": 0,
+          "construction_contract_id": "B01-R1-BUSINESS-CONSTRUCTION",
+          "opened_at": 0,
+          "project_id": "P-A",
+          "station_ids": [
+            "S01",
+            "S02",
+            "S03",
+            "S04",
+            "S08",
+            "S12"
+          ]
+        },
+        "ui_contract_revision": "DEV022-W06-UI-1"
+      },
+      "previous_report": {}
+    }
+  },
+  "source_evidence_sha256": "38c7eb67756fc0d739a21e42a954d41fcb600e0fe7178af96b3f73d31a66680b"
+}

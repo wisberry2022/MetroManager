@@ -14,18 +14,19 @@ func sync(entries: Array[Dictionary]) -> void:
 		if _closed.has(day):
 			continue
 		if not _days.has(day):
-			_days[day] = {
-				"day_id": day,
-				"operating_cost": 0,
-				"construction_cost": 0,
-				"fare": 0,
-				"government": 0,
-				"payment": 0,
-				"debt_payment": 0,
-				"construction_payment": 0
-			}
+			_days[day] = _blank(day)
 		_days[day][item.kind] += item.amount
 	_seen = entries.size()
+
+
+## 운행 서비스의 누적 사본만 소비한다. 마감 보고는 늦은 갱신으로 변경하지 않는다.
+func sync_operations(day: int, summary: Dictionary) -> bool:
+	if day < 1 or summary.get("day_id") != day or _closed.has(day):
+		return false
+	if not _days.has(day):
+		_days[day] = _blank(day)
+	_days[day]["operations"] = summary.duplicate(true)
+	return true
 
 
 func close(day: int, funds: Dictionary) -> void:
