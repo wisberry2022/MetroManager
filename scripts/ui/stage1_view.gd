@@ -529,12 +529,17 @@ func _construction_requested(id: String, action: String, confirmed: Dictionary) 
 
 
 func _refresh_construction() -> void:
+	_scroll.follow_focus = true
 	session.refresh_construction()
 	present(session.snapshot())
+	var region: Control = construction_view.focus_region()
+	if region != null:
+		_ensure_focus_region(region)
 
 
 func _focus_resized() -> void:
 	if construction_view != null and construction_view.visible:
+		_scroll.follow_focus = true
 		var region: Control = construction_view.focus_region()
 		if region != null:
 			_ensure_focus_region(region)
@@ -544,6 +549,8 @@ func _ensure_focus_region(region: Control) -> void:
 	# 레이아웃 반영 후에도 같은 대상에 포커스가 있을 때만 스크롤한다.
 	await get_tree().process_frame
 	if not is_instance_valid(region) or not region.is_visible_in_tree():
+		return
+	if construction_view.is_ancestor_of(region) and not _scroll.follow_focus:
 		return
 	var owner := get_viewport().gui_get_focus_owner()
 	if owner != null and (owner == region or region.is_ancestor_of(owner)):
@@ -571,3 +578,56 @@ func _ensure_focus_region(region: Control) -> void:
 				}
 			)
 		)
+
+
+## W05 읽기 키만 소비한다. 보조 검수 호스트도 이 제어를 그대로 재사용한다.
+static func read_construction_key(
+	scroll: ScrollContainer, panel: Control, event: InputEvent
+) -> bool:
+	if event is InputEventMouseButton and panel.is_visible_in_tree():
+		scroll.follow_focus = true
+		return false
+	if not event is InputEventKey or not event.pressed or not panel.is_visible_in_tree():
+		return false
+	if event.alt_pressed or event.meta_pressed or event.shift_pressed:
+		if event.keycode == KEY_TAB:
+			scroll.follow_focus = true
+		return false
+	if event.keycode == KEY_TAB:
+		scroll.follow_focus = true
+		return false
+	if event.keycode not in [KEY_PAGEUP, KEY_PAGEDOWN, KEY_HOME, KEY_END]:
+		return false
+	if event.ctrl_pressed and event.keycode not in [KEY_HOME, KEY_END]:
+		return false
+	var owner := panel.get_viewport().gui_get_focus_owner()
+	if owner == null or not panel.is_ancestor_of(owner):
+		return false
+	if owner is OptionButton or owner is LineEdit or owner is TextEdit:
+		return false
+	# 읽기 중 화면 밖의 기존 포커스로 자동 복귀하지 않게 한다.
+	scroll.follow_focus = false
+	var bar := scroll.get_v_scroll_bar()
+	var limit := maxi(0, int(bar.max_value - bar.page))
+	var step := maxi(1, int(scroll.size.y * 0.8))
+	match event.keycode:
+		KEY_HOME:
+			scroll.scroll_vertical = 0
+		KEY_END:
+			scroll.scroll_vertical = limit
+		KEY_PAGEUP:
+			scroll.scroll_vertical = maxi(0, scroll.scroll_vertical - step)
+		KEY_PAGEDOWN:
+			scroll.scroll_vertical = mini(limit, scroll.scroll_vertical + step)
+	return true
+
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if read_construction_key(_scroll, construction_view, event):
+		get_viewport().set_input_as_handled()
+
+
+func _input(event: InputEvent) -> void:
+	# Tab은 GUI가 소비하기 전에 기존 포커스 추적만 복구한다.
+	if event is InputEventMouseButton or (event is InputEventKey and event.keycode == KEY_TAB):
+		read_construction_key(_scroll, construction_view, event)

@@ -20,6 +20,19 @@ func _initialize() -> void:
 
 func _run() -> void:
 	var args := OS.get_cmdline_user_args()
+	if "--q12-read-only" in args:
+		var session := FX.create("FOCUS_POST_REPAIR")
+		for id: String in ["LTXT-G05", "LTXT-G07"]:
+			await _q12_host_focus(session, id, Vector2i(1104, 900))
+		print("DEV021_Q12_READ_RESULT checks=", _checks, " failures=", _failures)
+		quit(0 if _failures == 0 else 1)
+		return
+	if "--q12-only" in args:
+		await _test_q12()
+		_write_q12()
+		print("DEV021_Q12_TEST_RESULT checks=", _checks, " failures=", _failures)
+		quit(0 if _failures == 0 else 1)
+		return
 	if "--obs01-only" in args or "--obs01-baseline" in args:
 		await _test_focus_visibility("--obs01-baseline" in args)
 		_write_focus_evidence()
@@ -563,3 +576,320 @@ func _write_focus_evidence() -> void:
 	evidence.observation = "OBS-01"
 	var output := FileAccess.open(path, FileAccess.WRITE)
 	output.store_string(JSON.stringify(evidence, "  ") + "\n")
+
+
+func _test_q12() -> void:
+	_q12_authority()
+	_q12_order()
+	var session := FX.create("FOCUS_POST_REPAIR")
+	var before: Dictionary = session.snapshot().construction_ui
+	var ids := FX.q12_specs()
+	ids.append_array(["LTXT-G01", "LTXT-G05", "LTXT-G06", "LTXT-G07"])
+	for id: String in ids:
+		var display := FX.q12_display(session, id)
+		var panel: View = ConstructionPanel.instantiate()
+		root.add_child(panel)
+		panel.select_project(display.selected_id)
+		_expect(id + "_accepted", panel.present(display.packet), true)
+		var all_text := ""
+		for label: Label in panel.labels.values():
+			all_text += label.text + "\n"
+		for input: Dictionary in display.inputs:
+			_expect(id + "_text_" + input.field, input.text in all_text, true)
+			_expect(id + "_sha", input.text.sha256_text(), input.sha256)
+			var expected_size := 256
+			if (
+				id.begins_with("ID-")
+				or (id.begins_with("REASON-") and input.field.ends_with(".reason"))
+			):
+				expected_size = int(id.get_slice("-", 2))
+			elif id in ["FAILED-mixed", "FAILED-lf", "FAILED-tight"]:
+				expected_size = 1024
+			elif input.field.ends_with(".reason") and id in ["LTXT-G06", "LTXT-G07"]:
+				expected_size = 128
+			_expect(id + "_codepoints", input.text.length(), expected_size)
+		if id == "FAILED-lf":
+			_expect(id + "_LF256", display.packet.reason[255], "\n")
+			_expect(id + "_LF768", display.packet.reason[767], "\n")
+		for record: Dictionary in display.packet.requests:
+			_expect(id + "_project_reference", record.command.project_id, display.selected_id)
+		if id in ["LTXT-G05", "LTXT-G06", "LTXT-G07"]:
+			_expect(id + "_disabled_open", panel.controls.open.disabled, true)
+			_expect(id + "_active_safety", panel.controls.safety.disabled, false)
+		_expect(id + "_model_unchanged", session.snapshot().construction_ui, before)
+		_cases.append(
+			{"id": id, "inputs": display.inputs, "model": before, "packet": display.packet}
+		)
+		panel.free()
+	for id: String in ["LTXT-G05", "LTXT-G07"]:
+		for window_size: Vector2i in [Vector2i(1100, 900), Vector2i(1104, 900)]:
+			await _q12_host_focus(session, id, window_size)
+
+
+func _q12_host_focus(session: FX.BidFX.Session, id: String, window_size: Vector2i) -> void:
+	root.size = window_size
+	var host = Stage.instantiate()
+	host.session = session
+	root.add_child(host)
+	host.set_process(false)
+	host.controls.open_tenders.pressed.emit()
+	host._open_construction("P-A")
+	var display := FX.q12_display(session, id)
+	var panel: View = host.construction_view
+	panel.select_project(display.selected_id)
+	var snapshot := session.snapshot()
+	snapshot.construction_ui = display.packet
+	host.present(snapshot)
+	panel.controls.open.grab_focus()
+	for frame: int in 12:
+		await process_frame
+	var scroll: ScrollContainer = host.get("_scroll")
+	var clip := scroll.get_global_rect()
+	var button: Button = panel.controls.open
+	var reason: Label = panel.labels.open_reason
+	var starts_visible := clip.has_point(reason.get_global_rect().position + Vector2(2, 2))
+	_expect(id + "_button_visible", clip.encloses(button.get_global_rect()), true)
+	_expect(id + "_reason_start_visible", starts_visible, true)
+	await _q12_read_keys(host, snapshot, id)
+	_cases.append(
+		{
+			"id": id,
+			"kind": "PRODUCT_HOST_AUTOMATIC",
+			"window_raw": str(window_size),
+			"clip": str(clip),
+			"button": str(button.get_global_rect()),
+			"reason": str(reason.get_global_rect()),
+			"minimum": str(panel.get_combined_minimum_size())
+		}
+	)
+	host.free()
+
+
+func _write_q12() -> void:
+	if "--q12-evidence" not in OS.get_cmdline_user_args():
+		return
+	var previous: Dictionary = {}
+	var path := "res://docs/engineering/evidence/DEV-021_Q12_INPUT_CASES.json"
+	if FileAccess.file_exists(path):
+		var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+		if parsed is Dictionary:
+			previous = parsed
+	var file := FileAccess.open(
+		"res://docs/engineering/evidence/DEV-021_Q12_INPUT_CASES.json", FileAccess.WRITE
+	)
+	file.store_string(
+		(
+			JSON.stringify(
+				{
+					"task_id": "DEV-021",
+					"scope": "Q12_TEST_ONLY",
+					"base_sha": "273f725adba2ade4d491b6cbf94b01757be341ef",
+					"source_hashes":
+					{
+						"fixtures":
+						FileAccess.get_sha256("res://tests/game/construction_ui_fixtures.gd"),
+						"tests":
+						FileAccess.get_sha256("res://tests/game/run_construction_ui_tests.gd"),
+						"runner":
+						FileAccess.get_sha256("res://tests/game/run_construction_gui_cases.gd"),
+						"product_host": FileAccess.get_sha256("res://scripts/ui/stage1_view.gd")
+					},
+					"assertions": _assertions,
+					"cases": _cases,
+					"checks": _checks,
+					"failures": _failures,
+					"direct_gui": previous.get("direct_gui", "NOT_RUN"),
+					"authority_automatic": "EXECUTED_SEE_ASSERTIONS",
+					"design_acceptance": "PENDING"
+				},
+				"\t"
+			)
+			+ "\n"
+		)
+	)
+
+
+func _q12_authority() -> void:
+	var session := FX.q12_session("Q12-CMD-01")
+	var seen := FX.confirmed(session)
+	var pending := session.request_construction("q12-duplicate", "contract", seen)
+	_expect("Q12_CMD_pending", pending.pending, true)
+	_expect(
+		"Q12_CMD_repeat_pending", session.request_construction("q12-duplicate", "open", {}), pending
+	)
+	FX.BidFX.advance_to(session, 1801)
+	var completed := session.pipeline.construction_result("q12-duplicate")
+	_expect(
+		"Q12_CMD_repeat_complete",
+		session.request_construction("q12-duplicate", "repair", {}),
+		completed
+	)
+	_expect("Q12_CMD_one_project", session.snapshot().construction_ui.snapshot.projects.size(), 1)
+	_expect("Q12_CMD_no_extra_money", session.pipeline.ledger.snapshot().cash, 1800000)
+	_cases.append({"id": "Q12-CMD-01", "actual": session.snapshot().construction_ui})
+	seen = FX.confirmed(session)
+	session.pipeline.get("_construction")._projects["P-A"].invalidate_conditions()
+	var funds := session.pipeline.ledger.snapshot()
+	session.request_construction("q12-stale-target", "start", seen)
+	FX.BidFX.advance_to(session, 1802)
+	_expect(
+		"Q12_REV_reason",
+		session.pipeline.construction_result("q12-stale-target").reason,
+		"STATE_CHANGED"
+	)
+	_expect("Q12_REV_no_start", FX.row(session).started_at, null)
+	_expect("Q12_REV_no_money", session.pipeline.ledger.snapshot(), funds)
+	_cases.append({"id": "Q12-REV-01", "actual": session.snapshot().construction_ui})
+	for id: String in ["Q12-FIN-01", "Q12-FIN-02", "Q12-FIN-03", "Q12-FIN-04"]:
+		_q12_finance(id)
+	_q12_history()
+
+
+func _q12_finance(id: String) -> void:
+	var session := FX.q12_session(id)
+	var before := session.pipeline.ledger.snapshot()
+	var count: int = session.pipeline.ledger.entries().size()
+	var result := FX.execute(session, "repair", "q12-repair")
+	var after := session.pipeline.ledger.snapshot()
+	if id in ["Q12-FIN-03", "Q12-FIN-04"]:
+		_expect(id + "_rejected", result.reason, "REPAIR_FUNDS_INSUFFICIENT")
+		_expect(id + "_no_effect", after, before)
+		var payments := session.pipeline.ledger.entries().slice(count).filter(
+			func(entry: Dictionary) -> bool: return entry.kind == "construction_payment"
+		)
+		_expect(id + "_no_payment", payments.size(), 0)
+		_expect(id + "_no_procedure", FX.row(session).procedure, "")
+	else:
+		_expect(id + "_accepted", result.accepted, true)
+		_expect(id + "_cash", after.cash, before.cash - 20000)
+		var paid_r := mini(20000, int(before.restricted_by_project["P-A"]))
+		_expect(
+			id + "_own_R",
+			after.restricted_by_project["P-A"],
+			before.restricted_by_project["P-A"] - paid_r
+		)
+		_expect(id + "_A", after.available_cash, before.available_cash - (20000 - paid_r))
+		_expect(id + "_K", after.reserved_by_project, before.reserved_by_project)
+		_expect(id + "_repair", FX.row(session).repair_paid, 20000)
+		if id == "Q12-FIN-02":
+			_expect(id + "_other_R", after.restricted_by_project["P-B"], 5000)
+	_cases.append(
+		{
+			"id": id,
+			"before": before,
+			"after": after,
+			"result": result,
+			"ledger_delta": session.pipeline.ledger.entries().slice(count),
+			"actual": session.snapshot().construction_ui
+		}
+	)
+
+
+func _q12_history() -> void:
+	var session := FX.q12_session("Q12-HIS-01")
+	var observations: Array[Dictionary] = []
+	for action: String in ["trial", "safety", "repair", "safety"]:
+		var requested: int = session.pipeline.clock.minute
+		var result := FX.execute(session, action, "q12-history-" + str(requested))
+		_expect("Q12_HIS_" + str(requested), result.accepted, true)
+		var ends: int = FX.row(session).procedure_completes_at
+		_expect(
+			"Q12_HIS_duration",
+			ends - int(FX.row(session).procedure_started_at),
+			30 if action == "repair" else 60
+		)
+		observations.append({"boundary": "started", "actual": session.snapshot().construction_ui})
+		FX.BidFX.advance_to(session, ends - 1)
+		_expect("Q12_HIS_running", FX.row(session).procedure, action)
+		observations.append(
+			{"boundary": "before_complete", "actual": session.snapshot().construction_ui}
+		)
+		FX.BidFX.advance_to(session, ends)
+		_expect("Q12_HIS_completed", FX.row(session).procedure, "")
+		observations.append({"boundary": "complete", "actual": session.snapshot().construction_ui})
+	_expect("Q12_HIS_retest", FX.row(session).safety_status, "PASSED")
+	_cases.append({"id": "Q12-HIS-01", "observations": observations})
+
+
+func _q12_read_keys(host: Control, snapshot: Dictionary, id: String) -> void:
+	var scroll: ScrollContainer = host.get("_scroll")
+	var panel: View = host.construction_view
+	var owner := root.gui_get_focus_owner()
+	var before: Dictionary = host.session.snapshot().construction_ui
+	var keys := [KEY_HOME, KEY_PAGEDOWN, KEY_PAGEUP, KEY_END, KEY_HOME, KEY_END]
+	for index: int in keys.size():
+		var event := InputEventKey.new()
+		event.pressed = true
+		event.keycode = keys[index]
+		event.ctrl_pressed = index >= 4
+		var old := scroll.scroll_vertical
+		var limit := maxi(
+			0, int(scroll.get_v_scroll_bar().max_value - scroll.get_v_scroll_bar().page)
+		)
+		var step := maxi(1, int(scroll.size.y * 0.8))
+		var expected: int = 0 if event.keycode == KEY_HOME else limit
+		if event.keycode == KEY_PAGEDOWN:
+			expected = mini(limit, old + step)
+		if event.keycode == KEY_PAGEUP:
+			expected = maxi(0, old - step)
+		_expect(id + "_read_consumed", host.read_construction_key(scroll, panel, event), true)
+		_expect(id + "_read_position", scroll.scroll_vertical, expected)
+		_expect(id + "_read_focus", root.gui_get_focus_owner() == owner, true)
+		host.present(snapshot)
+		await process_frame
+		_expect(id + "_present_keeps_read_" + str(index), scroll.scroll_vertical, expected)
+	_expect(id + "_read_model", host.session.snapshot().construction_ui, before)
+	var tab := InputEventKey.new()
+	tab.pressed = true
+	tab.keycode = KEY_TAB
+	_expect(id + "_tab_not_consumed", host.read_construction_key(scroll, panel, tab), false)
+	_expect(id + "_tab_restores_follow", scroll.follow_focus, true)
+	var rejected := InputEventKey.new()
+	rejected.keycode = KEY_PAGEDOWN
+	rejected.pressed = true
+	rejected.ctrl_pressed = true
+	_expect(id + "_ctrl_page_ignored", host.read_construction_key(scroll, panel, rejected), false)
+	rejected.ctrl_pressed = false
+	for native: Control in [OptionButton.new(), LineEdit.new(), TextEdit.new()]:
+		panel.add_child(native)
+		native.grab_focus()
+		_expect(id + "_native_ignored", host.read_construction_key(scroll, panel, rejected), false)
+		native.free()
+	host.controls.open_tenders.grab_focus()
+	_expect(id + "_hud_ignored", host.read_construction_key(scroll, panel, rejected), false)
+	panel.controls.open.grab_focus()
+
+
+func _q12_order() -> void:
+	var session := FX.q12_session("Q12-CMD-01")
+	var panel := _panel(session)
+	var current := panel.shown.duplicate(true)
+	var record := {
+		"command":
+		{"command_id": "q12-old-success", "project_id": "P-A", "action": "open", "requested_at": 1},
+		"result":
+		{
+			"command_id": "q12-old-success",
+			"accepted": true,
+			"pending": false,
+			"effective_at": 2,
+			"result_revision": 2
+		}
+	}
+	_expect("Q12_ORD_old_success_history", panel.accept_result(record), true)
+	var old := current.duplicate(true)
+	old.view_revision = -1
+	_expect("Q12_ORD_old_snapshot", panel.present(old), false)
+	record.result.pending = true
+	_expect("Q12_ORD_pending_after_complete", panel.accept_result(record), false)
+	_expect("Q12_ORD_current_unchanged", panel.shown, current)
+	_expect(
+		"Q12_ORD_history_id",
+		panel.get("_history")["q12-old-success"].command.command_id,
+		"q12-old-success"
+	)
+	_expect(
+		"Q12_ORD_history_complete", panel.get("_history")["q12-old-success"].result.pending, false
+	)
+	_cases.append({"id": "Q12-ORD-01", "actual": panel.shown, "history": panel.get("_history")})
+	panel.free()
