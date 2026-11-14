@@ -1,0 +1,489 @@
+{
+  "schema_version": 1,
+  "task_id": "DSG-008",
+  "agent_id": "AGT-DSG-0003",
+  "date": "2026-11-14",
+  "kind": "DESIGN_REVIEW_CHECKLIST_NOT_EXECUTABLE_TEST_OR_ENGINE_PAYLOAD",
+  "status": "LOCAL_REVIEW_FINAL_SPEC_PENDING",
+  "base_sha": "7c7476b5425dfe3a24c7bc79e1a624436b472a10",
+  "catalog_revision": "0.2",
+  "catalog_sha256": "ff474aa286e4e0514413bd3faffb06b5f4c4f1d8b8efe9f2cdecb43a056be24f",
+  "dev_receipt": "https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-6868246151",
+  "case_count": 20,
+  "cases": [
+    {
+      "case_id": "EX-01",
+      "copy_ids": [
+        "CP-S01",
+        "CP-S15"
+      ],
+      "source_case_name": "전체 snapshot 미수신",
+      "precondition_description": "현재 snapshot을 확인하지 못하는 조건과 초기 DATA 실패 경로를 각각 구분",
+      "contract_mapping": "DEV_PROPOSAL_PENDING_NOT_ENGINE_FIXTURE",
+      "expected_display": "현재값을 표시하지 않고 마지막 확인본은 과거 출처로만 유지. 초기 실패 exit1 흐름을 부분 복구로 바꾸지 않음",
+      "expected_actions_and_independence": "실행/자료 소속·허용값 불명인 모델 요청은 제안하지 않음",
+      "recovery_and_focus": "새 정상 Session/자료가 확인된 뒤 현재 표시로 복귀. 대상이 없으면 선택 없음",
+      "application_boundary": "현재 공급이 보장한 조건에서만 문구 소비. 제품 적용/인수 완료 아님",
+      "implementation_boundary": "S01 범용 누락 guard는 현재 없음. 공급/중개 경계·지역 소비 계약과 별도 DEV 적용/검증 필요",
+      "evidence_required": [
+        "DEV 실행 SHA·계약/조건·격리 fixture/실제 제품 구분",
+        "입력 순서·기대/실제·대상 ID/같은 종류의 관측판·게임분",
+        "정상 전/이상 중/복귀 후의 표시·허용 행동·선택/키보드 포커스·로그/화면 참조"
+      ],
+      "actual_result": null,
+      "evidence_refs": [],
+      "execution_status": "NOT_RUN",
+      "design_review": "PENDING_IMPLEMENTATION_EVIDENCE"
+    },
+    {
+      "case_id": "EX-02",
+      "copy_ids": [
+        "CP-S02"
+      ],
+      "source_case_name": "지도 구성 자료 미수신",
+      "precondition_description": "지도 구성/역·간선 기반 자료 미확인과 독립 유효 패널을 함께 관찰",
+      "contract_mapping": "DEV_PROPOSAL_PENDING_NOT_ENGINE_FIXTURE",
+      "expected_display": "후보0/실제 빈 지도와 구별. 목록도 같은 자료 의존이면 대체 목록 보장하지 않음",
+      "expected_actions_and_independence": "자료 의존 지도/후보 입력만 제외하고 유효한 독립 행동 유지",
+      "recovery_and_focus": "안정 ID가 유효하면 정보 선택 유지, 사라지면 선택 없음. 첫 후보 자동 추가 없음",
+      "application_boundary": "현재 공급이 보장한 조건에서만 문구 소비. 제품 적용/인수 완료 아님",
+      "implementation_boundary": "S01 범용 누락 guard는 현재 없음. 공급/중개 경계·지역 소비 계약과 별도 DEV 적용/검증 필요",
+      "evidence_required": [
+        "DEV 실행 SHA·계약/조건·격리 fixture/실제 제품 구분",
+        "입력 순서·기대/실제·대상 ID/같은 종류의 관측판·게임분",
+        "정상 전/이상 중/복귀 후의 표시·허용 행동·선택/키보드 포커스·로그/화면 참조"
+      ],
+      "actual_result": null,
+      "evidence_refs": [],
+      "execution_status": "NOT_RUN",
+      "design_review": "PENDING_IMPLEMENTATION_EVIDENCE"
+    },
+    {
+      "case_id": "EX-03",
+      "copy_ids": [
+        "CP-S03",
+        "CP-R01"
+      ],
+      "source_case_name": "실제 빈 계획",
+      "precondition_description": "실제0역 계획이며 준비된 역 자료·edit 허용이 있는 상태",
+      "contract_mapping": "DEV_PROPOSAL_PENDING_NOT_ENGINE_FIXTURE",
+      "expected_display": "빈 계획 및 실제 역 수0, 유효성 안내. 미수신으로 표시하지 않음",
+      "expected_actions_and_independence": "허용된 후보 추가는 가능, 다른 행동은 현재 공급대로",
+      "recovery_and_focus": "원래 허용 명령으로 계획을 구성한 뒤 최신 상태 표시. 모델 효과는 DEV 증거로 확인",
+      "application_boundary": "현재 공급이 보장한 조건에서만 문구 소비. 제품 적용/인수 완료 아님",
+      "implementation_boundary": "새 부분 입력/복구 guard의 구현/검증을 주장하지 않음",
+      "evidence_required": [
+        "DEV 실행 SHA·계약/조건·격리 fixture/실제 제품 구분",
+        "입력 순서·기대/실제·대상 ID/같은 종류의 관측판·게임분",
+        "정상 전/이상 중/복귀 후의 표시·허용 행동·선택/키보드 포커스·로그/화면 참조"
+      ],
+      "actual_result": null,
+      "evidence_refs": [],
+      "execution_status": "NOT_RUN",
+      "design_review": "PENDING_IMPLEMENTATION_EVIDENCE"
+    },
+    {
+      "case_id": "EX-04",
+      "copy_ids": [
+        "CP-S04"
+      ],
+      "source_case_name": "예측 미계산",
+      "precondition_description": "NOT_CALCULATED 및 현재 predict 허용/미공급을 각각 확인",
+      "contract_mapping": "DEV_PROPOSAL_PENDING_NOT_ENGINE_FIXTURE",
+      "expected_display": "미계산과 유효0/실패를 구별. 현재 결과 없음",
+      "expected_actions_and_independence": "predict가 실제 허용될 때만 기존 계산 안내, 누락이면 실행 제안 보류",
+      "recovery_and_focus": "동기 계산의 최종 결과로 이동하며 대기 연출을 강제로 삽입하지 않음",
+      "application_boundary": "현재 공급이 보장한 조건에서만 문구 소비. 제품 적용/인수 완료 아님",
+      "implementation_boundary": "새 부분 입력/복구 guard의 구현/검증을 주장하지 않음",
+      "evidence_required": [
+        "DEV 실행 SHA·계약/조건·격리 fixture/실제 제품 구분",
+        "입력 순서·기대/실제·대상 ID/같은 종류의 관측판·게임분",
+        "정상 전/이상 중/복귀 후의 표시·허용 행동·선택/키보드 포커스·로그/화면 참조"
+      ],
+      "actual_result": null,
+      "evidence_refs": [],
+      "execution_status": "NOT_RUN",
+      "design_review": "PENDING_IMPLEMENTATION_EVIDENCE"
+    },
+    {
+      "case_id": "EX-05",
+      "copy_ids": [
+        "CP-S05"
+      ],
+      "source_case_name": "실제 계산중",
+      "precondition_description": "모델 CALCULATING 조건부 표본과 현행 동기 계산 경로를 구별",
+      "contract_mapping": "DEV_PROPOSAL_PENDING_NOT_ENGINE_FIXTURE",
+      "expected_display": "조건부 표본임을 명시. 동기 제품 중간 프레임 표시 증거로 삼지 않음",
+      "expected_actions_and_independence": "현 동기 S01에 인위적 대기/취소/타임아웃 없음",
+      "recovery_and_focus": "해당 경로에서 중간 상태가 관측되지 않으면 그 사실을 기록. 향후 경로는 계약 확정 뒤 별도 검증",
+      "application_boundary": "일반 S01 동기 예측의 실제 대기 화면으로 적용하지 않음",
+      "implementation_boundary": "CALCULATING은 모델 상태. begin→predict→complete/fail이 동기 호출 안에서 종료",
+      "evidence_required": [
+        "DEV 실행 SHA·계약/조건·격리 fixture/실제 제품 구분",
+        "입력 순서·기대/실제·대상 ID/같은 종류의 관측판·게임분",
+        "정상 전/이상 중/복귀 후의 표시·허용 행동·선택/키보드 포커스·로그/화면 참조"
+      ],
+      "actual_result": null,
+      "evidence_refs": [],
+      "execution_status": "NOT_RUN",
+      "design_review": "PENDING_IMPLEMENTATION_EVIDENCE"
+    },
+    {
+      "case_id": "EX-06",
+      "copy_ids": [
+        "CP-S06"
+      ],
+      "source_case_name": "유효한 0 예측",
+      "precondition_description": "현재 입력과 일치하는 READY·실제0수요 예측의 정상 공급",
+      "contract_mapping": "DEV_PROPOSAL_PENDING_NOT_ENGINE_FIXTURE",
+      "expected_display": "0통행/0운임과 비용108000·거리5km·종단9게임분, [1일06:00,2일06:00) 끝 제외 유지",
+      "expected_actions_and_independence": "0을 이유로 편집/시간을 일괄 막지 않음. 최신 공급에 따름",
+      "recovery_and_focus": "현재/이전 출처와 입력판·생성시점·단위/기간 유지",
+      "application_boundary": "현재 공급이 보장한 조건에서만 문구 소비. 제품 적용/인수 완료 아님",
+      "implementation_boundary": "새 부분 입력/복구 guard의 구현/검증을 주장하지 않음",
+      "evidence_required": [
+        "DEV 실행 SHA·계약/조건·격리 fixture/실제 제품 구분",
+        "입력 순서·기대/실제·대상 ID/같은 종류의 관측판·게임분",
+        "정상 전/이상 중/복귀 후의 표시·허용 행동·선택/키보드 포커스·로그/화면 참조"
+      ],
+      "actual_result": null,
+      "evidence_refs": [],
+      "execution_status": "NOT_RUN",
+      "design_review": "PENDING_IMPLEMENTATION_EVIDENCE"
+    },
+    {
+      "case_id": "EX-07",
+      "copy_ids": [
+        "CP-S07",
+        "CP-R11"
+      ],
+      "source_case_name": "예측 실패",
+      "precondition_description": "예측 FAILED와 실제 사유, 유효한 독립 계획/시간",
+      "contract_mapping": "DEV_PROPOSAL_PENDING_NOT_ENGINE_FIXTURE",
+      "expected_display": "실패·현재 결과 없음.0으로 대체하거나 이전값을 현재로 표시하지 않음",
+      "expected_actions_and_independence": "최신 공급의 편집/시간은 독립, 자동 재시도 없음",
+      "recovery_and_focus": "새 정상 공급은 입력판/계획 소속이 맞는 경우에만 현재로 표시",
+      "application_boundary": "현재 공급이 보장한 조건에서만 문구 소비. 제품 적용/인수 완료 아님",
+      "implementation_boundary": "새 부분 입력/복구 guard의 구현/검증을 주장하지 않음",
+      "evidence_required": [
+        "DEV 실행 SHA·계약/조건·격리 fixture/실제 제품 구분",
+        "입력 순서·기대/실제·대상 ID/같은 종류의 관측판·게임분",
+        "정상 전/이상 중/복귀 후의 표시·허용 행동·선택/키보드 포커스·로그/화면 참조"
+      ],
+      "actual_result": null,
+      "evidence_refs": [],
+      "execution_status": "NOT_RUN",
+      "design_review": "PENDING_IMPLEMENTATION_EVIDENCE"
+    },
+    {
+      "case_id": "EX-08",
+      "copy_ids": [
+        "CP-R18",
+        "CP-S08",
+        "CP-S04"
+      ],
+      "source_case_name": "입력 변경·이전 예측",
+      "precondition_description": "입력 변경 뒤 previous가 남고 현재 결과는 비워진 상태",
+      "contract_mapping": "DEV_PROPOSAL_PENDING_NOT_ENGINE_FIXTURE",
+      "expected_display": "이전 입력판·생성시각·기간을 가진 비교값과 현재 미계산 분리",
+      "expected_actions_and_independence": "이전 예측으로 현재 제출/유효성을 판정하지 않음",
+      "recovery_and_focus": "새 계산 결과로 현재만 갱신. 이전의 출처를 현재처럼 바꾸지 않음",
+      "application_boundary": "현재 공급이 보장한 조건에서만 문구 소비. 제품 적용/인수 완료 아님",
+      "implementation_boundary": "새 부분 입력/복구 guard의 구현/검증을 주장하지 않음",
+      "evidence_required": [
+        "DEV 실행 SHA·계약/조건·격리 fixture/실제 제품 구분",
+        "입력 순서·기대/실제·대상 ID/같은 종류의 관측판·게임분",
+        "정상 전/이상 중/복귀 후의 표시·허용 행동·선택/키보드 포커스·로그/화면 참조"
+      ],
+      "actual_result": null,
+      "evidence_refs": [],
+      "execution_status": "NOT_RUN",
+      "design_review": "PENDING_IMPLEMENTATION_EVIDENCE"
+    },
+    {
+      "case_id": "EX-09",
+      "copy_ids": [
+        "CP-S09"
+      ],
+      "source_case_name": "현재 자금 시각 불일치",
+      "precondition_description": "현재 자금 coherent=false와 독립 유효 지도/보고",
+      "contract_mapping": "DEV_PROPOSAL_PENDING_NOT_ENGINE_FIXTURE",
+      "expected_display": "시각 불일치 안내, 서로 다른 시점 금액 혼합 없음",
+      "expected_actions_and_independence": "시계/원장 자동 정정·전역 시간정지 없음, 의존 행동은 공급 확인",
+      "recovery_and_focus": "coherent 정상 공급 후 현재 자금 표시. 독립 선택/포커스 보존 여부 확인",
+      "application_boundary": "현재 공급이 보장한 조건에서만 문구 소비. 제품 적용/인수 완료 아님",
+      "implementation_boundary": "재무 coherent 및 당일 금액/관측 검사 존재. 전체 S01 구조·버전·누락 안전 보장 아님",
+      "evidence_required": [
+        "DEV 실행 SHA·계약/조건·격리 fixture/실제 제품 구분",
+        "입력 순서·기대/실제·대상 ID/같은 종류의 관측판·게임분",
+        "정상 전/이상 중/복귀 후의 표시·허용 행동·선택/키보드 포커스·로그/화면 참조"
+      ],
+      "actual_result": null,
+      "evidence_refs": [],
+      "execution_status": "NOT_RUN",
+      "design_review": "PENDING_IMPLEMENTATION_EVIDENCE"
+    },
+    {
+      "case_id": "EX-10",
+      "copy_ids": [
+        "CP-S10"
+      ],
+      "source_case_name": "당일 운영비 자료 누락/오류",
+      "precondition_description": "당일 금액의 누락/잘못된 타입/음수와 관측판 불일치를 구분",
+      "contract_mapping": "DEV_PROPOSAL_PENDING_NOT_ENGINE_FIXTURE",
+      "expected_display": "누락/오류를0으로 채우지 않음. 단순 시점 불일치와 안내를 구분",
+      "expected_actions_and_independence": "독립 현재/과거 영역과 허용 행동 유지. UI가 합계를 재계산하지 않음",
+      "recovery_and_focus": "정상 금액/관측 자료가 모두 공급된 뒤 해당 영역 복귀",
+      "application_boundary": "현재 공급이 보장한 조건에서만 문구 소비. 제품 적용/인수 완료 아님",
+      "implementation_boundary": "재무 coherent 및 당일 금액/관측 검사 존재. 전체 S01 구조·버전·누락 안전 보장 아님",
+      "evidence_required": [
+        "DEV 실행 SHA·계약/조건·격리 fixture/실제 제품 구분",
+        "입력 순서·기대/실제·대상 ID/같은 종류의 관측판·게임분",
+        "정상 전/이상 중/복귀 후의 표시·허용 행동·선택/키보드 포커스·로그/화면 참조"
+      ],
+      "actual_result": null,
+      "evidence_refs": [],
+      "execution_status": "NOT_RUN",
+      "design_review": "PENDING_IMPLEMENTATION_EVIDENCE"
+    },
+    {
+      "case_id": "EX-11",
+      "copy_ids": [
+        "CP-S11"
+      ],
+      "source_case_name": "보고 없음",
+      "precondition_description": "UNAVAILABLE·빈 보고의 첫날 확인 문맥과 원인 미확인 문맥",
+      "contract_mapping": "DEV_PROPOSAL_PENDING_NOT_ENGINE_FIXTURE",
+      "expected_display": "기본 확정 보고 자료 없음. 첫날/조회 생략이 확인될 때만 미마감 부연",
+      "expected_actions_and_independence": "현재 자금·계획·시계 독립 유지. 새 재조회 버튼 없음",
+      "recovery_and_focus": "정상 보고 확인 후 자기 마감일/key로 표시.0보고와 자료 없음을 구분",
+      "application_boundary": "현재 공급이 보장한 조건에서만 문구 소비. 제품 적용/인수 완료 아님",
+      "implementation_boundary": "새 부분 입력/복구 guard의 구현/검증을 주장하지 않음",
+      "evidence_required": [
+        "DEV 실행 SHA·계약/조건·격리 fixture/실제 제품 구분",
+        "입력 순서·기대/실제·대상 ID/같은 종류의 관측판·게임분",
+        "정상 전/이상 중/복귀 후의 표시·허용 행동·선택/키보드 포커스·로그/화면 참조"
+      ],
+      "actual_result": null,
+      "evidence_refs": [],
+      "execution_status": "NOT_RUN",
+      "design_review": "PENDING_IMPLEMENTATION_EVIDENCE"
+    },
+    {
+      "case_id": "EX-12",
+      "copy_ids": [
+        "CP-S12"
+      ],
+      "source_case_name": "보고 조회 실패",
+      "precondition_description": "report_error가 있고 display_key가 남을 수 있는 FAILED 상태",
+      "contract_mapping": "DEV_PROPOSAL_PENDING_NOT_ENGINE_FIXTURE",
+      "expected_display": "조회 실패·현재 보고 값 없음. key만으로 READY 승격 없음",
+      "expected_actions_and_independence": "현재 자금/계획/시계 독립 유지. 디스크/네트워크 복구 기능 약속 없음",
+      "recovery_and_focus": "정상 공급 시 해당 출처의 보고로 복귀. 과거 값을 다른 보고에 합치지 않음",
+      "application_boundary": "현재 공급이 보장한 조건에서만 문구 소비. 제품 적용/인수 완료 아님",
+      "implementation_boundary": "새 부분 입력/복구 guard의 구현/검증을 주장하지 않음",
+      "evidence_required": [
+        "DEV 실행 SHA·계약/조건·격리 fixture/실제 제품 구분",
+        "입력 순서·기대/실제·대상 ID/같은 종류의 관측판·게임분",
+        "정상 전/이상 중/복귀 후의 표시·허용 행동·선택/키보드 포커스·로그/화면 참조"
+      ],
+      "actual_result": null,
+      "evidence_refs": [],
+      "execution_status": "NOT_RUN",
+      "design_review": "PENDING_IMPLEMENTATION_EVIDENCE"
+    },
+    {
+      "case_id": "EX-13",
+      "copy_ids": [
+        "CP-S14"
+      ],
+      "source_case_name": "알 수 없는 사유",
+      "precondition_description": "사유 미상/알 수 없는 코드 결과와 현재 허용 상태",
+      "contract_mapping": "DEV_PROPOSAL_PENDING_NOT_ENGINE_FIXTURE",
+      "expected_display": "수락/거부/실패 사실 보존, 제품 fallback과 내부 진단 구분",
+      "expected_actions_and_independence": "코드만으로 전역 잠금·파산·새 원인을 추정하지 않음",
+      "recovery_and_focus": "현재 상태/허용값으로 다음 행동 판단. 미공급 ID/효력시각 생성 없음",
+      "application_boundary": "현재 공급이 보장한 조건에서만 문구 소비. 제품 적용/인수 완료 아님",
+      "implementation_boundary": "새 부분 입력/복구 guard의 구현/검증을 주장하지 않음",
+      "evidence_required": [
+        "DEV 실행 SHA·계약/조건·격리 fixture/실제 제품 구분",
+        "입력 순서·기대/실제·대상 ID/같은 종류의 관측판·게임분",
+        "정상 전/이상 중/복귀 후의 표시·허용 행동·선택/키보드 포커스·로그/화면 참조"
+      ],
+      "actual_result": null,
+      "evidence_refs": [],
+      "execution_status": "NOT_RUN",
+      "design_review": "PENDING_IMPLEMENTATION_EVIDENCE"
+    },
+    {
+      "case_id": "EX-14",
+      "copy_ids": [
+        "CP-S20"
+      ],
+      "source_case_name": "오래된 화면 응답",
+      "precondition_description": "같은 Session의 이전 view_revision 및 새 Session 판 재사용/이전 응답을 분리",
+      "contract_mapping": "DEV_PROPOSAL_PENDING_NOT_ENGINE_FIXTURE",
+      "expected_display": "낡은 응답은 현재 화면을 바꾸지 않음. 요청 거부 배너를 만들지 않음",
+      "expected_actions_and_independence": "낡은 화면 수신만으로 모델 요청/시간/원장 변경 없음",
+      "recovery_and_focus": "새 Session/자식 소비자 경계는 DEV 계약 뒤 검증. 서로 다른 종류 판을 직접 비교하지 않음",
+      "application_boundary": "현재 공급이 보장한 조건에서만 문구 소비. 제품 적용/인수 완료 아님",
+      "implementation_boundary": "현재 역행 무시 존재. reset_observation은 Session 생성·자식 View 전체 초기화·지연 응답 소속 검증이 아님",
+      "evidence_required": [
+        "DEV 실행 SHA·계약/조건·격리 fixture/실제 제품 구분",
+        "입력 순서·기대/실제·대상 ID/같은 종류의 관측판·게임분",
+        "정상 전/이상 중/복귀 후의 표시·허용 행동·선택/키보드 포커스·로그/화면 참조"
+      ],
+      "actual_result": null,
+      "evidence_refs": [],
+      "execution_status": "NOT_RUN",
+      "design_review": "PENDING_IMPLEMENTATION_EVIDENCE"
+    },
+    {
+      "case_id": "EX-15",
+      "copy_ids": [
+        "CP-S16",
+        "CP-R08"
+      ],
+      "source_case_name": "당시 거부·현재 편집 가능",
+      "precondition_description": "당시 요청 거부와 현재 편집 허용을 같이 확인",
+      "contract_mapping": "DEV_PROPOSAL_PENDING_NOT_ENGINE_FIXTURE",
+      "expected_display": "과거 거부 문구와 현재 자료/허용을 별도 구획으로 표시",
+      "expected_actions_and_independence": "현재 편집을 과거 거부로 덮지 않음. expected snapshot 차이만으로 일괄 거부 없음",
+      "recovery_and_focus": "당시 결과는 공급된 ID/효력으로 보존하고 새 결과만 자기 요청에 연결",
+      "application_boundary": "현재 공급이 보장한 조건에서만 문구 소비. 제품 적용/인수 완료 아님",
+      "implementation_boundary": "새 부분 입력/복구 guard의 구현/검증을 주장하지 않음",
+      "evidence_required": [
+        "DEV 실행 SHA·계약/조건·격리 fixture/실제 제품 구분",
+        "입력 순서·기대/실제·대상 ID/같은 종류의 관측판·게임분",
+        "정상 전/이상 중/복귀 후의 표시·허용 행동·선택/키보드 포커스·로그/화면 참조"
+      ],
+      "actual_result": null,
+      "evidence_refs": [],
+      "execution_status": "NOT_RUN",
+      "design_review": "PENDING_IMPLEMENTATION_EVIDENCE"
+    },
+    {
+      "case_id": "EX-16",
+      "copy_ids": [
+        "CP-S13"
+      ],
+      "source_case_name": "실제 pending 조건부 참조 · 동기 S01 적용 제외",
+      "precondition_description": "일반 S01 동기 요청과 다른 화면의 실제 pending을 분리",
+      "contract_mapping": "DEV_PROPOSAL_PENDING_NOT_ENGINE_FIXTURE",
+      "expected_display": "일반 S01에 CP-S13 제외. 실제 pending 참조는 접수·최종 성공·공정 RUNNING과 구분",
+      "expected_actions_and_independence": "실제 요청의 ID/pending/효력/최신 대상·allowed_actions에만 연결, 새 취소/자동 재접수 없음",
+      "recovery_and_focus": "기존 응찰/공사 제품을 자동 재설계하지 않음. 적용 승인된 해당 경로에서 실제 완료와 포커스 확인",
+      "application_boundary": "일반 S01 계획·시간 제어·예측 적용 제외. 응찰/공사에 자동 적용/재설계하지 않음",
+      "implementation_boundary": "응찰/공사 pending 공급은 DEV 정적 회신에서 확인. S01 전체 비동기 요청 목록/취소/타임아웃/자동 재접수는 없음",
+      "evidence_required": [
+        "DEV 실행 SHA·계약/조건·격리 fixture/실제 제품 구분",
+        "입력 순서·기대/실제·대상 ID/같은 종류의 관측판·게임분",
+        "정상 전/이상 중/복귀 후의 표시·허용 행동·선택/키보드 포커스·로그/화면 참조"
+      ],
+      "actual_result": null,
+      "evidence_refs": [],
+      "execution_status": "NOT_RUN",
+      "design_review": "PENDING_IMPLEMENTATION_EVIDENCE"
+    },
+    {
+      "case_id": "EX-17",
+      "copy_ids": [
+        "CP-S15"
+      ],
+      "source_case_name": "허용 행동 필드 미수신",
+      "precondition_description": "root 시간/predict·plan edit/undo·하위 화면 행동 중 한 군의 누락",
+      "contract_mapping": "DEV_PROPOSAL_PENDING_NOT_ENGINE_FIXTURE",
+      "expected_display": "해당 행동 허용 확인중. 누락 사유를 잔액/계약 등으로 추정하지 않음",
+      "expected_actions_and_independence": "누락 행동군만 제안 제외, 신뢰된 다른 행동/정보 열람은 독립. 과거 허용값 재사용 없음",
+      "recovery_and_focus": "정상 해당 행동군 공급 후 허용 상태와 포커스 갱신. 무관한 모델 효과 없음",
+      "application_boundary": "현재 공급이 보장한 조건에서만 문구 소비. 제품 적용/인수 완료 아님",
+      "implementation_boundary": "S01 범용 누락 guard는 현재 없음. 공급/중개 경계·지역 소비 계약과 별도 DEV 적용/검증 필요",
+      "evidence_required": [
+        "DEV 실행 SHA·계약/조건·격리 fixture/실제 제품 구분",
+        "입력 순서·기대/실제·대상 ID/같은 종류의 관측판·게임분",
+        "정상 전/이상 중/복귀 후의 표시·허용 행동·선택/키보드 포커스·로그/화면 참조"
+      ],
+      "actual_result": null,
+      "evidence_refs": [],
+      "execution_status": "NOT_RUN",
+      "design_review": "PENDING_IMPLEMENTATION_EVIDENCE"
+    },
+    {
+      "case_id": "EX-18",
+      "copy_ids": [
+        "CP-R04"
+      ],
+      "source_case_name": "관할 밖 별도 입력",
+      "precondition_description": "실제12후보를 바꾸지 않는 별도 관할 밖 오류 입력",
+      "contract_mapping": "DEV_PROPOSAL_PENDING_NOT_ENGINE_FIXTURE",
+      "expected_display": "실제 공급 대상/관할 사유만 안내. 새13번째 실제 후보 없음",
+      "expected_actions_and_independence": "현재 유효12역/계획은 보존, 원본 DATA/행정 소속 변경 없음",
+      "recovery_and_focus": "별도 검증 입력의 대상/사유와 현재 계획을 분리해 확인",
+      "application_boundary": "현재 공급이 보장한 조건에서만 문구 소비. 제품 적용/인수 완료 아님",
+      "implementation_boundary": "새 부분 입력/복구 guard의 구현/검증을 주장하지 않음",
+      "evidence_required": [
+        "DEV 실행 SHA·계약/조건·격리 fixture/실제 제품 구분",
+        "입력 순서·기대/실제·대상 ID/같은 종류의 관측판·게임분",
+        "정상 전/이상 중/복귀 후의 표시·허용 행동·선택/키보드 포커스·로그/화면 참조"
+      ],
+      "actual_result": null,
+      "evidence_refs": [],
+      "execution_status": "NOT_RUN",
+      "design_review": "PENDING_IMPLEMENTATION_EVIDENCE"
+    },
+    {
+      "case_id": "EX-19",
+      "copy_ids": [
+        "CP-S19"
+      ],
+      "source_case_name": "보고 식별 미확인",
+      "precondition_description": "정상 runtime display_key/day 및 별도 출처/날짜 불일치 조건",
+      "contract_mapping": "DEV_PROPOSAL_PENDING_NOT_ENGINE_FIXTURE",
+      "expected_display": "소속/마감일 확인 전 같은 보고로 합치지 않음. key는 영구ID 아님",
+      "expected_actions_and_independence": "독립 현재 자금/계획 유지, 세이브 복원/전역 보고ID 기능 창작 없음",
+      "recovery_and_focus": "실제 Session 소속/day 소비 계약을 DEV가 제안한 뒤 확인. 현재 guard 구현 완료로 표시하지 않음",
+      "application_boundary": "현재 공급이 보장한 조건에서만 문구 소비. 제품 적용/인수 완료 아님",
+      "implementation_boundary": "정상 공급의 key 생성과 View의 기대 실행 prefix/day 검증은 별개. 후자는 현재 없음",
+      "evidence_required": [
+        "DEV 실행 SHA·계약/조건·격리 fixture/실제 제품 구분",
+        "입력 순서·기대/실제·대상 ID/같은 종류의 관측판·게임분",
+        "정상 전/이상 중/복귀 후의 표시·허용 행동·선택/키보드 포커스·로그/화면 참조"
+      ],
+      "actual_result": null,
+      "evidence_refs": [],
+      "execution_status": "NOT_RUN",
+      "design_review": "PENDING_IMPLEMENTATION_EVIDENCE"
+    },
+    {
+      "case_id": "EX-20",
+      "copy_ids": [
+        "CP-S18"
+      ],
+      "source_case_name": "당일 관측판 불일치",
+      "precondition_description": "당일 day/minute/snapshot_revision 불일치와 금액 오류를 구분",
+      "contract_mapping": "DEV_PROPOSAL_PENDING_NOT_ENGINE_FIXTURE",
+      "expected_display": "당일 관측 시점 확인중, 과거 누계를 현재로 가장하거나0으로 보완하지 않음",
+      "expected_actions_and_independence": "현재 유효 잔액/과거보고 독립. 기존 B를 비용으로 다시 인식하지 않음",
+      "recovery_and_focus": "동일 종류의 관측판·게임일/분 일치 시 복귀. 계획판/표시판과 직접 교차 비교 없음",
+      "application_boundary": "현재 공급이 보장한 조건에서만 문구 소비. 제품 적용/인수 완료 아님",
+      "implementation_boundary": "재무 coherent 및 당일 금액/관측 검사 존재. 전체 S01 구조·버전·누락 안전 보장 아님",
+      "evidence_required": [
+        "DEV 실행 SHA·계약/조건·격리 fixture/실제 제품 구분",
+        "입력 순서·기대/실제·대상 ID/같은 종류의 관측판·게임분",
+        "정상 전/이상 중/복귀 후의 표시·허용 행동·선택/키보드 포커스·로그/화면 참조"
+      ],
+      "actual_result": null,
+      "evidence_refs": [],
+      "execution_status": "NOT_RUN",
+      "design_review": "PENDING_IMPLEMENTATION_EVIDENCE"
+    }
+  ],
+  "f08": {
+    "F08-01": "OPEN",
+    "F08-02": "OPEN",
+    "F08-03": "OPEN",
+    "F08-04": "OPEN"
+  },
+  "final_spec": "UNCONFIRMED",
+  "product_execution": "NOT_RUN"
+}
