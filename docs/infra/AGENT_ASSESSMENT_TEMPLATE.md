@@ -1,5 +1,7 @@
 # Independent Agent Context Assessment — INF Template
 
+> INF-009: 요청된 상세 독립 평가에만 사용하는 선택 양식이다. 아래 PM·Owner 의견란은 진단 기록이며 [통상 인계](AGENT_HANDOFF_TEMPLATE.md)의 별도 승인 대기란이 아니다. INF 자체 평가에는 Owner 지정 독립 검증자를 기록한다.
+
 - 평가 ID: `ACHC-YYYYMMDD-ROLE-SESSION-INF`
 - 대상 역할/세션(가명): / 제출된 SELF_REPORTED 문서 식별:
 - 평가 시각·시간대: / 검증자: INF / 업무 전환 협의: PM

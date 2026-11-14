@@ -1,4 +1,6 @@
 # INF-002 — 후임 Agent-ID 자동 등록 적합성 및 안전 설계
+
+> INF-009 / 2026-11-14 적용 안내: 아래는 INF-002 당시의 설계·미결 이력이다. 통상 수동 인계의 필수 시험·PM 확인·재승인 및 업무상 ID 예약·활성화 순서는 [전환 규정](REGISTRY_TRANSITION_RULES.md)으로 대체한다. 아래 과거 제안이 현재 의무를 다시 부과하지 않는다. DEV-017 도구의 PENDING 제안·trusted base 검사·실운영시험·ENFORCE는 별개이며, 이 문서 개정은 자동 활성화·자동 병합이나 도구 구현 완료를 승인하지 않는다.
 - 문서: v1.0 / 2026-11-02 / 담당: INF / 상태: REVIEW — Owner 구현·운영 승인 필요
 - 대상: `docs/infra/agents/registry.json` / DEV-013 REPORT_ONLY 시제품
 - 책임: INF=ID·인계·승인 근거 검증, Convention Team=검사/발급 보조도구 구현, HQ/PM=업무 전환, Owner=임명·병합·강제 적용 승인
