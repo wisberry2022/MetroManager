@@ -1,11 +1,12 @@
 # DEV-023 — 착수 준비와 P1 공급 구현·검증 결과
 
 - 담당: Development Project Leader / AGT-DEV-0004 / 2026-11-15 (Asia/Seoul).
-- 상태: **P3_IMPLEMENTED_REVIEW_REQUESTED / DESIGN_L2_ACCEPTED / INDEPENDENT_GUI_PENDING**.
+- 상태: **P3_MERGED / DESIGN_L2_ACCEPTED / INDEPENDENT_GUI_24_CONDITIONS_ACCEPTED_STAGE_CLOSED**. DEV-023 전체 DONE·상위 인수와 구별한다.
 - 현재 P3 기준 main: `3e2982ac71be28344c3be5360652f4071c678ce3`. 이전 P1 기준은 각 실행 이력에 보존.
-- 현재 브랜치: `codex/DEV-023-operations-screen-integration`. Owner 승인에 따른 후속 PR 제출 검토본.
+- 후속 기록 브랜치: `codex/DEV-023-design-acceptance-note`. §10의 로컬 검토 기준은 a9ce63a, 현재 제출 기준은 `9d6b4614b6eeeb2f3a3410e584de12329bc251f5`이며 이번 Git 승인·HQ의 별도 Owner DONE 결정은 §11을 따른다.
+- 이전 구현 브랜치 `codex/DEV-023-operations-screen-integration`의 PR #128은 병합됐다. 당시 P3 검증 기준은 위 SHA와 §9에 보존한다.
 
-> §1~5는 Owner 실행 승인 전 준비 기록, §6은 최초 P1 검토 결과다. Design 회신 후 보완 결과는 §7, 이전 원격 제출 승인·단계는 §8, 현재 P3 통합 결과는 §9를 따른다.
+> §1~5는 Owner 실행 승인 전 준비 기록, §6은 최초 P1 검토 결과다. Design 회신 후 보완 결과는 §7, 이전 원격 제출 승인·단계는 §8, P3 통합 당시 결과는 §9, 현재 독립 GUI 수용 후속 기록은 §10을 따른다. 이전 PENDING/PARTIAL/NOT_RUN과 실행 증거를 소급 변경하지 않는다.
 
 ## 1. PR #123 병합과 최신 지시 확인
 
@@ -185,3 +186,74 @@ DEV 자체 REAL_GUI는 G01~G06으로 구분한다. 제품 main 초기화·개통
 기존 Q03~05·W05·OBS-01·Q12 한정 수용/원래 P05 인계 종료 가능과 상위 PARTIAL, 환경/DPI·기존 ERROR 정합성·R02 등의 별도 상태를 보존한다. DEV-026 구현·제품 검증 보류 유지. 새 게임/경제 명세 변경 필요 없음. 이 PR은 P3 구현·DEV 검증 결과의 검토 요청이며 main 병합·Stage DONE 승인이 아니다.
 
 후속 증거 감사: 반복 실행한 long/만족도 GUI 프로필에서 각각 shader cache 하위 경로 생성 ERROR68건(스크립트 오류0)을 확인했다. 해당 로그를 정상 PASS에서 제외하고 짧은 실행별 .local/g23 프로필로 분리해 G03/G06을 다시 관측·종료0·SCRIPT ERROR/ERROR0으로 확보했다. 엔진/OS의 정확한 원인은 확정하지 않았고 캐시·safe-save·제품 설정을 끄거나 변경하지 않았다. 기존 환경/DPI 인수의 해소로 확대하지 않는다. 엔진이 생성한 untracked 이미지 .import151개만 원본 자산/추적 여부 확인 후 제거했으며 원본은 보존했다.
+
+## 10. Design 독립 GUI 24조건 수용 수신 — 후속 기록
+
+Owner의 이번 지시: “개발 에이전트. 디자이너 에이전트가 원격 저장소의 79번, 81번 이슈에 회신을 등록했으니 확인하여 응답 및 조치가 필요한 부분이 있으면 진행해주세요”.
+
+[Design #79 최종 정본](https://github.com/wisberry2022/MetroManager/issues/79#issuecomment-6887989037)과 [#81 연결](https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6887995179)을 확인했다. **기존 IG1115A 21조건 + SUP1115B 보완3조건 = CASE_MATRIX 총24조건 한정 수용, 합의된 독립 GUI 검수 단계 종료**다. 해당 범위에 미충족 필수 조건이나 추가 구현·증거 재공급·GUI 재실행 요청은 없다. U01~U20 모든 조합 PASS, DEV-023 전체 DONE, Issue 종료 또는 Stage 최종 인수로 확대하지 않는다.
+
+### 근거·이력·확인 수준
+
+- PR #128 제출 head `b1d9da850960627297651fb42fef2f89353a7daf`와 병합/독립 시험 SHA `bf99dd11f3d8cd4d6dc07e38de164cd0b27f8dba`의 tree diff 없음.
+- fetch 후 최신 main `a9ce63a09e0778435bb8c7ef1fd0501aa10f430d`를 확인했다. 시험본 이후 변경은 POST-MVP 기획 문서3개뿐이며 제품·시험·설정 변경 없음. SHA 진전 자체를 GUI 재실행 사유로 삼지 않는다.
+- [앞선21조건 수용·PARTIAL 정본](https://github.com/wisberry2022/MetroManager/issues/79#issuecomment-6887692818)의 당시 3조건 NOT_RUN은 최종 판정으로 해소됐다. 원래 PARTIAL/NOT_RUN 기록은 유지하고 후속 판정을 별도로 연결한다.
+- 원본은 Owner 보관이며 이번 DEV 작업에서 ZIP을 새로 수신·재해시하거나 독립 GUI를 재실행하지 않았다. 아래 원본 크기·해시·파일 감사·종료 결과는 **Design이 확인해 공개한 판정의 인용**이다. DEV 신규 실행으로 합산하지 않는다.
+
+| Owner 보관 원본 | 크기 / SHA-256 | Design 심사 범위 |
+| --- | --- | --- |
+| DEV-023-INDEPENDENT-GUI-20261115-IG1115A.zip | 13,855,687 bytes / `ebaa73558475895cfe10540606fc8d33c0f4299b887edbb83bd28f1558b95195` | 파일362/362, 원격 시험 소스644/644·실제 주입22/22 대조, 원래21조건 수용 |
+| DEV-023-INDEPENDENT-GUI-SUPPLEMENT-20261115-SUP1115B.zip | 6,344,934 bytes / `0e95d4ca611af091c5f091f0fba84acce571ce841e7b049b1e3597ef47e469c1` | 파일108/108, 소스644개 및 실행 전 도구 사본/해시 대조. B01·B02 exit0, ERROR/SCRIPT ERROR0 |
+
+### 보완3조건의 수용 범위
+
+| 원본 CASE_MATRIX 행 / 검증 행 | 최종 판정과 관측 범위 |
+| --- | --- |
+| 행17 / IG-06 U11 | PASS. 같은 Session/Host에서 실제 이전 Day1 응답을 Day4 표시 후 전달해 거부. 보고·키·본문·조회 허용·버튼 포커스·scroll605와 게임 효과 유지. 주입 뒤 재선택/비교 기준 초기화로 복구한 증거가 아님 |
+| 행22 / IG-08 U18·U19 | PASS. 525자 한국어 불가 사유가 800×600에서 끝까지 표시되고 키보드 상세/복귀 접근·사유 유지 확인. CONSUMER_FIXTURE 범위이며 자연 모델 실패 발생 증거로 확대하지 않음 |
+| 행25 / IG-08 U17 | PASS. P05 실제 입력의 이동 직전/제품 저장/복귀 scroll234→234→234, 포커스·공사 공급·게임 효과 유지. 코드로 scroll/context를 강제한 결과가 아님 |
+
+기존21조건의 정확한 행·TEST_ONLY/소비 사본·관측 한계는 앞선 정본을 재사용한다. CLOSE-01은 R12로 이미 보완됐으며 다시 미검증으로 되돌리지 않는다. 신규 상태 색인은 [검증 JSON](../gate3/DEV-023_UI_VALIDATION.json)의 `design_independent_acceptance`다. 기존 root·l2_followup·p3_integration 등 모든 값은 변경하지 않았다.
+
+### 유지할 잔여와 필요한 조치
+
+- A01-Q12 상위 PARTIAL, Q03~05·QA-001/002·Q12 28조건·W05/OBS-01·A02-11·원래 P05 인계/복귀 종료 가능 판단 및 L2 수용을 각각의 원래 범위로 보존한다.
+- 일부 IG1115A R03~R11 실행 당시 보조 도구 바이트, 초기 import/캐시 오류의 정확한 원인·물리 DPI/과거 창 동등성은 NOT_VERIFIED다. 최초 비프로필 전체 콘솔과 Q12 R02 종료 NOT_CAPTURED, R13/R14 timeout·exit4294967295, R09 당시 PARTIAL은 이력으로 보존한다.
+- Q12 ERROR 집계2→7의 인계 정정 연결 완료 NOT_VERIFIED 등 기록 잔여는 별도다. 이번24조건의 새 차단 조건으로 편입하지 않는다.
+- 남은 상위 인수는 DEV-024의 자연 표준 VS-01 완주·HQ 증거 통합·Owner 최종 판단이다. 수용된 GUI 증거는 실제 관측 범위에서 재사용한다. 이번 지시로 DEV-024 제품 실행·새 Git 권한 또는 완료를 선언하지 않는다.
+- Track B/F08-01~04·최종 규격·빌드/export/FPS·모든 문맥×키 조합의 별도 범위와 DEV-026 구현·제품 검증 HOLD를 유지한다.
+- 현재 필요한 조치는 수용 결과 기록·#79 정본 응답/#81 연결이며 제품 수정이나 추가 GUI는 없다. 관련 코드/계약/환경 변화, 새 결함 또는 증거 신뢰성 문제 발생 시 PM-015에 따라 영향 행만 재개방한다.
+
+### 이번 수행과 로컬 검토
+
+실제 변경은 본 결과서, 검증 계획의 후속 §10, 검증 JSON 색인 **3개 문서/증거 파일**이다. 제품·테스트·fixture·기존 provenance 제출 manifest는 그대로이며, manifest는 PR #128 당시 출처 기록으로 보존한다. 새 Git 제출이 승인되면 해당 제출의 base/변경 목록으로 별도 갱신한다.
+
+이번 정적 확인은 doctor, git diff/tree 대조, JSON 이전 필드 보존·24행 집계·근거 링크·허용 경로 검사, policy check다. 검증 로그는 로컬 `.local/validation/design-acceptance/`에 둔다. **게임 자동 테스트 / Godot 프로젝트 로드 / 실제 GUI·플레이 / 빌드·export·FPS: NOT_RUN**이며 문서 수신·정적 기록 작업이므로 재실행하지 않았다. 기존 자동·GUI·CI 결과는 원래 실행으로 보존한다.
+
+게임/경제 명세 변경 필요 없음. 신규 Commit·Push·PR·병합은 수행하지 않고 로컬 결과부터 검토 요청한다. 이번 결과나 회신을 공식 DONE/상위 인수로 처리하지 않는다.
+
+후속 회신: [개발 #79 정본](https://github.com/wisberry2022/MetroManager/issues/79#issuecomment-6888066340)과 [#81 연결](https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6888069422)을 게시하고 등록 본문 일치를 재조회로 확인했다. 이번 정적·정책 검사 PASS, 기존 JSON 필드/결과서 §1~9 및 검증 계획 이력 보존, 수용24행 중복 없음·근거 링크·시험본 동등성을 확인했다.
+
+## 11. Owner 후속 기록 제출 승인·HQ 완료 결정 연결
+
+Owner의 이번 개발 대화 지시:
+
+> DEV-023 로컬 후속 기록 3개 파일을 승인합니다. codex/DEV-023-design-acceptance-note 브랜치에 Commit·Push하고 PR을 생성한 뒤 필수 CI 결과까지 확인해주세요. main 병합은 별도 승인하겠습니다. DEV-026 구현·검증 보류는 유지합니다.
+
+대상은 wisberry2022/MetroManager / DEV-023 / AGT-DEV-0004 / codex/DEV-023-design-acceptance-note → main이다. **승인된 결과서·검증 계획·검증 JSON 3개 파일만** Commit·일반 Push·PR·필수 CI 확인에 제출한다. 유효 기간은 이번 제출 및 동일 범위 보완 종료 또는 Owner 철회까지다. main 병합·직접 쓰기·강제 Push·릴리스·배포·추가 제품 구현·DEV-026 보류 해제는 포함하지 않는다. §10과 JSON의 LOCAL_REVIEW_ONLY는 승인 전 검토 시점 기록이며 이 절이 현재 Git 권한의 근거다.
+
+### 최신 통합 기준과 별도 Owner 완료 결정
+
+fetch한 최신 main은 `9d6b4614b6eeeb2f3a3410e584de12329bc251f5`다. 로컬 검토 기준 a9ce63a 이후 Design2개·HQ5개 문서만 추가 변경됐으며 개발 제품/검증 파일은 동일하다. 승인된3개 파일의 바이트를 이전 감사 SHA-256과 대조하고 사본을 보존한 뒤, 이 작업 브랜치만 최신 main으로 fast-forward했다. 공용 main과 다른 worktree의 작업은 변경하지 않았다.
+
+[HQ PM-018 Owner 결정](../../hq/tasks/PM-018_DEV023_CLOSEOUT.md)과 [결과](../../hq/tasks/PM-018_RESULT.md), [#79](https://github.com/wisberry2022/MetroManager/issues/79)를 확인했다. **DEV-023은 별도 Owner 결정에 따라 OWNER_ACCEPTED / DONE이며 #79는 CLOSED/completed**다. Design의 24조건 한정 수용이 스스로 전체 DONE을 부여한 것이 아니므로, §10의 당시 한정 수용/권한 경계는 그대로 보존하고 이 후속 결정을 연결한다. 현재 기록 근거는 위 최신 main의 PM-018이며 해당 문서의 MAIN_MERGE_PENDING은 작성 시점 이력이다.
+
+DEV-024 자연 표준 VS-01·최종 영향 회귀, HQ 증거 통합 및 Owner 최종 Stage 인수는 후속이다. 기존 A01-Q12 상위 PARTIAL·환경/기록 잔여·Track B/F-08 별도 범위 및 DEV-026 구현·제품 검증 HOLD는 유지한다. 이번 PR 제출을 전체 S2 PASS·Stage DONE으로 확대하지 않는다.
+
+### 제출 범위·검증·출처 보고의 한계
+
+기존 승인3개 파일 안에 이번 제출 승인·최신 HQ 근거만 후속으로 연결한다. 검증 계획은 승인본 그대로이며, 검증 JSON의 기존 P1/L2/P3·Design 판정 원본 값과 결과서 §1~10은 보존한다. 제품·테스트·fixture·정책·CI·타 부서 파일 변경 없음. 게임 자동검사·Godot 로드·GUI/플레이·빌드/export/FPS 및 원본 ZIP 재해시는 이번에도 NOT_RUN이며 기존 수용을 새 실행으로 합산하지 않는다.
+
+기존 `DEV-023_PROVENANCE.json`은 PR #128의 base/16개 artifact를 설명하는 제출 당시 기록이다. 이번 Owner가 지정한 **3개 파일 범위를 유지하기 위해 해당 네 번째 파일은 수정하지 않는다**. [DEV-016 보고 운영 규정](../provenance/DEV-016_INF_REVIEW_AND_ROLLOUT.md)의 비필수 REPORT_ONLY 검사에서는 이전 manifest와 현재 제출 base의 차이로 MANIFEST_BASE 진단이 예상된다. 이를 출처 일관성 PASS나 신원/승인 인증으로 표시하지 않고 실제 진단을 PR/CI 결과에 공개한다. 정책/CI를 수정하거나 우회하지 않는다. 이번3개 파일의 경로·blob·변경자는 실제 Git diff, Commit/PR Agent-ID·Task-ID 및 제출 검증으로 별도 확인한다.
+
+제출 검사는 doctor/check·승인본 보존/JSON/링크/경로·git diff --check, 정상 Commit/Push 훅, 커밋 후 preflight와 실제 제출 head의 **policy·department-policy**를 따른다. 정확한 commit/PR/CI 결과는 해당 PR 본문·Checks에 기록한다. main 병합은 별도 승인 대기다.
