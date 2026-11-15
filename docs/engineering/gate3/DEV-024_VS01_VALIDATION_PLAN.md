@@ -1,9 +1,9 @@
 # DEV-024 — VS-01 검증·기존 수용·잔여 대응표
 
-- AGT-DEV-0004 / 2026-11-15 / **LOCAL_REVIEW / DESIGN_PARTIAL**. 독립 판정은 §8, 승인 후 DEV 보완 검증은 §9이며 이전 기록은 해당 시점 이력이다.
-- 기준: `0a76a2e924ec0b661e3cdbd858ed6bfd665f3dc9`.
-- [작업·권한](../tasks/DEV-024_VS01_INTEGRATION_EVIDENCE.md) / [실행 패킷](DEV-024_VS01_EXECUTION_PLAN.md) / [준비 결과](../tasks/DEV-024_RESULT.md).
-- §1~6은 준비 당시 기록이다. 승인 후 자동검사·로드·DEV 자체 GUI 결과는 §7에 추가했으며 독립 실행/Design 새 심사·빌드는 NOT_RUN이다.
+- AGT-DEV-0004 / 2026-11-15 / **DESIGN_GUI_ACCEPTED / GUI_REVIEW_CLOSED / LOCAL_DOCUMENT_REVIEW**.
+- 최신 독립 보완·Design 수용/S2 연결은 §10. §1~9와 당시 FAIL/PARTIAL/PENDING은 이력이다.
+- 이번 후속 기준: `324faf9b7d81540240217d2757f26de6f07460ba`. 최초 기준: `0a76a2e924ec0b661e3cdbd858ed6bfd665f3dc9`.
+- [작업·권한 §11](../tasks/DEV-024_VS01_INTEGRATION_EVIDENCE.md) / [실행 패킷 §8](DEV-024_VS01_EXECUTION_PLAN.md) / [결과 §15](../tasks/DEV-024_RESULT.md).
 
 ## 1. 이미 수용한 증거와 자연 완주를 구별
 
@@ -179,3 +179,30 @@ Windows 빌드/export/FPS, 독립 GUI, Design 새 심사, Commit·Push·PR·main
 | 빌드/export/FPS·전체 자연 재실행·DEV-026 | **NOT_RUN / NOT_RUN / HOLD** | 승인된 직접 영향 범위 외 |
 
 실제 소스·명령·원본/실패 보존·8경로·독립 인계는 [결과서 §13](../tasks/DEV-024_RESULT.md)과 [JSON 후속 키](DEV-024_VS01_VALIDATION.json)의 `v05_correction_20261115`에 연결했다. 기존 JSON 필드/§1~8 판정은 당시 이력으로 보존한다. DEV 자체 보완 PASS로 V05-3 Design 수용·전체 DONE·Stage 인수를 선언하지 않는다. 과거 PROV-01/DPI/입력 신원·Q12 기록 잔여도 소급 해소하지 않는다.
+
+## 10. 독립 보완 수용·검증 계보·HQ 연결 — 2026-11-15
+
+[Design #80 정본](https://github.com/wisberry2022/MetroManager/issues/80#issuecomment-6890415230)과 [#81 연결](https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6890437629)을 수신했다. F1~F3 PASS·V05-3 수용으로 합의된 DEV-024·VS-01 독립 GUI 검수 단계를 종료한다. §8의 GUI 전체 PARTIAL 및 §9 독립 보완 NOT_RUN/Design PENDING은 당시 기록으로 남으며 최신 상태는 본 절이다.
+
+| 증거/대상 | 현재 수용·연결 | 보존하는 경계 |
+| --- | --- | --- |
+| V01~V04·V05-1/2 | 기존 독립 자연 run1115A 수용 유지 | 원래 SHA0865e5a2…의 자연 완주/최종 P01 도달. 즉시 P01은 당시 FAIL |
+| V05-3 / OBS-V05-01 | 새 독립 run1115B의 F1~F3 PASS 수용 | SHA324faf9b…에서 MODEL_CHAIN_SETUP 뒤 실제 입력. 새 자연 전체 완주 아님 |
+| F1 | 재개 후 A36→B38 조회 즉시 P01·보이는 refresh·추가 탐색0 | 중단 중 첫 QUERY 및 입력7~25/캡처8~27은 NOT_VERIFIED로 제외 |
+| F2 | C40 원래 P07 보고·query 포커스·scroll605 복원 | B 목록 scroll124와 구분, 강제0 요구 없음 |
+| F3 | A/B/C minute5760·효과 해시 동일 | 물리 입력 신원/전체 프로세스 인증으로 확대하지 않음 |
+| DEV 자체 자동·로드·GUI | §9의 자동1185/로드/PASS·자체 GUI 재사용 | 독립 실행·Design 심사·패킷 감사130과 별도 |
+| PR #135 필수 CI | head f508d882…의 policy·department-policy SUCCESS | 이번 문서 후보의 CI가 아님 |
+| DOC-01 | README §2 정정문 준비, 원본 ZIP/PNG 메타데이터 읽기 확인 | PNG24개1100×900·16개2880×1659. 재개28~40 수용 영향 없음 |
+| 이번 문서 작업 | 정책·8경로·기록/원본 보존·링크·출처 정적 검증 | 새 게임/로드/GUI/빌드 NOT_RUN |
+
+S2 대응은 [HQ 기존 인수표](../../hq/STAGE2_ACCEPTANCE_MATRIX.md)의 소유 부서에 전달할 제안이며 DEV가 HQ 원본을 갱신하거나 전체 PASS를 선언하지 않는다.
+
+| HQ 항목 | 연결할 근거 | 잔여 판단 |
+| --- | --- | --- |
+| S2-08 실제 GUI | 기존 V01~V04·V05-1/2 + 이번 F1~F3 수용 | 해당 GUI V05-3 차단 해소. 기존 다른 행/범위는 유지 |
+| S2-09 첫 보고→공고 조회 | 기존 유효 보고/QUERY + 새 즉시 P01·원래 보고 복귀/무효과 | 두 시험본/수용 범위를 함께 표기 |
+| S2-10 VS-01 통합 | 원래 SHA의 자연 완주 + 변경 영향의 새 SHA 국소 보완·Design 수용 | 새 SHA 자연 전체 완주로 재명명하지 않음. 최종 회귀/CI 묶음은 HQ 취합 |
+| S2-11 교차 인수 | 위 수용·PR CI·기존/직접 영향 회귀·DOC-01·미해결 목록 전달 | HQ 교차 인수 취합 및 Owner DEV-024 DONE·Issue 종료·Stage 인수 별도 |
+
+A01-Q12 상위 PARTIAL과 기존 수용24조건/Q03~05/W05/Q12는 원래 범위대로다. 이번/과거 NOT_CAPTURED·NOT_VERIFIED·UNKNOWN·실패/중단을 소급 해소하지 않는다. 구체 한계와 명령/증거는 [결과 §15](../tasks/DEV-024_RESULT.md), 전달 문안은 [HQ 요약](DEV-024_DESIGN_ACCEPTANCE_HQ_HANDOFF.md)에 있다. 추가 필수 GUI는 없으며 **DEV-026 구현·제품 검증 HOLD**.

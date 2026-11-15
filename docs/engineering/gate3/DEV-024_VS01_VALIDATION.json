@@ -1868,5 +1868,180 @@
       "historical_PROV01_DPI_and_other_limits": "PRESERVED_NOT_RETROACTIVELY_RESOLVED"
     },
     "historical_note": "Prior JSON fields and the design receipt including its then-pending scope are historical snapshots. This entry records the later approval and DEV self-validation."
+  },
+  "design_acceptance_20261115_1115b": {
+    "record_type": "DESIGN_ACCEPTANCE_RECEIPT_AND_LOCAL_DOCUMENT_FOLLOWUP",
+    "recorded_date": "2026-11-15",
+    "agent_id": "AGT-DEV-0004",
+    "canonical_design_comment": "https://github.com/wisberry2022/MetroManager/issues/80#issuecomment-6890415230",
+    "tracking_comment": "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6890437629",
+    "accepted_at_kst": "2026-11-15T15:33:14+09:00",
+    "tracking_at_kst": "2026-11-15T15:35:30+09:00",
+    "basis_sha": "324faf9b7d81540240217d2757f26de6f07460ba",
+    "status": {
+      "F1": "PASS_ACCEPTED",
+      "F2": "PASS_ACCEPTED",
+      "F3": "PASS_ACCEPTED",
+      "OBS_V05_01": "ACCEPTED",
+      "V05_3": "ACCEPTED",
+      "agreed_DEV024_VS01_independent_gui": "CLOSED_BY_DESIGN_ACCEPTANCE",
+      "additional_mandatory_gui_or_product_fix": "NONE",
+      "A01_Q12": "PARTIAL",
+      "DEV024_owner_done": "NOT_DECLARED",
+      "S2_11_stage_acceptance": "HQ_OWNER_PENDING",
+      "DEV026": "HOLD"
+    },
+    "merged_submission": {
+      "pr": 135,
+      "head": "f508d88281dc84b1a9d7e4399f5eba06a89d3ce6",
+      "merge_sha": "324faf9b7d81540240217d2757f26de6f07460ba",
+      "merged_at_utc": "2026-11-15T06:01:42Z",
+      "head_merge_tree_equal": true,
+      "checks": {
+        "policy": "SUCCESS",
+        "department_policy": "SUCCESS",
+        "agent_provenance": "REPORT_ONLY_DECLARATION_CONSISTENT"
+      },
+      "not_new_document_ci": true
+    },
+    "independent_supplement": {
+      "run_id": "DEV024-V05-IG-20261115-1115B",
+      "executor_label": "LOCAL-CODEX-INDEPENDENT-V05-1115B",
+      "registered_identity_verified": false,
+      "classification": "MODEL_CHAIN_SETUP_THEN_ACTUAL_INPUT_LOCALIZED_RETEST",
+      "new_natural_full_run": false,
+      "design_new_gui_run": false,
+      "report_key": "run--9223371980500105755/day-4",
+      "capture_prefix": "captures/DEV023_GUI_first_report_1794723092-651_",
+      "A": 36,
+      "B": 38,
+      "C": 40,
+      "transition_captures": [
+        37,
+        39
+      ],
+      "resume_boundary": 28,
+      "minute": 5760,
+      "effects_sha256": "c32d96d9d2d05f417150fa1f4a997cd95b85e8c89098f403bc1048ace89efb80",
+      "report_scroll_A_C": [
+        605,
+        605
+      ],
+      "list_scroll_B": 124,
+      "raw_captures": 40,
+      "raw_inputs": 38,
+      "raw_queries": 2,
+      "accepted_query_stdout_line": 102,
+      "excluded": {
+        "raw_inputs": [
+          7,
+          25
+        ],
+        "captures": [
+          8,
+          27
+        ],
+        "first_query_stdout_line": 71,
+        "actor_intervention": "NOT_VERIFIED"
+      },
+      "exit": {
+        "actual_process": 0,
+        "engine_script_errors": 0,
+        "exit_labelled_png_record": "NOT_CAPTURED",
+        "runner_requested_exit": "NOT_PROVIDED"
+      },
+      "reported_integrity": {
+        "design_source_blobs_verified": 125,
+        "manifest_verified": 221,
+        "tracked_661_unchanged": "EXECUTOR_REPORT_NOT_DESIGN_FULL_RECHECK",
+        "offline_audit_130": "NOT_GAME_ASSERTIONS",
+        "dev_game_1185": "SEPARATE_PRIOR_DEV_RUN"
+      }
+    },
+    "doc01": {
+      "classification": "GUI_NON_BLOCKING_README_CORRIGENDUM",
+      "target_outer": "v05r/packet/README.md §2",
+      "target_inner": "README.md §2",
+      "original_readme_sha256": "6c266ad68240f134bd47d2d4c22239af7f3a61bee4fd7e9f856c44ec4e790e1c",
+      "correction_path": "docs/engineering/gate3/DEV-024_DOC-01_PACKET_README_CORRECTION.md",
+      "dimensions": [
+        {
+          "indices": "01-11,28-40",
+          "width": 1100,
+          "height": 900,
+          "count": 24
+        },
+        {
+          "indices": "12-27",
+          "width": 2880,
+          "height": 1659,
+          "count": 16,
+          "excluded_from_acceptance": true
+        }
+      ],
+      "raw_viewports": {
+        "12-27": [
+          1152,
+          663
+        ],
+        "28-40": [
+          1152,
+          942
+        ]
+      },
+      "resize_actor": "NOT_VERIFIED",
+      "original_zip_and_readme": "PRESERVED",
+      "new_zip_created": false,
+      "keeper_delivery": "NOT_SENT_LOCAL_REVIEW"
+    },
+    "original_archives": [
+      {
+        "file": "v05r.zip",
+        "bytes": 13831128,
+        "sha256": "4f282f8561517b58b7dadb3b59b1e9bf7fc0a8bc925ce198cbc3da77512d4610"
+      },
+      {
+        "file": "DEV-024-V05-INDEPENDENT-RETEST-20261115-1115B.zip",
+        "bytes": 6937676,
+        "sha256": "708c4f8df69109f0ec6c52d08eda367388d82d6b577237fa32340ac73fe1f12d"
+      }
+    ],
+    "local_document_verification": {
+      "kind": "READ_ONLY_ARCHIVE_AND_DOCUMENT_CHECKS_NOT_GAME_RETEST",
+      "packet_metadata": "PASS",
+      "crc_errors": 0,
+      "pngs_verified": 40,
+      "manifest_files_verified": 221,
+      "extracted_packet_files": 222,
+      "original_files_preserved": 230,
+      "doctor": "PASS",
+      "policy": "PASS",
+      "diff_check": "PASS",
+      "candidate_audit": "PASS",
+      "new_game_tests": "NOT_RUN",
+      "new_project_load": "NOT_RUN",
+      "new_gui_play": "NOT_RUN",
+      "new_build_export_fps": "NOT_RUN",
+      "new_commit_push_pr_ci_preflight_merge": "NOT_RUN"
+    },
+    "handoff": {
+      "path": "docs/engineering/gate3/DEV-024_DESIGN_ACCEPTANCE_HQ_HANDOFF.md",
+      "status": "LOCAL_REVIEW_NOT_SENT",
+      "S2_08_09_10": "LINK_ACCEPTED_GUI_SCOPE_WITH_SEPARATE_NATURAL_AND_LOCALIZED_RUNS",
+      "S2_11": "HQ_COLLECT_REGRESSION_CI_DEPARTMENT_ACCEPTANCE_AND_LIMITS_OWNER_FINAL_DECISION"
+    },
+    "preserved_limits": [
+      "A01_Q12_PARTIAL",
+      "INTERRUPTED_INPUT_ACTOR_NOT_VERIFIED",
+      "PHYSICAL_IDENTITY_REGISTERED_AGENT_AND_FULL_CONSOLE_GUI_LINK_NOT_VERIFIED",
+      "DPI_OS_SCALE_NATIVE_SIZE_NOT_VERIFIED",
+      "1115B_EXIT_PNG_NOT_CAPTURED_REQUESTED_EXIT_NOT_PROVIDED",
+      "1115A_PROV01_AND_ORIGINAL_CONSOLE_Q12_R02_EXIT_NOT_CAPTURED",
+      "HISTORICAL_ENV_HELPER_BYTES_Q12_ERROR2_TO_7_HANDOFF_LINK_NOT_VERIFIED",
+      "HISTORICAL_FAILURE_INTERRUPTION_UNKNOWN_NOT_RUN",
+      "NO_NEW_FULL_NATURAL_REPLAY_GLOBAL_REGRESSION_BUILD_EXPORT_FPS_ALL_KEYS_SPEEDS_WINDOWS_FAST_E2E_SECOND_AWARD_TRACK_B"
+    ],
+    "historical_preservation": "All prior top-level fields and nested values remain historical snapshots unchanged, including then-pending independent supplement and Design statuses.",
+    "new_specification_decision_required": false
   }
 }
