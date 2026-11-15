@@ -1,8 +1,8 @@
 # DEV-024 — VS-01 로컬 구현·검증 결과
 
 - Development / AGT-DEV-0004 / 2026-11-15 (Asia/Seoul).
-- 상태: **LOCAL_RESULT_ACCEPTED / SUBMISSION_APPROVED / INDEPENDENT_DESIGN_PENDING**.
-- §1~5는 준비, §6~9는 로컬 구현·검토 이력이다. 이번 Owner 결과 승인·제출 권한은 **§10**에 추가했다.
+- 상태: **OWNER_ACCEPTED / SUBMISSION_APPROVED / DESIGN_PARTIAL**.
+- §1~13은 준비·구현·검증 이력이며 최신 Owner 로컬 결과 승인·제출 권한은 **§14**다.
 - 기준 main/HEAD: `0a76a2e924ec0b661e3cdbd858ed6bfd665f3dc9`.
 - 브랜치: `codex/DEV-024-vs01-integration-evidence`.
 - [작업 티켓·Owner 지시](DEV-024_VS01_INTEGRATION_EVIDENCE.md).
@@ -141,3 +141,97 @@ fetch와 원격 main API에서 기준 `0a76a2e924ec0b661e3cdbd858ed6bfd665f3dc9`
 커밋 전에는 아직 head/PR/CI 결과가 없으므로 PASS를 미리 선언하지 않는다. 실제 제출 SHA·정상 훅/preflight·원격 필수 CI의 최종 결과는 이번 PR과 Owner 완료 보고에 연결하며, 로컬 원본은 `.local/validation/DEV-024-submission/`에 보관한다. §1~9 및 검증 JSON의 기존 NOT_RUN은 해당 로컬 결과 시점의 이력이다.
 
 **독립 실행·Design 심사 대기와 DEV-026 구현·제품 검증 HOLD를 유지한다.** 이번 로컬 결과 승인·PR/CI 성공을 독립 수용, DEV-024 DONE, HQ/Owner Stage 인수 또는 main 병합 승인으로 확대하지 않는다.
+
+## 11. 독립 Design 판정 수신 — 2026-11-15
+
+[#80 정본](https://github.com/wisberry2022/MetroManager/issues/80#issuecomment-6889738120)과 [#81 연결](https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6889744888)을 확인했다. **V01~V04·V05-1/2 한정 PASS 수용, V05-3 승인 L2 불충족/보완 필요, DEV-024 독립 GUI 전체 PARTIAL**이다. 기존 자체 GUI의 “추가 탐색 후 도달/Design PENDING” 기록은 보존하고 이번 판정을 후속 연결한다.
+
+독립 시험본/현재 main은 `0865e5a2cdf168dac14167922c9e59b16796fa81`이며 PR #134는 원격에서 병합된 상태다. 원본 `DEV-024-VS01-INDEPENDENT-GUI-20261115-1115A.zip`(37,649,968 bytes / SHA-256 `d34c0ca6098a9e5b6bbe39028ae25e4a9afb2417a4f780ec0b34d6e52634452e`), run `DEV024-IG-20261115-1115A`의 수치와 출처 대조는 Design 보고를 인용한다. DEV가 이번에 원본 ZIP을 새로 열거나 재해시하지 않았다.
+
+독립 실행의 첫 Day4 보고는 서비스169분·완료754·운임75400·운영비16900이며 T6327 조회 accepted다. 기존 DEV 자체439분·완료1969건과 다른 정상 실행이다. 둘을 같은 run/자동 단언으로 합산하지 않는다. Design은 manifest816/816·소스661/661·실제 종료0/엔진 오류0을 대조했다. PROV-01 사전 입력 wrapper 사본/해시 NOT_CAPTURED 및 신원·환경·프로세스 미확인은 원래 상태로 유지한다.
+
+## 12. OBS-V05-01 원인·후속 로컬 검토 요청
+
+정적 조사에서 `_query_business`는 accepted 후 보고 복귀 문맥을 저장하고 `_open_tenders`를 호출하지만 `TenderView.page`를 P01로 지정하지 않는다. 이 때문에 이전 P05가 남는다. 기존 자동 U14도 panel visible만 검사하여 실제 P01 페이지 여부를 확인하지 못했다. 새 게임 규칙/데이터 문제로 확대하지 않는다.
+
+수정안은 **성공한 보고 조회 분기에만 `tender_view.page = "P01"`1줄 추가**, 기존 GUI 검사에 실제 P05 선행 문맥·P01 목록/컨트롤·보고 복귀·읽기 무효과·실패 비이동을 보완하는 것이다. 공통 `_open_tenders`나 일반 P05 왕복/선택을 일괄 초기화하지 않는다. 검토 가능한 코드 위치·후속8경로·자동/로드·실GUI F1~3은 [실행 계획 §7](../gate3/DEV-024_VS01_EXECUTION_PLAN.md)에 정리했다.
+
+이번 Owner 지시로 최신 main 기반 `codex/DEV-024-v05-entry-fix`에서 티켓·본 결과서·실행/검증 계획·검증 JSON **기존5파일에 수신/검토 기록만 로컬 반영**했다. 기존 JSON 필드와 준비/실행 본문을 보존했다. 제품·테스트/관측기·타 부서·정책/CI는 변경하지 않았다. 이전 provenance는 PR #134 당시 기록이며 이번 준비의 새 manifest로 위장하지 않는다.
+
+**필요한 추가 확인은 제품 Host와 기존 GUI 검사2경로를 포함하는8경로 재지정 및 해당 로컬 구현·검증이다.** 원래 Owner 승인은 티켓 §3의 제품 scripts 제외·§4의 정확한8경로에 한정됐으므로 같은 개수라는 이유로 경로를 교체하지 않는다. 이미 승인된 Design L2를 다시 승인받을 필요는 없으며, 실제 추가 개발 경로만 확인 대상으로 남긴다. 수용된 V01~V04/V05-1/2·기존24조건과 독립 원본 전체 완주를 재실행하지 않는다.
+
+게임 명세 변경 필요 없음. DEV 자체 보완 뒤 별도 독립 증거/Design 명시 수용이 필요하며 현재 전체 PARTIAL·A01-Q12 상위 PARTIAL을 유지한다. DEV-024 DONE/Issue 종료/HQ·Owner Stage 인수는 별도다. **DEV-026 구현·제품 검증 HOLD**. 이번 새 제품 구현·게임 자동검사·프로젝트 로드·실GUI/빌드·독립 보완·Commit/Push/PR/CI·main 병합·외부 회신 게시는 NOT_RUN이다.
+
+## 13. OBS-V05-01 로컬 구현·검증 결과 — Owner 검토 요청
+
+### 13.1 승인·변경 범위
+
+Owner는 본 개발 대화의 실행 계획 §7.2 경로 재지정 질문에 다음과 같이 승인했다.
+
+> 8개 경로 재지정·로컬 수정 및 검증 승인
+
+기준 **0865e5a2cdf168dac14167922c9e59b16796fa81**, 브랜치 **codex/DEV-024-v05-entry-fix**, 담당 AGT-DEV-0004다. §12의 승인 대기는 해소됐고 아래 정확한8경로 안에서 작업했다. 새 Commit·Push·PR·main 병합은 승인/실행하지 않았다.
+
+| 파일 | 최종 변경 |
+| --- | --- |
+| `scripts/ui/stage1_view.gd` | accepted 보고 조회 분기에서 `tender_view.page = "P01"`1줄 추가 |
+| `tests/game/run_operations_gui_cases.gd` | 실제 P05 선행·즉시 P01·거부/숨은 화면·보고 복귀·일반 P05 왕복 회귀43개 추가; 기존 입력/캡처에 page·focus·scroll·보고/권위 해시와 성공/복귀 캡처 연결 |
+| `docs/engineering/tasks/DEV-024_VS01_INTEGRATION_EVIDENCE.md` | 독립 판정 수신·Owner 경로 승인·이번 로컬 결과 |
+| `docs/engineering/gate3/DEV-024_VS01_EXECUTION_PLAN.md` | 원인/수정안·승인8경로·실제 실행·독립 보완 인계 |
+| `docs/engineering/gate3/DEV-024_VS01_VALIDATION_PLAN.md` | 기존 수용/실패와 새 자체 보완 검사 구분 |
+| `docs/engineering/tasks/DEV-024_RESULT.md` | 본 검수 요청·명령/증거·잔여 |
+| `docs/engineering/gate3/DEV-024_VS01_VALIDATION.json` | 원래 필드 보존 + Design 수신/승인 후 보완 별도 키 |
+| `docs/engineering/tasks/DEV-024_PROVENANCE.json` | 이번 base 기준7개 변경 artifact의 old/new blob; 자기 파일 제외 |
+
+일반 `_open_tenders`와 TenderView 선택/이력·Session·게임 모델·원장·명세·디자인/정책/CI·기존 자연 관측기/UID는 바꾸지 않았다. 제품 수정은 기존 승인 L2 복원이며 **게임 명세 변경 필요 없음**이다.
+
+### 13.2 자동·프로젝트 로드·정적 검증
+
+모든 명령은 이 worktree에서 Godot `4.7.2.stable.official.ed1daf0bf`로 실행했다. 테스트 공통 앞부분은 `Godot_v4.7.2-stable_win64_console.exe --headless --path . --script`다. 최종 검사는 작업 폴더 안의 실행별 빈 APPDATA/LOCALAPPDATA/TEMP/TMP를 사용했다.
+
+| 스크립트/명령 뒤 인수 | 결과 |
+| --- | --- |
+| `tests/game/run_operations_gui_cases.gd -- --auto` | **245개 PASS**, 실패0/exit0 |
+| `tests/game/run_operations_ui_tests.gd -- --evidence` | **158개 PASS**, 실패0/exit0 |
+| `tests/game/run_tender_ui_tests.gd` | **460개 PASS**, 실패0/exit0 |
+| `tests/game/run_w07_tests.gd` | **322개 PASS**, 실패0/exit0 |
+| `--headless --editor --path . --quit` | 프로젝트 로드 exit0/엔진 오류0 |
+| `.venv/Scripts/python.exe tools/policy.py doctor` / `check` | PASS; gdformat/gdlint 포함 |
+| `git diff --check` / 로컬 범위·이력·출처 감사 | 별도 후보 검증; 원격 CI/신원 인증 아님 |
+
+총 **1185개/실패0**, 최종5실행 모두 엔진/스크립트 오류0이다. 기존 자동3291·과거 DEV023 수치와 합산하지 않는다. 수정 전 같은 보강 회귀는245개 중 **5실패/exit1**로 P05 page·목록/detail·back/공사 표시 결함을 재현했다. 기존 통합202개 대비43개를 추가했고 입력 wrapper/GUI 감사11개는 게임 단언에 합산하지 않는다. 최종 제품 SHA-256은 `d65d8f6e722a4ad880969fb9cb3841e6a220c1b5883d79aaf499c6024d065370`, 검사 SHA-256은 `1d5f62974469846c7807dd9450b600bc711010cad134a3fda27c99f2c3736e14`이며 최종 자동/GUI가 같은 바이트를 사용했다.
+
+### 13.3 DEV 자체 실제 GUI F1~3
+
+정본 run **DEV024-V05-DEV-20261115 / DEV_SELF_GUI / MODEL_CHAIN_SETUP**. 기존 fixture가 첫 유효 보고까지 준비한 다음 실제 Computer Use 입력을 사용했다. 이 fixture의 Day4 서비스955분/완료4291은 준비 상태이며 기존 자연 DEV439분/1969 및 독립169분/754와 별개다.
+
+- **F1 PASS:** P05 인계·공사→P06→P07, 첫 보고 `run--9223371980483328539/day-4` 표시/확인 후 Enter 조회 accepted. 즉시 P01 목록·B01 선택·보이는 refresh 포커스. 상세/목록 추가 탐색0.
+- **F2 PASS:** P01에서 원래 P07로 복귀하여 Day4/key/본문/확인값·query 포커스·비영점 scroll **605**를 보존했다.
+- **F3 PASS:** 전·조회 직후·복귀 및 관측19개 모두 정지 **T5760**, 권위 상태 SHA-256 `c32d96d9d2d05f417150fa1f4a997cd95b85e8c89098f403bc1048ace89efb80` 동일. FX.effects는 clock/model/원장/명령·결과/마감·당일보고/계획·예측을 포함한다.
+- 정상 Alt+F4 **exit0/엔진·스크립트 오류0**. 종료 후 OS 스크린샷은 창 소멸로 실패했으나 게임 내부 EXIT 캡처와 실행기 exit0을 보존했다. 종료 오류나 누락을 숨기지 않는다.
+
+D3D12 12_0 / Forward+ / Intel Iris Xe, 요청 창1100×900/엔진 viewport1152×942. 새 실행은 런타임 관련107파일·launcher/input wrapper를 실행 전에 사본/해시로 고정하고 종료 시 동일성을 확인했다. 엔진/GUI 형제 바이너리 사전 해시와 실제 launcher27464→console33224→game9512 프로세스 연결을 기록했다. 관측은 캡처19개·게임 입력18레코드·도구 조작17회/정상 후관측16회이며 마지막 종료 후관측은 창 소멸로 미포착이다. 입력 수는 Alt 조합 등 이벤트 단위와 조작 단위가 달라 일대일 건수로 주장하지 않는다. 물리 조작자/등록 신원·DPI 인증을 뜻하지 않으며 과거 PROV-01을 소급 해소하지 않는다.
+
+### 13.4 로컬 원본·초기 실패·남은 검수
+
+원본 경로는 **본 worktree**의 `.local/validation/DEV-024-v05-review/`다. `run_checks.py`, 실행별 log/JSON, 수정 전 실패 단언, `gui-run/manifest-before.json`·source/·입력 wrapper/launcher·console·operator-actions·캡처·process·result·gui-audit를 보존한다. 소스 고정·F1~3·종료 감사 **11개/실패0**는 게임 자동1185개와 별도다.
+
+초기 실행기는 엔진 경로의 부모 단계 오류로 엔진 시작 전 FileNotFoundError가 났고 수정했다. 최초 기본 프로필 editor는 exit0이지만 사용자 폴더 접근/설정 저장 오류가 있어 PASS에서 제외했다. 수정 전 회귀의 user:// 로그 오류도 별도 보존하며 최종 분리 프로필 실행은 오류0이다. 새 .venv 의존성 설치는 최초 DNS 제한 후 허용된 네트워크 설치로 성공했다. 프로세스 조회도 최초 CIM 제한 뒤 읽기 전용 권한으로 성공했다. 임시 콘솔 표시 스크립트의 JSON 접두부 길이 오류는 원본 변경 없이 정정했다. editor가 생성한 미추적 .import151개는 출처/범위 확인 후 무시 폴더로 보관해 제출 범위에서 제거했다.
+
+로컬 후보 감사는 정확한8경로, 기존 본문/JSON 필드 보존, 원래 관측기/UID 및 타 부서·제품 모델 무변경, provenance7행의 base old/new blob 일치를 확인한다. 첫 감사에서 문서 생성기의 Windows 기본 CRLF를 검출해6개 문서/JSON을 LF로 정리하고 출처를 재계산했다. 최초 실패 보고서를 보존하며 제품·검사 소스와 검증 바이트는 변경하지 않았다. 기존 PR #134 provenance는 Git 이력에 남고 새 manifest는 이번 후보만 식별한다. 커밋/서버의 agent provenance·preflight·필수 CI는 **NOT_RUN**이며 로컬 후보 일치를 원격 PASS로 표시하지 않는다.
+
+**Owner 로컬 검토 요청:** 보완 구현·자동1185·자체 GUI F1~3·위8파일을 검토해 주시기 바란다. 독립 보완 실행 **NOT_RUN**, Design 재수용 **PENDING**, 전체 독립 GUI/A01-Q12 **PARTIAL** 유지. 이전 V01~V04/V05-1/2 수용과 과거 PROV-01/환경·신원/Q12 잔여는 보존한다. 별도 독립 증거와 Design 명시 수용 후 해당 단계 종료를 판단한다. 빌드/export/FPS·전체 자연 재실행·Commit/Push/PR/CI/main 병합·Issue 게시/종료는 미실행이며 **DEV-026 HOLD**를 유지한다.
+
+## 14. Owner 승인 후 Commit·Push·PR 제출 — 2026-11-15
+
+Owner의 본 개발 대화 원문:
+
+> DEV-024 V05-3 로컬 수정·검증 결과를 승인합니다. 승인된 8개 파일을 codex/DEV-024-v05-entry-fix 브랜치에 Commit·Push하고 PR을 생성한 뒤 필수 CI 결과까지 확인해주세요. 독립 보완 실행·Design 재수용 대기는 유지하고, main 병합은 별도 승인하겠습니다. DEV-026 보류는 유지합니다.
+
+대상은 wisberry2022/MetroManager / DEV-024 / AGT-DEV-0004 / codex/DEV-024-v05-entry-fix / §13.1의8파일이다. 이번 제출·필수 CI 확인 완료 또는 Owner 철회까지 정상 훅 Commit·일반 Push·base=main PR 생성·필수 policy/department-policy 확인만 허용한다. main 병합·자동 병합·force push·브랜치 삭제·Issue 게시/종료·릴리스/배포 권한은 포함하지 않는다.
+
+제출 전8파일의 SHA-256을 승인된 candidate-audit와 대조해 모두 일치했고, 원본은 .local/validation/DEV-024-v05-submission/approved/에 보관했다. 티켓/본 결과서의 승인 후속 기록과 provenance만 갱신한다. 제품·검사·실행/검증 계획·검증 JSON5파일은 승인 바이트를 유지하며 §1~13의 검증/실패/미실행 기록은 당시 이력으로 보존한다.
+
+fetch/API 기준 main은 0865e5a2cdf168dac14167922c9e59b16796fa81로 로컬 검증 base와 같다. 제품/검사·환경 변경이 없어 승인된 자동1185·프로젝트 로드·DEV 자체 GUI F1~3를 재사용한다. 이번 제출 단계의 신규 게임 자동검사·프로젝트 로드·GUI·빌드/export/FPS는 NOT_RUN이며, 정상 훅·policy·출처·커밋 후 preflight 및 새 PR CI를 별도로 확인한다.
+
+실제 commit/PR SHA와 CI 결과는 생성 후 해당 PR/Owner 완료 보고에 기록하고 로컬 제출 로그를 위 디렉터리에 보존한다. 아직 생성 전인 결과를 PASS로 미리 선언하지 않는다. **독립 보완 실행·Design 재수용 대기, 전체 독립 GUI/A01-Q12 PARTIAL, DEV-026 HOLD**를 유지하며 이 제출을 DONE/Stage 인수·main 병합 승인으로 바꾸지 않는다.

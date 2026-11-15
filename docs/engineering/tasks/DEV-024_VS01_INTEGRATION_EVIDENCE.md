@@ -1,7 +1,7 @@
 # DEV-024 — W08 VS-01 통합 재현·회귀·GUI 증거 착수 검토안
 
 - 담당: Development Project Leader / LAPTOP / AGT-DEV-0004 / 2026-11-15 (Asia/Seoul).
-- 상태: **LOCAL_RESULT_ACCEPTED / SUBMISSION_APPROVED / INDEPENDENT_DESIGN_PENDING**. 로컬 실행 권한은 §1.1, 결과는 §6, 이번 제출 권한은 §7을 따른다. 준비·로컬 검토 당시 승인 대기/NOT_RUN 기록은 이력으로 보존한다.
+- 상태: **OWNER_ACCEPTED / SUBMISSION_APPROVED / DESIGN_PARTIAL**. §1~9는 단계별 이력이며 최신 제출 권한은 §10을 따른다.
 - 저장소: wisberry2022/MetroManager · [Issue #80](https://github.com/wisberry2022/MetroManager/issues/80).
 - 기준 main / 로컬 HEAD: `0a76a2e924ec0b661e3cdbd858ed6bfd665f3dc9`.
 - 브랜치: `codex/DEV-024-vs01-integration-evidence`. 독립 worktree 사용; 공용 main·기존 DEV-023 작업 보존.
@@ -101,3 +101,41 @@ P1/P2는 로컬 구현·자체검증 완료, P3는 독립 인계 자료 준비/�
 Owner가 본 개발 대화에서 승인된8파일의 Commit·Push·PR 생성과 필수 CI 확인을 승인했다. [결과서 §10](DEV-024_RESULT.md)에 원문·대상·동작·기간·금지 사항을 기록한다. 대상은 본 저장소/DEV-024/AGT-DEV-0004와 `codex/DEV-024-vs01-integration-evidence`이며 §4의8경로를 유지한다. 이번 승인 기록을 티켓·결과서에 추가하고 해당 출처 blob만 갱신한다. 나머지 구현·검증 증거는 승인본을 유지한다.
 
 P4 로컬 결과는 OWNER_ACCEPTED, P5 중 Commit·Push·PR·필수 CI 확인만 승인됐다. 독립 실행·Design 심사는 대기, main 병합은 별도 Owner 승인이다. DEV-024 전체 DONE/Issue 종료·Stage 인수는 선언하지 않으며 DEV-026 구현·제품 검증 **HOLD**를 유지한다.
+
+## 8. 독립 Design 판정 수신·OBS-V05-01 후속 범위 — 2026-11-15
+
+Owner의 본 개발 대화 지시:
+
+> 개발 에이전트 디자이너 에이전트가 80,81번 이슈에 검수 결과를 등록했으니 확인하여 후속 조치 작업을 진행해주세요
+
+[Design #80 정본](https://github.com/wisberry2022/MetroManager/issues/80#issuecomment-6889738120)과 [#81 연결](https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6889744888)을 수신했다. **V01~V04·V05-1/2는 관측 범위 PASS 수용, V05-3은 승인 L2 불충족으로 보완 필요, 전체 독립 GUI는 PARTIAL**이다. PR #134의 main 반영 SHA `0865e5a2cdf168dac14167922c9e59b16796fa81`를 기준으로 별도 `codex/DEV-024-v05-entry-fix` worktree에서 수신 기록·정적 원인·수정/검증안을 준비한다. 이전 실행·PR·실패/미확인 기록과 공용/기존 작업 트리는 보존한다.
+
+정적 원인은 `Stage1View._query_business`의 성공 분기가 `_open_tenders()`로 기존 `TenderView.page`를 보존하는 것이다. 기존 GUI 자동 U14는 panel visible만 확인해 P01/P05를 구분하지 못했다. 승인 L2의 P01 진입을 복원하는 제안이며 새 게임 규칙/디자인 결정은 필요 없다.
+
+이전 §3은 제품 scripts 변경을 제외했고 §4는 정확한8경로에 한정했다. 이번 후속 지시에 따라 수행할 수신·범위 준비와 제품 경로 추가를 구분한다. **제품 Host 및 기존 GUI 검사2경로를 포함하는 경로 재지정은 Owner 확인 대상으로 명시하며 적용 전이다.** 과거 DEV-023 완료 티켓의 실행 승인이나 PR #134 제출 승인을 확대 적용하지 않는다. 구체8경로와 성공 분기1줄 제안, 영향 검증은 [실행 계획 §7](../gate3/DEV-024_VS01_EXECUTION_PLAN.md)에 있다. 현재는 기존 문서/JSON5개만 로컬 갱신하며 제품/게임 검사 코드는 변경하지 않는다.
+
+후속 로컬 구현·검증 승인 요청은 `codex/DEV-024-v05-entry-fix`의 실행 계획 §7.2 재지정8경로, OBS-V05-01과 직접 영향3항목에 한한다. Commit·Push·새 PR·main 병합·Issue 게시/종료·릴리스는 포함하지 않는다. 독립 보완 실행·Design 재심사도 DEV 자체 검증과 별도로 남긴다. DEV-026 구현·제품 검증 **HOLD** 유지.
+
+### 8.1 Owner 경로 재지정·로컬 실행 승인
+
+Owner는 본 개발 대화의 실행 계획 §7.2 확인 질문에 다음과 같이 응답했다.
+
+> 8개 경로 재지정·로컬 수정 및 검증 승인
+
+이에 따라 §8의 경로 승인 대기를 해소하고 §7.2의 정확한8경로에서 OBS-V05-01 구현·직접 영향 검증을 진행한다. 대상은 본 저장소/DEV-024/AGT-DEV-0004/`codex/DEV-024-v05-entry-fix`이며 효력은 이번 로컬 구현·검증 완료 또는 Owner 철회까지다. 이전 제출 권한을 재사용하지 않으며 Commit·Push·PR·main 병합·외부 회신은 이번 승인에 포함하지 않는다. 독립 검수의 원래 판정과 DEV-026 HOLD는 유지한다.
+
+## 9. OBS-V05-01 승인 범위 실행·로컬 검수 요청
+
+§8.1 승인과 실행 계획 §7.2의8경로 안에서 구현·검증했다. 성공한 보고 조회가 P05 선행 문맥과 무관하게 즉시 P01에 진입하도록 Host1줄을 추가하고 기존 GUI 검사/관측을 보완했다. 자동1185개·프로젝트 로드·DEV 자체 GUI F1~3를 통과했으며 자세한 명령·증거·한계는 [결과서 §13](DEV-024_RESULT.md)에 있다.
+
+이전 단계의 NOT_RUN/승인 대기는 해당 시점 기록으로 보존한다. 이번 보완의 독립 실행·Design 명시 수용은 아직 대기이며 DEV-024 전체 PARTIAL·A01-Q12 PARTIAL·DEV-026 HOLD를 유지한다. 새 Commit·Push·PR·CI·main 병합과 외부 회신은 미실행/별도 승인이다. 이 문서는 로컬 검수 요청이며 DONE 선언이 아니다.
+
+## 10. Owner 로컬 결과 승인·후속 제출 권한 — 2026-11-15
+
+Owner는 본 개발 대화에서 다음과 같이 승인했다.
+
+> DEV-024 V05-3 로컬 수정·검증 결과를 승인합니다. 승인된 8개 파일을 codex/DEV-024-v05-entry-fix 브랜치에 Commit·Push하고 PR을 생성한 뒤 필수 CI 결과까지 확인해주세요. 독립 보완 실행·Design 재수용 대기는 유지하고, main 병합은 별도 승인하겠습니다. DEV-026 보류는 유지합니다.
+
+대상은 wisberry2022/MetroManager / DEV-024 / AGT-DEV-0004 / codex/DEV-024-v05-entry-fix / 실행 계획 §7.2의8경로다. 정상 훅을 통한 Commit·일반 Push·base=main PR 생성·필수 policy/department-policy 확인을 이번 제출 완료 또는 Owner 철회까지 허용한다. main 병합·자동 병합·강제 Push·브랜치 삭제·Issue 게시/종료·릴리스/배포는 포함하지 않는다.
+
+승인된8파일 바이트를 로컬 검토 감사와 대조한 뒤 보존했다. 이번 제출에서는 티켓·결과서에 승인 기록을 추가하고 그에 따른 provenance blob만 갱신한다. 제품·검사·실행/검증 계획·검증 JSON은 승인 바이트를 유지한다. 실제 제출·검사 결과는 PR 및 Owner 완료 보고에 연결하며 검사 성공을 DONE/Stage 인수로 확대하지 않는다. 독립 보완 실행·Design 재수용 대기와 DEV-026 HOLD를 유지한다.

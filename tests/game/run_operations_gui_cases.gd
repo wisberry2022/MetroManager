@@ -84,6 +84,8 @@ func _run() -> void:
 		_host.set_process(false)
 	await process_frame
 	_host.controls.open_operations.pressed.emit()
+	_host.finance_view.controls.query.pressed.connect(_capture.bind("QUERY_RESULT"))
+	_host.tender_view.controls.exit.pressed.connect(_capture.bind("TENDER_EXIT"))
 	root.window_input.connect(_input_log)
 	root.close_requested.connect(_exit_gui)
 	_capture("READY")
@@ -108,6 +110,10 @@ func _automatic() -> void:
 	_host.set_process(false)
 	await process_frame
 	var effects := FX.effects(_session)
+	_enter_p05()
+	var tender_id: String = _host.tender_view.selected_id
+	var history: Dictionary = _host.tender_view._history.duplicate(true)
+	_host.tender_view.controls.construction.pressed.emit()
 	_expect("U03_actual_completed", _host.shown.operations_ui.snapshot.daily.completed, 4)
 	_expect("U04_fixed_completed", _host.finance_view.labels.report.text.contains("완료 4291"), true)
 	_expect(
@@ -143,15 +149,33 @@ func _automatic() -> void:
 	reading.keycode = KEY_END
 	_host._input(reading)
 	var report_before: String = _host.finance_view.labels.report.text
+	var report_packet: Dictionary = _host.shown.finance_ui.report.duplicate(true)
+	var confirmed: Dictionary = _host.finance_view._confirmed.duplicate(true)
 	var scroll_before: int = _host._scroll.scroll_vertical
+	_rejected_queries(confirmed, effects)
 	_host.finance_view.controls.query.pressed.emit()
 	_expect("U14_query_P01", _host.tender_view.visible, true)
+	_expect("V05_immediate_page", _host.tender_view.page, "P01")
+	_expect("V05_list_visible", _host.tender_view._list.is_visible_in_tree(), true)
+	_expect("V05_detail_visible", _host.tender_view.controls.detail.is_visible_in_tree(), true)
+	for key: String in ["back", "submit", "handoff", "construction"]:
+		_expect("V05_hidden_" + key, _host.tender_view.controls[key].is_visible_in_tree(), false)
+	_expect("V05_query_focus", root.gui_get_focus_owner(), _host.tender_view.controls.refresh)
+	_expect("V05_focus_visible", root.gui_get_focus_owner().is_visible_in_tree(), true)
+	_expect("V05_selected_tender_kept", _host.tender_view.selected_id, tender_id)
+	_expect("V05_history_kept", _host.tender_view._history, history)
+	_expect("V05_query_no_effect", FX.effects(_session), effects)
 	_expect("U14_hidden_finance", _host.finance_view.visible, false)
+	_host.finance_view.query_requested.emit(confirmed)
+	_expect("V05_hidden_report_no_effect", FX.effects(_session), effects)
 	_host.tender_view.exit_requested.emit()
 	for index: int in 4:
 		await process_frame
 	_expect("U17_return_report", _host.finance_view.visible, true)
 	_expect("U17_report_preserved", _host.finance_view.labels.report.text, report_before)
+	_expect("V05_report_packet_preserved", _host.shown.finance_ui.report, report_packet)
+	_expect("V05_confirmed_preserved", _host.finance_view._confirmed, confirmed)
+	_expect("V05_return_consumed", _host._report_return.is_empty(), true)
 	_expect("U17_focus_restored", root.gui_get_focus_owner(), _host.finance_view.controls.query)
 	_expect("U17_scroll_restored", _host._scroll.scroll_vertical, scroll_before)
 	for index: int in 3:
@@ -176,8 +200,11 @@ func _automatic() -> void:
 	_host.operations_view.controls.back.pressed.emit()
 	await process_frame
 	await process_frame
+	_enter_p05()
+	_host.tender_view.controls.exit.pressed.emit()
 	_host.controls.open_tenders.pressed.emit()
-	_host.tender_view.construction_requested.emit("P-A")
+	_expect("V05_ordinary_open_keeps_P05", _host.tender_view.page, "P05")
+	_host.tender_view.controls.construction.pressed.emit()
 	_expect("U17_P05_entry", _host.construction_view.visible, true)
 	var project_before: Dictionary = _host.construction_view.shown.duplicate(true)
 	_host.controls.open_operations.grab_focus()
@@ -189,10 +216,38 @@ func _automatic() -> void:
 	_expect("U17_P05_preserved", _host.construction_view.shown, project_before)
 	_expect("U17_P05_focus", root.gui_get_focus_owner(), _host.controls.open_operations)
 	_expect("U12_P05_no_effect", FX.effects(_session), effects)
+	_host.construction_view.controls.back.pressed.emit()
+	_expect("V05_construction_back_keeps_P05", _host.tender_view.page, "P05")
+	_expect("V05_construction_back_visible", _host.tender_view.visible, true)
 	await _consumer_cases()
 	_map_cases()
 	_host.queue_free()
 	await process_frame
+
+
+func _enter_p05() -> void:
+	_host.controls.open_tenders.pressed.emit()
+	_host.tender_view._list.item_selected.emit(0)
+	_host.tender_view.controls.detail.pressed.emit()
+	_expect("V05_detail_precondition", _host.tender_view.page, "P02")
+	_host.tender_view.controls.handoff.pressed.emit()
+	_expect("V05_P05_precondition", _host.tender_view.page, "P05")
+	_expect("V05_P05_visible", _host.tender_view.controls.construction.is_visible_in_tree(), true)
+
+
+func _rejected_queries(confirmed: Dictionary, effects: String) -> void:
+	var wrong_key := confirmed.duplicate(true)
+	wrong_key.report_key = "invalid-report-key"
+	var wrong_report := confirmed.duplicate(true)
+	wrong_report.first_valid_report = {}
+	for invalid: Dictionary in [wrong_key, wrong_report, {}]:
+		_host.finance_view.query_requested.emit(invalid)
+		_expect("V05_rejected_stays_report", _host.finance_view.visible, true)
+		_expect("V05_rejected_no_tenders", _host.tender_view.visible, false)
+		_expect("V05_rejected_keeps_P05", _host.tender_view.page, "P05")
+		_expect("V05_rejected_feedback", _host.finance_view.labels.feedback.text.is_empty(), false)
+		_expect("V05_rejected_no_return", _host._report_return.is_empty(), true)
+		_expect("V05_rejected_no_effect", FX.effects(_session), effects)
 
 
 func _consumer_cases() -> void:
@@ -359,20 +414,22 @@ func _finish() -> void:
 func _input_log(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		print("DEV023_REAL_INPUT ", event.as_text())
-		if event.keycode == KEY_F12:
-			_capture("F12")
+		_capture("F12" if event.keycode == KEY_F12 else "KEY")
 	if event is InputEventMouseButton and event.pressed:
 		print("DEV023_REAL_INPUT ", event.as_text())
+		_capture("MOUSE")
 
 
 func _capture(label: String) -> void:
-	await process_frame
+	for index: int in 3:
+		await process_frame
 	_capture_index += 1
 	var path := (
 		"res://.local/validation/DEV023_GUI_%s_%s_%02d.png"
 		% [_case_id, _capture_run, _capture_index]
 	)
 	root.get_texture().get_image().save_png(path)
+	var focus := root.gui_get_focus_owner()
 	print(
 		"DEV023_GUI_CAPTURE ",
 		JSON.stringify(
@@ -387,6 +444,15 @@ func _capture(label: String) -> void:
 				"minute": _host.shown.current.simulation_minute,
 				"backing_pipeline_minute": _session.pipeline.clock.minute,
 				"effects": FX.effects(_session),
+				"tender_page": _host.tender_view.page,
+				"tender_visible": _host.tender_view.visible,
+				"tender_list_visible": _host.tender_view._list.is_visible_in_tree(),
+				"selected_tender": _host.tender_view.selected_id,
+				"focus": str(focus.get_path()) if focus != null else "",
+				"focus_visible": focus.is_visible_in_tree() if focus != null else false,
+				"scroll": _host._scroll.scroll_vertical,
+				"selected_report": _host.shown.finance_ui.report,
+				"confirmed_query": _host.finance_view._confirmed,
 				"operations_text": _host.operations_view.labels.status.text,
 				"report_text": _host.finance_view.labels.report.text
 			}

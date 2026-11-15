@@ -1,6 +1,6 @@
 # DEV-024 — VS-01 실행·Design 입력 패킷 검토안
 
-- AGT-DEV-0004 / 2026-11-15 / **DEV_SELF_GUI_VALIDATED / INDEPENDENT_REVIEW_PENDING**.
+- AGT-DEV-0004 / 2026-11-15 / **LOCAL_REVIEW / DESIGN_PARTIAL**. §1~7.3은 단계별 이력이며 승인 후 보완 실행·인계는 §7.4를 따른다.
 - 기준 main: `0a76a2e924ec0b661e3cdbd858ed6bfd665f3dc9`.
 - [티켓·권한/8경로](../tasks/DEV-024_VS01_INTEGRATION_EVIDENCE.md) / [검증 계획](DEV-024_VS01_VALIDATION_PLAN.md).
 - DEV-026 구현·제품 검증 **HOLD** 유지. §1~5는 준비 이력이며 실제 실행·인계 현황은 §6에 기록한다.
@@ -143,3 +143,69 @@ QUERY는 공고 데이터를 정상 조회했으나 `stage1_view._open_tenders`�
 원본 `events.jsonl`, `operator-actions.json`, `operator-concordance.json`, `gui-audit*.json`, `console.log`, `launch.json`, `result.json`, `source-manifest.json`, `source/`, 캡처는 `.local/g24/DEV024-GUI-20261115T035321/`에 있다. 입력·조작 시각 대응은70개 모두 확인했지만 물리 입력 주체를 인증하는 장치는 아니다. GUI 원본 감사23245개/실패0은 자동 게임 단언3291개와 별도다.
 
 관측기 초기 실패와 입력 주체 미확인 환경 probe는 [결과서 §8](../tasks/DEV-024_RESULT.md)에 분리했다. 이번 공급은 **DEV 자체 검증·로컬 독립 인계 자료**이며 독립 실행/Design 새 심사 NOT_RUN, #80/#81 게시 NOT_RUN이다. 충분한 별도 독립 증거가 공급되면 Design이 한 번 심사하고 기존24조건은 실제 영향이 없는 한 재개방하지 않는다.
+
+## 7. OBS-V05-01 수정·직접 영향 검증 로컬 검토안
+
+### 7.1 기준·원인·구체 변경 제안
+
+기준 main/독립 시험본은 `0865e5a2cdf168dac14167922c9e59b16796fa81`, 작업 브랜치는 `codex/DEV-024-v05-entry-fix`다. [Design 정본](https://github.com/wisberry2022/MetroManager/issues/80#issuecomment-6889738120)이 확인한 결함은 **P05 선행 문맥에서 유효 보고 조회 성공 직후 P01 대신 P05가 표시되는 한 항목**이다. 이미 수용된 자연 완주·QUERY·최종 도달 증거는 보존한다.
+
+`scripts/ui/stage1_view.gd`의 `_query_business`는 accepted일 때 보고 복귀 문맥을 저장하고 `_open_tenders`를 호출한다. 공통 열기 함수는 화면을 표시/재렌더하고 refresh에 포커스를 주지만 page는 바꾸지 않는다. 일반 P05 왕복에서 페이지 보존은 필요하므로 공통 열기를 무조건 초기화하는 변경은 제안하지 않는다.
+
+**제품 변경 후보는 조회 성공 분기의1줄**이다. 승인 후 아래 위치에 `tender_view.page = "P01"`을 추가하고 기존 재렌더·포커스·보고 복귀 경로를 사용한다. 아직 적용/실행하지 않은 검토안이다.
+
+~~~gdscript
+if result.get("accepted", false):
+    _report_return = _reading_context()
+    tender_view.page = "P01" # OBS-V05-01: 성공한 보고 기반 조회의 진입 화면
+    _open_tenders()
+~~~
+
+선택한 공고 ID·응찰 이력·Session/원장/시계는 초기화하지 않는다. 실패/불일치 결과는 이 분기에 들어가지 않아 현재 보고 화면을 유지해야 한다. 실제 의미/포커스·스크롤 보존은 다음 검사로 확인하며 정적 제안을 PASS로 부르지 않는다.
+
+### 7.2 Owner 확인이 필요한 정확한 후속8경로
+
+기존8경로 중 관측기/UID2개를 수정 대상에서 제외하고 Host/기존 GUI 검사2개로 바꾸는 제안이다. 숫자8이 같아도 경로가 다르므로 기존 승인을 자동 확대하지 않는다.
+
+| 번호 | 후속 변경 후보 | 이유 |
+| --- | --- | --- |
+| 1 | `scripts/ui/stage1_view.gd` | **추가 승인 경로**. 성공한 보고 조회에 한해 P01 page 지정 |
+| 2 | `tests/game/run_operations_gui_cases.gd` | **추가 승인 경로**. 실제 P05 선행 문맥 및 P01 페이지/컨트롤·복귀·거부·무효과 자동 회귀 |
+| 3 | `docs/engineering/tasks/DEV-024_VS01_INTEGRATION_EVIDENCE.md` | 수신·후속 승인/경로·범위 |
+| 4 | `docs/engineering/gate3/DEV-024_VS01_EXECUTION_PLAN.md` | 수정·실제 조작·독립 보완 인계 |
+| 5 | `docs/engineering/gate3/DEV-024_VS01_VALIDATION_PLAN.md` | 수용/보완 및 영향 검사 결과 |
+| 6 | `docs/engineering/tasks/DEV-024_RESULT.md` | 실제 결과·증거·잔여/로컬 검토 |
+| 7 | `docs/engineering/gate3/DEV-024_VS01_VALIDATION.json` | 기존 실행 필드 보존, 독립 판정 수신/새 보완 run 후속 색인 |
+| 8 | `docs/engineering/tasks/DEV-024_PROVENANCE.json` | 실제 후속 base·변경 blob 갱신. 구현 완료/제출 시 대조 |
+
+이번 준비는3~7의5파일만 변경한다. 기존 provenance는 PR #134 당시 기록으로 보존하며 이번 준비의 출처 PASS로 재사용하지 않는다. 실제 구현 후 변경 확정 시 새 base/old/new blob으로 갱신한다. 위8개 밖 파일 필요성이 드러나면 해당 경로·이유만 구체화한다.
+
+### 7.3 승인 후 자동·프로젝트 로드·자체 GUI
+
+**자동 회귀:** 기존 `run_operations_gui_cases.gd -- --auto`를 보완한다. 유효 보고를 만든 기존 MODEL_CHAIN_SETUP을 재사용하고, P01→P02→P05 인계 경로를 거쳐 page가 P05임을 확인한 뒤 P06/P07에서 조회한다. 기존 U14의 panel visible 검사에 실제 page=P01·목록 표시·detail 표시·P05 전용 컨트롤 비표시·보이는 refresh 포커스를 추가한다. 보고 복귀의 선택일/key/본문·query 포커스·비영점 스크롤을 대조한다. 잘못된 보고 key/자료 실패는 성공 이동을 하지 않는 Host 분기와 기존 Session 검사를 연결한다. 일반 P05 왕복·선택 보존과 숨은 패널 부작용도 직접 영향으로 확인한다.
+
+검증 명령은 고정 Godot 경로에서 `--headless --path . --script`로 실행한다: 보완 `run_operations_gui_cases.gd -- --auto`, 기존 `run_operations_ui_tests.gd -- --evidence`, `run_tender_ui_tests.gd`, `run_w07_tests.gd`. `--headless --editor --path . --quit` 로드와 doctor/policy/diff·출처 검사도 구분한다. W01~06 모델 전체·기존24조건은 코드/공급 변경 영향이 없는 한 원래 증거를 재사용한다. 실제 단언 수/exit/오류는 실행 후 기록한다.
+
+**자체 GUI 준비:** 기존 `run_operations_gui_cases.gd -- --case=first_report`의 MODEL_CHAIN_SETUP과 기존 캡처/입력 기록을 우선 재사용한다. 정상 원장/개통/마감 보고를 fixture로 준비하는 단계와 이후 실제 OS 입력을 구분한다. 새 자연 전체 완주로 표시하지 않는다. 실제 제품 버튼으로 P05 문맥을 만든 뒤 P06/P07의 첫 유효 보고를 선택한다. 게임은 정지 상태로 유지한다.
+
+| 보완 행 | 실제 입력·확인 | 기대/기록 |
+| --- | --- | --- |
+| F1 성공→P01 | P05 선행 → P07 첫 보고 → 실제 공고 조회 | 같은 표시 key/accepted와 클릭 직후 P01·목록/컨트롤·포커스. 상세/목록 추가 탐색0 |
+| F2 원래 보고 복귀 | P01의 재무·보고 복귀 버튼 | 선택 보고일/key/본문·진입 query 포커스·이동 직전 비영점 스크롤 보존 |
+| F3 조회/왕복 무효과 | F1 전→조회 직후→복귀 후 권위값 비교 | 정지된 게임분·원장·계약/공사·명령큐/결과·회차 불변. 관측 revision과 게임 효과 구분 |
+
+원본 실행 전 소스/관측·입력 wrapper/launcher 사본·해시와 정상 프로필/환경을 고정한다. 새 입력 wrapper의 사전 파일/해시를 확보하되 기존 PROV-01 NOT_CAPTURED를 소급 해소하지 않는다. 실제 입력→화면→권위·종료 exit/오류·파일 해시를 한 패킷으로 묶고 DEV_SELF_GUI와 독립 보완 실행/Design 심사를 구분한다.
+
+**제외/종료:** 초기→입찰→2880분 공사→개통→영업 전체 자연 완주 반복, 두 번째 수주, 기존24조건 전체, 모든 키/창·배속, 새 게임 규칙·DEV-026은 제외한다. F1~3의 독립 증거가 충분하고 Design이 명시 수용하면 해당 GUI 단계를 종료한다. 현재 F1~3 실행·보완 구현은 NOT_RUN이며 전체 PARTIAL을 유지한다. Commit·Push·PR·main 병합은 별도 Owner 승인이다.
+
+### 7.4 경로 승인 후 실행·직접 영향 인계
+
+Owner가 §7.2 질문에 **“8개 경로 재지정·로컬 수정 및 검증 승인”**으로 응답했다. §7.1~7.3은 승인 전 검토 이력이며 구현·검증 NOT_RUN 상태는 이번 후속 기록으로 갱신한다. 승인 대상 브랜치/base와8경로를 유지했고, 제품 변경은 제안한 성공 분기1줄뿐이다. 일반 공고 열기/P05 왕복과 Session·모델은 변경하지 않았다.
+
+자동 검사는 보강 통합245(기존202 대비43추가)·운영 공급158·입찰 UI460·W07 322로 총1185개/실패0이다. 자동 신호 방출은 실제 GUI 입력과 구분한다. 잘못된 보고 key·첫 보고 확인값·빈 확인값의 Host 비이동/무효과, 기존 공급 실패의 query 비활성화, 숨은 패널·일반 P05 왕복·보고 복귀를 확인했다.
+
+자체 GUI **DEV024-V05-DEV-20261115**는 기존 `--case=first_report` MODEL_CHAIN_SETUP 이후 실제 OS 입력으로 진행했다. P05→공사→P06→P07에서 첫 유효 보고 선택/End/Tab으로 query 포커스·scroll605를 만든 뒤 Enter1회로 P01 진입, 보고 복귀 버튼으로 원래 P07에 돌아왔다. 상세/목록 추가 탐색0, 같은 보고·포커스·scroll605·권위 상태 해시 보존을 확인했다. 정상 종료0/엔진 오류0이며 자연 전체 완주의 신규 증거로 표시하지 않는다.
+
+실제 명령은 고정 Godot 엔진으로 `--path . --resolution 1100x900 --script tests/game/run_operations_gui_cases.gd -- --case=first_report`이다. 새 빈 로컬 프로필과 고유 실행 폴더를 사용했다. raw는 본 worktree의 `.local/validation/DEV-024-v05-review/gui-run/`에 있으며 실행 전 런타임 관련107파일·launcher·입력 wrapper 사본/해시, 엔진/형제 실행 파일 해시, 입력/상태/캡처19개·console·exit·감사를 연결한다. 최초 자연 실행 관측기/UID는 변경하지 않았다.
+
+독립 보완 인계는 이 소스와 F1/F2/F3만 사용한다. 실행자는 자신의 권한·분류/run ID/프로필·입력 wrapper/launcher를 실행 전에 별도 고정하고 실제 조작 증거·오류/exit를 공급한다. 초기→입찰→2880분 공사→영업 전체 반복은 요구하지 않는다. 이 DEV 자체 패킷을 독립 실행으로 재명명하지 않는다. 독립 증거가 충분하고 Design이 명시 수용할 때 해당 GUI 단계의 종료를 판단하며 Commit·Push·PR·main 병합은 별도 승인이다.

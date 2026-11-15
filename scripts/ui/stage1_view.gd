@@ -777,6 +777,7 @@ func _query_business(confirmed: Dictionary) -> void:
 	_log_reading("QUERY", result)
 	if result.get("accepted", false):
 		_report_return = _reading_context()
+		tender_view.page = "P01"
 		_open_tenders()
 
 

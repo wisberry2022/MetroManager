@@ -1546,5 +1546,327 @@
   "dev026": "HOLD",
   "specification_change_required": false,
   "raw_path_base": "Repository root; this dedicated worktree resolves .local/g24 as ../../g24",
-  "provenance_note": "Source hashes and temporal input correspondence are evidence indices, not actor identity or approval authentication"
+  "provenance_note": "Source hashes and temporal input correspondence are evidence indices, not actor identity or approval authentication",
+  "design_review_20261115": {
+    "recorded_by": "AGT-DEV-0004",
+    "source_kind": "DESIGN_PUBLIC_REVIEW_RECEIPT_NOT_NEW_DEV_EXECUTION",
+    "canonical_url": "https://github.com/wisberry2022/MetroManager/issues/80#issuecomment-6889738120",
+    "linked_url": "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6889744888",
+    "test_sha": "0865e5a2cdf168dac14167922c9e59b16796fa81",
+    "overall": "PARTIAL",
+    "run": {
+      "id": "DEV024-IG-20261115-1115A",
+      "executor_label": "LOCAL-CODEX-INDEPENDENT-VS01-1115A",
+      "identity_authenticated": false
+    },
+    "archive": {
+      "file": "DEV-024-VS01-INDEPENDENT-GUI-20261115-1115A.zip",
+      "bytes": 37649968,
+      "sha256": "d34c0ca6098a9e5b6bbe39028ae25e4a9afb2417a4f780ec0b34d6e52634452e",
+      "reported_manifest_files": 816,
+      "reported_source_files": 661,
+      "checks_by": "Design report",
+      "new_dev_archive_access": "NOT_RUN",
+      "new_dev_rehash": "NOT_RUN"
+    },
+    "accepted": {
+      "V01": "PASS",
+      "V02": "PASS",
+      "V03": "PASS",
+      "V04": "PASS",
+      "V05-1": "PASS",
+      "V05-2": "PASS_LIMITED_TO_OBSERVED_P05_P02_P01_PATH"
+    },
+    "remaining": {
+      "V05-3": {
+        "result": "FAIL_REQUIRES_CORRECTION",
+        "id": "OBS-V05-01",
+        "expected": "Accepted query from a displayed valid report opens P01 immediately even after prior P05 context",
+        "observed": "P05, then two additional navigation steps to P01",
+        "scope": [
+          "F1_ACCEPTED_QUERY_ENTERS_P01",
+          "F2_REPORT_DAY_FOCUS_SCROLL_RETURN",
+          "F3_READ_ONLY_NO_GAME_EFFECTS"
+        ]
+      }
+    },
+    "independent_values": {
+      "first_report_day": 4,
+      "service_minutes": 169,
+      "completed": 754,
+      "fare": 75400,
+      "operating_cost": 16900,
+      "report_key": "run--9223371984996399615/day-4",
+      "query_minute": 6327,
+      "query_accepted": true,
+      "exit_code": 0,
+      "engine_script_errors": 0
+    },
+    "reported_evidence": {
+      "events": 3020,
+      "inputs": 90,
+      "operator_actions": 46,
+      "states": 960,
+      "ledger_entries": 12480,
+      "trace_entries": 41769,
+      "submitter_audit_checks": 22892,
+      "not_new_game_assertions": true
+    },
+    "limitations_preserved": [
+      "PROV-01 input wrapper pre-run file/hash NOT_CAPTURED",
+      "physical actor/registered Agent-ID authentication NOT_VERIFIED",
+      "physical DPI/OS scale/native sizes NOT_VERIFIED",
+      "GUI sibling binary pre-run hash/full process linkage NOT_VERIFIED/NOT_CAPTURED",
+      "preparation/environment errors and partial console NOT_CAPTURED",
+      "A01-Q12 PARTIAL",
+      "historical Q12 ERROR2-to-7 handoff correction NOT_VERIFIED"
+    ],
+    "s2_current": {
+      "S2-08": "PARTIAL_V05_3_PENDING",
+      "S2-09": "QUERY_AND_FINAL_REACH_ACCEPTED_IMMEDIATE_P01_PENDING",
+      "S2-10": "NATURAL_INDEPENDENT_PATH_EVIDENCED_GUI_ACCEPTANCE_PARTIAL",
+      "S2-11": "CORRECTION_DESIGN_HQ_OWNER_PENDING"
+    },
+    "followup": {
+      "branch": "codex/DEV-024-v05-entry-fix",
+      "base": "0865e5a2cdf168dac14167922c9e59b16796fa81",
+      "status": "LOCAL_SCOPE_REVIEW",
+      "extra_path_authorization": "PENDING",
+      "proposed_paths": [
+        "scripts/ui/stage1_view.gd",
+        "tests/game/run_operations_gui_cases.gd",
+        "docs/engineering/tasks/DEV-024_VS01_INTEGRATION_EVIDENCE.md",
+        "docs/engineering/gate3/DEV-024_VS01_EXECUTION_PLAN.md",
+        "docs/engineering/gate3/DEV-024_VS01_VALIDATION_PLAN.md",
+        "docs/engineering/tasks/DEV-024_RESULT.md",
+        "docs/engineering/gate3/DEV-024_VS01_VALIDATION.json",
+        "docs/engineering/tasks/DEV-024_PROVENANCE.json"
+      ],
+      "implementation": "NOT_RUN",
+      "game_tests": "NOT_RUN",
+      "project_load": "NOT_RUN",
+      "dev_gui": "NOT_RUN",
+      "independent_supplement": "NOT_RUN",
+      "commit_push_pr_merge": "NOT_RUN",
+      "full_natural_reexecution_required": false,
+      "dev026": "HOLD"
+    },
+    "historical_fields_note": "All prior JSON fields remain as the original DEV self-validation/submission snapshot. This receipt supplies the later independent Design result."
+  },
+  "v05_correction_20261115": {
+    "agent_id": "AGT-DEV-0004",
+    "base_sha": "0865e5a2cdf168dac14167922c9e59b16796fa81",
+    "branch": "codex/DEV-024-v05-entry-fix",
+    "status": "LOCAL_IMPLEMENTED_VALIDATED_REVIEW",
+    "owner_approval": {
+      "source": "This development conversation, reply to exact eight-path reassignment question",
+      "quote": "8개 경로 재지정·로컬 수정 및 검증 승인",
+      "scope": "Execution plan 7.2 exact eight paths; local OBS-V05-01 correction and direct impact verification",
+      "git_submission": false
+    },
+    "changed_paths": [
+      "scripts/ui/stage1_view.gd",
+      "tests/game/run_operations_gui_cases.gd",
+      "docs/engineering/tasks/DEV-024_VS01_INTEGRATION_EVIDENCE.md",
+      "docs/engineering/gate3/DEV-024_VS01_EXECUTION_PLAN.md",
+      "docs/engineering/gate3/DEV-024_VS01_VALIDATION_PLAN.md",
+      "docs/engineering/tasks/DEV-024_RESULT.md",
+      "docs/engineering/gate3/DEV-024_VS01_VALIDATION.json",
+      "docs/engineering/tasks/DEV-024_PROVENANCE.json"
+    ],
+    "implementation": "Accepted report query sets TenderView.page to P01 before existing open; rejected query/general P05 navigation unchanged",
+    "auto_tests": {
+      "total_assertions": 1185,
+      "failures": 0,
+      "runs": [
+        {
+          "name": "integration-after",
+          "assertions": 245,
+          "command": [
+            "C:\\Users\\kitak\\OneDrive\\바탕 화면\\develop\\game-dev\\godot\\Godot_v4.7.2-stable_win64_console.exe",
+            "--headless",
+            "--path",
+            "C:\\Users\\kitak\\OneDrive\\바탕 화면\\develop\\game-dev\\MetroManager\\.local\\worktrees\\DEV-024-v05-entry-fix",
+            "--script",
+            "tests/game/run_operations_gui_cases.gd",
+            "--",
+            "--auto"
+          ],
+          "started_utc": "2026-11-15T05:42:22.747381+00:00",
+          "exit_code": 0,
+          "finished_utc": "2026-11-15T05:43:27.576729+00:00",
+          "log_sha256": "6b28e8f8218211ff6655aae2777bd7d9083089033babd3926438d01c57f659f9",
+          "errors": [],
+          "source_sha256": {
+            "scripts/ui/stage1_view.gd": "d65d8f6e722a4ad880969fb9cb3841e6a220c1b5883d79aaf499c6024d065370",
+            "tests/game/run_operations_gui_cases.gd": "1d5f62974469846c7807dd9450b600bc711010cad134a3fda27c99f2c3736e14"
+          }
+        },
+        {
+          "name": "operations-ui",
+          "assertions": 158,
+          "command": [
+            "C:\\Users\\kitak\\OneDrive\\바탕 화면\\develop\\game-dev\\godot\\Godot_v4.7.2-stable_win64_console.exe",
+            "--headless",
+            "--path",
+            "C:\\Users\\kitak\\OneDrive\\바탕 화면\\develop\\game-dev\\MetroManager\\.local\\worktrees\\DEV-024-v05-entry-fix",
+            "--script",
+            "tests/game/run_operations_ui_tests.gd",
+            "--",
+            "--evidence"
+          ],
+          "started_utc": "2026-11-15T05:43:27.586792+00:00",
+          "exit_code": 0,
+          "finished_utc": "2026-11-15T05:45:18.099832+00:00",
+          "log_sha256": "1dd53aad430184166c46044698332745a6331aff578a631705bba28ecca20c92",
+          "errors": [],
+          "source_sha256": {
+            "scripts/ui/stage1_view.gd": "d65d8f6e722a4ad880969fb9cb3841e6a220c1b5883d79aaf499c6024d065370",
+            "tests/game/run_operations_gui_cases.gd": "1d5f62974469846c7807dd9450b600bc711010cad134a3fda27c99f2c3736e14"
+          }
+        },
+        {
+          "name": "tender-ui",
+          "assertions": 460,
+          "command": [
+            "C:\\Users\\kitak\\OneDrive\\바탕 화면\\develop\\game-dev\\godot\\Godot_v4.7.2-stable_win64_console.exe",
+            "--headless",
+            "--path",
+            "C:\\Users\\kitak\\OneDrive\\바탕 화면\\develop\\game-dev\\MetroManager\\.local\\worktrees\\DEV-024-v05-entry-fix",
+            "--script",
+            "tests/game/run_tender_ui_tests.gd"
+          ],
+          "started_utc": "2026-11-15T05:45:18.106365+00:00",
+          "exit_code": 0,
+          "finished_utc": "2026-11-15T05:45:41.835230+00:00",
+          "log_sha256": "5c8a422e1615c295dcfd6df727e293e32fa666e3f8a4aa6aa0a36c6d2cc871e9",
+          "errors": [],
+          "source_sha256": {
+            "scripts/ui/stage1_view.gd": "d65d8f6e722a4ad880969fb9cb3841e6a220c1b5883d79aaf499c6024d065370",
+            "tests/game/run_operations_gui_cases.gd": "1d5f62974469846c7807dd9450b600bc711010cad134a3fda27c99f2c3736e14"
+          }
+        },
+        {
+          "name": "w07",
+          "assertions": 322,
+          "command": [
+            "C:\\Users\\kitak\\OneDrive\\바탕 화면\\develop\\game-dev\\godot\\Godot_v4.7.2-stable_win64_console.exe",
+            "--headless",
+            "--path",
+            "C:\\Users\\kitak\\OneDrive\\바탕 화면\\develop\\game-dev\\MetroManager\\.local\\worktrees\\DEV-024-v05-entry-fix",
+            "--script",
+            "tests/game/run_w07_tests.gd"
+          ],
+          "started_utc": "2026-11-15T05:45:41.845772+00:00",
+          "exit_code": 0,
+          "finished_utc": "2026-11-15T05:45:49.290388+00:00",
+          "log_sha256": "e821d80b920db3b3562f8cb084f69d22e74c76c8ef4104701cdc27597f627b87",
+          "errors": [],
+          "source_sha256": {
+            "scripts/ui/stage1_view.gd": "d65d8f6e722a4ad880969fb9cb3841e6a220c1b5883d79aaf499c6024d065370",
+            "tests/game/run_operations_gui_cases.gd": "1d5f62974469846c7807dd9450b600bc711010cad134a3fda27c99f2c3736e14"
+          }
+        }
+      ],
+      "before_fix": {
+        "assertions": 245,
+        "failures": 5,
+        "exit_code": 1,
+        "labels": [
+          "V05_immediate_page",
+          "V05_list_visible",
+          "V05_detail_visible",
+          "V05_hidden_back",
+          "V05_hidden_construction"
+        ],
+        "environment_error": "user:// log unavailable; separate from assertion failures"
+      }
+    },
+    "project_load": {
+      "name": "project-load-after",
+      "command": [
+        "C:\\Users\\kitak\\OneDrive\\바탕 화면\\develop\\game-dev\\godot\\Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\kitak\\OneDrive\\바탕 화면\\develop\\game-dev\\MetroManager\\.local\\worktrees\\DEV-024-v05-entry-fix",
+        "--editor",
+        "--quit"
+      ],
+      "started_utc": "2026-11-15T05:45:49.305722+00:00",
+      "exit_code": 0,
+      "finished_utc": "2026-11-15T05:45:58.120354+00:00",
+      "log_sha256": "9f1d92bf73600c29a58ef2ed3bc46596638fb9df38f58a581238cc8e0ffa0f22",
+      "errors": [],
+      "source_sha256": {
+        "scripts/ui/stage1_view.gd": "d65d8f6e722a4ad880969fb9cb3841e6a220c1b5883d79aaf499c6024d065370",
+        "tests/game/run_operations_gui_cases.gd": "1d5f62974469846c7807dd9450b600bc711010cad134a3fda27c99f2c3736e14"
+      }
+    },
+    "dev_gui": {
+      "run_id": "DEV024-V05-DEV-20261115",
+      "classification": "DEV_SELF_GUI / MODEL_CHAIN_SETUP followed by real OS input",
+      "full_natural_run": false,
+      "source_files": 107,
+      "helpers": {
+        "launch_gui.py": "40a6c583b4a2b0a56c2881a614f4d2d81535ffb5f0fcc9640b7814d6e73024a0",
+        "input-wrapper.mjs": "264b759baf4aed90b9ea6dd8a257ef8a5518f51e407f8c918c48be2191718cdd"
+      },
+      "engine_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643",
+      "sibling_sha256": "ab1824f85bfd8e0e4128182c000c4003a3e042245b2967848d089b2a04b22424",
+      "source_sha256": {
+        "scripts/ui/stage1_view.gd": "d65d8f6e722a4ad880969fb9cb3841e6a220c1b5883d79aaf499c6024d065370",
+        "tests/game/run_operations_gui_cases.gd": "1d5f62974469846c7807dd9450b600bc711010cad134a3fda27c99f2c3736e14"
+      },
+      "report_key": "run--9223371980483328539/day-4",
+      "minute": 5760,
+      "F1": "PASS_IMMEDIATE_P01_NO_EXTRA_NAVIGATION",
+      "F2": "PASS_REPORT_KEY_DAY_BODY_FOCUS_SCROLL_605_RESTORED",
+      "F3": "PASS_AUTHORITY_UNCHANGED",
+      "authority_sha256": "c32d96d9d2d05f417150fa1f4a997cd95b85e8c89098f403bc1048ace89efb80",
+      "captures": 19,
+      "input_records": 18,
+      "operator_actions": 17,
+      "operator_post_observations": 16,
+      "keyframes": {
+        "before": "res://.local/validation/DEV023_GUI_first_report_1794721397-106_14.png",
+        "query_result": "res://.local/validation/DEV023_GUI_first_report_1794721397-106_16.png",
+        "return": "res://.local/validation/DEV023_GUI_first_report_1794721397-106_18.png"
+      },
+      "result": {
+        "exit_code": 0,
+        "finished_utc": "2026-11-15T05:48:26.603831+00:00",
+        "errors": [],
+        "unchanged_sources": true,
+        "unchanged_helpers": true,
+        "console_sha256": "e9a32785c595150d0bd46934216a8b85bbb0019125173ebaa5628a4b328f7537"
+      },
+      "evidence_audit": {
+        "checks": 11,
+        "failures": 0,
+        "not_game_assertions": true
+      },
+      "process_linkage": "Read-only process observation: launcher27464 -> console33224 -> game9512; app window matched game executable. Not identity authentication.",
+      "post_exit_screenshot": "NOT_CAPTURED_TARGET_CLOSED_NORMAL_EXIT0",
+      "local_path": ".local/validation/DEV-024-v05-review/gui-run"
+    },
+    "initial_failures": [
+      "Local helper initial engine path off by one parent: FileNotFoundError before engine execution, corrected",
+      "Initial editor exit0 with user profile access errors; not PASS. Separate local profiles final load exit0/errors0",
+      "Initial pip DNS restriction; fixed-version installation succeeded after network escalation",
+      "Initial CIM read restricted; elevated read-only observation succeeded",
+      "Initial ad-hoc console JSON display prefix offset error; corrected without changing raw logs"
+    ],
+    "remaining": {
+      "independent_supplement": "NOT_RUN",
+      "design_reacceptance": "PENDING",
+      "independent_overall": "PARTIAL",
+      "A01_Q12": "PARTIAL",
+      "DEV026": "HOLD",
+      "commit_push_pr_ci_main_merge": "NOT_RUN_SEPARATE_APPROVAL",
+      "build_export_fps": "NOT_RUN",
+      "new_specification_decision_required": false,
+      "historical_PROV01_DPI_and_other_limits": "PRESERVED_NOT_RETROACTIVELY_RESOLVED"
+    },
+    "historical_note": "Prior JSON fields and the design receipt including its then-pending scope are historical snapshots. This entry records the later approval and DEV self-validation."
+  }
 }
