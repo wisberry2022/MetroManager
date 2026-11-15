@@ -11384,5 +11384,159 @@
         }
       ]
     }
+  },
+  "design_independent_acceptance": {
+    "record_type": "DESIGN_DECISION_RECEIPT",
+    "recorded_by": "AGT-DEV-0004",
+    "recorded_on": "2026-11-15",
+    "status": "24_CONDITIONS_ACCEPTED_INDEPENDENT_GUI_STAGE_CLOSED",
+    "scope": "CASE_MATRIX accepted rows; not all U01-U20 combinations or overall DEV-023 DONE",
+    "canonical_decision": "https://github.com/wisberry2022/MetroManager/issues/79#issuecomment-6887989037",
+    "linked_decision": "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6887995179",
+    "prior_21_condition_decision": "https://github.com/wisberry2022/MetroManager/issues/79#issuecomment-6887692818",
+    "trial_sha": "bf99dd11f3d8cd4d6dc07e38de164cd0b27f8dba",
+    "implementation_head": "b1d9da850960627297651fb42fef2f89353a7daf",
+    "reviewed_main_sha": "a9ce63a09e0778435bb8c7ef1fd0501aa10f430d",
+    "implementation_and_trial_tree_equal": true,
+    "trial_to_reviewed_main_changes": [
+      "docs/planning/PLN-004_POST_MVP_COMPANY_STATE_V0_7.md",
+      "docs/planning/tasks/PLN-010_RESULT.md",
+      "docs/planning/tasks/PLN-010_SAFETY_RISK_MANAGEMENT_DESIGN.md"
+    ],
+    "accepted_count": 24,
+    "prior_accepted_rows": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      18,
+      19,
+      20,
+      21,
+      23,
+      24
+    ],
+    "supplement_rows": [
+      {
+        "row": 17,
+        "u_ids": [
+          "U11"
+        ],
+        "result": "DESIGN_ACCEPTED_PASS",
+        "scope": "Same Host P07 older actual Day1 response rejected while Day4 report, query, focus and scroll605 remain"
+      },
+      {
+        "row": 22,
+        "u_ids": [
+          "U18",
+          "U19"
+        ],
+        "result": "DESIGN_ACCEPTED_PASS",
+        "scope": "525-character Korean unavailable reason and keyboard navigation in 800x600; CONSUMER_FIXTURE"
+      },
+      {
+        "row": 25,
+        "u_ids": [
+          "U17"
+        ],
+        "result": "DESIGN_ACCEPTED_PASS",
+        "scope": "Actual P05 input scroll234 -> stored234 -> restored234 with focus, construction and game effects preserved"
+      }
+    ],
+    "owner_held_archives_as_reported_by_design": [
+      {
+        "name": "DEV-023-INDEPENDENT-GUI-20261115-IG1115A.zip",
+        "bytes": 13855687,
+        "sha256": "ebaa73558475895cfe10540606fc8d33c0f4299b887edbb83bd28f1558b95195",
+        "design_checked_files": 362
+      },
+      {
+        "name": "DEV-023-INDEPENDENT-GUI-SUPPLEMENT-20261115-SUP1115B.zip",
+        "bytes": 6344934,
+        "sha256": "0e95d4ca611af091c5f091f0fba84acce571ce841e7b049b1e3597ef47e469c1",
+        "design_checked_files": 108
+      }
+    ],
+    "verification_level": "Read Design decision and compare Git source history; no new archive acquisition, rehash or independent GUI execution by DEV",
+    "new_dev_archive_rehash": "NOT_RUN",
+    "new_dev_game_automatic_tests": "NOT_RUN_DOCUMENT_ONLY",
+    "new_dev_project_load": "NOT_RUN_DOCUMENT_ONLY",
+    "new_dev_gui_or_play": "NOT_RUN_DOCUMENT_ONLY",
+    "new_dev_build_export_performance": "NOT_RUN_OUT_OF_SCOPE",
+    "additional_required_conditions_in_accepted_scope": [],
+    "additional_implementation_or_gui_rerun_requested": false,
+    "preserved_residuals": [
+      "A01-Q12 upper PARTIAL",
+      "Some IG1115A R03-R11 exact historical helper bytes NOT_VERIFIED",
+      "Initial import/cache environmental cause and physical DPI/window equivalence NOT_VERIFIED",
+      "Initial non-profile full console and Q12 R02 termination NOT_CAPTURED",
+      "R13/R14 tool timeout and exit4294967295; R09 historical PARTIAL (CLOSE-01 already supplemented by R12)",
+      "Q12 ERROR2-to-7 handoff correction completion NOT_VERIFIED",
+      "Other historical UNKNOWN/NOT_VERIFIED/NOT_RUN outside observed scope"
+    ],
+    "next_acceptance": [
+      "DEV-024 natural standard VS-01 full path",
+      "HQ evidence integration",
+      "Owner final acceptance"
+    ],
+    "dev026": "OWNER_IMPLEMENTATION_DEFERRED",
+    "track_b_f08": "SEPARATE_SCOPE_OPEN",
+    "game_or_economic_spec_change_needed": false,
+    "git_submission": "LOCAL_REVIEW_ONLY_NO_NEW_COMMIT_PUSH_PR",
+    "original_p1_l2_p3_records": "PRESERVED_UNCHANGED",
+    "dev_response_refs": [
+      "https://github.com/wisberry2022/MetroManager/issues/79#issuecomment-6888066340",
+      "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6888069422"
+    ]
+  },
+  "followup_submission": {
+    "owner_instruction": "DEV-023 로컬 후속 기록 3개 파일을 승인합니다. codex/DEV-023-design-acceptance-note 브랜치에 Commit·Push하고 PR을 생성한 뒤 필수 CI 결과까지 확인해주세요. main 병합은 별도 승인하겠습니다. DEV-026 구현·검증 보류는 유지합니다.",
+    "agent_id": "AGT-DEV-0004",
+    "task_id": "DEV-023",
+    "branch": "codex/DEV-023-design-acceptance-note",
+    "submission_base_sha": "9d6b4614b6eeeb2f3a3410e584de12329bc251f5",
+    "approved_files": [
+      "docs/engineering/tasks/DEV-023_RESULT.md",
+      "docs/engineering/gate3/DEV-023_UI_VALIDATION_PLAN.md",
+      "docs/engineering/gate3/DEV-023_UI_VALIDATION.json"
+    ],
+    "allowed_actions": [
+      "commit",
+      "normal_push",
+      "create_pr",
+      "required_ci_checks"
+    ],
+    "main_merge": "SEPARATE_OWNER_APPROVAL_REQUIRED",
+    "hq_owner_closeout": {
+      "status": "OWNER_ACCEPTED_DONE",
+      "source": "docs/hq/tasks/PM-018_DEV023_CLOSEOUT.md",
+      "source_sha": "9d6b4614b6eeeb2f3a3410e584de12329bc251f5",
+      "issue": "https://github.com/wisberry2022/MetroManager/issues/79",
+      "issue_state": "closed",
+      "state_reason": "completed",
+      "distinct_from_design_24_condition_acceptance": true
+    },
+    "prior_records": "PRESERVED_UNCHANGED_AS_HISTORICAL_RECORDS",
+    "provenance": {
+      "manifest": "docs/engineering/tasks/DEV-023_PROVENANCE.json",
+      "scope": "PRESERVED_PR128_MANIFEST_NOT_CURRENT_THREE_FILE_SUBMISSION",
+      "expected_report_only_diagnostic": "MANIFEST_BASE",
+      "required_checks": [
+        "policy",
+        "department-policy"
+      ]
+    },
+    "dev026": "OWNER_IMPLEMENTATION_DEFERRED"
   }
 }

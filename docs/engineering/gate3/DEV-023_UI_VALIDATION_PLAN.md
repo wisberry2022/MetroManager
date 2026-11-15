@@ -156,3 +156,13 @@ P1 3,041단언과 L2 55단언은 서로 다른 실행 단계의 기록이다. �
 | U20 | PASS | GUI 종료0 | 정상202/의도적 exit1·제품 TEST_ONLY 로드 없음 |
 
 공급 문서 §10의 구현과 Owner §1.4의 Git 권한으로 PR/필수 CI를 진행한다. 실제 PR head와 CI는 PR/Checks가 정본이며 새 head의 미실행 게임 검사를 PASS로 소급하지 않는다.
+
+## 10. 독립 GUI 수용 후속 색인 — 24조건 한정 종료
+
+[Design #79 최종 판정](https://github.com/wisberry2022/MetroManager/issues/79#issuecomment-6887989037) 및 [#81 연결](https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6887995179)에 따라 IG1115A 21조건과 SUP1115B 3조건을 합한 **CASE_MATRIX 24행이 한정 수용됐으며 합의된 독립 GUI 검수 단계는 종료**됐다. §9의 PENDING·NOT_RUN은 P3 개발 검증 당시 기록이다. 기존 행을 다시 작성하거나 U01~U20 모든 조합 PASS로 변경하지 않는다.
+
+보완은 U11의 P07 이전 실제 보고 응답 거부(행17), U18/U19의 525자 한국어 불가 사유·작은 창 접근/복귀(행22), U17의 P05 비영점 스크롤234 저장/복귀(행25)다. 해당3조건은 최종 PASS이며 추가 필수 구현·GUI/증거 재공급 요청 없음. 기존21조건과 CLOSE-01 R12의 유효 범위를 재사용한다.
+
+원본·시험 SHA·출처 및 과거 PARTIAL/NOT_VERIFIED/NOT_CAPTURED는 [결과서 §10](../tasks/DEV-023_RESULT.md#10-design-독립-gui-24조건-수용-수신--후속-기록)과 검증 JSON.`design_independent_acceptance`에 연결했다. 원본 ZIP은 Owner 보관이고 이번 DEV 작업에서는 새로 수신·재해시/실행하지 않았다. Design의 원본 심사와 DEV 신규 실행을 구분한다.
+
+A01-Q12 상위 PARTIAL, 기록 정정·환경 등 별도 잔여, DEV-024 자연 VS-01·HQ/Owner 인수, Track B/F-08과 DEV-026 HOLD는 유지한다. 이번 문서 후속 작업의 게임 자동검사·프로젝트 로드·GUI·빌드/export/FPS는 NOT_RUN이다. 후속 재개방은 PM-015에 따라 관련 변경·새 결함·증거 신뢰성 문제의 영향 행으로 한정한다.
