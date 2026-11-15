@@ -1,10 +1,10 @@
 # DEV-024 — VS-01 실행·Design 입력 패킷 검토안
 
-- AGT-DEV-0004 / 2026-11-15 / **LOCAL_REVIEW / DESIGN_PARTIAL**. §1~7.3은 단계별 이력이며 승인 후 보완 실행·인계는 §7.4를 따른다.
-- 기준 main: `0a76a2e924ec0b661e3cdbd858ed6bfd665f3dc9`.
-- [티켓·권한/8경로](../tasks/DEV-024_VS01_INTEGRATION_EVIDENCE.md) / [검증 계획](DEV-024_VS01_VALIDATION_PLAN.md).
-- DEV-026 구현·제품 검증 **HOLD** 유지. §1~5는 준비 이력이며 실제 실행·인계 현황은 §6에 기록한다.
-- 요청 정본: [Design #80](https://github.com/wisberry2022/MetroManager/issues/80#issuecomment-6888452975). [#81](https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6888459436)은 연결용이며 동일 검수를 반복하지 않는다.
+- AGT-DEV-0004 / 2026-11-15 / **DESIGN_GUI_ACCEPTED / GUI_REVIEW_CLOSED / LOCAL_DOCUMENT_REVIEW**.
+- 최신 종료·인계는 §8. §1~7은 각 단계의 준비/승인/실행 이력으로 보존한다.
+- 이번 후속 기준 main: `324faf9b7d81540240217d2757f26de6f07460ba`. 최초 기준: `0a76a2e924ec0b661e3cdbd858ed6bfd665f3dc9`.
+- [티켓·권한/이번8경로 §11](../tasks/DEV-024_VS01_INTEGRATION_EVIDENCE.md) / [검증 계획 §10](DEV-024_VS01_VALIDATION_PLAN.md).
+- DEV-026 구현·제품 검증 **HOLD**. 원래 입력 요청/실행 계획과 과거 NOT_RUN은 소급 수정하지 않는다.
 
 ## 1. Design 입력6묶음: 준비 완료와 실행 시 채울 값
 
@@ -209,3 +209,15 @@ Owner가 §7.2 질문에 **“8개 경로 재지정·로컬 수정 및 검증 �
 실제 명령은 고정 Godot 엔진으로 `--path . --resolution 1100x900 --script tests/game/run_operations_gui_cases.gd -- --case=first_report`이다. 새 빈 로컬 프로필과 고유 실행 폴더를 사용했다. raw는 본 worktree의 `.local/validation/DEV-024-v05-review/gui-run/`에 있으며 실행 전 런타임 관련107파일·launcher·입력 wrapper 사본/해시, 엔진/형제 실행 파일 해시, 입력/상태/캡처19개·console·exit·감사를 연결한다. 최초 자연 실행 관측기/UID는 변경하지 않았다.
 
 독립 보완 인계는 이 소스와 F1/F2/F3만 사용한다. 실행자는 자신의 권한·분류/run ID/프로필·입력 wrapper/launcher를 실행 전에 별도 고정하고 실제 조작 증거·오류/exit를 공급한다. 초기→입찰→2880분 공사→영업 전체 반복은 요구하지 않는다. 이 DEV 자체 패킷을 독립 실행으로 재명명하지 않는다. 독립 증거가 충분하고 Design이 명시 수용할 때 해당 GUI 단계의 종료를 판단하며 Commit·Push·PR·main 병합은 별도 승인이다.
+
+## 8. 독립 보완·Design 수용 후 인계 — 2026-11-15
+
+[Design #80 정본](https://github.com/wisberry2022/MetroManager/issues/80#issuecomment-6890415230) / [#81 연결](https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6890437629)에 따라 F1~F3 PASS 및 OBS-V05-01/V05-3 수용을 기록한다. 기존 V01~V04·V05-1/2와 결합해 **합의된 DEV-024·VS-01 독립 GUI 검수 단계 종료** 조건을 충족했다. §7.3의 종료 조건을 적용하며 추가 필수 GUI·제품 보완·증거 재공급은 없다.
+
+독립 보완 run `DEV024-V05-IG-20261115-1115B`는 PR #135 병합 main `324faf9b7d81540240217d2757f26de6f07460ba`의 MODEL_CHAIN_SETUP 뒤 실제 입력이다. 이전 자연 완주1115A 및 DEV 자체 GUI와 구분하며 새 SHA의 자연 전체 완주로 쓰지 않는다. Design은 제공된 증거를 심사했고 새 GUI를 실행하지 않았다.
+
+재개28 이후 실제 P05 문맥을 다시 확보한 A36→B38→C40에서 즉시 P01·원래 보고/포커스/scroll605 복귀·효과 해시 불변이 수용됐다. 중단 중 입력7~25/캡처8~27/첫 QUERY는 주체 NOT_VERIFIED로 수용 근거에서 제외된다. 실제 exit0과 EXIT PNG NOT_CAPTURED·requested_exit NOT_PROVIDED는 별개다. 상세 계보/한계는 [결과 §15](../tasks/DEV-024_RESULT.md)와 [검증 JSON 후속 키](DEV-024_VS01_VALIDATION.json)에 있다.
+
+남은 문서 인계는 [DOC-01 별도 정정문](DEV-024_DOC-01_PACKET_README_CORRECTION.md)과 [HQ 요약](DEV-024_DESIGN_ACCEPTANCE_HQ_HANDOFF.md)이다. 원본 ZIP/README는 보존하고 정정문을 연결한다. 새 ZIP·GUI 재실행은 종료 선행조건이 아니다. 원본 보관·작성 담당에 전달할 요청까지 준비했으며 실제 외부 전달은 아직 하지 않았다.
+
+이번 Owner 지시는 로컬 문서/정적 확인과 검토 요청까지다. 새 제품/검사 구현·게임/로드/GUI/빌드 실행·Commit/Push/PR·main 병합은 하지 않았다. A01-Q12 PARTIAL·과거 미확인/미포착·DEV-026 HOLD를 유지하고 HQ/Owner의 전체 DONE·S2 인수 판단은 별도로 남긴다.

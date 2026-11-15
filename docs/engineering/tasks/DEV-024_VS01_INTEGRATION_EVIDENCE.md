@@ -1,11 +1,11 @@
 # DEV-024 — W08 VS-01 통합 재현·회귀·GUI 증거 착수 검토안
 
 - 담당: Development Project Leader / LAPTOP / AGT-DEV-0004 / 2026-11-15 (Asia/Seoul).
-- 상태: **OWNER_ACCEPTED / SUBMISSION_APPROVED / DESIGN_PARTIAL**. §1~9는 단계별 이력이며 최신 제출 권한은 §10을 따른다.
+- 현재: **OWNER_ACCEPTED / SUBMISSION_APPROVED / DESIGN_GUI_ACCEPTED**. 수용은 §11, 제출 승인은 §12, 최신 PR 참조 복구 지시는 §13이며 이전 절은 단계별 이력이다.
 - 저장소: wisberry2022/MetroManager · [Issue #80](https://github.com/wisberry2022/MetroManager/issues/80).
-- 기준 main / 로컬 HEAD: `0a76a2e924ec0b661e3cdbd858ed6bfd665f3dc9`.
-- 브랜치: `codex/DEV-024-vs01-integration-evidence`. 독립 worktree 사용; 공용 main·기존 DEV-023 작업 보존.
-- 연결: [실행·Design 입력 패킷](../gate3/DEV-024_VS01_EXECUTION_PLAN.md), [검증·기존 수용 대응표](../gate3/DEV-024_VS01_VALIDATION_PLAN.md), [준비 결과](DEV-024_RESULT.md).
+- 이번 후속 기준 main/HEAD: `324faf9b7d81540240217d2757f26de6f07460ba`. 최초 기준/브랜치: `0a76a2e924ec0b661e3cdbd858ed6bfd665f3dc9` / `codex/DEV-024-vs01-integration-evidence`.
+- 이번 브랜치: `codex/DEV-024-design-acceptance-handoff`. 공용 main·기존 worktree·원본 검수 패킷 보존.
+- 연결: [실행·Design 입력 패킷](../gate3/DEV-024_VS01_EXECUTION_PLAN.md), [검증·기존 수용 대응표](../gate3/DEV-024_VS01_VALIDATION_PLAN.md), [결과 §15](DEV-024_RESULT.md).
 
 ## 1. 이번 지시와 권한
 
@@ -139,3 +139,52 @@ Owner는 본 개발 대화에서 다음과 같이 승인했다.
 대상은 wisberry2022/MetroManager / DEV-024 / AGT-DEV-0004 / codex/DEV-024-v05-entry-fix / 실행 계획 §7.2의8경로다. 정상 훅을 통한 Commit·일반 Push·base=main PR 생성·필수 policy/department-policy 확인을 이번 제출 완료 또는 Owner 철회까지 허용한다. main 병합·자동 병합·강제 Push·브랜치 삭제·Issue 게시/종료·릴리스/배포는 포함하지 않는다.
 
 승인된8파일 바이트를 로컬 검토 감사와 대조한 뒤 보존했다. 이번 제출에서는 티켓·결과서에 승인 기록을 추가하고 그에 따른 provenance blob만 갱신한다. 제품·검사·실행/검증 계획·검증 JSON은 승인 바이트를 유지한다. 실제 제출·검사 결과는 PR 및 Owner 완료 보고에 연결하며 검사 성공을 DONE/Stage 인수로 확대하지 않는다. 독립 보완 실행·Design 재수용 대기와 DEV-026 HOLD를 유지한다.
+
+## 11. Design 수용 수신·DOC-01·HQ 인계 준비 — 2026-11-15
+
+Owner의 본 개발 대화 지시:
+
+> DEV-024의 Design 수용 결과를 문서에 후속 기록하고, 검수 패킷 README의 DOC-01 정정문과 HQ 인계용 요약을 준비해주세요. 원본 ZIP과 기존 검증 기록은 보존하고 로컬 산출물부터 검토 요청해주세요. DEV-026 보류는 유지합니다.
+
+[Design #80 정본](https://github.com/wisberry2022/MetroManager/issues/80#issuecomment-6890415230) 및 [#81 연결](https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6890437629)에서 F1~F3 PASS·OBS-V05-01/V05-3 수용과 **합의된 DEV-024·VS-01 독립 GUI 검수 단계 종료**를 확인했다. 이전 독립 GUI 전체 PARTIAL의 V05-3 잔여 조건은 해소됐으며 추가 필수 GUI·제품 수정·증거 재공급 요청은 없다. 과거 FAIL/PARTIAL/PENDING은 당시 관측 이력으로 보존한다. A01-Q12 상위 PARTIAL·전체 DONE/Stage 인수·DEV-026 HOLD는 별도다.
+
+이번 권한은 아래8개 개발 문서/JSON의 로컬 후속 기록·정적 검사·검토 요청까지다. §10의 이전 제품 보완 제출 승인을 새 문서 제출에 재사용하지 않는다.
+
+| 경로 | 이번 변경 |
+| --- | --- |
+| `docs/engineering/tasks/DEV-024_VS01_INTEGRATION_EVIDENCE.md` | 현재 지시·범위, §11 추가 |
+| `docs/engineering/tasks/DEV-024_RESULT.md` | 수용·원격 제출 결과·원본 보존·검증 §15 |
+| `docs/engineering/gate3/DEV-024_VS01_EXECUTION_PLAN.md` | GUI 단계 종료·인계 §8 |
+| `docs/engineering/gate3/DEV-024_VS01_VALIDATION_PLAN.md` | 검증 분류·S2 연결 §10 |
+| `docs/engineering/gate3/DEV-024_VS01_VALIDATION.json` | 기존 키 불변, 수용 후속 키 추가 |
+| `docs/engineering/gate3/DEV-024_DOC-01_PACKET_README_CORRECTION.md` | 원본 README §2에 연결할 별도 정정문 |
+| `docs/engineering/gate3/DEV-024_DESIGN_ACCEPTANCE_HQ_HANDOFF.md` | Owner 복사·붙여넣기용 HQ 요약 |
+| `docs/engineering/tasks/DEV-024_PROVENANCE.json` | 이번 후보7산출물의 기준/old·new blob 선언 |
+
+원본 외부/내부 ZIP, 추출 패킷 README·로그/PNG·기존 실행 기록을 수정하거나 다시 압축하지 않는다. DOC-01은 [독립 정정문](../gate3/DEV-024_DOC-01_PACKET_README_CORRECTION.md)으로 연결하며 원본 보관·작성 담당에게 전달할 내용은 [HQ 인계안](../gate3/DEV-024_DESIGN_ACCEPTANCE_HQ_HANDOFF.md)에 포함한다. 아직 전달/게시 완료를 주장하지 않는다.
+
+제품·테스트·HQ/Design/INF 문서·저장소 루트 README는 변경하지 않는다. 새 게임 자동검사·로드·GUI·빌드는 NOT_RUN. 새 Commit·Push·PR·CI·main 병합·외부 회신/Issue 종료는 미실행이다. 검수 요청은 전체 DONE/Stage 인수가 아니며 새 기획/디자인 명세 결정은 필요 없다. DEV-026 구현·제품 검증 **HOLD** 유지.
+
+## 12. Owner 로컬 후속 기록 승인·제출 권한 — 2026-11-15
+
+Owner의 본 개발 대화 원문:
+
+> DEV-024 로컬 후속 기록 8개 파일을 승인합니다. codex/DEV-024-design-acceptance-handoff 브랜치에 Commit·Push하고 PR을 생성한 뒤 필수 CI 결과까지 확인해주세요. main 병합은 별도 승인하겠습니다. DEV-026 구현·검증 보류는 유지합니다.
+
+대상은 wisberry2022/MetroManager / DEV-024 / AGT-DEV-0004 / `codex/DEV-024-design-acceptance-handoff` / §11의 정확한8파일이다. 이번 제출·필수 CI 확인 완료 또는 Owner 철회까지 정상 훅 Commit·일반 Push·base=main PR 생성·필수 policy/department-policy 확인을 허용한다. main 병합·자동 병합·강제 Push·브랜치 삭제·Issue 게시/종료·릴리스/배포는 포함하지 않는다.
+
+승인 당시 로컬 후보 감사의8파일 SHA-256과 제출 준비 직전 바이트가 모두 일치함을 확인하고 승인본을 별도 로컬 보관했다. 이번 제출 준비에서는 티켓/결과서에 이 승인 기록을 추가하고 그에 따른 provenance blob만 갱신한다. 실행/검증 계획·검증 JSON·DOC-01 정정문·HQ 인계안5파일은 승인 바이트 그대로다.
+
+§11과 결과서 §15의 LOCAL_REVIEW·미제출 표시는 해당 시점 이력이다. HQ 인계안은 승인된 복사 문안으로 공유하되 실제 HQ 전달·원본 보관 담당의 정정문 연결 완료를 대신하지 않는다. 원본 ZIP/추출 패킷230파일·기존 검증 기록·GUI 단계 종료와 별도 A01-Q12 PARTIAL을 보존한다. DEV-026 구현·제품 검증 **HOLD**. 실제 commit/PR SHA·필수 CI는 PR 및 Owner 완료 보고에 연결하며 전체 DONE/Stage 인수로 확대하지 않는다.
+
+## 13. PR #136 head 참조 조사·복구 지시 — 2026-11-15
+
+Owner의 본 개발 대화 원문:
+
+> 개발 에이전트. PR #136의 head 참조 누락 원인을 조사하고 필수 CI가 통과하도록 복구해주세요. CI 설정 변경이 필요하면 먼저 로컬 검토안을 준비해주세요. main 병합은 별도 승인하며 DEV-026 구현·검증 보류는 유지합니다.
+
+기존8경로의 제출 승인과 이번 복구 지시에 따라 같은 `codex/DEV-024-design-acceptance-handoff` 브랜치/PR #136에서 조사 기록을 후속 공유하고 정상 브랜치 갱신·CI 재실행을 진행한다. 이번 후속 변경은 기존8경로 중 본 티켓·결과서·provenance3파일에 한정한다. 원래 제출 커밋 `876fc1afc129cd93e1cf460d72764db3341c8b70`, 나머지5문서·제품·검사·원본 ZIP과 기존 실패 로그를 보존한다.
+
+확인된 직접 원인은 PR API/작업 브랜치에는 제출 head가 있으나 서버의 `refs/pull/136/head`가 없어서 base-only 두 workflow가 판정기 실행 전 fetch exit128로 종료되는 것이다. 최초 실행·실패 job 재실행·동일 PR 재개방과 같은 SHA의 작업 브랜치 ref 갱신으로는 복구되지 않았다. 빈 커밋이나 이력 재작성 대신 조사/복구 기록이 있는 정상 후속 커밋·일반 Push로 PR synchronize를 유발하고 참조 및 CI를 확인한다. 복구 성공은 원격 확인 후 별도 보고하며 미리 PASS로 기록하지 않는다.
+
+CI/도구/보호 설정 변경은 이번에 하지 않는다. 정상 브랜치 갱신으로도 복구되지 않고 CI 변경이 필요하면 원인·정확한 파일/패치·base-only 신뢰 경계·검증·적용 순서를 로컬 검토안으로 먼저 제출한다. main 병합·자동 병합·강제 Push·보호 완화·숨은 PR ref 직접 쓰기·새 게임 실행은 포함하지 않는다. **DEV-026 구현·제품 검증 HOLD**를 유지한다.

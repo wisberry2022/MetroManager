@@ -1,11 +1,11 @@
 # DEV-024 — VS-01 로컬 구현·검증 결과
 
 - Development / AGT-DEV-0004 / 2026-11-15 (Asia/Seoul).
-- 상태: **OWNER_ACCEPTED / SUBMISSION_APPROVED / DESIGN_PARTIAL**.
-- §1~13은 준비·구현·검증 이력이며 최신 Owner 로컬 결과 승인·제출 권한은 **§14**다.
-- 기준 main/HEAD: `0a76a2e924ec0b661e3cdbd858ed6bfd665f3dc9`.
-- 브랜치: `codex/DEV-024-vs01-integration-evidence`.
-- [작업 티켓·Owner 지시](DEV-024_VS01_INTEGRATION_EVIDENCE.md).
+- 현재: **OWNER_ACCEPTED / SUBMISSION_APPROVED / DESIGN_GUI_ACCEPTED**.
+- 수용·문서 검증은 **§15**, 제출 승인은 **§16**, 최신 PR 참조 조사·복구는 **§17**. 이전 실행·실패·당시 상태는 이력으로 보존한다.
+- 후속 기준 main/HEAD: `324faf9b7d81540240217d2757f26de6f07460ba`. 최초 기준: `0a76a2e924ec0b661e3cdbd858ed6bfd665f3dc9`.
+- 이번 브랜치: `codex/DEV-024-design-acceptance-handoff`. 최초 브랜치: `codex/DEV-024-vs01-integration-evidence`.
+- [작업 티켓·Owner 지시 §11](DEV-024_VS01_INTEGRATION_EVIDENCE.md).
 
 ## 1. 검토 결과
 
@@ -235,3 +235,126 @@ Owner의 본 개발 대화 원문:
 fetch/API 기준 main은 0865e5a2cdf168dac14167922c9e59b16796fa81로 로컬 검증 base와 같다. 제품/검사·환경 변경이 없어 승인된 자동1185·프로젝트 로드·DEV 자체 GUI F1~3를 재사용한다. 이번 제출 단계의 신규 게임 자동검사·프로젝트 로드·GUI·빌드/export/FPS는 NOT_RUN이며, 정상 훅·policy·출처·커밋 후 preflight 및 새 PR CI를 별도로 확인한다.
 
 실제 commit/PR SHA와 CI 결과는 생성 후 해당 PR/Owner 완료 보고에 기록하고 로컬 제출 로그를 위 디렉터리에 보존한다. 아직 생성 전인 결과를 PASS로 미리 선언하지 않는다. **독립 보완 실행·Design 재수용 대기, 전체 독립 GUI/A01-Q12 PARTIAL, DEV-026 HOLD**를 유지하며 이 제출을 DONE/Stage 인수·main 병합 승인으로 바꾸지 않는다.
+
+## 15. Design 수용 후 기록·DOC-01 정정·HQ 인계 로컬 검토안
+
+### 15.1 수신한 판정과 종료 범위
+
+[Design #80 정본](https://github.com/wisberry2022/MetroManager/issues/80#issuecomment-6890415230)은 2026-11-15 15:33:14 KST, [#81 연결](https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6890437629)은 15:35:30 KST 등록이다. Design Track A / AGT-DSG-0002가 F1~F3 PASS와 OBS-V05-01/V05-3 보완을 수용했다. 기존 V01~V04·V05-1/2와 연결해 **합의된 DEV-024·VS-01 독립 GUI 검수 단계가 종료**됐으며 추가 필수 GUI·제품 보완·증거 재공급 요청은 없다.
+
+이전 §12~14 및 JSON의 독립 GUI PARTIAL·Design PENDING은 해당 시점의 기록이다. 이번 판정은 그 GUI 잔여 조건을 해소하지만 **A01-Q12 상위 PARTIAL**, 전체 DEV-024 DONE·Issue 종료·Stage 인수를 대신하지 않는다. 이전 수용을 재개방하지 않는다.
+
+### 15.2 병합·CI와 증거 계보
+
+[PR #135](https://github.com/wisberry2022/MetroManager/pull/135)는 head `f508d88281dc84b1a9d7e4399f5eba06a89d3ce6`에서 2026-11-15 15:01:42 KST에 병합돼 main `324faf9b7d81540240217d2757f26de6f07460ba`가 됐다. 원격 API와 fetch로 확인한 사실이며 이번 문서 작업에서 병합하지 않았다. PR head와 병합 main의 tree diff는 없다.
+
+| 확인 구분 | 결과/범위 |
+| --- | --- |
+| PR #135 필수 department-policy | [SUCCESS](https://github.com/wisberry2022/MetroManager/actions/runs/43683416561/job/132718749518), 위 head 기준 |
+| PR #135 필수 policy | [SUCCESS](https://github.com/wisberry2022/MetroManager/actions/runs/43683416572/job/132718747793), 위 head 기준 |
+| PR #135 agent provenance | [report-only SUCCESS](https://github.com/wisberry2022/MetroManager/actions/runs/43683416579/job/132718749511), DECLARATION_CONSISTENT. 신원/실행 권한 인증 아님 |
+| 원래 독립 자연 실행 | `DEV024-IG-20261115-1115A` / `0865e5a2cdf168dac14167922c9e59b16796fa81`. V01~V04·V05-1/2 기존 수용 유지 |
+| DEV 자체 보완 | §13의 자동1185·프로젝트 로드·`DEV024-V05-DEV-20261115` 자체 GUI. 독립 실행과 별도 |
+| 이번 독립 보완 | `DEV024-V05-IG-20261115-1115B` / 위 병합 main. MODEL_CHAIN_SETUP 뒤 실제 입력의 국소 재검수 |
+| Design 심사 | 제출 원본/소스·로그·화면 대조. Design이 새 게임/GUI를 실행한 것은 아님 |
+| 이번 DEV 문서 작업 | 원격 수신·원본 메타데이터/바이트 읽기·문서 정적 검증. 새 게임/GUI 실행 아님 |
+
+실행자 표기 `LOCAL-CODEX-INDEPENDENT-V05-1115B`는 등록 Agent-ID나 물리 신원 인증이 아니다. 제출자 오프라인 감사130개·기존 DEV 게임 자동1185개·Design 증거 심사·이번 DOC-01 원본 읽기 검사를 합산하지 않는다.
+
+### 15.3 독립 보완 수용 근거 — Design 판정 인용
+
+정본 ZIP PNG 접두부는 `captures/DEV023_GUI_first_report_1794723092-651_`다. 기존 DEV023 파일명은 유지한다. A=36 조회 직전, B=38 QUERY_RESULT, C=40 TENDER_EXIT이며 전환37·39도 보존됐다.
+
+| 항목 | 수용한 실제 관측 |
+| --- | --- |
+| F1 | 재개 F12/PNG28 이후 실제 P05 인계30→공사31→P06 32→P07/첫 보고33~36. Enter1회, 표시/QUERY key 일치·accepted, B 즉시 page=P01·목록·보이는 Tender_refresh 포커스, P05 전용 컨트롤 없음·추가 탐색0 |
+| F2 | 복귀 클릭1회로 원래 P07. A/C day/key/객체·본문·확인값 동일, P07_query2 포커스·보고 scroll **605→605**, 수동 복원0. B 목록 scroll124는 별도이며 목록0 조건을 신설하지 않음 |
+| F3 | A/B/C displayed/backing minute5760, 원장·clock/model·명령/결과·계약·보고/계획 효과 해시 동일 |
+
+보고 key는 `run--9223371980500105755/day-4`, 효과 해시는 `c32d96d9d2d05f417150fa1f4a997cd95b85e8c89098f403bc1048ace89efb80`다. 앞선 V05-2의 P05→P02→P01 최종 도달 한정 PASS와 이번 성공 직후 P01 수용은 서로 다른 시험본 관측이다.
+
+Design은 실행 전 소스125/125와 main blob, ZIP manifest221/221을 대조했다. tracked661개의 전후 무변경은 실행자 보고이며 Design이661개 전체 원문을 새 대조했다는 뜻은 아니다. 원본 stdout 캡처40·입력38·QUERY2 중 **재개 후 알려진 QUERY(stdout102행)와 복귀**만 F1~F3 수용에 사용했다. 중단 중 raw 입력7~25·캡처8~27·첫 QUERY(stdout71행)의 주체/개입은 NOT_VERIFIED로 제외하며 Owner나 실행자에게 귀속하지 않는다.
+
+실제 process exit0·stdout/stderr 엔진/스크립트 오류0. **EXIT-labelled 내부 PNG/기록 NOT_CAPTURED, runner requested_exit NOT_PROVIDED**를 유지한다. C는 마지막 안정 복귀 화면이며 종료 PNG가 아니다. DEV 자체 run의 종료 기록을 독립 보완의 누락에 전용하지 않는다.
+
+### 15.4 DOC-01 정정과 원본 보존
+
+대상은 검수 패킷 README §2다. [별도 정정문](../gate3/DEV-024_DOC-01_PACKET_README_CORRECTION.md)에 원문 위치·실측표·대체 문단·원본 SHA를 준비했다. `실제 PNG40개1100×900` 서술을 **01~11·28~40:1100×900 24개 / 12~27:2880×1659 16개**로 정정한다. 재개28~40은 모두1100×900이며 F1~F3 수용에 영향이 없다. 크기 변화 주체는 NOT_VERIFIED다.
+
+외부 `v05r.zip`(13,831,128 bytes, SHA-256 `4f282f8561517b58b7dadb3b59b1e9bf7fc0a8bc925ce198cbc3da77512d4610`)과 내부 `DEV-024-V05-INDEPENDENT-RETEST-20261115-1115B.zip`(6,937,676 bytes, SHA-256 `708c4f8df69109f0ec6c52d08eda367388d82d6b577237fa32340ac73fe1f12d`)을 읽기 전용 대조했다. ZIP CRC0, 외부/내부 동일 바이트, manifest221파일 해시/크기, 추출 패킷222파일, PNG40개 IHDR/기존 색인·환경·viewport가 일치했다.
+
+원본 ZIP·추출 README·로그·PNG를 포함한 로컬230파일의 작업 전후 경로·크기·SHA-256이 동일하다. 새 ZIP을 만들지 않았으며 원본 README의 당시 PENDING/잘못된 서술도 그대로 보존하고 후속 기록으로 연결한다. 원본 보관·작성 담당에게 정정문 연결을 요청할 문안은 [HQ 인계안](../gate3/DEV-024_DESIGN_ACCEPTANCE_HQ_HANDOFF.md)에 준비했다. 전달/게시·원본 담당의 반영 완료는 아직 주장하지 않는다.
+
+### 15.5 이번8파일·검증 및 로컬 검토 요청
+
+변경8경로는 [티켓 §11](DEV-024_VS01_INTEGRATION_EVIDENCE.md)에 있다. 제품·테스트·타 부서 산출물·기존 worktree는 변경하지 않았다. 기존4개 Markdown의 §1 이후 본문과 검증 JSON의 기존 모든 키/값을 보존하고 후속 절/키만 추가했다. 헤더는 최신 절을 가리킨다. provenance는 이번 base/7산출물 old·new blob으로 갱신하며 기존 PR #135 선언은 Git 이력에 남는다.
+
+아래는 이번 문서 작업의 검증이다. Python은 기존 보완 worktree의 고정 venv `../DEV-024-v05-entry-fix/.venv/Scripts/python.exe`를 사용했다.
+
+| 명령/검증 | 결과·증거 |
+| --- | --- |
+| 위 Python `tools/policy.py doctor` | PASS, 작업 환경/훅·고정 도구 확인 |
+| 위 Python `tools/policy.py check` | PASS, 저장소 정적 정책 검사. 게임 단언 아님 |
+| `git diff --check` | PASS |
+| 위 Python `.local/validation/DEV-024-design-acceptance/inspect_packet.py` | PASS, 원본 ZIP/PNG·DOC-01 읽기 감사, `packet-read-audit.json` |
+| 위 Python `.local/validation/DEV-024-design-acceptance/audit_candidate.py` | PASS,8경로·기존 본문/JSON·원본230파일·문서 링크·UTF-8/LF·provenance7행 대조, `candidate-audit.json` |
+| 원격 #80/#81·PR #135·main/CI 조회 | 수신 기록 `remote-receipt.json`; 위 PR의 기존 CI이며 새 문서 CI 아님 |
+| 새 게임 자동검사 / 프로젝트 로드 / 실제 플레이·GUI / 빌드·export·FPS | **NOT_RUN / NOT_RUN / NOT_RUN / NOT_RUN**. 문서 변경에 대한 불필요한 재실행 없음 |
+| 새 문서 Commit·Push·PR·preflight·서버 provenance/CI·main 병합·외부 게시 | **NOT_RUN**, 이번 권한은 로컬 검토까지 |
+
+위 로컬 증거는 이 worktree의 `.local/validation/DEV-024-design-acceptance/`에 보관하며 Owner 제한 원본 패킷을 공개 Git에 추가하지 않는다. 후보 provenance 대조는 서버의 출처 검증이나 신원 인증이 아니다.
+
+**검토 요청:** 수용 후속 기록·DOC-01 정정문·HQ 복사 전달안을 로컬 검토해 주시기 바란다. 새 게임 규칙/Design 명세 변경은 필요 없다. 남은 것은 문서 검토·정정문 전달 연결과 HQ의 최종 회귀/CI·부서 수용·잔여 취합, Owner의 전체 DONE/Issue 종료/Stage 인수 판단이다. 이번 문서 작업으로 이를 완료 처리하지 않는다.
+
+A01-Q12 상위 PARTIAL, 이번 중단 구간 주체/전체 console→GUI 연결·물리 신원·DPI/OS 배율/native 크기 NOT_VERIFIED, 이번 EXIT PNG·기존1115A PROV-01·최초 콘솔/Q12 R02 종료 NOT_CAPTURED, 과거 환경/보조 도구 바이트·Q12 ERROR2→7 인계 정정 연결 NOT_VERIFIED 및 실패/중단·UNKNOWN/NOT_RUN을 유지한다. 기존24조건/Q03~05/W05/Q12 한정 수용도 유지한다. 새 전체 자연 완주·전체 회귀·모든 키/배속/창 조합·빠른 별도 E2E·두 번째 수주/Track B는 NOT_RUN. **DEV-026 구현·제품 검증 HOLD**.
+
+## 16. Owner 승인 후 후속 문서 Commit·Push·PR 제출 — 2026-11-15
+
+Owner의 본 개발 대화 원문:
+
+> DEV-024 로컬 후속 기록 8개 파일을 승인합니다. codex/DEV-024-design-acceptance-handoff 브랜치에 Commit·Push하고 PR을 생성한 뒤 필수 CI 결과까지 확인해주세요. main 병합은 별도 승인하겠습니다. DEV-026 구현·검증 보류는 유지합니다.
+
+[티켓 §12](DEV-024_VS01_INTEGRATION_EVIDENCE.md)의 이번 승인에 따라 동일 브랜치에서 §15의 문서8파일을 제출한다. 이전 PR #135 제품 보완 제출 권한을 재사용하지 않는다. main 병합·자동 병합·force push·브랜치 삭제·Issue 게시/종료·릴리스는 제외하며 **DEV-026 구현·제품 검증 HOLD**를 유지한다.
+
+제출 준비 직전8파일의 SHA-256을 승인 후보 감사와 대조해 모두 일치했고, 승인본과 manifest를 `.local/validation/DEV-024-design-acceptance-submission/approved/` 및 `approved-manifest.json`에 보관했다. 이번에는 티켓/본 결과서의 승인 기록과 provenance만 갱신하며 다른5파일은 승인 바이트를 유지한다. §1~15의 과거 검증/미제출/PENDING과 원본 ZIP/README·로그/PNG는 보존한다.
+
+fetch 및 원격 API로 확인한 main은 `324faf9b7d81540240217d2757f26de6f07460ba`로 승인 후보 base와 같다. 실제 main 보호는 strict=true·필수 policy/department-policy·관리자 적용·선형 이력·force push/삭제 금지, squash-only·자동 병합 비활성 상태다. GitHub 연결의 보호 조회는 권한 부족403이었고 로컬 Git 인증의 읽기 전용 API로 별도 확인했다. 자격증명은 출력/저장하지 않았다.
+
+정상 훅 실행을 위해 이 worktree에 별도 `.venv`를 만들고 `tools/requirements-dev.txt`의 고정 도구를 설치했다. 설치된 훅/doctor·policy·diff·8경로/승인 바이트/기존 기록/원본 보존을 확인한 뒤 명시 경로만 stage하고 커밋 후 preflight·REPORT_ONLY 출처 검사를 실행한다. 신규 게임 자동검사·Godot 프로젝트 로드·GUI/플레이·Windows 빌드/export/FPS는 문서 제출에 대해 **NOT_RUN**이며 기존 검증을 새 실행으로 표시하지 않는다.
+
+실제 제출 SHA·PR·preflight·필수 CI 결과는 생성 후 PR/Owner 완료 보고와 위 로컬 제출 폴더에 기록한다. 아직 생성 전인 서버 결과를 PASS로 선언하지 않는다. Design 수용/합의된 GUI 단계 종료·DOC-01 정정문·HQ 인계안을 공유하는 제출이며 원본 보관 담당/HQ의 후속 반영·A01-Q12 상위 PARTIAL·미확인/미포착·Owner의 전체 DONE/Issue 종료/Stage 인수 판단은 별도로 유지한다.
+
+## 17. PR #136 head 참조 누락 조사·비설정 복구 — 2026-11-15
+
+### 17.1 확인 사실과 원인 경계
+
+[PR #136](https://github.com/wisberry2022/MetroManager/pull/136)의 초기 head는 `876fc1afc129cd93e1cf460d72764db3341c8b70`, base/main은 `324faf9b7d81540240217d2757f26de6f07460ba`다. PR은 OPEN·미병합·충돌 없음이며 필수 검사 실패로 blocked다. 초기 제출의 문서8파일·정상 훅·preflight·로컬 출처 검증은 보존한다.
+
+| 대조 | 실제 관측 |
+| --- | --- |
+| PR API `head.sha` / 원격 작업 브랜치 | 둘 다 위876fc1a… 존재 |
+| `git ls-remote origin refs/pull/136/head` | 출력 없음 |
+| REST `git/ref/pull/136/head` | 404 Not Found |
+| `refs/pull/136/merge` | 존재; 재개방 뒤47db4d7301d73580ffe161009252dc47f8aab355 |
+| 이전 PR #135 head | f508d88281dc84b1a9d7e4399f5eba06a89d3ce6 조회됨 |
+| 필수 policy | [SUCCESS](https://github.com/wisberry2022/MetroManager/actions/runs/43687917218/job/132732189252), tooling89검사 통과 |
+| 필수 department-policy | [FAILURE](https://github.com/wisberry2022/MetroManager/actions/runs/43687917555/job/132732192348), PR head fetch exit128 |
+| 보조 agent-provenance-report | [FAILURE](https://github.com/wisberry2022/MetroManager/actions/runs/43687917541/job/132732192163), 같은 fetch 오류·판정기 미실행 |
+
+직접 실패 원인은 서버가 제공하지 않는 PR head ref를 명시 fetch하는 단계다. 오류는 `fatal: couldn't find remote ref refs/pull/136/head`이고 경로/제목/출처 판정 코드 실행 전이다. API 메타데이터와 브랜치/merge ref는 있는데 PR head ref만 누락된 **서버 참조 불일치**가 관측됐다. GitHub 내부의 누락 발생 원인·발생 주체는 NOT_VERIFIED이며 서비스 전체 장애·플러그인 원인으로 단정하지 않는다.
+
+[GitHub 공식 문서](https://docs.github.com/en/pull-requests/how-tos/review-pull-requests/checking-out-pull-requests-locally)는 PR head fetch를 지원하며 refs/pull 공간을 읽기 전용으로 설명한다. 숨은 참조에 직접 Push하지 않는다. [checkout 보안 변경](https://github.blog/changelog/2026-06-18-safer-pull_request_target-defaults-for-github-actions-checkout/)은 fork head checkout에 대한 제한이다. 이번은 같은 저장소 PR이고 trusted base checkout은 성공했으며 그 뒤 수동 fetch에서 실패했으므로 해당 제한의 거부 로그가 아니다. [상태 페이지](https://www.githubstatus.com/)가 정상이어도 이 PR의 참조 누락이 부정되는 것은 아니다.
+
+### 17.2 복구 조치와 승인 경계
+
+최초 실행·동일 SHA 실패 job 재실행·동일 PR close/reopen에서 같은 오류를 확인했고 모두 로그를 보존했다. 이번 지시 후에도 같은 상태다. 작업 브랜치에 expected_sha=876fc1a…·sha=동일값·force=false의 ref 갱신 요청은 성공했지만 PR head ref는 계속404/미조회였다.
+
+[티켓 §13](DEV-024_VS01_INTEGRATION_EVIDENCE.md)에 따라 기존8경로 안의 티켓/본 결과서/출처3파일에 조사 기록을 추가하고, 정상 후속 커밋·일반 Push로 실제 branch update/PR synchronize를 유발한다. 제품·CI·검사 도구·보호 설정을 변경하지 않는다. 이전 커밋과 원본을 유지하며 빈 커밋·force push·기존 이력 수정은 하지 않는다. 이 조치가 서버 참조를 복구한다는 보장은 없고 실제 참조·새 head의 두 필수 CI로 판정한다.
+
+성공 기준은 (1) PR API/브랜치/refs-pull head의 동일 SHA, (2) 해당 head의 policy·department-policy SUCCESS, (3) 보조 출처 판정 결과 확인, (4) 변경8경로/원본 보존·main 미병합이다. 기존 failure는 성공 이력으로 덮어쓰지 않는다. 실패가 지속돼 CI 변경이 필요하면 적용하지 않고 로컬 검토안을 먼저 준비한다. base-only workflow는 main의 신뢰된 코드로 실행되므로 PR 안의 설정만 바꿔 즉시 복구된다고 주장하지 않는다.
+
+### 17.3 검증·증거와 유지 상태
+
+이번 조사 증거는 `.local/validation/DEV-024-pr136-recovery/`, 앞선 실패 원문은 `.local/validation/DEV-024-design-acceptance-submission/`에 보관한다. 후보3경로·나머지5파일/원본230파일 보존·과거 본문·cumulative provenance7행·정적 정책·커밋 후 preflight를 검증하고 실제 원격 재실행 결과는 PR/Owner 완료 보고와 로컬 recovery 결과에 연결한다. 아직 새 head의 CI 결과를 PASS로 선언하지 않는다.
+
+신규 게임 자동검사·Godot 로드·GUI/플레이·Windows 빌드/export/FPS는 **NOT_RUN**이다. 원래 Design 수용·합의된 GUI 단계 종료, DOC-01 별도 정정문, A01-Q12 상위 PARTIAL·과거 NOT_VERIFIED/NOT_CAPTURED를 유지한다. 게임/Design 명세 변경 필요 없음. **main 병합은 별도 Owner 승인, DEV-026 구현·제품 검증 HOLD**.
