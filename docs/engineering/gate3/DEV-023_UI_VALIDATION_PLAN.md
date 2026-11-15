@@ -1,7 +1,7 @@
 # DEV-023 — UI 실행·검증 계획
 
-- AGT-DEV-0004 / 2026-11-15 / **L2_SUPPLEMENT_LOCAL_REVIEW / UI_INTEGRATION_NOT_RUN / DESIGN_ACCEPTANCE_PENDING**.
-- 기준 main: `e379e584e6a9fefa0c581f27903c16e4fc0f5136`.
+- AGT-DEV-0004 / 2026-11-15 / **P3_IMPLEMENTED_REVIEW_REQUESTED / DESIGN_L2_ACCEPTED / INDEPENDENT_GUI_PENDING**.
+- 현재 P3 기준 main: `3e2982ac71be28344c3be5360652f4071c678ce3`. 이전 P1 기준은 각 실행 이력에 보존.
 - [착수 범위·권한](../tasks/DEV-023_W06_OPERATIONS_UI.md), [소비 계약·RFC](DEV-023_UI_SUPPLY_AND_EXECUTION_PLAN.md).
 - U01~U20은 전체 수용 계획과 기대값이다. P1 실제 실행·잔여는 §6과 검증 JSON으로 구분하며 DEV-022의 과거 PASS를 이번 실행 결과로 복사하지 않는다.
 
@@ -127,3 +127,32 @@ L2-03-S의 역순 응답은 실제 공급 사본의 전달순서 입력을 마�
 Owner의 원격 PR 생성 승인에 따라 최신 main 30cc2ea 기준으로 제출한다. e379e58 이후 제품/테스트/규칙 차이는 없고 검토받은 제품·테스트·fixture/validation JSON 바이트도 그대로다. 이미 통과한 게임 검사를 문서/출처 갱신만으로 반복하지 않는다. 현재 제출에서 doctor/check·승인12개 경로/기존 해시·manifest, 정상 commit/push 훅·커밋 후 preflight와 실제 head의 필수 CI를 확인한다.
 
 P1 3,041단언과 L2 55단언은 서로 다른 실행 단계의 기록이다. 기존 source_sha256 및 current_source_sha256과 실행별 raw hash를 보존하고 새 head의 신규 전체 실행으로 합산하지 않는다. 실제 제출 head·CI 링크는 PR 본문/Checks가 정본이며 미실행 UI/GUI/build 및 Design 수용·main 병합·DEV-026의 경계는 유지한다.
+
+## 9. P3 실행 결과 행별 인계
+
+현재 결과는 validation JSON.p3_integration에 원본/입력 종류·실행별 소스·로그/캡처 해시와 연결한다. 아래 GUI는 DEV 관측 범위이며 Design 독립 수용은 전체 PENDING이다. 기존 공급 L2는 ACCEPTED로 유지한다.
+
+| ID | 자동/공급 | DEV 실제 GUI | 관측 한계/후속 |
+| --- | --- | --- | --- |
+| U01 | PASS | G04 | 제품 초기화/미개통. 활성화 실패는 기존 P1 공급 반례 재사용 |
+| U02 | PASS | NOT_RUN | 명시 opt-in/기존 W07 fixture 보존. 별도 GUI 필요 없음 |
+| U03 | PASS | G01/G05 | 정상 명령 초기화 후 실제 화면. DEV-024 자연 완주 아님 |
+| U04 | PASS | G01 | 현재 이동중1와 Day4 마감5/완료4291 분리 |
+| U05 | PASS | G04; 정상수요0 GUI NOT_RUN | 정상0 소비 자동과 미개통 실제0 구분 |
+| U06 | PASS | G02; 회복 연속 GUI NOT_RUN | B100 제한 GUI와 B0 부족→재개 자동 입력 |
+| U07 | REUSED_P1_MODEL_AND_AUTO | NOT_RUN | CLOSE-01 00:09 전용 GUI 후속. 자정 후 실제 공급 소비는 G01 |
+| U08 | PASS | G01/G02/G03/G04 | 현재/당일/기성/운영비 지급 합계, R 보호/큰 값 |
+| U09 | PASS | G01 | 일자 선택/첫 보고/복귀. 잘못된 타입은 기존 P1 재사용 |
+| U10 | PASS | G03/G06; 일부 예외 GUI NOT_RUN | 정확한 큰 분수/산술 오류/미마감. 확정0·원본실패/복구 자동 |
+| U11 | PASS | 역순 응답 직접 GUI NOT_RUN | 낡은 모델/게임분/View판 거부와 동일판 remainder 수용 |
+| U12 | PASS | G01 | 읽기/왕복 게임효과0. 실제 입력과 현재/고정 보고 로그 |
+| U13 | PASS | G01/G02/G04 | 유효 보고 전/후 및 query 공급 실패 구별 |
+| U14 | PASS | G01 | 기존 CLOSED 목록 진입 후 P07 복귀. 새 수주 없음 |
+| U15 | P1_PREDICTION_REUSED / DISPLAY_REVIEW | 미계산 G01/G05; 계산 완료 GUI NOT_RUN | 예측 현재값의 계획/기간/생성 시각 별도 코드. 독립 해당 행 후속 |
+| U16 | PASS | G05 | 동일시각 동일 표식/그림 호출 효과0/정지/1·2·4배속. 정확한 열차 event 재생 아님 |
+| U17 | PASS | G01/G03/G04 | P05 왕복 자동·기존 공사 회귀, 보고 왕복/포커스/Tab/Space 실제. 새 전체 조합 없음 |
+| U18 | PASS_STRUCTURE_AND_KEYS | G03 | 800x600 / viewport1152x864. 물리 DPI·F-08 최종 규격 확정 아님 |
+| U19 | PASS | G02/G06 및 종료0 | 잘못된 타입/누락·복구 자동. 전역 Session 재생성 제외 |
+| U20 | PASS | GUI 종료0 | 정상202/의도적 exit1·제품 TEST_ONLY 로드 없음 |
+
+공급 문서 §10의 구현과 Owner §1.4의 Git 권한으로 PR/필수 CI를 진행한다. 실제 PR head와 CI는 PR/Checks가 정본이며 새 head의 미실행 게임 검사를 PASS로 소급하지 않는다.

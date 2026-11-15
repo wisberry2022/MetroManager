@@ -1,11 +1,11 @@
 # DEV-023 — 착수 준비와 P1 공급 구현·검증 결과
 
 - 담당: Development Project Leader / AGT-DEV-0004 / 2026-11-15 (Asia/Seoul).
-- 상태: **OWNER_PR_SUBMISSION_APPROVED / DESIGN_ACCEPTANCE_PENDING / UI_INTEGRATION_NOT_RUN**.
-- 기준 main: `e379e584e6a9fefa0c581f27903c16e4fc0f5136`.
-- 브랜치: `codex/DEV-023-operations-finance-ui`. 독립 로컬 worktree의 미커밋 검토안이다.
+- 상태: **P3_IMPLEMENTED_REVIEW_REQUESTED / DESIGN_L2_ACCEPTED / INDEPENDENT_GUI_PENDING**.
+- 현재 P3 기준 main: `3e2982ac71be28344c3be5360652f4071c678ce3`. 이전 P1 기준은 각 실행 이력에 보존.
+- 현재 브랜치: `codex/DEV-023-operations-screen-integration`. Owner 승인에 따른 후속 PR 제출 검토본.
 
-> §1~5는 Owner 실행 승인 전 준비 기록, §6은 최초 P1 검토 결과다. Design 회신 후 보완 결과는 §7, 현재 원격 제출 승인·단계는 §8을 따른다.
+> §1~5는 Owner 실행 승인 전 준비 기록, §6은 최초 P1 검토 결과다. Design 회신 후 보완 결과는 §7, 이전 원격 제출 승인·단계는 §8, 현재 P3 통합 결과는 §9를 따른다.
 
 ## 1. PR #123 병합과 최신 지시 확인
 
@@ -153,3 +153,35 @@ Owner가 “해당 구현 내용을 원격 저장소 PR로 생성해주세요”
 제출 범위는 Session 공급1개·신규 테스트/fixture와 UID4개·문서/증거7개로 총12개다. 기존 P1 정상3,041단언 및 프로젝트 로드, 후속 L2 55단언/의도적 exit1은 각각 당시 소스 해시의 실행으로 보존한다. 새 원격 SHA의 전체 게임 재실행으로 소급하지 않는다. 제출 전 doctor/check·파일/경로·해시·출처 확인, 정상 Git 훅과 커밋 후 preflight, 제출 head의 policy/department-policy를 확인한다. 검사 우회나 신규 제품 범위 추가는 없다.
 
 **Design 최종 L2 수용과 제품 main/Host/Map/P06/P07·씬 통합·실제 GUI는 후속이다. main 병합은 별도 승인 대기이며 DEV-026 구현·제품 검증 보류를 유지한다.** PR 제출을 전체 DEV-023 DONE·Issue 종료·Stage 인수로 처리하지 않는다.
+
+## 9. Design L2 수용 후 P3 화면 통합 결과
+
+Owner의 최신 후속 구현·PR 지시와 [Design L2 정본](https://github.com/wisberry2022/MetroManager/issues/79#issuecomment-6886354300)을 범위 §1.4에 연결했다. **L2-01~04/RFC L2-A/B/C ACCEPTED**, P2 공급 협의 선행 조건 해소다. PR #127 병합 main 3e2982ac71be28344c3be5360652f4071c678ce3에서 codex/DEV-023-operations-screen-integration으로 진행했다. 공식 제품 인수/DONE이나 main 병합 승인은 아니다.
+
+### 구현과 파일
+
+승인23개 중 **17개 파일**: scripts/main.gd, stage1_view.gd, stage1_map.gd 수정; operations_view.gd/finance_view.gd와 UID, operations_panel.tscn/finance_panel.tscn, run_operations_gui_cases.gd와 UID 신규; 범위/결과/공급계획/검증계획 4개와 validation/provenance 2개 갱신. Session·모든 모델·기존 테스트·P1 fixture 생성기/runner·fixture JSON·DATA·설정·타 부서 파일은 보존했다.
+
+- 제품 초기화에서 W06 명시 활성화. 개통 전/실패를 정상0으로 숨기지 않고 기존 W07 격리 fixture를 유지한다.
+- P06 운영 실적/현재 이동 중·만족도 원분수·별도 예상, P07 현재 재무/당일 흐름/고정 마감 보고·실제 첫 보고 조회를 연결했다. 오류/없음/0, 운영비 지급 합계와 공사 기성을 분리했다.
+- S01/P05→P06/P07→P01 왕복의 반환 화면·보고일·선택·포커스/스크롤을 보존한다. accepted=true에서만 조회 이동하며 역순 모델/View 관측을 거부한다.
+- 실제 운영선/OD/cohort의 대표 이동·역 집계 표시와 가까운 설명을 추가했다. 시간/원장/수요/도착을 연출이 만들지 않는다.
+- 새 패널 읽기 키는 Home/End가 컨테이너에 선소비되지 않게 처리한다. 숨은 패널 입력/갱신 포커스 이동과 기존 P05 입력의 범위를 분리했다.
+
+### 검증과 관측
+
+신규 **AUTO_UI 202단언 PASS / 실패0 / exit0**. 의도적 실패1은 **exit1 확인 PASS**이며 정상 증거 파일과 분리한다. 기존 W07 322, 입찰 UI460, 공사 UI898 회귀는 각 PASS다. 자동 실행은 각각의 실제 소스/로그 해시에 고정했다. 공사898은 최종 새 패널 읽기 키/문구 전 실행이며, 최종 U17 P05 왕복을 새 검사로 보완했다. 전체1882를 단일 최종 head 실행으로 주장하지 않는다. 이전 P1 3041과 L2 55도 원래 실행으로 보존한다.
+
+Godot 4.7.2 / Python3.12 / gdtoolkit4.5.0. 명령은 기존 run_checks.py가 보관한 실제 명령을 검증 JSON에 기록했다. 신규 자동은 Godot --headless --path . --script tests/game/run_operations_gui_cases.gd -- --auto, 실패는 --verify-failure-exit, 로드는 --headless --editor --path . --quit이다. 실행별 exit·SCRIPT ERROR/ERROR 검사를 적용했다. 최종 LF 정규화·정상/실패 원본 증거 파일 분리 후 신규 자동/실패/프로젝트 로드를 다시 실행했다.
+
+DEV 자체 REAL_GUI는 G01~G06으로 구분한다. 제품 main 초기화·개통 전/보고 없음, 정상 명령 초기화의 현재/고정 보고·첫 조회/복귀·Tab/Space/End, 미지급 제한/R 보호, 800x600(논리 viewport1152x864)의 긴 분수/큰 금액/Home/End, 실제 운영선의 정지/재개/1·2·4배속, 만족도 산술 오류를 관측했다. 각 실행은 종료0이며 캡처·로그·해시를 로컬 .local에 보관하고 검증 JSON에 색인했다. 초기 제한 fixture 로그 minute360은 backing pipeline이며 실제 표시 T362와 구별하도록 후속 runner에서 필드를 분리했다.
+
+첫 탐색의 타입 추론 오류, 새/기존 노드 이름 충돌, 작은 창 Home 선소비, 만족도 오류의 미산출 혼동 및 자동 원본 덮어쓰기 문제를 수정했다. 실패/탐색 로그를 PASS 합계에 포함하지 않았다. source hash는 실행별로 보존하고 이후 문구/바이트 변경을 소급하지 않는다.
+
+### 잔여와 검토 요청
+
+[검증 계획 §9](../gate3/DEV-023_UI_VALIDATION_PLAN.md#9-p3-실행-결과-행별-인계)와 JSON의 20행은 AUTO/DEV GUI/독립 인수를 구분한다. **U01~U20 전체 GUI PASS가 아니다.** 정상수요0·CLOSE-01 전용00:09·회복 연속·역순 응답의 직접 GUI·계산 완료 예측 등 미관측 조건은 명시된 후속이다. Design 독립 GUI는 PENDING이며 수용한 공급 L2를 다시 열지 않는다. DEV-024 자연 전체 완주/Windows build/export/FPS/DPI 확정은 NOT_RUN이다.
+
+기존 Q03~05·W05·OBS-01·Q12 한정 수용/원래 P05 인계 종료 가능과 상위 PARTIAL, 환경/DPI·기존 ERROR 정합성·R02 등의 별도 상태를 보존한다. DEV-026 구현·제품 검증 보류 유지. 새 게임/경제 명세 변경 필요 없음. 이 PR은 P3 구현·DEV 검증 결과의 검토 요청이며 main 병합·Stage DONE 승인이 아니다.
+
+후속 증거 감사: 반복 실행한 long/만족도 GUI 프로필에서 각각 shader cache 하위 경로 생성 ERROR68건(스크립트 오류0)을 확인했다. 해당 로그를 정상 PASS에서 제외하고 짧은 실행별 .local/g23 프로필로 분리해 G03/G06을 다시 관측·종료0·SCRIPT ERROR/ERROR0으로 확보했다. 엔진/OS의 정확한 원인은 확정하지 않았고 캐시·safe-save·제품 설정을 끄거나 변경하지 않았다. 기존 환경/DPI 인수의 해소로 확대하지 않는다. 엔진이 생성한 untracked 이미지 .import151개만 원본 자산/추적 여부 확인 후 제거했으며 원본은 보존했다.
