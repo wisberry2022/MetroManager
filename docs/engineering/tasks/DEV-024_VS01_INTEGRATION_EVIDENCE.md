@@ -1,7 +1,7 @@
 # DEV-024 — W08 VS-01 통합 재현·회귀·GUI 증거 착수 검토안
 
 - 담당: Development Project Leader / LAPTOP / AGT-DEV-0004 / 2026-11-15 (Asia/Seoul).
-- 현재: **OWNER_ACCEPTED / SUBMISSION_APPROVED / DESIGN_GUI_ACCEPTED**. 수용은 §11, 최신 제출 권한은 §12이며 §1~11은 단계별 이력이다.
+- 현재: **OWNER_ACCEPTED / SUBMISSION_APPROVED / DESIGN_GUI_ACCEPTED**. 수용은 §11, 제출 승인은 §12, 최신 PR 참조 복구 지시는 §13이며 이전 절은 단계별 이력이다.
 - 저장소: wisberry2022/MetroManager · [Issue #80](https://github.com/wisberry2022/MetroManager/issues/80).
 - 이번 후속 기준 main/HEAD: `324faf9b7d81540240217d2757f26de6f07460ba`. 최초 기준/브랜치: `0a76a2e924ec0b661e3cdbd858ed6bfd665f3dc9` / `codex/DEV-024-vs01-integration-evidence`.
 - 이번 브랜치: `codex/DEV-024-design-acceptance-handoff`. 공용 main·기존 worktree·원본 검수 패킷 보존.
@@ -176,3 +176,15 @@ Owner의 본 개발 대화 원문:
 승인 당시 로컬 후보 감사의8파일 SHA-256과 제출 준비 직전 바이트가 모두 일치함을 확인하고 승인본을 별도 로컬 보관했다. 이번 제출 준비에서는 티켓/결과서에 이 승인 기록을 추가하고 그에 따른 provenance blob만 갱신한다. 실행/검증 계획·검증 JSON·DOC-01 정정문·HQ 인계안5파일은 승인 바이트 그대로다.
 
 §11과 결과서 §15의 LOCAL_REVIEW·미제출 표시는 해당 시점 이력이다. HQ 인계안은 승인된 복사 문안으로 공유하되 실제 HQ 전달·원본 보관 담당의 정정문 연결 완료를 대신하지 않는다. 원본 ZIP/추출 패킷230파일·기존 검증 기록·GUI 단계 종료와 별도 A01-Q12 PARTIAL을 보존한다. DEV-026 구현·제품 검증 **HOLD**. 실제 commit/PR SHA·필수 CI는 PR 및 Owner 완료 보고에 연결하며 전체 DONE/Stage 인수로 확대하지 않는다.
+
+## 13. PR #136 head 참조 조사·복구 지시 — 2026-11-15
+
+Owner의 본 개발 대화 원문:
+
+> 개발 에이전트. PR #136의 head 참조 누락 원인을 조사하고 필수 CI가 통과하도록 복구해주세요. CI 설정 변경이 필요하면 먼저 로컬 검토안을 준비해주세요. main 병합은 별도 승인하며 DEV-026 구현·검증 보류는 유지합니다.
+
+기존8경로의 제출 승인과 이번 복구 지시에 따라 같은 `codex/DEV-024-design-acceptance-handoff` 브랜치/PR #136에서 조사 기록을 후속 공유하고 정상 브랜치 갱신·CI 재실행을 진행한다. 이번 후속 변경은 기존8경로 중 본 티켓·결과서·provenance3파일에 한정한다. 원래 제출 커밋 `876fc1afc129cd93e1cf460d72764db3341c8b70`, 나머지5문서·제품·검사·원본 ZIP과 기존 실패 로그를 보존한다.
+
+확인된 직접 원인은 PR API/작업 브랜치에는 제출 head가 있으나 서버의 `refs/pull/136/head`가 없어서 base-only 두 workflow가 판정기 실행 전 fetch exit128로 종료되는 것이다. 최초 실행·실패 job 재실행·동일 PR 재개방과 같은 SHA의 작업 브랜치 ref 갱신으로는 복구되지 않았다. 빈 커밋이나 이력 재작성 대신 조사/복구 기록이 있는 정상 후속 커밋·일반 Push로 PR synchronize를 유발하고 참조 및 CI를 확인한다. 복구 성공은 원격 확인 후 별도 보고하며 미리 PASS로 기록하지 않는다.
+
+CI/도구/보호 설정 변경은 이번에 하지 않는다. 정상 브랜치 갱신으로도 복구되지 않고 CI 변경이 필요하면 원인·정확한 파일/패치·base-only 신뢰 경계·검증·적용 순서를 로컬 검토안으로 먼저 제출한다. main 병합·자동 병합·강제 Push·보호 완화·숨은 PR ref 직접 쓰기·새 게임 실행은 포함하지 않는다. **DEV-026 구현·제품 검증 HOLD**를 유지한다.

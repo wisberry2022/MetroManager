@@ -2,7 +2,7 @@
 
 - Development / AGT-DEV-0004 / 2026-11-15 (Asia/Seoul).
 - 현재: **OWNER_ACCEPTED / SUBMISSION_APPROVED / DESIGN_GUI_ACCEPTED**.
-- 수용·DOC-01·HQ 인계·로컬 문서 검증은 **§15**, 최신 Owner 제출 승인은 **§16**. §1~15의 실행·실패·당시 상태는 이력으로 보존한다.
+- 수용·문서 검증은 **§15**, 제출 승인은 **§16**, 최신 PR 참조 조사·복구는 **§17**. 이전 실행·실패·당시 상태는 이력으로 보존한다.
 - 후속 기준 main/HEAD: `324faf9b7d81540240217d2757f26de6f07460ba`. 최초 기준: `0a76a2e924ec0b661e3cdbd858ed6bfd665f3dc9`.
 - 이번 브랜치: `codex/DEV-024-design-acceptance-handoff`. 최초 브랜치: `codex/DEV-024-vs01-integration-evidence`.
 - [작업 티켓·Owner 지시 §11](DEV-024_VS01_INTEGRATION_EVIDENCE.md).
@@ -323,3 +323,38 @@ fetch 및 원격 API로 확인한 main은 `324faf9b7d81540240217d2757f26de6f0746
 정상 훅 실행을 위해 이 worktree에 별도 `.venv`를 만들고 `tools/requirements-dev.txt`의 고정 도구를 설치했다. 설치된 훅/doctor·policy·diff·8경로/승인 바이트/기존 기록/원본 보존을 확인한 뒤 명시 경로만 stage하고 커밋 후 preflight·REPORT_ONLY 출처 검사를 실행한다. 신규 게임 자동검사·Godot 프로젝트 로드·GUI/플레이·Windows 빌드/export/FPS는 문서 제출에 대해 **NOT_RUN**이며 기존 검증을 새 실행으로 표시하지 않는다.
 
 실제 제출 SHA·PR·preflight·필수 CI 결과는 생성 후 PR/Owner 완료 보고와 위 로컬 제출 폴더에 기록한다. 아직 생성 전인 서버 결과를 PASS로 선언하지 않는다. Design 수용/합의된 GUI 단계 종료·DOC-01 정정문·HQ 인계안을 공유하는 제출이며 원본 보관 담당/HQ의 후속 반영·A01-Q12 상위 PARTIAL·미확인/미포착·Owner의 전체 DONE/Issue 종료/Stage 인수 판단은 별도로 유지한다.
+
+## 17. PR #136 head 참조 누락 조사·비설정 복구 — 2026-11-15
+
+### 17.1 확인 사실과 원인 경계
+
+[PR #136](https://github.com/wisberry2022/MetroManager/pull/136)의 초기 head는 `876fc1afc129cd93e1cf460d72764db3341c8b70`, base/main은 `324faf9b7d81540240217d2757f26de6f07460ba`다. PR은 OPEN·미병합·충돌 없음이며 필수 검사 실패로 blocked다. 초기 제출의 문서8파일·정상 훅·preflight·로컬 출처 검증은 보존한다.
+
+| 대조 | 실제 관측 |
+| --- | --- |
+| PR API `head.sha` / 원격 작업 브랜치 | 둘 다 위876fc1a… 존재 |
+| `git ls-remote origin refs/pull/136/head` | 출력 없음 |
+| REST `git/ref/pull/136/head` | 404 Not Found |
+| `refs/pull/136/merge` | 존재; 재개방 뒤47db4d7301d73580ffe161009252dc47f8aab355 |
+| 이전 PR #135 head | f508d88281dc84b1a9d7e4399f5eba06a89d3ce6 조회됨 |
+| 필수 policy | [SUCCESS](https://github.com/wisberry2022/MetroManager/actions/runs/43687917218/job/132732189252), tooling89검사 통과 |
+| 필수 department-policy | [FAILURE](https://github.com/wisberry2022/MetroManager/actions/runs/43687917555/job/132732192348), PR head fetch exit128 |
+| 보조 agent-provenance-report | [FAILURE](https://github.com/wisberry2022/MetroManager/actions/runs/43687917541/job/132732192163), 같은 fetch 오류·판정기 미실행 |
+
+직접 실패 원인은 서버가 제공하지 않는 PR head ref를 명시 fetch하는 단계다. 오류는 `fatal: couldn't find remote ref refs/pull/136/head`이고 경로/제목/출처 판정 코드 실행 전이다. API 메타데이터와 브랜치/merge ref는 있는데 PR head ref만 누락된 **서버 참조 불일치**가 관측됐다. GitHub 내부의 누락 발생 원인·발생 주체는 NOT_VERIFIED이며 서비스 전체 장애·플러그인 원인으로 단정하지 않는다.
+
+[GitHub 공식 문서](https://docs.github.com/en/pull-requests/how-tos/review-pull-requests/checking-out-pull-requests-locally)는 PR head fetch를 지원하며 refs/pull 공간을 읽기 전용으로 설명한다. 숨은 참조에 직접 Push하지 않는다. [checkout 보안 변경](https://github.blog/changelog/2026-06-18-safer-pull_request_target-defaults-for-github-actions-checkout/)은 fork head checkout에 대한 제한이다. 이번은 같은 저장소 PR이고 trusted base checkout은 성공했으며 그 뒤 수동 fetch에서 실패했으므로 해당 제한의 거부 로그가 아니다. [상태 페이지](https://www.githubstatus.com/)가 정상이어도 이 PR의 참조 누락이 부정되는 것은 아니다.
+
+### 17.2 복구 조치와 승인 경계
+
+최초 실행·동일 SHA 실패 job 재실행·동일 PR close/reopen에서 같은 오류를 확인했고 모두 로그를 보존했다. 이번 지시 후에도 같은 상태다. 작업 브랜치에 expected_sha=876fc1a…·sha=동일값·force=false의 ref 갱신 요청은 성공했지만 PR head ref는 계속404/미조회였다.
+
+[티켓 §13](DEV-024_VS01_INTEGRATION_EVIDENCE.md)에 따라 기존8경로 안의 티켓/본 결과서/출처3파일에 조사 기록을 추가하고, 정상 후속 커밋·일반 Push로 실제 branch update/PR synchronize를 유발한다. 제품·CI·검사 도구·보호 설정을 변경하지 않는다. 이전 커밋과 원본을 유지하며 빈 커밋·force push·기존 이력 수정은 하지 않는다. 이 조치가 서버 참조를 복구한다는 보장은 없고 실제 참조·새 head의 두 필수 CI로 판정한다.
+
+성공 기준은 (1) PR API/브랜치/refs-pull head의 동일 SHA, (2) 해당 head의 policy·department-policy SUCCESS, (3) 보조 출처 판정 결과 확인, (4) 변경8경로/원본 보존·main 미병합이다. 기존 failure는 성공 이력으로 덮어쓰지 않는다. 실패가 지속돼 CI 변경이 필요하면 적용하지 않고 로컬 검토안을 먼저 준비한다. base-only workflow는 main의 신뢰된 코드로 실행되므로 PR 안의 설정만 바꿔 즉시 복구된다고 주장하지 않는다.
+
+### 17.3 검증·증거와 유지 상태
+
+이번 조사 증거는 `.local/validation/DEV-024-pr136-recovery/`, 앞선 실패 원문은 `.local/validation/DEV-024-design-acceptance-submission/`에 보관한다. 후보3경로·나머지5파일/원본230파일 보존·과거 본문·cumulative provenance7행·정적 정책·커밋 후 preflight를 검증하고 실제 원격 재실행 결과는 PR/Owner 완료 보고와 로컬 recovery 결과에 연결한다. 아직 새 head의 CI 결과를 PASS로 선언하지 않는다.
+
+신규 게임 자동검사·Godot 로드·GUI/플레이·Windows 빌드/export/FPS는 **NOT_RUN**이다. 원래 Design 수용·합의된 GUI 단계 종료, DOC-01 별도 정정문, A01-Q12 상위 PARTIAL·과거 NOT_VERIFIED/NOT_CAPTURED를 유지한다. 게임/Design 명세 변경 필요 없음. **main 병합은 별도 Owner 승인, DEV-026 구현·제품 검증 HOLD**.

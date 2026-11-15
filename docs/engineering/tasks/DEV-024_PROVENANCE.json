@@ -15,7 +15,7 @@
         "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6890437629"
       ],
       "old_blob_sha": "9aeb157043ff90f09b1c90120a7291fce1fda4ac",
-      "blob_sha": "a82b6e2d6c1d62bdfc77ec963d68c812479a85c6"
+      "blob_sha": "5a05a27c8fa06df3c023df308a876d34d2ef0ade"
     },
     {
       "path": "docs/engineering/tasks/DEV-024_RESULT.md",
@@ -28,7 +28,7 @@
         "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6890437629"
       ],
       "old_blob_sha": "1a5799197e97a04605d3ba4ca8c28c0d3cd4c270",
-      "blob_sha": "3cb1d5009b1c9bf010854851b0a2c9816b27f669"
+      "blob_sha": "83488a7e434fa714a4476dfbf7c9080acbfd2128"
     },
     {
       "path": "docs/engineering/gate3/DEV-024_VS01_EXECUTION_PLAN.md",
