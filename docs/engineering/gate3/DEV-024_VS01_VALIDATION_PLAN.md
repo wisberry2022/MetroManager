@@ -1,6 +1,6 @@
 # DEV-024 — VS-01 검증·기존 수용·잔여 대응표
 
-- AGT-DEV-0004 / 2026-11-15 / **DEV_LOCAL_VALIDATED / INDEPENDENT_DESIGN_PENDING**.
+- AGT-DEV-0004 / 2026-11-15 / **LOCAL_REVIEW / DESIGN_PARTIAL**. 독립 판정은 §8, 승인 후 DEV 보완 검증은 §9이며 이전 기록은 해당 시점 이력이다.
 - 기준: `0a76a2e924ec0b661e3cdbd858ed6bfd665f3dc9`.
 - [작업·권한](../tasks/DEV-024_VS01_INTEGRATION_EVIDENCE.md) / [실행 패킷](DEV-024_VS01_EXECUTION_PLAN.md) / [준비 결과](../tasks/DEV-024_RESULT.md).
 - §1~6은 준비 당시 기록이다. 승인 후 자동검사·로드·DEV 자체 GUI 결과는 §7에 추가했으며 독립 실행/Design 새 심사·빌드는 NOT_RUN이다.
@@ -143,3 +143,39 @@ READ_ONLY 관측 결과만으로 내부 불변식을 전부 새로 증명했다�
 새 제품 결함/명세 변경 필요는 확인하지 않았다. 공고 조회 후 기존 페이지 보존은 실제 동작으로 기록하고 Design의 해당 경로 판단을 남긴다. 원장·계약/공사·시범/안전·보고 연속성을 깨는 미해결 사항은 이번 DEV run에서 발견하지 않았다. 과거 실패/NOT_CAPTURED/NOT_VERIFIED와 A01-Q12 상위 PARTIAL, 기존24조건 수용은 그대로 보존한다.
 
 Windows 빌드/export/FPS, 독립 GUI, Design 새 심사, Commit·Push·PR·main 병합·신규 CI/preflight·Issue 게시는 **NOT_RUN**. DEV-026 구현·제품 검증 **HOLD**다. 이 후속 표는 HQ 표 수정이나 Owner DONE 결정을 대신하지 않는다.
+
+## 8. 독립 GUI 심사 수신과 직접 영향 보완
+
+정본 [#80](https://github.com/wisberry2022/MetroManager/issues/80#issuecomment-6889738120) / 연결 [#81](https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6889744888)의 판정을 수신했다. 별도 run `DEV024-IG-20261115-1115A`에 대한 Design 심사이며 기존 DEV_SELF_GUI를 승격한 것이 아니다. Owner 제한 ZIP `DEV-024-VS01-INDEPENDENT-GUI-20261115-1115A.zip`, 37,649,968 bytes, SHA-256 `d34c0ca6098a9e5b6bbe39028ae25e4a9afb2417a4f780ec0b34d6e52634452e`와 manifest816/816·소스661/661 확인은 **Design 보고 인용**이다. 이번 DEV 작업은 ZIP 신규 수신·재해시/심사 NOT_RUN이다.
+
+| 범위 | 수신한 판정 | DEV 후속 |
+| --- | --- | --- |
+| V01~V04 | PASS 수용. 정상 초기→사업/공사→개통→첫 실적 보고 | 원래 독립 증거 재사용. Day4 서비스169분·완료754·운임75400을 DEV 자체439분/1969건과 분리 |
+| V05-1 | 표시 보고 key에 대한 T6327 QUERY accepted PASS | 원래 조회 증거 유지 |
+| V05-2 | P05→P02→P01 최종 도달의 관측 경로 한정 PASS | 직후 P01 진입 PASS로 확대하지 않음 |
+| V05-3 / OBS-V05-01 | 승인 L2 불충족 FAIL / 보완 필요 | 제품 성공 분기·직접 영향 F1~3 검토안. 경로 재지정 승인/실행 전 |
+| V05/전체 독립 GUI | PARTIAL | V05-3과 직접 영향의 독립 보완/Design 수용까지 유지 |
+| S2-08·09·10 | 위 같은 독립 run을 실제 관측 범위로 공동 참조 | 전체 수용/Stage PASS로 승격하지 않음 |
+| S2-11 | 부서 판정·잔여 인계 가능 | 필수 보완/회귀·제출 CI·HQ/Owner 최종 인수 후속 |
+
+세부 수정/검증은 [실행 계획 §7](DEV-024_VS01_EXECUTION_PLAN.md) F1(성공 직후 P01)·F2(보고 선택/포커스/스크롤 복귀)·F3(읽기 무효과)와 필요한 실패/일반 P05 회귀만이다. 전체 자연 완주 및 기존24조건 반복을 요청하지 않는다. 고정 full SHA·변경 영향·준비 종류·실제 입력/화면/권위·종료/오류·새 helper 사전 사본/해시를 함께 인계한다.
+
+**보존:** PROV-01 입력 wrapper 사전 파일/해시 NOT_CAPTURED, 물리 입력 주체·등록 Agent-ID·DPI/OS 배율/native 크기·GUI 형제 실행 파일 사전 해시/전체 프로세스 연결의 미확인, 준비/환경 오류·원본 일부 미포착을 유지한다. Design이 완주 전체의 무효 사유로 삼지 않은 한계를 임의 차단으로 확대하지 않는다. A01-Q12 상위 PARTIAL·기존24조건/Q03~05/W05/Q12 수용과 과거 실패/NOT_RUN은 그대로다.
+
+이번은 수신·정적 원인/검증 계획 보완이며 새 제품 구현·게임 자동검사·Godot 로드·실제 GUI/플레이·빌드/독립 보완은 NOT_RUN이다. 새 Commit·Push·PR/CI·main 병합도 NOT_RUN. DEV-026 구현·제품 검증 **HOLD** 유지.
+
+## 9. OBS-V05-01 승인 후 보완 검증 — DEV 자체 결과
+
+| 분류 | 실제 실행/결과 | 경계 |
+| --- | --- | --- |
+| 수정 전 자동 회귀 | 보강245개 중5실패, exit1: P05 잔존·목록/detail 숨김·P05 back/공사 컨트롤 표시 | user:// 로그 접근 오류도 별도 기록. 성공 검사로 합산하지 않음 |
+| 수정 후 자동 | GUI 통합245·운영 공급158·입찰 UI460·W07 322, **총1185/실패0**, 각 exit0/엔진 오류0 | 자동 신호/모델 준비이며 실제 입력이나 자연 완주 증거가 아님 |
+| 프로젝트 로드 | 분리 프로필 `--headless --editor --path . --quit`, exit0/오류0 | 초기 기본 프로필 권한 오류 exit0은 PASS 제외 |
+| F1 DEV_SELF_GUI | 실제 P05 선행 후 표시 보고의 QUERY accepted, 즉시 P01/목록/refresh 포커스, 추가 탐색0 | MODEL_CHAIN_SETUP 이후 실제 OS 입력 |
+| F2 DEV_SELF_GUI | 원래 P07 Day4/key/본문/확인값·query 포커스·scroll605 복원 | 같은 run 전/직후/복귀 원본 비교 |
+| F3 DEV_SELF_GUI | 정지 T5760·원장/모델/계약·명령·보고/계획 효과 해시 동일 | revision/읽기 관측과 게임 효과 구분 |
+| 정적·출처 | doctor·policy·diff·8경로/기존 기록/old-new blob 대조 | 로컬 후보 검사. 커밋 후 preflight/원격 CI와 구분 |
+| 독립 보완/Design 재수용 | **NOT_RUN / PENDING** | 기존 독립 전체 PARTIAL 유지 |
+| 빌드/export/FPS·전체 자연 재실행·DEV-026 | **NOT_RUN / NOT_RUN / HOLD** | 승인된 직접 영향 범위 외 |
+
+실제 소스·명령·원본/실패 보존·8경로·독립 인계는 [결과서 §13](../tasks/DEV-024_RESULT.md)과 [JSON 후속 키](DEV-024_VS01_VALIDATION.json)의 `v05_correction_20261115`에 연결했다. 기존 JSON 필드/§1~8 판정은 당시 이력으로 보존한다. DEV 자체 보완 PASS로 V05-3 Design 수용·전체 DONE·Stage 인수를 선언하지 않는다. 과거 PROV-01/DPI/입력 신원·Q12 기록 잔여도 소급 해소하지 않는다.
