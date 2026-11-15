@@ -16,6 +16,6 @@ HQ의 신규 계획·일정·공유 보고서는 이 디렉터리에 둡니다. 
 
 ## Stage 2 통합 현황
 
-- [S2 통합 인수표·Q12 증거 대조·DEV-023/024 잔여 업무](STAGE2_ACCEPTANCE_MATRIX.md) — 원래 P05 인계·복귀의 대조 완료·종료 가능과 DEV-022 모델 공급·병합 완료를 반영합니다. 제품 UI·VS-01·HQ/Owner 인수는 별도 잔여입니다. 승인 기준은 PM-014, 실제 수용 범위는 연결된 Issue/PR을 따릅니다.
-- 최신 갱신: [PM-017 작업 범위](tasks/PM-017_Q12_W06_ACCEPTANCE_UPDATE.md) / [검증 결과](tasks/PM-017_RESULT.md). 작성본·PR 검토·main 반영 상태를 구별합니다.
-- 최초 작성 이력: [PM-016 작업 범위](tasks/PM-016_STAGE2_ACCEPTANCE_UPDATE.md) / [검증 결과](tasks/PM-016_RESULT.md).
+- [S2 통합 인수표·DEV-023 완료·DEV-024 잔여 업무](STAGE2_ACCEPTANCE_MATRIX.md) — DEV-023 24조건 수용·GUI 단계 종료와 Owner DONE/#79 종료를 반영합니다. 다음 필수 경로는 DEV-024 실제 VS-01·영향 회귀, HQ 통합·Owner Stage 인수입니다. Q12 원래 P05 대조 완료와 상위 PARTIAL을 구별하며 기존 수용을 유지합니다.
+- 최신 갱신: [PM-018 Owner 결정·작업 범위](tasks/PM-018_DEV023_CLOSEOUT.md) / [검증 결과](tasks/PM-018_RESULT.md). DEV-023 완료와 이 문서 PR의 검토/main 반영 상태를 구별합니다.
+- 이전 이력: [PM-017 범위](tasks/PM-017_Q12_W06_ACCEPTANCE_UPDATE.md) / [결과](tasks/PM-017_RESULT.md), [PM-016 범위](tasks/PM-016_STAGE2_ACCEPTANCE_UPDATE.md) / [결과](tasks/PM-016_RESULT.md). 승인 기준은 PM-014이며 실제 수용 범위는 연결된 Issue/PR을 따릅니다.
