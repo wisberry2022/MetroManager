@@ -5,7 +5,7 @@
 
 ## 요청 범위
 
-1. Stage 2 [최종 결정](https://github.com/wisberry2022/MetroManager/issues/141#issuecomment-6892772104), 현재 승인 명세/티켓, DEV-025 공급/Design 대기, DEV-026 HOLD, Stage 3 준비 요청서의 참조를 인계 시 연결한다. 새 전체 인계 패키지·전원 재시험을 요구하지 않는다.
+1. Stage 2 [최종 결정](https://github.com/wisberry2022/MetroManager/issues/141#issuecomment-6892772104), 현재 승인 명세/티켓, DEV-025 공급/Design 대기, DEV-026의 **Stage 3 범위 확정/착수 준비 대기**(과거 HOLD와 구별), Stage 3 준비 요청서의 참조를 인계 시 연결한다. 새 전체 인계 패키지·전원 재시험을 요구하지 않는다.
 2. [INF-009 간소화 전환 규정](../../infra/agents/REGISTRY_TRANSITION_RULES.md)을 유지한다. 통상 Owner 전환 지시+후임 인수 확인으로 처리하며 반복 INF 수용시험·PM 확인·Owner 재승인 대기를 부활시키지 않는다. 실제 미반영 ID/권한 충돌·필수 정보 누락만 영향 범위로 보고한다.
 3. [#139 Owner 결정](https://github.com/wisberry2022/MetroManager/issues/139#issuecomment-6891629210)의 현재 로컬 정본·Owner 보관 담당과 원본+#138 정정+#141을 함께 연결한다. 다른 사용 사본 없음은 Owner 확인 범위이고 모든 기기 조사 결과가 아니다.
 4. 백업/복구는 **OWNER_APPROVED_DEFERRED / NO_BACKUP_REPORTED / RESTORE_NOT_RUN / NOT_SCHEDULED**로 유지한다. 다음 원본 재사용/인계 때 이월을 전달·재확인하고, Owner가 대상/접근/담당/일정을 정하면 비파괴 복구·해시 증거를 지원한다. 그 전에 복구 완료를 Stage 3 진입 조건으로 추가하지 않는다.
