@@ -1,5 +1,7 @@
 # DEV-023 — UI 공급 계약·실행 계획
 
+현재 상태: **DESIGN_L2_ACCEPTED / P3 화면 통합 진행**. §1~9의 초안/PENDING/LOCAL/NOT_SENT는 당시 이력이며 현재 결정은 §10을 따른다.
+
 - AGT-DEV-0004 / 2026-11-15 / **L2_SUPPLEMENT_LOCAL_REVIEW / DESIGN_ACCEPTANCE_PENDING**.
 - 기준 main: `e379e584e6a9fefa0c581f27903c16e4fc0f5136`.
 - [권한·23개 경로](../tasks/DEV-023_W06_OPERATIONS_UI.md), [검증 계획](DEV-023_UI_VALIDATION_PLAN.md).
@@ -218,3 +220,17 @@ Design 지적을 확인했다. 공개 DEV-022 restricted는 T359/revision0·SERV
 Owner의 PR 생성 지시에 따라 동일한 DEV023-L2-INPUT-1 패킷을 Commit·Push·PR로 공유한다. 권한은 [범위 §1.3](../tasks/DEV-023_W06_OPERATIONS_UI.md#13-owner-원격-pr-제출-승인--2026-11-15)에 연결했다. 제품/시험/fixture 값·파일 해시는 로컬 검토본과 동일하다. §7~8의 미커밋·NOT_SENT와 Owner 전달문은 작성 당시 기록이며, 게시 이후의 고정 출처는 제출 PR의 실제 head SHA와 해당 파일 링크를 사용한다. 별도 Issue 댓글은 보내지 않는다.
 
 PR parent/base는 30cc2ea5f6e7c03aebff1315b6fd00530871ebec이며 기존 e379e58 실행 증거를 보존한다. Design이 검토할 정본은 §8의 L2-01~04와 fixture.l2_supplement/validation.l2_followup이다. Git 게시가 Design 최종 수용을 대신하지 않는다. 제품 화면 통합·독립 GUI·DEV-024/HQ 인수·DEV-026 보류 경계는 동일하다.
+
+## 10. Design L2 수용과 P3 화면 통합
+
+[2026-11-15 정본 회신](https://github.com/wisberry2022/MetroManager/issues/79#issuecomment-6886354300)에 따라 L2-01~04 및 RFC L2-A/B/C를 ACCEPTED로 연결한다. 새 의미 revision을 만들지 않으며 DEV023-UI-1/DEV023-L2-INPUT-1 공급을 소비한다. 화면 통합 전 차단은 해소됐다. 실제 GUI 독립 수용을 공급 L2의 재검토 조건으로 되돌리지 않는다.
+
+- 제품 main은 DATA/회사 초기화 성공 후 같은 Session의 enable_operations_ui를 명시 호출한다. 공통 Host의 W07 격리 fixture는 자동 활성화하지 않는다.
+- P06은 외부 봉투의 정상/가용성을 먼저 검사한다. 한국어 영업/재무 제한, 당일 실적·현재 재고·만족도 원분수·예측의 기간/계획을 구별한다.
+- P07은 현재 자금·당일 흐름·선택한 고정 과거 보고를 분리한다. 운영비 지급 합계는 payment+debt_payment이며 공사 기성을 더하지 않는다. 미산출/오류/0을 구분한다.
+- 표시한 첫 실적 보고와 query의 ID/보고일/서비스·완료·운임을 대조한 뒤 확인 사본을 Session에 전달한다. accepted=true에서만 P01로 이동한다. 실패는 사유/재확인을 남긴다. 기존 조기 P01 탐색과 CLOSED/BUSY를 보존한다.
+- Host는 P05/P06/P07 및 공고의 반환 문맥을 저장한다. 보고일·기존 객체 선택·포커스·스크롤을 보존한다. 새 패널의 읽기 키는 기존 OBS-01 의미를 재사용한다.
+- S01은 실제 source.station_ids/OD/cohort로 주황 운영선과 대표 이동 표식을 그린다. 진행은 clock minute/remainder만 소비하고 정지 시 고정된다. 역 테두리/툴팁은 현재 출발 cohort 집계, 텍스트는 당일 실제 탑승/완료와 현재 이동 중이다. 정확한 열차·정차 사건/시간이나 개별 시민을 생성하지 않는다.
+- 동일 Session에서 역행하는 View판 또는 모델판/게임분을 거부하며 같은 판의 remainder 변화는 허용한다. 전역 run_scope/Session 재생성/DEV-026 범위는 추가하지 않는다.
+
+새 UI 검증 도구 run_operations_gui_cases.gd는 TEST_ONLY이며 제품이 로드하지 않는다. 정상 명령 초기화(MODEL_CHAIN_SETUP)와 정적 공급 사본(CONSUMER_FIXTURE), AUTO_UI와 실제 입력을 구분한다. 최초 제품 부팅부터의 전체 자연 플레이는 DEV-024 후속이다.

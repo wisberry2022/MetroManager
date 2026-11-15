@@ -1,10 +1,11 @@
 # DEV-023 — W06 운행·재무 UI 착수 범위 검토안
 
 - 담당: Development Project Leader / LAPTOP / AGT-DEV-0004 / 2026-11-15 (Asia/Seoul).
-- 상태: **OWNER_PR_SUBMISSION_APPROVED / DESIGN_ACCEPTANCE_PENDING**.
+- 상태: **P3_IMPLEMENTED_REVIEW_REQUESTED / DESIGN_L2_ACCEPTED**.
 - 저장소: wisberry2022/MetroManager · [Issue #79](https://github.com/wisberry2022/MetroManager/issues/79).
 - 구현·검증 기준 main: `e379e584e6a9fefa0c581f27903c16e4fc0f5136`. 제출 기준 main: `30cc2ea5f6e7c03aebff1315b6fd00530871ebec`.
-- 로컬 브랜치: `codex/DEV-023-operations-finance-ui`. #79의 operations-ui는 최초 제안명이며 이번 독립 worktree의 실제 이름은 이 이름이다.
+- 현재 후속 브랜치: `codex/DEV-023-operations-screen-integration`, 기준 main `3e2982ac71be28344c3be5360652f4071c678ce3`. 아래 기존 브랜치·승인/검증 기록은 이력이다.
+- 이전 로컬 브랜치: `codex/DEV-023-operations-finance-ui`. #79의 operations-ui는 최초 제안명이며 이번 독립 worktree의 실제 이름은 이 이름이다.
 - 연결: [실행·공급 계약/L2 협의안](../gate3/DEV-023_UI_SUPPLY_AND_EXECUTION_PLAN.md), [검증 계획](../gate3/DEV-023_UI_VALIDATION_PLAN.md), [준비 결과](DEV-023_RESULT.md).
 
 ## 1. 준비 당시 권한과 선행 상태 — 현재 승인은 §1.1
@@ -48,6 +49,14 @@ Owner가 승인한 2026-11-14 17:37 승계 및 티켓별 권한 이전에 따라
 main 병합·직접 쓰기·강제 Push·릴리스·배포, 별도 Issue 댓글/메시지·Issue 종료는 포함하지 않는다. 이번 Git 제출은 실제 화면 통합 L2 수용, DEV-023 전체 제품 인수 또는 Stage DONE 승인이 아니다. DEV-026 구현·제품 검증 보류를 유지한다.
 
 제출 준비에서 fetch 후 최신 main 30cc2ea5f6e7c03aebff1315b6fd00530871ebec를 확인했다. 미공유 DEV-023 브랜치만 fast-forward하여 HQ5개/POST-MVP Planning3개를 포함했고, 동기화 직후 검토받은 12개 파일의 바이트/해시가 모두 동일함을 확인했다. 이후 변경은 본 승인·제출 기록과 manifest뿐이다. 검증 당시 base e379e58와 실행 증거는 이력으로 보존하며 실제 제출 parent/base는 최신 main이다.
+
+### 1.4 Owner L2 후속 구현·PR 승인 — 2026-11-15
+
+> 개발 에이전트. 디자이너 에이전트가 79번, 81번 이슈에 L2 회신을 등록하였으니 확인하여 작업할 내용이 있다면 작업에 착수해주세요. 작업 완료 후 PR까지 생성해주세요
+
+[Design 정본](https://github.com/wisberry2022/MetroManager/issues/79#issuecomment-6886354300) 및 [연결 회신](https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6886360127)은 **L2-01~04 및 RFC L2-A/B/C ACCEPTED**다. 공급/표현/동선/연출 계획의 선행 조건은 해소됐고 실제 GUI 독립 수용은 별도다. PR #127은 main 3e2982ac71be28344c3be5360652f4071c678ce3에 병합됐으며 b18db70 제출 tree와 동일하다.
+
+Owner의 이번 지시는 기존 §4 승인23개 경로 내 P3 화면 통합·P4 자동/프로젝트 로드/DEV 실제 GUI·결과 보완과 Commit·일반 Push·PR·필수 CI 확인을 포함한다. 대상은 wisberry2022/MetroManager / DEV-023 / AGT-DEV-0004 / codex/DEV-023-operations-screen-integration → main이며 이번 제출 종료 또는 Owner 철회까지다. main 병합·직접 쓰기·강제 Push·릴리스·배포·별도 Issue 댓글은 포함하지 않는다. DEV-026 구현·제품 검증 보류를 유지한다. 현재 승인 상태는 본 절이며 이전 PENDING/NOT_RUN/12개 제출 승인은 작성 시점 이력으로 보존한다.
 
 ## 2. 승인 근거와 적용 경계
 
@@ -125,3 +134,7 @@ main 병합·직접 쓰기·강제 Push·릴리스·배포, 별도 Issue 댓글/
 Owner §1.1이 승인한 실행 단위는 **위 23개 경로의 로컬 구현·테스트 작성·자동검사·Godot 프로젝트 로드·해당 GUI 검증·증거 작성**이며 화면 통합은 Design L2 수용 후다. 대상 저장소/브랜치/담당은 헤더와 같고, 해당 로컬 결과 검토 종료 또는 Owner 철회까지로 적용한다. 외부 전달과 Commit/Push/PR/main 병합·릴리스·배포는 별도다. Design L2는 영향 화면 통합 시 적용하며 독립 공급 준비를 전면 차단하지 않는다.
 
 현재 새 기획 명세 변경 필요 없음. 디자인 실제 공급/표현 협의는 실행계획의 RFC에 한정한다. 모델 변경이 불가피하면 DEV-022 소유 범위의 정확한 변경·L3 회귀와 별도 승인을 먼저 제시한다. DEV-026 구현·제품 검증은 계속 **OWNER_IMPLEMENTATION_DEFERRED / NOT_RUN**이다.
+
+## 6. P3 제출 현재 상태
+
+현재 결과는 [결과서 §9](DEV-023_RESULT.md#9-design-l2-수용-후-p3-화면-통합-결과)와 검증 JSON의 p3_integration을 따른다. P2 공급 L2 수용과 제품 화면 구현은 완료하여 검토 요청한다. DEV 자체 GUI의 관측 범위만 PASS로 기록하며 Design 독립 GUI/DEV-024/HQ 인수·Owner DONE은 별도다. §5 표의 과거 NOT_RUN은 당시 이력이다. 실제 이번 변경은 승인23개 중 17개 경로이며 기존 P1 Session·fixture·공급 runner와 fixture JSON은 그대로다.

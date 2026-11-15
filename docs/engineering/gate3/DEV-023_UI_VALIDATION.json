@@ -8846,5 +8846,2543 @@
     "original_root_fields": "Preserved P1 run and fixture metadata, tied to the archived original fixture/source hashes. They are historical, not the current whole-file digest.",
     "current_source_sha256": "Current file bytes after L2 test-only additions.",
     "l2_followup": "Current DEV023-L2-INPUT-1 tests, fixture digest, policy and review status."
+  },
+  "p3_integration": {
+    "task_id": "DEV-023",
+    "agent_id": "AGT-DEV-0004",
+    "base_sha": "3e2982ac71be28344c3be5360652f4071c678ce3",
+    "branch": "codex/DEV-023-operations-screen-integration",
+    "working_tree": true,
+    "status": "IMPLEMENTED_REVIEW_REQUESTED",
+    "design_l2": "ACCEPTED",
+    "design_l2_url": "https://github.com/wisberry2022/MetroManager/issues/79#issuecomment-6886354300",
+    "independent_gui": "PENDING",
+    "current_source_sha256": {
+      "scripts/data/gate2_data_loader.gd": "3b76939a3ae9840debf86cb4f30bdea59bac26647289ca8c80523b05116fe5e2",
+      "scripts/data/tender_data_loader.gd": "e1082d08e5610dff382def2e76a2b3c33e765710f99ce936a5c55fc994725bde",
+      "scripts/main.gd": "bea3e347fccfba63ed088ba6b80080accb962b188361bf85a7bdb40a06e18d9e",
+      "scripts/model/administrative_network.gd": "d723b6013b7f50fa3593e9a1cd95e041b794cde811b717e15ea589af48148462",
+      "scripts/model/company_ledger.gd": "98bebff3eb0ff6efae8f846f77a9d2b03cbd5f6c0874f57db0a80b7377f6a396",
+      "scripts/model/construction_project.gd": "b4e21f5f9e1facafc324cc5ea92d12bfe8fb790dba7fb862ed2e456a56f9e423",
+      "scripts/model/daily_ledger_report.gd": "3d2e89ba43ac771c4647e859edfadccbdcc39638ca765d4821acd03000402c8a",
+      "scripts/model/initial_company_state.gd": "dceb7dd03b26ba03c211cc32535e7dabbfabaa47a2c6ed77ba530b43528ed312",
+      "scripts/model/operating_line.gd": "638d04fbd6b69cba113282c8810a965d8632c00ede7aaa5aeab610a348ef6884",
+      "scripts/model/prediction_state.gd": "77ba1a69632e01fd3cdd1f04d91ed67d55fad007adf7327b58cd9f522c37ee30",
+      "scripts/model/public_tender.gd": "f0bd86d9ce78efb15903b56c5dfb9affaf823f90aae93fe1f857bd2b89404576",
+      "scripts/model/route_plan.gd": "385f3aa5a5e69486550abf7468ea41b9299133122f2efc2f3ba0ff9c16588ae6",
+      "scripts/simulation/command_queue.gd": "249ae3864afb0110af972e0576e482a00580ba3d3703f5ad25299fd9a5876cf5",
+      "scripts/simulation/construction_service.gd": "19e25b8b2c0ff23a64453c33ced695b45ff9b1384e3c981d0d0061b3cb55cc8a",
+      "scripts/simulation/demand_predictor.gd": "de26cc272a823c846837b738c4c2645a86f1ec538af8b24510be39e4a12b7812",
+      "scripts/simulation/game_clock.gd": "188355b3d727b25de924e6c1cf436ef3d6e7fe4f7870718db6f9f88d71dc2e12",
+      "scripts/simulation/minute_pipeline.gd": "a4afeacd5cf1be061296878b9473b9ae3eec0895d9c3f99ef0a25f097cea064e",
+      "scripts/simulation/operations_service.gd": "b7cc399431a23c4ea930763209ead46e0e05406fc895c74d0566bebedc02c554",
+      "scripts/simulation/tender_service.gd": "c0b7e22ee44e51bd29891c440967b7ac698ac5f6317f284181ad592bd4961192",
+      "scripts/ui/construction_view.gd": "722cfb6378a7bc317ef2b539c4b5f945fee23cfa40ec06676c78e65c18c55cd0",
+      "scripts/ui/finance_view.gd": "167a1d89611b51fa7ee70e63d4f501c36d155e2e57741260d2bde12535344776",
+      "scripts/ui/operations_view.gd": "b9d8905175fea77c2fd35ca7c5400dc432b08e917ccf03c61106571d2b17a7e6",
+      "scripts/ui/stage1_map.gd": "75a91873bbf945a61df4e74c6532f7c2d7147e8f2eb94c3a1e4f0145a37f22f8",
+      "scripts/ui/stage1_session.gd": "d59f86e3a5c4d256b3742fd384e17e4605abbda181d5b60ed14a2c99e26c7c4a",
+      "scripts/ui/stage1_view.gd": "e20b53ff363496f0d8ae743eeb15425c33db5284c3b3eacb28a831508069f7e5",
+      "scripts/ui/tender_view.gd": "a26cf2916bd38886a196c20ce154c17729a33812d847a895bc9d25a1f70bb5f9",
+      "tests/game/construction_ui_fixtures.gd": "56716d087065669713fa69c9faad607bc24653040b6e9d20f41052fec00f299c",
+      "tests/game/operations_ui_fixtures.gd": "4dfb68c678f09abfc719fc5883866aa1bc529265153e76c39d4bf49c4924f425",
+      "tests/game/run_construction_gui_cases.gd": "31ab55654c49f7867c67976a149d5684fe6712088e9062678d500a07a35ca3c4",
+      "tests/game/run_construction_ui_tests.gd": "5293bcd98a337583c0922c9d380979249d666b4faf670e7f502ac85cb30be427",
+      "tests/game/run_operations_gui_cases.gd": "fd1cc5542d982901210e20929eeaa0a1392495410ebe8f37400af25bde820c26",
+      "tests/game/run_operations_ui_tests.gd": "a24e3da3efe87e768bf4808c3ce8c793886f8aad2779a908e38bb94494865abe",
+      "tests/game/run_tender_gui_cases.gd": "4b7297e2f8f67bed9f16377941a0d43f799dc11aa5eb47e7ce60be83e11c57d4",
+      "tests/game/run_tender_ui_tests.gd": "a0069faf1f4dfaca60bcafc1edcc64213227df05a8d3fc08f811acb524698ee2",
+      "tests/game/run_w01_tests.gd": "e74799d867508cfff40390762716e17d30301b1ff6b31809a103a971f3e57179",
+      "tests/game/run_w02_tests.gd": "b0fff3ae7c13111cc268b0ac448278175b97432546e0960c7cd65ca9f05b1dfc",
+      "tests/game/run_w03_tests.gd": "c6248435469e5a362a976e7b7256c31fd37c2cf439ae795fe19859b482fc4835",
+      "tests/game/run_w04a_tests.gd": "297d671fe651bb379395016c587d648ed70acade2f003ea13ba277219abf76d0",
+      "tests/game/run_w05_tests.gd": "7f59b666acceae0e0890e92cad85749bfa572f2d39f15719aff4993be231dd53",
+      "tests/game/run_w06_tests.gd": "6d59d4bffdf70dfaf8feece84b1d4dad55421faca7d1bbb791604497e7de4aed",
+      "tests/game/run_w07_gui_cases.gd": "104c93b2b2a38761daeb4a1d67efebd3007f8354acc52949f21c3123986da4d9",
+      "tests/game/run_w07_tests.gd": "62e755a49d1b61798480d38ef7db0d74919b17fbe56a95d5dd77c15828789054",
+      "tests/game/w019_ui_fixtures.gd": "a2432dbe40dca1158f09d4af7f700b471ed1857bacf9818d87add33c9d72858f",
+      "tests/game/w02_midnight_fixture.gd": "6d25a0c9a73372ac81f726f565043ca6645e4000e0fb4c5b4328b3106708910a",
+      "tests/game/w04a_fixtures.gd": "35b5d440200cccc3b174ab9eefc2a71f9eb4a1b91e11174281ca17646b75e9ac",
+      "tests/game/w05_fixtures.gd": "1347e911a819a26166de6e2d0368da9342879fdafde7329ed10af6062ef9a04f",
+      "tests/game/w06_fixtures.gd": "7a06533e83daa4ac13e4abdd0a7efb0d91facb392e7335ee2b8228609378edc6",
+      "tests/game/w07_ui_fixtures.gd": "7bb1d49b2ca9859eb1c76d05458921dd7e0024a0714b9c2e9c802218e8ccdbad"
+    },
+    "runs": [
+      {
+        "name": "ui",
+        "command": [
+          "Godot_v4.7.2-stable_win64_console.exe",
+          "--headless",
+          "--path",
+          ".",
+          "--script",
+          "tests/game/run_operations_gui_cases.gd",
+          "--",
+          "--auto"
+        ],
+        "exit_code": 0,
+        "expected_exit": 0,
+        "elapsed_seconds": 73.12,
+        "status": "PASS",
+        "log": ".local/validation/DEV-023_UI_20261115-094017.log",
+        "log_sha256": "e7652ef1e9133baf90dc6be82a3c9c11deac4542fc0bc2ac364e7f8d1d4b6cab",
+        "errors": [],
+        "result_lines": [
+          "DEV023_UI_TEST_RESULT checks=202 failures=0"
+        ],
+        "source_sha256": {
+          "scripts/data/gate2_data_loader.gd": "3b76939a3ae9840debf86cb4f30bdea59bac26647289ca8c80523b05116fe5e2",
+          "scripts/data/tender_data_loader.gd": "e1082d08e5610dff382def2e76a2b3c33e765710f99ce936a5c55fc994725bde",
+          "scripts/main.gd": "bea3e347fccfba63ed088ba6b80080accb962b188361bf85a7bdb40a06e18d9e",
+          "scripts/model/administrative_network.gd": "d723b6013b7f50fa3593e9a1cd95e041b794cde811b717e15ea589af48148462",
+          "scripts/model/company_ledger.gd": "98bebff3eb0ff6efae8f846f77a9d2b03cbd5f6c0874f57db0a80b7377f6a396",
+          "scripts/model/construction_project.gd": "b4e21f5f9e1facafc324cc5ea92d12bfe8fb790dba7fb862ed2e456a56f9e423",
+          "scripts/model/daily_ledger_report.gd": "3d2e89ba43ac771c4647e859edfadccbdcc39638ca765d4821acd03000402c8a",
+          "scripts/model/initial_company_state.gd": "dceb7dd03b26ba03c211cc32535e7dabbfabaa47a2c6ed77ba530b43528ed312",
+          "scripts/model/operating_line.gd": "638d04fbd6b69cba113282c8810a965d8632c00ede7aaa5aeab610a348ef6884",
+          "scripts/model/prediction_state.gd": "77ba1a69632e01fd3cdd1f04d91ed67d55fad007adf7327b58cd9f522c37ee30",
+          "scripts/model/public_tender.gd": "f0bd86d9ce78efb15903b56c5dfb9affaf823f90aae93fe1f857bd2b89404576",
+          "scripts/model/route_plan.gd": "385f3aa5a5e69486550abf7468ea41b9299133122f2efc2f3ba0ff9c16588ae6",
+          "scripts/simulation/command_queue.gd": "249ae3864afb0110af972e0576e482a00580ba3d3703f5ad25299fd9a5876cf5",
+          "scripts/simulation/construction_service.gd": "19e25b8b2c0ff23a64453c33ced695b45ff9b1384e3c981d0d0061b3cb55cc8a",
+          "scripts/simulation/demand_predictor.gd": "de26cc272a823c846837b738c4c2645a86f1ec538af8b24510be39e4a12b7812",
+          "scripts/simulation/game_clock.gd": "188355b3d727b25de924e6c1cf436ef3d6e7fe4f7870718db6f9f88d71dc2e12",
+          "scripts/simulation/minute_pipeline.gd": "a4afeacd5cf1be061296878b9473b9ae3eec0895d9c3f99ef0a25f097cea064e",
+          "scripts/simulation/operations_service.gd": "b7cc399431a23c4ea930763209ead46e0e05406fc895c74d0566bebedc02c554",
+          "scripts/simulation/tender_service.gd": "c0b7e22ee44e51bd29891c440967b7ac698ac5f6317f284181ad592bd4961192",
+          "scripts/ui/construction_view.gd": "722cfb6378a7bc317ef2b539c4b5f945fee23cfa40ec06676c78e65c18c55cd0",
+          "scripts/ui/finance_view.gd": "167a1d89611b51fa7ee70e63d4f501c36d155e2e57741260d2bde12535344776",
+          "scripts/ui/operations_view.gd": "b9d8905175fea77c2fd35ca7c5400dc432b08e917ccf03c61106571d2b17a7e6",
+          "scripts/ui/stage1_map.gd": "75a91873bbf945a61df4e74c6532f7c2d7147e8f2eb94c3a1e4f0145a37f22f8",
+          "scripts/ui/stage1_session.gd": "d59f86e3a5c4d256b3742fd384e17e4605abbda181d5b60ed14a2c99e26c7c4a",
+          "scripts/ui/stage1_view.gd": "e20b53ff363496f0d8ae743eeb15425c33db5284c3b3eacb28a831508069f7e5",
+          "scripts/ui/tender_view.gd": "a26cf2916bd38886a196c20ce154c17729a33812d847a895bc9d25a1f70bb5f9",
+          "tests/game/construction_ui_fixtures.gd": "56716d087065669713fa69c9faad607bc24653040b6e9d20f41052fec00f299c",
+          "tests/game/operations_ui_fixtures.gd": "4dfb68c678f09abfc719fc5883866aa1bc529265153e76c39d4bf49c4924f425",
+          "tests/game/run_construction_gui_cases.gd": "31ab55654c49f7867c67976a149d5684fe6712088e9062678d500a07a35ca3c4",
+          "tests/game/run_construction_ui_tests.gd": "5293bcd98a337583c0922c9d380979249d666b4faf670e7f502ac85cb30be427",
+          "tests/game/run_operations_gui_cases.gd": "fd1cc5542d982901210e20929eeaa0a1392495410ebe8f37400af25bde820c26",
+          "tests/game/run_operations_ui_tests.gd": "a24e3da3efe87e768bf4808c3ce8c793886f8aad2779a908e38bb94494865abe",
+          "tests/game/run_tender_gui_cases.gd": "4b7297e2f8f67bed9f16377941a0d43f799dc11aa5eb47e7ce60be83e11c57d4",
+          "tests/game/run_tender_ui_tests.gd": "a0069faf1f4dfaca60bcafc1edcc64213227df05a8d3fc08f811acb524698ee2",
+          "tests/game/run_w01_tests.gd": "e74799d867508cfff40390762716e17d30301b1ff6b31809a103a971f3e57179",
+          "tests/game/run_w02_tests.gd": "b0fff3ae7c13111cc268b0ac448278175b97432546e0960c7cd65ca9f05b1dfc",
+          "tests/game/run_w03_tests.gd": "c6248435469e5a362a976e7b7256c31fd37c2cf439ae795fe19859b482fc4835",
+          "tests/game/run_w04a_tests.gd": "297d671fe651bb379395016c587d648ed70acade2f003ea13ba277219abf76d0",
+          "tests/game/run_w05_tests.gd": "7f59b666acceae0e0890e92cad85749bfa572f2d39f15719aff4993be231dd53",
+          "tests/game/run_w06_tests.gd": "6d59d4bffdf70dfaf8feece84b1d4dad55421faca7d1bbb791604497e7de4aed",
+          "tests/game/run_w07_gui_cases.gd": "104c93b2b2a38761daeb4a1d67efebd3007f8354acc52949f21c3123986da4d9",
+          "tests/game/run_w07_tests.gd": "62e755a49d1b61798480d38ef7db0d74919b17fbe56a95d5dd77c15828789054",
+          "tests/game/w019_ui_fixtures.gd": "a2432dbe40dca1158f09d4af7f700b471ed1857bacf9818d87add33c9d72858f",
+          "tests/game/w02_midnight_fixture.gd": "6d25a0c9a73372ac81f726f565043ca6645e4000e0fb4c5b4328b3106708910a",
+          "tests/game/w04a_fixtures.gd": "35b5d440200cccc3b174ab9eefc2a71f9eb4a1b91e11174281ca17646b75e9ac",
+          "tests/game/w05_fixtures.gd": "1347e911a819a26166de6e2d0368da9342879fdafde7329ed10af6062ef9a04f",
+          "tests/game/w06_fixtures.gd": "7a06533e83daa4ac13e4abdd0a7efb0d91facb392e7335ee2b8228609378edc6",
+          "tests/game/w07_ui_fixtures.gd": "7bb1d49b2ca9859eb1c76d05458921dd7e0024a0714b9c2e9c802218e8ccdbad"
+        }
+      },
+      {
+        "name": "ui_failure",
+        "command": [
+          "Godot_v4.7.2-stable_win64_console.exe",
+          "--headless",
+          "--path",
+          ".",
+          "--script",
+          "tests/game/run_operations_gui_cases.gd",
+          "--",
+          "--verify-failure-exit"
+        ],
+        "exit_code": 1,
+        "expected_exit": 1,
+        "elapsed_seconds": 1.03,
+        "status": "PASS",
+        "log": ".local/validation/DEV-023_UI_FAILURE_20261115-094130.log",
+        "log_sha256": "c4388634c51a1f0537762f680904a26913ad54bfb1739b8f302f9c36b6cb000a",
+        "errors": [],
+        "result_lines": [
+          "FAIL intentional_failure actual=false expected=true",
+          "DEV023_UI_TEST_RESULT checks=1 failures=1"
+        ],
+        "source_sha256": {
+          "scripts/data/gate2_data_loader.gd": "3b76939a3ae9840debf86cb4f30bdea59bac26647289ca8c80523b05116fe5e2",
+          "scripts/data/tender_data_loader.gd": "e1082d08e5610dff382def2e76a2b3c33e765710f99ce936a5c55fc994725bde",
+          "scripts/main.gd": "bea3e347fccfba63ed088ba6b80080accb962b188361bf85a7bdb40a06e18d9e",
+          "scripts/model/administrative_network.gd": "d723b6013b7f50fa3593e9a1cd95e041b794cde811b717e15ea589af48148462",
+          "scripts/model/company_ledger.gd": "98bebff3eb0ff6efae8f846f77a9d2b03cbd5f6c0874f57db0a80b7377f6a396",
+          "scripts/model/construction_project.gd": "b4e21f5f9e1facafc324cc5ea92d12bfe8fb790dba7fb862ed2e456a56f9e423",
+          "scripts/model/daily_ledger_report.gd": "3d2e89ba43ac771c4647e859edfadccbdcc39638ca765d4821acd03000402c8a",
+          "scripts/model/initial_company_state.gd": "dceb7dd03b26ba03c211cc32535e7dabbfabaa47a2c6ed77ba530b43528ed312",
+          "scripts/model/operating_line.gd": "638d04fbd6b69cba113282c8810a965d8632c00ede7aaa5aeab610a348ef6884",
+          "scripts/model/prediction_state.gd": "77ba1a69632e01fd3cdd1f04d91ed67d55fad007adf7327b58cd9f522c37ee30",
+          "scripts/model/public_tender.gd": "f0bd86d9ce78efb15903b56c5dfb9affaf823f90aae93fe1f857bd2b89404576",
+          "scripts/model/route_plan.gd": "385f3aa5a5e69486550abf7468ea41b9299133122f2efc2f3ba0ff9c16588ae6",
+          "scripts/simulation/command_queue.gd": "249ae3864afb0110af972e0576e482a00580ba3d3703f5ad25299fd9a5876cf5",
+          "scripts/simulation/construction_service.gd": "19e25b8b2c0ff23a64453c33ced695b45ff9b1384e3c981d0d0061b3cb55cc8a",
+          "scripts/simulation/demand_predictor.gd": "de26cc272a823c846837b738c4c2645a86f1ec538af8b24510be39e4a12b7812",
+          "scripts/simulation/game_clock.gd": "188355b3d727b25de924e6c1cf436ef3d6e7fe4f7870718db6f9f88d71dc2e12",
+          "scripts/simulation/minute_pipeline.gd": "a4afeacd5cf1be061296878b9473b9ae3eec0895d9c3f99ef0a25f097cea064e",
+          "scripts/simulation/operations_service.gd": "b7cc399431a23c4ea930763209ead46e0e05406fc895c74d0566bebedc02c554",
+          "scripts/simulation/tender_service.gd": "c0b7e22ee44e51bd29891c440967b7ac698ac5f6317f284181ad592bd4961192",
+          "scripts/ui/construction_view.gd": "722cfb6378a7bc317ef2b539c4b5f945fee23cfa40ec06676c78e65c18c55cd0",
+          "scripts/ui/finance_view.gd": "167a1d89611b51fa7ee70e63d4f501c36d155e2e57741260d2bde12535344776",
+          "scripts/ui/operations_view.gd": "b9d8905175fea77c2fd35ca7c5400dc432b08e917ccf03c61106571d2b17a7e6",
+          "scripts/ui/stage1_map.gd": "75a91873bbf945a61df4e74c6532f7c2d7147e8f2eb94c3a1e4f0145a37f22f8",
+          "scripts/ui/stage1_session.gd": "d59f86e3a5c4d256b3742fd384e17e4605abbda181d5b60ed14a2c99e26c7c4a",
+          "scripts/ui/stage1_view.gd": "e20b53ff363496f0d8ae743eeb15425c33db5284c3b3eacb28a831508069f7e5",
+          "scripts/ui/tender_view.gd": "a26cf2916bd38886a196c20ce154c17729a33812d847a895bc9d25a1f70bb5f9",
+          "tests/game/construction_ui_fixtures.gd": "56716d087065669713fa69c9faad607bc24653040b6e9d20f41052fec00f299c",
+          "tests/game/operations_ui_fixtures.gd": "4dfb68c678f09abfc719fc5883866aa1bc529265153e76c39d4bf49c4924f425",
+          "tests/game/run_construction_gui_cases.gd": "31ab55654c49f7867c67976a149d5684fe6712088e9062678d500a07a35ca3c4",
+          "tests/game/run_construction_ui_tests.gd": "5293bcd98a337583c0922c9d380979249d666b4faf670e7f502ac85cb30be427",
+          "tests/game/run_operations_gui_cases.gd": "fd1cc5542d982901210e20929eeaa0a1392495410ebe8f37400af25bde820c26",
+          "tests/game/run_operations_ui_tests.gd": "a24e3da3efe87e768bf4808c3ce8c793886f8aad2779a908e38bb94494865abe",
+          "tests/game/run_tender_gui_cases.gd": "4b7297e2f8f67bed9f16377941a0d43f799dc11aa5eb47e7ce60be83e11c57d4",
+          "tests/game/run_tender_ui_tests.gd": "a0069faf1f4dfaca60bcafc1edcc64213227df05a8d3fc08f811acb524698ee2",
+          "tests/game/run_w01_tests.gd": "e74799d867508cfff40390762716e17d30301b1ff6b31809a103a971f3e57179",
+          "tests/game/run_w02_tests.gd": "b0fff3ae7c13111cc268b0ac448278175b97432546e0960c7cd65ca9f05b1dfc",
+          "tests/game/run_w03_tests.gd": "c6248435469e5a362a976e7b7256c31fd37c2cf439ae795fe19859b482fc4835",
+          "tests/game/run_w04a_tests.gd": "297d671fe651bb379395016c587d648ed70acade2f003ea13ba277219abf76d0",
+          "tests/game/run_w05_tests.gd": "7f59b666acceae0e0890e92cad85749bfa572f2d39f15719aff4993be231dd53",
+          "tests/game/run_w06_tests.gd": "6d59d4bffdf70dfaf8feece84b1d4dad55421faca7d1bbb791604497e7de4aed",
+          "tests/game/run_w07_gui_cases.gd": "104c93b2b2a38761daeb4a1d67efebd3007f8354acc52949f21c3123986da4d9",
+          "tests/game/run_w07_tests.gd": "62e755a49d1b61798480d38ef7db0d74919b17fbe56a95d5dd77c15828789054",
+          "tests/game/w019_ui_fixtures.gd": "a2432dbe40dca1158f09d4af7f700b471ed1857bacf9818d87add33c9d72858f",
+          "tests/game/w02_midnight_fixture.gd": "6d25a0c9a73372ac81f726f565043ca6645e4000e0fb4c5b4328b3106708910a",
+          "tests/game/w04a_fixtures.gd": "35b5d440200cccc3b174ab9eefc2a71f9eb4a1b91e11174281ca17646b75e9ac",
+          "tests/game/w05_fixtures.gd": "1347e911a819a26166de6e2d0368da9342879fdafde7329ed10af6062ef9a04f",
+          "tests/game/w06_fixtures.gd": "7a06533e83daa4ac13e4abdd0a7efb0d91facb392e7335ee2b8228609378edc6",
+          "tests/game/w07_ui_fixtures.gd": "7bb1d49b2ca9859eb1c76d05458921dd7e0024a0714b9c2e9c802218e8ccdbad"
+        }
+      },
+      {
+        "name": "project_load",
+        "command": [
+          "Godot_v4.7.2-stable_win64_console.exe",
+          "--headless",
+          "--editor",
+          "--path",
+          ".",
+          "--quit"
+        ],
+        "exit_code": 0,
+        "expected_exit": 0,
+        "elapsed_seconds": 4.86,
+        "status": "PASS",
+        "log": ".local/validation/DEV-023_PROJECT_LOAD_20261115-094131.log",
+        "log_sha256": "fdd79a248ec104e9a2fa0317f032217c789fa47fa00669ea7c948d600fa0332a",
+        "errors": [],
+        "result_lines": [],
+        "source_sha256": {
+          "scripts/data/gate2_data_loader.gd": "3b76939a3ae9840debf86cb4f30bdea59bac26647289ca8c80523b05116fe5e2",
+          "scripts/data/tender_data_loader.gd": "e1082d08e5610dff382def2e76a2b3c33e765710f99ce936a5c55fc994725bde",
+          "scripts/main.gd": "bea3e347fccfba63ed088ba6b80080accb962b188361bf85a7bdb40a06e18d9e",
+          "scripts/model/administrative_network.gd": "d723b6013b7f50fa3593e9a1cd95e041b794cde811b717e15ea589af48148462",
+          "scripts/model/company_ledger.gd": "98bebff3eb0ff6efae8f846f77a9d2b03cbd5f6c0874f57db0a80b7377f6a396",
+          "scripts/model/construction_project.gd": "b4e21f5f9e1facafc324cc5ea92d12bfe8fb790dba7fb862ed2e456a56f9e423",
+          "scripts/model/daily_ledger_report.gd": "3d2e89ba43ac771c4647e859edfadccbdcc39638ca765d4821acd03000402c8a",
+          "scripts/model/initial_company_state.gd": "dceb7dd03b26ba03c211cc32535e7dabbfabaa47a2c6ed77ba530b43528ed312",
+          "scripts/model/operating_line.gd": "638d04fbd6b69cba113282c8810a965d8632c00ede7aaa5aeab610a348ef6884",
+          "scripts/model/prediction_state.gd": "77ba1a69632e01fd3cdd1f04d91ed67d55fad007adf7327b58cd9f522c37ee30",
+          "scripts/model/public_tender.gd": "f0bd86d9ce78efb15903b56c5dfb9affaf823f90aae93fe1f857bd2b89404576",
+          "scripts/model/route_plan.gd": "385f3aa5a5e69486550abf7468ea41b9299133122f2efc2f3ba0ff9c16588ae6",
+          "scripts/simulation/command_queue.gd": "249ae3864afb0110af972e0576e482a00580ba3d3703f5ad25299fd9a5876cf5",
+          "scripts/simulation/construction_service.gd": "19e25b8b2c0ff23a64453c33ced695b45ff9b1384e3c981d0d0061b3cb55cc8a",
+          "scripts/simulation/demand_predictor.gd": "de26cc272a823c846837b738c4c2645a86f1ec538af8b24510be39e4a12b7812",
+          "scripts/simulation/game_clock.gd": "188355b3d727b25de924e6c1cf436ef3d6e7fe4f7870718db6f9f88d71dc2e12",
+          "scripts/simulation/minute_pipeline.gd": "a4afeacd5cf1be061296878b9473b9ae3eec0895d9c3f99ef0a25f097cea064e",
+          "scripts/simulation/operations_service.gd": "b7cc399431a23c4ea930763209ead46e0e05406fc895c74d0566bebedc02c554",
+          "scripts/simulation/tender_service.gd": "c0b7e22ee44e51bd29891c440967b7ac698ac5f6317f284181ad592bd4961192",
+          "scripts/ui/construction_view.gd": "722cfb6378a7bc317ef2b539c4b5f945fee23cfa40ec06676c78e65c18c55cd0",
+          "scripts/ui/finance_view.gd": "167a1d89611b51fa7ee70e63d4f501c36d155e2e57741260d2bde12535344776",
+          "scripts/ui/operations_view.gd": "b9d8905175fea77c2fd35ca7c5400dc432b08e917ccf03c61106571d2b17a7e6",
+          "scripts/ui/stage1_map.gd": "75a91873bbf945a61df4e74c6532f7c2d7147e8f2eb94c3a1e4f0145a37f22f8",
+          "scripts/ui/stage1_session.gd": "d59f86e3a5c4d256b3742fd384e17e4605abbda181d5b60ed14a2c99e26c7c4a",
+          "scripts/ui/stage1_view.gd": "e20b53ff363496f0d8ae743eeb15425c33db5284c3b3eacb28a831508069f7e5",
+          "scripts/ui/tender_view.gd": "a26cf2916bd38886a196c20ce154c17729a33812d847a895bc9d25a1f70bb5f9",
+          "tests/game/construction_ui_fixtures.gd": "56716d087065669713fa69c9faad607bc24653040b6e9d20f41052fec00f299c",
+          "tests/game/operations_ui_fixtures.gd": "4dfb68c678f09abfc719fc5883866aa1bc529265153e76c39d4bf49c4924f425",
+          "tests/game/run_construction_gui_cases.gd": "31ab55654c49f7867c67976a149d5684fe6712088e9062678d500a07a35ca3c4",
+          "tests/game/run_construction_ui_tests.gd": "5293bcd98a337583c0922c9d380979249d666b4faf670e7f502ac85cb30be427",
+          "tests/game/run_operations_gui_cases.gd": "fd1cc5542d982901210e20929eeaa0a1392495410ebe8f37400af25bde820c26",
+          "tests/game/run_operations_ui_tests.gd": "a24e3da3efe87e768bf4808c3ce8c793886f8aad2779a908e38bb94494865abe",
+          "tests/game/run_tender_gui_cases.gd": "4b7297e2f8f67bed9f16377941a0d43f799dc11aa5eb47e7ce60be83e11c57d4",
+          "tests/game/run_tender_ui_tests.gd": "a0069faf1f4dfaca60bcafc1edcc64213227df05a8d3fc08f811acb524698ee2",
+          "tests/game/run_w01_tests.gd": "e74799d867508cfff40390762716e17d30301b1ff6b31809a103a971f3e57179",
+          "tests/game/run_w02_tests.gd": "b0fff3ae7c13111cc268b0ac448278175b97432546e0960c7cd65ca9f05b1dfc",
+          "tests/game/run_w03_tests.gd": "c6248435469e5a362a976e7b7256c31fd37c2cf439ae795fe19859b482fc4835",
+          "tests/game/run_w04a_tests.gd": "297d671fe651bb379395016c587d648ed70acade2f003ea13ba277219abf76d0",
+          "tests/game/run_w05_tests.gd": "7f59b666acceae0e0890e92cad85749bfa572f2d39f15719aff4993be231dd53",
+          "tests/game/run_w06_tests.gd": "6d59d4bffdf70dfaf8feece84b1d4dad55421faca7d1bbb791604497e7de4aed",
+          "tests/game/run_w07_gui_cases.gd": "104c93b2b2a38761daeb4a1d67efebd3007f8354acc52949f21c3123986da4d9",
+          "tests/game/run_w07_tests.gd": "62e755a49d1b61798480d38ef7db0d74919b17fbe56a95d5dd77c15828789054",
+          "tests/game/w019_ui_fixtures.gd": "a2432dbe40dca1158f09d4af7f700b471ed1857bacf9818d87add33c9d72858f",
+          "tests/game/w02_midnight_fixture.gd": "6d25a0c9a73372ac81f726f565043ca6645e4000e0fb4c5b4328b3106708910a",
+          "tests/game/w04a_fixtures.gd": "35b5d440200cccc3b174ab9eefc2a71f9eb4a1b91e11174281ca17646b75e9ac",
+          "tests/game/w05_fixtures.gd": "1347e911a819a26166de6e2d0368da9342879fdafde7329ed10af6062ef9a04f",
+          "tests/game/w06_fixtures.gd": "7a06533e83daa4ac13e4abdd0a7efb0d91facb392e7335ee2b8228609378edc6",
+          "tests/game/w07_ui_fixtures.gd": "7bb1d49b2ca9859eb1c76d05458921dd7e0024a0714b9c2e9c802218e8ccdbad"
+        }
+      },
+      {
+        "name": "w07",
+        "command": [
+          "Godot_v4.7.2-stable_win64_console.exe",
+          "--headless",
+          "--path",
+          ".",
+          "--script",
+          "tests/game/run_w07_tests.gd"
+        ],
+        "exit_code": 0,
+        "expected_exit": 0,
+        "elapsed_seconds": 5.38,
+        "status": "PASS",
+        "log": ".local/validation/DEV-023_W07_20261115-093705.log",
+        "log_sha256": "9bef021ec102c2f1dcf5eb7b2f463bae80f8e89f02260788a11ba38433fd8f49",
+        "errors": [],
+        "result_lines": [
+          "W07_TEST_RESULT checks=322 failures=0"
+        ],
+        "source_sha256": {
+          "scripts/data/gate2_data_loader.gd": "3b76939a3ae9840debf86cb4f30bdea59bac26647289ca8c80523b05116fe5e2",
+          "scripts/data/tender_data_loader.gd": "e1082d08e5610dff382def2e76a2b3c33e765710f99ce936a5c55fc994725bde",
+          "scripts/main.gd": "bea3e347fccfba63ed088ba6b80080accb962b188361bf85a7bdb40a06e18d9e",
+          "scripts/model/administrative_network.gd": "d723b6013b7f50fa3593e9a1cd95e041b794cde811b717e15ea589af48148462",
+          "scripts/model/company_ledger.gd": "98bebff3eb0ff6efae8f846f77a9d2b03cbd5f6c0874f57db0a80b7377f6a396",
+          "scripts/model/construction_project.gd": "b4e21f5f9e1facafc324cc5ea92d12bfe8fb790dba7fb862ed2e456a56f9e423",
+          "scripts/model/daily_ledger_report.gd": "3d2e89ba43ac771c4647e859edfadccbdcc39638ca765d4821acd03000402c8a",
+          "scripts/model/initial_company_state.gd": "dceb7dd03b26ba03c211cc32535e7dabbfabaa47a2c6ed77ba530b43528ed312",
+          "scripts/model/operating_line.gd": "638d04fbd6b69cba113282c8810a965d8632c00ede7aaa5aeab610a348ef6884",
+          "scripts/model/prediction_state.gd": "77ba1a69632e01fd3cdd1f04d91ed67d55fad007adf7327b58cd9f522c37ee30",
+          "scripts/model/public_tender.gd": "f0bd86d9ce78efb15903b56c5dfb9affaf823f90aae93fe1f857bd2b89404576",
+          "scripts/model/route_plan.gd": "385f3aa5a5e69486550abf7468ea41b9299133122f2efc2f3ba0ff9c16588ae6",
+          "scripts/simulation/command_queue.gd": "249ae3864afb0110af972e0576e482a00580ba3d3703f5ad25299fd9a5876cf5",
+          "scripts/simulation/construction_service.gd": "19e25b8b2c0ff23a64453c33ced695b45ff9b1384e3c981d0d0061b3cb55cc8a",
+          "scripts/simulation/demand_predictor.gd": "de26cc272a823c846837b738c4c2645a86f1ec538af8b24510be39e4a12b7812",
+          "scripts/simulation/game_clock.gd": "188355b3d727b25de924e6c1cf436ef3d6e7fe4f7870718db6f9f88d71dc2e12",
+          "scripts/simulation/minute_pipeline.gd": "a4afeacd5cf1be061296878b9473b9ae3eec0895d9c3f99ef0a25f097cea064e",
+          "scripts/simulation/operations_service.gd": "b7cc399431a23c4ea930763209ead46e0e05406fc895c74d0566bebedc02c554",
+          "scripts/simulation/tender_service.gd": "c0b7e22ee44e51bd29891c440967b7ac698ac5f6317f284181ad592bd4961192",
+          "scripts/ui/construction_view.gd": "722cfb6378a7bc317ef2b539c4b5f945fee23cfa40ec06676c78e65c18c55cd0",
+          "scripts/ui/finance_view.gd": "167a1d89611b51fa7ee70e63d4f501c36d155e2e57741260d2bde12535344776",
+          "scripts/ui/operations_view.gd": "53d52adadae34d6662a73105111e4b90ce8dd8c9ed7272d1b22f1206b7293728",
+          "scripts/ui/stage1_map.gd": "e23bcc96ba28f7603b504bc9e4ad12376708e213d889bab3574f4941e2093032",
+          "scripts/ui/stage1_session.gd": "d59f86e3a5c4d256b3742fd384e17e4605abbda181d5b60ed14a2c99e26c7c4a",
+          "scripts/ui/stage1_view.gd": "6d860101249815e5abaf3d39f18627d10b00395cf838669e9ed7359a669beb57",
+          "scripts/ui/tender_view.gd": "a26cf2916bd38886a196c20ce154c17729a33812d847a895bc9d25a1f70bb5f9",
+          "tests/game/construction_ui_fixtures.gd": "56716d087065669713fa69c9faad607bc24653040b6e9d20f41052fec00f299c",
+          "tests/game/operations_ui_fixtures.gd": "4dfb68c678f09abfc719fc5883866aa1bc529265153e76c39d4bf49c4924f425",
+          "tests/game/run_construction_gui_cases.gd": "31ab55654c49f7867c67976a149d5684fe6712088e9062678d500a07a35ca3c4",
+          "tests/game/run_construction_ui_tests.gd": "5293bcd98a337583c0922c9d380979249d666b4faf670e7f502ac85cb30be427",
+          "tests/game/run_operations_gui_cases.gd": "1c5f872a0f985b2932e97f2ec6d69e583a633e730ada97991651e6d16b4d2771",
+          "tests/game/run_operations_ui_tests.gd": "a24e3da3efe87e768bf4808c3ce8c793886f8aad2779a908e38bb94494865abe",
+          "tests/game/run_tender_gui_cases.gd": "4b7297e2f8f67bed9f16377941a0d43f799dc11aa5eb47e7ce60be83e11c57d4",
+          "tests/game/run_tender_ui_tests.gd": "a0069faf1f4dfaca60bcafc1edcc64213227df05a8d3fc08f811acb524698ee2",
+          "tests/game/run_w01_tests.gd": "e74799d867508cfff40390762716e17d30301b1ff6b31809a103a971f3e57179",
+          "tests/game/run_w02_tests.gd": "b0fff3ae7c13111cc268b0ac448278175b97432546e0960c7cd65ca9f05b1dfc",
+          "tests/game/run_w03_tests.gd": "c6248435469e5a362a976e7b7256c31fd37c2cf439ae795fe19859b482fc4835",
+          "tests/game/run_w04a_tests.gd": "297d671fe651bb379395016c587d648ed70acade2f003ea13ba277219abf76d0",
+          "tests/game/run_w05_tests.gd": "7f59b666acceae0e0890e92cad85749bfa572f2d39f15719aff4993be231dd53",
+          "tests/game/run_w06_tests.gd": "6d59d4bffdf70dfaf8feece84b1d4dad55421faca7d1bbb791604497e7de4aed",
+          "tests/game/run_w07_gui_cases.gd": "104c93b2b2a38761daeb4a1d67efebd3007f8354acc52949f21c3123986da4d9",
+          "tests/game/run_w07_tests.gd": "62e755a49d1b61798480d38ef7db0d74919b17fbe56a95d5dd77c15828789054",
+          "tests/game/w019_ui_fixtures.gd": "a2432dbe40dca1158f09d4af7f700b471ed1857bacf9818d87add33c9d72858f",
+          "tests/game/w02_midnight_fixture.gd": "6d25a0c9a73372ac81f726f565043ca6645e4000e0fb4c5b4328b3106708910a",
+          "tests/game/w04a_fixtures.gd": "35b5d440200cccc3b174ab9eefc2a71f9eb4a1b91e11174281ca17646b75e9ac",
+          "tests/game/w05_fixtures.gd": "1347e911a819a26166de6e2d0368da9342879fdafde7329ed10af6062ef9a04f",
+          "tests/game/w06_fixtures.gd": "7a06533e83daa4ac13e4abdd0a7efb0d91facb392e7335ee2b8228609378edc6",
+          "tests/game/w07_ui_fixtures.gd": "7bb1d49b2ca9859eb1c76d05458921dd7e0024a0714b9c2e9c802218e8ccdbad"
+        }
+      },
+      {
+        "name": "tender_ui",
+        "command": [
+          "Godot_v4.7.2-stable_win64_console.exe",
+          "--headless",
+          "--path",
+          ".",
+          "--script",
+          "tests/game/run_tender_ui_tests.gd"
+        ],
+        "exit_code": 0,
+        "expected_exit": 0,
+        "elapsed_seconds": 20.78,
+        "status": "PASS",
+        "log": ".local/validation/DEV-023_TENDER_UI_20261115-093236.log",
+        "log_sha256": "4407a7f35ca7190cea89181b24b2d1c4a40fa4582758bae63234c127adf79a8d",
+        "errors": [],
+        "result_lines": [
+          "DEV019_UI_TEST_RESULT checks=460 failures=0"
+        ],
+        "source_sha256": {
+          "scripts/data/gate2_data_loader.gd": "3b76939a3ae9840debf86cb4f30bdea59bac26647289ca8c80523b05116fe5e2",
+          "scripts/data/tender_data_loader.gd": "e1082d08e5610dff382def2e76a2b3c33e765710f99ce936a5c55fc994725bde",
+          "scripts/main.gd": "bea3e347fccfba63ed088ba6b80080accb962b188361bf85a7bdb40a06e18d9e",
+          "scripts/model/administrative_network.gd": "d723b6013b7f50fa3593e9a1cd95e041b794cde811b717e15ea589af48148462",
+          "scripts/model/company_ledger.gd": "98bebff3eb0ff6efae8f846f77a9d2b03cbd5f6c0874f57db0a80b7377f6a396",
+          "scripts/model/construction_project.gd": "b4e21f5f9e1facafc324cc5ea92d12bfe8fb790dba7fb862ed2e456a56f9e423",
+          "scripts/model/daily_ledger_report.gd": "3d2e89ba43ac771c4647e859edfadccbdcc39638ca765d4821acd03000402c8a",
+          "scripts/model/initial_company_state.gd": "dceb7dd03b26ba03c211cc32535e7dabbfabaa47a2c6ed77ba530b43528ed312",
+          "scripts/model/operating_line.gd": "638d04fbd6b69cba113282c8810a965d8632c00ede7aaa5aeab610a348ef6884",
+          "scripts/model/prediction_state.gd": "77ba1a69632e01fd3cdd1f04d91ed67d55fad007adf7327b58cd9f522c37ee30",
+          "scripts/model/public_tender.gd": "f0bd86d9ce78efb15903b56c5dfb9affaf823f90aae93fe1f857bd2b89404576",
+          "scripts/model/route_plan.gd": "385f3aa5a5e69486550abf7468ea41b9299133122f2efc2f3ba0ff9c16588ae6",
+          "scripts/simulation/command_queue.gd": "249ae3864afb0110af972e0576e482a00580ba3d3703f5ad25299fd9a5876cf5",
+          "scripts/simulation/construction_service.gd": "19e25b8b2c0ff23a64453c33ced695b45ff9b1384e3c981d0d0061b3cb55cc8a",
+          "scripts/simulation/demand_predictor.gd": "de26cc272a823c846837b738c4c2645a86f1ec538af8b24510be39e4a12b7812",
+          "scripts/simulation/game_clock.gd": "188355b3d727b25de924e6c1cf436ef3d6e7fe4f7870718db6f9f88d71dc2e12",
+          "scripts/simulation/minute_pipeline.gd": "a4afeacd5cf1be061296878b9473b9ae3eec0895d9c3f99ef0a25f097cea064e",
+          "scripts/simulation/operations_service.gd": "b7cc399431a23c4ea930763209ead46e0e05406fc895c74d0566bebedc02c554",
+          "scripts/simulation/tender_service.gd": "c0b7e22ee44e51bd29891c440967b7ac698ac5f6317f284181ad592bd4961192",
+          "scripts/ui/construction_view.gd": "722cfb6378a7bc317ef2b539c4b5f945fee23cfa40ec06676c78e65c18c55cd0",
+          "scripts/ui/finance_view.gd": "167a1d89611b51fa7ee70e63d4f501c36d155e2e57741260d2bde12535344776",
+          "scripts/ui/operations_view.gd": "3d8b123245f1a29e0a26c70035eae6a1b5baf762b7b73dd5915bc7b16e2e9d59",
+          "scripts/ui/stage1_map.gd": "e23bcc96ba28f7603b504bc9e4ad12376708e213d889bab3574f4941e2093032",
+          "scripts/ui/stage1_session.gd": "d59f86e3a5c4d256b3742fd384e17e4605abbda181d5b60ed14a2c99e26c7c4a",
+          "scripts/ui/stage1_view.gd": "fb45b0d340e46d735961db96206f4dc1127ea442c0bc7187c1a9941299aef8e1",
+          "scripts/ui/tender_view.gd": "a26cf2916bd38886a196c20ce154c17729a33812d847a895bc9d25a1f70bb5f9",
+          "tests/game/construction_ui_fixtures.gd": "56716d087065669713fa69c9faad607bc24653040b6e9d20f41052fec00f299c",
+          "tests/game/operations_ui_fixtures.gd": "4dfb68c678f09abfc719fc5883866aa1bc529265153e76c39d4bf49c4924f425",
+          "tests/game/run_construction_gui_cases.gd": "31ab55654c49f7867c67976a149d5684fe6712088e9062678d500a07a35ca3c4",
+          "tests/game/run_construction_ui_tests.gd": "5293bcd98a337583c0922c9d380979249d666b4faf670e7f502ac85cb30be427",
+          "tests/game/run_operations_gui_cases.gd": "e0d3ddd5db439fcc708b2ef5262737a9099f5776ecd54cb2b16e82396e84113f",
+          "tests/game/run_operations_ui_tests.gd": "a24e3da3efe87e768bf4808c3ce8c793886f8aad2779a908e38bb94494865abe",
+          "tests/game/run_tender_gui_cases.gd": "4b7297e2f8f67bed9f16377941a0d43f799dc11aa5eb47e7ce60be83e11c57d4",
+          "tests/game/run_tender_ui_tests.gd": "a0069faf1f4dfaca60bcafc1edcc64213227df05a8d3fc08f811acb524698ee2",
+          "tests/game/run_w01_tests.gd": "e74799d867508cfff40390762716e17d30301b1ff6b31809a103a971f3e57179",
+          "tests/game/run_w02_tests.gd": "b0fff3ae7c13111cc268b0ac448278175b97432546e0960c7cd65ca9f05b1dfc",
+          "tests/game/run_w03_tests.gd": "c6248435469e5a362a976e7b7256c31fd37c2cf439ae795fe19859b482fc4835",
+          "tests/game/run_w04a_tests.gd": "297d671fe651bb379395016c587d648ed70acade2f003ea13ba277219abf76d0",
+          "tests/game/run_w05_tests.gd": "7f59b666acceae0e0890e92cad85749bfa572f2d39f15719aff4993be231dd53",
+          "tests/game/run_w06_tests.gd": "6d59d4bffdf70dfaf8feece84b1d4dad55421faca7d1bbb791604497e7de4aed",
+          "tests/game/run_w07_gui_cases.gd": "104c93b2b2a38761daeb4a1d67efebd3007f8354acc52949f21c3123986da4d9",
+          "tests/game/run_w07_tests.gd": "62e755a49d1b61798480d38ef7db0d74919b17fbe56a95d5dd77c15828789054",
+          "tests/game/w019_ui_fixtures.gd": "a2432dbe40dca1158f09d4af7f700b471ed1857bacf9818d87add33c9d72858f",
+          "tests/game/w02_midnight_fixture.gd": "6d25a0c9a73372ac81f726f565043ca6645e4000e0fb4c5b4328b3106708910a",
+          "tests/game/w04a_fixtures.gd": "35b5d440200cccc3b174ab9eefc2a71f9eb4a1b91e11174281ca17646b75e9ac",
+          "tests/game/w05_fixtures.gd": "1347e911a819a26166de6e2d0368da9342879fdafde7329ed10af6062ef9a04f",
+          "tests/game/w06_fixtures.gd": "7a06533e83daa4ac13e4abdd0a7efb0d91facb392e7335ee2b8228609378edc6",
+          "tests/game/w07_ui_fixtures.gd": "7bb1d49b2ca9859eb1c76d05458921dd7e0024a0714b9c2e9c802218e8ccdbad"
+        }
+      },
+      {
+        "name": "construction_ui",
+        "command": [
+          "Godot_v4.7.2-stable_win64_console.exe",
+          "--headless",
+          "--path",
+          ".",
+          "--script",
+          "tests/game/run_construction_ui_tests.gd"
+        ],
+        "exit_code": 0,
+        "expected_exit": 0,
+        "elapsed_seconds": 455.08,
+        "status": "PASS",
+        "log": ".local/validation/DEV-023_CONSTRUCTION_UI_20261115-091929.log",
+        "log_sha256": "e1f26c1d5d954fc66fdd62c364a201f0f82efae8ec75ac5fe858c4ba2b4840c9",
+        "errors": [],
+        "result_lines": [
+          "DEV021_UI_TEST_RESULT checks=898 failures=0"
+        ],
+        "source_sha256": {
+          "scripts/data/gate2_data_loader.gd": "3b76939a3ae9840debf86cb4f30bdea59bac26647289ca8c80523b05116fe5e2",
+          "scripts/data/tender_data_loader.gd": "e1082d08e5610dff382def2e76a2b3c33e765710f99ce936a5c55fc994725bde",
+          "scripts/main.gd": "bea3e347fccfba63ed088ba6b80080accb962b188361bf85a7bdb40a06e18d9e",
+          "scripts/model/administrative_network.gd": "d723b6013b7f50fa3593e9a1cd95e041b794cde811b717e15ea589af48148462",
+          "scripts/model/company_ledger.gd": "98bebff3eb0ff6efae8f846f77a9d2b03cbd5f6c0874f57db0a80b7377f6a396",
+          "scripts/model/construction_project.gd": "b4e21f5f9e1facafc324cc5ea92d12bfe8fb790dba7fb862ed2e456a56f9e423",
+          "scripts/model/daily_ledger_report.gd": "3d2e89ba43ac771c4647e859edfadccbdcc39638ca765d4821acd03000402c8a",
+          "scripts/model/initial_company_state.gd": "dceb7dd03b26ba03c211cc32535e7dabbfabaa47a2c6ed77ba530b43528ed312",
+          "scripts/model/operating_line.gd": "638d04fbd6b69cba113282c8810a965d8632c00ede7aaa5aeab610a348ef6884",
+          "scripts/model/prediction_state.gd": "77ba1a69632e01fd3cdd1f04d91ed67d55fad007adf7327b58cd9f522c37ee30",
+          "scripts/model/public_tender.gd": "f0bd86d9ce78efb15903b56c5dfb9affaf823f90aae93fe1f857bd2b89404576",
+          "scripts/model/route_plan.gd": "385f3aa5a5e69486550abf7468ea41b9299133122f2efc2f3ba0ff9c16588ae6",
+          "scripts/simulation/command_queue.gd": "249ae3864afb0110af972e0576e482a00580ba3d3703f5ad25299fd9a5876cf5",
+          "scripts/simulation/construction_service.gd": "19e25b8b2c0ff23a64453c33ced695b45ff9b1384e3c981d0d0061b3cb55cc8a",
+          "scripts/simulation/demand_predictor.gd": "de26cc272a823c846837b738c4c2645a86f1ec538af8b24510be39e4a12b7812",
+          "scripts/simulation/game_clock.gd": "188355b3d727b25de924e6c1cf436ef3d6e7fe4f7870718db6f9f88d71dc2e12",
+          "scripts/simulation/minute_pipeline.gd": "a4afeacd5cf1be061296878b9473b9ae3eec0895d9c3f99ef0a25f097cea064e",
+          "scripts/simulation/operations_service.gd": "b7cc399431a23c4ea930763209ead46e0e05406fc895c74d0566bebedc02c554",
+          "scripts/simulation/tender_service.gd": "c0b7e22ee44e51bd29891c440967b7ac698ac5f6317f284181ad592bd4961192",
+          "scripts/ui/construction_view.gd": "722cfb6378a7bc317ef2b539c4b5f945fee23cfa40ec06676c78e65c18c55cd0",
+          "scripts/ui/finance_view.gd": "d58dcd7f3348ec8fa345f850bfee5c177ef4282726f689451be12ba99afc331d",
+          "scripts/ui/operations_view.gd": "592d4865c2674f76ff7ce985286c88878fb94249a1dcaa74962e0c96c4a28016",
+          "scripts/ui/stage1_map.gd": "e23bcc96ba28f7603b504bc9e4ad12376708e213d889bab3574f4941e2093032",
+          "scripts/ui/stage1_session.gd": "d59f86e3a5c4d256b3742fd384e17e4605abbda181d5b60ed14a2c99e26c7c4a",
+          "scripts/ui/stage1_view.gd": "873bcea12a11e98f2b5f1b2ef4ee80961b374df148d06c47ab14398a1bf2ef97",
+          "scripts/ui/tender_view.gd": "a26cf2916bd38886a196c20ce154c17729a33812d847a895bc9d25a1f70bb5f9",
+          "tests/game/construction_ui_fixtures.gd": "56716d087065669713fa69c9faad607bc24653040b6e9d20f41052fec00f299c",
+          "tests/game/operations_ui_fixtures.gd": "4dfb68c678f09abfc719fc5883866aa1bc529265153e76c39d4bf49c4924f425",
+          "tests/game/run_construction_gui_cases.gd": "31ab55654c49f7867c67976a149d5684fe6712088e9062678d500a07a35ca3c4",
+          "tests/game/run_construction_ui_tests.gd": "5293bcd98a337583c0922c9d380979249d666b4faf670e7f502ac85cb30be427",
+          "tests/game/run_operations_gui_cases.gd": "3392ced4dc222e7ffffa5b8174e7aae8978bccb232bbcd01416eb61d7149d933",
+          "tests/game/run_operations_ui_tests.gd": "a24e3da3efe87e768bf4808c3ce8c793886f8aad2779a908e38bb94494865abe",
+          "tests/game/run_tender_gui_cases.gd": "4b7297e2f8f67bed9f16377941a0d43f799dc11aa5eb47e7ce60be83e11c57d4",
+          "tests/game/run_tender_ui_tests.gd": "a0069faf1f4dfaca60bcafc1edcc64213227df05a8d3fc08f811acb524698ee2",
+          "tests/game/run_w01_tests.gd": "e74799d867508cfff40390762716e17d30301b1ff6b31809a103a971f3e57179",
+          "tests/game/run_w02_tests.gd": "b0fff3ae7c13111cc268b0ac448278175b97432546e0960c7cd65ca9f05b1dfc",
+          "tests/game/run_w03_tests.gd": "c6248435469e5a362a976e7b7256c31fd37c2cf439ae795fe19859b482fc4835",
+          "tests/game/run_w04a_tests.gd": "297d671fe651bb379395016c587d648ed70acade2f003ea13ba277219abf76d0",
+          "tests/game/run_w05_tests.gd": "7f59b666acceae0e0890e92cad85749bfa572f2d39f15719aff4993be231dd53",
+          "tests/game/run_w06_tests.gd": "6d59d4bffdf70dfaf8feece84b1d4dad55421faca7d1bbb791604497e7de4aed",
+          "tests/game/run_w07_gui_cases.gd": "104c93b2b2a38761daeb4a1d67efebd3007f8354acc52949f21c3123986da4d9",
+          "tests/game/run_w07_tests.gd": "62e755a49d1b61798480d38ef7db0d74919b17fbe56a95d5dd77c15828789054",
+          "tests/game/w019_ui_fixtures.gd": "a2432dbe40dca1158f09d4af7f700b471ed1857bacf9818d87add33c9d72858f",
+          "tests/game/w02_midnight_fixture.gd": "6d25a0c9a73372ac81f726f565043ca6645e4000e0fb4c5b4328b3106708910a",
+          "tests/game/w04a_fixtures.gd": "35b5d440200cccc3b174ab9eefc2a71f9eb4a1b91e11174281ca17646b75e9ac",
+          "tests/game/w05_fixtures.gd": "1347e911a819a26166de6e2d0368da9342879fdafde7329ed10af6062ef9a04f",
+          "tests/game/w06_fixtures.gd": "7a06533e83daa4ac13e4abdd0a7efb0d91facb392e7335ee2b8228609378edc6",
+          "tests/game/w07_ui_fixtures.gd": "7bb1d49b2ca9859eb1c76d05458921dd7e0024a0714b9c2e9c802218e8ccdbad"
+        }
+      }
+    ],
+    "ui_assertions": {
+      "checks": [
+        {
+          "actual": "READY",
+          "expected": "READY",
+          "label": "U01_product_opt_in",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U01_preopen",
+          "passed": true
+        },
+        {
+          "actual": "4",
+          "expected": "4",
+          "label": "U03_actual_completed",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U04_fixed_completed",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U04_current_transit",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U04_fixed_transit",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U17_open_P06",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U17_open_P07",
+          "passed": true
+        },
+        {
+          "actual": "false",
+          "expected": "false",
+          "label": "U17_hidden_P06",
+          "passed": true
+        },
+        {
+          "actual": "1",
+          "expected": "1",
+          "label": "U09_selected",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U13_other_report_blocks_query",
+          "passed": true
+        },
+        {
+          "actual": "4",
+          "expected": "4",
+          "label": "U13_first_report",
+          "passed": true
+        },
+        {
+          "actual": "false",
+          "expected": "false",
+          "label": "U13_display_confirmed",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U18_End_reads",
+          "passed": true
+        },
+        {
+          "actual": "0",
+          "expected": "0",
+          "label": "U18_Home_reads",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U14_query_P01",
+          "passed": true
+        },
+        {
+          "actual": "false",
+          "expected": "false",
+          "label": "U14_hidden_finance",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U17_return_report",
+          "passed": true
+        },
+        {
+          "actual": "고정 과거 보고 · 마감일 4\n보고 식별 run--9223371984476305956/day-4\n게임 통화 단위\n운영비 발생 95500\n운영비 즉시 지급 95500\n미지급 운영비 후정산 0\n도착 운임 429100\n정부금 0\n공사비 발생 75417\n공사 기성 지급 75625\n운영비 지급 합계 95500\n마감 자금\n게임 통화 단위\n총현금 1533600\n제한현금 200000\n자유현금 1333600\n예약금 0\n신규약정 가용금 1333600\n미지급금 0\n사업별 제한현금 · P-A 200000\n사업별 예약금 · P-A 0\n요청 4296 / 탑승 4296 / 미탑승 0 / 완료 4291 / 늦은 완료 0통행\n서비스 955분 · 기초 이동 중 0 / 마감 시점 이동 중 5통행\n만족도 전 50점 → 마감 55점",
+          "expected": "고정 과거 보고 · 마감일 4\n보고 식별 run--9223371984476305956/day-4\n게임 통화 단위\n운영비 발생 95500\n운영비 즉시 지급 95500\n미지급 운영비 후정산 0\n도착 운임 429100\n정부금 0\n공사비 발생 75417\n공사 기성 지급 75625\n운영비 지급 합계 95500\n마감 자금\n게임 통화 단위\n총현금 1533600\n제한현금 200000\n자유현금 1333600\n예약금 0\n신규약정 가용금 1333600\n미지급금 0\n사업별 제한현금 · P-A 200000\n사업별 예약금 · P-A 0\n요청 4296 / 탑승 4296 / 미탑승 0 / 완료 4291 / 늦은 완료 0통행\n서비스 955분 · 기초 이동 중 0 / 마감 시점 이동 중 5통행\n만족도 전 50점 → 마감 55점",
+          "label": "U17_report_preserved",
+          "passed": true
+        },
+        {
+          "actual": "P07_query2:<Button#124184954669>",
+          "expected": "P07_query2:<Button#124184954669>",
+          "label": "U17_focus_restored",
+          "passed": true
+        },
+        {
+          "actual": "605",
+          "expected": "605",
+          "label": "U17_scroll_restored",
+          "passed": true
+        },
+        {
+          "actual": "c32d96d9d2d05f417150fa1f4a997cd95b85e8c89098f403bc1048ace89efb80",
+          "expected": "c32d96d9d2d05f417150fa1f4a997cd95b85e8c89098f403bc1048ace89efb80",
+          "label": "U12_read_only",
+          "passed": true
+        },
+        {
+          "actual": "false",
+          "expected": "false",
+          "label": "U11_old_model_rejected",
+          "passed": true
+        },
+        {
+          "actual": "4",
+          "expected": "4",
+          "label": "U11_selected_retained",
+          "passed": true
+        },
+        {
+          "actual": "false",
+          "expected": "false",
+          "label": "U11_old_view_rejected",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U11_equal_revision_remainder",
+          "passed": true
+        },
+        {
+          "actual": "c32d96d9d2d05f417150fa1f4a997cd95b85e8c89098f403bc1048ace89efb80",
+          "expected": "c32d96d9d2d05f417150fa1f4a997cd95b85e8c89098f403bc1048ace89efb80",
+          "label": "U12_display_only",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U17_finance_back_P06",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U17_P05_entry",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U17_P05_return",
+          "passed": true
+        },
+        {
+          "actual": "{ \"view_revision\": 22, \"status\": \"READY\", \"reason\": \"\", \"snapshot\": { \"available\": true, \"rules_version\": \"RFC-DEV-020-01-OWNER-20261108\", \"data_version\": \"1.3\", \"ui_contract_revision\": \"DEV020-W05-UI-1\", \"simulation_minute\": 5760, \"day_id\": 5, \"snapshot_revision\": 43209, \"observation_phase\": \"T_COMPLETE\", \"funds\": { \"cash\": 1534000, \"restricted_by_project\": { \"P-A\": 200000 }, \"reserved_by_project\": { \"P-A\": 0 }, \"restricted\": 200000, \"reserved\": 0, \"free_cash\": 1334000, \"available_cash\": 1334000, \"unpaid\": 0 }, \"projects\": [{ \"project_id\": \"P-A\", \"business_contract\": { \"business_contract_id\": \"B01-R1-BUSINESS\", \"project_id\": \"P-A\", \"status\": \"EFFECTIVE\", \"attempted_at\": 1800, \"effective_at\": 1800, \"phase_revision\": 11516, \"result_revision\": 11517, \"result\": { \"accepted\": true, \"reason\": \"\", \"decision_funds\": { \"cash\": 1000000, \"restricted_by_project\": {  }, \"reserved_by_project\": {  }, \"restricted\": 0, \"reserved\": 0, \"free_cash\": 1000000, \"available_cash\": 1000000, \"unpaid\": 0 } }, \"government_payment\": { \"available\": true, \"effective_at\": 1800, \"ledger_entry_index\": 1439, \"transaction_id\": \"B01-R1-GOVERNMENT\", \"amount\": 800000, \"restricted_project_id\": \"P-A\" }, \"standard_cost\": 600000, \"construction_contract_available\": false }, \"station_ids\": [\"S01\", \"S02\", \"S03\", \"S04\", \"S08\", \"S12\"], \"construction_contract_id\": \"B01-R1-BUSINESS-CONSTRUCTION\", \"construction_contract_status\": \"EFFECTIVE\", \"contract_effective_at\": 1801, \"mode\": \"STANDARD\", \"total_cost\": 600000, \"duration_minutes\": 2880, \"condition_revision\": 0, \"status\": \"OPEN\", \"started_at\": 1802, \"completed_at\": 4682, \"elapsed_minutes\": 2880, \"last_progress_at\": 4682, \"accrued\": 600000, \"paid\": 600000, \"construction_payable\": 0, \"trial_status\": \"PASSED\", \"safety_status\": \"PASSED\", \"procedure\": \"\", \"procedure_started_at\": 4744, \"procedure_completes_at\": 4804, \"procedure_revision\": 0, \"defects\": 0, \"first_defect_issued\": false, \"repair_paid\": 0, \"opened_at\": 4805, \"allowed_actions\": { \"start\": false, \"resume\": false, \"trial\": false, \"safety\": false, \"repair\": false, \"open\": false }, \"action_reason_codes\": { \"start\": [\"PREREQUISITE_NOT_MET\"], \"resume\": [\"PREREQUISITE_NOT_MET\"], \"trial\": [\"PREREQUISITE_NOT_MET\"], \"safety\": [\"PREREQUISITE_NOT_MET\"], \"repair\": [\"PREREQUISITE_NOT_MET\"], \"open\": [\"PREREQUISITE_NOT_MET\"] }, \"reason_codes\": [], \"service_ready\": true }], \"contract_candidates\": [{ \"project_id\": \"P-A\", \"business_contract\": { \"business_contract_id\": \"B01-R1-BUSINESS\", \"project_id\": \"P-A\", \"status\": \"EFFECTIVE\", \"attempted_at\": 1800, \"effective_at\": 1800, \"phase_revision\": 11516, \"result_revision\": 11517, \"result\": { \"accepted\": true, \"reason\": \"\", \"decision_funds\": { \"cash\": 1000000, \"restricted_by_project\": {  }, \"reserved_by_project\": {  }, \"restricted\": 0, \"reserved\": 0, \"free_cash\": 1000000, \"available_cash\": 1000000, \"unpaid\": 0 } }, \"government_payment\": { \"available\": true, \"effective_at\": 1800, \"ledger_entry_index\": 1439, \"transaction_id\": \"B01-R1-GOVERNMENT\", \"amount\": 800000, \"restricted_project_id\": \"P-A\" }, \"standard_cost\": 600000, \"construction_contract_available\": false }, \"target_revision\": 0, \"allowed_actions\": { \"contract\": false }, \"reason_codes\": [\"CONSTRUCTION_CONTRACT_EXISTS\"], \"modes\": { \"STANDARD\": [600000, 2880], \"FAST\": [720000, 1440] } }] }, \"requests\": [{ \"command\": { \"command_id\": \"dev023-contract\", \"project_id\": \"P-A\", \"business_contract_id\": \"B01-R1-BUSINESS\", \"action\": \"contract\", \"requested_at\": 1800, \"effective_at\": 1801, \"expected_snapshot_revision\": 11524, \"target_revision\": 0, &\"mode\": \"STANDARD\" }, \"result\": { \"accepted\": true, \"pending\": false, \"command\": { \"command_id\": \"dev023-contract\", \"project_id\": \"P-A\", \"business_contract_id\": \"B01-R1-BUSINESS\", \"action\": \"contract\", \"requested_at\": 1800, \"effective_at\": 1801, \"expected_snapshot_revision\": 11524, \"target_revision\": 0, &\"mode\": \"STANDARD\" }, \"command_id\": \"dev023-contract\", \"requested_at\": 1800, \"effective_at\": 1801, \"phase_revision\": 11526, \"result_revision\": 11527, \"decision_phase\": \"CONTRACT\", \"reason\": \"\", \"reason_codes\": [] } }, { \"command\": { \"command_id\": \"dev023-start\", \"project_id\": \"P-A\", \"business_contract_id\": \"B01-R1-BUSINESS\", \"action\": \"start\", \"requested_at\": 1801, \"effective_at\": 1802, \"expected_snapshot_revision\": 11533, \"target_revision\": 0 }, \"result\": { \"accepted\": true, \"pending\": false, \"command\": { \"command_id\": \"dev023-start\", \"project_id\": \"P-A\", \"business_contract_id\": \"B01-R1-BUSINESS\", \"action\": \"start\", \"requested_at\": 1801, \"effective_at\": 1802, \"expected_snapshot_revision\": 11533, \"target_revision\": 0 }, \"command_id\": \"dev023-start\", \"requested_at\": 1801, \"effective_at\": 1802, \"phase_revision\": 11536, \"result_revision\": 11537, \"decision_phase\": \"PROGRESS\", \"reason\": \"\", \"reason_codes\": [] } }, { \"command\": { \"command_id\": \"dev023-trial\", \"project_id\": \"P-A\", \"business_contract_id\": \"B01-R1-BUSINESS\", \"action\": \"trial\", \"requested_at\": 4682, \"effective_at\": 4683, \"expected_snapshot_revision\": 34582, \"target_revision\": 0 }, \"result\": { \"accepted\": true, \"pending\": false, \"command\": { \"command_id\": \"dev023-trial\", \"project_id\": \"P-A\", \"business_contract_id\": \"B01-R1-BUSINESS\", \"action\": \"trial\", \"requested_at\": 4682, \"effective_at\": 4683, \"expected_snapshot_revision\": 34582, \"target_revision\": 0 }, \"command_id\": \"dev023-trial\", \"requested_at\": 4682, \"effective_at\": 4683, \"phase_revision\": 34586, \"result_revision\": 34587, \"decision_phase\": \"VALIDATION\", \"reason\": \"\", \"reason_codes\": [] } }, { \"command\": { \"command_id\": \"dev023-safety\", \"project_id\": \"P-A\", \"business_contract_id\": \"B01-R1-BUSINESS\", \"action\": \"safety\", \"requested_at\": 4743, \"effective_at\": 4744, \"expected_snapshot_revision\": 35071, \"target_revision\": 0 }, \"result\": { \"accepted\": true, \"pending\": false, \"command\": { \"command_id\": \"dev023-safety\", \"project_id\": \"P-A\", \"business_contract_id\": \"B01-R1-BUSINESS\", \"action\": \"safety\", \"requested_at\": 4743, \"effective_at\": 4744, \"expected_snapshot_revision\": 35071, \"target_revision\": 0 }, \"command_id\": \"dev023-safety\", \"requested_at\": 4743, \"effective_at\": 4744, \"phase_revision\": 35075, \"result_revision\": 35076, \"decision_phase\": \"VALIDATION\", \"reason\": \"\", \"reason_codes\": [] } }, { \"command\": { \"command_id\": \"dev023-open\", \"project_id\": \"P-A\", \"business_contract_id\": \"B01-R1-BUSINESS\", \"action\": \"open\", \"requested_at\": 4804, \"effective_at\": 4805, \"expected_snapshot_revision\": 35560, \"target_revision\": 0 }, \"result\": { \"accepted\": true, \"pending\": false, \"command\": { \"command_id\": \"dev023-open\", \"project_id\": \"P-A\", \"business_contract_id\": \"B01-R1-BUSINESS\", \"action\": \"open\", \"requested_at\": 4804, \"effective_at\": 4805, \"expected_snapshot_revision\": 35560, \"target_revision\": 0 }, \"command_id\": \"dev023-open\", \"requested_at\": 4804, \"effective_at\": 4805, \"phase_revision\": 35564, \"result_revision\": 35565, \"decision_phase\": \"VALIDATION\", \"reason\": \"\", \"reason_codes\": [] } }], \"next_effective_at\": 5761, \"fixture_label\": \"DEV023-TEST_ONLY\" }",
+          "expected": "{ \"view_revision\": 22, \"status\": \"READY\", \"reason\": \"\", \"snapshot\": { \"available\": true, \"rules_version\": \"RFC-DEV-020-01-OWNER-20261108\", \"data_version\": \"1.3\", \"ui_contract_revision\": \"DEV020-W05-UI-1\", \"simulation_minute\": 5760, \"day_id\": 5, \"snapshot_revision\": 43209, \"observation_phase\": \"T_COMPLETE\", \"funds\": { \"cash\": 1534000, \"restricted_by_project\": { \"P-A\": 200000 }, \"reserved_by_project\": { \"P-A\": 0 }, \"restricted\": 200000, \"reserved\": 0, \"free_cash\": 1334000, \"available_cash\": 1334000, \"unpaid\": 0 }, \"projects\": [{ \"project_id\": \"P-A\", \"business_contract\": { \"business_contract_id\": \"B01-R1-BUSINESS\", \"project_id\": \"P-A\", \"status\": \"EFFECTIVE\", \"attempted_at\": 1800, \"effective_at\": 1800, \"phase_revision\": 11516, \"result_revision\": 11517, \"result\": { \"accepted\": true, \"reason\": \"\", \"decision_funds\": { \"cash\": 1000000, \"restricted_by_project\": {  }, \"reserved_by_project\": {  }, \"restricted\": 0, \"reserved\": 0, \"free_cash\": 1000000, \"available_cash\": 1000000, \"unpaid\": 0 } }, \"government_payment\": { \"available\": true, \"effective_at\": 1800, \"ledger_entry_index\": 1439, \"transaction_id\": \"B01-R1-GOVERNMENT\", \"amount\": 800000, \"restricted_project_id\": \"P-A\" }, \"standard_cost\": 600000, \"construction_contract_available\": false }, \"station_ids\": [\"S01\", \"S02\", \"S03\", \"S04\", \"S08\", \"S12\"], \"construction_contract_id\": \"B01-R1-BUSINESS-CONSTRUCTION\", \"construction_contract_status\": \"EFFECTIVE\", \"contract_effective_at\": 1801, \"mode\": \"STANDARD\", \"total_cost\": 600000, \"duration_minutes\": 2880, \"condition_revision\": 0, \"status\": \"OPEN\", \"started_at\": 1802, \"completed_at\": 4682, \"elapsed_minutes\": 2880, \"last_progress_at\": 4682, \"accrued\": 600000, \"paid\": 600000, \"construction_payable\": 0, \"trial_status\": \"PASSED\", \"safety_status\": \"PASSED\", \"procedure\": \"\", \"procedure_started_at\": 4744, \"procedure_completes_at\": 4804, \"procedure_revision\": 0, \"defects\": 0, \"first_defect_issued\": false, \"repair_paid\": 0, \"opened_at\": 4805, \"allowed_actions\": { \"start\": false, \"resume\": false, \"trial\": false, \"safety\": false, \"repair\": false, \"open\": false }, \"action_reason_codes\": { \"start\": [\"PREREQUISITE_NOT_MET\"], \"resume\": [\"PREREQUISITE_NOT_MET\"], \"trial\": [\"PREREQUISITE_NOT_MET\"], \"safety\": [\"PREREQUISITE_NOT_MET\"], \"repair\": [\"PREREQUISITE_NOT_MET\"], \"open\": [\"PREREQUISITE_NOT_MET\"] }, \"reason_codes\": [], \"service_ready\": true }], \"contract_candidates\": [{ \"project_id\": \"P-A\", \"business_contract\": { \"business_contract_id\": \"B01-R1-BUSINESS\", \"project_id\": \"P-A\", \"status\": \"EFFECTIVE\", \"attempted_at\": 1800, \"effective_at\": 1800, \"phase_revision\": 11516, \"result_revision\": 11517, \"result\": { \"accepted\": true, \"reason\": \"\", \"decision_funds\": { \"cash\": 1000000, \"restricted_by_project\": {  }, \"reserved_by_project\": {  }, \"restricted\": 0, \"reserved\": 0, \"free_cash\": 1000000, \"available_cash\": 1000000, \"unpaid\": 0 } }, \"government_payment\": { \"available\": true, \"effective_at\": 1800, \"ledger_entry_index\": 1439, \"transaction_id\": \"B01-R1-GOVERNMENT\", \"amount\": 800000, \"restricted_project_id\": \"P-A\" }, \"standard_cost\": 600000, \"construction_contract_available\": false }, \"target_revision\": 0, \"allowed_actions\": { \"contract\": false }, \"reason_codes\": [\"CONSTRUCTION_CONTRACT_EXISTS\"], \"modes\": { \"STANDARD\": [600000, 2880], \"FAST\": [720000, 1440] } }] }, \"requests\": [{ \"command\": { \"command_id\": \"dev023-contract\", \"project_id\": \"P-A\", \"business_contract_id\": \"B01-R1-BUSINESS\", \"action\": \"contract\", \"requested_at\": 1800, \"effective_at\": 1801, \"expected_snapshot_revision\": 11524, \"target_revision\": 0, &\"mode\": \"STANDARD\" }, \"result\": { \"accepted\": true, \"pending\": false, \"command\": { \"command_id\": \"dev023-contract\", \"project_id\": \"P-A\", \"business_contract_id\": \"B01-R1-BUSINESS\", \"action\": \"contract\", \"requested_at\": 1800, \"effective_at\": 1801, \"expected_snapshot_revision\": 11524, \"target_revision\": 0, &\"mode\": \"STANDARD\" }, \"command_id\": \"dev023-contract\", \"requested_at\": 1800, \"effective_at\": 1801, \"phase_revision\": 11526, \"result_revision\": 11527, \"decision_phase\": \"CONTRACT\", \"reason\": \"\", \"reason_codes\": [] } }, { \"command\": { \"command_id\": \"dev023-start\", \"project_id\": \"P-A\", \"business_contract_id\": \"B01-R1-BUSINESS\", \"action\": \"start\", \"requested_at\": 1801, \"effective_at\": 1802, \"expected_snapshot_revision\": 11533, \"target_revision\": 0 }, \"result\": { \"accepted\": true, \"pending\": false, \"command\": { \"command_id\": \"dev023-start\", \"project_id\": \"P-A\", \"business_contract_id\": \"B01-R1-BUSINESS\", \"action\": \"start\", \"requested_at\": 1801, \"effective_at\": 1802, \"expected_snapshot_revision\": 11533, \"target_revision\": 0 }, \"command_id\": \"dev023-start\", \"requested_at\": 1801, \"effective_at\": 1802, \"phase_revision\": 11536, \"result_revision\": 11537, \"decision_phase\": \"PROGRESS\", \"reason\": \"\", \"reason_codes\": [] } }, { \"command\": { \"command_id\": \"dev023-trial\", \"project_id\": \"P-A\", \"business_contract_id\": \"B01-R1-BUSINESS\", \"action\": \"trial\", \"requested_at\": 4682, \"effective_at\": 4683, \"expected_snapshot_revision\": 34582, \"target_revision\": 0 }, \"result\": { \"accepted\": true, \"pending\": false, \"command\": { \"command_id\": \"dev023-trial\", \"project_id\": \"P-A\", \"business_contract_id\": \"B01-R1-BUSINESS\", \"action\": \"trial\", \"requested_at\": 4682, \"effective_at\": 4683, \"expected_snapshot_revision\": 34582, \"target_revision\": 0 }, \"command_id\": \"dev023-trial\", \"requested_at\": 4682, \"effective_at\": 4683, \"phase_revision\": 34586, \"result_revision\": 34587, \"decision_phase\": \"VALIDATION\", \"reason\": \"\", \"reason_codes\": [] } }, { \"command\": { \"command_id\": \"dev023-safety\", \"project_id\": \"P-A\", \"business_contract_id\": \"B01-R1-BUSINESS\", \"action\": \"safety\", \"requested_at\": 4743, \"effective_at\": 4744, \"expected_snapshot_revision\": 35071, \"target_revision\": 0 }, \"result\": { \"accepted\": true, \"pending\": false, \"command\": { \"command_id\": \"dev023-safety\", \"project_id\": \"P-A\", \"business_contract_id\": \"B01-R1-BUSINESS\", \"action\": \"safety\", \"requested_at\": 4743, \"effective_at\": 4744, \"expected_snapshot_revision\": 35071, \"target_revision\": 0 }, \"command_id\": \"dev023-safety\", \"requested_at\": 4743, \"effective_at\": 4744, \"phase_revision\": 35075, \"result_revision\": 35076, \"decision_phase\": \"VALIDATION\", \"reason\": \"\", \"reason_codes\": [] } }, { \"command\": { \"command_id\": \"dev023-open\", \"project_id\": \"P-A\", \"business_contract_id\": \"B01-R1-BUSINESS\", \"action\": \"open\", \"requested_at\": 4804, \"effective_at\": 4805, \"expected_snapshot_revision\": 35560, \"target_revision\": 0 }, \"result\": { \"accepted\": true, \"pending\": false, \"command\": { \"command_id\": \"dev023-open\", \"project_id\": \"P-A\", \"business_contract_id\": \"B01-R1-BUSINESS\", \"action\": \"open\", \"requested_at\": 4804, \"effective_at\": 4805, \"expected_snapshot_revision\": 35560, \"target_revision\": 0 }, \"command_id\": \"dev023-open\", \"requested_at\": 4804, \"effective_at\": 4805, \"phase_revision\": 35564, \"result_revision\": 35565, \"decision_phase\": \"VALIDATION\", \"reason\": \"\", \"reason_codes\": [] } }], \"next_effective_at\": 5761, \"fixture_label\": \"DEV023-TEST_ONLY\" }",
+          "label": "U17_P05_preserved",
+          "passed": true
+        },
+        {
+          "actual": "open_operations:<Button#119973873203>",
+          "expected": "open_operations:<Button#119973873203>",
+          "label": "U17_P05_focus",
+          "passed": true
+        },
+        {
+          "actual": "c32d96d9d2d05f417150fa1f4a997cd95b85e8c89098f403bc1048ace89efb80",
+          "expected": "c32d96d9d2d05f417150fa1f4a997cd95b85e8c89098f403bc1048ace89efb80",
+          "label": "U12_P05_no_effect",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U19_render_SERVICE_FUNDS_INSUFFICIENT",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_SERVICE_FUNDS_INSUFFICIENT_title",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_SERVICE_FUNDS_INSUFFICIENT_current",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_SERVICE_FUNDS_INSUFFICIENT_activity",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_SERVICE_FUNDS_INSUFFICIENT_selection",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_SERVICE_FUNDS_INSUFFICIENT_report",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_SERVICE_FUNDS_INSUFFICIENT_query",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_SERVICE_FUNDS_INSUFFICIENT_feedback",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U19_render_UNPAID_BALANCE",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_UNPAID_BALANCE_title",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_UNPAID_BALANCE_current",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_UNPAID_BALANCE_activity",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_UNPAID_BALANCE_selection",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_UNPAID_BALANCE_report",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_UNPAID_BALANCE_query",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_UNPAID_BALANCE_feedback",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U19_render_activation_failed",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_activation_failed_title",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_activation_failed_current",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_activation_failed_activity",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_activation_failed_selection",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_activation_failed_report",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_activation_failed_query",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_activation_failed_feedback",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U19_render_actual_first_report",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_actual_first_report_title",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_actual_first_report_current",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_actual_first_report_activity",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_actual_first_report_selection",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_actual_first_report_report",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_actual_first_report_query",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_actual_first_report_feedback",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U19_render_actual_open",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_actual_open_title",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_actual_open_current",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_actual_open_activity",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_actual_open_selection",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_actual_open_report",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_actual_open_query",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_actual_open_feedback",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U19_render_fixture_conflict",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_fixture_conflict_title",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_fixture_conflict_current",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_fixture_conflict_activity",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_fixture_conflict_selection",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_fixture_conflict_report",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_fixture_conflict_query",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_fixture_conflict_feedback",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U19_render_midnight_residual",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_midnight_residual_title",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_midnight_residual_current",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_midnight_residual_activity",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_midnight_residual_selection",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_midnight_residual_report",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_midnight_residual_query",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_midnight_residual_feedback",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U19_render_next_supply_unavailable",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U13_query_failure",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_next_supply_unavailable_title",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_next_supply_unavailable_current",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_next_supply_unavailable_activity",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_next_supply_unavailable_selection",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_next_supply_unavailable_report",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_next_supply_unavailable_query",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_next_supply_unavailable_feedback",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U19_render_partial_payment",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_partial_payment_title",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_partial_payment_current",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_partial_payment_activity",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_partial_payment_selection",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_partial_payment_report",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_partial_payment_query",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_partial_payment_feedback",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U19_render_preopen",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U05_preopen_reason",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_preopen_title",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_preopen_current",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_preopen_activity",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_preopen_selection",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_preopen_report",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_preopen_query",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_preopen_feedback",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U19_render_report_failure",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U09_report_error",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U09_current_kept",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_report_failure_title",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_report_failure_current",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_report_failure_activity",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_report_failure_selection",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_report_failure_report",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_report_failure_query",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_report_failure_feedback",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U19_render_same_T_recovery",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_same_T_recovery_title",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_same_T_recovery_current",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_same_T_recovery_activity",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_same_T_recovery_selection",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_same_T_recovery_report",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_same_T_recovery_query",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_same_T_recovery_feedback",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U19_render_satisfaction_unavailable",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U10_arithmetic",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_satisfaction_unavailable_title",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_satisfaction_unavailable_current",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_satisfaction_unavailable_activity",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_satisfaction_unavailable_selection",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_satisfaction_unavailable_report",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_satisfaction_unavailable_query",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_satisfaction_unavailable_feedback",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U19_render_settlement",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_settlement_title",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_settlement_current",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_settlement_activity",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_settlement_selection",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_settlement_report",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_settlement_query",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_settlement_feedback",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U19_render_unknown_source_failure",
+          "passed": true
+        },
+        {
+          "actual": "false",
+          "expected": "false",
+          "label": "U19_outer_failure",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_unknown_source_failure_title",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_unknown_source_failure_current",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_unknown_source_failure_activity",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_unknown_source_failure_selection",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_unknown_source_failure_report",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_unknown_source_failure_query",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_unknown_source_failure_feedback",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U19_render_zero_demand",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U05_real_zero",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U10_unclosed",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_zero_demand_title",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_zero_demand_current",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_zero_demand_activity",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_zero_demand_selection",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_zero_demand_report",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_zero_demand_query",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_zero_demand_feedback",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U19_render_zero_fixed_report",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U10_zero_report",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_zero_fixed_report_title",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_zero_fixed_report_current",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_zero_fixed_report_activity",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_zero_fixed_report_selection",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_zero_fixed_report_report",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_zero_fixed_report_query",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U18_wrap_zero_fixed_report_feedback",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U06_before",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U08_payment_label_before",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U06_restricted",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U08_payment_label_restricted",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U06_B0_still_insufficient",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U08_payment_label_B0_still_insufficient",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U06_resumed",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U08_payment_label_resumed",
+          "passed": true
+        },
+        {
+          "actual": "",
+          "expected": "",
+          "label": "U19_bad_type_clears",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U19_bad_type_failure",
+          "passed": true
+        },
+        {
+          "actual": "",
+          "expected": "",
+          "label": "U19_missing_clears",
+          "passed": true
+        },
+        {
+          "actual": "true",
+          "expected": "true",
+          "label": "U19_recovery",
+          "passed": true
+        },
+        {
+          "actual": "false",
+          "expected": "false",
+          "label": "U19_no_stale_allow",
+          "passed": true
+        },
+        {
+          "actual": "55점",
+          "expected": "55점",
+          "label": "U10_fraction_integer",
+          "passed": true
+        },
+        {
+          "actual": "9223372036854775807/3점",
+          "expected": "9223372036854775807/3점",
+          "label": "U10_fraction_exact",
+          "passed": true
+        },
+        {
+          "actual": "151/3점",
+          "expected": "151/3점",
+          "label": "U10_no_rounding",
+          "passed": true
+        },
+        {
+          "actual": "6",
+          "expected": "6",
+          "label": "U16_actual_route",
+          "passed": true
+        },
+        {
+          "actual": "3",
+          "expected": "3",
+          "label": "U16_cohort_markers",
+          "passed": true
+        },
+        {
+          "actual": "[{ \"path\": [\"S01\", \"S02\"], \"count\": 1, \"progress\": 0.0 }, { \"path\": [\"S02\", \"S03\"], \"count\": 1, \"progress\": 0.0 }, { \"path\": [\"S03\", \"S04\"], \"count\": 1, \"progress\": 0.0 }]",
+          "expected": "[{ \"path\": [\"S01\", \"S02\"], \"count\": 1, \"progress\": 0.0 }, { \"path\": [\"S02\", \"S03\"], \"count\": 1, \"progress\": 0.0 }, { \"path\": [\"S03\", \"S04\"], \"count\": 1, \"progress\": 0.0 }]",
+          "label": "U16_draw_no_advance",
+          "passed": true
+        },
+        {
+          "actual": "0.5",
+          "expected": "0.5",
+          "label": "U16_authoritative_interpolation",
+          "passed": true
+        },
+        {
+          "actual": "0.5",
+          "expected": "0.5",
+          "label": "U16_same_time_speed_1",
+          "passed": true
+        },
+        {
+          "actual": "0.5",
+          "expected": "0.5",
+          "label": "U16_same_time_speed_2",
+          "passed": true
+        },
+        {
+          "actual": "0.5",
+          "expected": "0.5",
+          "label": "U16_same_time_speed_4",
+          "passed": true
+        },
+        {
+          "actual": "0",
+          "expected": "0",
+          "label": "U19_failed_map_clears",
+          "passed": true
+        }
+      ],
+      "failures": 0,
+      "kind": "AUTO_UI",
+      "real_gui": "NOT_INFERRED_FROM_AUTO"
+    },
+    "real_gui": [
+      {
+        "id": "G01",
+        "kind": "MODEL_CHAIN_SETUP + REAL_GUI",
+        "observed": "P06→P07・첫 실적 보고・End・공고→고정 보고 복귀・Tab/Space 재확인",
+        "status": "PASS_OBSERVED_SCOPE",
+        "exit_code": 0,
+        "log": ".local/validation/DEV023_REAL_first_report_20261115-092131.log",
+        "log_sha256": "5a80c5041581c22aff6c644f7556dc4cf301a39d43402df81beec9e611bf26c8",
+        "captures": [
+          {
+            "case": "first_report",
+            "effects": "c32d96d9d2d05f417150fa1f4a997cd95b85e8c89098f403bc1048ace89efb80",
+            "file": ".local/validation/DEV023_GUI_first_report_01.png",
+            "kind": "MODEL_CHAIN_SETUP",
+            "label": "READY",
+            "minute": 5760,
+            "operations_text": "개통 완료 · 영업시간 외 — 신규 탑승 불가 [OUTSIDE_SERVICE_HOURS]\n이동 중 1 / 당일 완료 4통행",
+            "report_text": "고정 과거 보고 · 마감일 4\n보고 식별 run--9223371980449774107/day-4\n게임 통화 단위\n운영비 발생 95500\n운영비 즉시 지급 95500\n미지급 운영비 후정산 0\n도착 운임 429100\n정부금 0\n공사비 발생 75417\n공사 기성 지급 75625\n운영비 지급 합계 95500\n마감 자금\n게임 통화 단위\n총현금 1533600\n제한현금 200000\n자유현금 1333600\n예약금 0\n신규약정 가용금 1333600\n미지급금 0\n사업별 제한현금 · P-A 200000\n사업별 예약금 · P-A 0\n요청 4296 / 탑승 4296 / 미탑승 0 / 완료 4291 / 늦은 완료 0통행\n서비스 955분 · 기초 이동 중 0 / 마감 시점 이동 중 5통행\n만족도 전 50점 → 마감 55점",
+            "screen": "operations",
+            "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+            "window": "(1100, 900)",
+            "sha256": "c1317b73b92a8a38a78459fa0ed80973a12974f266313ee56ac2078d46cad6cc"
+          },
+          {
+            "case": "first_report",
+            "effects": "c32d96d9d2d05f417150fa1f4a997cd95b85e8c89098f403bc1048ace89efb80",
+            "file": ".local/validation/DEV023_GUI_first_report_02.png",
+            "kind": "MODEL_CHAIN_SETUP",
+            "label": "F12",
+            "minute": 5760,
+            "operations_text": "개통 완료 · 영업시간 외 — 신규 탑승 불가 [OUTSIDE_SERVICE_HOURS]\n이동 중 1 / 당일 완료 4통행",
+            "report_text": "고정 과거 보고 · 마감일 4\n보고 식별 run--9223371980449774107/day-4\n게임 통화 단위\n운영비 발생 95500\n운영비 즉시 지급 95500\n미지급 운영비 후정산 0\n도착 운임 429100\n정부금 0\n공사비 발생 75417\n공사 기성 지급 75625\n운영비 지급 합계 95500\n마감 자금\n게임 통화 단위\n총현금 1533600\n제한현금 200000\n자유현금 1333600\n예약금 0\n신규약정 가용금 1333600\n미지급금 0\n사업별 제한현금 · P-A 200000\n사업별 예약금 · P-A 0\n요청 4296 / 탑승 4296 / 미탑승 0 / 완료 4291 / 늦은 완료 0통행\n서비스 955분 · 기초 이동 중 0 / 마감 시점 이동 중 5통행\n만족도 전 50점 → 마감 55점",
+            "screen": "finance",
+            "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+            "window": "(1100, 900)",
+            "sha256": "abf9b8ff696135f954abf6c3f999d7d50583eec365420815ed27e2fe74c10efb"
+          },
+          {
+            "case": "first_report",
+            "effects": "c32d96d9d2d05f417150fa1f4a997cd95b85e8c89098f403bc1048ace89efb80",
+            "file": ".local/validation/DEV023_GUI_first_report_03.png",
+            "kind": "MODEL_CHAIN_SETUP",
+            "label": "EXIT",
+            "minute": 5760,
+            "operations_text": "개통 완료 · 영업시간 외 — 신규 탑승 불가 [OUTSIDE_SERVICE_HOURS]\n이동 중 1 / 당일 완료 4통행",
+            "report_text": "고정 과거 보고 · 마감일 4\n보고 식별 run--9223371980449774107/day-4\n게임 통화 단위\n운영비 발생 95500\n운영비 즉시 지급 95500\n미지급 운영비 후정산 0\n도착 운임 429100\n정부금 0\n공사비 발생 75417\n공사 기성 지급 75625\n운영비 지급 합계 95500\n마감 자금\n게임 통화 단위\n총현금 1533600\n제한현금 200000\n자유현금 1333600\n예약금 0\n신규약정 가용금 1333600\n미지급금 0\n사업별 제한현금 · P-A 200000\n사업별 예약금 · P-A 0\n요청 4296 / 탑승 4296 / 미탑승 0 / 완료 4291 / 늦은 완료 0통행\n서비스 955분 · 기초 이동 중 0 / 마감 시점 이동 중 5통행\n만족도 전 50점 → 마감 55점",
+            "screen": "finance",
+            "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+            "window": "(1100, 900)",
+            "sha256": "538edd26cf539680f5d98624f5f1bbee426baef0292b37b4c6471ff866d3749c"
+          }
+        ],
+        "independent_acceptance": "PENDING",
+        "source_sha256": {
+          "scripts/main.gd": "bea3e347fccfba63ed088ba6b80080accb962b188361bf85a7bdb40a06e18d9e",
+          "scripts/data/gate2_data_loader.gd": "3b76939a3ae9840debf86cb4f30bdea59bac26647289ca8c80523b05116fe5e2",
+          "scripts/data/tender_data_loader.gd": "e1082d08e5610dff382def2e76a2b3c33e765710f99ce936a5c55fc994725bde",
+          "scripts/model/administrative_network.gd": "d723b6013b7f50fa3593e9a1cd95e041b794cde811b717e15ea589af48148462",
+          "scripts/model/company_ledger.gd": "98bebff3eb0ff6efae8f846f77a9d2b03cbd5f6c0874f57db0a80b7377f6a396",
+          "scripts/model/construction_project.gd": "b4e21f5f9e1facafc324cc5ea92d12bfe8fb790dba7fb862ed2e456a56f9e423",
+          "scripts/model/daily_ledger_report.gd": "3d2e89ba43ac771c4647e859edfadccbdcc39638ca765d4821acd03000402c8a",
+          "scripts/model/initial_company_state.gd": "dceb7dd03b26ba03c211cc32535e7dabbfabaa47a2c6ed77ba530b43528ed312",
+          "scripts/model/operating_line.gd": "638d04fbd6b69cba113282c8810a965d8632c00ede7aaa5aeab610a348ef6884",
+          "scripts/model/prediction_state.gd": "77ba1a69632e01fd3cdd1f04d91ed67d55fad007adf7327b58cd9f522c37ee30",
+          "scripts/model/public_tender.gd": "f0bd86d9ce78efb15903b56c5dfb9affaf823f90aae93fe1f857bd2b89404576",
+          "scripts/model/route_plan.gd": "385f3aa5a5e69486550abf7468ea41b9299133122f2efc2f3ba0ff9c16588ae6",
+          "scripts/simulation/command_queue.gd": "249ae3864afb0110af972e0576e482a00580ba3d3703f5ad25299fd9a5876cf5",
+          "scripts/simulation/construction_service.gd": "19e25b8b2c0ff23a64453c33ced695b45ff9b1384e3c981d0d0061b3cb55cc8a",
+          "scripts/simulation/demand_predictor.gd": "de26cc272a823c846837b738c4c2645a86f1ec538af8b24510be39e4a12b7812",
+          "scripts/simulation/game_clock.gd": "188355b3d727b25de924e6c1cf436ef3d6e7fe4f7870718db6f9f88d71dc2e12",
+          "scripts/simulation/minute_pipeline.gd": "a4afeacd5cf1be061296878b9473b9ae3eec0895d9c3f99ef0a25f097cea064e",
+          "scripts/simulation/operations_service.gd": "b7cc399431a23c4ea930763209ead46e0e05406fc895c74d0566bebedc02c554",
+          "scripts/simulation/tender_service.gd": "c0b7e22ee44e51bd29891c440967b7ac698ac5f6317f284181ad592bd4961192",
+          "scripts/ui/construction_view.gd": "722cfb6378a7bc317ef2b539c4b5f945fee23cfa40ec06676c78e65c18c55cd0",
+          "scripts/ui/finance_view.gd": "d58dcd7f3348ec8fa345f850bfee5c177ef4282726f689451be12ba99afc331d",
+          "scripts/ui/operations_view.gd": "fb50caec2f66d4c1e1d0c068d0b0f70a0c022a13f17343f46e0d9e2e87bb61be",
+          "scripts/ui/stage1_map.gd": "e23bcc96ba28f7603b504bc9e4ad12376708e213d889bab3574f4941e2093032",
+          "scripts/ui/stage1_session.gd": "d59f86e3a5c4d256b3742fd384e17e4605abbda181d5b60ed14a2c99e26c7c4a",
+          "scripts/ui/stage1_view.gd": "873bcea12a11e98f2b5f1b2ef4ee80961b374df148d06c47ab14398a1bf2ef97",
+          "scripts/ui/tender_view.gd": "a26cf2916bd38886a196c20ce154c17729a33812d847a895bc9d25a1f70bb5f9",
+          "tests/game/construction_ui_fixtures.gd": "56716d087065669713fa69c9faad607bc24653040b6e9d20f41052fec00f299c",
+          "tests/game/operations_ui_fixtures.gd": "4dfb68c678f09abfc719fc5883866aa1bc529265153e76c39d4bf49c4924f425",
+          "tests/game/run_construction_gui_cases.gd": "31ab55654c49f7867c67976a149d5684fe6712088e9062678d500a07a35ca3c4",
+          "tests/game/run_construction_ui_tests.gd": "5293bcd98a337583c0922c9d380979249d666b4faf670e7f502ac85cb30be427",
+          "tests/game/run_operations_gui_cases.gd": "3392ced4dc222e7ffffa5b8174e7aae8978bccb232bbcd01416eb61d7149d933",
+          "tests/game/run_operations_ui_tests.gd": "a24e3da3efe87e768bf4808c3ce8c793886f8aad2779a908e38bb94494865abe",
+          "tests/game/run_tender_gui_cases.gd": "4b7297e2f8f67bed9f16377941a0d43f799dc11aa5eb47e7ce60be83e11c57d4",
+          "tests/game/run_tender_ui_tests.gd": "a0069faf1f4dfaca60bcafc1edcc64213227df05a8d3fc08f811acb524698ee2",
+          "tests/game/run_w01_tests.gd": "e74799d867508cfff40390762716e17d30301b1ff6b31809a103a971f3e57179",
+          "tests/game/run_w02_tests.gd": "b0fff3ae7c13111cc268b0ac448278175b97432546e0960c7cd65ca9f05b1dfc",
+          "tests/game/run_w03_tests.gd": "c6248435469e5a362a976e7b7256c31fd37c2cf439ae795fe19859b482fc4835",
+          "tests/game/run_w04a_tests.gd": "297d671fe651bb379395016c587d648ed70acade2f003ea13ba277219abf76d0",
+          "tests/game/run_w05_tests.gd": "7f59b666acceae0e0890e92cad85749bfa572f2d39f15719aff4993be231dd53",
+          "tests/game/run_w06_tests.gd": "6d59d4bffdf70dfaf8feece84b1d4dad55421faca7d1bbb791604497e7de4aed",
+          "tests/game/run_w07_gui_cases.gd": "104c93b2b2a38761daeb4a1d67efebd3007f8354acc52949f21c3123986da4d9",
+          "tests/game/run_w07_tests.gd": "62e755a49d1b61798480d38ef7db0d74919b17fbe56a95d5dd77c15828789054",
+          "tests/game/w019_ui_fixtures.gd": "a2432dbe40dca1158f09d4af7f700b471ed1857bacf9818d87add33c9d72858f",
+          "tests/game/w02_midnight_fixture.gd": "6d25a0c9a73372ac81f726f565043ca6645e4000e0fb4c5b4328b3106708910a",
+          "tests/game/w04a_fixtures.gd": "35b5d440200cccc3b174ab9eefc2a71f9eb4a1b91e11174281ca17646b75e9ac",
+          "tests/game/w05_fixtures.gd": "1347e911a819a26166de6e2d0368da9342879fdafde7329ed10af6062ef9a04f",
+          "tests/game/w06_fixtures.gd": "7a06533e83daa4ac13e4abdd0a7efb0d91facb392e7335ee2b8228609378edc6",
+          "tests/game/w07_ui_fixtures.gd": "7bb1d49b2ca9859eb1c76d05458921dd7e0024a0714b9c2e9c802218e8ccdbad"
+        },
+        "command": [
+          "Godot_v4.7.2-stable_win64_console.exe",
+          "--path",
+          ".",
+          "--script",
+          "tests/game/run_operations_gui_cases.gd",
+          "--",
+          "--case=first_report"
+        ],
+        "script_errors": 0,
+        "engine_errors": 0
+      },
+      {
+        "id": "G02",
+        "kind": "CONSUMER_FIXTURE + REAL_GUI",
+        "observed": "미지급 제한・B100/A0/R200000・공급 없는 조회 실패/비활성",
+        "status": "PASS_OBSERVED_SCOPE",
+        "exit_code": 0,
+        "log": ".local/validation/DEV023_REAL_l2_restricted_unpaid_20261115-092607.log",
+        "log_sha256": "412db2c083eb12f91e1d0ab8cb8c500c646fe15d61b7cc779b65814eb1bf0bcd",
+        "captures": [
+          {
+            "case": "l2_restricted_unpaid",
+            "effects": "ce058685acd69e096f6234cef64c282a8bae399d2304f6dcc6e999f37b5cde77",
+            "file": ".local/validation/DEV023_GUI_l2_restricted_unpaid_01.png",
+            "kind": "CONSUMER_FIXTURE",
+            "label": "READY",
+            "minute": 360,
+            "operations_text": "개통 완료 · 미지급금으로 신규 탑승 제한 [UNPAID_BALANCE]\n이동 중 0 / 당일 완료 0통행",
+            "report_text": "마감 보고서 없음",
+            "screen": "operations",
+            "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+            "window": "(1100, 900)",
+            "sha256": "f761c9b229be445122c021449ebc20e4d93746159e82ad7b2b2214b5bf100401"
+          },
+          {
+            "case": "l2_restricted_unpaid",
+            "effects": "ce058685acd69e096f6234cef64c282a8bae399d2304f6dcc6e999f37b5cde77",
+            "file": ".local/validation/DEV023_GUI_l2_restricted_unpaid_02.png",
+            "kind": "CONSUMER_FIXTURE",
+            "label": "F12",
+            "minute": 360,
+            "operations_text": "개통 완료 · 미지급금으로 신규 탑승 제한 [UNPAID_BALANCE]\n이동 중 0 / 당일 완료 0통행",
+            "report_text": "마감 보고서 없음",
+            "screen": "finance",
+            "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+            "window": "(1100, 900)",
+            "sha256": "4f56879d454a105179abc705c3d97106b9410a94544dc3fb7ac3ff1bb2c89e74"
+          },
+          {
+            "case": "l2_restricted_unpaid",
+            "effects": "ce058685acd69e096f6234cef64c282a8bae399d2304f6dcc6e999f37b5cde77",
+            "file": ".local/validation/DEV023_GUI_l2_restricted_unpaid_03.png",
+            "kind": "CONSUMER_FIXTURE",
+            "label": "EXIT",
+            "minute": 360,
+            "operations_text": "개통 완료 · 미지급금으로 신규 탑승 제한 [UNPAID_BALANCE]\n이동 중 0 / 당일 완료 0통행",
+            "report_text": "마감 보고서 없음",
+            "screen": "finance",
+            "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+            "window": "(1100, 900)",
+            "sha256": "4f56879d454a105179abc705c3d97106b9410a94544dc3fb7ac3ff1bb2c89e74"
+          }
+        ],
+        "independent_acceptance": "PENDING",
+        "source_sha256": {
+          "scripts/data/gate2_data_loader.gd": "3b76939a3ae9840debf86cb4f30bdea59bac26647289ca8c80523b05116fe5e2",
+          "scripts/data/tender_data_loader.gd": "e1082d08e5610dff382def2e76a2b3c33e765710f99ce936a5c55fc994725bde",
+          "scripts/main.gd": "bea3e347fccfba63ed088ba6b80080accb962b188361bf85a7bdb40a06e18d9e",
+          "scripts/model/administrative_network.gd": "d723b6013b7f50fa3593e9a1cd95e041b794cde811b717e15ea589af48148462",
+          "scripts/model/company_ledger.gd": "98bebff3eb0ff6efae8f846f77a9d2b03cbd5f6c0874f57db0a80b7377f6a396",
+          "scripts/model/construction_project.gd": "b4e21f5f9e1facafc324cc5ea92d12bfe8fb790dba7fb862ed2e456a56f9e423",
+          "scripts/model/daily_ledger_report.gd": "3d2e89ba43ac771c4647e859edfadccbdcc39638ca765d4821acd03000402c8a",
+          "scripts/model/initial_company_state.gd": "dceb7dd03b26ba03c211cc32535e7dabbfabaa47a2c6ed77ba530b43528ed312",
+          "scripts/model/operating_line.gd": "638d04fbd6b69cba113282c8810a965d8632c00ede7aaa5aeab610a348ef6884",
+          "scripts/model/prediction_state.gd": "77ba1a69632e01fd3cdd1f04d91ed67d55fad007adf7327b58cd9f522c37ee30",
+          "scripts/model/public_tender.gd": "f0bd86d9ce78efb15903b56c5dfb9affaf823f90aae93fe1f857bd2b89404576",
+          "scripts/model/route_plan.gd": "385f3aa5a5e69486550abf7468ea41b9299133122f2efc2f3ba0ff9c16588ae6",
+          "scripts/simulation/command_queue.gd": "249ae3864afb0110af972e0576e482a00580ba3d3703f5ad25299fd9a5876cf5",
+          "scripts/simulation/construction_service.gd": "19e25b8b2c0ff23a64453c33ced695b45ff9b1384e3c981d0d0061b3cb55cc8a",
+          "scripts/simulation/demand_predictor.gd": "de26cc272a823c846837b738c4c2645a86f1ec538af8b24510be39e4a12b7812",
+          "scripts/simulation/game_clock.gd": "188355b3d727b25de924e6c1cf436ef3d6e7fe4f7870718db6f9f88d71dc2e12",
+          "scripts/simulation/minute_pipeline.gd": "a4afeacd5cf1be061296878b9473b9ae3eec0895d9c3f99ef0a25f097cea064e",
+          "scripts/simulation/operations_service.gd": "b7cc399431a23c4ea930763209ead46e0e05406fc895c74d0566bebedc02c554",
+          "scripts/simulation/tender_service.gd": "c0b7e22ee44e51bd29891c440967b7ac698ac5f6317f284181ad592bd4961192",
+          "scripts/ui/construction_view.gd": "722cfb6378a7bc317ef2b539c4b5f945fee23cfa40ec06676c78e65c18c55cd0",
+          "scripts/ui/finance_view.gd": "167a1d89611b51fa7ee70e63d4f501c36d155e2e57741260d2bde12535344776",
+          "scripts/ui/operations_view.gd": "3d8b123245f1a29e0a26c70035eae6a1b5baf762b7b73dd5915bc7b16e2e9d59",
+          "scripts/ui/stage1_map.gd": "e23bcc96ba28f7603b504bc9e4ad12376708e213d889bab3574f4941e2093032",
+          "scripts/ui/stage1_session.gd": "d59f86e3a5c4d256b3742fd384e17e4605abbda181d5b60ed14a2c99e26c7c4a",
+          "scripts/ui/stage1_view.gd": "10cdb98c036b713e9c425662f1521e2486405049864605350f76e86947f329fc",
+          "scripts/ui/tender_view.gd": "a26cf2916bd38886a196c20ce154c17729a33812d847a895bc9d25a1f70bb5f9",
+          "tests/game/construction_ui_fixtures.gd": "56716d087065669713fa69c9faad607bc24653040b6e9d20f41052fec00f299c",
+          "tests/game/operations_ui_fixtures.gd": "4dfb68c678f09abfc719fc5883866aa1bc529265153e76c39d4bf49c4924f425",
+          "tests/game/run_construction_gui_cases.gd": "31ab55654c49f7867c67976a149d5684fe6712088e9062678d500a07a35ca3c4",
+          "tests/game/run_construction_ui_tests.gd": "5293bcd98a337583c0922c9d380979249d666b4faf670e7f502ac85cb30be427",
+          "tests/game/run_operations_gui_cases.gd": "3392ced4dc222e7ffffa5b8174e7aae8978bccb232bbcd01416eb61d7149d933",
+          "tests/game/run_operations_ui_tests.gd": "a24e3da3efe87e768bf4808c3ce8c793886f8aad2779a908e38bb94494865abe",
+          "tests/game/run_tender_gui_cases.gd": "4b7297e2f8f67bed9f16377941a0d43f799dc11aa5eb47e7ce60be83e11c57d4",
+          "tests/game/run_tender_ui_tests.gd": "a0069faf1f4dfaca60bcafc1edcc64213227df05a8d3fc08f811acb524698ee2",
+          "tests/game/run_w01_tests.gd": "e74799d867508cfff40390762716e17d30301b1ff6b31809a103a971f3e57179",
+          "tests/game/run_w02_tests.gd": "b0fff3ae7c13111cc268b0ac448278175b97432546e0960c7cd65ca9f05b1dfc",
+          "tests/game/run_w03_tests.gd": "c6248435469e5a362a976e7b7256c31fd37c2cf439ae795fe19859b482fc4835",
+          "tests/game/run_w04a_tests.gd": "297d671fe651bb379395016c587d648ed70acade2f003ea13ba277219abf76d0",
+          "tests/game/run_w05_tests.gd": "7f59b666acceae0e0890e92cad85749bfa572f2d39f15719aff4993be231dd53",
+          "tests/game/run_w06_tests.gd": "6d59d4bffdf70dfaf8feece84b1d4dad55421faca7d1bbb791604497e7de4aed",
+          "tests/game/run_w07_gui_cases.gd": "104c93b2b2a38761daeb4a1d67efebd3007f8354acc52949f21c3123986da4d9",
+          "tests/game/run_w07_tests.gd": "62e755a49d1b61798480d38ef7db0d74919b17fbe56a95d5dd77c15828789054",
+          "tests/game/w019_ui_fixtures.gd": "a2432dbe40dca1158f09d4af7f700b471ed1857bacf9818d87add33c9d72858f",
+          "tests/game/w02_midnight_fixture.gd": "6d25a0c9a73372ac81f726f565043ca6645e4000e0fb4c5b4328b3106708910a",
+          "tests/game/w04a_fixtures.gd": "35b5d440200cccc3b174ab9eefc2a71f9eb4a1b91e11174281ca17646b75e9ac",
+          "tests/game/w05_fixtures.gd": "1347e911a819a26166de6e2d0368da9342879fdafde7329ed10af6062ef9a04f",
+          "tests/game/w06_fixtures.gd": "7a06533e83daa4ac13e4abdd0a7efb0d91facb392e7335ee2b8228609378edc6",
+          "tests/game/w07_ui_fixtures.gd": "7bb1d49b2ca9859eb1c76d05458921dd7e0024a0714b9c2e9c802218e8ccdbad"
+        },
+        "time_note": "Early capture minute=360 denotes backing fixture pipeline; displayed authoritative minute is T362. Later runner separates these fields.",
+        "command": [
+          "Godot_v4.7.2-stable_win64_console.exe",
+          "--path",
+          ".",
+          "--script",
+          "tests/game/run_operations_gui_cases.gd",
+          "--",
+          "--case=l2_restricted_unpaid"
+        ],
+        "script_errors": 0,
+        "engine_errors": 0
+      },
+      {
+        "id": "G03",
+        "kind": "CONSUMER_FIXTURE + REAL_GUI",
+        "observed": "800x600 긴 식별/정확한 분수/큰 금액・Home/End 재검증",
+        "status": "PASS_OBSERVED_SCOPE",
+        "exit_code": 0,
+        "log": ".local/validation/DEV023_REAL_long_20261115-094320.log",
+        "log_sha256": "2e8a7c450080f271ac1a6caf1a290539b19fc41e6159f6ca995d1e061267d24e",
+        "captures": [
+          {
+            "backing_pipeline_minute": 360,
+            "case": "long",
+            "effects": "ce058685acd69e096f6234cef64c282a8bae399d2304f6dcc6e999f37b5cde77",
+            "file": ".local/validation/DEV023_GUI_long_1794703404-315_01.png",
+            "kind": "CONSUMER_FIXTURE",
+            "label": "READY",
+            "minute": 4805,
+            "operations_text": "개통 완료 · 신규 탑승 가능\n이동 중 3 / 당일 완료 0통행",
+            "report_text": "고정 과거 보고 · 마감일 3\n보고 식별 run--9223371996287465991/day-3\n게임 통화 단위\n운영비 발생 0\n운영비 즉시 지급 0\n미지급 운영비 후정산 0\n도착 운임 0\n정부금 0\n공사비 발생 300000\n공사 기성 지급 300000\n운영비 지급 합계 0\n마감 자금\n게임 통화 단위\n총현금 1275625\n제한현금 275625\n자유현금 1000000\n예약금 0\n신규약정 가용금 1000000\n미지급금 0\n사업별 제한현금 · P-A 275625\n사업별 예약금 · P-A 0\n요청 0 / 탑승 0 / 미탑승 0 / 완료 0 / 늦은 완료 0통행\n서비스 0분 · 기초 이동 중 0 / 마감 시점 이동 중 0통행\n만족도 전 50점 → 마감 50점",
+            "screen": "operations",
+            "viewport": "[P: (0.0, 0.0), S: (1152.0, 864.0)]",
+            "window": "(800, 600)",
+            "sha256": "814aa4a173f053b5d58ca2166b8a096e6380780bca8b4975a2f29679c8bb6e39"
+          },
+          {
+            "backing_pipeline_minute": 360,
+            "case": "long",
+            "effects": "ce058685acd69e096f6234cef64c282a8bae399d2304f6dcc6e999f37b5cde77",
+            "file": ".local/validation/DEV023_GUI_long_1794703404-315_02.png",
+            "kind": "CONSUMER_FIXTURE",
+            "label": "F12",
+            "minute": 4805,
+            "operations_text": "개통 완료 · 신규 탑승 가능\n이동 중 3 / 당일 완료 0통행",
+            "report_text": "고정 과거 보고 · 마감일 3\n보고 식별 run--9223371996287465991/day-3\n게임 통화 단위\n운영비 발생 0\n운영비 즉시 지급 0\n미지급 운영비 후정산 0\n도착 운임 0\n정부금 0\n공사비 발생 300000\n공사 기성 지급 300000\n운영비 지급 합계 0\n마감 자금\n게임 통화 단위\n총현금 1275625\n제한현금 275625\n자유현금 1000000\n예약금 0\n신규약정 가용금 1000000\n미지급금 0\n사업별 제한현금 · P-A 275625\n사업별 예약금 · P-A 0\n요청 0 / 탑승 0 / 미탑승 0 / 완료 0 / 늦은 완료 0통행\n서비스 0분 · 기초 이동 중 0 / 마감 시점 이동 중 0통행\n만족도 전 50점 → 마감 50점",
+            "screen": "finance",
+            "viewport": "[P: (0.0, 0.0), S: (1152.0, 864.0)]",
+            "window": "(800, 600)",
+            "sha256": "2decae2d683a0000dd7442cf689ff77b548474207c400c9913e2c28f238c5510"
+          },
+          {
+            "backing_pipeline_minute": 360,
+            "case": "long",
+            "effects": "ce058685acd69e096f6234cef64c282a8bae399d2304f6dcc6e999f37b5cde77",
+            "file": ".local/validation/DEV023_GUI_long_1794703404-315_03.png",
+            "kind": "CONSUMER_FIXTURE",
+            "label": "EXIT",
+            "minute": 4805,
+            "operations_text": "개통 완료 · 신규 탑승 가능\n이동 중 3 / 당일 완료 0통행",
+            "report_text": "고정 과거 보고 · 마감일 3\n보고 식별 run--9223371996287465991/day-3\n게임 통화 단위\n운영비 발생 0\n운영비 즉시 지급 0\n미지급 운영비 후정산 0\n도착 운임 0\n정부금 0\n공사비 발생 300000\n공사 기성 지급 300000\n운영비 지급 합계 0\n마감 자금\n게임 통화 단위\n총현금 1275625\n제한현금 275625\n자유현금 1000000\n예약금 0\n신규약정 가용금 1000000\n미지급금 0\n사업별 제한현금 · P-A 275625\n사업별 예약금 · P-A 0\n요청 0 / 탑승 0 / 미탑승 0 / 완료 0 / 늦은 완료 0통행\n서비스 0분 · 기초 이동 중 0 / 마감 시점 이동 중 0통행\n만족도 전 50점 → 마감 50점",
+            "screen": "finance",
+            "viewport": "[P: (0.0, 0.0), S: (1152.0, 864.0)]",
+            "window": "(800, 600)",
+            "sha256": "7b0213a82cb1b590c97663e7c0985bf3d1089d07f1c03c3cd8b01cca0c56394b"
+          }
+        ],
+        "independent_acceptance": "PENDING",
+        "source_sha256": {
+          "scripts/main.gd": "bea3e347fccfba63ed088ba6b80080accb962b188361bf85a7bdb40a06e18d9e",
+          "scripts/data/gate2_data_loader.gd": "3b76939a3ae9840debf86cb4f30bdea59bac26647289ca8c80523b05116fe5e2",
+          "scripts/data/tender_data_loader.gd": "e1082d08e5610dff382def2e76a2b3c33e765710f99ce936a5c55fc994725bde",
+          "scripts/model/administrative_network.gd": "d723b6013b7f50fa3593e9a1cd95e041b794cde811b717e15ea589af48148462",
+          "scripts/model/company_ledger.gd": "98bebff3eb0ff6efae8f846f77a9d2b03cbd5f6c0874f57db0a80b7377f6a396",
+          "scripts/model/construction_project.gd": "b4e21f5f9e1facafc324cc5ea92d12bfe8fb790dba7fb862ed2e456a56f9e423",
+          "scripts/model/daily_ledger_report.gd": "3d2e89ba43ac771c4647e859edfadccbdcc39638ca765d4821acd03000402c8a",
+          "scripts/model/initial_company_state.gd": "dceb7dd03b26ba03c211cc32535e7dabbfabaa47a2c6ed77ba530b43528ed312",
+          "scripts/model/operating_line.gd": "638d04fbd6b69cba113282c8810a965d8632c00ede7aaa5aeab610a348ef6884",
+          "scripts/model/prediction_state.gd": "77ba1a69632e01fd3cdd1f04d91ed67d55fad007adf7327b58cd9f522c37ee30",
+          "scripts/model/public_tender.gd": "f0bd86d9ce78efb15903b56c5dfb9affaf823f90aae93fe1f857bd2b89404576",
+          "scripts/model/route_plan.gd": "385f3aa5a5e69486550abf7468ea41b9299133122f2efc2f3ba0ff9c16588ae6",
+          "scripts/simulation/command_queue.gd": "249ae3864afb0110af972e0576e482a00580ba3d3703f5ad25299fd9a5876cf5",
+          "scripts/simulation/construction_service.gd": "19e25b8b2c0ff23a64453c33ced695b45ff9b1384e3c981d0d0061b3cb55cc8a",
+          "scripts/simulation/demand_predictor.gd": "de26cc272a823c846837b738c4c2645a86f1ec538af8b24510be39e4a12b7812",
+          "scripts/simulation/game_clock.gd": "188355b3d727b25de924e6c1cf436ef3d6e7fe4f7870718db6f9f88d71dc2e12",
+          "scripts/simulation/minute_pipeline.gd": "a4afeacd5cf1be061296878b9473b9ae3eec0895d9c3f99ef0a25f097cea064e",
+          "scripts/simulation/operations_service.gd": "b7cc399431a23c4ea930763209ead46e0e05406fc895c74d0566bebedc02c554",
+          "scripts/simulation/tender_service.gd": "c0b7e22ee44e51bd29891c440967b7ac698ac5f6317f284181ad592bd4961192",
+          "scripts/ui/construction_view.gd": "722cfb6378a7bc317ef2b539c4b5f945fee23cfa40ec06676c78e65c18c55cd0",
+          "scripts/ui/finance_view.gd": "167a1d89611b51fa7ee70e63d4f501c36d155e2e57741260d2bde12535344776",
+          "scripts/ui/operations_view.gd": "b9d8905175fea77c2fd35ca7c5400dc432b08e917ccf03c61106571d2b17a7e6",
+          "scripts/ui/stage1_map.gd": "75a91873bbf945a61df4e74c6532f7c2d7147e8f2eb94c3a1e4f0145a37f22f8",
+          "scripts/ui/stage1_session.gd": "d59f86e3a5c4d256b3742fd384e17e4605abbda181d5b60ed14a2c99e26c7c4a",
+          "scripts/ui/stage1_view.gd": "e20b53ff363496f0d8ae743eeb15425c33db5284c3b3eacb28a831508069f7e5",
+          "scripts/ui/tender_view.gd": "a26cf2916bd38886a196c20ce154c17729a33812d847a895bc9d25a1f70bb5f9",
+          "tests/game/construction_ui_fixtures.gd": "56716d087065669713fa69c9faad607bc24653040b6e9d20f41052fec00f299c",
+          "tests/game/operations_ui_fixtures.gd": "4dfb68c678f09abfc719fc5883866aa1bc529265153e76c39d4bf49c4924f425",
+          "tests/game/run_construction_gui_cases.gd": "31ab55654c49f7867c67976a149d5684fe6712088e9062678d500a07a35ca3c4",
+          "tests/game/run_construction_ui_tests.gd": "5293bcd98a337583c0922c9d380979249d666b4faf670e7f502ac85cb30be427",
+          "tests/game/run_operations_gui_cases.gd": "fd1cc5542d982901210e20929eeaa0a1392495410ebe8f37400af25bde820c26",
+          "tests/game/run_operations_ui_tests.gd": "a24e3da3efe87e768bf4808c3ce8c793886f8aad2779a908e38bb94494865abe",
+          "tests/game/run_tender_gui_cases.gd": "4b7297e2f8f67bed9f16377941a0d43f799dc11aa5eb47e7ce60be83e11c57d4",
+          "tests/game/run_tender_ui_tests.gd": "a0069faf1f4dfaca60bcafc1edcc64213227df05a8d3fc08f811acb524698ee2",
+          "tests/game/run_w01_tests.gd": "e74799d867508cfff40390762716e17d30301b1ff6b31809a103a971f3e57179",
+          "tests/game/run_w02_tests.gd": "b0fff3ae7c13111cc268b0ac448278175b97432546e0960c7cd65ca9f05b1dfc",
+          "tests/game/run_w03_tests.gd": "c6248435469e5a362a976e7b7256c31fd37c2cf439ae795fe19859b482fc4835",
+          "tests/game/run_w04a_tests.gd": "297d671fe651bb379395016c587d648ed70acade2f003ea13ba277219abf76d0",
+          "tests/game/run_w05_tests.gd": "7f59b666acceae0e0890e92cad85749bfa572f2d39f15719aff4993be231dd53",
+          "tests/game/run_w06_tests.gd": "6d59d4bffdf70dfaf8feece84b1d4dad55421faca7d1bbb791604497e7de4aed",
+          "tests/game/run_w07_gui_cases.gd": "104c93b2b2a38761daeb4a1d67efebd3007f8354acc52949f21c3123986da4d9",
+          "tests/game/run_w07_tests.gd": "62e755a49d1b61798480d38ef7db0d74919b17fbe56a95d5dd77c15828789054",
+          "tests/game/w019_ui_fixtures.gd": "a2432dbe40dca1158f09d4af7f700b471ed1857bacf9818d87add33c9d72858f",
+          "tests/game/w02_midnight_fixture.gd": "6d25a0c9a73372ac81f726f565043ca6645e4000e0fb4c5b4328b3106708910a",
+          "tests/game/w04a_fixtures.gd": "35b5d440200cccc3b174ab9eefc2a71f9eb4a1b91e11174281ca17646b75e9ac",
+          "tests/game/w05_fixtures.gd": "1347e911a819a26166de6e2d0368da9342879fdafde7329ed10af6062ef9a04f",
+          "tests/game/w06_fixtures.gd": "7a06533e83daa4ac13e4abdd0a7efb0d91facb392e7335ee2b8228609378edc6",
+          "tests/game/w07_ui_fixtures.gd": "7bb1d49b2ca9859eb1c76d05458921dd7e0024a0714b9c2e9c802218e8ccdbad"
+        },
+        "command": [
+          "Godot_v4.7.2-stable_win64_console.exe",
+          "--path",
+          ".",
+          "--script",
+          "tests/game/run_operations_gui_cases.gd",
+          "--",
+          "--case=long",
+          "--small"
+        ],
+        "script_errors": 0,
+        "engine_errors": 0
+      },
+      {
+        "id": "G04",
+        "kind": "PRODUCT_MAIN + REAL_GUI",
+        "observed": "정상 부팅・정지・개통 전 P06・P07 보고 없음/조회 비활성",
+        "status": "PASS_OBSERVED_SCOPE",
+        "exit_code": 0,
+        "log": ".local/validation/DEV023_REAL_product_20261115-093254.log",
+        "log_sha256": "fda359e861b9fee9359455861d9733ac6a766ce8fe7527e63d3d8014a3e40799",
+        "captures": [
+          {
+            "file": ".local/validation/p3/product-preopen.png",
+            "sha256": "1f48e46bd3a20fe44666d9a529d2f27ef7714eb28ebda740f66e0817334ba84f"
+          },
+          {
+            "file": ".local/validation/p3/product-no-report.png",
+            "sha256": "f75aa27acd9bf1a75d86c9fed306496b71cc2621dbe33fb36951d0fb011783a4"
+          }
+        ],
+        "independent_acceptance": "PENDING",
+        "source_sha256": {
+          "scripts/data/gate2_data_loader.gd": "3b76939a3ae9840debf86cb4f30bdea59bac26647289ca8c80523b05116fe5e2",
+          "scripts/data/tender_data_loader.gd": "e1082d08e5610dff382def2e76a2b3c33e765710f99ce936a5c55fc994725bde",
+          "scripts/main.gd": "bea3e347fccfba63ed088ba6b80080accb962b188361bf85a7bdb40a06e18d9e",
+          "scripts/model/administrative_network.gd": "d723b6013b7f50fa3593e9a1cd95e041b794cde811b717e15ea589af48148462",
+          "scripts/model/company_ledger.gd": "98bebff3eb0ff6efae8f846f77a9d2b03cbd5f6c0874f57db0a80b7377f6a396",
+          "scripts/model/construction_project.gd": "b4e21f5f9e1facafc324cc5ea92d12bfe8fb790dba7fb862ed2e456a56f9e423",
+          "scripts/model/daily_ledger_report.gd": "3d2e89ba43ac771c4647e859edfadccbdcc39638ca765d4821acd03000402c8a",
+          "scripts/model/initial_company_state.gd": "dceb7dd03b26ba03c211cc32535e7dabbfabaa47a2c6ed77ba530b43528ed312",
+          "scripts/model/operating_line.gd": "638d04fbd6b69cba113282c8810a965d8632c00ede7aaa5aeab610a348ef6884",
+          "scripts/model/prediction_state.gd": "77ba1a69632e01fd3cdd1f04d91ed67d55fad007adf7327b58cd9f522c37ee30",
+          "scripts/model/public_tender.gd": "f0bd86d9ce78efb15903b56c5dfb9affaf823f90aae93fe1f857bd2b89404576",
+          "scripts/model/route_plan.gd": "385f3aa5a5e69486550abf7468ea41b9299133122f2efc2f3ba0ff9c16588ae6",
+          "scripts/simulation/command_queue.gd": "249ae3864afb0110af972e0576e482a00580ba3d3703f5ad25299fd9a5876cf5",
+          "scripts/simulation/construction_service.gd": "19e25b8b2c0ff23a64453c33ced695b45ff9b1384e3c981d0d0061b3cb55cc8a",
+          "scripts/simulation/demand_predictor.gd": "de26cc272a823c846837b738c4c2645a86f1ec538af8b24510be39e4a12b7812",
+          "scripts/simulation/game_clock.gd": "188355b3d727b25de924e6c1cf436ef3d6e7fe4f7870718db6f9f88d71dc2e12",
+          "scripts/simulation/minute_pipeline.gd": "a4afeacd5cf1be061296878b9473b9ae3eec0895d9c3f99ef0a25f097cea064e",
+          "scripts/simulation/operations_service.gd": "b7cc399431a23c4ea930763209ead46e0e05406fc895c74d0566bebedc02c554",
+          "scripts/simulation/tender_service.gd": "c0b7e22ee44e51bd29891c440967b7ac698ac5f6317f284181ad592bd4961192",
+          "scripts/ui/construction_view.gd": "722cfb6378a7bc317ef2b539c4b5f945fee23cfa40ec06676c78e65c18c55cd0",
+          "scripts/ui/finance_view.gd": "167a1d89611b51fa7ee70e63d4f501c36d155e2e57741260d2bde12535344776",
+          "scripts/ui/operations_view.gd": "3d8b123245f1a29e0a26c70035eae6a1b5baf762b7b73dd5915bc7b16e2e9d59",
+          "scripts/ui/stage1_map.gd": "e23bcc96ba28f7603b504bc9e4ad12376708e213d889bab3574f4941e2093032",
+          "scripts/ui/stage1_session.gd": "d59f86e3a5c4d256b3742fd384e17e4605abbda181d5b60ed14a2c99e26c7c4a",
+          "scripts/ui/stage1_view.gd": "fb45b0d340e46d735961db96206f4dc1127ea442c0bc7187c1a9941299aef8e1",
+          "scripts/ui/tender_view.gd": "a26cf2916bd38886a196c20ce154c17729a33812d847a895bc9d25a1f70bb5f9",
+          "tests/game/construction_ui_fixtures.gd": "56716d087065669713fa69c9faad607bc24653040b6e9d20f41052fec00f299c",
+          "tests/game/operations_ui_fixtures.gd": "4dfb68c678f09abfc719fc5883866aa1bc529265153e76c39d4bf49c4924f425",
+          "tests/game/run_construction_gui_cases.gd": "31ab55654c49f7867c67976a149d5684fe6712088e9062678d500a07a35ca3c4",
+          "tests/game/run_construction_ui_tests.gd": "5293bcd98a337583c0922c9d380979249d666b4faf670e7f502ac85cb30be427",
+          "tests/game/run_operations_gui_cases.gd": "e0d3ddd5db439fcc708b2ef5262737a9099f5776ecd54cb2b16e82396e84113f",
+          "tests/game/run_operations_ui_tests.gd": "a24e3da3efe87e768bf4808c3ce8c793886f8aad2779a908e38bb94494865abe",
+          "tests/game/run_tender_gui_cases.gd": "4b7297e2f8f67bed9f16377941a0d43f799dc11aa5eb47e7ce60be83e11c57d4",
+          "tests/game/run_tender_ui_tests.gd": "a0069faf1f4dfaca60bcafc1edcc64213227df05a8d3fc08f811acb524698ee2",
+          "tests/game/run_w01_tests.gd": "e74799d867508cfff40390762716e17d30301b1ff6b31809a103a971f3e57179",
+          "tests/game/run_w02_tests.gd": "b0fff3ae7c13111cc268b0ac448278175b97432546e0960c7cd65ca9f05b1dfc",
+          "tests/game/run_w03_tests.gd": "c6248435469e5a362a976e7b7256c31fd37c2cf439ae795fe19859b482fc4835",
+          "tests/game/run_w04a_tests.gd": "297d671fe651bb379395016c587d648ed70acade2f003ea13ba277219abf76d0",
+          "tests/game/run_w05_tests.gd": "7f59b666acceae0e0890e92cad85749bfa572f2d39f15719aff4993be231dd53",
+          "tests/game/run_w06_tests.gd": "6d59d4bffdf70dfaf8feece84b1d4dad55421faca7d1bbb791604497e7de4aed",
+          "tests/game/run_w07_gui_cases.gd": "104c93b2b2a38761daeb4a1d67efebd3007f8354acc52949f21c3123986da4d9",
+          "tests/game/run_w07_tests.gd": "62e755a49d1b61798480d38ef7db0d74919b17fbe56a95d5dd77c15828789054",
+          "tests/game/w019_ui_fixtures.gd": "a2432dbe40dca1158f09d4af7f700b471ed1857bacf9818d87add33c9d72858f",
+          "tests/game/w02_midnight_fixture.gd": "6d25a0c9a73372ac81f726f565043ca6645e4000e0fb4c5b4328b3106708910a",
+          "tests/game/w04a_fixtures.gd": "35b5d440200cccc3b174ab9eefc2a71f9eb4a1b91e11174281ca17646b75e9ac",
+          "tests/game/w05_fixtures.gd": "1347e911a819a26166de6e2d0368da9342879fdafde7329ed10af6062ef9a04f",
+          "tests/game/w06_fixtures.gd": "7a06533e83daa4ac13e4abdd0a7efb0d91facb392e7335ee2b8228609378edc6",
+          "tests/game/w07_ui_fixtures.gd": "7bb1d49b2ca9859eb1c76d05458921dd7e0024a0714b9c2e9c802218e8ccdbad"
+        },
+        "command": [
+          "Godot_v4.7.2-stable_win64_console.exe",
+          "--path",
+          ".",
+          "--resolution",
+          "1100x900"
+        ],
+        "script_errors": 0,
+        "engine_errors": 0
+      },
+      {
+        "id": "G05",
+        "kind": "MODEL_CHAIN_SETUP + REAL_GUI",
+        "observed": "실제 운영선과 대표 표식・정지/재개・1/2/4배속・현재 통행/완료",
+        "status": "PASS_OBSERVED_SCOPE",
+        "exit_code": 0,
+        "log": ".local/validation/DEV023_REAL_open_20261115-093414.log",
+        "log_sha256": "842d28b4ff8e27348cda6ab3a8c79d0cbd7c86a4ce7b041e6d8b2961e71a838d",
+        "captures": [
+          {
+            "backing_pipeline_minute": 4805,
+            "case": "open",
+            "effects": "f3262e5c3298e42e772e025e542b97a180189d1b8e1e3559446de9fd7b7caa0d",
+            "file": ".local/validation/DEV023_GUI_open_1794702857-76_01.png",
+            "kind": "MODEL_CHAIN_SETUP",
+            "label": "READY",
+            "minute": 4805,
+            "operations_text": "개통 완료 · 신규 탑승 가능\n이동 중 3 / 당일 완료 0통행",
+            "report_text": "고정 과거 보고 · 마감일 3\n보고 식별 run--9223371980533660207/day-3\n게임 통화 단위\n운영비 발생 0\n운영비 즉시 지급 0\n미지급 운영비 후정산 0\n도착 운임 0\n정부금 0\n공사비 발생 300000\n공사 기성 지급 300000\n운영비 지급 합계 0\n마감 자금\n게임 통화 단위\n총현금 1275625\n제한현금 275625\n자유현금 1000000\n예약금 0\n신규약정 가용금 1000000\n미지급금 0\n사업별 제한현금 · P-A 275625\n사업별 예약금 · P-A 0\n요청 0 / 탑승 0 / 미탑승 0 / 완료 0 / 늦은 완료 0통행\n서비스 0분 · 기초 이동 중 0 / 마감 시점 이동 중 0통행\n만족도 전 50점 → 마감 50점",
+            "screen": "operations",
+            "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+            "window": "(1100, 900)",
+            "sha256": "e8c038ed7677ea27b96cc909e847992ad886dc537f6fa3a22129497c632148af"
+          },
+          {
+            "backing_pipeline_minute": 4945,
+            "case": "open",
+            "effects": "da9858cc1b147392e18bd8c3c9e7a9b0270185f58d72d1c1086ad676242139c1",
+            "file": ".local/validation/DEV023_GUI_open_1794702857-76_02.png",
+            "kind": "MODEL_CHAIN_SETUP",
+            "label": "F12",
+            "minute": 4945,
+            "operations_text": "개통 완료 · 신규 탑승 가능\n이동 중 5 / 당일 완료 627통행",
+            "report_text": "고정 과거 보고 · 마감일 3\n보고 식별 run--9223371980533660207/day-3\n게임 통화 단위\n운영비 발생 0\n운영비 즉시 지급 0\n미지급 운영비 후정산 0\n도착 운임 0\n정부금 0\n공사비 발생 300000\n공사 기성 지급 300000\n운영비 지급 합계 0\n마감 자금\n게임 통화 단위\n총현금 1275625\n제한현금 275625\n자유현금 1000000\n예약금 0\n신규약정 가용금 1000000\n미지급금 0\n사업별 제한현금 · P-A 275625\n사업별 예약금 · P-A 0\n요청 0 / 탑승 0 / 미탑승 0 / 완료 0 / 늦은 완료 0통행\n서비스 0분 · 기초 이동 중 0 / 마감 시점 이동 중 0통행\n만족도 전 50점 → 마감 50점",
+            "screen": "plan",
+            "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+            "window": "(1100, 900)",
+            "sha256": "d17bcdf8bb071adf6af91fff8f050f2e50d9d0e5ee52182fb47f62d352bd402e"
+          },
+          {
+            "backing_pipeline_minute": 4945,
+            "case": "open",
+            "effects": "da9858cc1b147392e18bd8c3c9e7a9b0270185f58d72d1c1086ad676242139c1",
+            "file": ".local/validation/DEV023_GUI_open_1794702857-76_03.png",
+            "kind": "MODEL_CHAIN_SETUP",
+            "label": "EXIT",
+            "minute": 4945,
+            "operations_text": "개통 완료 · 신규 탑승 가능\n이동 중 5 / 당일 완료 627통행",
+            "report_text": "고정 과거 보고 · 마감일 3\n보고 식별 run--9223371980533660207/day-3\n게임 통화 단위\n운영비 발생 0\n운영비 즉시 지급 0\n미지급 운영비 후정산 0\n도착 운임 0\n정부금 0\n공사비 발생 300000\n공사 기성 지급 300000\n운영비 지급 합계 0\n마감 자금\n게임 통화 단위\n총현금 1275625\n제한현금 275625\n자유현금 1000000\n예약금 0\n신규약정 가용금 1000000\n미지급금 0\n사업별 제한현금 · P-A 275625\n사업별 예약금 · P-A 0\n요청 0 / 탑승 0 / 미탑승 0 / 완료 0 / 늦은 완료 0통행\n서비스 0분 · 기초 이동 중 0 / 마감 시점 이동 중 0통행\n만족도 전 50점 → 마감 50점",
+            "screen": "plan",
+            "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+            "window": "(1100, 900)",
+            "sha256": "d17bcdf8bb071adf6af91fff8f050f2e50d9d0e5ee52182fb47f62d352bd402e"
+          }
+        ],
+        "independent_acceptance": "PENDING",
+        "source_sha256": {
+          "scripts/data/gate2_data_loader.gd": "3b76939a3ae9840debf86cb4f30bdea59bac26647289ca8c80523b05116fe5e2",
+          "scripts/data/tender_data_loader.gd": "e1082d08e5610dff382def2e76a2b3c33e765710f99ce936a5c55fc994725bde",
+          "scripts/main.gd": "bea3e347fccfba63ed088ba6b80080accb962b188361bf85a7bdb40a06e18d9e",
+          "scripts/model/administrative_network.gd": "d723b6013b7f50fa3593e9a1cd95e041b794cde811b717e15ea589af48148462",
+          "scripts/model/company_ledger.gd": "98bebff3eb0ff6efae8f846f77a9d2b03cbd5f6c0874f57db0a80b7377f6a396",
+          "scripts/model/construction_project.gd": "b4e21f5f9e1facafc324cc5ea92d12bfe8fb790dba7fb862ed2e456a56f9e423",
+          "scripts/model/daily_ledger_report.gd": "3d2e89ba43ac771c4647e859edfadccbdcc39638ca765d4821acd03000402c8a",
+          "scripts/model/initial_company_state.gd": "dceb7dd03b26ba03c211cc32535e7dabbfabaa47a2c6ed77ba530b43528ed312",
+          "scripts/model/operating_line.gd": "638d04fbd6b69cba113282c8810a965d8632c00ede7aaa5aeab610a348ef6884",
+          "scripts/model/prediction_state.gd": "77ba1a69632e01fd3cdd1f04d91ed67d55fad007adf7327b58cd9f522c37ee30",
+          "scripts/model/public_tender.gd": "f0bd86d9ce78efb15903b56c5dfb9affaf823f90aae93fe1f857bd2b89404576",
+          "scripts/model/route_plan.gd": "385f3aa5a5e69486550abf7468ea41b9299133122f2efc2f3ba0ff9c16588ae6",
+          "scripts/simulation/command_queue.gd": "249ae3864afb0110af972e0576e482a00580ba3d3703f5ad25299fd9a5876cf5",
+          "scripts/simulation/construction_service.gd": "19e25b8b2c0ff23a64453c33ced695b45ff9b1384e3c981d0d0061b3cb55cc8a",
+          "scripts/simulation/demand_predictor.gd": "de26cc272a823c846837b738c4c2645a86f1ec538af8b24510be39e4a12b7812",
+          "scripts/simulation/game_clock.gd": "188355b3d727b25de924e6c1cf436ef3d6e7fe4f7870718db6f9f88d71dc2e12",
+          "scripts/simulation/minute_pipeline.gd": "a4afeacd5cf1be061296878b9473b9ae3eec0895d9c3f99ef0a25f097cea064e",
+          "scripts/simulation/operations_service.gd": "b7cc399431a23c4ea930763209ead46e0e05406fc895c74d0566bebedc02c554",
+          "scripts/simulation/tender_service.gd": "c0b7e22ee44e51bd29891c440967b7ac698ac5f6317f284181ad592bd4961192",
+          "scripts/ui/construction_view.gd": "722cfb6378a7bc317ef2b539c4b5f945fee23cfa40ec06676c78e65c18c55cd0",
+          "scripts/ui/finance_view.gd": "167a1d89611b51fa7ee70e63d4f501c36d155e2e57741260d2bde12535344776",
+          "scripts/ui/operations_view.gd": "3d8b123245f1a29e0a26c70035eae6a1b5baf762b7b73dd5915bc7b16e2e9d59",
+          "scripts/ui/stage1_map.gd": "e23bcc96ba28f7603b504bc9e4ad12376708e213d889bab3574f4941e2093032",
+          "scripts/ui/stage1_session.gd": "d59f86e3a5c4d256b3742fd384e17e4605abbda181d5b60ed14a2c99e26c7c4a",
+          "scripts/ui/stage1_view.gd": "fb45b0d340e46d735961db96206f4dc1127ea442c0bc7187c1a9941299aef8e1",
+          "scripts/ui/tender_view.gd": "a26cf2916bd38886a196c20ce154c17729a33812d847a895bc9d25a1f70bb5f9",
+          "tests/game/construction_ui_fixtures.gd": "56716d087065669713fa69c9faad607bc24653040b6e9d20f41052fec00f299c",
+          "tests/game/operations_ui_fixtures.gd": "4dfb68c678f09abfc719fc5883866aa1bc529265153e76c39d4bf49c4924f425",
+          "tests/game/run_construction_gui_cases.gd": "31ab55654c49f7867c67976a149d5684fe6712088e9062678d500a07a35ca3c4",
+          "tests/game/run_construction_ui_tests.gd": "5293bcd98a337583c0922c9d380979249d666b4faf670e7f502ac85cb30be427",
+          "tests/game/run_operations_gui_cases.gd": "e0d3ddd5db439fcc708b2ef5262737a9099f5776ecd54cb2b16e82396e84113f",
+          "tests/game/run_operations_ui_tests.gd": "a24e3da3efe87e768bf4808c3ce8c793886f8aad2779a908e38bb94494865abe",
+          "tests/game/run_tender_gui_cases.gd": "4b7297e2f8f67bed9f16377941a0d43f799dc11aa5eb47e7ce60be83e11c57d4",
+          "tests/game/run_tender_ui_tests.gd": "a0069faf1f4dfaca60bcafc1edcc64213227df05a8d3fc08f811acb524698ee2",
+          "tests/game/run_w01_tests.gd": "e74799d867508cfff40390762716e17d30301b1ff6b31809a103a971f3e57179",
+          "tests/game/run_w02_tests.gd": "b0fff3ae7c13111cc268b0ac448278175b97432546e0960c7cd65ca9f05b1dfc",
+          "tests/game/run_w03_tests.gd": "c6248435469e5a362a976e7b7256c31fd37c2cf439ae795fe19859b482fc4835",
+          "tests/game/run_w04a_tests.gd": "297d671fe651bb379395016c587d648ed70acade2f003ea13ba277219abf76d0",
+          "tests/game/run_w05_tests.gd": "7f59b666acceae0e0890e92cad85749bfa572f2d39f15719aff4993be231dd53",
+          "tests/game/run_w06_tests.gd": "6d59d4bffdf70dfaf8feece84b1d4dad55421faca7d1bbb791604497e7de4aed",
+          "tests/game/run_w07_gui_cases.gd": "104c93b2b2a38761daeb4a1d67efebd3007f8354acc52949f21c3123986da4d9",
+          "tests/game/run_w07_tests.gd": "62e755a49d1b61798480d38ef7db0d74919b17fbe56a95d5dd77c15828789054",
+          "tests/game/w019_ui_fixtures.gd": "a2432dbe40dca1158f09d4af7f700b471ed1857bacf9818d87add33c9d72858f",
+          "tests/game/w02_midnight_fixture.gd": "6d25a0c9a73372ac81f726f565043ca6645e4000e0fb4c5b4328b3106708910a",
+          "tests/game/w04a_fixtures.gd": "35b5d440200cccc3b174ab9eefc2a71f9eb4a1b91e11174281ca17646b75e9ac",
+          "tests/game/w05_fixtures.gd": "1347e911a819a26166de6e2d0368da9342879fdafde7329ed10af6062ef9a04f",
+          "tests/game/w06_fixtures.gd": "7a06533e83daa4ac13e4abdd0a7efb0d91facb392e7335ee2b8228609378edc6",
+          "tests/game/w07_ui_fixtures.gd": "7bb1d49b2ca9859eb1c76d05458921dd7e0024a0714b9c2e9c802218e8ccdbad"
+        },
+        "command": [
+          "Godot_v4.7.2-stable_win64_console.exe",
+          "--path",
+          ".",
+          "--script",
+          "tests/game/run_operations_gui_cases.gd",
+          "--",
+          "--case=open"
+        ],
+        "script_errors": 0,
+        "engine_errors": 0
+      },
+      {
+        "id": "G06",
+        "kind": "CONSUMER_FIXTURE + REAL_GUI",
+        "observed": "현재/당일 마감 만족도 산술 오류를 0/미마감과 구별",
+        "status": "PASS_OBSERVED_SCOPE",
+        "exit_code": 0,
+        "log": ".local/validation/DEV023_REAL_satisfaction_unavailable_20261115-094439.log",
+        "log_sha256": "aa3cb466231cab4144ffff20197492d655af7c041523dbe03ea74350dfa244af",
+        "captures": [
+          {
+            "backing_pipeline_minute": 360,
+            "case": "satisfaction_unavailable",
+            "effects": "ce058685acd69e096f6234cef64c282a8bae399d2304f6dcc6e999f37b5cde77",
+            "file": ".local/validation/DEV023_GUI_satisfaction_unavailable_1794703482-941_01.png",
+            "kind": "CONSUMER_FIXTURE",
+            "label": "READY",
+            "minute": 361,
+            "operations_text": "개통 완료 · 신규 탑승 가능\n이동 중 0 / 당일 완료 0통행",
+            "report_text": "마감 보고서 없음",
+            "screen": "operations",
+            "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+            "window": "(1100, 900)",
+            "sha256": "fb9ca0439103c82e1e8ebb2a31e84ad89baf33994b260b5b786d5fe1ee710362"
+          },
+          {
+            "backing_pipeline_minute": 360,
+            "case": "satisfaction_unavailable",
+            "effects": "ce058685acd69e096f6234cef64c282a8bae399d2304f6dcc6e999f37b5cde77",
+            "file": ".local/validation/DEV023_GUI_satisfaction_unavailable_1794703482-941_02.png",
+            "kind": "CONSUMER_FIXTURE",
+            "label": "EXIT",
+            "minute": 361,
+            "operations_text": "개통 완료 · 신규 탑승 가능\n이동 중 0 / 당일 완료 0통행",
+            "report_text": "마감 보고서 없음",
+            "screen": "operations",
+            "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+            "window": "(1100, 900)",
+            "sha256": "fb9ca0439103c82e1e8ebb2a31e84ad89baf33994b260b5b786d5fe1ee710362"
+          }
+        ],
+        "independent_acceptance": "PENDING",
+        "source_sha256": {
+          "scripts/main.gd": "bea3e347fccfba63ed088ba6b80080accb962b188361bf85a7bdb40a06e18d9e",
+          "scripts/data/gate2_data_loader.gd": "3b76939a3ae9840debf86cb4f30bdea59bac26647289ca8c80523b05116fe5e2",
+          "scripts/data/tender_data_loader.gd": "e1082d08e5610dff382def2e76a2b3c33e765710f99ce936a5c55fc994725bde",
+          "scripts/model/administrative_network.gd": "d723b6013b7f50fa3593e9a1cd95e041b794cde811b717e15ea589af48148462",
+          "scripts/model/company_ledger.gd": "98bebff3eb0ff6efae8f846f77a9d2b03cbd5f6c0874f57db0a80b7377f6a396",
+          "scripts/model/construction_project.gd": "b4e21f5f9e1facafc324cc5ea92d12bfe8fb790dba7fb862ed2e456a56f9e423",
+          "scripts/model/daily_ledger_report.gd": "3d2e89ba43ac771c4647e859edfadccbdcc39638ca765d4821acd03000402c8a",
+          "scripts/model/initial_company_state.gd": "dceb7dd03b26ba03c211cc32535e7dabbfabaa47a2c6ed77ba530b43528ed312",
+          "scripts/model/operating_line.gd": "638d04fbd6b69cba113282c8810a965d8632c00ede7aaa5aeab610a348ef6884",
+          "scripts/model/prediction_state.gd": "77ba1a69632e01fd3cdd1f04d91ed67d55fad007adf7327b58cd9f522c37ee30",
+          "scripts/model/public_tender.gd": "f0bd86d9ce78efb15903b56c5dfb9affaf823f90aae93fe1f857bd2b89404576",
+          "scripts/model/route_plan.gd": "385f3aa5a5e69486550abf7468ea41b9299133122f2efc2f3ba0ff9c16588ae6",
+          "scripts/simulation/command_queue.gd": "249ae3864afb0110af972e0576e482a00580ba3d3703f5ad25299fd9a5876cf5",
+          "scripts/simulation/construction_service.gd": "19e25b8b2c0ff23a64453c33ced695b45ff9b1384e3c981d0d0061b3cb55cc8a",
+          "scripts/simulation/demand_predictor.gd": "de26cc272a823c846837b738c4c2645a86f1ec538af8b24510be39e4a12b7812",
+          "scripts/simulation/game_clock.gd": "188355b3d727b25de924e6c1cf436ef3d6e7fe4f7870718db6f9f88d71dc2e12",
+          "scripts/simulation/minute_pipeline.gd": "a4afeacd5cf1be061296878b9473b9ae3eec0895d9c3f99ef0a25f097cea064e",
+          "scripts/simulation/operations_service.gd": "b7cc399431a23c4ea930763209ead46e0e05406fc895c74d0566bebedc02c554",
+          "scripts/simulation/tender_service.gd": "c0b7e22ee44e51bd29891c440967b7ac698ac5f6317f284181ad592bd4961192",
+          "scripts/ui/construction_view.gd": "722cfb6378a7bc317ef2b539c4b5f945fee23cfa40ec06676c78e65c18c55cd0",
+          "scripts/ui/finance_view.gd": "167a1d89611b51fa7ee70e63d4f501c36d155e2e57741260d2bde12535344776",
+          "scripts/ui/operations_view.gd": "b9d8905175fea77c2fd35ca7c5400dc432b08e917ccf03c61106571d2b17a7e6",
+          "scripts/ui/stage1_map.gd": "75a91873bbf945a61df4e74c6532f7c2d7147e8f2eb94c3a1e4f0145a37f22f8",
+          "scripts/ui/stage1_session.gd": "d59f86e3a5c4d256b3742fd384e17e4605abbda181d5b60ed14a2c99e26c7c4a",
+          "scripts/ui/stage1_view.gd": "e20b53ff363496f0d8ae743eeb15425c33db5284c3b3eacb28a831508069f7e5",
+          "scripts/ui/tender_view.gd": "a26cf2916bd38886a196c20ce154c17729a33812d847a895bc9d25a1f70bb5f9",
+          "tests/game/construction_ui_fixtures.gd": "56716d087065669713fa69c9faad607bc24653040b6e9d20f41052fec00f299c",
+          "tests/game/operations_ui_fixtures.gd": "4dfb68c678f09abfc719fc5883866aa1bc529265153e76c39d4bf49c4924f425",
+          "tests/game/run_construction_gui_cases.gd": "31ab55654c49f7867c67976a149d5684fe6712088e9062678d500a07a35ca3c4",
+          "tests/game/run_construction_ui_tests.gd": "5293bcd98a337583c0922c9d380979249d666b4faf670e7f502ac85cb30be427",
+          "tests/game/run_operations_gui_cases.gd": "fd1cc5542d982901210e20929eeaa0a1392495410ebe8f37400af25bde820c26",
+          "tests/game/run_operations_ui_tests.gd": "a24e3da3efe87e768bf4808c3ce8c793886f8aad2779a908e38bb94494865abe",
+          "tests/game/run_tender_gui_cases.gd": "4b7297e2f8f67bed9f16377941a0d43f799dc11aa5eb47e7ce60be83e11c57d4",
+          "tests/game/run_tender_ui_tests.gd": "a0069faf1f4dfaca60bcafc1edcc64213227df05a8d3fc08f811acb524698ee2",
+          "tests/game/run_w01_tests.gd": "e74799d867508cfff40390762716e17d30301b1ff6b31809a103a971f3e57179",
+          "tests/game/run_w02_tests.gd": "b0fff3ae7c13111cc268b0ac448278175b97432546e0960c7cd65ca9f05b1dfc",
+          "tests/game/run_w03_tests.gd": "c6248435469e5a362a976e7b7256c31fd37c2cf439ae795fe19859b482fc4835",
+          "tests/game/run_w04a_tests.gd": "297d671fe651bb379395016c587d648ed70acade2f003ea13ba277219abf76d0",
+          "tests/game/run_w05_tests.gd": "7f59b666acceae0e0890e92cad85749bfa572f2d39f15719aff4993be231dd53",
+          "tests/game/run_w06_tests.gd": "6d59d4bffdf70dfaf8feece84b1d4dad55421faca7d1bbb791604497e7de4aed",
+          "tests/game/run_w07_gui_cases.gd": "104c93b2b2a38761daeb4a1d67efebd3007f8354acc52949f21c3123986da4d9",
+          "tests/game/run_w07_tests.gd": "62e755a49d1b61798480d38ef7db0d74919b17fbe56a95d5dd77c15828789054",
+          "tests/game/w019_ui_fixtures.gd": "a2432dbe40dca1158f09d4af7f700b471ed1857bacf9818d87add33c9d72858f",
+          "tests/game/w02_midnight_fixture.gd": "6d25a0c9a73372ac81f726f565043ca6645e4000e0fb4c5b4328b3106708910a",
+          "tests/game/w04a_fixtures.gd": "35b5d440200cccc3b174ab9eefc2a71f9eb4a1b91e11174281ca17646b75e9ac",
+          "tests/game/w05_fixtures.gd": "1347e911a819a26166de6e2d0368da9342879fdafde7329ed10af6062ef9a04f",
+          "tests/game/w06_fixtures.gd": "7a06533e83daa4ac13e4abdd0a7efb0d91facb392e7335ee2b8228609378edc6",
+          "tests/game/w07_ui_fixtures.gd": "7bb1d49b2ca9859eb1c76d05458921dd7e0024a0714b9c2e9c802218e8ccdbad"
+        },
+        "command": [
+          "Godot_v4.7.2-stable_win64_console.exe",
+          "--path",
+          ".",
+          "--script",
+          "tests/game/run_operations_gui_cases.gd",
+          "--",
+          "--case=satisfaction_unavailable"
+        ],
+        "script_errors": 0,
+        "engine_errors": 0
+      }
+    ],
+    "acceptance_rows": [
+      {
+        "id": "U01",
+        "auto": "PASS",
+        "dev_gui": "G04",
+        "scope": "제품 초기화/미개통. 활성화 실패는 기존 P1 공급 반례 재사용"
+      },
+      {
+        "id": "U02",
+        "auto": "PASS",
+        "dev_gui": "NOT_RUN",
+        "scope": "명시 opt-in/기존 W07 fixture 보존. 별도 GUI 필요 없음"
+      },
+      {
+        "id": "U03",
+        "auto": "PASS",
+        "dev_gui": "G01/G05",
+        "scope": "정상 명령 초기화 후 실제 화면. DEV-024 자연 완주 아님"
+      },
+      {
+        "id": "U04",
+        "auto": "PASS",
+        "dev_gui": "G01",
+        "scope": "현재 이동중1와 Day4 마감5/완료4291 분리"
+      },
+      {
+        "id": "U05",
+        "auto": "PASS",
+        "dev_gui": "G04; 정상수요0 GUI NOT_RUN",
+        "scope": "정상0 소비 자동과 미개통 실제0 구분"
+      },
+      {
+        "id": "U06",
+        "auto": "PASS",
+        "dev_gui": "G02; 회복 연속 GUI NOT_RUN",
+        "scope": "B100 제한 GUI와 B0 부족→재개 자동 입력"
+      },
+      {
+        "id": "U07",
+        "auto": "REUSED_P1_MODEL_AND_AUTO",
+        "dev_gui": "NOT_RUN",
+        "scope": "CLOSE-01 00:09 전용 GUI 후속. 자정 후 실제 공급 소비는 G01"
+      },
+      {
+        "id": "U08",
+        "auto": "PASS",
+        "dev_gui": "G01/G02/G03/G04",
+        "scope": "현재/당일/기성/운영비 지급 합계, R 보호/큰 값"
+      },
+      {
+        "id": "U09",
+        "auto": "PASS",
+        "dev_gui": "G01",
+        "scope": "일자 선택/첫 보고/복귀. 잘못된 타입은 기존 P1 재사용"
+      },
+      {
+        "id": "U10",
+        "auto": "PASS",
+        "dev_gui": "G03/G06; 일부 예외 GUI NOT_RUN",
+        "scope": "정확한 큰 분수/산술 오류/미마감. 확정0·원본실패/복구 자동"
+      },
+      {
+        "id": "U11",
+        "auto": "PASS",
+        "dev_gui": "역순 응답 직접 GUI NOT_RUN",
+        "scope": "낡은 모델/게임분/View판 거부와 동일판 remainder 수용"
+      },
+      {
+        "id": "U12",
+        "auto": "PASS",
+        "dev_gui": "G01",
+        "scope": "읽기/왕복 게임효과0. 실제 입력과 현재/고정 보고 로그"
+      },
+      {
+        "id": "U13",
+        "auto": "PASS",
+        "dev_gui": "G01/G02/G04",
+        "scope": "유효 보고 전/후 및 query 공급 실패 구별"
+      },
+      {
+        "id": "U14",
+        "auto": "PASS",
+        "dev_gui": "G01",
+        "scope": "기존 CLOSED 목록 진입 후 P07 복귀. 새 수주 없음"
+      },
+      {
+        "id": "U15",
+        "auto": "P1_PREDICTION_REUSED / DISPLAY_REVIEW",
+        "dev_gui": "미계산 G01/G05; 계산 완료 GUI NOT_RUN",
+        "scope": "예측 현재값의 계획/기간/생성 시각 별도 코드. 독립 해당 행 후속"
+      },
+      {
+        "id": "U16",
+        "auto": "PASS",
+        "dev_gui": "G05",
+        "scope": "동일시각 동일 표식/그림 호출 효과0/정지/1·2·4배속. 정확한 열차 event 재생 아님"
+      },
+      {
+        "id": "U17",
+        "auto": "PASS",
+        "dev_gui": "G01/G03/G04",
+        "scope": "P05 왕복 자동·기존 공사 회귀, 보고 왕복/포커스/Tab/Space 실제. 새 전체 조합 없음"
+      },
+      {
+        "id": "U18",
+        "auto": "PASS_STRUCTURE_AND_KEYS",
+        "dev_gui": "G03",
+        "scope": "800x600 / viewport1152x864. 물리 DPI·F-08 최종 규격 확정 아님"
+      },
+      {
+        "id": "U19",
+        "auto": "PASS",
+        "dev_gui": "G02/G06 및 종료0",
+        "scope": "잘못된 타입/누락·복구 자동. 전역 Session 재생성 제외"
+      },
+      {
+        "id": "U20",
+        "auto": "PASS",
+        "dev_gui": "GUI 종료0",
+        "scope": "정상202/의도적 exit1·제품 TEST_ONLY 로드 없음"
+      }
+    ],
+    "lf_normalization": [
+      {
+        "path": "scripts/ui/stage1_view.gd",
+        "before": "6d860101249815e5abaf3d39f18627d10b00395cf838669e9ed7359a669beb57",
+        "after": "e20b53ff363496f0d8ae743eeb15425c33db5284c3b3eacb28a831508069f7e5",
+        "change": "CRLF_TO_LF_ONLY"
+      },
+      {
+        "path": "scripts/ui/stage1_map.gd",
+        "before": "e23bcc96ba28f7603b504bc9e4ad12376708e213d889bab3574f4941e2093032",
+        "after": "75a91873bbf945a61df4e74c6532f7c2d7147e8f2eb94c3a1e4f0145a37f22f8",
+        "change": "CRLF_TO_LF_ONLY"
+      },
+      {
+        "path": "scripts/ui/operations_view.gd",
+        "before": "8a285534be2511eb0cbe6adc82f889f030e39b8125dbf893a66a99205ab892a1",
+        "after": "b9d8905175fea77c2fd35ca7c5400dc432b08e917ccf03c61106571d2b17a7e6",
+        "change": "CRLF_TO_LF_ONLY"
+      },
+      {
+        "path": "tests/game/run_operations_gui_cases.gd",
+        "before": "aa27dc425f7aea61b7f5e2c98c5f96c89e35c4db45798c95fe1ccf2e64a0ed45",
+        "after": "fd1cc5542d982901210e20929eeaa0a1392495410ebe8f37400af25bde820c26",
+        "change": "CRLF_TO_LF_ONLY"
+      }
+    ],
+    "notes": [
+      "Original P1 3041 and L2 55 records are preserved, not rerun as a whole.",
+      "Listed regression runs have their own source hashes. Construction898 predates final P06/P07-only reading keys/labels; final U17 covers P05 roundtrip. No claim of all tests rerun on submission head.",
+      "GUI source versions are preserved. Later changes affect satisfaction wording, nearby representative legend, and test artifact filenames. Final LF conversion is byte-only.",
+      "Independent Design GUI, DEV024 full natural play, build/export/FPS, DPI certification and DEV026 implementation/product validation are NOT_RUN/PENDING.",
+      "Initial type inference failure, node name collision, pre-fix Home behavior and overwritten automatic artifact were corrected; exploratory logs remain local."
+    ],
+    "environment_recovery": {
+      "symptom": "Two repeated GUI profiles logged 68 shader-cache subdirectory creation errors each; no GDScript errors.",
+      "cause_status": "Observed failure of long nested runtime cache paths; precise engine/OS cause not certified.",
+      "action": "Shorter, unique per-run profile under ignored root .local/g23; cache and safe-save remain enabled.",
+      "rerun": "G03 and G06 observed again, exit0 and SCRIPT ERROR/ERROR0; no product/config change.",
+      "superseded": [
+        {
+          "log": ".local/validation/DEV023_REAL_long_20261115-093110.log",
+          "sha256": "9e323382137bf9bd24aa164b570bcdb7209b5abc221d58675df673fad804da49",
+          "engine_errors": 68,
+          "status": "NOT_COUNTED_AS_CLEAN_PASS"
+        },
+        {
+          "log": ".local/validation/DEV023_REAL_satisfaction_unavailable_20261115-093820.log",
+          "sha256": "3dd79f3a981f35a01ad5cdf82fc116b86355ac39bf3ca8e246d1e7297e14f792",
+          "engine_errors": 68,
+          "status": "NOT_COUNTED_AS_CLEAN_PASS"
+        }
+      ]
+    }
   }
 }

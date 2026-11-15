@@ -22,6 +22,8 @@ func _ready() -> void:
 	var state: Dictionary = initialized.state
 	var view := Stage1.instantiate()
 	view.session = Session.new(loaded.data, state)
+	var operations: Dictionary = view.session.enable_operations_ui()
+	print("DEV023_ACTIVATION ", JSON.stringify(operations))
 	$Margin.hide()
 	add_child(view)
 	print("W01_INIT_OK ", JSON.stringify(state))

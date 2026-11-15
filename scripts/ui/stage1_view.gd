@@ -4,6 +4,9 @@ extends MarginContainer
 const Session = preload("res://scripts/ui/stage1_session.gd")
 const TenderPanel = preload("res://scenes/tender_panel.tscn")
 const ConstructionPanel = preload("res://scenes/construction_panel.tscn")
+const OperationsPanel = preload("res://scenes/operations_panel.tscn")
+const FinancePanel = preload("res://scenes/finance_panel.tscn")
+const Operations = preload("res://scripts/ui/operations_view.gd")
 const MapView = preload("res://scripts/ui/stage1_map.gd")
 
 var session: Session
@@ -14,6 +17,10 @@ var plan_list: ItemList
 var shown: Dictionary = {}
 var tender_view: VBoxContainer
 var construction_view: VBoxContainer
+var operations_view: VBoxContainer
+var finance_view: VBoxContainer
+var _screen_history: Array[Dictionary] = []
+var _report_return: Dictionary = {}
 var _labels: Dictionary = {}
 var _sequence: int = 0
 var _displayed_revision: int = -1
@@ -51,6 +58,16 @@ func _ready() -> void:
 	navigation.pressed.connect(_open_tenders)
 	root.add_child(navigation)
 	controls["open_tenders"] = navigation
+	var reading := HFlowContainer.new()
+	root.add_child(reading)
+	for screen: String in ["operations", "finance"]:
+		Operations.add_action(
+			reading,
+			controls,
+			"open_" + screen,
+			"운영 현황" if screen == "operations" else "재무·보고",
+			_open_reading.bind(screen)
+		)
 	tender_view = TenderPanel.instantiate()
 	tender_view.visible = false
 	tender_view.bid_requested.connect(_bid_requested)
@@ -65,6 +82,17 @@ func _ready() -> void:
 	construction_view.exit_requested.connect(_close_construction)
 	construction_view.focus_region_requested.connect(_ensure_focus_region)
 	root.add_child(construction_view)
+	operations_view = OperationsPanel.instantiate()
+	finance_view = FinancePanel.instantiate()
+	for panel: VBoxContainer in [operations_view, finance_view]:
+		root.add_child(panel)
+		panel.hide()
+		panel.exit_requested.connect(_return_reading)
+		panel.focus_region_requested.connect(_ensure_focus_region)
+	operations_view.finance_requested.connect(_open_reading.bind("finance"))
+	finance_view.report_requested.connect(_select_report)
+	finance_view.query_requested.connect(_query_business)
+	finance_view.refresh_requested.connect(_refresh_finance)
 	var work := HBoxContainer.new()
 	root.add_child(work)
 	var left := VBoxContainer.new()
@@ -75,7 +103,11 @@ func _ready() -> void:
 	map_view.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	map_view.station_requested.connect(_select_station)
 	left.add_child(map_view)
-	_label(left, "legend", "관할: P01 > C01 · DATA 소속 기준 / 도형은 추상 배치")
+	_label(
+		left,
+		"legend",
+		"관할: P01 > C01 · DATA 소속 기준 / 도형은 추상 배치\n운행 흐름(대표 표시) · 주황선: 실제 운영선 / 점: 이동 중 통행 묶음"
+	)
 	var right := VBoxContainer.new()
 	right.custom_minimum_size.x = 360
 	work.add_child(right)
@@ -105,10 +137,11 @@ func _ready() -> void:
 	_label(root, "activity", "당일 운영비 확인 중")
 	_label(root, "report", "확정 보고 없음")
 	_label(root, "feedback", "후보역을 선택해 노선을 편집하세요.")
-	_label(root, "scope", "노선 계획/예측 · 공공입찰 → 사업 인계 → 공사·검증·개통 · 실제 영업은 W06 후속")
+	_label(root, "operations_summary", "")
+	_label(root, "scope", "노선 계획/예측 · 공공입찰 → 사업 인계 → 공사·검증·개통 · 운영 현황 · 재무·보고")
 	var after_panel := false
 	for section: Node in root.get_children():
-		if after_panel and section != construction_view:
+		if after_panel and section not in [construction_view, operations_view, finance_view]:
 			_planning_sections.append(section)
 		if section == tender_view:
 			after_panel = true
@@ -200,7 +233,7 @@ func _act(action: String, payload: Dictionary = {}) -> void:
 
 
 func present(state: Dictionary) -> bool:
-	if state.view_revision < _displayed_revision:
+	if state.view_revision < _displayed_revision or Operations.is_older(state, shown):
 		return false
 	_displayed_revision = state.view_revision
 	shown = state.duplicate(true)
@@ -225,6 +258,9 @@ func present(state: Dictionary) -> bool:
 		controls["speed%d" % speed].text = ("[%d×]" if speed == clock.speed else "%d×") % speed
 	tender_view.present(state.tender_ui)
 	construction_view.present(state.construction_ui)
+	operations_view.present(state)
+	finance_view.present(state)
+	_labels.operations_summary.text = "운행 흐름(대표 표시)\n" + Operations.summary(state)
 	_render_plan(state)
 	_render_finance(state)
 	_render_prediction(state.prediction)
@@ -451,6 +487,9 @@ func reason_text(code: String) -> String:
 
 func reset_observation() -> void:
 	_displayed_revision = -1
+	shown = {}
+	operations_view.shown = {}
+	finance_view.shown = {}
 	_selected_id = ""
 	_focus_feedback = ""
 	_list_stops = []
@@ -478,6 +517,11 @@ func _build_candidates() -> void:
 
 
 func _open_tenders() -> void:
+	tender_view.controls.exit.text = (
+		"재무·보고로 돌아가기" if not _report_return.is_empty() else "S01 노선 계획으로"
+	)
+	operations_view.hide()
+	finance_view.hide()
 	for section: Control in _planning_sections:
 		section.hide()
 	tender_view.show()
@@ -487,6 +531,11 @@ func _open_tenders() -> void:
 
 
 func _close_tenders() -> void:
+	if not _report_return.is_empty():
+		var previous := _report_return
+		_report_return = {}
+		_restore_reading(previous)
+		return
 	tender_view.hide()
 	for section: Control in _planning_sections:
 		section.show()
@@ -623,11 +672,126 @@ static func read_construction_key(
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
-	if read_construction_key(_scroll, construction_view, event):
-		get_viewport().set_input_as_handled()
+	for panel: Control in [construction_view, operations_view, finance_view]:
+		if read_construction_key(_scroll, panel, event):
+			get_viewport().set_input_as_handled()
+			return
 
 
 func _input(event: InputEvent) -> void:
+	# 새 읽기 패널은 ScrollContainer가 Home/End를 먼저 소비하기 전에 처리한다.
+	for panel: Control in [operations_view, finance_view]:
+		if read_construction_key(_scroll, panel, event):
+			get_viewport().set_input_as_handled()
+			return
 	# Tab은 GUI가 소비하기 전에 기존 포커스 추적만 복구한다.
 	if event is InputEventMouseButton or (event is InputEventKey and event.keycode == KEY_TAB):
-		read_construction_key(_scroll, construction_view, event)
+		for panel: Control in [construction_view, operations_view, finance_view]:
+			read_construction_key(_scroll, panel, event)
+
+
+func _reading_context() -> Dictionary:
+	var screen := "plan"
+	for entry: Array in [
+		["tenders", tender_view],
+		["construction", construction_view],
+		["operations", operations_view],
+		["finance", finance_view]
+	]:
+		if entry[1].visible:
+			screen = entry[0]
+	return {
+		"screen": screen,
+		"focus": get_viewport().gui_get_focus_owner(),
+		"scroll": _scroll.scroll_vertical
+	}
+
+
+func _show_reading(screen: String) -> void:
+	for section: Control in _planning_sections:
+		section.visible = screen == "plan"
+	tender_view.visible = screen == "tenders"
+	construction_view.visible = screen == "construction"
+	operations_view.visible = screen == "operations"
+	finance_view.visible = screen == "finance"
+	controls.open_tenders.visible = screen == "plan"
+	_scroll.follow_focus = true
+	present(session.snapshot())
+
+
+func _open_reading(screen: String) -> void:
+	if _reading_context().screen == screen:
+		return
+	_screen_history.append(_reading_context())
+	_show_reading(screen)
+	var target: Control = (
+		operations_view.controls.finance if screen == "operations" else finance_view.controls.first
+	)
+	if target.disabled:
+		target = finance_view.controls.refresh
+	target.grab_focus()
+	_ensure_focus_region(target)
+
+
+func _return_reading() -> void:
+	if _screen_history.is_empty():
+		_show_reading("plan")
+		return
+	_restore_reading(_screen_history.pop_back())
+
+
+func _restore_reading(context: Dictionary) -> void:
+	_show_reading(context.screen)
+	await get_tree().process_frame
+	await get_tree().process_frame
+	var target: Variant = context.focus
+	if is_instance_valid(target) and target is Control and target.is_visible_in_tree():
+		target.grab_focus()
+	_scroll.follow_focus = false
+	_scroll.scroll_vertical = context.scroll
+
+
+func _select_report(day: int) -> void:
+	if not finance_view.visible:
+		return
+	var result := session.select_finance_report(day)
+	present(session.snapshot())
+	finance_view.show_result(result)
+	_log_reading("REPORT", result)
+
+
+func _refresh_finance() -> void:
+	if not finance_view.visible:
+		return
+	present(session.snapshot())
+	finance_view.show_result({"accepted": true})
+	_log_reading("REFRESH", {})
+
+
+func _query_business(confirmed: Dictionary) -> void:
+	if not finance_view.visible:
+		return
+	var result := session.query_next_business(confirmed)
+	present(session.snapshot())
+	finance_view.show_result(result)
+	_log_reading("QUERY", result)
+	if result.get("accepted", false):
+		_report_return = _reading_context()
+		_open_tenders()
+
+
+func _log_reading(action: String, result: Dictionary) -> void:
+	print(
+		"DEV023_UI ",
+		JSON.stringify(
+			{
+				"action": action,
+				"result": result,
+				"fixture": session.fixture_label,
+				"minute": session.pipeline.clock.minute,
+				"view_revision": session.revision,
+				"report": shown.finance_ui.report,
+				"funds": shown.finance_ui.current_funds
+			}
+		)
+	)
