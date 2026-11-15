@@ -16,6 +16,6 @@ HQ의 신규 계획·일정·공유 보고서는 이 디렉터리에 둡니다. 
 
 ## Stage 2 통합 현황
 
-- [S2 통합 인수표·DEV-023 완료·DEV-024 잔여 업무](STAGE2_ACCEPTANCE_MATRIX.md) — DEV-023 24조건 수용·GUI 단계 종료와 Owner DONE/#79 종료를 반영합니다. 다음 필수 경로는 DEV-024 실제 VS-01·영향 회귀, HQ 통합·Owner Stage 인수입니다. Q12 원래 P05 대조 완료와 상위 PARTIAL을 구별하며 기존 수용을 유지합니다.
-- 최신 갱신: [PM-018 Owner 결정·작업 범위](tasks/PM-018_DEV023_CLOSEOUT.md) / [검증 결과](tasks/PM-018_RESULT.md). DEV-023 완료와 이 문서 PR의 검토/main 반영 상태를 구별합니다.
-- 이전 이력: [PM-017 범위](tasks/PM-017_Q12_W06_ACCEPTANCE_UPDATE.md) / [결과](tasks/PM-017_RESULT.md), [PM-016 범위](tasks/PM-016_STAGE2_ACCEPTANCE_UPDATE.md) / [결과](tasks/PM-016_RESULT.md). 승인 기준은 PM-014이며 실제 수용 범위는 연결된 Issue/PR을 따릅니다.
+- [S2 통합 인수표·최종 인수 잔여와 이월](STAGE2_ACCEPTANCE_MATRIX.md) — DEV-019/021/022/023/024 완료, 합의된 Design 수용·GUI 종료, DOC-01/Q12 원본 정정 연결을 반영합니다. DEV-024 자연 실행과 국소 보완을 구별하며 Stage 최종 결정은 Owner 대기입니다.
+- 최신 갱신: [PM-019 승인·범위](tasks/PM-019_STAGE2_FINAL_ACCEPTANCE.md) / [검증 결과](tasks/PM-019_RESULT.md). #141 F01~04 연결, F-08의 PR #143 실험 공급·Design 검토 잔여, DEV-026 HOLD, #139의 Owner 정본/보관 확정·백업 복구 이월을 추적합니다.
+- 이전 이력: [PM-018 범위](tasks/PM-018_DEV023_CLOSEOUT.md) / [결과](tasks/PM-018_RESULT.md), [PM-017 범위](tasks/PM-017_Q12_W06_ACCEPTANCE_UPDATE.md) / [결과](tasks/PM-017_RESULT.md), [PM-016 범위](tasks/PM-016_STAGE2_ACCEPTANCE_UPDATE.md) / [결과](tasks/PM-016_RESULT.md). 승인 기준은 PM-014이며 최신 수용·종료는 연결된 Issue/PR·Owner 결정을 따릅니다.
