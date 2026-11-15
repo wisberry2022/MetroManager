@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "task_id": "PM-020",
+  "primary_agent_id": "AGT-PM-0002",
+  "base_sha": "96c51ae6c3352195b9a8e8b89f92dd51c13be81c",
+  "artifacts": [
+    {
+      "path": "docs/hq/PM-020_STAGE3_EXECUTION_PLAN.md",
+      "change_type": "add",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "AGT-PM-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-020_STAGE3_ENTRY_PLAN.md#owner-요청과-이번-권한",
+        "docs/hq/tasks/PM-020_STAGE3_ENTRY_PLAN.md#owner-후속-요청--dev-026-편입",
+        "https://github.com/wisberry2022/MetroManager/issues/141#issuecomment-6892772104",
+        "https://github.com/wisberry2022/MetroManager/pull/143",
+        "docs/hq/PM-020_STAGE3_EXECUTION_PLAN.md#9-공식-근거"
+      ],
+      "blob_sha": "4e2f10f4904c4572427f8acc3c6f647414eced18"
+    },
+    {
+      "path": "docs/hq/requests/PM-020_DEVELOPMENT_STAGE3.md",
+      "change_type": "add",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "AGT-PM-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-020_STAGE3_ENTRY_PLAN.md#owner-요청과-이번-권한",
+        "docs/hq/tasks/PM-020_STAGE3_ENTRY_PLAN.md#owner-후속-요청--dev-026-편입",
+        "https://github.com/wisberry2022/MetroManager/issues/141#issuecomment-6892772104",
+        "https://github.com/wisberry2022/MetroManager/pull/143",
+        "docs/hq/PM-020_STAGE3_EXECUTION_PLAN.md#9-공식-근거"
+      ],
+      "blob_sha": "41834ae664d75a0cc42921f4a87f34758e3cc9c4"
+    },
+    {
+      "path": "docs/hq/requests/PM-020_PLANNING_STAGE3.md",
+      "change_type": "add",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "AGT-PM-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-020_STAGE3_ENTRY_PLAN.md#owner-요청과-이번-권한",
+        "docs/hq/tasks/PM-020_STAGE3_ENTRY_PLAN.md#owner-후속-요청--dev-026-편입",
+        "https://github.com/wisberry2022/MetroManager/issues/141#issuecomment-6892772104",
+        "https://github.com/wisberry2022/MetroManager/pull/143",
+        "docs/hq/PM-020_STAGE3_EXECUTION_PLAN.md#9-공식-근거"
+      ],
+      "blob_sha": "c206c83c8bcfc27da39e62c73bb80af6097e3afa"
+    },
+    {
+      "path": "docs/hq/requests/PM-020_DESIGN_A_STAGE3.md",
+      "change_type": "add",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "AGT-PM-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-020_STAGE3_ENTRY_PLAN.md#owner-요청과-이번-권한",
+        "docs/hq/tasks/PM-020_STAGE3_ENTRY_PLAN.md#owner-후속-요청--dev-026-편입",
+        "https://github.com/wisberry2022/MetroManager/issues/141#issuecomment-6892772104",
+        "https://github.com/wisberry2022/MetroManager/pull/143",
+        "docs/hq/PM-020_STAGE3_EXECUTION_PLAN.md#9-공식-근거"
+      ],
+      "blob_sha": "f838f4949124d343106572a22267897c908d70b7"
+    },
+    {
+      "path": "docs/hq/requests/PM-020_DESIGN_B_STAGE3.md",
+      "change_type": "add",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "AGT-PM-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-020_STAGE3_ENTRY_PLAN.md#owner-요청과-이번-권한",
+        "docs/hq/tasks/PM-020_STAGE3_ENTRY_PLAN.md#owner-후속-요청--dev-026-편입",
+        "https://github.com/wisberry2022/MetroManager/issues/141#issuecomment-6892772104",
+        "https://github.com/wisberry2022/MetroManager/pull/143",
+        "docs/hq/PM-020_STAGE3_EXECUTION_PLAN.md#9-공식-근거"
+      ],
+      "blob_sha": "eaac21ed999a64050be56b07dc5ba77631e1e524"
+    },
+    {
+      "path": "docs/hq/requests/PM-020_INFRA_STAGE3.md",
+      "change_type": "add",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "AGT-PM-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-020_STAGE3_ENTRY_PLAN.md#owner-요청과-이번-권한",
+        "docs/hq/tasks/PM-020_STAGE3_ENTRY_PLAN.md#owner-후속-요청--dev-026-편입",
+        "https://github.com/wisberry2022/MetroManager/issues/141#issuecomment-6892772104",
+        "https://github.com/wisberry2022/MetroManager/pull/143",
+        "docs/hq/PM-020_STAGE3_EXECUTION_PLAN.md#9-공식-근거"
+      ],
+      "blob_sha": "30e55eb46f9b1e799b44bc3416547a88c577d2f4"
+    },
+    {
+      "path": "docs/hq/requests/PM-020_CONVENTION_STAGE3.md",
+      "change_type": "add",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "AGT-PM-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-020_STAGE3_ENTRY_PLAN.md#owner-요청과-이번-권한",
+        "docs/hq/tasks/PM-020_STAGE3_ENTRY_PLAN.md#owner-후속-요청--dev-026-편입",
+        "https://github.com/wisberry2022/MetroManager/issues/141#issuecomment-6892772104",
+        "https://github.com/wisberry2022/MetroManager/pull/143",
+        "docs/hq/PM-020_STAGE3_EXECUTION_PLAN.md#9-공식-근거"
+      ],
+      "blob_sha": "3fd242211c4d72e3b548b840119e2880aac65993"
+    },
+    {
+      "path": "docs/hq/STAGE2_ACCEPTANCE_MATRIX.md",
+      "change_type": "modify",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "AGT-PM-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-020_STAGE3_ENTRY_PLAN.md#owner-요청과-이번-권한",
+        "docs/hq/tasks/PM-020_STAGE3_ENTRY_PLAN.md#owner-후속-요청--dev-026-편입",
+        "https://github.com/wisberry2022/MetroManager/issues/141#issuecomment-6892772104",
+        "https://github.com/wisberry2022/MetroManager/pull/143",
+        "docs/hq/PM-020_STAGE3_EXECUTION_PLAN.md#9-공식-근거"
+      ],
+      "blob_sha": "95581b90b9629d4807cd38b8052cd678ea21fc2a",
+      "old_blob_sha": "ee13c433c9509ee2813ac565590d234ad52e16e5"
+    },
+    {
+      "path": "docs/hq/README.md",
+      "change_type": "modify",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "UNKNOWN",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-020_STAGE3_ENTRY_PLAN.md#owner-요청과-이번-권한",
+        "docs/hq/tasks/PM-020_STAGE3_ENTRY_PLAN.md#owner-후속-요청--dev-026-편입",
+        "https://github.com/wisberry2022/MetroManager/issues/141#issuecomment-6892772104",
+        "https://github.com/wisberry2022/MetroManager/pull/143",
+        "docs/hq/PM-020_STAGE3_EXECUTION_PLAN.md#9-공식-근거"
+      ],
+      "blob_sha": "53c4628d0beab75f027710971e8b34aa00811ab8",
+      "old_blob_sha": "ac139c8a4e01e9de1a7644ac3a132857accf8633"
+    },
+    {
+      "path": "docs/hq/tasks/PM-020_STAGE3_ENTRY_PLAN.md",
+      "change_type": "add",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "AGT-PM-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-020_STAGE3_ENTRY_PLAN.md#owner-요청과-이번-권한",
+        "docs/hq/tasks/PM-020_STAGE3_ENTRY_PLAN.md#owner-후속-요청--dev-026-편입",
+        "https://github.com/wisberry2022/MetroManager/issues/141#issuecomment-6892772104",
+        "https://github.com/wisberry2022/MetroManager/pull/143",
+        "docs/hq/PM-020_STAGE3_EXECUTION_PLAN.md#9-공식-근거"
+      ],
+      "blob_sha": "a762f65248a3a1bb7f02544bae0aba78fb1feb43"
+    },
+    {
+      "path": "docs/hq/tasks/PM-020_RESULT.md",
+      "change_type": "add",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "AGT-PM-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-020_STAGE3_ENTRY_PLAN.md#owner-요청과-이번-권한",
+        "docs/hq/tasks/PM-020_STAGE3_ENTRY_PLAN.md#owner-후속-요청--dev-026-편입",
+        "https://github.com/wisberry2022/MetroManager/issues/141#issuecomment-6892772104",
+        "https://github.com/wisberry2022/MetroManager/pull/143",
+        "docs/hq/PM-020_STAGE3_EXECUTION_PLAN.md#9-공식-근거"
+      ],
+      "blob_sha": "8e34a36bda97588c8adf4e7d4d30d1ba5dcdd686"
+    }
+  ],
+  "notes": "REPORT_ONLY declaration; not identity, approval or test authentication. Prior authorship and acceptance evidence are preserved. Referenced department evidence is not coauthorship or new HQ execution."
+}
