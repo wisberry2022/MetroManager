@@ -1,0 +1,250 @@
+{
+  "schema_version": 1,
+  "task_id": "DEV-025",
+  "primary_agent_id": "AGT-DEV-0004",
+  "base_sha": "d673435ce51f8f10604a93a54aa9ba3060d84ebf",
+  "artifacts": [
+    {
+      "path": "docs/engineering/evidence/DEV-025_F08_CASES.json",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "https://github.com/wisberry2022/MetroManager/issues/97",
+        "docs/design/tasks/DSG-008_DEV025_SAMPLES.md"
+      ],
+      "blob_sha": "86357bf7f2a08234c04bcd4e85964f5ee1b3e0fe"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-025_F08_FILTER_FRACTIONAL.png",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "https://github.com/wisberry2022/MetroManager/issues/97",
+        "docs/design/tasks/DSG-008_DEV025_SAMPLES.md"
+      ],
+      "blob_sha": "6b498cd3b0dcfbae4cac208566d956635611a0dd"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-025_F08_FILTER_INTEGER.png",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "https://github.com/wisberry2022/MetroManager/issues/97",
+        "docs/design/tasks/DSG-008_DEV025_SAMPLES.md"
+      ],
+      "blob_sha": "5604e45662d6cb8763f966e02c8e3f31c2cf9732"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-025_F08_FONT_DEFAULT.png",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "https://github.com/wisberry2022/MetroManager/issues/97",
+        "docs/design/tasks/DSG-008_DEV025_SAMPLES.md"
+      ],
+      "blob_sha": "4add0679396a16d4af1ecbe1f7b9cae03044a58e"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-025_F08_FONT_SYSTEM.png",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "https://github.com/wisberry2022/MetroManager/issues/97",
+        "docs/design/tasks/DSG-008_DEV025_SAMPLES.md"
+      ],
+      "blob_sha": "e5fc3c087bcdb8fb45ab9af0e8f3ae1a7d7647e8"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-025_F08_LAYOUT_NARROW.png",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "https://github.com/wisberry2022/MetroManager/issues/97",
+        "docs/design/tasks/DSG-008_DEV025_SAMPLES.md"
+      ],
+      "blob_sha": "37adc620a7f636eaf75b7f5bf39baf90daba1be7"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-025_F08_LAYOUT_WIDE.png",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "https://github.com/wisberry2022/MetroManager/issues/97",
+        "docs/design/tasks/DSG-008_DEV025_SAMPLES.md"
+      ],
+      "blob_sha": "48153de7bb00404beaa57106360aa097b4b9cee3"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-025_F08_MAP_FOCUS.png",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "https://github.com/wisberry2022/MetroManager/issues/97",
+        "docs/design/tasks/DSG-008_DEV025_SAMPLES.md"
+      ],
+      "blob_sha": "179b314e1b65221205d6c4d1e90c66942ddbfe7e"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-025_F08_MAP_OVERLAP.png",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "https://github.com/wisberry2022/MetroManager/issues/97",
+        "docs/design/tasks/DSG-008_DEV025_SAMPLES.md"
+      ],
+      "blob_sha": "f4851de52228b3b91b1bfb2e873753a944d85bb6"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-025_F08_PROFILE.csv",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "https://github.com/wisberry2022/MetroManager/issues/97",
+        "docs/design/tasks/DSG-008_DEV025_SAMPLES.md"
+      ],
+      "blob_sha": "6420a1df218619b9a73deb816bbc282b7ddc8beb"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-025_F08_REPORT.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "https://github.com/wisberry2022/MetroManager/issues/97",
+        "docs/design/tasks/DSG-008_DEV025_SAMPLES.md"
+      ],
+      "blob_sha": "c691a7da0ddcb34fe4eb9243924e4cce04519729"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-025_F08_VALIDATION.json",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "https://github.com/wisberry2022/MetroManager/issues/97",
+        "docs/design/tasks/DSG-008_DEV025_SAMPLES.md"
+      ],
+      "blob_sha": "9b2415e0fa9f82e34a166cd3e39674a984b85860"
+    },
+    {
+      "path": "docs/engineering/tasks/DEV-025_F08_TECHNICAL_VALIDATION.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "https://github.com/wisberry2022/MetroManager/issues/97",
+        "docs/design/tasks/DSG-008_DEV025_SAMPLES.md"
+      ],
+      "blob_sha": "2713052070a6a3c7d56a0865a876e9ecd16f06c4"
+    },
+    {
+      "path": "docs/engineering/tasks/DEV-025_RESULT.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "https://github.com/wisberry2022/MetroManager/issues/97",
+        "docs/design/tasks/DSG-008_DEV025_SAMPLES.md"
+      ],
+      "blob_sha": "dc6df47789a50f49d8ebdecd204d96e4a4ddfe95"
+    },
+    {
+      "path": "tests/game/f08_experiment_panel.gd",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "https://github.com/wisberry2022/MetroManager/issues/97",
+        "docs/design/tasks/DSG-008_DEV025_SAMPLES.md"
+      ],
+      "blob_sha": "9f4bfa8f9db333b874c817a8c6c402c81eef3d31"
+    },
+    {
+      "path": "tests/game/f08_experiment_panel.gd.uid",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "https://github.com/wisberry2022/MetroManager/issues/97",
+        "docs/design/tasks/DSG-008_DEV025_SAMPLES.md"
+      ],
+      "blob_sha": "d89d652e310b62b966ef680de3f838db6b88522e"
+    },
+    {
+      "path": "tests/game/f08_fixtures.gd",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "https://github.com/wisberry2022/MetroManager/issues/97",
+        "docs/design/tasks/DSG-008_DEV025_SAMPLES.md"
+      ],
+      "blob_sha": "53ff4da6e30db226ec5132aedf323d2c82d77d93"
+    },
+    {
+      "path": "tests/game/f08_fixtures.gd.uid",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "https://github.com/wisberry2022/MetroManager/issues/97",
+        "docs/design/tasks/DSG-008_DEV025_SAMPLES.md"
+      ],
+      "blob_sha": "2808c6baf92c193ee6d20ca7fddcdd038e2dd923"
+    },
+    {
+      "path": "tests/game/run_f08_gui_cases.gd",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "https://github.com/wisberry2022/MetroManager/issues/97",
+        "docs/design/tasks/DSG-008_DEV025_SAMPLES.md"
+      ],
+      "blob_sha": "caa2e10d8665a6f9ad7531fb64ac242c4759fed7"
+    },
+    {
+      "path": "tests/game/run_f08_gui_cases.gd.uid",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "https://github.com/wisberry2022/MetroManager/issues/97",
+        "docs/design/tasks/DSG-008_DEV025_SAMPLES.md"
+      ],
+      "blob_sha": "6f2102776af41c57b2e92f75c566bb0b5d4e90ec"
+    },
+    {
+      "path": "tests/game/run_f08_tests.gd",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "https://github.com/wisberry2022/MetroManager/issues/97",
+        "docs/design/tasks/DSG-008_DEV025_SAMPLES.md"
+      ],
+      "blob_sha": "1ea53592bde95aef4739f1a92163a9af6031d90b"
+    },
+    {
+      "path": "tests/game/run_f08_tests.gd.uid",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "https://github.com/wisberry2022/MetroManager/issues/97",
+        "docs/design/tasks/DSG-008_DEV025_SAMPLES.md"
+      ],
+      "blob_sha": "3731a137fb394df77fd15b24b474dd7499ee9999"
+    }
+  ]
+}
