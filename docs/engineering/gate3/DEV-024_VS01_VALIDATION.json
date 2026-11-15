@@ -1,0 +1,1550 @@
+{
+  "schema_version": 1,
+  "task_id": "DEV-024",
+  "agent_id": "AGT-DEV-0004",
+  "status": "IMPLEMENTED_LOCAL_REVIEW",
+  "base_sha": "0a76a2e924ec0b661e3cdbd858ed6bfd665f3dc9",
+  "source_identity": {
+    "product_matches_base": true,
+    "product_matches_design_gui_sha": "bf99dd11f3d8cd4d6dc07e38de164cd0b27f8dba",
+    "uncommitted_observer": {
+      "path": "tests/game/run_vs01_tests.gd",
+      "sha256": "fa20d87f05d3726e9ca583a92e113977b9060932438bb27aec6b5eda0ecefd81",
+      "uid_sha256": "81f95e39b0e3bee4c425bb9ca63a3b04e689cd6b2252cbffca8c22746adf47c0"
+    },
+    "git_sha_does_not_include_local_observer": true,
+    "observer_delivery_eol": {
+      "tested_sha256": "be5d52f6d5196deed95c50e1b5e0123490c577f6599dec8cf3f00244ee1cf7be",
+      "delivered_sha256": "fa20d87f05d3726e9ca583a92e113977b9060932438bb27aec6b5eda0ecefd81",
+      "tested_eol": "CRLF",
+      "delivered_eol": "LF",
+      "normalized_bytes_identical": true,
+      "game_reexecution_after_eol_only_change": "NOT_RUN; no code content or product change; preserved original run hashes"
+    }
+  },
+  "approval_ref": "docs/engineering/tasks/DEV-024_VS01_INTEGRATION_EVIDENCE.md#11-owner-로컬-구현검증-승인--2026-11-15",
+  "normal_auto": {
+    "status": "PASS",
+    "checks": 3291,
+    "game_regression_checks": 3243,
+    "new_observer_checks": 48,
+    "intentional_failure_checks_excluded": 49
+  },
+  "runs": [
+    {
+      "run_id": "DEV024-CONSTRUCTION_UI-20261115T034648",
+      "kind": "GAME_AUTO",
+      "process_status": "PASS",
+      "command": [
+        "Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        ".",
+        "--script",
+        "tests/game/run_construction_ui_tests.gd"
+      ],
+      "started_utc": "2026-11-15T03:46:49.698798+00:00",
+      "ended_utc": "2026-11-15T03:56:20.859894+00:00",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "elapsed_seconds": 571.156,
+      "checks": 898,
+      "failures": 0,
+      "errors": [],
+      "result_lines": [
+        "DEV021_UI_TEST_RESULT checks=898 failures=0"
+      ],
+      "log": ".local/g24/DEV024-CONSTRUCTION_UI-20261115T034648/console.log",
+      "log_sha256": "260a1cc190ade27eb2b633b741336d8472c0d233d7f13877f9931a1f9995a49b",
+      "source_manifest": ".local/g24/DEV024-CONSTRUCTION_UI-20261115T034648/source-manifest.json",
+      "source_manifest_sha256": "d4d91a4ea23944945d4326017c685c4dd844d219c36d35c7b9b19f38502aaef3",
+      "source_changed_during_run": [],
+      "result": ".local/g24/DEV024-CONSTRUCTION_UI-20261115T034648/result.json",
+      "result_sha256": "baac6b862d9e5b3400cbb26200bcedb17b8ec5906dc8ef605803849d267c88c4",
+      "launcher_sha256": "0045df903bdbf42b0209443cdc1fd7e5ceaffcdf7d4ff9f32440923e0c0b00e5",
+      "engine_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643"
+    },
+    {
+      "run_id": "DEV024-GUI-20261115T035048",
+      "kind": "ENVIRONMENT_PROBE_ONLY",
+      "process_status": "PASS",
+      "command": [
+        "Godot_v4.7.2-stable_win64_console.exe",
+        "--path",
+        ".",
+        "--resolution",
+        "1100x900",
+        "--script",
+        "tests/game/run_vs01_tests.gd",
+        "--",
+        "--observe",
+        "--run-id=DEV024-GUI-20261115T035048",
+        "--evidence-dir=<RUN>/evidence"
+      ],
+      "started_utc": "2026-11-15T03:50:48.805879+00:00",
+      "ended_utc": "2026-11-15T03:52:52.411544+00:00",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "elapsed_seconds": 123.594,
+      "checks": null,
+      "failures": null,
+      "errors": [],
+      "result_lines": [],
+      "log": ".local/g24/DEV024-GUI-20261115T035048/console.log",
+      "log_sha256": "15694fae54eb82d6f063e223ed10be793b4296a5270869ef4bd3530f8166444b",
+      "source_manifest": ".local/g24/DEV024-GUI-20261115T035048/source-manifest.json",
+      "source_manifest_sha256": "d4d91a4ea23944945d4326017c685c4dd844d219c36d35c7b9b19f38502aaef3",
+      "source_changed_during_run": [],
+      "result": ".local/g24/DEV024-GUI-20261115T035048/result.json",
+      "result_sha256": "0202a30e8d6faf9c41f3cedb15323822f1d943acf3f6062c33b5b5020b39d5d4",
+      "launcher_sha256": "0045df903bdbf42b0209443cdc1fd7e5ceaffcdf7d4ff9f32440923e0c0b00e5",
+      "engine_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643"
+    },
+    {
+      "run_id": "DEV024-GUI-20261115T035321",
+      "kind": "DEV_SELF_GUI",
+      "process_status": "PASS",
+      "command": [
+        "Godot_v4.7.2-stable_win64_console.exe",
+        "--path",
+        ".",
+        "--resolution",
+        "1100x900",
+        "--script",
+        "tests/game/run_vs01_tests.gd",
+        "--",
+        "--observe",
+        "--run-id=DEV024-GUI-20261115T035321",
+        "--evidence-dir=<RUN>/evidence"
+      ],
+      "started_utc": "2026-11-15T03:53:22.482035+00:00",
+      "ended_utc": "2026-11-15T04:10:21.375148+00:00",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "elapsed_seconds": 1018.89,
+      "checks": null,
+      "failures": null,
+      "errors": [],
+      "result_lines": [],
+      "log": ".local/g24/DEV024-GUI-20261115T035321/console.log",
+      "log_sha256": "a0189dc72b8ab6e60242516a5dd5b04ab19ea27e2c7c305703169f35b0473d6b",
+      "source_manifest": ".local/g24/DEV024-GUI-20261115T035321/source-manifest.json",
+      "source_manifest_sha256": "d4d91a4ea23944945d4326017c685c4dd844d219c36d35c7b9b19f38502aaef3",
+      "source_changed_during_run": [],
+      "result": ".local/g24/DEV024-GUI-20261115T035321/result.json",
+      "result_sha256": "3cec572eeafc72886698d87de35249edfe917d661919c556a819a701ec607a5c",
+      "launcher_sha256": "0045df903bdbf42b0209443cdc1fd7e5ceaffcdf7d4ff9f32440923e0c0b00e5",
+      "engine_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643"
+    },
+    {
+      "run_id": "DEV024-OBSERVER-20261115T034351",
+      "kind": "OBSERVER_SELF_TEST",
+      "process_status": "FAIL",
+      "command": [
+        "Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        ".",
+        "--resolution",
+        "1100x900",
+        "--script",
+        "tests/game/run_vs01_tests.gd",
+        "--",
+        "--self-test",
+        "--run-id=DEV024-OBSERVER-20261115T034351",
+        "--evidence-dir=<RUN>/evidence"
+      ],
+      "started_utc": "2026-11-15T03:43:51.334724+00:00",
+      "ended_utc": "2026-11-15T03:45:23.994977+00:00",
+      "exit_code": 4294967295,
+      "expected_exit": 0,
+      "elapsed_seconds": 92.671,
+      "checks": null,
+      "failures": null,
+      "errors": [
+        "SCRIPT ERROR: Invalid assignment of property or key 'auto_accept_quit' with value of type 'bool' on a base object of type 'Window'."
+      ],
+      "result_lines": [],
+      "log": ".local/g24/DEV024-OBSERVER-20261115T034351/console.log",
+      "log_sha256": "0c8255497d5890bd3ded4e268e6eaded2694e726ee3f9e2fd3409a3a34fdbdb9",
+      "source_manifest": ".local/g24/DEV024-OBSERVER-20261115T034351/source-manifest.json",
+      "source_manifest_sha256": "85a3e1676d66c047e15029814fbaccc6dbe651706168c6a55b9701f6c39e83f7",
+      "source_changed_during_run": [
+        "tests/game/run_vs01_tests.gd"
+      ],
+      "result": ".local/g24/DEV024-OBSERVER-20261115T034351/result.json",
+      "result_sha256": "3154992eb81869931aeae9b1d35100b3b888e32c7d228c7c82f472088dc60b98",
+      "launcher_sha256": "0045df903bdbf42b0209443cdc1fd7e5ceaffcdf7d4ff9f32440923e0c0b00e5",
+      "engine_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643"
+    },
+    {
+      "run_id": "DEV024-OBSERVER-20261115T034451",
+      "kind": "OBSERVER_SELF_TEST",
+      "process_status": "PASS",
+      "command": [
+        "Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        ".",
+        "--resolution",
+        "1100x900",
+        "--script",
+        "tests/game/run_vs01_tests.gd",
+        "--",
+        "--self-test",
+        "--run-id=DEV024-OBSERVER-20261115T034451",
+        "--evidence-dir=<RUN>/evidence"
+      ],
+      "started_utc": "2026-11-15T03:44:51.900397+00:00",
+      "ended_utc": "2026-11-15T03:44:53.022216+00:00",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "elapsed_seconds": 1.109,
+      "checks": 48,
+      "failures": 0,
+      "errors": [],
+      "result_lines": [
+        "DEV024_TEST_RESULT checks=48 failures=0"
+      ],
+      "log": ".local/g24/DEV024-OBSERVER-20261115T034451/console.log",
+      "log_sha256": "79d4bc0044c5bd66cb93b3fa3f0c4a1c674f298e5ae30a8dda69c604a465469e",
+      "source_manifest": ".local/g24/DEV024-OBSERVER-20261115T034451/source-manifest.json",
+      "source_manifest_sha256": "d4d91a4ea23944945d4326017c685c4dd844d219c36d35c7b9b19f38502aaef3",
+      "source_changed_during_run": [],
+      "result": ".local/g24/DEV024-OBSERVER-20261115T034451/result.json",
+      "result_sha256": "e46e4299746ca54ebc5eb8118f6ecf1b2e8e22a0dd9233df9cdc4c8eebd27e4f",
+      "launcher_sha256": "0045df903bdbf42b0209443cdc1fd7e5ceaffcdf7d4ff9f32440923e0c0b00e5",
+      "engine_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643"
+    },
+    {
+      "run_id": "DEV024-OBSERVER_FAILURE-20261115T034453",
+      "kind": "INTENTIONAL_FAILURE_DETECTION",
+      "process_status": "PASS",
+      "command": [
+        "Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        ".",
+        "--resolution",
+        "1100x900",
+        "--script",
+        "tests/game/run_vs01_tests.gd",
+        "--",
+        "--verify-failure-exit",
+        "--run-id=DEV024-OBSERVER_FAILURE-20261115T034453",
+        "--evidence-dir=<RUN>/evidence"
+      ],
+      "started_utc": "2026-11-15T03:44:53.325175+00:00",
+      "ended_utc": "2026-11-15T03:44:54.470646+00:00",
+      "exit_code": 1,
+      "expected_exit": 1,
+      "elapsed_seconds": 1.14,
+      "checks": 49,
+      "failures": 1,
+      "errors": [],
+      "result_lines": [
+        "FAIL intentional_failure actual=false expected=true",
+        "DEV024_TEST_RESULT checks=49 failures=1"
+      ],
+      "log": ".local/g24/DEV024-OBSERVER_FAILURE-20261115T034453/console.log",
+      "log_sha256": "b1f88a2a33060fa2f3e48e5423e3656e5a6d6f336099365559203d5e53a67f9d",
+      "source_manifest": ".local/g24/DEV024-OBSERVER_FAILURE-20261115T034453/source-manifest.json",
+      "source_manifest_sha256": "d4d91a4ea23944945d4326017c685c4dd844d219c36d35c7b9b19f38502aaef3",
+      "source_changed_during_run": [],
+      "result": ".local/g24/DEV024-OBSERVER_FAILURE-20261115T034453/result.json",
+      "result_sha256": "b9a5f120d4f8d4088458fed51f1d6618e69269c1f48e1cb9a35ec9228ef3b7ee",
+      "launcher_sha256": "0045df903bdbf42b0209443cdc1fd7e5ceaffcdf7d4ff9f32440923e0c0b00e5",
+      "engine_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643"
+    },
+    {
+      "run_id": "DEV024-OPERATIONS_GUI_AUTO-20261115T035917",
+      "kind": "GAME_AUTO",
+      "process_status": "PASS",
+      "command": [
+        "Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        ".",
+        "--script",
+        "tests/game/run_operations_gui_cases.gd",
+        "--",
+        "--auto"
+      ],
+      "started_utc": "2026-11-15T03:59:18.259507+00:00",
+      "ended_utc": "2026-11-15T04:01:52.879587+00:00",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "elapsed_seconds": 154.609,
+      "checks": 202,
+      "failures": 0,
+      "errors": [],
+      "result_lines": [
+        "DEV023_UI_TEST_RESULT checks=202 failures=0"
+      ],
+      "log": ".local/g24/DEV024-OPERATIONS_GUI_AUTO-20261115T035917/console.log",
+      "log_sha256": "1d16b7097c3ea4f839322c2199c9558bf031704b2d24f400551af586c8c3062c",
+      "source_manifest": ".local/g24/DEV024-OPERATIONS_GUI_AUTO-20261115T035917/source-manifest.json",
+      "source_manifest_sha256": "d4d91a4ea23944945d4326017c685c4dd844d219c36d35c7b9b19f38502aaef3",
+      "source_changed_during_run": [],
+      "result": ".local/g24/DEV024-OPERATIONS_GUI_AUTO-20261115T035917/result.json",
+      "result_sha256": "3bada6eadd3e9a87c6515574eda299a28ce9bf9b81cf2e68fc33f5d5cefc9784",
+      "launcher_sha256": "0045df903bdbf42b0209443cdc1fd7e5ceaffcdf7d4ff9f32440923e0c0b00e5",
+      "engine_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643"
+    },
+    {
+      "run_id": "DEV024-OPERATIONS_UI-20261115T035620",
+      "kind": "GAME_AUTO",
+      "process_status": "PASS",
+      "command": [
+        "Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        ".",
+        "--script",
+        "tests/game/run_operations_ui_tests.gd",
+        "--",
+        "--evidence"
+      ],
+      "started_utc": "2026-11-15T03:56:21.523413+00:00",
+      "ended_utc": "2026-11-15T03:59:17.506368+00:00",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "elapsed_seconds": 175.984,
+      "checks": 158,
+      "failures": 0,
+      "errors": [],
+      "result_lines": [
+        "DEV023_SUPPLY_TEST_RESULT checks=158 failures=0"
+      ],
+      "log": ".local/g24/DEV024-OPERATIONS_UI-20261115T035620/console.log",
+      "log_sha256": "1dd53aad430184166c46044698332745a6331aff578a631705bba28ecca20c92",
+      "source_manifest": ".local/g24/DEV024-OPERATIONS_UI-20261115T035620/source-manifest.json",
+      "source_manifest_sha256": "d4d91a4ea23944945d4326017c685c4dd844d219c36d35c7b9b19f38502aaef3",
+      "source_changed_during_run": [],
+      "result": ".local/g24/DEV024-OPERATIONS_UI-20261115T035620/result.json",
+      "result_sha256": "59623b4da705576ebecd49d37e8ae1a04dd08681bea6227cf2f6a9d884a8eff8",
+      "launcher_sha256": "0045df903bdbf42b0209443cdc1fd7e5ceaffcdf7d4ff9f32440923e0c0b00e5",
+      "engine_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643"
+    },
+    {
+      "run_id": "DEV024-PROJECT_LOAD-20261115T034251",
+      "kind": "PROJECT_LOAD",
+      "process_status": "PASS",
+      "command": [
+        "Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--editor",
+        "--path",
+        ".",
+        "--quit"
+      ],
+      "started_utc": "2026-11-15T03:42:52.205204+00:00",
+      "ended_utc": "2026-11-15T03:43:33.851878+00:00",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "elapsed_seconds": 41.656,
+      "checks": null,
+      "failures": null,
+      "errors": [],
+      "result_lines": [],
+      "log": ".local/g24/DEV024-PROJECT_LOAD-20261115T034251/console.log",
+      "log_sha256": "98948620df0abef7ac3dfb1b559219ddab5b767b67b05f4faf0d5db6a6cd85b5",
+      "source_manifest": ".local/g24/DEV024-PROJECT_LOAD-20261115T034251/source-manifest.json",
+      "source_manifest_sha256": "84596d41df4a95fb081717bce4b36149b7a3cf56858dca3439375b2054696af8",
+      "source_changed_during_run": [
+        "tests/game/run_vs01_tests.gd.uid"
+      ],
+      "result": ".local/g24/DEV024-PROJECT_LOAD-20261115T034251/result.json",
+      "result_sha256": "36705491e2c23f3ffa40d286be6e8018540dc060c859288dcc998ba9e173ca00",
+      "launcher_sha256": "0045df903bdbf42b0209443cdc1fd7e5ceaffcdf7d4ff9f32440923e0c0b00e5",
+      "engine_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643"
+    },
+    {
+      "run_id": "DEV024-PROJECT_LOAD-20261115T040152",
+      "kind": "PROJECT_LOAD",
+      "process_status": "PASS",
+      "command": [
+        "Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--editor",
+        "--path",
+        ".",
+        "--quit"
+      ],
+      "started_utc": "2026-11-15T04:01:53.757203+00:00",
+      "ended_utc": "2026-11-15T04:02:08.396271+00:00",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "elapsed_seconds": 14.641,
+      "checks": null,
+      "failures": null,
+      "errors": [],
+      "result_lines": [],
+      "log": ".local/g24/DEV024-PROJECT_LOAD-20261115T040152/console.log",
+      "log_sha256": "91c01cadb6117fe6663ebcaca5993cb4db75e51039796b4552940602e355ae71",
+      "source_manifest": ".local/g24/DEV024-PROJECT_LOAD-20261115T040152/source-manifest.json",
+      "source_manifest_sha256": "d4d91a4ea23944945d4326017c685c4dd844d219c36d35c7b9b19f38502aaef3",
+      "source_changed_during_run": [],
+      "result": ".local/g24/DEV024-PROJECT_LOAD-20261115T040152/result.json",
+      "result_sha256": "127471ed09543f98900e2f03f7e2dd9542424246db140d656404ec1edf0acefa",
+      "launcher_sha256": "0045df903bdbf42b0209443cdc1fd7e5ceaffcdf7d4ff9f32440923e0c0b00e5",
+      "engine_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643"
+    },
+    {
+      "run_id": "DEV024-TENDER_UI-20261115T034556",
+      "kind": "GAME_AUTO",
+      "process_status": "PASS",
+      "command": [
+        "Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        ".",
+        "--script",
+        "tests/game/run_tender_ui_tests.gd"
+      ],
+      "started_utc": "2026-11-15T03:45:56.886143+00:00",
+      "ended_utc": "2026-11-15T03:46:48.473544+00:00",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "elapsed_seconds": 51.578,
+      "checks": 460,
+      "failures": 0,
+      "errors": [],
+      "result_lines": [
+        "DEV019_UI_TEST_RESULT checks=460 failures=0"
+      ],
+      "log": ".local/g24/DEV024-TENDER_UI-20261115T034556/console.log",
+      "log_sha256": "5c8a422e1615c295dcfd6df727e293e32fa666e3f8a4aa6aa0a36c6d2cc871e9",
+      "source_manifest": ".local/g24/DEV024-TENDER_UI-20261115T034556/source-manifest.json",
+      "source_manifest_sha256": "d4d91a4ea23944945d4326017c685c4dd844d219c36d35c7b9b19f38502aaef3",
+      "source_changed_during_run": [],
+      "result": ".local/g24/DEV024-TENDER_UI-20261115T034556/result.json",
+      "result_sha256": "0910bb8aa131bfbaec5e6583c19d393e7cc3ab245fcf69153a80469e05c0479c",
+      "launcher_sha256": "0045df903bdbf42b0209443cdc1fd7e5ceaffcdf7d4ff9f32440923e0c0b00e5",
+      "engine_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643"
+    },
+    {
+      "run_id": "DEV024-W01-20261115T034556",
+      "kind": "GAME_AUTO",
+      "process_status": "PASS",
+      "command": [
+        "Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        ".",
+        "--script",
+        "tests/game/run_w01_tests.gd"
+      ],
+      "started_utc": "2026-11-15T03:45:56.927144+00:00",
+      "ended_utc": "2026-11-15T03:45:57.566261+00:00",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "elapsed_seconds": 0.641,
+      "checks": 219,
+      "failures": 0,
+      "errors": [],
+      "result_lines": [
+        "W01_TEST_RESULT checks=219 failures=0"
+      ],
+      "log": ".local/g24/DEV024-W01-20261115T034556/console.log",
+      "log_sha256": "b9d8fcb6fe9a6a6bd7c7b3d6c8ebf28fcbd067ceeb3c2462ef7c63baaaf7e4df",
+      "source_manifest": ".local/g24/DEV024-W01-20261115T034556/source-manifest.json",
+      "source_manifest_sha256": "d4d91a4ea23944945d4326017c685c4dd844d219c36d35c7b9b19f38502aaef3",
+      "source_changed_during_run": [],
+      "result": ".local/g24/DEV024-W01-20261115T034556/result.json",
+      "result_sha256": "10508e411e1d9e048b26cbfabdd7ded1fd182b69f093200ea4510ddd78fc3b00",
+      "launcher_sha256": "0045df903bdbf42b0209443cdc1fd7e5ceaffcdf7d4ff9f32440923e0c0b00e5",
+      "engine_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643"
+    },
+    {
+      "run_id": "DEV024-W02-20261115T034557",
+      "kind": "GAME_AUTO",
+      "process_status": "PASS",
+      "command": [
+        "Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        ".",
+        "--script",
+        "tests/game/run_w02_tests.gd"
+      ],
+      "started_utc": "2026-11-15T03:45:57.979875+00:00",
+      "ended_utc": "2026-11-15T03:45:59.134647+00:00",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "elapsed_seconds": 1.156,
+      "checks": 309,
+      "failures": 0,
+      "errors": [],
+      "result_lines": [
+        "W02_TEST_RESULT checks=309 failures=0"
+      ],
+      "log": ".local/g24/DEV024-W02-20261115T034557/console.log",
+      "log_sha256": "65566b680f39334a0c970ed6a328551863fee5d89e4c7ea5a284e89b1955f40a",
+      "source_manifest": ".local/g24/DEV024-W02-20261115T034557/source-manifest.json",
+      "source_manifest_sha256": "d4d91a4ea23944945d4326017c685c4dd844d219c36d35c7b9b19f38502aaef3",
+      "source_changed_during_run": [],
+      "result": ".local/g24/DEV024-W02-20261115T034557/result.json",
+      "result_sha256": "816844cd405169f677101cbdb5c160f69b6cd3b49bf8b7d24d5843751757d7a0",
+      "launcher_sha256": "0045df903bdbf42b0209443cdc1fd7e5ceaffcdf7d4ff9f32440923e0c0b00e5",
+      "engine_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643"
+    },
+    {
+      "run_id": "DEV024-W03-20261115T034559",
+      "kind": "GAME_AUTO",
+      "process_status": "PASS",
+      "command": [
+        "Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        ".",
+        "--script",
+        "tests/game/run_w03_tests.gd"
+      ],
+      "started_utc": "2026-11-15T03:45:59.605280+00:00",
+      "ended_utc": "2026-11-15T03:46:00.481215+00:00",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "elapsed_seconds": 0.875,
+      "checks": 101,
+      "failures": 0,
+      "errors": [],
+      "result_lines": [
+        "W03_TEST_RESULT checks=101 failures=0"
+      ],
+      "log": ".local/g24/DEV024-W03-20261115T034559/console.log",
+      "log_sha256": "e106f7aa57e133af5012c6bd05580ffa9e1c2932482dc5d855c0e658be5ac1a5",
+      "source_manifest": ".local/g24/DEV024-W03-20261115T034559/source-manifest.json",
+      "source_manifest_sha256": "d4d91a4ea23944945d4326017c685c4dd844d219c36d35c7b9b19f38502aaef3",
+      "source_changed_during_run": [],
+      "result": ".local/g24/DEV024-W03-20261115T034559/result.json",
+      "result_sha256": "27ac77155754408b471c35778250a3434f3ff4a5d59905ddcb252aa4012da1bd",
+      "launcher_sha256": "0045df903bdbf42b0209443cdc1fd7e5ceaffcdf7d4ff9f32440923e0c0b00e5",
+      "engine_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643"
+    },
+    {
+      "run_id": "DEV024-W04A-20261115T034613",
+      "kind": "GAME_AUTO",
+      "process_status": "PASS",
+      "command": [
+        "Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        ".",
+        "--script",
+        "tests/game/run_w04a_tests.gd"
+      ],
+      "started_utc": "2026-11-15T03:46:13.793893+00:00",
+      "ended_utc": "2026-11-15T03:47:41.284477+00:00",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "elapsed_seconds": 87.485,
+      "checks": 204,
+      "failures": 0,
+      "errors": [],
+      "result_lines": [
+        "W04A_TEST_RESULT checks=204 failures=0"
+      ],
+      "log": ".local/g24/DEV024-W04A-20261115T034613/console.log",
+      "log_sha256": "57498132f2da6fd3c9278a84fb54ddfc1a82c2cae07a184c5fe56c20dcea6ff8",
+      "source_manifest": ".local/g24/DEV024-W04A-20261115T034613/source-manifest.json",
+      "source_manifest_sha256": "d4d91a4ea23944945d4326017c685c4dd844d219c36d35c7b9b19f38502aaef3",
+      "source_changed_during_run": [],
+      "result": ".local/g24/DEV024-W04A-20261115T034613/result.json",
+      "result_sha256": "5ae4355a96bd9d6db7f65c9de933dea01dc9d1e33c93cbe9d81b827f1d43f33c",
+      "launcher_sha256": "0045df903bdbf42b0209443cdc1fd7e5ceaffcdf7d4ff9f32440923e0c0b00e5",
+      "engine_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643"
+    },
+    {
+      "run_id": "DEV024-W05-20261115T034741",
+      "kind": "GAME_AUTO",
+      "process_status": "PASS",
+      "command": [
+        "Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        ".",
+        "--script",
+        "tests/game/run_w05_tests.gd"
+      ],
+      "started_utc": "2026-11-15T03:47:41.840352+00:00",
+      "ended_utc": "2026-11-15T04:02:59.824260+00:00",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "elapsed_seconds": 917.985,
+      "checks": 191,
+      "failures": 0,
+      "errors": [],
+      "result_lines": [
+        "W05_TEST_RESULT checks=191 failures=0"
+      ],
+      "log": ".local/g24/DEV024-W05-20261115T034741/console.log",
+      "log_sha256": "9dccae2b9b8c5cf8672db64c480f9241a3128953d2fde617255f3e089016c8fd",
+      "source_manifest": ".local/g24/DEV024-W05-20261115T034741/source-manifest.json",
+      "source_manifest_sha256": "d4d91a4ea23944945d4326017c685c4dd844d219c36d35c7b9b19f38502aaef3",
+      "source_changed_during_run": [],
+      "result": ".local/g24/DEV024-W05-20261115T034741/result.json",
+      "result_sha256": "58aa4102f9cd43d18a6f01e0a385761e47d0942f83c2772af3ddcf62c1c26bff",
+      "launcher_sha256": "0045df903bdbf42b0209443cdc1fd7e5ceaffcdf7d4ff9f32440923e0c0b00e5",
+      "engine_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643"
+    },
+    {
+      "run_id": "DEV024-W06-20261115T040259",
+      "kind": "GAME_AUTO",
+      "process_status": "PASS",
+      "command": [
+        "Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        ".",
+        "--script",
+        "tests/game/run_w06_tests.gd"
+      ],
+      "started_utc": "2026-11-15T04:03:00.297265+00:00",
+      "ended_utc": "2026-11-15T04:07:27.963474+00:00",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "elapsed_seconds": 267.672,
+      "checks": 179,
+      "failures": 0,
+      "errors": [],
+      "result_lines": [
+        "W06_TEST_RESULT checks=179 failures=0"
+      ],
+      "log": ".local/g24/DEV024-W06-20261115T040259/console.log",
+      "log_sha256": "b780dba79123b08e80bcd332be0d2f7323e50a8c9ee5eccdd8e091fff4af30b0",
+      "source_manifest": ".local/g24/DEV024-W06-20261115T040259/source-manifest.json",
+      "source_manifest_sha256": "d4d91a4ea23944945d4326017c685c4dd844d219c36d35c7b9b19f38502aaef3",
+      "source_changed_during_run": [],
+      "result": ".local/g24/DEV024-W06-20261115T040259/result.json",
+      "result_sha256": "f920dbcf0d553b6d2af1c2578aa1dff608cfc9f1a67d5154bfb29526e8bce924",
+      "launcher_sha256": "0045df903bdbf42b0209443cdc1fd7e5ceaffcdf7d4ff9f32440923e0c0b00e5",
+      "engine_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643"
+    },
+    {
+      "run_id": "DEV024-W07-20261115T034600",
+      "kind": "GAME_AUTO",
+      "process_status": "PASS",
+      "command": [
+        "Godot_v4.7.2-stable_win64_console.exe",
+        "--headless",
+        "--path",
+        ".",
+        "--script",
+        "tests/game/run_w07_tests.gd"
+      ],
+      "started_utc": "2026-11-15T03:46:01.678907+00:00",
+      "ended_utc": "2026-11-15T03:46:13.031472+00:00",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "elapsed_seconds": 11.36,
+      "checks": 322,
+      "failures": 0,
+      "errors": [],
+      "result_lines": [
+        "W07_TEST_RESULT checks=322 failures=0"
+      ],
+      "log": ".local/g24/DEV024-W07-20261115T034600/console.log",
+      "log_sha256": "e821d80b920db3b3562f8cb084f69d22e74c76c8ef4104701cdc27597f627b87",
+      "source_manifest": ".local/g24/DEV024-W07-20261115T034600/source-manifest.json",
+      "source_manifest_sha256": "d4d91a4ea23944945d4326017c685c4dd844d219c36d35c7b9b19f38502aaef3",
+      "source_changed_during_run": [],
+      "result": ".local/g24/DEV024-W07-20261115T034600/result.json",
+      "result_sha256": "799b1224a7fab04f7a6e932680bc217bdb1d0e9fbc0373264b9198703c0058f8",
+      "launcher_sha256": "0045df903bdbf42b0209443cdc1fd7e5ceaffcdf7d4ff9f32440923e0c0b00e5",
+      "engine_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643"
+    }
+  ],
+  "dev_self_gui": {
+    "status": "PASS_WITH_RECORDED_NAVIGATION",
+    "run_id": "DEV024-GUI-20261115T035321",
+    "source_manifest_sha256": "d4d91a4ea23944945d4326017c685c4dd844d219c36d35c7b9b19f38502aaef3",
+    "kind": "DEV_SELF_GUI",
+    "independent_execution": false,
+    "engine": "4.7.2.stable.official.ed1daf0bf",
+    "renderer": "D3D12 12_0 / Forward+ / Intel(R) Iris(R) Xe Graphics",
+    "window": [
+      1100,
+      900
+    ],
+    "viewport": [
+      1152,
+      942
+    ],
+    "physical_dpi": "NOT_VERIFIED",
+    "os": "Windows",
+    "os_version": "10.0.26200",
+    "normal_initial_minute": 360,
+    "final_minute": 6701,
+    "actual_input_tool": "@oai/sky Computer Use / skill 26.1111.21308",
+    "operator_actions": 36,
+    "window_input_events": 70,
+    "input_correspondence": "PASS",
+    "states": 971,
+    "captures": [
+      {
+        "event_sequence": 6,
+        "label": "MILESTONE",
+        "file": "capture-001.png",
+        "minute": 360,
+        "reading": {
+          "displayed_minute": 360,
+          "focus": "",
+          "screen": "plan",
+          "scroll": 0,
+          "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+          "window_size": [
+            1100,
+            900
+          ]
+        },
+        "image_size": [
+          1100,
+          900
+        ],
+        "bytes": 184187,
+        "sha256": "9302533e57904c6f1ac6e9b0ef50cb20edd0a5acb5713a1127856407e08bfc0c"
+      },
+      {
+        "event_sequence": 93,
+        "label": "MILESTONE",
+        "file": "capture-002.png",
+        "minute": 398,
+        "reading": {
+          "displayed_minute": 398,
+          "focus": "/root/Main/Stage1/@ScrollContainer@4/@VBoxContainer@5/TenderPanel/@HBoxContainer@9/Tender_refresh",
+          "screen": "tenders",
+          "scroll": 0,
+          "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+          "window_size": [
+            1100,
+            900
+          ]
+        },
+        "image_size": [
+          1100,
+          900
+        ],
+        "bytes": 62585,
+        "sha256": "3dd875bdf3fbd18963a71b40c290731476b6a69ab671be956d8ada63b228ddb3"
+      },
+      {
+        "event_sequence": 249,
+        "label": "MILESTONE",
+        "file": "capture-003.png",
+        "minute": 410,
+        "reading": {
+          "displayed_minute": 409,
+          "focus": "/root/Main/Stage1/@ScrollContainer@4/@VBoxContainer@5/@HBoxContainer@6/resume",
+          "screen": "tenders",
+          "scroll": 0,
+          "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+          "window_size": [
+            1100,
+            900
+          ]
+        },
+        "image_size": [
+          1100,
+          900
+        ],
+        "bytes": 231384,
+        "sha256": "195e0ef82488306b330c37d33eed49c51b6afa14a7bc75705a160ee24079ddaf"
+      },
+      {
+        "event_sequence": 563,
+        "label": "MILESTONE",
+        "file": "capture-004.png",
+        "minute": 1442,
+        "reading": {
+          "displayed_minute": 1441,
+          "focus": "/root/Main/Stage1/@ScrollContainer@4/@VBoxContainer@5/@HBoxContainer@6/resume",
+          "screen": "tenders",
+          "scroll": 0,
+          "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+          "window_size": [
+            1100,
+            900
+          ]
+        },
+        "image_size": [
+          1100,
+          900
+        ],
+        "bytes": 231672,
+        "sha256": "e97406735cfe7bea3cfec225fe540d0cf8e11bf845ae22eeacd0ecf15e4bf018"
+      },
+      {
+        "event_sequence": 676,
+        "label": "MILESTONE",
+        "file": "capture-005.png",
+        "minute": 1810,
+        "reading": {
+          "displayed_minute": 1808,
+          "focus": "/root/Main/Stage1/@ScrollContainer@4/@VBoxContainer@5/@HBoxContainer@6/resume",
+          "screen": "tenders",
+          "scroll": 0,
+          "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+          "window_size": [
+            1100,
+            900
+          ]
+        },
+        "image_size": [
+          1100,
+          900
+        ],
+        "bytes": 254086,
+        "sha256": "0689c4c1753d787c05e3b8734be793186f805d6a58b1dbbe045234d721b70f98"
+      },
+      {
+        "event_sequence": 798,
+        "label": "MILESTONE",
+        "file": "capture-006.png",
+        "minute": 2015,
+        "reading": {
+          "displayed_minute": 2015,
+          "focus": "/root/Main/Stage1/@ScrollContainer@4/@VBoxContainer@5/ConstructionPanel/@HBoxContainer@26/Construction_back",
+          "screen": "construction",
+          "scroll": 0,
+          "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+          "window_size": [
+            1100,
+            900
+          ]
+        },
+        "image_size": [
+          1100,
+          900
+        ],
+        "bytes": 162017,
+        "sha256": "3fcd03676743ccc75df21b7013188f28a272245a5856e221b904b54abf113513"
+      },
+      {
+        "event_sequence": 926,
+        "label": "MILESTONE",
+        "file": "capture-007.png",
+        "minute": 2019,
+        "reading": {
+          "displayed_minute": 2018,
+          "focus": "/root/Main/Stage1/@ScrollContainer@4/@VBoxContainer@5/@HBoxContainer@6/resume",
+          "screen": "construction",
+          "scroll": 0,
+          "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+          "window_size": [
+            1100,
+            900
+          ]
+        },
+        "image_size": [
+          1100,
+          900
+        ],
+        "bytes": 195064,
+        "sha256": "09d5f8d24375607e266e51b749879fed1d0f1f0c35ed2778b8342683f7ce17a4"
+      },
+      {
+        "event_sequence": 966,
+        "label": "MILESTONE",
+        "file": "capture-008.png",
+        "minute": 2045,
+        "reading": {
+          "displayed_minute": 2044,
+          "focus": "/root/Main/Stage1/@ScrollContainer@4/@VBoxContainer@5/ConstructionPanel/@VBoxContainer@38/Construction_start",
+          "screen": "construction",
+          "scroll": 0,
+          "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+          "window_size": [
+            1100,
+            900
+          ]
+        },
+        "image_size": [
+          1100,
+          900
+        ],
+        "bytes": 189263,
+        "sha256": "01978ae990df9c8dd2420f97109fb2b8468b4413142d0252f79de2170945afb4"
+      },
+      {
+        "event_sequence": 1243,
+        "label": "MILESTONE",
+        "file": "capture-009.png",
+        "minute": 2888,
+        "reading": {
+          "displayed_minute": 2888,
+          "focus": "/root/Main/Stage1/@ScrollContainer@4/@VBoxContainer@5/@HBoxContainer@6/speed4",
+          "screen": "construction",
+          "scroll": 0,
+          "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+          "window_size": [
+            1100,
+            900
+          ]
+        },
+        "image_size": [
+          1100,
+          900
+        ],
+        "bytes": 192081,
+        "sha256": "22d64b30fa1e5d8c958bc76af376875fd109f3389ad84b9c0d5aa6e7cd0be1a3"
+      },
+      {
+        "event_sequence": 1492,
+        "label": "F12",
+        "file": "capture-010.png",
+        "minute": 3739,
+        "reading": {
+          "displayed_minute": 3739,
+          "focus": "/root/Main/Stage1/@ScrollContainer@4/@VBoxContainer@5/@HBoxContainer@6/speed4",
+          "screen": "construction",
+          "scroll": 0,
+          "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+          "window_size": [
+            1100,
+            900
+          ]
+        },
+        "image_size": [
+          1100,
+          900
+        ],
+        "bytes": 191431,
+        "sha256": "4fabfc52ade838f371d8b77a1028705f6c1a3719e880168163df2db5f7e516f3"
+      },
+      {
+        "event_sequence": 1659,
+        "label": "MILESTONE",
+        "file": "capture-011.png",
+        "minute": 4333,
+        "reading": {
+          "displayed_minute": 4333,
+          "focus": "/root/Main/Stage1/@ScrollContainer@4/@VBoxContainer@5/@HBoxContainer@6/speed4",
+          "screen": "construction",
+          "scroll": 0,
+          "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+          "window_size": [
+            1100,
+            900
+          ]
+        },
+        "image_size": [
+          1100,
+          900
+        ],
+        "bytes": 191239,
+        "sha256": "0510a19dc1aa2da17d108a431b125046f6244bc8f3eec119c06c8523917a829d"
+      },
+      {
+        "event_sequence": 1823,
+        "label": "MILESTONE",
+        "file": "capture-012.png",
+        "minute": 4937,
+        "reading": {
+          "displayed_minute": 4937,
+          "focus": "/root/Main/Stage1/@ScrollContainer@4/@VBoxContainer@5/@HBoxContainer@6/speed4",
+          "screen": "construction",
+          "scroll": 0,
+          "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+          "window_size": [
+            1100,
+            900
+          ]
+        },
+        "image_size": [
+          1100,
+          900
+        ],
+        "bytes": 196266,
+        "sha256": "8e93081439f95d10028a618a79ef2bcc597613ec93662a06e163660a5ccb1268"
+      },
+      {
+        "event_sequence": 1989,
+        "label": "MILESTONE",
+        "file": "capture-013.png",
+        "minute": 5098,
+        "reading": {
+          "displayed_minute": 5098,
+          "focus": "/root/Main/Stage1/@ScrollContainer@4/@VBoxContainer@5/@HBoxContainer@6/resume",
+          "screen": "construction",
+          "scroll": 0,
+          "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+          "window_size": [
+            1100,
+            900
+          ]
+        },
+        "image_size": [
+          1100,
+          900
+        ],
+        "bytes": 187760,
+        "sha256": "f99f4ae760e43a24066f288257fb124a47ef2bc6ab03689239e0809236ed9398"
+      },
+      {
+        "event_sequence": 2057,
+        "label": "MILESTONE",
+        "file": "capture-014.png",
+        "minute": 5157,
+        "reading": {
+          "displayed_minute": 5157,
+          "focus": "/root/Main/Stage1/@ScrollContainer@4/@VBoxContainer@5/@HBoxContainer@6/resume",
+          "screen": "construction",
+          "scroll": 0,
+          "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+          "window_size": [
+            1100,
+            900
+          ]
+        },
+        "image_size": [
+          1100,
+          900
+        ],
+        "bytes": 193248,
+        "sha256": "9ef86c4558d18cdc78f716f9c1059a1aafa20c51ad58818241c751e8d23bcbfe"
+      },
+      {
+        "event_sequence": 2112,
+        "label": "MILESTONE",
+        "file": "capture-015.png",
+        "minute": 5200,
+        "reading": {
+          "displayed_minute": 5200,
+          "focus": "/root/Main/Stage1/@ScrollContainer@4/@VBoxContainer@5/ConstructionPanel/@VBoxContainer@41/Construction_safety",
+          "screen": "construction",
+          "scroll": 0,
+          "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+          "window_size": [
+            1100,
+            900
+          ]
+        },
+        "image_size": [
+          1100,
+          900
+        ],
+        "bytes": 188938,
+        "sha256": "3f44d609bc12c1c9272f1c5e045b0674a667aa79b272b2ce776da9d490f75d70"
+      },
+      {
+        "event_sequence": 2188,
+        "label": "MILESTONE",
+        "file": "capture-016.png",
+        "minute": 5259,
+        "reading": {
+          "displayed_minute": 5259,
+          "focus": "/root/Main/Stage1/@ScrollContainer@4/@VBoxContainer@5/ConstructionPanel/@VBoxContainer@41/Construction_safety",
+          "screen": "construction",
+          "scroll": 208,
+          "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+          "window_size": [
+            1100,
+            900
+          ]
+        },
+        "image_size": [
+          1100,
+          900
+        ],
+        "bytes": 224308,
+        "sha256": "96efc4abdd991d571b635d4c1a4ce56ffd02e226cb0ad44e3c3a3d034b4b4ef3"
+      },
+      {
+        "event_sequence": 2273,
+        "label": "MILESTONE",
+        "file": "capture-017.png",
+        "minute": 5325,
+        "reading": {
+          "displayed_minute": 5325,
+          "focus": "/root/Main/Stage1/@ScrollContainer@4/@VBoxContainer@5/ConstructionPanel/@VBoxContainer@43/Construction_open",
+          "screen": "construction",
+          "scroll": 208,
+          "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+          "window_size": [
+            1100,
+            900
+          ]
+        },
+        "image_size": [
+          1100,
+          900
+        ],
+        "bytes": 219379,
+        "sha256": "cf27672574b6d71f9974ad11915f558699e654fe90464e288354849cb1f64cdb"
+      },
+      {
+        "event_sequence": 2351,
+        "label": "MILESTONE",
+        "file": "capture-018.png",
+        "minute": 5382,
+        "reading": {
+          "displayed_minute": 5382,
+          "focus": "/root/Main/Stage1/@ScrollContainer@4/@VBoxContainer@5/OperationsPanel/P06_finance",
+          "screen": "operations",
+          "scroll": 0,
+          "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+          "window_size": [
+            1100,
+            900
+          ]
+        },
+        "image_size": [
+          1100,
+          900
+        ],
+        "bytes": 107957,
+        "sha256": "9e19216ccfcdd362ca5438de9f1e94cb275a8731864595612cd4cbaaefc8a202"
+      },
+      {
+        "event_sequence": 2471,
+        "label": "F12",
+        "file": "capture-019.png",
+        "minute": 5484,
+        "reading": {
+          "displayed_minute": 5484,
+          "focus": "/root/Main/Stage1/@ScrollContainer@4/@VBoxContainer@5/OperationsPanel/P06_finance",
+          "screen": "operations",
+          "scroll": 0,
+          "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+          "window_size": [
+            1100,
+            900
+          ]
+        },
+        "image_size": [
+          1100,
+          900
+        ],
+        "bytes": 108250,
+        "sha256": "838f501057432b0c934bc18aa94a41d964cc9b64eaa32368a2b1a5ec209056c0"
+      },
+      {
+        "event_sequence": 2537,
+        "label": "MILESTONE",
+        "file": "capture-020.png",
+        "minute": 5602,
+        "reading": {
+          "displayed_minute": 5602,
+          "focus": "/root/Main/Stage1/@ScrollContainer@4/@VBoxContainer@5/FinancePanel/P07_refresh",
+          "screen": "finance",
+          "scroll": 605,
+          "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+          "window_size": [
+            1100,
+            900
+          ]
+        },
+        "image_size": [
+          1100,
+          900
+        ],
+        "bytes": 129642,
+        "sha256": "142cf721fad5ba53887bf9744ea4536212d10adf57ee6e5b7af4323bf9ba87ec"
+      },
+      {
+        "event_sequence": 2587,
+        "label": "MILESTONE",
+        "file": "capture-021.png",
+        "minute": 5772,
+        "reading": {
+          "displayed_minute": 5772,
+          "focus": "/root/Main/Stage1/@ScrollContainer@4/@VBoxContainer@5/FinancePanel/P07_refresh",
+          "screen": "finance",
+          "scroll": 605,
+          "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+          "window_size": [
+            1100,
+            900
+          ]
+        },
+        "image_size": [
+          1100,
+          900
+        ],
+        "bytes": 130650,
+        "sha256": "062625827fae17a28ec1c7e90581e83f7e8c3f1efbeb6846b02a2cf14b18aaeb"
+      },
+      {
+        "event_sequence": 2742,
+        "label": "F12",
+        "file": "capture-022.png",
+        "minute": 6300,
+        "reading": {
+          "displayed_minute": 6300,
+          "focus": "/root/Main/Stage1/@ScrollContainer@4/@VBoxContainer@5/FinancePanel/P07_first",
+          "screen": "finance",
+          "scroll": 605,
+          "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+          "window_size": [
+            1100,
+            900
+          ]
+        },
+        "image_size": [
+          1100,
+          900
+        ],
+        "bytes": 131530,
+        "sha256": "b50b4f5bb8aacf37a5602f1768acc475eb62426cb4f32359e0b474a3118b7d73"
+      },
+      {
+        "event_sequence": 2776,
+        "label": "MILESTONE",
+        "file": "capture-023.png",
+        "minute": 6412,
+        "reading": {
+          "displayed_minute": 6412,
+          "focus": "/root/Main/Stage1/@ScrollContainer@4/@VBoxContainer@5/TenderPanel/@HBoxContainer@9/Tender_refresh",
+          "screen": "tenders",
+          "scroll": 0,
+          "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+          "window_size": [
+            1100,
+            900
+          ]
+        },
+        "image_size": [
+          1100,
+          900
+        ],
+        "bytes": 125702,
+        "sha256": "d8f66697e8eef3e3d2c597abf261a3c3a6435de7617fd04369ffc24a0a74bf20"
+      },
+      {
+        "event_sequence": 2974,
+        "label": "F12",
+        "file": "capture-024.png",
+        "minute": 6701,
+        "reading": {
+          "displayed_minute": 6701,
+          "focus": "/root/Main/Stage1/@ScrollContainer@4/@VBoxContainer@5/TenderPanel/@ItemList@14",
+          "screen": "tenders",
+          "scroll": 0,
+          "viewport": "[P: (0.0, 0.0), S: (1152.0, 942.0)]",
+          "window_size": [
+            1100,
+            900
+          ]
+        },
+        "image_size": [
+          1100,
+          900
+        ],
+        "bytes": 85298,
+        "sha256": "3f770a5457c2aec4865dcecb2e481af00c0144f29620aba861ecae7dfa6f61d5"
+      }
+    ],
+    "ledger_entries": 14142,
+    "trace_entries": 44387,
+    "evidence_audit": {
+      "status": "PASS",
+      "checks": 23245,
+      "failures": 0,
+      "not_game_unit_checks": true
+    },
+    "source_ids": [
+      [
+        "P-A",
+        "B01-R1-BUSINESS",
+        "B01-R1-BUSINESS-CONSTRUCTION"
+      ]
+    ],
+    "accepted_commands": [
+      {
+        "command_id": "bid-ui-53099890238-1",
+        "action": "bid",
+        "requested_at": 398,
+        "effective_at": 399,
+        "state_event_sequence": 247,
+        "decision_phase": "CONTRACT",
+        "project_id": "P-A",
+        "accepted": true
+      },
+      {
+        "command_id": "construction-ui-54089746041-1",
+        "action": "contract",
+        "requested_at": 2015,
+        "effective_at": 2016,
+        "state_event_sequence": 924,
+        "decision_phase": "CONTRACT",
+        "project_id": "P-A",
+        "accepted": true
+      },
+      {
+        "command_id": "construction-ui-54089746041-2",
+        "action": "start",
+        "requested_at": 2041,
+        "effective_at": 2042,
+        "state_event_sequence": 964,
+        "decision_phase": "PROGRESS",
+        "project_id": "P-A",
+        "accepted": true
+      },
+      {
+        "command_id": "construction-ui-54089746041-3",
+        "action": "trial",
+        "requested_at": 5094,
+        "effective_at": 5095,
+        "state_event_sequence": 1987,
+        "decision_phase": "VALIDATION",
+        "project_id": "P-A",
+        "accepted": true
+      },
+      {
+        "command_id": "construction-ui-54089746041-4",
+        "action": "safety",
+        "requested_at": 5195,
+        "effective_at": 5196,
+        "state_event_sequence": 2110,
+        "decision_phase": "VALIDATION",
+        "project_id": "P-A",
+        "accepted": true
+      },
+      {
+        "command_id": "construction-ui-54089746041-5",
+        "action": "open",
+        "requested_at": 5320,
+        "effective_at": 5321,
+        "state_event_sequence": 2271,
+        "decision_phase": "VALIDATION",
+        "project_id": "P-A",
+        "accepted": true
+      }
+    ],
+    "construction": {
+      "started_at": 2042,
+      "completed_at": 4922,
+      "duration": 2880,
+      "paid": 600000,
+      "mode": "STANDARD"
+    },
+    "trial": {
+      "started_at": 5095,
+      "completed_at": 5155
+    },
+    "safety": {
+      "started_at": 5196,
+      "completed_at": 5256
+    },
+    "opened_at": 5321,
+    "first_valid_report": {
+      "close_boundary": 5760,
+      "first_observed_at": 5764,
+      "day_id": 4,
+      "display_key": "run--9223371984979622399/day-4",
+      "value": {
+        "closing_funds": {
+          "available_cash": 1153000,
+          "cash": 1353000,
+          "free_cash": 1153000,
+          "reserved": 0,
+          "reserved_by_project": {
+            "P-A": 0
+          },
+          "restricted": 200000,
+          "restricted_by_project": {
+            "P-A": 200000
+          },
+          "unpaid": 0
+        },
+        "construction_cost": 125417,
+        "construction_payment": 125625,
+        "day_id": 4,
+        "debt_payment": 0,
+        "fare": 196900,
+        "government": 0,
+        "operating_cost": 43900,
+        "operations": {
+          "boarded": 1973,
+          "closing_in_transit": 4,
+          "completed": 1969,
+          "day_id": 4,
+          "late_completed": 0,
+          "opening_in_transit": 0,
+          "reason_codes": [],
+          "requested": 1973,
+          "satisfaction_after": [
+            55,
+            1
+          ],
+          "satisfaction_available": true,
+          "satisfaction_before": [
+            50,
+            1
+          ],
+          "service_minutes": 439,
+          "unboarded": 0
+        },
+        "payment": 43900
+      }
+    },
+    "query": {
+      "accepted": true,
+      "observed_at": 6400,
+      "report_key": "run--9223371984979622399/day-4",
+      "first_valid_report": {
+        "completed": 1969,
+        "day_id": 4,
+        "fare": 196900,
+        "service_minutes": 439
+      },
+      "returned_tenders": [
+        {
+          "tender_id": "B01",
+          "state": "AWARDED",
+          "submit_allowed": false
+        },
+        {
+          "tender_id": "B02",
+          "state": "CLOSED",
+          "submit_allowed": false
+        }
+      ]
+    },
+    "navigation_observation": {
+      "query_entry": "existing P05 handoff context",
+      "additional_real_input": [
+        "공고 상세로",
+        "목록으로"
+      ],
+      "final_screen": "P01 tender list",
+      "source_reason": "stage1_view._open_tenders preserves TenderView.page",
+      "product_fix_performed": false,
+      "design_independent_acceptance": "PENDING",
+      "does_not_claim_new_open_round_or_second_award": true
+    },
+    "final_funds": {
+      "available_cash": 1356700,
+      "cash": 1556700,
+      "free_cash": 1356700,
+      "reserved": 0,
+      "reserved_by_project": {
+        "P-A": 0
+      },
+      "restricted": 200000,
+      "restricted_by_project": {
+        "P-A": 200000
+      },
+      "unpaid": 0
+    },
+    "evidence_root": ".local/g24/DEV024-GUI-20261115T035321/",
+    "files": {
+      "evidence/events.jsonl": {
+        "sha256": "7c20d2575bcb888e6c2801709eec8e52891c0d42b8ef5ea5c88887447023ed91",
+        "bytes": 32041125
+      },
+      "evidence/latest.json": {
+        "sha256": "fc1723fdc050189d4f4642f3e0649361689707381389a4fe9c4cb651e10136be",
+        "bytes": 62193
+      },
+      "operator-actions.json": {
+        "sha256": "b65d449991f5cf57c55914b1569f910d34e6c3c7e5db1a70c79c0ac30549cc1c",
+        "bytes": 4450
+      },
+      "operator-concordance.json": {
+        "sha256": "860a3fa4f792a28fa5a9ad17a2613e3f21c33eee932b5857153beb972d916047",
+        "bytes": 6789
+      },
+      "gui-audit.json": {
+        "sha256": "c1b419c9eee79b1399f78a8e750f6f9cf280c0683bf067d3260a564bee6cefa0",
+        "bytes": 41511
+      },
+      "gui-audit-checks.json": {
+        "sha256": "d0c7cf5983503d61862c0f1c62e078093ea4ecde4e51039cdb3ea582848fa1f3",
+        "bytes": 2718313
+      },
+      "audit_gui.py": {
+        "sha256": "d2754e1b194b4257e8bb1b50d49e9c43c58e96c93a3a7d9013c3c430f1d98f90",
+        "bytes": 10233
+      },
+      "run_checks.py": {
+        "sha256": "0045df903bdbf42b0209443cdc1fd7e5ceaffcdf7d4ff9f32440923e0c0b00e5",
+        "bytes": 6188
+      },
+      "launch.json": {
+        "sha256": "0e943be7ff5059e0e2365fd362c4776a18c96ae003194bf3b88aa8ab65370167",
+        "bytes": 1273
+      },
+      "source-manifest.json": {
+        "sha256": "d4d91a4ea23944945d4326017c685c4dd844d219c36d35c7b9b19f38502aaef3",
+        "bytes": 12150
+      },
+      "result.json": {
+        "sha256": "3cec572eeafc72886698d87de35249edfe917d661919c556a819a701ec607a5c",
+        "bytes": 30272
+      },
+      "console.log": {
+        "sha256": "a0189dc72b8ab6e60242516a5dd5b04ab19ea27e2c7c305703169f35b0473d6b",
+        "bytes": 96505
+      }
+    },
+    "exit_code": 0,
+    "engine_script_errors": 0,
+    "source_changed_during_run": []
+  },
+  "history_preserved": [
+    {
+      "run_id": "DEV024-OBSERVER-20261115T034351",
+      "status": "FAIL_FIXED",
+      "cause": "Window.auto_accept_quit invalid; fixed to SceneTree.auto_accept_quit",
+      "termination": "Only failed test process terminated; exit 4294967295 preserved; initial source changed while failed process was pending",
+      "supporting_files": {
+        ".local/g24/DEV024-OBSERVER-20261115T034351/termination.json": {
+          "sha256": "b8af288db9120631dd3bfe7f7e9d40dd6392da0c8e2b2d403634db3293e60b67",
+          "bytes": 164
+        }
+      }
+    },
+    {
+      "run_id": "DEV024-GUI-20261115T035048",
+      "status": "ENVIRONMENT_PROBE_ONLY",
+      "cause": "Ten navigation events preceded DEV UI actions; producer NOT_VERIFIED",
+      "natural_vs01": "NOT_RUN",
+      "exit_code": 0,
+      "supporting_files": {
+        ".local/g24/DEV024-GUI-20261115T035048/scope.json": {
+          "sha256": "ca788e3f70bcd22681211ab696c7348d22019f0485fc4038975ae8b8ec67af02",
+          "bytes": 332
+        }
+      }
+    }
+  ],
+  "s2_disposition": {
+    "S2-01": "DEV_FINAL_REGRESSION_PASS",
+    "S2-02": "REUSE_PLUS_V01",
+    "S2-03": "DEV_V01_OBSERVED",
+    "S2-04": "DEV_V02_OBSERVED",
+    "S2-05": "DEV_V03_OBSERVED",
+    "S2-06": "DEV_V04_OBSERVED",
+    "S2-07": "DEV_V04_LEDGER_REPORT_MATCH",
+    "S2-08": "DEV_SELF_GUI_PASS_INDEPENDENT_PENDING",
+    "S2-09": "DEV_QUERY_ACCEPTED_AND_P01_REACHED",
+    "S2-10": "DEV_NATURAL_PATH_COMPLETE_INDEPENDENT_NOT_RUN",
+    "S2-11": "DESIGN_HQ_OWNER_PENDING"
+  },
+  "not_run": [
+    "INDEPENDENT_GUI",
+    "DESIGN_NEW_ACCEPTANCE",
+    "BUILD_EXPORT_FPS",
+    "COMMIT_PUSH_PR",
+    "MAIN_MERGE",
+    "NEW_CI_PREFLIGHT",
+    "EXTERNAL_ISSUE_REPLY"
+  ],
+  "preserved": [
+    "DEV-022 OWNER_ACCEPTED/DONE",
+    "DEV-023 OWNER_ACCEPTED/DONE",
+    "DESIGN_24_ACCEPTED",
+    "Q03_Q04_Q05",
+    "W05_OBS01_A02_11",
+    "Q12_28",
+    "A01-Q12 PARTIAL",
+    "historical DPI/environment/helper bytes/Q12 ERROR2-to-7 handoff correction NOT_VERIFIED",
+    "initial console/Q12 R02 NOT_CAPTURED"
+  ],
+  "dev026": "HOLD",
+  "specification_change_required": false,
+  "raw_path_base": "Repository root; this dedicated worktree resolves .local/g24 as ../../g24",
+  "provenance_note": "Source hashes and temporal input correspondence are evidence indices, not actor identity or approval authentication"
+}

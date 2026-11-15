@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "task_id": "DEV-024",
+  "primary_agent_id": "AGT-DEV-0004",
+  "base_sha": "0a76a2e924ec0b661e3cdbd858ed6bfd665f3dc9",
+  "artifacts": [
+    {
+      "path": "docs/engineering/tasks/DEV-024_VS01_INTEGRATION_EVIDENCE.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-024_VS01_INTEGRATION_EVIDENCE.md",
+        "https://github.com/wisberry2022/MetroManager/issues/80#issuecomment-6888452975",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6888459436"
+      ],
+      "blob_sha": "8a5a77f01bef1f0a0b19547adee666db454fb9fd"
+    },
+    {
+      "path": "docs/engineering/gate3/DEV-024_VS01_EXECUTION_PLAN.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-024_VS01_INTEGRATION_EVIDENCE.md",
+        "https://github.com/wisberry2022/MetroManager/issues/80#issuecomment-6888452975",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6888459436"
+      ],
+      "blob_sha": "7445342fc90e671eae2e5bf7b30e9af435071f1c"
+    },
+    {
+      "path": "docs/engineering/gate3/DEV-024_VS01_VALIDATION_PLAN.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-024_VS01_INTEGRATION_EVIDENCE.md",
+        "https://github.com/wisberry2022/MetroManager/issues/80#issuecomment-6888452975",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6888459436"
+      ],
+      "blob_sha": "b6b24dacf3308aaf9f40f04ea89271dc4c6dc566"
+    },
+    {
+      "path": "docs/engineering/tasks/DEV-024_RESULT.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-024_VS01_INTEGRATION_EVIDENCE.md",
+        "https://github.com/wisberry2022/MetroManager/issues/80#issuecomment-6888452975",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6888459436"
+      ],
+      "blob_sha": "a4ca4830b33d91e4ffe6b34dcec0e7edabea382d"
+    },
+    {
+      "path": "tests/game/run_vs01_tests.gd",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-024_VS01_INTEGRATION_EVIDENCE.md",
+        "https://github.com/wisberry2022/MetroManager/issues/80#issuecomment-6888452975",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6888459436"
+      ],
+      "blob_sha": "a1b17cdb7db1fed3a210ae772c1ddc78433537b7"
+    },
+    {
+      "path": "tests/game/run_vs01_tests.gd.uid",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-024_VS01_INTEGRATION_EVIDENCE.md",
+        "https://github.com/wisberry2022/MetroManager/issues/80#issuecomment-6888452975",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6888459436"
+      ],
+      "blob_sha": "d57977b16a1354e6d08b889951bc5a12e92703b9"
+    },
+    {
+      "path": "docs/engineering/gate3/DEV-024_VS01_VALIDATION.json",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-024_VS01_INTEGRATION_EVIDENCE.md",
+        "https://github.com/wisberry2022/MetroManager/issues/80#issuecomment-6888452975",
+        "https://github.com/wisberry2022/MetroManager/issues/81#issuecomment-6888459436"
+      ],
+      "blob_sha": "6cc88e1de92eea58a65f2383aca221cc410acd83"
+    }
+  ]
+}
