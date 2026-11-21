@@ -1,0 +1,223 @@
+{
+  "task_id": "DSG-008",
+  "review_type": "EXISTING_EVIDENCE_AUDIT_NOT_NEW_GAME_EXECUTION",
+  "base_sha": "c699f7d0f191aebd9ecb912895e9f34c0aef8cda",
+  "experiment_base_sha": "d673435ce51f8f10604a93a54aa9ba3060d84ebf",
+  "final_spec": "PENDING",
+  "hash_checks": [
+    {
+      "kind": "representative_png",
+      "path": "docs/engineering/evidence/DEV-025_F08_LAYOUT_WIDE.png",
+      "expected": "7211d8a785fa6c06aa0e634c8ec4f805ce8588418fc3513bdf5ce2d0fc9edd06",
+      "actual": "7211d8a785fa6c06aa0e634c8ec4f805ce8588418fc3513bdf5ce2d0fc9edd06",
+      "raw_copy_match": true,
+      "match": true
+    },
+    {
+      "kind": "representative_png",
+      "path": "docs/engineering/evidence/DEV-025_F08_LAYOUT_NARROW.png",
+      "expected": "65653db3d4c176a485984f0aad4370fcbfc6d1edfaea14bc9e6981fe72dacf4a",
+      "actual": "65653db3d4c176a485984f0aad4370fcbfc6d1edfaea14bc9e6981fe72dacf4a",
+      "raw_copy_match": true,
+      "match": true
+    },
+    {
+      "kind": "representative_png",
+      "path": "docs/engineering/evidence/DEV-025_F08_FONT_DEFAULT.png",
+      "expected": "afee44b8deba46a604c051bbe6a985bfb258b2b0c5db5e01defd7cbb3febddf5",
+      "actual": "afee44b8deba46a604c051bbe6a985bfb258b2b0c5db5e01defd7cbb3febddf5",
+      "raw_copy_match": true,
+      "match": true
+    },
+    {
+      "kind": "representative_png",
+      "path": "docs/engineering/evidence/DEV-025_F08_FONT_SYSTEM.png",
+      "expected": "2f94a71df02dfc8b72b205744888b7336fb0505785b07f7c6d25a5dcadb20012",
+      "actual": "2f94a71df02dfc8b72b205744888b7336fb0505785b07f7c6d25a5dcadb20012",
+      "raw_copy_match": true,
+      "match": true
+    },
+    {
+      "kind": "representative_png",
+      "path": "docs/engineering/evidence/DEV-025_F08_FILTER_INTEGER.png",
+      "expected": "e3f98cd824e603475649c4cb946d6bb2d42db7ac071462a8c237e18cb2f23fe1",
+      "actual": "e3f98cd824e603475649c4cb946d6bb2d42db7ac071462a8c237e18cb2f23fe1",
+      "raw_copy_match": true,
+      "match": true
+    },
+    {
+      "kind": "representative_png",
+      "path": "docs/engineering/evidence/DEV-025_F08_FILTER_FRACTIONAL.png",
+      "expected": "1331c92ceac4c0ee0bf7577284c37bfc1ace42c1f55de7338eda778b9d4d75bf",
+      "actual": "1331c92ceac4c0ee0bf7577284c37bfc1ace42c1f55de7338eda778b9d4d75bf",
+      "raw_copy_match": true,
+      "match": true
+    },
+    {
+      "kind": "representative_png",
+      "path": "docs/engineering/evidence/DEV-025_F08_MAP_FOCUS.png",
+      "expected": "eb124076f5ec61a83da9ac0784145f0afc425067dc1bc0f2579da372fd332555",
+      "actual": "eb124076f5ec61a83da9ac0784145f0afc425067dc1bc0f2579da372fd332555",
+      "raw_copy_match": true,
+      "match": true
+    },
+    {
+      "kind": "representative_png",
+      "path": "docs/engineering/evidence/DEV-025_F08_MAP_OVERLAP.png",
+      "expected": "ad00b6a3c9b42c61e2ee5e147186c3dbd35ad4c289097e91b6e4ab8a29e4b142",
+      "actual": "ad00b6a3c9b42c61e2ee5e147186c3dbd35ad4c289097e91b6e4ab8a29e4b142",
+      "raw_copy_match": true,
+      "match": true
+    },
+    {
+      "kind": "manual_png",
+      "path": ".local/f08/manual-02/artifacts/001-READY.png",
+      "expected": "c4c03d26efbe402769d05cffc0d4c544308fbf79a9531f7be2e9f49885fbc733",
+      "actual": "c4c03d26efbe402769d05cffc0d4c544308fbf79a9531f7be2e9f49885fbc733",
+      "match": true
+    },
+    {
+      "kind": "manual_png",
+      "path": ".local/f08/manual-02/artifacts/002-MANUAL.png",
+      "expected": "0a8c57b32319382dc87f999aedce1af92442d79ed63befb45cd927405d57921a",
+      "actual": "0a8c57b32319382dc87f999aedce1af92442d79ed63befb45cd927405d57921a",
+      "match": true
+    },
+    {
+      "kind": "manual_png",
+      "path": ".local/f08/manual-02/artifacts/003-MANUAL.png",
+      "expected": "eb124076f5ec61a83da9ac0784145f0afc425067dc1bc0f2579da372fd332555",
+      "actual": "eb124076f5ec61a83da9ac0784145f0afc425067dc1bc0f2579da372fd332555",
+      "match": true
+    },
+    {
+      "kind": "manual_png",
+      "path": ".local/f08/manual-02/artifacts/004-MANUAL.png",
+      "expected": "ad00b6a3c9b42c61e2ee5e147186c3dbd35ad4c289097e91b6e4ab8a29e4b142",
+      "actual": "ad00b6a3c9b42c61e2ee5e147186c3dbd35ad4c289097e91b6e4ab8a29e4b142",
+      "match": true
+    },
+    {
+      "kind": "manual_png",
+      "path": ".local/f08/manual-02/artifacts/005-MANUAL.png",
+      "expected": "65653db3d4c176a485984f0aad4370fcbfc6d1edfaea14bc9e6981fe72dacf4a",
+      "actual": "65653db3d4c176a485984f0aad4370fcbfc6d1edfaea14bc9e6981fe72dacf4a",
+      "match": true
+    },
+    {
+      "kind": "manual_png",
+      "path": ".local/f08/manual-02/artifacts/006-MANUAL.png",
+      "expected": "bc18fd302a844e757d6b2d3ff8a55f98deef0f4935a550a4f95a8fb8b003c124",
+      "actual": "bc18fd302a844e757d6b2d3ff8a55f98deef0f4935a550a4f95a8fb8b003c124",
+      "match": true
+    },
+    {
+      "kind": "manual_png",
+      "path": ".local/f08/manual-02/artifacts/007-MANUAL.png",
+      "expected": "df1e7ae49eef4202597fcd355e81f9666ca5ab80a6f8cb1276b48747bedd15e2",
+      "actual": "df1e7ae49eef4202597fcd355e81f9666ca5ab80a6f8cb1276b48747bedd15e2",
+      "match": true
+    },
+    {
+      "kind": "events_path",
+      "path": ".local/f08/manual-02/artifacts/events.jsonl",
+      "expected": "c0833fc92f40789af7b1b109448e518f7619a1c87b2e38395696a5095fbba72e",
+      "actual": "c0833fc92f40789af7b1b109448e518f7619a1c87b2e38395696a5095fbba72e",
+      "match": true
+    },
+    {
+      "kind": "actions_path",
+      "path": ".local/f08/manual-02/sky-actions.json",
+      "expected": "4d28655f218d2db9a274ef6f3226e195e2c0da08c2d802fc7355e4eb7ff202bc",
+      "actual": "4d28655f218d2db9a274ef6f3226e195e2c0da08c2d802fc7355e4eb7ff202bc",
+      "match": true
+    },
+    {
+      "kind": "profile_csv",
+      "path": "docs/engineering/evidence/DEV-025_F08_PROFILE.csv",
+      "expected": "16bb84d50ef74fad1ed7a6a992ca2a0a58f3c7f20f04fb84a955a4ac2f3a0dae",
+      "actual": "16bb84d50ef74fad1ed7a6a992ca2a0a58f3c7f20f04fb84a955a4ac2f3a0dae",
+      "match": true
+    }
+  ],
+  "all_hashes_match": true,
+  "all_representative_raw_copies_match": true,
+  "profile_rows": 2639,
+  "manual_information_events": 6,
+  "manual_information_invariant": true,
+  "nonreset_controls": 12,
+  "nonreset_controls_invariant": true,
+  "pair_equivalence": [
+    {
+      "id": "PAIR-01",
+      "same_content": true,
+      "same_authority": true
+    },
+    {
+      "id": "PAIR-02",
+      "same_content": true,
+      "same_authority": true
+    },
+    {
+      "id": "PAIR-03",
+      "same_content": true,
+      "same_authority": true
+    },
+    {
+      "id": "PAIR-04",
+      "same_content": true,
+      "same_authority": true
+    },
+    {
+      "id": "PAIR-05",
+      "same_content": true,
+      "same_authority": true
+    },
+    {
+      "id": "PAIR-06",
+      "same_content": true,
+      "same_authority": true
+    },
+    {
+      "id": "PAIR-07",
+      "same_content": true,
+      "same_authority": true
+    },
+    {
+      "id": "PAIR-08",
+      "same_content": true,
+      "same_authority": true
+    },
+    {
+      "id": "PAIR-09",
+      "same_content": true,
+      "same_authority": true
+    },
+    {
+      "id": "PAIR-10",
+      "same_content": true,
+      "same_authority": true
+    },
+    {
+      "id": "PAIR-11",
+      "same_content": true,
+      "same_authority": true
+    },
+    {
+      "id": "PAIR-12",
+      "same_content": true,
+      "same_authority": true
+    }
+  ],
+  "observed_RD03_RD07": {
+    "capture": "manual-02/002-MANUAL",
+    "layout": "B",
+    "focus": "Action_undo",
+    "scroll_y": 0,
+    "judgment": "ISSUE_OBSERVED",
+    "note": "PNG and raw observation reviewed; offscreen focus. Not a current product-wide defect."
+  },
+  "new_game_automatic": "NOT_RUN",
+  "new_gui": "NOT_RUN",
+  "new_build": "NOT_RUN"
+}
