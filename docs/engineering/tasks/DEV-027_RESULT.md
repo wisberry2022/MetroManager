@@ -1,5 +1,7 @@
 # DEV-027 — 이슈 철회·착수 계획 문서 PR 전환 결과
 
+> **현재 후속 — 2026-11-21:** PR #149 병합 후 #146 Design 사전 의견을 반영한 문서 보완이다. 제출 base는 `de0f03f9d2fcc301940a4176f1359b2788a51950`, 브랜치는 `codex/DEV-027-design-plan-followup`이며 현재 권한·결과는 §5을 따른다. 앞선 제출 식별·검증은 PR #149 당시 기록으로 보존한다. 제품 구현·실행·최종 L2·main 병합은 별도 대기다.
+
 - 작성: Development / AGT-DEV-0004 / 2026-11-21 (Asia/Seoul).
 - 상태: **DOCUMENT_REVIEW / PRODUCT_IMPLEMENTATION_NOT_RUN**.
 - 제출 base: `f047edbf67a6f888eda5eed24309b78554b3c2ed`.
@@ -50,6 +52,30 @@ Owner의 후속 요청에 따라 [#148](https://github.com/wisberry2022/MetroMan
 남은 제품 권한은 계획 §10의 로컬 구현·제품 실행 및 미래 구현 산출물의 Git 제출이다. Design L2·독립 실행/수용, RFC-DEV-027-01 Planning 답변, main 병합·HQ/Owner 인수도 별도다. DEV-026은 Stage 3 필수 편입/착수 준비 상태를 유지하며 과거 HOLD 또는 제품 DONE으로 변경하지 않는다.
 
 새 명세 변경 필요: **확정 없음**. 기존 DI-03 의미 확인만 OPEN이며 이번 변환으로 닫지 않았다.
+
+## 5. Design 사전 의견 문서 반영 — 2026-11-21
+
+- 제출 base: `de0f03f9d2fcc301940a4176f1359b2788a51950` / `codex/DEV-027-design-plan-followup`.
+- Owner의 현 요청·문서4개 제출 권한: [티켓 §5](DEV-027_W04B_VS02_IMPLEMENTATION.md).
+- 근거: [Track A](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7053550740), [Track B](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7053570152). 앞선 변환/검증/CI는 PR #149 당시 이력이다.
+
+| 반영 항목 | 이번 변경·확인 수준 |
+| --- | --- |
+| 사전 의견과 권한 | 비의존 모델 디자인 선행 차단 없음 / 실제 공급·UI L2_FINAL_PENDING / 제품 NOT_RUN. 문서 병합·Design 의견을 실행 승인으로 사용하지 않음 |
+| 접수·사본 | 대기 당시 제출 입력과 현재 초안, 심사/보류 근거·설득 사용 이력·허가 계획을 별도 표현. 재검사 실패·현재 행동·명시적 새 요청·다른 초안 대체 금지의 공급 요구 명시 |
+| 다음 L2 입력 | #146 01~14·RP/EX별 실제 코드·고정본·표본·기대/관측·원본을 한 패킷에 연결. 부족 행만 보완 |
+| 제한 범위 | DI-03 대상/반복 효과 종속 부분만 보류. F08 전체 확정/같은 GUI 반복/제품 후보 경로 확대 없음 |
+| DEV-026 | 원문 계약·검증 계획은 별도 DEV-026 문서 PR. 두 작업의 문서/제품 권한 구분 |
+
+실제 변경은 기존 계획·티켓·결과서·PROVENANCE **4개**다. 원문 후보 경로65행/고유63개, DI-02 확률/추출안 및 DI-03 RFC 미결, 이전 제품 증거와 NOT_RUN은 보존한다. 현재 출처 JSON은 이번 base/문서 blob으로 갱신하고 PR #149 제출 당시 manifest는 [고정 원본](https://github.com/wisberry2022/MetroManager/blob/d098d47e32159e5438aff7d702ff19f2c5d37d0f/docs/engineering/tasks/DEV-027_PROVENANCE.json)에 보존한다.
+
+문서 검사: 실행 후 아래에 기록한다. `.local/validation/design-plan-followup/`에 정적 감사·로그를 분리 보관한다. 게임 자동/프로젝트 로드/GUI·독립 실행/seed 탐색/빌드/export는 모두 **NOT_RUN**이다.
+
+- `.venv/Scripts/python.exe tools/policy.py doctor` 및 `check`: PASS / exit0. 파일708개·GDScript53개 정적 formatter/linter, 포맷 변경 없음. 로그 `doctor.log`·`check.log`.
+- `문서 경로·링크·UTF-8/LF·출처 blob, 후보 경로/DI-02·03 불변`: PASS. 변경4개·Markdown blob3개·상대 링크7개·고정 SHA 링크9개·후보65행/고유63개·DI-02/03 원문 대조. 일회성 문서 감사 `audit_docs.py`의 출력은 `audit.json`에 보관.
+- diff --check 및 정상 Commit 후 preflight: 제출 단계에 확인, 실제 결과는 PR에 연결.
+- 필수 CI: 새 head에서 확인, PR #149 CI를 재사용하지 않는다.
+- 새 게임 명세 변경 필요 확정 없음. RFC-DEV-027-01 OPEN, 실제 L2·제품 수용·구현 승인·main 병합 별도.
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-027

@@ -1,5 +1,7 @@
 # DEV-027 — W04B·VS-02 착수 계획 및 문서 제출 티켓
 
+> **현재 후속 — 2026-11-21:** PR #149 병합 후 #146 Design 사전 의견을 반영한 문서 보완이다. 제출 base는 `de0f03f9d2fcc301940a4176f1359b2788a51950`, 브랜치는 `codex/DEV-027-design-plan-followup`이며 현재 권한·결과는 §5을 따른다. 앞선 제출 식별·검증은 PR #149 당시 기록으로 보존한다. 제품 구현·실행·최종 L2·main 병합은 별도 대기다.
+
 - 담당: Development / AGT-DEV-0004 / 2026-11-21 (Asia/Seoul).
 - 문서 제출: **OWNER_DOCUMENT_PR_REQUESTED / PLAN_REVIEW**.
 - 제품 작업: **IMPLEMENTATION_AUTH_PENDING / PRODUCT_VALIDATION_NOT_RUN**.
@@ -49,6 +51,22 @@
 ## 4. 이번 문서 제출 종료 조건
 
 원래 계획의 의미/변경 후보/승인 경계를 보존한 로컬 문서4개를 검증하여 PR로 제출하고, 실제 head의 `policy`·`department-policy`를 확인한다. #148 철회와 #146/#104의 대체 PR 연결을 확인한다. 문서 제출 완료는 구현 계획의 최종 승인이나 제품 DONE이 아니다.
+
+## 5. PR #149 병합·Design 회신 후 문서 보완 권한 — 2026-11-21
+
+Owner의 이번 개발 대화 요청:
+
+> 149 PR이 main에 머지되었습니다. 당신의 계획서를 읽고 디자이너 에이전트가 146번 이슈에 코멘트를 등록하였으니 확인하여, DEV-027,026에서 수정해야할 부분이 있다면 수정하여 PR 생성해주세요
+
+[PR #149](https://github.com/wisberry2022/MetroManager/pull/149)의 병합 main `de0f03f9d2fcc301940a4176f1359b2788a51950`와 제출 head `d098d47e32159e5438aff7d702ff19f2c5d37d0f`의 tree가 같음을 확인했다. 최초 문서 PR 제출/CI 기록은 이전 결과로 보존한다.
+
+- 이번 브랜치: `codex/DEV-027-design-plan-followup` → `main`.
+- 허용: §2의 동일한 개발 문서4개 수정·문서 정적 검사·정상 Commit·일반 Push·PR·실제 head 필수 CI 확인. 기간은 이번 보완 PR 및 같은 문서 검수 대응 종료/Owner 철회까지.
+- 근거: [Track A](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7053550740)·[Track B](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7053570152)의 사전 이견 없음과 실제 공급/L2 PENDING 구분.
+- 제외: 제품/게임 테스트·실험, 후보41개 구현, DEV-026 제품 변경, 정책/CI·타 부서 문서, main 병합/릴리스. 제품 구현·실행 및 미래 구현 Git 권한은 별도다.
+- DEV-026 자체 문서5개는 별도 `codex/DEV-026-design-plan-followup` PR로 처리한다. 현재 PR에는 섞지 않는다.
+
+계획 §3·4.2·7.3·11에 사전 의견/실제 수용 상태, 제출 사본·초안, 실제 공급/증거 항목, 종속 부분만의 차단을 반영했다. 후보 경로41/24개는 그대로이며 새 정책·수치·Stage DONE을 선언하지 않는다.
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-027
