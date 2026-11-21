@@ -2,7 +2,7 @@
   "schema_version": 1,
   "task_id": "DEV-026",
   "primary_agent_id": "AGT-DEV-0004",
-  "base_sha": "ae614d922c837eddf4e615fda985bd978e217461",
+  "base_sha": "e2c55a6845e496172e2e8c43af1aac83f158e200",
   "artifacts": [
     {
       "path": "docs/engineering/tasks/DEV-026_S01_EXCEPTION_SCOPE.md",
@@ -11,11 +11,11 @@
       "contributors": [],
       "source_refs": [
         "docs/engineering/tasks/DEV-026_S01_EXCEPTION_SCOPE.md",
-        "https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7056903693",
-        "https://github.com/wisberry2022/MetroManager/pull/154"
+        "https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7057161624",
+        "https://github.com/wisberry2022/MetroManager/pull/155"
       ],
-      "old_blob_sha": "9f5417c57b0f24caa258d11216317ece972c08e6",
-      "blob_sha": "d47530160a0b5c750f70fe3e27189eaedf1283b9"
+      "old_blob_sha": "d47530160a0b5c750f70fe3e27189eaedf1283b9",
+      "blob_sha": "eb8c06bbec89c683ed30059dfa652c925275e058"
     },
     {
       "path": "docs/engineering/gate3/DEV-026_S01_EXCEPTION_CONTRACT.md",
@@ -24,11 +24,11 @@
       "contributors": [],
       "source_refs": [
         "docs/engineering/tasks/DEV-026_S01_EXCEPTION_SCOPE.md",
-        "https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7056903693",
-        "https://github.com/wisberry2022/MetroManager/pull/154"
+        "https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7057161624",
+        "https://github.com/wisberry2022/MetroManager/pull/155"
       ],
-      "old_blob_sha": "c2b521cd6b4345e6049c4d44afd78f9e43dd777a",
-      "blob_sha": "d2aba58dfbe9c84f4a2a61f0f83026b9b6189358"
+      "old_blob_sha": "d2aba58dfbe9c84f4a2a61f0f83026b9b6189358",
+      "blob_sha": "16029aec2ac29fcb5722006e1db65bcef2fad945"
     },
     {
       "path": "docs/engineering/tasks/DEV-026_RESULT.md",
@@ -37,11 +37,11 @@
       "contributors": [],
       "source_refs": [
         "docs/engineering/tasks/DEV-026_S01_EXCEPTION_SCOPE.md",
-        "https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7056903693",
-        "https://github.com/wisberry2022/MetroManager/pull/154"
+        "https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7057161624",
+        "https://github.com/wisberry2022/MetroManager/pull/155"
       ],
-      "old_blob_sha": "ea352bb9dcceba1d4e1e566dcb71f42236c7235f",
-      "blob_sha": "6a1f1fbefc74c6c591948f8e42c1fdee2c403b8d"
+      "old_blob_sha": "6a1f1fbefc74c6c591948f8e42c1fdee2c403b8d",
+      "blob_sha": "21d08bdfd42e9952c718d4147763d03fb82b6f1b"
     },
     {
       "path": "docs/engineering/evidence/DEV-026_S01_EXCEPTION_EVIDENCE.md",
@@ -50,11 +50,11 @@
       "contributors": [],
       "source_refs": [
         "docs/engineering/tasks/DEV-026_S01_EXCEPTION_SCOPE.md",
-        "https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7056903693",
-        "https://github.com/wisberry2022/MetroManager/pull/154"
+        "https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7057161624",
+        "https://github.com/wisberry2022/MetroManager/pull/155"
       ],
-      "old_blob_sha": "0d80bcc3f5103ffb17e7e6e93f780cd5fc0a0220",
-      "blob_sha": "d849a5a37897134d96b471648e6619fddf82e793"
+      "old_blob_sha": "d849a5a37897134d96b471648e6619fddf82e793",
+      "blob_sha": "da9c547eb6776dccf3e5c5481782ecaec11f640d"
     }
   ]
 }
