@@ -8,6 +8,7 @@ signal exit_requested
 signal focus_region_requested(region: Control)
 
 const Format = preload("res://scripts/ui/operations_view.gd")
+const Contract = preload("res://scripts/ui/s01_observation_contract.gd")
 const FUND_NAMES = {
 	"cash": "총현금",
 	"restricted": "제한현금",
@@ -33,17 +34,29 @@ var _days: OptionButton
 var _range_last: int = -1
 var _confirmed: Dictionary = {}
 var _first_day: int = -1
+var _binding: RefCounted
+var _scope: String = ""
+var _floor_revision: int = -1
+
+
+func bind_session(value: RefCounted) -> void:
+	if _binding == null:
+		_binding = value
+		_scope = value.observation_scope()
 
 
 func _ready() -> void:
 	Format.add_text(self, labels, "title", "재무·보고 · P07")
+	labels.title.focus_mode = Control.FOCUS_ALL
 	Format.add_text(self, labels, "current", "")
 	Format.add_text(self, labels, "activity", "")
 	Format.add_text(self, labels, "selection", "마감 보고일 선택")
 	_days = OptionButton.new()
 	_days.name = "ReportDay"
 	_days.item_selected.connect(
-		func(index: int) -> void: report_requested.emit(_days.get_item_id(index))
+		func(index: int) -> void:
+			if index >= 0 and index < _days.item_count and day_allowed(_days.get_item_id(index)):
+				report_requested.emit(_days.get_item_id(index))
 	)
 	add_child(_days)
 	controls["day"] = _days
@@ -64,15 +77,21 @@ func _ready() -> void:
 		controls[id].name = "P07_" + id
 
 
-func present(state: Dictionary) -> bool:
-	if Format.is_older(state, shown):
+func present(state: Variant) -> bool:
+	var check := Contract.inspect(state, _scope, _floor_revision)
+	if check.discard_observation or (check.global_current_valid and Format.is_older(state, shown)):
 		return false
+	state = state if check.global_current_valid and _binding != null else {}
+	if not state.is_empty():
+		_floor_revision = maxi(_floor_revision, state.view_revision)
 	shown = state.duplicate(true)
 	var outer := Format.packet(state, "finance_ui")
-	var report := Format.dictionary(outer.get("report"))
+	var report := Contract.finance_report(
+		state, _scope, _binding.finance_report_day() if _binding != null else -1
+	)
 	labels.current.text = Format.failure("재무", outer)
 	labels.activity.text = ""
-	if outer.get("status") == "READY" and outer.get("available") == true:
+	if not outer.is_empty():
 		labels.current.text = (
 			"현재 재무 · 게임일 %d / 게임분 %d\n%s"
 			% [
@@ -84,10 +103,16 @@ func present(state: Dictionary) -> bool:
 		labels.activity.text = (
 			"당일 누계 · 미마감\n" + activity_text(Format.dictionary(outer.get("current_activity")))
 		)
+		if (
+			not Format.numbers(Format.dictionary(outer.get("current_activity")), ["day_id"])
+			or outer.current_activity.day_id != outer.observation.day_id
+		):
+			labels.activity.text = "당일 재무 자료의 관측 시점을 확인 중입니다"
 	labels.report.text = report_text(report)
 	_update_days(outer, report)
 	_update_query(Format.packet(state, "next_business_ui"), report)
-	return true
+	controls.refresh.disabled = not check.global_current_valid
+	return check.global_current_valid and _binding != null
 
 
 func show_result(result: Dictionary) -> void:
@@ -99,7 +124,14 @@ func show_result(result: Dictionary) -> void:
 
 
 func _update_days(outer: Dictionary, report: Dictionary) -> void:
-	var last: Variant = Format.dictionary(outer.get("report_day_range")).get("last", 0)
+	var range_value := Format.dictionary(outer.get("report_day_range"))
+	var last: Variant = range_value.get("last", 0)
+	if (
+		not Contract.integers(range_value, ["first", "last"])
+		or range_value.first != 1
+		or last != Contract.dictionary(shown.get("clock")).get("day_id", 0) - 1
+	):
+		last = 0
 	if not last is int or last < 0:
 		last = 0
 	if last != _range_last:
@@ -108,6 +140,7 @@ func _update_days(outer: Dictionary, report: Dictionary) -> void:
 		for day: int in range(1, last + 1):
 			_days.add_item("마감일 %d" % day, day)
 	_days.disabled = last == 0
+	_days.select(-1)
 	for index: int in _days.item_count:
 		if _days.get_item_id(index) == report.get("day_id"):
 			_days.select(index)
@@ -118,7 +151,10 @@ func _update_query(outer: Dictionary, report: Dictionary) -> void:
 	_first_day = -1
 	var first := Format.dictionary(outer.get("first_valid_report"))
 	var allowed := Format.dictionary(outer.get("allowed_actions"))
-	if allowed.get("query") == true and first.get("day_id") is int:
+	if (
+		Contract.enabled(allowed.get("query"))
+		and Format.numbers(first, ["day_id", "completed", "service_minutes", "fare"])
+	):
 		_first_day = first.day_id
 	controls.first.disabled = _first_day < 1
 	controls.query.disabled = true
@@ -137,7 +173,7 @@ func _update_query(outer: Dictionary, report: Dictionary) -> void:
 		or operations.get("completed") != first.get("completed")
 		or operations.get("service_minutes") != first.get("service_minutes")
 		or value.get("fare") != first.get("fare")
-		or allowed.get("query") != true
+		or not Contract.enabled(allowed.get("query"))
 	):
 		return
 	_confirmed = {"report_key": outer.report_key, "first_valid_report": first.duplicate(true)}
@@ -146,13 +182,38 @@ func _update_query(outer: Dictionary, report: Dictionary) -> void:
 
 
 func _select_first() -> void:
-	if _first_day > 0 and is_visible_in_tree():
+	if day_allowed(_first_day):
 		report_requested.emit(_first_day)
 
 
 func _query() -> void:
-	if not _confirmed.is_empty() and not controls.query.disabled and is_visible_in_tree():
+	if confirmation_current(_confirmed):
 		query_requested.emit(_confirmed.duplicate(true))
+
+
+func day_allowed(day: int) -> bool:
+	return (
+		_binding != null
+		and is_visible_in_tree()
+		and not _days.disabled
+		and day > 0
+		and day <= _range_last
+		and Contract.root_valid(shown)
+		and shown.run_scope == _scope
+	)
+
+
+func confirmation_current(value: Dictionary) -> bool:
+	return (
+		_binding != null
+		and is_visible_in_tree()
+		and not controls.query.disabled
+		and not value.is_empty()
+		and value == _confirmed
+		and Contract.root_valid(shown)
+		and shown.run_scope == _scope
+		and not Contract.finance_report(shown, _scope, _binding.finance_report_day()).is_empty()
+	)
 
 
 static func funds_text(value: Dictionary) -> String:
@@ -163,7 +224,10 @@ static func funds_text(value: Dictionary) -> String:
 		rows.append("%s %d" % [FUND_NAMES[key], value[key]])
 	for key: String in ["restricted_by_project", "reserved_by_project"]:
 		var buckets := Format.dictionary(value.get(key))
-		for id: String in buckets:
+		for id: Variant in buckets:
+			if not id is String or not Format.numbers(buckets, [id]):
+				rows.append("사업별 금액 자료를 확인할 수 없습니다")
+				continue
 			rows.append(
 				(
 					"%s · %s %s"

@@ -8,6 +8,7 @@ const Prediction = preload("res://scripts/model/prediction_state.gd")
 const Tender = preload("res://scripts/model/public_tender.gd")
 const Predictor = preload("res://scripts/simulation/demand_predictor.gd")
 const OPERATIONS_UI_REVISION := "DEV023-UI-1"
+const OBSERVATION_REVISION := "DEV026-S01-EX-v0.1"
 
 var pipeline: Pipeline
 var network: Network
@@ -64,6 +65,8 @@ func snapshot() -> Dictionary:
 		else ("READY" if not report.is_empty() else "UNAVAILABLE")
 	)
 	return {
+		"ui_contract_revision": OBSERVATION_REVISION,
+		"run_scope": _report_scope,
 		"view_revision": revision,
 		"data_version": current.data_version,
 		"clock": clock,
@@ -108,6 +111,16 @@ func snapshot() -> Dictionary:
 		"finance_ui": _finance_snapshot(current, daily),
 		"next_business_ui": _next_business_snapshot(current)
 	}
+
+
+## 기대 실행 소속은 수신 자료가 아닌 실제 Session에서 고정한다.
+func observation_scope() -> String:
+	return _report_scope
+
+
+## 선택 보고일의 권위 문맥. 조회는 시간/원장을 변경하지 않는다.
+func finance_report_day() -> int:
+	return pipeline.clock.minute / 1440 if _finance_day < 0 else _finance_day
 
 
 func dispatch(command: Dictionary) -> Dictionary:
@@ -347,16 +360,20 @@ func _finance_snapshot(current: Dictionary, daily: Dictionary) -> Dictionary:
 			"report": _finance_report(day)
 		}
 	)
-	if (
-		not _same_observation(current, current)
-		or not _valid_funds(current.get("funds"))
-		or not _valid_report_totals(daily, current.day_id)
-		or daily.payment > 9223372036854775807 - daily.debt_payment
-	):
+	var valid_observation := _same_observation(current, current)
+	var valid_funds := valid_observation and _valid_funds(current.get("funds"))
+	var valid_activity: bool = (
+		valid_observation
+		and _valid_report_totals(daily, current.day_id)
+		and daily.payment <= 9223372036854775807 - daily.debt_payment
+	)
+	if valid_funds:
+		packet.current_funds = current.funds.duplicate(true)
+	if valid_activity:
+		packet.current_activity = daily.duplicate(true)
+		packet.current_activity["cash_payment"] = daily.payment + daily.debt_payment
+	if not valid_funds or not valid_activity:
 		return _ui_failure(packet, "INVALID_FINANCE_SUPPLY")
-	packet.current_funds = current.funds.duplicate(true)
-	packet.current_activity = daily.duplicate(true)
-	packet.current_activity["cash_payment"] = daily.payment + daily.debt_payment
 	return packet
 
 

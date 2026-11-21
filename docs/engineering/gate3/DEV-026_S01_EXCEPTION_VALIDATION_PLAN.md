@@ -1,6 +1,6 @@
 # DEV-026 — 적용 사례·검증 계획
 
-> **현재 상태 — 2026-11-21:** STAGE3_SCOPE_CONFIRMED / IMPLEMENTATION_READINESS_PENDING / PRODUCT_VALIDATION_NOT_RUN. #146의 사전 의견은 수신했으며 실제 공급·제품 L2/검증 수용은 PENDING이다. 현재 범위·권한은 §4을 따른다. 그 앞의 2026-11-14 검토·선행 티켓 대기·HOLD·검증 기록은 당시 이력으로 보존한다. 이번 승인은 문서 보완·Commit/Push/PR이며 제품 구현·실행·main 병합은 별도다.
+> **현재 상태 — 2026-11-21:** PR_REVIEW_PARTIAL / TEST_PATH_REASSIGNMENT_PENDING / PRODUCT_L2_PENDING. Owner가 기존23개 파일의 Commit·Push·Draft PR 공유를 요청했다([티켓 §9](../tasks/DEV-026_S01_EXCEPTION_SCOPE.md)). 기존 GUI35개 실패·검사기 재지정 승인 대기·Design 수용 대기는 유지한다. 앞선 HOLD/NOT_RUN·로컬 검토 기록은 당시 이력이며 main 병합은 별도 승인이다.
 
 - 기준: `9e6154e926d44cdbbb2fb117fb7d3fc56d152eac` / AGT-DEV-0004 / 2026-11-14.
 - 상태: **DOCUMENT_REVIEW / PLANNED_NOT_RUN / OWNER_IMPLEMENTATION_DEFERRED**.
@@ -105,6 +105,18 @@ Track B는 예외·실행 소속·수명·복귀, Track A는 기능 흐름/신�
 Stage 2 DONE·DEV-023 24조건·DEV-024 1115A/1115B·DEV-025 공급 종료와 원래 SHA/수용 한계를 유지한다. Track B RD별 새 심사/F08 선택·적용은 #92 별도다. RFC-DEV-026-01은 실제 계약 반영/제품 수용까지 구분해 OPEN으로 남긴다.
 
 현재 새 자동 게임 검사·Godot 로드·실제 GUI/플레이·독립 실행·부분 자료/Session/복귀 실험·빌드/export·성능은 **모두 NOT_RUN**이다. 위 표의 기대값은 관측된 PASS가 아니다.
+
+## 5. 로컬 실행 전환 — 2026-11-21
+
+Owner의 DEV-026 우선 진행 원문과 로컬 실행 권한은 [티켓 §8](../tasks/DEV-026_S01_EXCEPTION_SCOPE.md)이다. 앞의 PLANNED_NOT_RUN·미구현은 작성 당시 기록이며 현재 실행 여부는 [실행 색인](../evidence/DEV-026_S01_EXCEPTION_EVIDENCE.md)과 [기계 판독 결과](../evidence/DEV-026_S01_EXCEPTION_RESULTS.json)를 따른다. 기존20사례/copy_ids·EX-05/16/18 제외/한정 의미는 변경하지 않았다.
+
+신규 `w026_ui_fixtures.gd`는 실제 Session 생성/모델 준비와 소비 사본 변조를 구분한다. `run_s01_exception_tests.gd`는 조건별 단언과 실패 exit 검사를 제공한다. `run_s01_exception_gui_cases.gd`는 TEST_ONLY 표식을 유지하며 실제 OS 입력·화면·선택/포커스·Session 효과 해시를 기록한다. 소비 fixture를 실제 제품 자연 완주로 세지 않는다.
+
+원본 로그는 전용 worktree의 `.local/validation/DEV-026/`에 보존한다. 미커밋 시험본은 full base SHA+변경 파일 SHA-256 및 실행별 source-hashes.json으로 고정하며 앞선 실패/보완/최종 판정을 분리한다. 자동 검사 개수와 실제 GUI 조작 수, 프로젝트 로드/빌드/Design 심사를 합산하지 않는다. 데이터 초기화 실패는 격리 프로젝트 사본에서 실제 main의 종료1을 확인하고 제품 DATA는 그대로 둔다.
+
+P06/P07 기존 GUI 소비 전환기의 경로 재지정 검토는 [티켓 §8.1](../tasks/DEV-026_S01_EXCEPTION_SCOPE.md)에 있다. 검사의 기대값을 새 구현에 맞춰 낮추지 않고 실제 Session 소속과 선택일 문맥을 맞추는 범위다. 승인 전에는 해당 파일을 수정하지 않는다. 관련 잔여는 실제 검증 결과서에 명시한다.
+
+DEV 자체 자동·GUI는 본 패킷, 독립 실행 주체/권한·Track B 실제 공급 L2·Design 검증 수용은 PENDING이다. Track A W04B 신규 실제 공급은 DEV-027에서 연결한다. 현재 패킷을 Stage DONE·최신 main 전체 자연 완주·RD/F08 최종 심사로 표시하지 않는다.
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-026

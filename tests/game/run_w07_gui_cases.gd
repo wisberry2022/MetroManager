@@ -48,8 +48,7 @@ func _build() -> void:
 
 
 func _choose(index: int) -> void:
-	_view.session = Fixtures.create(Fixtures.CASES[index])
-	_view.reset_observation()
+	_view = _view.replace_session(_view, Fixtures.create(Fixtures.CASES[index]))
 	print("W07_CASE_READY ", Fixtures.CASES[index])
 
 

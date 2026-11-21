@@ -1,6 +1,8 @@
 # DEV-026 — DSG-008 후속 계약·적용 범위 검토 티켓
 
-> **현재 상태 — 2026-11-21:** STAGE3_SCOPE_CONFIRMED / IMPLEMENTATION_READINESS_PENDING / PRODUCT_VALIDATION_NOT_RUN. #146의 사전 의견은 수신했으며 실제 공급·제품 L2/검증 수용은 PENDING이다. 현재 범위·권한은 §7을 따른다. 그 앞의 2026-11-14 검토·선행 티켓 대기·HOLD·검증 기록은 당시 이력으로 보존한다. 이번 승인은 문서 보완·Commit/Push/PR이며 제품 구현·실행·main 병합은 별도다.
+> **현재 상태 — 2026-11-21:** PR_REVIEW_PARTIAL / TEST_PATH_REASSIGNMENT_PENDING / PRODUCT_L2_PENDING. Owner가 기존23개 파일의 Commit·Push·Draft PR 공유를 요청했다([티켓 §9](DEV-026_S01_EXCEPTION_SCOPE.md)). 기존 GUI35개 실패·검사기 재지정 승인 대기·Design 수용 대기는 유지한다. 앞선 HOLD/NOT_RUN·로컬 검토 기록은 당시 이력이며 main 병합은 별도 승인이다.
+
+> **이전 문서 제출 상태 — 2026-11-21:** STAGE3_SCOPE_CONFIRMED / IMPLEMENTATION_READINESS_PENDING / PRODUCT_VALIDATION_NOT_RUN. #146의 사전 의견은 수신했으며 실제 공급·제품 L2/검증 수용은 PENDING이다. 현재 범위·권한은 §7을 따른다. 그 앞의 2026-11-14 검토·선행 티켓 대기·HOLD·검증 기록은 당시 이력으로 보존한다. 이번 승인은 문서 보완·Commit/Push/PR이며 제품 구현·실행·main 병합은 별도다.
 
 - 담당: Development / AGT-DEV-0004 / 2026-11-14.
 - 현재 상태: **DOCUMENT_REVIEW / CONTRACT_PROPOSED / OWNER_IMPLEMENTATION_DEFERRED**.
@@ -126,6 +128,36 @@ DEV-026 공통 공급/생명주기 → DEV-027 Session/호스트 통합 → 해�
 DI-03의 E01 대상 동/OD·추가 발생/중첩은 Planning 미결이며 종속 W04B 연결만 보류한다. DEV-026 전체 선행조건이나 새 폰트/배치·F08 확정 조건이 아니다. Track B RD별 새 심사/F08-01~04 선택·적용은 #92 별도이며 이번 회신을 RD 최종 판정으로 바꾸지 않는다.
 
 같은 Session·새 Session, 실제 제품·수신 fixture, DEV 자체·독립 실행·Design 심사를 구별한 한 패킷을 제출한다. 기존 Stage 2 DONE·한정 수용과 과거 NOT_VERIFIED/NOT_CAPTURED를 보존한다. 추가 게임 명세 변경 필요는 현재 확정하지 않았으며 실제 차이만 RFC로 연결한다.
+
+## 8. 로컬 구현·검증 착수 — 2026-11-21
+
+Owner 원문(본 개발 대화): “개발 에이전트 두 PR이 모두 main에 머지되었습니다. 우선 DEV-026부터 작업 진행해주세요”.
+
+PR #151 병합 `b319edb2222ae993b3fa5b74694d55f9f833fd2d`, PR #150 병합/착수 base `ecb2708bfa7bd3230d56c60b910d6831511953c6`을 확인했다. 브랜치는 `codex/DEV-026-s01-exception-implementation`, 담당 AGT-DEV-0004다.
+
+이 요청을 병합된 공동 계획 §8.2의 정확한24개 경로 내 DEV-026 로컬 구현·관련 자동/직접 영향 회귀·프로젝트 로드·DEV 자체 GUI 경계 검증 착수 승인으로 적용한다. 최초20개에 P06/P07 및 검증 전환4개를 포함한 목록은 §7.3의 고정 계획과 같다. 신규 파일/UID도 경로에 계수하며 목록 밖 제품 수정은 확대하지 않는다. 실제 변경 목록·명령·base+파일 해시·결과는 결과서와 증거 색인에 기록한다.
+
+목표는 최소 root 계약/Session 소속, 순수 지역 검사와 입력 제한, 새 Session의 새 전체 View, 같은 Session 복귀·P07 FIXED_DAY/확인 사본 및 옛 callback 차단이다. W04B 실제 공급은 DEV-027 후속이며 이번에 가짜 모델/대기를 추가하지 않는다. DI-03/E01 미결은 DEV-026의 선행 차단이 아니다.
+
+현재 요청은 로컬 결과를 먼저 검토하는 기존 제출 절차를 유지한다. 이번 구현물의 Commit·Push·PR·main 병합·릴리스/배포, 독립 실행 주체의 권한 및 Design 최종 제품 L2 수용은 포함하지 않는다. 최초 문서와20사례·Stage 2 기존 수용/미확인을 보존한다.
+
+### 8.1 회귀 전환기 경로 재지정 검토
+
+구현 대조에서 기존 `tests/game/run_operations_gui_cases.gd`의 `_consumer_cases`가 실제 Session binding 없이 P06/P07을 만들고, 여러 실행의 과거 소비 표본을 같은 View에 주입한 뒤 `shown={}`로 하한을 되감는 것을 확인했다. 새 Session 소속/수신 하한·고정 보고일 계약에서는 같은 시험 전제를 유지할 수 없다. 제품 검사를 완화하지 않고 시험 자체의 독립 Session/View와 보고 식별 문맥을 명시해야 한다.
+
+제안은 **최대24개 경로를 유지**하며 `tests/game/run_operations_ui_tests.gd` 수정 후보 대신 `tests/game/run_operations_gui_cases.gd`를 수정 후보로 재지정하는 것이다. 기존 공급 자동검사는 수정 없이 회귀 실행하고, 신규 root 메타데이터·부분 재무 공급 검증은 승인 목록의 `run_s01_exception_tests.gd`에서 수행한다. 기존 GUI 자동검사의 단언/과거 공개 증거는 보존하고 소비 표본 전환/실제 binding·선택 보고일 문맥만 정렬한다. 이 경로 재지정은 Owner 확인 전 미적용이다. 기존 파일을 수정하지 않은 재검사 `operations-02`는245개 중35개 FAIL·exit1이며, 남은 실패는 `_consumer_cases()`에 모여 있다. 다른 승인 경로의 신규334개·W07 322개 경계 검사는 PASS이고 로컬 결과23개 파일을 검토 대상으로 공급한다. 전체 제품 검증 종료/수용은 선언하지 않는다.
+
+## 9. 현재 작업본 PR 공유 승인 — 2026-11-21
+
+Owner 원문(본 개발 대화): “개발 에이전트. 작업 내용을 PR로 만들어주세요”. 직전 검토 결과23개 파일·기존 GUI35개 실패·검사기 경로 재지정/Design 수용 대기를 보고한 뒤 받은 요청이다.
+
+대상은 `wisberry2022/MetroManager`, 작업 DEV-026 / AGT-DEV-0004, 브랜치 `codex/DEV-026-s01-exception-implementation` → `main`이다. **기존23개 작업 파일**과 그 안의 승인/제출 기록을 정상 훅 Commit·일반 Push·Draft PR로 공유하고 필수 CI를 확인한다. 기간은 이번 제출 및 같은 범위 제출 검사 대응 완료/Owner 철회까지다. 변경 경로는 [결과 JSON](../evidence/DEV-026_S01_EXCEPTION_RESULTS.json)의 `changed_files`를 따른다.
+
+이 요청은 현재 PARTIAL 결과의 검토용 공유다. §8.1의 검사기 재지정은 계속 승인 대기이며 `run_operations_gui_cases.gd`를 수정하지 않는다. 기존35개 실패를 숨기거나 단언을 삭제하지 않는다. 실패 상태의 현재 작업본을 공개 검토하는 근거는 이 Owner 요청이며, 완료/병합 가능 판정의 예외가 아니다. main 병합·릴리스/배포·Design 독립 수용은 미포함이다.
+
+제출 base는 `63550826af8b6ae9a46bda2e4bb826dd1ed7cd79`다. 최초 시험 base `ecb2708bfa7bd3230d56c60b910d6831511953c6` 이후 PR #152의 기획 문서3개만 진전했다. 겹치는 경로 없이 작업 브랜치만 fast-forward했고 원래 시험본/로그/해시는 보존했다. 제품/테스트16개 파일 해시를 로컬 검토본과 대조하여 기존 제품 검증을 재사용한다. 새 GUI·자연 완주를 실행한 것으로 기록하지 않는다.
+
+현재 main 보호는 strict `policy`·`department-policy`, 관리자 적용·선형 이력·대화 해결 필수, force push/삭제 금지, squash만 허용으로 확인했다. 리뷰0명은 기존 단일 계정 운영이며 Owner의 별도 main 병합 원칙을 유지한다. 실제 제출 head·preflight·CI는 PR 본문/Checks를 따른다.
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-026

@@ -5,13 +5,25 @@ signal finance_requested
 signal exit_requested
 signal focus_region_requested(region: Control)
 
+const Contract = preload("res://scripts/ui/s01_observation_contract.gd")
+
 var controls: Dictionary = {}
 var labels: Dictionary = {}
 var shown: Dictionary = {}
+var _binding: RefCounted
+var _scope: String = ""
+var _floor_revision: int = -1
+
+
+func bind_session(value: RefCounted) -> void:
+	if _binding == null:
+		_binding = value
+		_scope = value.observation_scope()
 
 
 func _ready() -> void:
 	add_text(self, labels, "title", "운영 현황 · P06")
+	labels.title.focus_mode = Control.FOCUS_ALL
 	add_text(self, labels, "status", "")
 	add_text(self, labels, "source", "")
 	add_text(self, labels, "totals", "")
@@ -28,9 +40,13 @@ func _ready() -> void:
 		controls[id].name = "P06_" + id
 
 
-func present(state: Dictionary) -> bool:
-	if is_older(state, shown):
+func present(state: Variant) -> bool:
+	var check := Contract.inspect(state, _scope, _floor_revision)
+	if check.discard_observation or (check.global_current_valid and is_older(state, shown)):
 		return false
+	state = state if check.global_current_valid and _binding != null else {}
+	if not state.is_empty():
+		_floor_revision = maxi(_floor_revision, state.view_revision)
 	shown = state.duplicate(true)
 	var value := operation(state)
 	labels.status.text = summary(state)
@@ -52,7 +68,10 @@ func present(state: Dictionary) -> bool:
 		labels.totals.text = daily_text(value.daily) + "\n현재 이동 중 %d통행" % value.in_transit
 		var finance := packet(state, "finance_ui")
 		var activity := dictionary(finance.get("current_activity"))
-		if finance.get("available") == true and numbers(activity, ["fare", "operating_cost"]):
+		if (
+			numbers(activity, ["fare", "operating_cost", "day_id"])
+			and activity.day_id == finance.observation.day_id
+		):
 			labels.totals.text += (
 				"\n당일 도착 운임 %d / 운영비 발생 %d (게임 통화 단위)" % [activity.fare, activity.operating_cost]
 			)
@@ -68,8 +87,11 @@ func present(state: Dictionary) -> bool:
 				)
 			]
 		)
-	labels.prediction.text = prediction_text(state.get("prediction", {}))
-	return true
+	labels.prediction.text = prediction_text(
+		Contract.dictionary(state.get("prediction")) if check.regions.prediction else {}
+	)
+	controls.finance.disabled = packet(state, "finance_ui").is_empty()
+	return check.global_current_valid and _binding != null
 
 
 static func add_text(parent: Node, into: Dictionary, id: String, text: String) -> void:
@@ -100,7 +122,11 @@ static func dictionary(value: Variant) -> Dictionary:
 static func is_older(state: Dictionary, previous: Dictionary) -> bool:
 	if previous.is_empty():
 		return false
-	if state.get("view_revision", -1) < previous.get("view_revision", -1):
+	if (
+		state.get("view_revision") is int
+		and previous.get("view_revision") is int
+		and state.view_revision < previous.view_revision
+	):
 		return true
 	var current := dictionary(state.get("current"))
 	var old := dictionary(previous.get("current"))
@@ -111,24 +137,7 @@ static func is_older(state: Dictionary, previous: Dictionary) -> bool:
 
 
 static func packet(state: Dictionary, key: String) -> Dictionary:
-	var value := dictionary(state.get(key))
-	var observation := dictionary(value.get("observation"))
-	var current := dictionary(state.get("current"))
-	var clock := dictionary(state.get("clock"))
-	if value.get("ui_contract_revision") != "DEV023-UI-1":
-		return {}
-	if value.get("view_revision") != state.get("view_revision"):
-		return {}
-	for field: String in ["simulation_minute", "day_id", "snapshot_revision"]:
-		if not observation.get(field) is int or observation[field] != current.get(field):
-			return {}
-	if (
-		observation.get("data_version") != "1.3"
-		or observation.get("observation_phase") != "T_COMPLETE"
-		or clock.get("simulation_minute") != observation.get("simulation_minute")
-	):
-		return {}
-	return value
+	return Contract.envelope(state, key)
 
 
 static func numbers(value: Dictionary, keys: Array) -> bool:
@@ -146,7 +155,7 @@ static func operation(state: Dictionary) -> Dictionary:
 	var daily := dictionary(value.get("daily"))
 	var boarding := dictionary(value.get("boarding"))
 	if (
-		value.get("available") != true
+		not Contract.enabled(value.get("available"))
 		or not value.get("service_ready") is bool
 		or not boarding.get("boarding_allowed") is bool
 		or not value.get("source") is Dictionary
@@ -183,7 +192,10 @@ static func summary(state: Dictionary) -> String:
 	if value.is_empty():
 		if outer.get("status") == "UNAVAILABLE":
 			return "운행 자료 없음"
-		if outer.get("reason_codes", []) == ["INVALID_OPERATIONS_INPUT"]:
+		if (
+			outer.get("reason_codes") is Array
+			and outer.reason_codes == ["INVALID_OPERATIONS_INPUT"]
+		):
 			return "운행 자료를 불러오지 못했습니다"
 		return failure("운행", outer)
 	var result := "개통 완료" if value.service_ready else "개통 전"
@@ -272,7 +284,7 @@ static func daily_text(value: Dictionary, closed: bool = false) -> String:
 static func prediction_text(value: Dictionary) -> String:
 	var current := dictionary(value.get("current"))
 	var totals := dictionary(dictionary(current.get("value")).get("totals"))
-	if value.get("available") != true or totals.is_empty():
+	if not Contract.enabled(value.get("available")) or totals.is_empty():
 		return "예측 · 자료 없음 / 계획 화면에서 예측 계산 (현재 실적과 별도)"
 	var data: Dictionary = current.value
 	return (
@@ -287,3 +299,82 @@ static func prediction_text(value: Dictionary) -> String:
 			str(totals.get("predicted_fare"))
 		]
 	)
+
+
+static func prediction_value(result: Dictionary) -> String:
+	var value: Dictionary = result.value
+	return (
+		(
+			"예측 기간 [%d, %d) 게임분 · %d km / 종단 %d 게임분\n"
+			+ "요청 %d / 탑승 %d / 완료 %d 통행 · 예상 운임 %d / 운영비 %d (실적 아님) · 생성 게임분 %d"
+		)
+		% [
+			value.period_start,
+			value.period_end,
+			value.distance_km,
+			value.end_to_end_minutes,
+			value.totals.requested,
+			value.totals.boarded,
+			value.totals.completed,
+			value.totals.predicted_fare,
+			value.totals.operating_cost,
+			result.generated_minute
+		]
+	)
+
+
+static func reason_text(code: String) -> String:
+	if not code.is_empty():
+		print("DEV026_REASON ", code)
+	return (
+		{
+			"": "현재 상태를 확인하세요",
+			"STATION_COUNT": "서로 다른 역 6~8개가 필요합니다",
+			"DUPLICATE_STATION": "이미 선택한 역입니다",
+			"DISCONNECTED": "이어지지 않은 역 구간이 있습니다",
+			"OUTSIDE_JURISDICTION": "관할에 없는 역입니다",
+			"PLAN_LOCKED": "계획이 잠겨 있습니다",
+			"NO_UNDO_HISTORY": "되돌릴 이력이 없습니다",
+			"UNDO_FAILED": "되돌리기 실패: 상태를 다시 확인하세요",
+			"STATE_CHANGED": "계획이 변경됐습니다. 다시 확인하세요",
+			"INVALID_SPEED": "배속은 1·2·4만 가능합니다",
+			"INVALID_PLAN": "계획 조건을 먼저 확인하세요",
+			"INVALID_INPUT": "예측 입력을 확인하세요",
+			"STATION_NOT_SELECTED": "선택된 노선 역이 아닙니다",
+			"INVALID_INDEX": "이동할 순서를 확인하세요"
+		}
+		. get(code, "안내 내용을 확인하지 못했습니다. 현재 허용된 행동을 확인하세요")
+	)
+
+
+static func prediction_messages(prediction: Dictionary, previous_valid: bool) -> Dictionary:
+	var result := {}
+	result.current = (
+		"예측: %s · 입력판 %d / 계획판 %d"
+		% [
+			(
+				{
+					"NOT_CALCULATED": "미계산",
+					"CALCULATING": "계산 중",
+					"READY": "계산 완료",
+					"FAILED": "계산 실패"
+				}
+				. get(prediction.prediction_status, prediction.prediction_status)
+			),
+			prediction.prediction_input_revision,
+			prediction.plan_revision
+		]
+	)
+	if prediction.available:
+		result.current += "\n" + prediction_value(prediction.current)
+	elif prediction.prediction_status == "FAILED":
+		result.current += " · 자료 없음: " + reason_text(prediction.reason)
+	else:
+		result.current += " · 자료 없음 / 예측 계산을 선택하세요"
+	result.previous = ""
+	if previous_valid:
+		result.previous = (
+			"이전 입력판 %d (비교용): %s"
+			% [prediction.previous.input_revision, prediction_value(prediction.previous)]
+		)
+	return result

@@ -1,0 +1,3436 @@
+{
+  "schema_version": 1,
+  "task_id": "DEV-026",
+  "agent_id": "AGT-DEV-0004",
+  "date_kst": "2026-11-21",
+  "status": "PR_REVIEW_PARTIAL_PENDING_TEST_PATH_APPROVAL",
+  "base_sha": "ecb2708bfa7bd3230d56c60b910d6831511953c6",
+  "branch": "codex/DEV-026-s01-exception-implementation",
+  "head": "UNCOMMITTED",
+  "changed_files": [
+    "docs/engineering/evidence/DEV-026_S01_EXCEPTION_EVIDENCE.md",
+    "docs/engineering/evidence/DEV-026_S01_EXCEPTION_RESULTS.json",
+    "docs/engineering/gate3/DEV-026_S01_EXCEPTION_CONTRACT.md",
+    "docs/engineering/gate3/DEV-026_S01_EXCEPTION_VALIDATION_PLAN.md",
+    "docs/engineering/tasks/DEV-026_PROVENANCE.json",
+    "docs/engineering/tasks/DEV-026_RESULT.md",
+    "docs/engineering/tasks/DEV-026_S01_EXCEPTION_SCOPE.md",
+    "scripts/ui/finance_view.gd",
+    "scripts/ui/operations_view.gd",
+    "scripts/ui/s01_observation_contract.gd",
+    "scripts/ui/s01_observation_contract.gd.uid",
+    "scripts/ui/stage1_map.gd",
+    "scripts/ui/stage1_session.gd",
+    "scripts/ui/stage1_view.gd",
+    "tests/game/run_f08_gui_cases.gd",
+    "tests/game/run_s01_exception_gui_cases.gd",
+    "tests/game/run_s01_exception_gui_cases.gd.uid",
+    "tests/game/run_s01_exception_tests.gd",
+    "tests/game/run_s01_exception_tests.gd.uid",
+    "tests/game/run_w07_gui_cases.gd",
+    "tests/game/run_w07_tests.gd",
+    "tests/game/w026_ui_fixtures.gd",
+    "tests/game/w026_ui_fixtures.gd.uid"
+  ],
+  "runtime_file_sha256": {
+    "scripts/ui/finance_view.gd": "56aef6b8a28c15786a17205c9ea7678424240467372458f2609d81788a1d22ec",
+    "scripts/ui/operations_view.gd": "e0fff5da02d115b5fd2c1383a2609bd6b9ac3157b5eefcc74c18bc4713eab48d",
+    "scripts/ui/s01_observation_contract.gd": "2acd782a4ab5fe969ba6117c8fe84d703c68d0087a60e36250de7755f7668dc7",
+    "scripts/ui/s01_observation_contract.gd.uid": "a032302981620b34869aba23cc984ebc6102e97c2fbd7ff42fa8f77f0a836f36",
+    "scripts/ui/stage1_map.gd": "5ab8c90d614b62e4bb82cd2548970c58ff7bf144cea68d681304f9a5934f20da",
+    "scripts/ui/stage1_session.gd": "cfc72c40372f6cd1e0d0dd187caf0effffc187fbfcbde2461ba9cbf6508427be",
+    "scripts/ui/stage1_view.gd": "0742afc808a44e6614faa82107217cc4e4234877952b6aa21bff418ac46724ba",
+    "tests/game/run_f08_gui_cases.gd": "7a16a79a83385f7c5c6bbb6cab670003da13ae4ae2c2ba92da1d848a0a0c2a3c",
+    "tests/game/run_s01_exception_gui_cases.gd": "acf70cdbfa0c292c79cdf98cef8620db796f14e3492d37a1f2c2e7b3d7cd4ab5",
+    "tests/game/run_s01_exception_gui_cases.gd.uid": "b99a3869b6e1d084fad4505364847b8c747cf1a9b5e3e98d0d964c52f874e98e",
+    "tests/game/run_s01_exception_tests.gd": "1ce0db7a8a3593af1edfbdc161be0f218666170876f58202258532fc9bdeb425",
+    "tests/game/run_s01_exception_tests.gd.uid": "6863c6385bc0856cae938d207561cecbc6824d9753d1d85c28b7917f2b92bde0",
+    "tests/game/run_w07_gui_cases.gd": "3859a7cb597912528b1d22534c86ea938e05d94be78ee7fd836cbd877f8aa6a7",
+    "tests/game/run_w07_tests.gd": "505d76add51e255a74b8d84000e3a52ebbe3ce3e4f4306a6a260eb9aa327f63e",
+    "tests/game/w026_ui_fixtures.gd": "c1d35c225c9a656e54045f09a59c8e969764b53a203071302bf69baf431bc823",
+    "tests/game/w026_ui_fixtures.gd.uid": "3852f338cc4bed03422691c99cd6b57f4a83083f54e665226cd6df7d2184d01f"
+  },
+  "scope": {
+    "actual_paths": 23,
+    "maximum_paths": 24,
+    "pending_reassignment": {
+      "instead_of": "tests/game/run_operations_ui_tests.gd",
+      "proposed": "tests/game/run_operations_gui_cases.gd",
+      "status": "OWNER_APPROVAL_PENDING_NOT_MODIFIED"
+    },
+    "product_git": "AUTHORIZED_EXISTING_23_FILE_COMMIT_PUSH_DRAFT_PR; MAIN_MERGE_NOT_AUTHORIZED",
+    "independent_execution": "NOT_RUN",
+    "design_product_L2": "PENDING",
+    "build_export_performance": "NOT_RUN",
+    "full_natural_VS02": "NOT_RUN"
+  },
+  "rows": [
+    {
+      "row": "EX-01",
+      "status": "PASS_DEV",
+      "evidence": "root_rejected/root_missing/root_no_command; initial-failure-01; gui-01 002/003"
+    },
+    {
+      "row": "EX-02",
+      "status": "PASS_DEV",
+      "evidence": "regional_accept/map_cycle_rejected/map_cycle_callback_no_effect; gui-02 003-EX-02"
+    },
+    {
+      "row": "EX-03",
+      "status": "PASS_DEV",
+      "evidence": "new_scope_no_selection; W07 case_switch_clears; gui-02 NEW_SESSION"
+    },
+    {
+      "row": "EX-04",
+      "status": "PASS_DEV",
+      "evidence": "missing_action_no_effect_predict; W07 prediction NOT_CALCULATED; gui-01 READY"
+    },
+    {
+      "row": "EX-05",
+      "status": "PASS_CONSUMER_ONLY",
+      "evidence": "calculating_fixture_only; synchronous product intermediate frame EXCLUDED_FROM_PATH"
+    },
+    {
+      "row": "EX-06",
+      "status": "PASS_DEV",
+      "evidence": "real_zero_current_prediction/prediction_identity_mismatch/prediction_bad_period; W07 ready_zero"
+    },
+    {
+      "row": "EX-07",
+      "status": "PASS_DEV",
+      "evidence": "W07 failed_not_zero/render_error; failed_report_recovery is report-only, not prediction evidence"
+    },
+    {
+      "row": "EX-08",
+      "status": "PASS_DEV",
+      "evidence": "W07 previous_retained/R02_late_fail_*; prediction_identity_mismatch"
+    },
+    {
+      "row": "EX-09",
+      "status": "PASS_DEV",
+      "evidence": "funds_missing_not_zero/funds_missing_clock_kept/funds_missing_plan_kept; gui-01 EX-09/NORMAL"
+    },
+    {
+      "row": "EX-10",
+      "status": "PASS_DEV",
+      "evidence": "daily_bad_* 4 fields x null/string/bool/negative; daily_funds_independent"
+    },
+    {
+      "row": "EX-11",
+      "status": "PASS_DEV",
+      "evidence": "later_missing_report_neutral; W07 report_absent/real_zero; day>0 UNAVAILABLE is neither first close nor zero"
+    },
+    {
+      "row": "EX-12",
+      "status": "PASS_DEV",
+      "evidence": "real_failed_report_hidden/failed_p07_hidden/failed_report_recovery; W07 report_error"
+    },
+    {
+      "row": "EX-13",
+      "status": "PASS_DEV",
+      "evidence": "unknown_reason_neutral/unknown_reason_not_raw_ui; regional command_result rejection"
+    },
+    {
+      "row": "EX-14",
+      "status": "PASS_DEV",
+      "evidence": "stale_same_scope/same_revision_remainder/foreign_high_revision/reset_preserves_floor/new_scope_low_revision/retired_callback_no_old_effect"
+    },
+    {
+      "row": "EX-15",
+      "status": "PASS_DEV",
+      "evidence": "stale_display_request_rejected/displayed_revision_not_replaced; allowed actions independent of past result"
+    },
+    {
+      "row": "EX-16",
+      "status": "EXCLUDED_FROM_GENERAL_S01",
+      "evidence": "general_sync_no_pending; existing W04A 460/W05 898 normal delivery regression; no synthetic wait"
+    },
+    {
+      "row": "EX-17",
+      "status": "PASS_DEV",
+      "evidence": "missing_action_no_effect_*/missing_plan_action_*; callbacks blocked without model effects"
+    },
+    {
+      "row": "EX-18",
+      "status": "PASS_ISOLATED_FIXTURE",
+      "evidence": "W07 QA-M02-EXTERNAL model jurisdiction + actual candidate callback; default DATA unchanged"
+    },
+    {
+      "row": "EX-19",
+      "status": "PASS_DEV",
+      "evidence": "wrong_report_*/wrong_report_hidden_*; fixed_day_report; independent_p07_report; old_confirmation_no_effect"
+    },
+    {
+      "row": "EX-20",
+      "status": "PASS_DEV",
+      "evidence": "daily_observation_mismatch_day_id/simulation_minute/snapshot_revision; daily_mismatch_funds_kept_*"
+    },
+    {
+      "row": "RP-01/02",
+      "status": "PASS_DEV",
+      "evidence": "regional fields/root/type matrix; independent_p07_report/partial_p07_report_kept; missing-child hidden and recovery"
+    },
+    {
+      "row": "RP-03/04",
+      "status": "PASS_DEV",
+      "evidence": "same_revision_remainder/reset_preserves_floor; new View/children/empty history; foreign observations/old callback/direct rebinding rejection"
+    },
+    {
+      "row": "RP-05/06",
+      "status": "PASS_DEV",
+      "evidence": "fixed_day_after_midnight; stale confirmation vs actual first-report query; report return; GUI fixed day1 while root day2"
+    },
+    {
+      "row": "RP-07",
+      "status": "PASS_DEV_LIMITED",
+      "evidence": "removed_marker_fallback/gone_id_fallback/no_data_focus_title/deferred_restore_respects_user; gui-02 map/list + P07 keyboard return; no full accessibility acceptance"
+    },
+    {
+      "row": "RP-08",
+      "status": "PARTIAL_FUTURE_SUPPLY",
+      "evidence": "existing P06/P07/tender/construction boundary verified; W04B actual envelope absent until DEV-027; not invented PASS"
+    }
+  ],
+  "automatic_runs": [
+    {
+      "test": "run_w07_tests",
+      "command": [
+        "godot4.7.2",
+        "--headless",
+        "--path",
+        ".",
+        "--script",
+        "tests/game/run_w07_tests.gd"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "seconds": 4.52,
+      "engine_errors": [],
+      "summaries": [
+        "W07_TEST_RESULT checks=322 failures=0"
+      ],
+      "log_sha256": "6efa4e1c7c573e6b6769da7a35a026039ca3163c7e44350d7bdfdfe780874e3d",
+      "passed": true,
+      "batch": "regression-01",
+      "source_hashes": ".local/validation/DEV-026/regression-01/source-hashes.json",
+      "log": ".local/validation/DEV-026/regression-01/run_w07_tests.log"
+    },
+    {
+      "test": "run_w03_tests",
+      "command": [
+        "godot4.7.2",
+        "--headless",
+        "--path",
+        ".",
+        "--script",
+        "tests/game/run_w03_tests.gd"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "seconds": 0.45,
+      "engine_errors": [],
+      "summaries": [
+        "W03_TEST_RESULT checks=101 failures=0"
+      ],
+      "log_sha256": "e106f7aa57e133af5012c6bd05580ffa9e1c2932482dc5d855c0e658be5ac1a5",
+      "passed": true,
+      "batch": "regression-01",
+      "source_hashes": ".local/validation/DEV-026/regression-01/source-hashes.json",
+      "log": ".local/validation/DEV-026/regression-01/run_w03_tests.log"
+    },
+    {
+      "test": "run_tender_ui_tests",
+      "command": [
+        "godot4.7.2",
+        "--headless",
+        "--path",
+        ".",
+        "--script",
+        "tests/game/run_tender_ui_tests.gd"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "seconds": 15.92,
+      "engine_errors": [],
+      "summaries": [
+        "DEV019_UI_TEST_RESULT checks=460 failures=0"
+      ],
+      "log_sha256": "03f4be9a5b8958cb98daeab7db74b7d460ad2731792294eb088ed0a43842c1ee",
+      "passed": true,
+      "batch": "regression-01",
+      "source_hashes": ".local/validation/DEV-026/regression-01/source-hashes.json",
+      "log": ".local/validation/DEV-026/regression-01/run_tender_ui_tests.log"
+    },
+    {
+      "test": "run_construction_ui_tests",
+      "command": [
+        "godot4.7.2",
+        "--headless",
+        "--path",
+        ".",
+        "--script",
+        "tests/game/run_construction_ui_tests.gd"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "seconds": 342.88,
+      "engine_errors": [],
+      "summaries": [
+        "DEV021_UI_TEST_RESULT checks=898 failures=0"
+      ],
+      "log_sha256": "e33b2d68aaeabbef80b313a6ba335855d8e45c836b416c1a258f9866eb076ea6",
+      "passed": true,
+      "batch": "regression-01",
+      "source_hashes": ".local/validation/DEV-026/regression-01/source-hashes.json",
+      "log": ".local/validation/DEV-026/regression-01/run_construction_ui_tests.log"
+    },
+    {
+      "test": "run_operations_ui_tests",
+      "command": [
+        "godot4.7.2",
+        "--headless",
+        "--path",
+        ".",
+        "--script",
+        "tests/game/run_operations_ui_tests.gd"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "seconds": 95.98,
+      "engine_errors": [],
+      "summaries": [
+        "DEV023_SUPPLY_TEST_RESULT checks=158 failures=0"
+      ],
+      "log_sha256": "1dd53aad430184166c46044698332745a6331aff578a631705bba28ecca20c92",
+      "passed": true,
+      "batch": "regression-01",
+      "source_hashes": ".local/validation/DEV-026/regression-01/source-hashes.json",
+      "log": ".local/validation/DEV-026/regression-01/run_operations_ui_tests.log"
+    },
+    {
+      "test": "project-load",
+      "command": [
+        "godot4.7.2",
+        "--headless",
+        "--path",
+        ".",
+        "--editor",
+        "--quit"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "seconds": 9.91,
+      "engine_errors": [
+        "ERROR: Safe save failed. This may be a permissions problem, but also may happen because you are running a paranoid antivirus. If this is the case, please switch to Windows Defender or disable the 'safe save' option in editor settings. This makes it work, but increases the risk of file corruption in a crash."
+      ],
+      "summaries": [],
+      "log_sha256": "4383ddddba7b79d53e0c087db852f5428d6623b260d258585cfc980a7b96ffb4",
+      "passed": false,
+      "batch": "regression-01",
+      "source_hashes": ".local/validation/DEV-026/regression-01/source-hashes.json",
+      "log": ".local/validation/DEV-026/regression-01/project-load.log"
+    },
+    {
+      "test": "product-init",
+      "command": [
+        "godot4.7.2",
+        "--headless",
+        "--path",
+        ".",
+        "--quit-after",
+        "3"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "seconds": 1.14,
+      "engine_errors": [],
+      "summaries": [
+        "W01_INIT_OK {\"available_cash\":1000000,\"capability\":80,\"cash\":1000000,\"city_id\":\"C01\",\"data_version\":\"1.3\",\"day_id\":1,\"financial_score\":100,\"free_cash\":1000000,\"reserved_by_project\":{},\"restricted_by_project\":{},\"simulation_minute\":360,\"unpaid\":0}",
+        "W07_INIT_OK S01_MINIMUM_UI"
+      ],
+      "log_sha256": "873be5ee2c0557083e9f3a61eda7aae45b7e6027127bd83ac288f55c91989a42",
+      "passed": true,
+      "batch": "regression-01",
+      "source_hashes": ".local/validation/DEV-026/regression-01/source-hashes.json",
+      "log": ".local/validation/DEV-026/regression-01/product-init.log"
+    },
+    {
+      "test": "run_s01_exception_tests",
+      "command": [
+        "godot4.7.2",
+        "--headless",
+        "--path",
+        ".",
+        "--script",
+        "tests/game/run_s01_exception_tests.gd",
+        "--",
+        "--output=res://.local/validation/DEV-026/boundaries-01/automatic.json"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "seconds": 80.75,
+      "engine_errors": [],
+      "summaries": [
+        "DEV026_TEST_RESULT checks=249 failures=0"
+      ],
+      "log_sha256": "135e38f25063232b5b3f23257bfa80a59a8d2929fbe2920cef6b96b155037367",
+      "passed": true,
+      "batch": "boundaries-01",
+      "source_hashes": ".local/validation/DEV-026/boundaries-01/source-hashes.json",
+      "log": ".local/validation/DEV-026/boundaries-01/run_s01_exception_tests.log"
+    },
+    {
+      "test": "run_s01_exception_tests:failure",
+      "command": [
+        "godot4.7.2",
+        "--headless",
+        "--path",
+        ".",
+        "--script",
+        "tests/game/run_s01_exception_tests.gd",
+        "--",
+        "--verify-failure-exit"
+      ],
+      "exit": 1,
+      "expected_exit": 1,
+      "seconds": 1.14,
+      "engine_errors": [],
+      "summaries": [
+        "DEV026_TEST_RESULT checks=1 failures=1"
+      ],
+      "log_sha256": "ef63157af22be1be20231cc91e4e1b72e982af347395efa0a9268e2fed2f57a6",
+      "passed": true,
+      "batch": "boundaries-01",
+      "source_hashes": ".local/validation/DEV-026/boundaries-01/source-hashes.json",
+      "log": ".local/validation/DEV-026/boundaries-01/run_s01_exception_tests-failure.log"
+    },
+    {
+      "test": "run_s01_exception_tests",
+      "command": [
+        "godot4.7.2",
+        "--headless",
+        "--path",
+        ".",
+        "--script",
+        "tests/game/run_s01_exception_tests.gd",
+        "--",
+        "--output=res://.local/validation/DEV-026/boundaries-02/automatic.json"
+      ],
+      "exit": 1,
+      "expected_exit": 0,
+      "seconds": 96.7,
+      "engine_errors": [],
+      "summaries": [
+        "DEV026_TEST_RESULT checks=263 failures=1"
+      ],
+      "log_sha256": "3785a6d4f66715296994784b45a43f1ee9914b89f443cddf90243ba9ef47e1c9",
+      "passed": false,
+      "batch": "boundaries-02",
+      "source_hashes": ".local/validation/DEV-026/boundaries-02/source-hashes.json",
+      "log": ".local/validation/DEV-026/boundaries-02/run_s01_exception_tests.log"
+    },
+    {
+      "test": "run_w07_tests",
+      "command": [
+        "godot4.7.2",
+        "--headless",
+        "--path",
+        ".",
+        "--script",
+        "tests/game/run_w07_tests.gd"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "seconds": 7.23,
+      "engine_errors": [],
+      "summaries": [
+        "W07_TEST_RESULT checks=322 failures=0"
+      ],
+      "log_sha256": "407438419507d149328db9909d67f1f146f43f8265eacc4fda1814738d2eefb4",
+      "passed": true,
+      "batch": "boundaries-02",
+      "source_hashes": ".local/validation/DEV-026/boundaries-02/source-hashes.json",
+      "log": ".local/validation/DEV-026/boundaries-02/run_w07_tests.log"
+    },
+    {
+      "test": "run_s01_exception_tests",
+      "command": [
+        "godot4.7.2",
+        "--headless",
+        "--path",
+        ".",
+        "--script",
+        "tests/game/run_s01_exception_tests.gd",
+        "--",
+        "--output=res://.local/validation/DEV-026/boundaries-03/automatic.json"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "seconds": 104.36,
+      "engine_errors": [],
+      "summaries": [
+        "DEV026_TEST_RESULT checks=263 failures=0"
+      ],
+      "log_sha256": "3c606adc00d5a9b7e42e6134cc502a403f62aa072917cd17fa9a4fc1495f2e56",
+      "passed": true,
+      "batch": "boundaries-03",
+      "source_hashes": ".local/validation/DEV-026/boundaries-03/source-hashes.json",
+      "log": ".local/validation/DEV-026/boundaries-03/run_s01_exception_tests.log"
+    },
+    {
+      "test": "run_s01_exception_tests:failure",
+      "command": [
+        "godot4.7.2",
+        "--headless",
+        "--path",
+        ".",
+        "--script",
+        "tests/game/run_s01_exception_tests.gd",
+        "--",
+        "--verify-failure-exit"
+      ],
+      "exit": 1,
+      "expected_exit": 1,
+      "seconds": 1.17,
+      "engine_errors": [],
+      "summaries": [
+        "DEV026_TEST_RESULT checks=1 failures=1"
+      ],
+      "log_sha256": "ef63157af22be1be20231cc91e4e1b72e982af347395efa0a9268e2fed2f57a6",
+      "passed": true,
+      "batch": "boundaries-03",
+      "source_hashes": ".local/validation/DEV-026/boundaries-03/source-hashes.json",
+      "log": ".local/validation/DEV-026/boundaries-03/run_s01_exception_tests-failure.log"
+    },
+    {
+      "test": "run_w07_tests",
+      "command": [
+        "godot4.7.2",
+        "--headless",
+        "--path",
+        ".",
+        "--script",
+        "tests/game/run_w07_tests.gd"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "seconds": 6.36,
+      "engine_errors": [],
+      "summaries": [
+        "W07_TEST_RESULT checks=322 failures=0"
+      ],
+      "log_sha256": "407438419507d149328db9909d67f1f146f43f8265eacc4fda1814738d2eefb4",
+      "passed": true,
+      "batch": "boundaries-03",
+      "source_hashes": ".local/validation/DEV-026/boundaries-03/source-hashes.json",
+      "log": ".local/validation/DEV-026/boundaries-03/run_w07_tests.log"
+    },
+    {
+      "test": "run_s01_exception_tests",
+      "command": [
+        "godot4.7.2",
+        "--headless",
+        "--path",
+        ".",
+        "--script",
+        "tests/game/run_s01_exception_tests.gd",
+        "--",
+        "--output=res://.local/validation/DEV-026/boundaries-04/automatic.json"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "seconds": 95.66,
+      "engine_errors": [
+        "SCRIPT ERROR: Invalid operands 'String' and 'bool' in operator '=='.",
+        "SCRIPT ERROR: Invalid access to property or key 'discard_observation' on a base object of type 'Dictionary'.",
+        "SCRIPT ERROR: Invalid operands 'int' and 'bool' in operator '=='.",
+        "SCRIPT ERROR: Invalid access to property or key 'discard_observation' on a base object of type 'Dictionary'.",
+        "SCRIPT ERROR: Invalid operands 'int' and 'bool' in operator '=='.",
+        "SCRIPT ERROR: Invalid access to property or key 'discard_observation' on a base object of type 'Dictionary'."
+      ],
+      "summaries": [
+        "DEV026_TEST_RESULT checks=285 failures=0"
+      ],
+      "log_sha256": "ab143b0f30fd30fd81b54332a4c4b0de582eb27155245aa493cb3f2b837ddabc",
+      "passed": false,
+      "batch": "boundaries-04",
+      "source_hashes": ".local/validation/DEV-026/boundaries-04/source-hashes.json",
+      "log": ".local/validation/DEV-026/boundaries-04/run_s01_exception_tests.log"
+    },
+    {
+      "test": "run_s01_exception_tests",
+      "command": [
+        "godot4.7.2",
+        "--headless",
+        "--path",
+        ".",
+        "--script",
+        "tests/game/run_s01_exception_tests.gd",
+        "--",
+        "--output=res://.local/validation/DEV-026/boundaries-05/automatic.json"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "seconds": 94.08,
+      "engine_errors": [],
+      "summaries": [
+        "DEV026_TEST_RESULT checks=334 failures=0"
+      ],
+      "log_sha256": "f8ca5a9f5bfb689ca73f663db2a323cbaa5e07519b0c162df84c0952bb75ee08",
+      "passed": true,
+      "batch": "boundaries-05",
+      "source_hashes": ".local/validation/DEV-026/boundaries-05/source-hashes.json",
+      "log": ".local/validation/DEV-026/boundaries-05/run_s01_exception_tests.log"
+    },
+    {
+      "test": "run_w07_tests",
+      "command": [
+        "godot4.7.2",
+        "--headless",
+        "--path",
+        ".",
+        "--script",
+        "tests/game/run_w07_tests.gd"
+      ],
+      "exit": 0,
+      "expected_exit": 0,
+      "seconds": 9.28,
+      "engine_errors": [],
+      "summaries": [
+        "W07_TEST_RESULT checks=322 failures=0"
+      ],
+      "log_sha256": "407438419507d149328db9909d67f1f146f43f8265eacc4fda1814738d2eefb4",
+      "passed": true,
+      "batch": "boundaries-05",
+      "source_hashes": ".local/validation/DEV-026/boundaries-05/source-hashes.json",
+      "log": ".local/validation/DEV-026/boundaries-05/run_w07_tests.log"
+    },
+    {
+      "test": "run_operations_gui_cases",
+      "command": [
+        "godot4.7.2",
+        "--headless",
+        "--path",
+        ".",
+        "--script",
+        "tests/game/run_operations_gui_cases.gd",
+        "--",
+        "--auto"
+      ],
+      "exit": 1,
+      "expected_exit": 0,
+      "seconds": 77.83,
+      "engine_errors": [],
+      "summaries": [
+        "W01_INIT_OK {\"available_cash\":1000000,\"capability\":80,\"cash\":1000000,\"city_id\":\"C01\",\"data_version\":\"1.3\",\"day_id\":1,\"financial_score\":100,\"free_cash\":1000000,\"reserved_by_project\":{},\"restricted_by_project\":{},\"simulation_minute\":360,\"unpaid\":0}",
+        "W07_INIT_OK S01_MINIMUM_UI",
+        "DEV023_UI_TEST_RESULT checks=245 failures=35"
+      ],
+      "log_sha256": "bd2c268fa64dc4e4be8c1f14e6a2f0187300ef20c2288229d919f63e8838db47",
+      "passed": false,
+      "batch": "operations-02",
+      "source_hashes": ".local/validation/DEV-026/operations-02/source-hashes.json",
+      "log": ".local/validation/DEV-026/operations-02/run_operations_gui_cases.log"
+    }
+  ],
+  "project_load": {
+    "log": ".local/validation/DEV-026/project-load-03.log",
+    "log_sha256": "16c410f753726dcef3252abfd1243b628992af3c94f47b2ad177891f5c52cef1",
+    "exit": 0,
+    "engine_errors": [],
+    "status": "PASS_WITH_NORMAL_PERMISSIONS",
+    "prior_safe_save_error_preserved": "regression-01/project-load.log"
+  },
+  "initial_failure": {
+    "classification": "ISOLATED_DATA_FAILURE_REAL_MAIN",
+    "command": [
+      "godot4.7.2",
+      "--headless",
+      "--path",
+      ".local/validation/DEV-026/initial-failure-01/project"
+    ],
+    "exit": 1,
+    "expected_exit": 1,
+    "original_data_sha256": "1bce97486fdcc81101332f24eb508e10f089204ab78fe79fa6bdc66d19c7594a",
+    "fixture_data": "{}",
+    "source_data_unchanged": true,
+    "passed": true,
+    "log_sha256": "69c6609659ff9a12b9e545a12710c60ff23c5c2f867dcffedebcec81e80dfd17"
+  },
+  "gui_runs": [
+    {
+      "run_id": "gui-01",
+      "classification": "DEV_OS_INPUT_CONSUMER_FIXTURE_NOT_INDEPENDENT",
+      "source_hashes": ".local/validation/DEV-026/regression-01/source-hashes.json",
+      "input_events": 8,
+      "events": ".local/validation/DEV-026/gui-01/events.jsonl",
+      "events_sha256": "eba980812271f84caa4d2cf59a0a7283b0cb46c93815863d2b46748ce1d4504f",
+      "console": ".local/validation/DEV-026/gui-01-console.log",
+      "console_sha256": "ea74599004726cba9e8bd55cf96b84e9b4c1eab27387d11d81c537ce7aac1569",
+      "captures": [
+        {
+          "file": ".local/validation/DEV-026/gui-01/001-READY.png",
+          "sha256": "87d43c915aff06819812d55636e870f23723f1ca9c6c3e361a954a6618ea46e5",
+          "label": "READY",
+          "save_error": 0,
+          "state": {
+            "actions": {
+              "predict": true,
+              "resume": true,
+              "undo": true
+            },
+            "effects": "5bb04b4a3eeec108e5bd28f264d8372f54bee53936004ffa697494bb3c8f89c2",
+            "focus": "<Object#null>",
+            "labels": {
+              "clock": "게임일 1 06:00 · 일시정지 · 1×",
+              "daily": "당일 운영비(미마감) · 게임일 1 / 게임분 360 · 게임 통화 정수 단위\n발생 누계 0 / 현금 지급 누계 0",
+              "feedback": "당시 요청 fixture-add-S12: 처리됨 · 현재 상태를 확인하세요 · 게임분 360",
+              "funds": "현재 자금 · 게임분 360 · 게임 통화 단위\nC 총현금 1000000 / R 제한 0 / F 자유 1000000 / K 예약 0 / A 신규약정 가용 1000000 / B 미지급 0",
+              "plan": "6역 · 계획판 6 · 유효\n",
+              "prediction": "예측: 미계산 · 입력판 7 / 계획판 6 · 자료 없음 / 예측 계산을 선택하세요",
+              "report": "확정 보고 자료 없음 (첫 마감 전)"
+            },
+            "markers": [
+              "S01",
+              "S02",
+              "S03",
+              "S04",
+              "S05",
+              "S06",
+              "S07",
+              "S08",
+              "S09",
+              "S10",
+              "S11",
+              "S12"
+            ],
+            "regions": {
+              "clock": true,
+              "command": true,
+              "construction_ui": true,
+              "daily": true,
+              "finance_ui": true,
+              "funds": true,
+              "map": true,
+              "next_business_ui": true,
+              "operations_ui": true,
+              "plan": true,
+              "prediction": true,
+              "previous": false,
+              "report": true,
+              "tender_ui": true
+            },
+            "scope": "run--9223371978788829654",
+            "screen": "plan",
+            "selection": "",
+            "view_revision": 9
+          }
+        },
+        {
+          "file": ".local/validation/DEV-026/gui-01/002-EX-01.png",
+          "sha256": "cff1967569388fdcef9c4c3516862a8c797d0ca4f41c7d4c6b1487ea5fb3f7c1",
+          "label": "EX-01",
+          "save_error": 0,
+          "state": {
+            "actions": {
+              "predict": false,
+              "resume": false,
+              "undo": false
+            },
+            "effects": "5bb04b4a3eeec108e5bd28f264d8372f54bee53936004ffa697494bb3c8f89c2",
+            "focus": "Fixture_EX-01:<Button#57411634695>",
+            "labels": {
+              "clock": "게임 시간 확인 중 · 자료 없음",
+              "daily": "당일 운영비 확인 실패: 자료 없음/오류",
+              "feedback": "현재 상태와 허용된 행동을 확인하세요",
+              "funds": "현재 자금의 기준 시각을 확인 중입니다 · 자료 없음",
+              "plan": "계획 자료를 확인하지 못했습니다",
+              "prediction": "예측을 확인하지 못했습니다 · 자료 없음",
+              "report": "보고의 조회 대상을 확인 중입니다 · 자료 없음"
+            },
+            "markers": [],
+            "regions": {
+              "clock": false,
+              "command": false,
+              "construction_ui": false,
+              "daily": false,
+              "finance_ui": false,
+              "funds": false,
+              "map": false,
+              "next_business_ui": false,
+              "operations_ui": false,
+              "plan": false,
+              "prediction": false,
+              "previous": false,
+              "report": false,
+              "tender_ui": false
+            },
+            "scope": "run--9223371978788829654",
+            "screen": "plan",
+            "selection": "",
+            "view_revision": 9
+          }
+        },
+        {
+          "file": ".local/validation/DEV-026/gui-01/003-AFTER_INPUT.png",
+          "sha256": "cff1967569388fdcef9c4c3516862a8c797d0ca4f41c7d4c6b1487ea5fb3f7c1",
+          "label": "AFTER_INPUT",
+          "save_error": 0,
+          "state": {
+            "actions": {
+              "predict": false,
+              "resume": false,
+              "undo": false
+            },
+            "effects": "5bb04b4a3eeec108e5bd28f264d8372f54bee53936004ffa697494bb3c8f89c2",
+            "focus": "Fixture_EX-01:<Button#57411634695>",
+            "labels": {
+              "clock": "게임 시간 확인 중 · 자료 없음",
+              "daily": "당일 운영비 확인 실패: 자료 없음/오류",
+              "feedback": "현재 상태와 허용된 행동을 확인하세요",
+              "funds": "현재 자금의 기준 시각을 확인 중입니다 · 자료 없음",
+              "plan": "계획 자료를 확인하지 못했습니다",
+              "prediction": "예측을 확인하지 못했습니다 · 자료 없음",
+              "report": "보고의 조회 대상을 확인 중입니다 · 자료 없음"
+            },
+            "markers": [],
+            "regions": {
+              "clock": false,
+              "command": false,
+              "construction_ui": false,
+              "daily": false,
+              "finance_ui": false,
+              "funds": false,
+              "map": false,
+              "next_business_ui": false,
+              "operations_ui": false,
+              "plan": false,
+              "prediction": false,
+              "previous": false,
+              "report": false,
+              "tender_ui": false
+            },
+            "scope": "run--9223371978788829654",
+            "screen": "plan",
+            "selection": "",
+            "view_revision": 9
+          }
+        },
+        {
+          "file": ".local/validation/DEV-026/gui-01/004-EX-09.png",
+          "sha256": "005f64e81c32738afe1d01e0d85aa7b1694b82b53e2a73608958976d17654c85",
+          "label": "EX-09",
+          "save_error": 0,
+          "state": {
+            "actions": {
+              "predict": true,
+              "resume": true,
+              "undo": true
+            },
+            "effects": "5bb04b4a3eeec108e5bd28f264d8372f54bee53936004ffa697494bb3c8f89c2",
+            "focus": "Fixture_EX-09:<Button#57512297997>",
+            "labels": {
+              "clock": "게임일 1 06:00 · 일시정지 · 1×",
+              "daily": "당일 운영비(미마감) · 게임일 1 / 게임분 360 · 게임 통화 정수 단위\n발생 누계 0 / 현금 지급 누계 0",
+              "feedback": "당시 요청 fixture-add-S12: 처리됨 · 현재 상태를 확인하세요 · 게임분 360",
+              "funds": "현재 자금의 기준 시각을 확인 중입니다 · 자료 없음",
+              "plan": "6역 · 계획판 6 · 유효\n",
+              "prediction": "예측: 미계산 · 입력판 7 / 계획판 6 · 자료 없음 / 예측 계산을 선택하세요",
+              "report": "확정 보고 자료 없음 (첫 마감 전)"
+            },
+            "markers": [
+              "S01",
+              "S02",
+              "S03",
+              "S04",
+              "S05",
+              "S06",
+              "S07",
+              "S08",
+              "S09",
+              "S10",
+              "S11",
+              "S12"
+            ],
+            "regions": {
+              "clock": true,
+              "command": true,
+              "construction_ui": true,
+              "daily": true,
+              "finance_ui": true,
+              "funds": false,
+              "map": true,
+              "next_business_ui": true,
+              "operations_ui": true,
+              "plan": true,
+              "prediction": true,
+              "previous": false,
+              "report": true,
+              "tender_ui": true
+            },
+            "scope": "run--9223371978788829654",
+            "screen": "plan",
+            "selection": "",
+            "view_revision": 9
+          }
+        },
+        {
+          "file": ".local/validation/DEV-026/gui-01/005-AFTER_INPUT.png",
+          "sha256": "005f64e81c32738afe1d01e0d85aa7b1694b82b53e2a73608958976d17654c85",
+          "label": "AFTER_INPUT",
+          "save_error": 0,
+          "state": {
+            "actions": {
+              "predict": true,
+              "resume": true,
+              "undo": true
+            },
+            "effects": "5bb04b4a3eeec108e5bd28f264d8372f54bee53936004ffa697494bb3c8f89c2",
+            "focus": "Fixture_EX-09:<Button#57512297997>",
+            "labels": {
+              "clock": "게임일 1 06:00 · 일시정지 · 1×",
+              "daily": "당일 운영비(미마감) · 게임일 1 / 게임분 360 · 게임 통화 정수 단위\n발생 누계 0 / 현금 지급 누계 0",
+              "feedback": "당시 요청 fixture-add-S12: 처리됨 · 현재 상태를 확인하세요 · 게임분 360",
+              "funds": "현재 자금의 기준 시각을 확인 중입니다 · 자료 없음",
+              "plan": "6역 · 계획판 6 · 유효\n",
+              "prediction": "예측: 미계산 · 입력판 7 / 계획판 6 · 자료 없음 / 예측 계산을 선택하세요",
+              "report": "확정 보고 자료 없음 (첫 마감 전)"
+            },
+            "markers": [
+              "S01",
+              "S02",
+              "S03",
+              "S04",
+              "S05",
+              "S06",
+              "S07",
+              "S08",
+              "S09",
+              "S10",
+              "S11",
+              "S12"
+            ],
+            "regions": {
+              "clock": true,
+              "command": true,
+              "construction_ui": true,
+              "daily": true,
+              "finance_ui": true,
+              "funds": false,
+              "map": true,
+              "next_business_ui": true,
+              "operations_ui": true,
+              "plan": true,
+              "prediction": true,
+              "previous": false,
+              "report": true,
+              "tender_ui": true
+            },
+            "scope": "run--9223371978788829654",
+            "screen": "plan",
+            "selection": "",
+            "view_revision": 9
+          }
+        },
+        {
+          "file": ".local/validation/DEV-026/gui-01/006-NORMAL.png",
+          "sha256": "a3d590629aabe8ba053f4bbfc4fcc726f3ef50f5485b4d8b98e45b3a7f88c444",
+          "label": "NORMAL",
+          "save_error": 0,
+          "state": {
+            "actions": {
+              "predict": true,
+              "resume": true,
+              "undo": true
+            },
+            "effects": "5bb04b4a3eeec108e5bd28f264d8372f54bee53936004ffa697494bb3c8f89c2",
+            "focus": "Fixture_NORMAL:<Button#57361303044>",
+            "labels": {
+              "clock": "게임일 1 06:00 · 일시정지 · 1×",
+              "daily": "당일 운영비(미마감) · 게임일 1 / 게임분 360 · 게임 통화 정수 단위\n발생 누계 0 / 현금 지급 누계 0",
+              "feedback": "당시 요청 fixture-add-S12: 처리됨 · 현재 상태를 확인하세요 · 게임분 360",
+              "funds": "현재 자금 · 게임분 360 · 게임 통화 단위\nC 총현금 1000000 / R 제한 0 / F 자유 1000000 / K 예약 0 / A 신규약정 가용 1000000 / B 미지급 0",
+              "plan": "6역 · 계획판 6 · 유효\n",
+              "prediction": "예측: 미계산 · 입력판 7 / 계획판 6 · 자료 없음 / 예측 계산을 선택하세요",
+              "report": "확정 보고 자료 없음 (첫 마감 전)"
+            },
+            "markers": [
+              "S01",
+              "S02",
+              "S03",
+              "S04",
+              "S05",
+              "S06",
+              "S07",
+              "S08",
+              "S09",
+              "S10",
+              "S11",
+              "S12"
+            ],
+            "regions": {
+              "clock": true,
+              "command": true,
+              "construction_ui": true,
+              "daily": true,
+              "finance_ui": true,
+              "funds": true,
+              "map": true,
+              "next_business_ui": true,
+              "operations_ui": true,
+              "plan": true,
+              "prediction": true,
+              "previous": false,
+              "report": true,
+              "tender_ui": true
+            },
+            "scope": "run--9223371978788829654",
+            "screen": "plan",
+            "selection": "",
+            "view_revision": 9
+          }
+        },
+        {
+          "file": ".local/validation/DEV-026/gui-01/007-AFTER_INPUT.png",
+          "sha256": "a3d590629aabe8ba053f4bbfc4fcc726f3ef50f5485b4d8b98e45b3a7f88c444",
+          "label": "AFTER_INPUT",
+          "save_error": 0,
+          "state": {
+            "actions": {
+              "predict": true,
+              "resume": true,
+              "undo": true
+            },
+            "effects": "5bb04b4a3eeec108e5bd28f264d8372f54bee53936004ffa697494bb3c8f89c2",
+            "focus": "Fixture_NORMAL:<Button#57361303044>",
+            "labels": {
+              "clock": "게임일 1 06:00 · 일시정지 · 1×",
+              "daily": "당일 운영비(미마감) · 게임일 1 / 게임분 360 · 게임 통화 정수 단위\n발생 누계 0 / 현금 지급 누계 0",
+              "feedback": "당시 요청 fixture-add-S12: 처리됨 · 현재 상태를 확인하세요 · 게임분 360",
+              "funds": "현재 자금 · 게임분 360 · 게임 통화 단위\nC 총현금 1000000 / R 제한 0 / F 자유 1000000 / K 예약 0 / A 신규약정 가용 1000000 / B 미지급 0",
+              "plan": "6역 · 계획판 6 · 유효\n",
+              "prediction": "예측: 미계산 · 입력판 7 / 계획판 6 · 자료 없음 / 예측 계산을 선택하세요",
+              "report": "확정 보고 자료 없음 (첫 마감 전)"
+            },
+            "markers": [
+              "S01",
+              "S02",
+              "S03",
+              "S04",
+              "S05",
+              "S06",
+              "S07",
+              "S08",
+              "S09",
+              "S10",
+              "S11",
+              "S12"
+            ],
+            "regions": {
+              "clock": true,
+              "command": true,
+              "construction_ui": true,
+              "daily": true,
+              "finance_ui": true,
+              "funds": true,
+              "map": true,
+              "next_business_ui": true,
+              "operations_ui": true,
+              "plan": true,
+              "prediction": true,
+              "previous": false,
+              "report": true,
+              "tender_ui": true
+            },
+            "scope": "run--9223371978788829654",
+            "screen": "plan",
+            "selection": "",
+            "view_revision": 9
+          }
+        },
+        {
+          "file": ".local/validation/DEV-026/gui-01/008-AFTER_INPUT.png",
+          "sha256": "5b049d8e649e50966941b1d4680a22daa58c2b2275a63dec47fa6cfcbc31bb65",
+          "label": "AFTER_INPUT",
+          "save_error": 0,
+          "state": {
+            "actions": {
+              "predict": true,
+              "resume": true,
+              "undo": true
+            },
+            "effects": "5bb04b4a3eeec108e5bd28f264d8372f54bee53936004ffa697494bb3c8f89c2",
+            "focus": "List_S02:<Button#64793610145>",
+            "labels": {
+              "clock": "게임일 1 06:00 · 일시정지 · 1×",
+              "daily": "당일 운영비(미마감) · 게임일 1 / 게임분 360 · 게임 통화 정수 단위\n발생 누계 0 / 현금 지급 누계 0",
+              "feedback": "정보 선택: S02 · 노선 변경 없음 · 계획판 6",
+              "funds": "현재 자금 · 게임분 360 · 게임 통화 단위\nC 총현금 1000000 / R 제한 0 / F 자유 1000000 / K 예약 0 / A 신규약정 가용 1000000 / B 미지급 0",
+              "plan": "6역 · 계획판 6 · 유효\n",
+              "prediction": "예측: 미계산 · 입력판 7 / 계획판 6 · 자료 없음 / 예측 계산을 선택하세요",
+              "report": "확정 보고 자료 없음 (첫 마감 전)"
+            },
+            "markers": [
+              "S01",
+              "S02",
+              "S03",
+              "S04",
+              "S05",
+              "S06",
+              "S07",
+              "S08",
+              "S09",
+              "S10",
+              "S11",
+              "S12"
+            ],
+            "regions": {
+              "clock": true,
+              "command": true,
+              "construction_ui": true,
+              "daily": true,
+              "finance_ui": true,
+              "funds": true,
+              "map": true,
+              "next_business_ui": true,
+              "operations_ui": true,
+              "plan": true,
+              "prediction": true,
+              "previous": false,
+              "report": true,
+              "tender_ui": true
+            },
+            "scope": "run--9223371978788829654",
+            "screen": "plan",
+            "selection": "S02",
+            "view_revision": 9
+          }
+        },
+        {
+          "file": ".local/validation/DEV-026/gui-01/009-MANUAL.png",
+          "sha256": "f2ad4f1c984d0b6a8bb9d8637de9d7f1e5103b8493015e92beeff785e84cbb58",
+          "label": "MANUAL",
+          "save_error": 0,
+          "state": {
+            "actions": {
+              "predict": true,
+              "resume": true,
+              "undo": true
+            },
+            "effects": "5bb04b4a3eeec108e5bd28f264d8372f54bee53936004ffa697494bb3c8f89c2",
+            "focus": "List_S03:<Button#64843941796>",
+            "labels": {
+              "clock": "게임일 1 06:00 · 일시정지 · 1×",
+              "daily": "당일 운영비(미마감) · 게임일 1 / 게임분 360 · 게임 통화 정수 단위\n발생 누계 0 / 현금 지급 누계 0",
+              "feedback": "정보 선택: S02 · 노선 변경 없음 · 계획판 6",
+              "funds": "현재 자금 · 게임분 360 · 게임 통화 단위\nC 총현금 1000000 / R 제한 0 / F 자유 1000000 / K 예약 0 / A 신규약정 가용 1000000 / B 미지급 0",
+              "plan": "6역 · 계획판 6 · 유효\n",
+              "prediction": "예측: 미계산 · 입력판 7 / 계획판 6 · 자료 없음 / 예측 계산을 선택하세요",
+              "report": "확정 보고 자료 없음 (첫 마감 전)"
+            },
+            "markers": [
+              "S01",
+              "S02",
+              "S03",
+              "S04",
+              "S05",
+              "S06",
+              "S07",
+              "S08",
+              "S09",
+              "S10",
+              "S11",
+              "S12"
+            ],
+            "regions": {
+              "clock": true,
+              "command": true,
+              "construction_ui": true,
+              "daily": true,
+              "finance_ui": true,
+              "funds": true,
+              "map": true,
+              "next_business_ui": true,
+              "operations_ui": true,
+              "plan": true,
+              "prediction": true,
+              "previous": false,
+              "report": true,
+              "tender_ui": true
+            },
+            "scope": "run--9223371978788829654",
+            "screen": "plan",
+            "selection": "S02",
+            "view_revision": 9
+          }
+        }
+      ]
+    },
+    {
+      "run_id": "gui-02",
+      "classification": "DEV_OS_INPUT_CONSUMER_FIXTURE_NOT_INDEPENDENT",
+      "source_hashes": ".local/validation/DEV-026/boundaries-02/source-hashes.json",
+      "input_events": 13,
+      "events": ".local/validation/DEV-026/gui-02/events.jsonl",
+      "events_sha256": "ea6ca4143b156fb7f1acf33fe0a2537296aeb964b7dea56169728b79065145d7",
+      "console": ".local/validation/DEV-026/gui-02-console.log",
+      "console_sha256": "cd40df5c0c0cf042dc92a463a5bdab80bb713e564b44751eda40e69e9991cac1",
+      "captures": [
+        {
+          "file": ".local/validation/DEV-026/gui-02/001-READY.png",
+          "sha256": "6395cbff3df48867edde58c59a09a9045213ef592eb04e58c45bfe0463d72b95",
+          "label": "READY",
+          "save_error": 0,
+          "state": {
+            "actions": {
+              "predict": true,
+              "resume": true,
+              "undo": true
+            },
+            "effects": "5bb04b4a3eeec108e5bd28f264d8372f54bee53936004ffa697494bb3c8f89c2",
+            "focus": "<Object#null>",
+            "labels": {
+              "clock": "게임일 1 06:00 · 일시정지 · 1×",
+              "daily": "당일 운영비(미마감) · 게임일 1 / 게임분 360 · 게임 통화 정수 단위\n발생 누계 0 / 현금 지급 누계 0",
+              "feedback": "당시 요청 fixture-add-S12: 처리됨 · 현재 상태를 확인하세요 · 게임분 360",
+              "funds": "현재 자금 · 게임분 360 · 게임 통화 단위\nC 총현금 1000000 / R 제한 0 / F 자유 1000000 / K 예약 0 / A 신규약정 가용 1000000 / B 미지급 0",
+              "plan": "6역 · 계획판 6 · 유효\n",
+              "prediction": "예측: 미계산 · 입력판 7 / 계획판 6 · 자료 없음 / 예측 계산을 선택하세요",
+              "report": "확정 보고 자료 없음 (첫 마감 전)"
+            },
+            "markers": [
+              "S01",
+              "S02",
+              "S03",
+              "S04",
+              "S05",
+              "S06",
+              "S07",
+              "S08",
+              "S09",
+              "S10",
+              "S11",
+              "S12"
+            ],
+            "regions": {
+              "clock": true,
+              "command": true,
+              "construction_ui": true,
+              "daily": true,
+              "finance_ui": true,
+              "funds": true,
+              "map": true,
+              "next_business_ui": true,
+              "operations_ui": true,
+              "plan": true,
+              "prediction": true,
+              "previous": false,
+              "report": true,
+              "tender_ui": true
+            },
+            "scope": "run--9223371978704943572",
+            "screen": "plan",
+            "selection": "",
+            "view_revision": 9
+          }
+        },
+        {
+          "file": ".local/validation/DEV-026/gui-02/002-AFTER_INPUT.png",
+          "sha256": "70aca5d561d4852f34cd8f39b28f569c7d2008ac9d5fc7b508124c87250264cc",
+          "label": "AFTER_INPUT",
+          "save_error": 0,
+          "state": {
+            "actions": {
+              "predict": true,
+              "resume": true,
+              "undo": true
+            },
+            "effects": "5bb04b4a3eeec108e5bd28f264d8372f54bee53936004ffa697494bb3c8f89c2",
+            "focus": "Map_S02:<Button#65481476039>",
+            "labels": {
+              "clock": "게임일 1 06:00 · 일시정지 · 1×",
+              "daily": "당일 운영비(미마감) · 게임일 1 / 게임분 360 · 게임 통화 정수 단위\n발생 누계 0 / 현금 지급 누계 0",
+              "feedback": "정보 선택: S02 · 노선 변경 없음 · 계획판 6",
+              "funds": "현재 자금 · 게임분 360 · 게임 통화 단위\nC 총현금 1000000 / R 제한 0 / F 자유 1000000 / K 예약 0 / A 신규약정 가용 1000000 / B 미지급 0",
+              "plan": "6역 · 계획판 6 · 유효\n",
+              "prediction": "예측: 미계산 · 입력판 7 / 계획판 6 · 자료 없음 / 예측 계산을 선택하세요",
+              "report": "확정 보고 자료 없음 (첫 마감 전)"
+            },
+            "markers": [
+              "S01",
+              "S02",
+              "S03",
+              "S04",
+              "S05",
+              "S06",
+              "S07",
+              "S08",
+              "S09",
+              "S10",
+              "S11",
+              "S12"
+            ],
+            "regions": {
+              "clock": true,
+              "command": true,
+              "construction_ui": true,
+              "daily": true,
+              "finance_ui": true,
+              "funds": true,
+              "map": true,
+              "next_business_ui": true,
+              "operations_ui": true,
+              "plan": true,
+              "prediction": true,
+              "previous": false,
+              "report": true,
+              "tender_ui": true
+            },
+            "scope": "run--9223371978704943572",
+            "screen": "plan",
+            "selection": "S02",
+            "view_revision": 9
+          }
+        },
+        {
+          "file": ".local/validation/DEV-026/gui-02/003-EX-02.png",
+          "sha256": "139634da097734002f6ba212c272dc09aa17798cb705e3d227ee3ed173db02b3",
+          "label": "EX-02",
+          "save_error": 0,
+          "state": {
+            "actions": {
+              "predict": true,
+              "resume": true,
+              "undo": true
+            },
+            "effects": "5bb04b4a3eeec108e5bd28f264d8372f54bee53936004ffa697494bb3c8f89c2",
+            "focus": "PlanList:<ItemList#63870863215>",
+            "labels": {
+              "clock": "게임일 1 06:00 · 일시정지 · 1×",
+              "daily": "당일 운영비(미마감) · 게임일 1 / 게임분 360 · 게임 통화 정수 단위\n발생 누계 0 / 현금 지급 누계 0",
+              "feedback": "당시 요청 fixture-add-S12: 처리됨 · 현재 상태를 확인하세요 · 게임분 360",
+              "funds": "현재 자금 · 게임분 360 · 게임 통화 단위\nC 총현금 1000000 / R 제한 0 / F 자유 1000000 / K 예약 0 / A 신규약정 가용 1000000 / B 미지급 0",
+              "plan": "6역 · 계획판 6 · 유효\n",
+              "prediction": "예측: 미계산 · 입력판 7 / 계획판 6 · 자료 없음 / 예측 계산을 선택하세요",
+              "report": "확정 보고 자료 없음 (첫 마감 전)"
+            },
+            "markers": [],
+            "regions": {
+              "clock": true,
+              "command": true,
+              "construction_ui": true,
+              "daily": true,
+              "finance_ui": true,
+              "funds": true,
+              "map": false,
+              "next_business_ui": true,
+              "operations_ui": true,
+              "plan": true,
+              "prediction": true,
+              "previous": false,
+              "report": true,
+              "tender_ui": true
+            },
+            "scope": "run--9223371978704943572",
+            "screen": "plan",
+            "selection": "S02",
+            "view_revision": 9
+          }
+        },
+        {
+          "file": ".local/validation/DEV-026/gui-02/004-NORMAL.png",
+          "sha256": "b890bdd014d34dbe6bb78ca031b112ec6d07d05c0492895a60647037f9666030",
+          "label": "NORMAL",
+          "save_error": 0,
+          "state": {
+            "actions": {
+              "predict": true,
+              "resume": true,
+              "undo": true
+            },
+            "effects": "5bb04b4a3eeec108e5bd28f264d8372f54bee53936004ffa697494bb3c8f89c2",
+            "focus": "PlanList:<ItemList#63870863215>",
+            "labels": {
+              "clock": "게임일 1 06:00 · 일시정지 · 1×",
+              "daily": "당일 운영비(미마감) · 게임일 1 / 게임분 360 · 게임 통화 정수 단위\n발생 누계 0 / 현금 지급 누계 0",
+              "feedback": "정보 선택: S02 · 노선 변경 없음 · 계획판 6",
+              "funds": "현재 자금 · 게임분 360 · 게임 통화 단위\nC 총현금 1000000 / R 제한 0 / F 자유 1000000 / K 예약 0 / A 신규약정 가용 1000000 / B 미지급 0",
+              "plan": "6역 · 계획판 6 · 유효\n",
+              "prediction": "예측: 미계산 · 입력판 7 / 계획판 6 · 자료 없음 / 예측 계산을 선택하세요",
+              "report": "확정 보고 자료 없음 (첫 마감 전)"
+            },
+            "markers": [
+              "S01",
+              "S02",
+              "S03",
+              "S04",
+              "S05",
+              "S06",
+              "S07",
+              "S08",
+              "S09",
+              "S10",
+              "S11",
+              "S12"
+            ],
+            "regions": {
+              "clock": true,
+              "command": true,
+              "construction_ui": true,
+              "daily": true,
+              "finance_ui": true,
+              "funds": true,
+              "map": true,
+              "next_business_ui": true,
+              "operations_ui": true,
+              "plan": true,
+              "prediction": true,
+              "previous": false,
+              "report": true,
+              "tender_ui": true
+            },
+            "scope": "run--9223371978704943572",
+            "screen": "plan",
+            "selection": "S02",
+            "view_revision": 9
+          }
+        },
+        {
+          "file": ".local/validation/DEV-026/gui-02/005-AFTER_INPUT.png",
+          "sha256": "71b083353aa61aad766aa1c0d2d31aac6f2dbddc98573c1153afd94dc4e50fed",
+          "label": "AFTER_INPUT",
+          "save_error": 0,
+          "state": {
+            "actions": {
+              "predict": true,
+              "resume": true,
+              "undo": true
+            },
+            "effects": "5bb04b4a3eeec108e5bd28f264d8372f54bee53936004ffa697494bb3c8f89c2",
+            "focus": "P07_refresh:<Button#63468210007>",
+            "labels": {
+              "clock": "게임일 1 06:00 · 일시정지 · 1×",
+              "daily": "당일 운영비(미마감) · 게임일 1 / 게임분 360 · 게임 통화 정수 단위\n발생 누계 0 / 현금 지급 누계 0",
+              "feedback": "정보 선택: S02 · 노선 변경 없음 · 계획판 6",
+              "funds": "현재 자금 · 게임분 360 · 게임 통화 단위\nC 총현금 1000000 / R 제한 0 / F 자유 1000000 / K 예약 0 / A 신규약정 가용 1000000 / B 미지급 0",
+              "plan": "6역 · 계획판 6 · 유효\n",
+              "prediction": "예측: 미계산 · 입력판 7 / 계획판 6 · 자료 없음 / 예측 계산을 선택하세요",
+              "report": "확정 보고 자료 없음 (첫 마감 전)"
+            },
+            "markers": [
+              "S01",
+              "S02",
+              "S03",
+              "S04",
+              "S05",
+              "S06",
+              "S07",
+              "S08",
+              "S09",
+              "S10",
+              "S11",
+              "S12"
+            ],
+            "regions": {
+              "clock": true,
+              "command": true,
+              "construction_ui": true,
+              "daily": true,
+              "finance_ui": true,
+              "funds": true,
+              "map": true,
+              "next_business_ui": true,
+              "operations_ui": true,
+              "plan": true,
+              "prediction": true,
+              "previous": false,
+              "report": true,
+              "tender_ui": true
+            },
+            "scope": "run--9223371978704943572",
+            "screen": "finance",
+            "selection": "S02",
+            "view_revision": 9
+          }
+        },
+        {
+          "file": ".local/validation/DEV-026/gui-02/006-MANUAL.png",
+          "sha256": "d75d203a448c0786f23cf20a83995231e49a18844ba88eb94b8848b3cd68071a",
+          "label": "MANUAL",
+          "save_error": 0,
+          "state": {
+            "actions": {
+              "predict": true,
+              "resume": true,
+              "undo": true
+            },
+            "effects": "5bb04b4a3eeec108e5bd28f264d8372f54bee53936004ffa697494bb3c8f89c2",
+            "focus": "open_finance:<Button#59055801952>",
+            "labels": {
+              "clock": "게임일 1 06:00 · 일시정지 · 1×",
+              "daily": "당일 운영비(미마감) · 게임일 1 / 게임분 360 · 게임 통화 정수 단위\n발생 누계 0 / 현금 지급 누계 0",
+              "feedback": "정보 선택: S02 · 노선 변경 없음 · 계획판 6",
+              "funds": "현재 자금 · 게임분 360 · 게임 통화 단위\nC 총현금 1000000 / R 제한 0 / F 자유 1000000 / K 예약 0 / A 신규약정 가용 1000000 / B 미지급 0",
+              "plan": "6역 · 계획판 6 · 유효\n",
+              "prediction": "예측: 미계산 · 입력판 7 / 계획판 6 · 자료 없음 / 예측 계산을 선택하세요",
+              "report": "확정 보고 자료 없음 (첫 마감 전)"
+            },
+            "markers": [
+              "S01",
+              "S02",
+              "S03",
+              "S04",
+              "S05",
+              "S06",
+              "S07",
+              "S08",
+              "S09",
+              "S10",
+              "S11",
+              "S12"
+            ],
+            "regions": {
+              "clock": true,
+              "command": true,
+              "construction_ui": true,
+              "daily": true,
+              "finance_ui": true,
+              "funds": true,
+              "map": true,
+              "next_business_ui": true,
+              "operations_ui": true,
+              "plan": true,
+              "prediction": true,
+              "previous": false,
+              "report": true,
+              "tender_ui": true
+            },
+            "scope": "run--9223371978704943572",
+            "screen": "plan",
+            "selection": "S02",
+            "view_revision": 9
+          }
+        },
+        {
+          "file": ".local/validation/DEV-026/gui-02/007-AFTER_INPUT.png",
+          "sha256": "fc1a9126ca77ce3f3ad005f82461cc2d690325d735bdee5b7e736060066396b2",
+          "label": "AFTER_INPUT",
+          "save_error": 0,
+          "state": {
+            "actions": {
+              "predict": false,
+              "resume": true,
+              "undo": false
+            },
+            "effects": "650ecaab224f5b75957607feeb17304c97a580dd5309ac881b2dc69eb1a9f8d4",
+            "focus": "P07_day:<OptionButton#88600479997>",
+            "labels": {
+              "clock": "게임일 3 00:00 · 일시정지 · 1×",
+              "daily": "당일 운영비(미마감) · 게임일 3 / 게임분 2880 · 게임 통화 정수 단위\n발생 누계 0 / 현금 지급 누계 0",
+              "feedback": "현재 상태와 허용된 행동을 확인하세요",
+              "funds": "현재 자금 · 게임분 2880 · 게임 통화 단위\nC 총현금 1000000 / R 제한 0 / F 자유 1000000 / K 예약 0 / A 신규약정 가용 1000000 / B 미지급 0",
+              "plan": "0역 · 계획판 0 · 계획 조건 미충족\n서로 다른 역 6~8개가 필요합니다",
+              "prediction": "예측: 미계산 · 입력판 1 / 계획판 0 · 자료 없음 / 예측 계산을 선택하세요",
+              "report": "확정 과거 보고 · 마감일 2 · run--9223371952700258306/day-2\n운영비 0 / 지급 0 / 운임 0 / 마감 현금 1000000"
+            },
+            "markers": [
+              "S01",
+              "S02",
+              "S03",
+              "S04",
+              "S05",
+              "S06",
+              "S07",
+              "S08",
+              "S09",
+              "S10",
+              "S11",
+              "S12"
+            ],
+            "regions": {
+              "clock": true,
+              "command": true,
+              "construction_ui": true,
+              "daily": true,
+              "finance_ui": true,
+              "funds": true,
+              "map": true,
+              "next_business_ui": true,
+              "operations_ui": true,
+              "plan": true,
+              "prediction": true,
+              "previous": false,
+              "report": true,
+              "tender_ui": true
+            },
+            "scope": "run--9223371952700258306",
+            "screen": "finance",
+            "selection": "",
+            "view_revision": 5
+          }
+        },
+        {
+          "file": ".local/validation/DEV-026/gui-02/008-FIXED_DAY.png",
+          "sha256": "73303d2e901fd86a008b892a7c80df12da53e9eba32841885c3681ebc55ab591",
+          "label": "FIXED_DAY",
+          "save_error": 0,
+          "state": {
+            "actions": {
+              "predict": false,
+              "resume": true,
+              "undo": false
+            },
+            "effects": "650ecaab224f5b75957607feeb17304c97a580dd5309ac881b2dc69eb1a9f8d4",
+            "focus": "P07_day:<OptionButton#88600479997>",
+            "labels": {
+              "clock": "게임일 3 00:00 · 일시정지 · 1×",
+              "daily": "당일 운영비(미마감) · 게임일 3 / 게임분 2880 · 게임 통화 정수 단위\n발생 누계 0 / 현금 지급 누계 0",
+              "feedback": "현재 상태와 허용된 행동을 확인하세요",
+              "funds": "현재 자금 · 게임분 2880 · 게임 통화 단위\nC 총현금 1000000 / R 제한 0 / F 자유 1000000 / K 예약 0 / A 신규약정 가용 1000000 / B 미지급 0",
+              "plan": "0역 · 계획판 0 · 계획 조건 미충족\n서로 다른 역 6~8개가 필요합니다",
+              "prediction": "예측: 미계산 · 입력판 1 / 계획판 0 · 자료 없음 / 예측 계산을 선택하세요",
+              "report": "확정 과거 보고 · 마감일 2 · run--9223371952700258306/day-2\n운영비 0 / 지급 0 / 운임 0 / 마감 현금 1000000"
+            },
+            "markers": [
+              "S01",
+              "S02",
+              "S03",
+              "S04",
+              "S05",
+              "S06",
+              "S07",
+              "S08",
+              "S09",
+              "S10",
+              "S11",
+              "S12"
+            ],
+            "regions": {
+              "clock": true,
+              "command": true,
+              "construction_ui": true,
+              "daily": true,
+              "finance_ui": true,
+              "funds": true,
+              "map": true,
+              "next_business_ui": true,
+              "operations_ui": true,
+              "plan": true,
+              "prediction": true,
+              "previous": false,
+              "report": true,
+              "tender_ui": true
+            },
+            "scope": "run--9223371952700258306",
+            "screen": "finance",
+            "selection": "",
+            "view_revision": 5
+          }
+        },
+        {
+          "file": ".local/validation/DEV-026/gui-02/009-AFTER_INPUT.png",
+          "sha256": "179455d2b3696fe556b985d63e4b9e667ad2818256cb3140c34fb55645c2a6e4",
+          "label": "AFTER_INPUT",
+          "save_error": 0,
+          "state": {
+            "actions": {
+              "predict": false,
+              "resume": true,
+              "undo": false
+            },
+            "effects": "650ecaab224f5b75957607feeb17304c97a580dd5309ac881b2dc69eb1a9f8d4",
+            "focus": "P07_day:<OptionButton#88600479997>",
+            "labels": {
+              "clock": "게임일 3 00:00 · 일시정지 · 1×",
+              "daily": "당일 운영비(미마감) · 게임일 3 / 게임분 2880 · 게임 통화 정수 단위\n발생 누계 0 / 현금 지급 누계 0",
+              "feedback": "현재 상태와 허용된 행동을 확인하세요",
+              "funds": "현재 자금 · 게임분 2880 · 게임 통화 단위\nC 총현금 1000000 / R 제한 0 / F 자유 1000000 / K 예약 0 / A 신규약정 가용 1000000 / B 미지급 0",
+              "plan": "0역 · 계획판 0 · 계획 조건 미충족\n서로 다른 역 6~8개가 필요합니다",
+              "prediction": "예측: 미계산 · 입력판 1 / 계획판 0 · 자료 없음 / 예측 계산을 선택하세요",
+              "report": "확정 과거 보고 · 마감일 2 · run--9223371952700258306/day-2\n운영비 0 / 지급 0 / 운임 0 / 마감 현금 1000000"
+            },
+            "markers": [
+              "S01",
+              "S02",
+              "S03",
+              "S04",
+              "S05",
+              "S06",
+              "S07",
+              "S08",
+              "S09",
+              "S10",
+              "S11",
+              "S12"
+            ],
+            "regions": {
+              "clock": true,
+              "command": true,
+              "construction_ui": true,
+              "daily": true,
+              "finance_ui": true,
+              "funds": true,
+              "map": true,
+              "next_business_ui": true,
+              "operations_ui": true,
+              "plan": true,
+              "prediction": true,
+              "previous": false,
+              "report": true,
+              "tender_ui": true
+            },
+            "scope": "run--9223371952700258306",
+            "screen": "finance",
+            "selection": "",
+            "view_revision": 5
+          }
+        },
+        {
+          "file": ".local/validation/DEV-026/gui-02/010-MANUAL.png",
+          "sha256": "179455d2b3696fe556b985d63e4b9e667ad2818256cb3140c34fb55645c2a6e4",
+          "label": "MANUAL",
+          "save_error": 0,
+          "state": {
+            "actions": {
+              "predict": false,
+              "resume": true,
+              "undo": false
+            },
+            "effects": "650ecaab224f5b75957607feeb17304c97a580dd5309ac881b2dc69eb1a9f8d4",
+            "focus": "P07_day:<OptionButton#88600479997>",
+            "labels": {
+              "clock": "게임일 3 00:00 · 일시정지 · 1×",
+              "daily": "당일 운영비(미마감) · 게임일 3 / 게임분 2880 · 게임 통화 정수 단위\n발생 누계 0 / 현금 지급 누계 0",
+              "feedback": "현재 상태와 허용된 행동을 확인하세요",
+              "funds": "현재 자금 · 게임분 2880 · 게임 통화 단위\nC 총현금 1000000 / R 제한 0 / F 자유 1000000 / K 예약 0 / A 신규약정 가용 1000000 / B 미지급 0",
+              "plan": "0역 · 계획판 0 · 계획 조건 미충족\n서로 다른 역 6~8개가 필요합니다",
+              "prediction": "예측: 미계산 · 입력판 1 / 계획판 0 · 자료 없음 / 예측 계산을 선택하세요",
+              "report": "확정 과거 보고 · 마감일 2 · run--9223371952700258306/day-2\n운영비 0 / 지급 0 / 운임 0 / 마감 현금 1000000"
+            },
+            "markers": [
+              "S01",
+              "S02",
+              "S03",
+              "S04",
+              "S05",
+              "S06",
+              "S07",
+              "S08",
+              "S09",
+              "S10",
+              "S11",
+              "S12"
+            ],
+            "regions": {
+              "clock": true,
+              "command": true,
+              "construction_ui": true,
+              "daily": true,
+              "finance_ui": true,
+              "funds": true,
+              "map": true,
+              "next_business_ui": true,
+              "operations_ui": true,
+              "plan": true,
+              "prediction": true,
+              "previous": false,
+              "report": true,
+              "tender_ui": true
+            },
+            "scope": "run--9223371952700258306",
+            "screen": "finance",
+            "selection": "",
+            "view_revision": 5
+          }
+        },
+        {
+          "file": ".local/validation/DEV-026/gui-02/011-AFTER_INPUT.png",
+          "sha256": "31a233489ea1d7268df19367fc7a5a72113859de0394e85cda42188e472d76aa",
+          "label": "AFTER_INPUT",
+          "save_error": 0,
+          "state": {
+            "actions": {
+              "predict": false,
+              "resume": true,
+              "undo": false
+            },
+            "effects": "a8ac945c52c44604280ee20ecb52c3cff4154ae3ec9bece19b1351bb85f30aa0",
+            "focus": "Fixture_NEW_SESSION:<Button#57948505636>",
+            "labels": {
+              "clock": "게임일 1 06:00 · 일시정지 · 1×",
+              "daily": "당일 운영비(미마감) · 게임일 1 / 게임분 360 · 게임 통화 정수 단위\n발생 누계 0 / 현금 지급 누계 0",
+              "feedback": "현재 상태와 허용된 행동을 확인하세요",
+              "funds": "현재 자금 · 게임분 360 · 게임 통화 단위\nC 총현금 1000000 / R 제한 0 / F 자유 1000000 / K 예약 0 / A 신규약정 가용 1000000 / B 미지급 0",
+              "plan": "0역 · 계획판 0 · 계획 조건 미충족\n서로 다른 역 6~8개가 필요합니다",
+              "prediction": "예측: 미계산 · 입력판 1 / 계획판 0 · 자료 없음 / 예측 계산을 선택하세요",
+              "report": "확정 보고 자료 없음 (첫 마감 전)"
+            },
+            "markers": [
+              "S01",
+              "S02",
+              "S03",
+              "S04",
+              "S05",
+              "S06",
+              "S07",
+              "S08",
+              "S09",
+              "S10",
+              "S11",
+              "S12"
+            ],
+            "regions": {
+              "clock": true,
+              "command": true,
+              "construction_ui": true,
+              "daily": true,
+              "finance_ui": true,
+              "funds": true,
+              "map": true,
+              "next_business_ui": true,
+              "operations_ui": true,
+              "plan": true,
+              "prediction": true,
+              "previous": false,
+              "report": true,
+              "tender_ui": true
+            },
+            "scope": "run--9223371942751369684",
+            "screen": "plan",
+            "selection": "",
+            "view_revision": 3
+          }
+        },
+        {
+          "file": ".local/validation/DEV-026/gui-02/012-NEW_SESSION.png",
+          "sha256": "1feb198addc8ebf42a2c473cd8c588761fff4b925be3ea4f49bca4ed209800d9",
+          "label": "NEW_SESSION",
+          "save_error": 0,
+          "state": {
+            "actions": {
+              "predict": false,
+              "resume": true,
+              "undo": false
+            },
+            "effects": "a8ac945c52c44604280ee20ecb52c3cff4154ae3ec9bece19b1351bb85f30aa0",
+            "focus": "Fixture_NEW_SESSION:<Button#57948505636>",
+            "labels": {
+              "clock": "게임일 1 06:00 · 일시정지 · 1×",
+              "daily": "당일 운영비(미마감) · 게임일 1 / 게임분 360 · 게임 통화 정수 단위\n발생 누계 0 / 현금 지급 누계 0",
+              "feedback": "현재 상태와 허용된 행동을 확인하세요",
+              "funds": "현재 자금 · 게임분 360 · 게임 통화 단위\nC 총현금 1000000 / R 제한 0 / F 자유 1000000 / K 예약 0 / A 신규약정 가용 1000000 / B 미지급 0",
+              "plan": "0역 · 계획판 0 · 계획 조건 미충족\n서로 다른 역 6~8개가 필요합니다",
+              "prediction": "예측: 미계산 · 입력판 1 / 계획판 0 · 자료 없음 / 예측 계산을 선택하세요",
+              "report": "확정 보고 자료 없음 (첫 마감 전)"
+            },
+            "markers": [
+              "S01",
+              "S02",
+              "S03",
+              "S04",
+              "S05",
+              "S06",
+              "S07",
+              "S08",
+              "S09",
+              "S10",
+              "S11",
+              "S12"
+            ],
+            "regions": {
+              "clock": true,
+              "command": true,
+              "construction_ui": true,
+              "daily": true,
+              "finance_ui": true,
+              "funds": true,
+              "map": true,
+              "next_business_ui": true,
+              "operations_ui": true,
+              "plan": true,
+              "prediction": true,
+              "previous": false,
+              "report": true,
+              "tender_ui": true
+            },
+            "scope": "run--9223371942751369684",
+            "screen": "plan",
+            "selection": "",
+            "view_revision": 3
+          }
+        }
+      ]
+    }
+  ],
+  "line_ending_only_changes": [
+    {
+      "path": "scripts/ui/finance_view.gd",
+      "before_sha256": "04d9c0787edb8df70bca69aff33c0b42c0b08daa83fc85ad670a2e8281d0edca",
+      "after_sha256": "c9d2d1c3f9ad861236917ef3cb520d6fa1e7dafe79d3f84554162d3e88b4714f",
+      "only_change": "CRLF_TO_LF"
+    },
+    {
+      "path": "scripts/ui/s01_observation_contract.gd",
+      "before_sha256": "03e95fc1f130c2985d20bca5c516175ed5a32216ef897e325285714271eca23f",
+      "after_sha256": "e78487eb8e9e6a49b64730f6b2f23112a6b64b6a1deed74a85572236f5ddebeb",
+      "only_change": "CRLF_TO_LF"
+    },
+    {
+      "path": "scripts/ui/stage1_session.gd",
+      "before_sha256": "5572e85dc6ee6b9bdd9aa2f64524663cba660da391c15396b3480a751d3cdaad",
+      "after_sha256": "cfc72c40372f6cd1e0d0dd187caf0effffc187fbfcbde2461ba9cbf6508427be",
+      "only_change": "CRLF_TO_LF"
+    },
+    {
+      "path": "scripts/ui/stage1_view.gd",
+      "before_sha256": "14163c67f56a91c23f8a137c50fb136432c96195ba626c6090a1e36affc9f935",
+      "after_sha256": "0742afc808a44e6614faa82107217cc4e4234877952b6aa21bff418ac46724ba",
+      "only_change": "CRLF_TO_LF"
+    },
+    {
+      "path": "tests/game/run_s01_exception_gui_cases.gd",
+      "before_sha256": "1605973cbad9755a389a16857ddca0e4b6e082922a3cca0da1b4077e8d248183",
+      "after_sha256": "acf70cdbfa0c292c79cdf98cef8620db796f14e3492d37a1f2c2e7b3d7cd4ab5",
+      "only_change": "CRLF_TO_LF"
+    },
+    {
+      "path": "tests/game/w026_ui_fixtures.gd",
+      "before_sha256": "87855503ca9013e83ad98a42f3d24ec6b3bc1a84a1587f0216e1ea31c12e045a",
+      "after_sha256": "c1d35c225c9a656e54045f09a59c8e969764b53a203071302bf69baf431bc823",
+      "only_change": "CRLF_TO_LF"
+    },
+    {
+      "path": "scripts/ui/operations_view.gd",
+      "before_sha256": "c292ea96fb6772b2f1f9f08cdf2521f591e28e6d27ac879f9da5ada877a6b8d6",
+      "after_sha256": "e0fff5da02d115b5fd2c1383a2609bd6b9ac3157b5eefcc74c18bc4713eab48d",
+      "only_change": "CRLF_TO_LF"
+    },
+    {
+      "path": "scripts/ui/s01_observation_contract.gd",
+      "before_sha256": "3d973180d61910c5ffb997aebddb2c388064ecaabdcd3ab46068e249983c7279",
+      "after_sha256": "2acd782a4ab5fe969ba6117c8fe84d703c68d0087a60e36250de7755f7668dc7",
+      "only_change": "CRLF_TO_LF"
+    },
+    {
+      "path": "tests/game/run_s01_exception_tests.gd",
+      "before_sha256": "8ff1404fec91d059657cbae817a8afdaed964d2ccc31ebaaf3964b2af0f0e016",
+      "after_sha256": "1ce0db7a8a3593af1edfbdc161be0f218666170876f58202258532fc9bdeb425",
+      "only_change": "CRLF_TO_LF"
+    }
+  ],
+  "raw_artifact_sha256": {
+    ".local/validation/DEV-026/auto-915678.json": "073a6528b541df24160918dc887549256c72fa997cdf646fd3f7db5a727a2654",
+    ".local/validation/DEV-026/auto-971929.json": "073a6528b541df24160918dc887549256c72fa997cdf646fd3f7db5a727a2654",
+    ".local/validation/DEV-026/auto-dev1-console.log": "ab639e64e4c90a88dce93d3dd095d5a53276867bdd40c86893dda2952a1b820b",
+    ".local/validation/DEV-026/auto-dev1.log": "f823f907b06e922dc8d2d43e98d91ee48d3a9feccc2dca874ebbf9333ea58b77",
+    ".local/validation/DEV-026/auto-dev2-console.log": "abd14a4d68ef3ff9404de4e8755779f5f961c4c565d195cb74bec337168a7d51",
+    ".local/validation/DEV-026/auto-dev2.json": "1b6ad780ec4b7482cc6618d1f86ca2c50e9b534b931b4eb4201d110b7d632964",
+    ".local/validation/DEV-026/auto-dev2.log": "f11f98ec248877a8dc862a8f97f2d315e061c6afcaaed6a35555e2b5fa0af227",
+    ".local/validation/DEV-026/boundaries-01/automatic.json": "9acd32b9f0d8cab00e70f518000f2ea4254fef6fcfc4e8d554de485d56ca864d",
+    ".local/validation/DEV-026/boundaries-01/results.json": "bc7b7e43ebcf9c47f0bfd31f00091d13e93b3f7b2fe1908136e03c14a6e8fa79",
+    ".local/validation/DEV-026/boundaries-01/run_s01_exception_tests-failure.log": "ef63157af22be1be20231cc91e4e1b72e982af347395efa0a9268e2fed2f57a6",
+    ".local/validation/DEV-026/boundaries-01/run_s01_exception_tests.log": "135e38f25063232b5b3f23257bfa80a59a8d2929fbe2920cef6b96b155037367",
+    ".local/validation/DEV-026/boundaries-01/source-hashes.json": "22a3e1f589212e6097f8d2a68785f7d6950f0f02e53bb0f9cd3df8a762e1bde1",
+    ".local/validation/DEV-026/boundaries-02/automatic.json": "5621eeccfd83bcd4de4e9872fbf9d6f7d1f2b2497bbc83e578ac4de080f14dd4",
+    ".local/validation/DEV-026/boundaries-02/results.json": "a5d340845be619c4a9a53975a6265ae56d027c14589edacf17d5941f0ee8a6b6",
+    ".local/validation/DEV-026/boundaries-02/run_s01_exception_tests.log": "3785a6d4f66715296994784b45a43f1ee9914b89f443cddf90243ba9ef47e1c9",
+    ".local/validation/DEV-026/boundaries-02/run_w07_tests.log": "407438419507d149328db9909d67f1f146f43f8265eacc4fda1814738d2eefb4",
+    ".local/validation/DEV-026/boundaries-02/source-hashes.json": "12849586dfc8b2ea4107142879b8616961bc7596f680bfaf042258172904700d",
+    ".local/validation/DEV-026/boundaries-03/automatic.json": "68782f0ceade1062cd09539716528130e027a5d365a41ad0c120ad3ec6b4a04c",
+    ".local/validation/DEV-026/boundaries-03/results.json": "57ebe089bcebf2f5b01d8ef9f4bbfe85a1e10616ff28dc715a4080767861967c",
+    ".local/validation/DEV-026/boundaries-03/run_s01_exception_tests-failure.log": "ef63157af22be1be20231cc91e4e1b72e982af347395efa0a9268e2fed2f57a6",
+    ".local/validation/DEV-026/boundaries-03/run_s01_exception_tests.log": "3c606adc00d5a9b7e42e6134cc502a403f62aa072917cd17fa9a4fc1495f2e56",
+    ".local/validation/DEV-026/boundaries-03/run_w07_tests.log": "407438419507d149328db9909d67f1f146f43f8265eacc4fda1814738d2eefb4",
+    ".local/validation/DEV-026/boundaries-03/source-hashes.json": "89fc2470bd8ea99fe20c4fc640a6aa6b00ff9de3f89e1bf1566e82d79dd2e97d",
+    ".local/validation/DEV-026/boundaries-04/automatic.json": "33cedca9b3ff898e343b4aa9f0a03514fd8d627ad6abd21cda3c85883b52ab37",
+    ".local/validation/DEV-026/boundaries-04/results.json": "31db9fd3599c0cde0b8622106348dc80606fac66b5cf1a1cd1d12b2bfda05b09",
+    ".local/validation/DEV-026/boundaries-04/run_s01_exception_tests.log": "ab143b0f30fd30fd81b54332a4c4b0de582eb27155245aa493cb3f2b837ddabc",
+    ".local/validation/DEV-026/boundaries-04/source-hashes.json": "06590f53c3ee25fed23086bc2517d4e74fcacf0f11eaf11d65c2558366eefc43",
+    ".local/validation/DEV-026/boundaries-05/automatic.json": "bea094e6a7e653d98fde2c7cf9303e6ec86c1fe7a14a0fa3fa8b56290b171583",
+    ".local/validation/DEV-026/boundaries-05/results.json": "01f183a2c980d2cbea663aa3528df876eacbefa0e6aaf6da01f2a65aea486227",
+    ".local/validation/DEV-026/boundaries-05/run_s01_exception_tests.log": "f8ca5a9f5bfb689ca73f663db2a323cbaa5e07519b0c162df84c0952bb75ee08",
+    ".local/validation/DEV-026/boundaries-05/run_w07_tests.log": "407438419507d149328db9909d67f1f146f43f8265eacc4fda1814738d2eefb4",
+    ".local/validation/DEV-026/boundaries-05/source-hashes.json": "1b8b407534910fb227ceb75dfc1ed911587847de8b973d733d73f2294bd4026a",
+    ".local/validation/DEV-026/check-final.log": "73886193cb6e6e6676962a62c59f15d7d74b1440c31584a851032060952119fb",
+    ".local/validation/DEV-026/doctor-final.log": "fd0752f7b05433bdc8050471288f5a9ea20d8ddf14e14087b2b7c8b128d4a29f",
+    ".local/validation/DEV-026/f08-transition/events.jsonl": "0adfdbd0765ce06b164988719261edc9ace564979789047bd217ad213231c0c8",
+    ".local/validation/DEV-026/f08-transition.log": "52bbb995738633097c9fe5efff226fa5ffa546f07a20ab2edaaf93ea34a0c0c7",
+    ".local/validation/DEV-026/gui-01/001-READY.png": "87d43c915aff06819812d55636e870f23723f1ca9c6c3e361a954a6618ea46e5",
+    ".local/validation/DEV-026/gui-01/002-EX-01.png": "cff1967569388fdcef9c4c3516862a8c797d0ca4f41c7d4c6b1487ea5fb3f7c1",
+    ".local/validation/DEV-026/gui-01/003-AFTER_INPUT.png": "cff1967569388fdcef9c4c3516862a8c797d0ca4f41c7d4c6b1487ea5fb3f7c1",
+    ".local/validation/DEV-026/gui-01/004-EX-09.png": "005f64e81c32738afe1d01e0d85aa7b1694b82b53e2a73608958976d17654c85",
+    ".local/validation/DEV-026/gui-01/005-AFTER_INPUT.png": "005f64e81c32738afe1d01e0d85aa7b1694b82b53e2a73608958976d17654c85",
+    ".local/validation/DEV-026/gui-01/006-NORMAL.png": "a3d590629aabe8ba053f4bbfc4fcc726f3ef50f5485b4d8b98e45b3a7f88c444",
+    ".local/validation/DEV-026/gui-01/007-AFTER_INPUT.png": "a3d590629aabe8ba053f4bbfc4fcc726f3ef50f5485b4d8b98e45b3a7f88c444",
+    ".local/validation/DEV-026/gui-01/008-AFTER_INPUT.png": "5b049d8e649e50966941b1d4680a22daa58c2b2275a63dec47fa6cfcbc31bb65",
+    ".local/validation/DEV-026/gui-01/009-MANUAL.png": "f2ad4f1c984d0b6a8bb9d8637de9d7f1e5103b8493015e92beeff785e84cbb58",
+    ".local/validation/DEV-026/gui-01/events.jsonl": "eba980812271f84caa4d2cf59a0a7283b0cb46c93815863d2b46748ce1d4504f",
+    ".local/validation/DEV-026/gui-01-console.log": "ea74599004726cba9e8bd55cf96b84e9b4c1eab27387d11d81c537ce7aac1569",
+    ".local/validation/DEV-026/gui-02/001-READY.png": "6395cbff3df48867edde58c59a09a9045213ef592eb04e58c45bfe0463d72b95",
+    ".local/validation/DEV-026/gui-02/002-AFTER_INPUT.png": "70aca5d561d4852f34cd8f39b28f569c7d2008ac9d5fc7b508124c87250264cc",
+    ".local/validation/DEV-026/gui-02/003-EX-02.png": "139634da097734002f6ba212c272dc09aa17798cb705e3d227ee3ed173db02b3",
+    ".local/validation/DEV-026/gui-02/004-NORMAL.png": "b890bdd014d34dbe6bb78ca031b112ec6d07d05c0492895a60647037f9666030",
+    ".local/validation/DEV-026/gui-02/005-AFTER_INPUT.png": "71b083353aa61aad766aa1c0d2d31aac6f2dbddc98573c1153afd94dc4e50fed",
+    ".local/validation/DEV-026/gui-02/006-MANUAL.png": "d75d203a448c0786f23cf20a83995231e49a18844ba88eb94b8848b3cd68071a",
+    ".local/validation/DEV-026/gui-02/007-AFTER_INPUT.png": "fc1a9126ca77ce3f3ad005f82461cc2d690325d735bdee5b7e736060066396b2",
+    ".local/validation/DEV-026/gui-02/008-FIXED_DAY.png": "73303d2e901fd86a008b892a7c80df12da53e9eba32841885c3681ebc55ab591",
+    ".local/validation/DEV-026/gui-02/009-AFTER_INPUT.png": "179455d2b3696fe556b985d63e4b9e667ad2818256cb3140c34fb55645c2a6e4",
+    ".local/validation/DEV-026/gui-02/010-MANUAL.png": "179455d2b3696fe556b985d63e4b9e667ad2818256cb3140c34fb55645c2a6e4",
+    ".local/validation/DEV-026/gui-02/011-AFTER_INPUT.png": "31a233489ea1d7268df19367fc7a5a72113859de0394e85cda42188e472d76aa",
+    ".local/validation/DEV-026/gui-02/012-NEW_SESSION.png": "1feb198addc8ebf42a2c473cd8c588761fff4b925be3ea4f49bca4ed209800d9",
+    ".local/validation/DEV-026/gui-02/events.jsonl": "ea6ca4143b156fb7f1acf33fe0a2537296aeb964b7dea56169728b79065145d7",
+    ".local/validation/DEV-026/gui-02-console.log": "cd40df5c0c0cf042dc92a463a5bdab80bb713e564b44751eda40e69e9991cac1",
+    ".local/validation/DEV-026/import.log": "4678646837ef1da27fecdda54d1c6513dab03e5eb9753bc529a52b9cb31622bc",
+    ".local/validation/DEV-026/initial-failure-01/console.log": "69c6609659ff9a12b9e545a12710c60ff23c5c2f867dcffedebcec81e80dfd17",
+    ".local/validation/DEV-026/initial-failure-01/result.json": "ff6abc6e6122750a512b5a88a37b1def52c5932dcd4876b2b66a2f848248af07",
+    ".local/validation/DEV-026/line-endings.json": "909ec5e61578247810753f9db6110964eab75b9fceca0c0e96123b9d41e8e55c",
+    ".local/validation/DEV-026/operations-02/results.json": "da5dcd46ef899878de6ec3d6874b8ecc01113ebc7f2d757248a19eb88999076d",
+    ".local/validation/DEV-026/operations-02/run_operations_gui_cases.log": "bd2c268fa64dc4e4be8c1f14e6a2f0187300ef20c2288229d919f63e8838db47",
+    ".local/validation/DEV-026/operations-02/source-hashes.json": "dc8871515ec153157118dc74f3b305da5659db214199bd9cbe4725af562433bc",
+    ".local/validation/DEV-026/operations-gui-dev1-console.log": "eeafad5ed80dca41789556725db2322717df0dbf06c2998ed39c04359ef8f668",
+    ".local/validation/DEV-026/operations-gui-dev1.log": "a320fb48f64cb6113a5ca7d99f6e17fd59d4edc28b7a5a3b3488752472e83cf9",
+    ".local/validation/DEV-026/project-load-02.log": "e43983b44cb56ccd638fb3c1bff6deb9b949920d7a817e6ba66039648027e073",
+    ".local/validation/DEV-026/project-load-03.log": "16c410f753726dcef3252abfd1243b628992af3c94f47b2ad177891f5c52cef1",
+    ".local/validation/DEV-026/regression-01/product-init.log": "873be5ee2c0557083e9f3a61eda7aae45b7e6027127bd83ac288f55c91989a42",
+    ".local/validation/DEV-026/regression-01/project-load.log": "4383ddddba7b79d53e0c087db852f5428d6623b260d258585cfc980a7b96ffb4",
+    ".local/validation/DEV-026/regression-01/results.json": "72dbede16f022dc2fc3058949d5537ddd5bda6eaabf9e8b33b085f8f62df31e7",
+    ".local/validation/DEV-026/regression-01/run_construction_ui_tests.log": "e33b2d68aaeabbef80b313a6ba335855d8e45c836b416c1a258f9866eb076ea6",
+    ".local/validation/DEV-026/regression-01/run_operations_ui_tests.log": "1dd53aad430184166c46044698332745a6331aff578a631705bba28ecca20c92",
+    ".local/validation/DEV-026/regression-01/run_tender_ui_tests.log": "03f4be9a5b8958cb98daeab7db74b7d460ad2731792294eb088ed0a43842c1ee",
+    ".local/validation/DEV-026/regression-01/run_w03_tests.log": "e106f7aa57e133af5012c6bd05580ffa9e1c2932482dc5d855c0e658be5ac1a5",
+    ".local/validation/DEV-026/regression-01/run_w07_tests.log": "6efa4e1c7c573e6b6769da7a35a026039ca3163c7e44350d7bdfdfe780874e3d",
+    ".local/validation/DEV-026/regression-01/source-hashes.json": "22a3e1f589212e6097f8d2a68785f7d6950f0f02e53bb0f9cd3df8a762e1bde1",
+    ".local/validation/DEV-026/w07-dev1-console.log": "6efa4e1c7c573e6b6769da7a35a026039ca3163c7e44350d7bdfdfe780874e3d",
+    ".local/validation/DEV-026/w07-dev1.log": "1580cb99d34c57cc7be9f9b9c21611a90edd00db754c7acaa666a72666e504f9",
+    ".local/validation/DEV-026/w07-transition.log": "3b4c3943c4a3fac9a6abc554df1a0e7424a18ab0c39bd1debf5dad860af67007"
+  },
+  "limitations": [
+    "Past failures are preserved; no whole-suite PASS while existing GUI consumer harness remains failing.",
+    "After gui-02: empty ItemList fallback and malformed scalar type comparisons hardened. Automatic no_data_focus_title and typed_* cases cover these changes; prior GUI reused only for unaffected valid-input paths.",
+    "New supply metadata and focus/lifetime guards do not implement W04B.",
+    "Normal headless product initialization is distinct from GUI fixture and natural completion."
+  ],
+  "caller_probes": [
+    {
+      "runner": "w07",
+      "classification": "HEADLESS_TRANSITION_ONLY_NOT_F08_EXPERIMENT",
+      "script": ".local/dev026/probe_w07_runner.gd",
+      "script_sha256": "4832e92a04c4d6df73ed39c218b0a450ddc0b8fce3fc3cd0bf30cf407b9da245",
+      "log": ".local/validation/DEV-026/w07-transition.log",
+      "log_sha256": "3b4c3943c4a3fac9a6abc554df1a0e7424a18ab0c39bd1debf5dad860af67007",
+      "checks": 8,
+      "failures": 0,
+      "exit": 0
+    },
+    {
+      "runner": "f08",
+      "classification": "HEADLESS_TRANSITION_ONLY_NOT_F08_EXPERIMENT",
+      "script": ".local/dev026/probe_f08_runner.gd",
+      "script_sha256": "dad5c162b0f066a52e89daf008d4f4ce2d222aa22330a94a7f117bcbf95cac6d",
+      "log": ".local/validation/DEV-026/f08-transition.log",
+      "log_sha256": "52bbb995738633097c9fe5efff226fa5ffa546f07a20ab2edaaf93ea34a0c0c7",
+      "checks": 8,
+      "failures": 0,
+      "exit": 0
+    }
+  ],
+  "submission": {
+    "base_sha": "63550826af8b6ae9a46bda2e4bb826dd1ed7cd79",
+    "owner_request": "개발 에이전트. 작업 내용을 PR로 만들어주세요",
+    "authorization_source": "current development conversation; scope section 9",
+    "branch": "codex/DEV-026-s01-exception-implementation",
+    "authorized": [
+      "commit existing 23 files",
+      "push work branch",
+      "draft PR",
+      "required CI verification"
+    ],
+    "not_authorized": [
+      "test path reassignment",
+      "main merge",
+      "release",
+      "deployment"
+    ],
+    "head_and_ci": "See PR body and Checks; original head=UNCOMMITTED describes product validation time",
+    "runtime_changes_since_local_review": false,
+    "raw_logs_and_pngs": "LOCAL_ONLY_NOT_UPLOADED"
+  },
+  "publication_evidence": {
+    "final_automatic_assertions": [
+      {
+        "name": "root_contract",
+        "passed": true
+      },
+      {
+        "name": "scope_from_binding",
+        "passed": true
+      },
+      {
+        "name": "root_rejected_<null>",
+        "passed": true
+      },
+      {
+        "name": "root_markers_cleared",
+        "passed": true
+      },
+      {
+        "name": "root_no_command",
+        "passed": true
+      },
+      {
+        "name": "root_recovery",
+        "passed": true
+      },
+      {
+        "name": "root_rejected_[]",
+        "passed": true
+      },
+      {
+        "name": "root_markers_cleared",
+        "passed": true
+      },
+      {
+        "name": "root_no_command",
+        "passed": true
+      },
+      {
+        "name": "root_recovery",
+        "passed": true
+      },
+      {
+        "name": "root_rejected_bad",
+        "passed": true
+      },
+      {
+        "name": "root_markers_cleared",
+        "passed": true
+      },
+      {
+        "name": "root_no_command",
+        "passed": true
+      },
+      {
+        "name": "root_recovery",
+        "passed": true
+      },
+      {
+        "name": "root_rejected_{  }",
+        "passed": true
+      },
+      {
+        "name": "root_markers_cleared",
+        "passed": true
+      },
+      {
+        "name": "root_no_command",
+        "passed": true
+      },
+      {
+        "name": "root_recovery",
+        "passed": true
+      },
+      {
+        "name": "root_rejected_{ \"view_revision\": \"1\" }",
+        "passed": true
+      },
+      {
+        "name": "root_markers_cleared",
+        "passed": true
+      },
+      {
+        "name": "root_no_command",
+        "passed": true
+      },
+      {
+        "name": "root_recovery",
+        "passed": true
+      },
+      {
+        "name": "root_missing_ui_contract_revision",
+        "passed": true
+      },
+      {
+        "name": "root_missing_resume_ui_contract_revision",
+        "passed": true
+      },
+      {
+        "name": "root_missing_run_scope",
+        "passed": true
+      },
+      {
+        "name": "root_missing_resume_run_scope",
+        "passed": true
+      },
+      {
+        "name": "root_missing_view_revision",
+        "passed": true
+      },
+      {
+        "name": "root_missing_resume_view_revision",
+        "passed": true
+      },
+      {
+        "name": "root_missing_data_version",
+        "passed": true
+      },
+      {
+        "name": "root_missing_resume_data_version",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_clock_<null>",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_clock",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_clock_wrong",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_clock",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_clock_true",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_clock",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_clock_[]",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_clock",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_current_<null>",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_current",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_current_wrong",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_current",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_current_true",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_current",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_current_[]",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_current",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_plan_<null>",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_plan",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_plan_wrong",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_plan",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_plan_true",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_plan",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_plan_[]",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_plan",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_prediction_<null>",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_prediction",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_prediction_wrong",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_prediction",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_prediction_true",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_prediction",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_prediction_[]",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_prediction",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_daily_activity_<null>",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_daily_activity",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_daily_activity_wrong",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_daily_activity",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_daily_activity_true",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_daily_activity",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_daily_activity_[]",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_daily_activity",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_report_<null>",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_report",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_report_wrong",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_report",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_report_true",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_report",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_report_[]",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_report",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_stations_<null>",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_stations",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_stations_wrong",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_stations",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_stations_true",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_stations",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_stations_[]",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_stations",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_administration_<null>",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_administration",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_administration_wrong",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_administration",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_administration_true",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_administration",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_administration_[]",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_administration",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_edges_<null>",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_edges",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_edges_wrong",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_edges",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_edges_true",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_edges",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_edges_[]",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_edges",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_tender_ui_<null>",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_tender_ui",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_tender_ui_wrong",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_tender_ui",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_tender_ui_true",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_tender_ui",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_tender_ui_[]",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_tender_ui",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_construction_ui_<null>",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_construction_ui",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_construction_ui_wrong",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_construction_ui",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_construction_ui_true",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_construction_ui",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_construction_ui_[]",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_construction_ui",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_operations_ui_<null>",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_operations_ui",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_operations_ui_wrong",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_operations_ui",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_operations_ui_true",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_operations_ui",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_operations_ui_[]",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_operations_ui",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_finance_ui_<null>",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_finance_ui",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_finance_ui_wrong",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_finance_ui",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_finance_ui_true",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_finance_ui",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_finance_ui_[]",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_finance_ui",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_next_business_ui_<null>",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_next_business_ui",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_next_business_ui_wrong",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_next_business_ui",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_next_business_ui_true",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_next_business_ui",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_next_business_ui_[]",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_next_business_ui",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_command_result_<null>",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_command_result",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_command_result_wrong",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_command_result",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_command_result_true",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_command_result",
+        "passed": true
+      },
+      {
+        "name": "regional_accept_command_result_[]",
+        "passed": true
+      },
+      {
+        "name": "regional_no_effect_command_result",
+        "passed": true
+      },
+      {
+        "name": "funds_missing_not_zero",
+        "passed": true
+      },
+      {
+        "name": "funds_missing_plan_kept",
+        "passed": true
+      },
+      {
+        "name": "funds_missing_clock_kept",
+        "passed": true
+      },
+      {
+        "name": "map_cycle_rejected",
+        "passed": true
+      },
+      {
+        "name": "map_cycle_funds_kept",
+        "passed": true
+      },
+      {
+        "name": "map_cycle_callback_no_effect",
+        "passed": true
+      },
+      {
+        "name": "daily_bad_operating_cost<null>",
+        "passed": true
+      },
+      {
+        "name": "daily_funds_independent",
+        "passed": true
+      },
+      {
+        "name": "daily_bad_operating_cost0",
+        "passed": true
+      },
+      {
+        "name": "daily_funds_independent",
+        "passed": true
+      },
+      {
+        "name": "daily_bad_operating_costtrue",
+        "passed": true
+      },
+      {
+        "name": "daily_funds_independent",
+        "passed": true
+      },
+      {
+        "name": "daily_bad_operating_cost-1",
+        "passed": true
+      },
+      {
+        "name": "daily_funds_independent",
+        "passed": true
+      },
+      {
+        "name": "daily_bad_payment<null>",
+        "passed": true
+      },
+      {
+        "name": "daily_funds_independent",
+        "passed": true
+      },
+      {
+        "name": "daily_bad_payment0",
+        "passed": true
+      },
+      {
+        "name": "daily_funds_independent",
+        "passed": true
+      },
+      {
+        "name": "daily_bad_paymenttrue",
+        "passed": true
+      },
+      {
+        "name": "daily_funds_independent",
+        "passed": true
+      },
+      {
+        "name": "daily_bad_payment-1",
+        "passed": true
+      },
+      {
+        "name": "daily_funds_independent",
+        "passed": true
+      },
+      {
+        "name": "daily_bad_debt_payment<null>",
+        "passed": true
+      },
+      {
+        "name": "daily_funds_independent",
+        "passed": true
+      },
+      {
+        "name": "daily_bad_debt_payment0",
+        "passed": true
+      },
+      {
+        "name": "daily_funds_independent",
+        "passed": true
+      },
+      {
+        "name": "daily_bad_debt_paymenttrue",
+        "passed": true
+      },
+      {
+        "name": "daily_funds_independent",
+        "passed": true
+      },
+      {
+        "name": "daily_bad_debt_payment-1",
+        "passed": true
+      },
+      {
+        "name": "daily_funds_independent",
+        "passed": true
+      },
+      {
+        "name": "daily_bad_cash_payment<null>",
+        "passed": true
+      },
+      {
+        "name": "daily_funds_independent",
+        "passed": true
+      },
+      {
+        "name": "daily_bad_cash_payment0",
+        "passed": true
+      },
+      {
+        "name": "daily_funds_independent",
+        "passed": true
+      },
+      {
+        "name": "daily_bad_cash_paymenttrue",
+        "passed": true
+      },
+      {
+        "name": "daily_funds_independent",
+        "passed": true
+      },
+      {
+        "name": "daily_bad_cash_payment-1",
+        "passed": true
+      },
+      {
+        "name": "daily_funds_independent",
+        "passed": true
+      },
+      {
+        "name": "regional_full_recovery",
+        "passed": true
+      },
+      {
+        "name": "daily_observation_mismatch_day_id",
+        "passed": true
+      },
+      {
+        "name": "daily_mismatch_funds_kept_day_id",
+        "passed": true
+      },
+      {
+        "name": "daily_observation_mismatch_simulation_minute",
+        "passed": true
+      },
+      {
+        "name": "daily_mismatch_funds_kept_simulation_minute",
+        "passed": true
+      },
+      {
+        "name": "daily_observation_mismatch_snapshot_revision",
+        "passed": true
+      },
+      {
+        "name": "daily_mismatch_funds_kept_snapshot_revision",
+        "passed": true
+      },
+      {
+        "name": "coherence_requires_bool_<null>",
+        "passed": true
+      },
+      {
+        "name": "coherence_requires_bool_true",
+        "passed": true
+      },
+      {
+        "name": "coherence_requires_bool_1",
+        "passed": true
+      },
+      {
+        "name": "coherence_requires_bool_0",
+        "passed": true
+      },
+      {
+        "name": "coherence_requires_bool_false",
+        "passed": true
+      },
+      {
+        "name": "root_type_ui_contract_revisiontrue",
+        "passed": true
+      },
+      {
+        "name": "root_type_ui_contract_revision0",
+        "passed": true
+      },
+      {
+        "name": "root_type_ui_contract_revision[]",
+        "passed": true
+      },
+      {
+        "name": "root_type_ui_contract_revision{  }",
+        "passed": true
+      },
+      {
+        "name": "root_type_data_versiontrue",
+        "passed": true
+      },
+      {
+        "name": "root_type_data_version0",
+        "passed": true
+      },
+      {
+        "name": "root_type_data_version[]",
+        "passed": true
+      },
+      {
+        "name": "root_type_data_version{  }",
+        "passed": true
+      },
+      {
+        "name": "root_type_run_scopetrue",
+        "passed": true
+      },
+      {
+        "name": "root_type_run_scope0",
+        "passed": true
+      },
+      {
+        "name": "root_type_run_scope[]",
+        "passed": true
+      },
+      {
+        "name": "root_type_run_scope{  }",
+        "passed": true
+      },
+      {
+        "name": "root_type_view_revisiontrue",
+        "passed": true
+      },
+      {
+        "name": "root_type_view_revision0",
+        "passed": true
+      },
+      {
+        "name": "root_type_view_revision[]",
+        "passed": true
+      },
+      {
+        "name": "root_type_view_revision{  }",
+        "passed": true
+      },
+      {
+        "name": "regional_type_[\"current\", \"data_version\", \"funds\"]true",
+        "passed": true
+      },
+      {
+        "name": "regional_type_[\"current\", \"data_version\", \"funds\"]0",
+        "passed": true
+      },
+      {
+        "name": "regional_type_[\"current\", \"data_version\", \"funds\"][]",
+        "passed": true
+      },
+      {
+        "name": "regional_type_[\"current\", \"data_version\", \"funds\"]{  }",
+        "passed": true
+      },
+      {
+        "name": "regional_type_[\"current\", \"observation_phase\", \"funds\"]true",
+        "passed": true
+      },
+      {
+        "name": "regional_type_[\"current\", \"observation_phase\", \"funds\"]0",
+        "passed": true
+      },
+      {
+        "name": "regional_type_[\"current\", \"observation_phase\", \"funds\"][]",
+        "passed": true
+      },
+      {
+        "name": "regional_type_[\"current\", \"observation_phase\", \"funds\"]{  }",
+        "passed": true
+      },
+      {
+        "name": "regional_type_[\"prediction\", \"prediction_status\", \"prediction\"]true",
+        "passed": true
+      },
+      {
+        "name": "regional_type_[\"prediction\", \"prediction_status\", \"prediction\"]0",
+        "passed": true
+      },
+      {
+        "name": "regional_type_[\"prediction\", \"prediction_status\", \"prediction\"][]",
+        "passed": true
+      },
+      {
+        "name": "regional_type_[\"prediction\", \"prediction_status\", \"prediction\"]{  }",
+        "passed": true
+      },
+      {
+        "name": "regional_type_[\"report\", \"status\", \"report\"]true",
+        "passed": true
+      },
+      {
+        "name": "regional_type_[\"report\", \"status\", \"report\"]0",
+        "passed": true
+      },
+      {
+        "name": "regional_type_[\"report\", \"status\", \"report\"][]",
+        "passed": true
+      },
+      {
+        "name": "regional_type_[\"report\", \"status\", \"report\"]{  }",
+        "passed": true
+      },
+      {
+        "name": "regional_type_[\"finance_ui\", \"ui_contract_revision\", \"finance_ui\"]true",
+        "passed": true
+      },
+      {
+        "name": "regional_type_[\"finance_ui\", \"ui_contract_revision\", \"finance_ui\"]0",
+        "passed": true
+      },
+      {
+        "name": "regional_type_[\"finance_ui\", \"ui_contract_revision\", \"finance_ui\"][]",
+        "passed": true
+      },
+      {
+        "name": "regional_type_[\"finance_ui\", \"ui_contract_revision\", \"finance_ui\"]{  }",
+        "passed": true
+      },
+      {
+        "name": "regional_type_[\"operations_ui\", \"status\", \"operations_ui\"]true",
+        "passed": true
+      },
+      {
+        "name": "regional_type_[\"operations_ui\", \"status\", \"operations_ui\"]0",
+        "passed": true
+      },
+      {
+        "name": "regional_type_[\"operations_ui\", \"status\", \"operations_ui\"][]",
+        "passed": true
+      },
+      {
+        "name": "regional_type_[\"operations_ui\", \"status\", \"operations_ui\"]{  }",
+        "passed": true
+      },
+      {
+        "name": "malformed_child_query_blocked_wrong",
+        "passed": true
+      },
+      {
+        "name": "malformed_child_independent_plan_wrong",
+        "passed": true
+      },
+      {
+        "name": "malformed_child_query_blocked_0",
+        "passed": true
+      },
+      {
+        "name": "malformed_child_independent_plan_0",
+        "passed": true
+      },
+      {
+        "name": "malformed_child_query_blocked_[]",
+        "passed": true
+      },
+      {
+        "name": "malformed_child_independent_plan_[]",
+        "passed": true
+      },
+      {
+        "name": "malformed_child_query_blocked_{  }",
+        "passed": true
+      },
+      {
+        "name": "malformed_child_independent_plan_{  }",
+        "passed": true
+      },
+      {
+        "name": "typed_consumer_no_effect",
+        "passed": true
+      },
+      {
+        "name": "missing_action_no_effect_pause",
+        "passed": true
+      },
+      {
+        "name": "missing_action_no_effect_resume",
+        "passed": true
+      },
+      {
+        "name": "missing_action_no_effect_speed",
+        "passed": true
+      },
+      {
+        "name": "missing_action_no_effect_predict",
+        "passed": true
+      },
+      {
+        "name": "missing_plan_action_edit",
+        "passed": true
+      },
+      {
+        "name": "missing_plan_action_undo",
+        "passed": true
+      },
+      {
+        "name": "displayed_revision_not_replaced",
+        "passed": true
+      },
+      {
+        "name": "stale_display_request_rejected",
+        "passed": true
+      },
+      {
+        "name": "displayed_revision_was_old",
+        "passed": true
+      },
+      {
+        "name": "real_zero_current_prediction",
+        "passed": true
+      },
+      {
+        "name": "prediction_identity_mismatch",
+        "passed": true
+      },
+      {
+        "name": "prediction_bad_period",
+        "passed": true
+      },
+      {
+        "name": "calculating_fixture_only",
+        "passed": true
+      },
+      {
+        "name": "unknown_reason_neutral",
+        "passed": true
+      },
+      {
+        "name": "unknown_reason_not_raw_ui",
+        "passed": true
+      },
+      {
+        "name": "general_sync_no_pending",
+        "passed": true
+      },
+      {
+        "name": "later_missing_report_neutral",
+        "passed": true
+      },
+      {
+        "name": "root_report_identity_display_key",
+        "passed": true
+      },
+      {
+        "name": "root_report_funds_kept_display_key",
+        "passed": true
+      },
+      {
+        "name": "root_report_identity_day_id",
+        "passed": true
+      },
+      {
+        "name": "root_report_funds_kept_day_id",
+        "passed": true
+      },
+      {
+        "name": "root_report_identity_value",
+        "passed": true
+      },
+      {
+        "name": "root_report_funds_kept_value",
+        "passed": true
+      },
+      {
+        "name": "supply_funds_missing_activity_kept",
+        "passed": true
+      },
+      {
+        "name": "supply_funds_missing_report_kept",
+        "passed": true
+      },
+      {
+        "name": "supply_activity_missing_funds_kept",
+        "passed": true
+      },
+      {
+        "name": "supply_activity_missing_not_zero",
+        "passed": true
+      },
+      {
+        "name": "fixed_day_is_not_root_previous",
+        "passed": true
+      },
+      {
+        "name": "fixed_day_report",
+        "passed": true
+      },
+      {
+        "name": "wrong_report_display_key",
+        "passed": true
+      },
+      {
+        "name": "wrong_report_hidden_display_key",
+        "passed": true
+      },
+      {
+        "name": "wrong_report_day_id",
+        "passed": true
+      },
+      {
+        "name": "wrong_report_hidden_day_id",
+        "passed": true
+      },
+      {
+        "name": "wrong_report_value",
+        "passed": true
+      },
+      {
+        "name": "wrong_report_hidden_value",
+        "passed": true
+      },
+      {
+        "name": "independent_p07_report",
+        "passed": true
+      },
+      {
+        "name": "partial_p07_report_kept",
+        "passed": true
+      },
+      {
+        "name": "partial_funds_no_zero",
+        "passed": true
+      },
+      {
+        "name": "report_reads_no_effect",
+        "passed": true
+      },
+      {
+        "name": "fixed_day_after_midnight",
+        "passed": true
+      },
+      {
+        "name": "real_failed_report_hidden",
+        "passed": true
+      },
+      {
+        "name": "failed_p07_hidden",
+        "passed": true
+      },
+      {
+        "name": "failed_report_recovery",
+        "passed": true
+      },
+      {
+        "name": "missing_child_hidden_tender_ui",
+        "passed": true
+      },
+      {
+        "name": "child_boundary_no_command_tender_ui",
+        "passed": true
+      },
+      {
+        "name": "child_screen_restored_tender_ui",
+        "passed": true
+      },
+      {
+        "name": "child_back_recovered_tender_ui",
+        "passed": true
+      },
+      {
+        "name": "missing_child_hidden_construction_ui",
+        "passed": true
+      },
+      {
+        "name": "child_boundary_no_command_construction_ui",
+        "passed": true
+      },
+      {
+        "name": "child_screen_restored_construction_ui",
+        "passed": true
+      },
+      {
+        "name": "child_back_recovered_construction_ui",
+        "passed": true
+      },
+      {
+        "name": "stale_same_scope",
+        "passed": true
+      },
+      {
+        "name": "stale_keeps_current",
+        "passed": true
+      },
+      {
+        "name": "same_revision_remainder",
+        "passed": true
+      },
+      {
+        "name": "foreign_high_revision",
+        "passed": true
+      },
+      {
+        "name": "reset_preserves_floor",
+        "passed": true
+      },
+      {
+        "name": "deferred_restore_respects_user",
+        "passed": true
+      },
+      {
+        "name": "retired_callback_no_old_effect",
+        "passed": true
+      },
+      {
+        "name": "new_host",
+        "passed": true
+      },
+      {
+        "name": "new_child",
+        "passed": true
+      },
+      {
+        "name": "new_scope_low_revision",
+        "passed": true
+      },
+      {
+        "name": "new_scope_no_selection",
+        "passed": true
+      },
+      {
+        "name": "new_scope_no_history",
+        "passed": true
+      },
+      {
+        "name": "new_scope_no_confirmation",
+        "passed": true
+      },
+      {
+        "name": "old_scope_after_replacement",
+        "passed": true
+      },
+      {
+        "name": "unsupported_rebinding_old_no_effect",
+        "passed": true
+      },
+      {
+        "name": "unsupported_rebinding_new_no_effect",
+        "passed": true
+      },
+      {
+        "name": "unsupported_rebinding_input_block",
+        "passed": true
+      },
+      {
+        "name": "missing_map_keeps_latent_id",
+        "passed": true
+      },
+      {
+        "name": "removed_marker_fallback",
+        "passed": true
+      },
+      {
+        "name": "same_id_recovered",
+        "passed": true
+      },
+      {
+        "name": "gone_id_clear",
+        "passed": true
+      },
+      {
+        "name": "gone_candidate_removed",
+        "passed": true
+      },
+      {
+        "name": "gone_id_fallback",
+        "passed": true
+      },
+      {
+        "name": "selection_and_fallback_no_effect",
+        "passed": true
+      },
+      {
+        "name": "no_data_focus_title",
+        "passed": true
+      },
+      {
+        "name": "actual_first_report_confirmed",
+        "passed": true
+      },
+      {
+        "name": "old_confirmation_no_navigation",
+        "passed": true
+      },
+      {
+        "name": "old_confirmation_no_effect",
+        "passed": true
+      },
+      {
+        "name": "valid_query_catalog",
+        "passed": true
+      },
+      {
+        "name": "valid_query_no_ledger_time_effect",
+        "passed": true
+      },
+      {
+        "name": "same_run_report_return",
+        "passed": true
+      },
+      {
+        "name": "same_run_fixed_day_return",
+        "passed": true
+      },
+      {
+        "name": "missing_query_clears_confirmation",
+        "passed": true
+      },
+      {
+        "name": "missing_query_callback_no_effect",
+        "passed": true
+      }
+    ],
+    "pending_legacy_gui_failures": [
+      "FAIL U19_render_SERVICE_FUNDS_INSUFFICIENT actual=false expected=true",
+      "FAIL U19_render_UNPAID_BALANCE actual=false expected=true",
+      "FAIL U19_render_activation_failed actual=false expected=true",
+      "FAIL U19_render_actual_first_report actual=false expected=true",
+      "FAIL U19_render_actual_open actual=false expected=true",
+      "FAIL U19_render_fixture_conflict actual=false expected=true",
+      "FAIL U19_render_midnight_residual actual=false expected=true",
+      "FAIL U19_render_next_supply_unavailable actual=false expected=true",
+      "FAIL U13_query_failure actual=false expected=true",
+      "FAIL U19_render_partial_payment actual=false expected=true",
+      "FAIL U19_render_preopen actual=false expected=true",
+      "FAIL U05_preopen_reason actual=false expected=true",
+      "FAIL U19_render_report_failure actual=false expected=true",
+      "FAIL U09_report_error actual=false expected=true",
+      "FAIL U09_current_kept actual=false expected=true",
+      "FAIL U19_render_same_T_recovery actual=false expected=true",
+      "FAIL U19_render_satisfaction_unavailable actual=false expected=true",
+      "FAIL U10_arithmetic actual=false expected=true",
+      "FAIL U19_render_settlement actual=false expected=true",
+      "FAIL U19_render_unknown_source_failure actual=false expected=true",
+      "FAIL U19_render_zero_demand actual=false expected=true",
+      "FAIL U05_real_zero actual=false expected=true",
+      "FAIL U10_unclosed actual=false expected=true",
+      "FAIL U19_render_zero_fixed_report actual=false expected=true",
+      "FAIL U10_zero_report actual=false expected=true",
+      "FAIL U06_before actual=false expected=true",
+      "FAIL U08_payment_label_before actual=false expected=true",
+      "FAIL U06_restricted actual=false expected=true",
+      "FAIL U08_payment_label_restricted actual=false expected=true",
+      "FAIL U06_B0_still_insufficient actual=false expected=true",
+      "FAIL U08_payment_label_B0_still_insufficient actual=false expected=true",
+      "FAIL U06_resumed actual=false expected=true",
+      "FAIL U08_payment_label_resumed actual=false expected=true",
+      "FAIL U19_bad_type_failure actual=false expected=true",
+      "FAIL U19_recovery actual=false expected=true"
+    ],
+    "full_values_and_raw_screenshots": "LOCAL_ONLY; hashes and original paths retained"
+  }
+}
