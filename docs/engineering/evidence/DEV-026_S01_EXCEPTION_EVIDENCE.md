@@ -1,5 +1,9 @@
 # DEV-026 — 로컬 구현·검증 증거 색인
 
+> **최신 후속 — 2026-11-21:** [Track B 검수 의견](https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7056903693) 수신 / LIMITED_ACCEPTANCE_RECOMMENDED / OVERALL_PARTIAL / OWNER_REVIEW_REQUESTED. PR #153·#154 병합과 현재 공급에 대한 독립 실행·Design 증거 심사 보고를 연결했다. 이는 Owner 최종 수용·RFC 종결·S3-12/DONE이 아니다. 아래 이전 PENDING/HOLD/미커밋 기록은 당시 이력이며 현재 판단과 잔여는 마지막 후속 절을 따른다.
+
+<!-- 이전 본문은 당시 상태로 보존하며 최신 효력은 후속 절을 따른다. -->
+
 > **현재 로컬 후속 — 2026-11-21:** 경로 재지정 승인 적용·기존35개 실패 해소·자동 GUI266/266 PASS. LOCAL_REVIEW / PRODUCT_L2_PENDING. 후속8개 파일은 미커밋이며 Commit·Push·main 병합은 별도 승인이다. 아래 이전 본문의 PARTIAL·승인 대기·NOT_RUN은 당시 기록이고 최신 근거는 마지막 후속 절과 증거 JSON gui_followup을 따른다.
 
 <!-- 아래 이전 본문은 당시 상태로 보존한다. -->
@@ -91,6 +95,24 @@ Owner의 현재 작업본 PR 요청에 따라 기존23개 파일을 공유한다
 이전 원본은 기존 구현 worktree와 [Git 고정본](https://github.com/wisberry2022/MetroManager/blob/3695c1eefc76fe257c66bd9c4fbbd7d62ae1f572/docs/engineering/evidence/DEV-026_S01_EXCEPTION_RESULTS.json)에 보존한다. publication_evidence.pending_legacy_gui_failures는 과거 기록이며 현재 실패 목록이 아니다. 수정 후 자동 실행과 최종 LF 파일의 해시는 line_ending_normalization에 연결하고 차이가 CRLF→LF뿐임을 확인했다. 이후 회귀는 LF 파일로 실행했다.
 
 로컬 원본은 원격 다운로드 링크가 아니다. 이번 실제 GUI·독립 실행/Design 심사·빌드·전체 자연 VS-02·원격 CI는 NOT_RUN, 실제 공급 L2/검증 수용은 PENDING이다. 제품 코드가 바뀌지 않은 행의 기존 GUI를 반복하지 않았다.
+
+## 2026-11-21 후속 — 독립 실행 보고·Design 심사 수신
+
+현재 연결은 [Track B 정본 의견](https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7056903693)과 시험본 ae614d922c837eddf4e615fda985bd978e217461다. PR #153 구현 head350a55b1b6f7f182774d4ae74772425e4bca2299 → merge3695c1eefc76fe257c66bd9c4fbbd7d62ae1f572, PR #154 보완 head d24290d6f2d8ed7e9c0ff9b931f290810f768915 → merge ae614d922c837eddf4e615fda985bd978e217461를 구별한다. #154 head/main의 트리 동일성을 확인했다.
+
+| 수행 주체·종류 | 근거/한계 |
+| --- | --- |
+| DEV 기존 자동/자체 GUI | 실행 JSON gui_followup의266/334/158/322, 최초 GUI21캡처. 과거245/35FAIL은 보존 |
+| 독립 실행자 | Track B가 보고한3프로세스·PNG73개·정상 종료/오류0. 모델 준비/소비 변조 fixture이며 자연 완주 아님 |
+| Design Track B | 댓글의128개 파일 해시 목록 불일치0·행별 관측/입력/소스·대표 화면 심사. LIMITED_ACCEPTANCE_RECOMMENDED / OVERALL_PARTIAL |
+| DEV 이번 후속 | 댓글·고정 소스·공개 실행 기록 정적 대조. Owner 제한 원본의128개 파일/화면/입력을 이번 DEV가 직접 재검증했다고 주장하지 않음 |
+| HQ/Owner | S3-12·한정 수용안 최종 판단/RFC 종결은 별도 PENDING |
+
+기존 필수 CI는 원 head에만 연결한다: #153 [policy](https://github.com/wisberry2022/MetroManager/actions/runs/44857424008)·[department-policy](https://github.com/wisberry2022/MetroManager/actions/runs/44857424780), #154 [policy](https://github.com/wisberry2022/MetroManager/actions/runs/44859448207)·[department-policy](https://github.com/wisberry2022/MetroManager/actions/runs/44859448299). 이번 미커밋 문서의 CI나 게임 재실행 결과로 전용하지 않는다.
+
+P07 일4/스크롤605의 문맥 복귀와 일1/628→0의 일반 재진입은 별도 관측이다. 일1의 비영점 중첩 문맥 복귀는 미관측/PARTIAL로 남긴다. 새 Session 내부 수명의 OS 가시성 PARTIAL/INCONCLUSIVE는 자동/소스의 기술 근거와 함께 읽되 GUI PASS로 바꾸지 않는다. 환경/훅 실패·DPI 미확인·W04B NOT_SUPPLIED 및 F08 FINAL_SPEC_PENDING도 보존한다.
+
+기존 JSON/원본은 수정하지 않았다. 이전 PENDING/NOT_RUN은 각 수행 전 이력이며 Design 심사 수신 후의 현재 의견은 위 댓글과 [DEV 검토 결과](../tasks/DEV-026_RESULT.md), [RFC 후속](../gate3/DEV-026_S01_EXCEPTION_CONTRACT.md)에 연결한다. 새 코드·지원 환경·시험 입력 변경이나 반대 증거가 없어 이번 GUI/게임 실행은 NOT_RUN이다.
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-026

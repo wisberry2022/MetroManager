@@ -2,31 +2,20 @@
   "schema_version": 1,
   "task_id": "DEV-026",
   "primary_agent_id": "AGT-DEV-0004",
-  "base_sha": "3695c1eefc76fe257c66bd9c4fbbd7d62ae1f572",
+  "base_sha": "ae614d922c837eddf4e615fda985bd978e217461",
   "artifacts": [
     {
-      "path": "docs/engineering/evidence/DEV-026_S01_EXCEPTION_EVIDENCE.md",
+      "path": "docs/engineering/tasks/DEV-026_S01_EXCEPTION_SCOPE.md",
       "change_type": "modify",
       "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
         "docs/engineering/tasks/DEV-026_S01_EXCEPTION_SCOPE.md",
-        "https://github.com/wisberry2022/MetroManager/pull/153"
+        "https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7056903693",
+        "https://github.com/wisberry2022/MetroManager/pull/154"
       ],
-      "old_blob_sha": "ae93959d4ac898b4fbb71df1e9a8ebb03c87cbd8",
-      "blob_sha": "0d80bcc3f5103ffb17e7e6e93f780cd5fc0a0220"
-    },
-    {
-      "path": "docs/engineering/evidence/DEV-026_S01_EXCEPTION_RESULTS.json",
-      "change_type": "modify",
-      "agent_id": "AGT-DEV-0004",
-      "contributors": [],
-      "source_refs": [
-        "docs/engineering/tasks/DEV-026_S01_EXCEPTION_SCOPE.md",
-        "https://github.com/wisberry2022/MetroManager/pull/153"
-      ],
-      "old_blob_sha": "78bafd891e3155fb10355776c0a772327041eab6",
-      "blob_sha": "805953efdf69d16534e92b7a341f1d990b228701"
+      "old_blob_sha": "9f5417c57b0f24caa258d11216317ece972c08e6",
+      "blob_sha": "d47530160a0b5c750f70fe3e27189eaedf1283b9"
     },
     {
       "path": "docs/engineering/gate3/DEV-026_S01_EXCEPTION_CONTRACT.md",
@@ -35,22 +24,11 @@
       "contributors": [],
       "source_refs": [
         "docs/engineering/tasks/DEV-026_S01_EXCEPTION_SCOPE.md",
-        "https://github.com/wisberry2022/MetroManager/pull/153"
+        "https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7056903693",
+        "https://github.com/wisberry2022/MetroManager/pull/154"
       ],
-      "old_blob_sha": "87d3c32f6ef58f133baab7a5fd4f11b11e6472a6",
-      "blob_sha": "c2b521cd6b4345e6049c4d44afd78f9e43dd777a"
-    },
-    {
-      "path": "docs/engineering/gate3/DEV-026_S01_EXCEPTION_VALIDATION_PLAN.md",
-      "change_type": "modify",
-      "agent_id": "AGT-DEV-0004",
-      "contributors": [],
-      "source_refs": [
-        "docs/engineering/tasks/DEV-026_S01_EXCEPTION_SCOPE.md",
-        "https://github.com/wisberry2022/MetroManager/pull/153"
-      ],
-      "old_blob_sha": "583ad4b57e31518e4c7b468de5e97f67e8c2ac72",
-      "blob_sha": "87e6889638fab245b2135adc871bb03bc8a932c3"
+      "old_blob_sha": "c2b521cd6b4345e6049c4d44afd78f9e43dd777a",
+      "blob_sha": "d2aba58dfbe9c84f4a2a61f0f83026b9b6189358"
     },
     {
       "path": "docs/engineering/tasks/DEV-026_RESULT.md",
@@ -59,34 +37,24 @@
       "contributors": [],
       "source_refs": [
         "docs/engineering/tasks/DEV-026_S01_EXCEPTION_SCOPE.md",
-        "https://github.com/wisberry2022/MetroManager/pull/153"
+        "https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7056903693",
+        "https://github.com/wisberry2022/MetroManager/pull/154"
       ],
-      "old_blob_sha": "3f3e7e07fd1c76249728fcbe8ddf9ac4ea217ff6",
-      "blob_sha": "ea352bb9dcceba1d4e1e566dcb71f42236c7235f"
+      "old_blob_sha": "ea352bb9dcceba1d4e1e566dcb71f42236c7235f",
+      "blob_sha": "6a1f1fbefc74c6c591948f8e42c1fdee2c403b8d"
     },
     {
-      "path": "docs/engineering/tasks/DEV-026_S01_EXCEPTION_SCOPE.md",
+      "path": "docs/engineering/evidence/DEV-026_S01_EXCEPTION_EVIDENCE.md",
       "change_type": "modify",
       "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
         "docs/engineering/tasks/DEV-026_S01_EXCEPTION_SCOPE.md",
-        "https://github.com/wisberry2022/MetroManager/pull/153"
+        "https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7056903693",
+        "https://github.com/wisberry2022/MetroManager/pull/154"
       ],
-      "old_blob_sha": "603e3b1e50446c2ce1b5b1525adf42adc210511f",
-      "blob_sha": "9f5417c57b0f24caa258d11216317ece972c08e6"
-    },
-    {
-      "path": "tests/game/run_operations_gui_cases.gd",
-      "change_type": "modify",
-      "agent_id": "AGT-DEV-0004",
-      "contributors": [],
-      "source_refs": [
-        "docs/engineering/tasks/DEV-026_S01_EXCEPTION_SCOPE.md",
-        "https://github.com/wisberry2022/MetroManager/pull/153"
-      ],
-      "old_blob_sha": "5d796d1fa8011ad7a4a663f65e18dd2adf83fd21",
-      "blob_sha": "bc81aba681fbe64ec6c852edf90f1ea0a553b0fe"
+      "old_blob_sha": "0d80bcc3f5103ffb17e7e6e93f780cd5fc0a0220",
+      "blob_sha": "d849a5a37897134d96b471648e6619fddf82e793"
     }
   ]
 }

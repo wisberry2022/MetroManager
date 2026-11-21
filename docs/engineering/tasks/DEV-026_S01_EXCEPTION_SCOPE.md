@@ -1,5 +1,9 @@
 # DEV-026 — DSG-008 후속 계약·적용 범위 검토 티켓
 
+> **최신 후속 — 2026-11-21:** [Track B 검수 의견](https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7056903693) 수신 / LIMITED_ACCEPTANCE_RECOMMENDED / OVERALL_PARTIAL / OWNER_REVIEW_REQUESTED. PR #153·#154 병합과 현재 공급에 대한 독립 실행·Design 증거 심사 보고를 연결했다. 이는 Owner 최종 수용·RFC 종결·S3-12/DONE이 아니다. 아래 이전 PENDING/HOLD/미커밋 기록은 당시 이력이며 현재 판단과 잔여는 마지막 후속 절을 따른다.
+
+<!-- 이전 본문은 당시 상태로 보존하며 최신 효력은 후속 절을 따른다. -->
+
 > **현재 로컬 후속 — 2026-11-21:** 경로 재지정 승인 적용·기존35개 실패 해소·자동 GUI266/266 PASS. LOCAL_REVIEW / PRODUCT_L2_PENDING. 후속8개 파일은 미커밋이며 Commit·Push·main 병합은 별도 승인이다. 아래 이전 본문의 PARTIAL·승인 대기·NOT_RUN은 당시 기록이고 최신 근거는 마지막 후속 절과 증거 JSON gui_followup을 따른다.
 
 <!-- 아래 이전 본문은 당시 상태로 보존한다. -->
@@ -201,6 +205,26 @@ tests/game/run_operations_ui_tests.gd 수정 후보를 tests/game/run_operations
 원격 조회에서 [PR #153](https://github.com/wisberry2022/MetroManager/pull/153)의 병합과 main 3695c1eefc76fe257c66bd9c4fbbd7d62ae1f572를 확인했다. 이전 head 350a55b1b6f7f182774d4ae74772425e4bca2299와 트리는 같으며 이 조회로 과거 승인 원문을 생성하지 않는다. 해당 main에서 독립 worktree/브랜치 codex/DEV-026-operations-gui-followup를 만들고 기존 구현 worktree·공유 root의 작업물을 보존했다.
 
 이번 권한은 검사 준비의 Session 귀속·독립/연속 표본·P07 보고 선택 문맥 정렬, 관련 회귀·로드와 로컬 결과 보고다. 후속 Commit·Push·PR 갱신/생성·main 병합은 NOT_RUN / 별도 승인이다. 기존 제출 권한을 재사용하지 않는다. 독립 실행/Design 수용·W04B 공급은 별도이며 기존 단언·실패 원본·제품 guard를 보존한다.
+
+## 11. Design 검수 의견 확인·로컬 후속 — 2026-11-21
+
+Owner 원문(본 개발 대화):
+
+> 개발 에이전트 104번 이슈에 디자이너 에이전트가 DEV-026에 대한 검토 결과를 회신하였으니 확인하여 조치할 부분이 있으면 후속작업 진행해주세요
+
+[정본 회신](https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7056903693)과 PR #154 병합을 확인했다. 기준 main ae614d922c837eddf4e615fda985bd978e217461; 브랜치 codex/DEV-026-design-review-followup. 이번 범위는 기존 계약/소스/증거의 정적 대조, Design 의견의 후속 기록, P07 의미 경계에 대한 DEV 검토 및 회신/HQ 인계 초안이다. 새 기능 결함은 확인되지 않았으므로 제품 수정·동일 GUI 반복은 착수하지 않는다.
+
+실제 변경은 기존 허용24개 중 아래 **문서/출처5개**다. 제품·테스트·실행 JSON·원본·Design/HQ 산출물은 변경하지 않는다.
+
+| 경로 | 후속 내용 |
+| --- | --- |
+| docs/engineering/tasks/DEV-026_S01_EXCEPTION_SCOPE.md | 본 작업 근거·정확한5개 경로·권한 경계 |
+| docs/engineering/gate3/DEV-026_S01_EXCEPTION_CONTRACT.md | 기존 RFC-DEV-026-01에 P07 문맥 복귀/일반 재진입 DEV 의견 연결 |
+| docs/engineering/tasks/DEV-026_RESULT.md | 검토 결과·잔여·#104 회신 초안/HQ 인계 요약 |
+| docs/engineering/evidence/DEV-026_S01_EXCEPTION_EVIDENCE.md | DEV 자체·독립 실행·Design 심사·Owner 결정 분리 및 고정 근거 |
+| docs/engineering/tasks/DEV-026_PROVENANCE.json | 현재4개 Markdown의 base/blob/출처 선언 |
+
+이 요청은 코드/Git 권한이나 Owner의 한정 수용안 승인을 새로 생성하지 않는다. 현재 후속의 Commit·Push·PR·main 병합·이슈/RFC 종료·댓글 게시는 NOT_RUN이다. 이전 8개 파일 제출 승인은 완료된 PR #154의 범위이며 재사용하지 않는다. 회신 초안은 로컬 검토용으로 준비했다.
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-026
