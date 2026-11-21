@@ -2,46 +2,32 @@
   "schema_version": 1,
   "task_id": "DSG-008",
   "primary_agent_id": "AGT-DSG-0003",
-  "base_sha": "1a941196cc6d963db93a9fba6a0386b16710aa46",
+  "base_sha": "b34079d5fa85c2eb61604406c3680c62e1e09857",
   "artifacts": [
     {
-      "path": "docs/design/tasks/DSG-008_MVP_SCOPE_ENV_OWNER_OPTIONS.md",
-      "change_type": "add",
+      "path": "docs/design/tasks/DSG-008_PM021_F08_APPLICATION_MATRIX.md",
+      "change_type": "modify",
       "agent_id": "AGT-DSG-0003",
       "contributors": [],
       "source_refs": [
-        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057405335",
-        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057935798",
-        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057978655",
-        "docs/hq/requests/PM-020_DESIGN_B_STAGE3.md"
+        "https://github.com/wisberry2022/MetroManager/pull/162",
+        "https://github.com/wisberry2022/MetroManager/pull/164",
+        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057935798"
       ],
-      "blob_sha": "0965d271b532dcce86de4b0bb14f79e59fecde56"
+      "blob_sha": "a38297142ca0eb571a44548707dc0c79fcedcc1d",
+      "old_blob_sha": "7a72ffb3d99e7edcb026a7afa830181218feaf2f"
     },
     {
-      "path": "docs/design/tasks/DSG-008_MVP_SUPPLY_VALIDATION_PLAN.md",
+      "path": "docs/design/tasks/DSG-008_PM021_DEV_RESPONSE_REVIEW_RESULT.md",
       "change_type": "add",
       "agent_id": "AGT-DSG-0003",
       "contributors": [],
       "source_refs": [
-        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057405335",
-        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057935798",
-        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057978655",
-        "docs/hq/requests/PM-020_DESIGN_B_STAGE3.md"
+        "https://github.com/wisberry2022/MetroManager/pull/162",
+        "https://github.com/wisberry2022/MetroManager/pull/164",
+        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057935798"
       ],
-      "blob_sha": "a38ff7579084181c7912cde92275ec090a02cd6e"
-    },
-    {
-      "path": "docs/design/tasks/DSG-008_MVP_SCOPE_ENV_RESULT.md",
-      "change_type": "add",
-      "agent_id": "AGT-DSG-0003",
-      "contributors": [],
-      "source_refs": [
-        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057405335",
-        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057935798",
-        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057978655",
-        "docs/hq/requests/PM-020_DESIGN_B_STAGE3.md"
-      ],
-      "blob_sha": "4daef16b5ecddd9386ef08c206a91d61bc5fe273"
+      "blob_sha": "816ef440ae06dd369224731a5e1d5de03289ac9c"
     }
   ]
 }
