@@ -1,5 +1,7 @@
 # DEV-026 — DSG-008 후속 계약·적용 범위 검토 티켓
 
+> **현재 상태 — 2026-11-21:** STAGE3_SCOPE_CONFIRMED / IMPLEMENTATION_READINESS_PENDING / PRODUCT_VALIDATION_NOT_RUN. #146의 사전 의견은 수신했으며 실제 공급·제품 L2/검증 수용은 PENDING이다. 현재 범위·권한은 §7을 따른다. 그 앞의 2026-11-14 검토·선행 티켓 대기·HOLD·검증 기록은 당시 이력으로 보존한다. 이번 승인은 문서 보완·Commit/Push/PR이며 제품 구현·실행·main 병합은 별도다.
+
 - 담당: Development / AGT-DEV-0004 / 2026-11-14.
 - 현재 상태: **DOCUMENT_REVIEW / CONTRACT_PROPOSED / OWNER_IMPLEMENTATION_DEFERRED**.
 - 문서 제출 기준 main: `2baed0518e5443007c159962bfba46a8eeae5fdb`. 기존 소스 분석 기준과 구분한다.
@@ -85,6 +87,45 @@ S01의 자료 준비·허용 행동·예측·현재 자금/당일 관측·과거
 문서 제출 종료 조건은 구체 필드·책임·경계/적용·제외·20사례 기대·필요 파일·검증·권한 범위와 Owner 순서 결정을 PR로 제공하고 필수 CI를 확인하는 것이다. 구현/실험은 보류하며 Design 제품 수용은 PENDING, 실제 제품 실행 결과는 NOT_RUN이다.
 
 게임/경제/세이브 명세 변경 필요 NONE. 기술 계약 보강과 Design 직접 영향은 RFC-DEV-026-01의 제안으로 연결한다. 부서 경계·정책/범위·일정 충돌이 실제 생길 때 해당 차이만 HQ/Owner에 상정한다. F08-01~04·최종 규격 미확정·A01-Q12 상위 PARTIAL·기존 한정 수용과 DEV-019의 종료된 Q03~Q05 잔여 범위를 보존한다.
+
+## 7. Stage 3 편입·Design 사전 의견 및 문서 보완 — 2026-11-21
+
+### 7.1 현재 효력과 근거
+
+현재 상태는 **STAGE3_SCOPE_CONFIRMED / IMPLEMENTATION_READINESS_PENDING / PRODUCT_VALIDATION_NOT_RUN**이다. [PM-020](../../hq/PM-020_STAGE3_EXECUTION_PLAN.md)의 편입 결정과 [병합 PR #149](https://github.com/wisberry2022/MetroManager/pull/149)의 공동 계획을 따른다. §1~6의 OWNER_IMPLEMENTATION_DEFERRED·20개 후보·DEV-022~025 선행 대기는 당시 이력이다. 현재도 제품 실행 권한은 별도지만 편입 자체를 재승인하거나 과거 선행 티켓을 다시 시작하는 조건은 아니다.
+
+기준 main: `de0f03f9d2fcc301940a4176f1359b2788a51950`. [Track A](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7053550740)는 비의존 모델에 DESIGN_PRELIMINARY_NO_OBJECTION / 실제 UI L2_FINAL_PENDING, [Track B](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7053570152)는 RP/EX 제안 의미에 이견 없음 / 실제 공급·제품 L2 및 검증 수용 PENDING이다. 두 회신은 제품 실행 승인이 아니며 새 전체 Design 차단을 추가하지 않는다. RFC-DEV-026-01은 OPEN / PROPOSED로 유지하되 Design 의견 미수신 표기는 역사로 구분한다.
+
+### 7.2 이번 Owner 요청·정확한 문서 제출 범위
+
+> 149 PR이 main에 머지되었습니다. 당신의 계획서를 읽고 디자이너 에이전트가 146번 이슈에 코멘트를 등록하였으니 확인하여, DEV-027,026에서 수정해야할 부분이 있다면 수정하여 PR 생성해주세요
+
+이번 개발 대화의 위 요청에 따라 다음 **문서5개만** 수정·정적 검사·정상 훅 Commit·일반 Push·PR·필수 CI 확인한다. 대상은 `wisberry2022/MetroManager`, 담당 AGT-DEV-0004, 브랜치 `codex/DEV-026-design-plan-followup` → `main`. 기간은 이번 문서 PR 및 같은 범위 검수 대응 종료/Owner 철회까지다.
+
+| 정확한 경로 | 보완 |
+| --- | --- |
+| `docs/engineering/tasks/DEV-026_S01_EXCEPTION_SCOPE.md` | 본 후속 권한·현 상태·24개 미래 후보 연결 |
+| `docs/engineering/gate3/DEV-026_S01_EXCEPTION_CONTRACT.md` | RP/EX 수신, 지역 의존·P07 선택 보고일·화면별 복귀·W04B 사본 표현 |
+| `docs/engineering/gate3/DEV-026_S01_EXCEPTION_VALIDATION_PLAN.md` | RP/EX 최소 표본·검증 기대·공동 증거 계획 |
+| `docs/engineering/tasks/DEV-026_RESULT.md` | 과거 증거 보존·현재 문서 검증·미해결 |
+| `docs/engineering/tasks/DEV-026_PROVENANCE.json` | 현재5개 제출 중 Markdown4개의 base/blob/출처 선언 |
+
+제품 소스·게임 테스트/fixture·새 API·실험, 미래 구현24개 경로, 타 부서 문서·정책/CI, main 병합·릴리스/배포는 미포함이다. DEV-027 문서4개는 자기 브랜치/PR로 분리한다. 현재 요청을 제품 구현 승인으로 확대하지 않는다.
+
+### 7.3 현재 미래 구현 후보와 순서
+
+[공동 계획 §8.2의 고정 원본](https://github.com/wisberry2022/MetroManager/blob/de0f03f9d2fcc301940a4176f1359b2788a51950/docs/engineering/gate3/DEV-027_EXECUTION_VALIDATION_PLAN.md)의 **24개 경로**를 현재 후보로 재대조했다. 과거20개에서 추가된4개는 아래와 같으며 이번 문서 후속으로 더 늘리지 않는다.
+
+- `scripts/ui/operations_view.gd`: P06 지역 의존·실행 소속/복귀 경계.
+- `scripts/ui/finance_view.gd`: P07 선택일·확인 사본·조회·지역 제한.
+- `tests/game/run_operations_ui_tests.gd`: 해당 P06/P07 경계 검사.
+- `tests/game/run_f08_gui_cases.gd`: 기존 View에 새 Session 대입/reset하던 전환부만 새 View 계약과 정렬.
+
+DEV-026 공통 공급/생명주기 → DEV-027 Session/호스트 통합 → 해당 W04B 실제 공급 L2 → 신규 UI 수용 → 공동 고정 VS-02 시험본 순서다. 비의존 모델의 실제 공급 생성은 UI 최종 L2를 먼저 받아야 하는 작업이 아니다. 제품 구현·실행은 별도의 유효 승인 범위를 연결한 뒤 진행한다.
+
+DI-03의 E01 대상 동/OD·추가 발생/중첩은 Planning 미결이며 종속 W04B 연결만 보류한다. DEV-026 전체 선행조건이나 새 폰트/배치·F08 확정 조건이 아니다. Track B RD별 새 심사/F08-01~04 선택·적용은 #92 별도이며 이번 회신을 RD 최종 판정으로 바꾸지 않는다.
+
+같은 Session·새 Session, 실제 제품·수신 fixture, DEV 자체·독립 실행·Design 심사를 구별한 한 패킷을 제출한다. 기존 Stage 2 DONE·한정 수용과 과거 NOT_VERIFIED/NOT_CAPTURED를 보존한다. 추가 게임 명세 변경 필요는 현재 확정하지 않았으며 실제 차이만 RFC로 연결한다.
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-026

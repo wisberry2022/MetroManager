@@ -1,5 +1,7 @@
 # DEV-026 — 적용 사례·검증 계획
 
+> **현재 상태 — 2026-11-21:** STAGE3_SCOPE_CONFIRMED / IMPLEMENTATION_READINESS_PENDING / PRODUCT_VALIDATION_NOT_RUN. #146의 사전 의견은 수신했으며 실제 공급·제품 L2/검증 수용은 PENDING이다. 현재 범위·권한은 §4을 따른다. 그 앞의 2026-11-14 검토·선행 티켓 대기·HOLD·검증 기록은 당시 이력으로 보존한다. 이번 승인은 문서 보완·Commit/Push/PR이며 제품 구현·실행·main 병합은 별도다.
+
 - 기준: `9e6154e926d44cdbbb2fb117fb7d3fc56d152eac` / AGT-DEV-0004 / 2026-11-14.
 - 상태: **DOCUMENT_REVIEW / PLANNED_NOT_RUN / OWNER_IMPLEMENTATION_DEFERRED**.
 - [계약안](DEV-026_S01_EXCEPTION_CONTRACT.md), [실행·승인 범위](../tasks/DEV-026_S01_EXCEPTION_SCOPE.md).
@@ -74,6 +76,35 @@ Godot4.7.2 / Windows D3D12 Forward+·현재 project 설정을 유지한다. 실�
 - 해당 표시/guard의 제품 적용·인수 전이 차단 시점이다. Track A 전체·독립 W06 준비·Stage 전부의 착수 차단으로 확대하지 않는다.
 
 이번 계획에서 게임 자동검사·프로젝트 로드·GUI/플레이·부분 자료/새 Session/복구 실험·빌드/export·성능은 모두 NOT_RUN. F-08·상위 통합·전체 가독성/접근성 인수와 A01-Q12 상위 PARTIAL은 별도 유지한다.
+
+## 4. RP/EX 공동 검증 보완 — 2026-11-21 / PLANNED_NOT_RUN
+
+기준 main `de0f03f9d2fcc301940a4176f1359b2788a51950`. [Track B](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7053570152)·[Track A](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7053550740)의 사전 의미 의견을 [계약 §7](DEV-026_S01_EXCEPTION_CONTRACT.md)에 반영했다. §1의 기존20사례·copy_ids와 EX-05/16/18 구분은 그대로다. 아래 행은 기존 X/RP/EX의 최신 문맥을 연결하며 추가 필수 GUI 횟수나 모든 화면×키 조합을 만들지 않는다.
+
+| 기존 연결 | 실제 공급 후 최소 입력/기대 | 증거·구분 |
+| --- | --- | --- |
+| X-01/03/07 · RP-01·02·08 | root 무효 vs 단일 P06/P07/W04B 봉투 오류, 부분 자금/당일/운영·보고 오류 → 해당 지역만 제한·독립 유효값 유지. 이전 marker/클릭/허용 상태를 현재 것으로 사용0 | 표시/행동 의존표와 경계 callback·명령 효과. 깊은 자식 전면 손상 행렬은 제외 |
+| X-05/07 · RP-03·04 | 새 scope 낮은판 / old scope 높은판 / 같은판 remainder, 새 View의 자식·선택일·확인 사본·feedback·이력 초기화. 프레임 대기 중 Session/화면/사용자 포커스 변경 → 옛 callback 복원/명령0 | 정상 제품 새 Session 경로와 주입 반례를 분리. 같은 Session reset의 수신 하한 불변 |
+| X-04/05 · RP-05·06 | P07 FIXED_DAY가 자정 뒤 유지, S01 직전일과 독립. 다른 run/day·낡은 확인 사본·key/value 불일치 → 조회0, 정상 사본은 실제 조회 결과 대조 | 표시한 보고·선택 문맥·사본/명령·허용/성공·계약 가능 구분. 조회 성공을 신규 계약 완료로 합산하지 않음 |
+| X-06/07 · RP-07 | 계약 §7.3의 화면별 유효 fallback, 선택 소멸→선택 없음, 숨은/제거된 Control 복원0, 사용자 이동 존중, 실제 포커스 도달/가시성·스크롤·읽기 순서 | 원래 수용 복귀와 직접 영향만. 포커스만 이동할 때 자동 선택/모델 명령0 |
+| X-05/07 · W04B UI-02·04·06·09~11·13 | 대기 제출 사본/현재 초안, 보류 근거/설득 이력, 허가 계획/계약 분리. 실제 실패 결과와 미수신/오류·당시/현재 구분 | 모델 전이 검증은 DEV-027, 소비·예외 의미는 DEV-026/Track B, 기능 L2는 Track A. 실제 공급 전 전체 제품 PASS 불가 |
+| X-06/07 · RD-03·07 | 실제 채택/변경한 복귀·가시성·겹친 마커 동일 ID 목록 접근 | B 배치 채택·마커 재배치·최소창 규격/F08 전체 재실험을 추가하지 않음 |
+
+### 4.1 실행 후보·표본 공급
+
+기존 X-01~07 명령과 실제 영향 회귀를 재사용한다. 최신 P06/P07 영향은 `run_operations_ui_tests.gd`와 `run_operations_gui_cases.gd -- --auto`의 해당 행을 연결한다. F08 runner 수정은 새 Session→새 View 전환 호환 행만 대조하며 기존 실험 전부를 다시 실행하지 않는다. 새 fixture/runner는 아직 만들지 않았다.
+
+실제 공급 때 한 패킷의 각 행에 **코드/명령 위치, full SHA(미커밋이면 base+변경 파일 해시), RP/EX 및 W04B 영향 행, 입력/기대/실제 관측, 실제 제품/소비 fixture, 원본 로그/화면·해시 위치**를 연결한다. 오류/낡은 관측의 무효과는 정지 조건 또는 동일 유효 시간 진행으로 비교해 자연 경과와 추가 부작용을 혼동하지 않는다.
+
+Track B는 예외·실행 소속·수명·복귀, Track A는 기능 흐름/신규 W04B 영향 행을 주관한다. 같은 GUI를 중복 요구하지 않는다. 독립 실행 주체·범위·권한은 실행 전에 합의하고, DEV 자체 자동/GUI·독립 실행·Design 증거 심사를 별도로 기록한다.
+
+### 4.2 상태·차단과 재사용
+
+사전 의견은 수신됐지만 실제 공급/제품 L2 및 검증 수용은 PENDING이다. 새 전체 Design 차단은 없고 실제 미공급·필수 차이 행만 해당 통합/수용 시점까지 보류한다. DI-03 미결과 F08 전체 규격은 DEV-026 비의존 준비의 선행조건이 아니다. 이미 유효한 실행 승인은 원문/대상/경로/동작을 연결해 재사용하되, 이번 문서 PR이나 Design 댓글 자체를 새 제품 실행 권한으로 사용하지 않는다.
+
+Stage 2 DONE·DEV-023 24조건·DEV-024 1115A/1115B·DEV-025 공급 종료와 원래 SHA/수용 한계를 유지한다. Track B RD별 새 심사/F08 선택·적용은 #92 별도다. RFC-DEV-026-01은 실제 계약 반영/제품 수용까지 구분해 OPEN으로 남긴다.
+
+현재 새 자동 게임 검사·Godot 로드·실제 GUI/플레이·독립 실행·부분 자료/Session/복귀 실험·빌드/export·성능은 **모두 NOT_RUN**이다. 위 표의 기대값은 관측된 PASS가 아니다.
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-026

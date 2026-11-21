@@ -1,5 +1,7 @@
 # DEV-026 — DSG-008 후속 계약 검토·Owner 착수 순서 결정
 
+> **현재 상태 — 2026-11-21:** STAGE3_SCOPE_CONFIRMED / IMPLEMENTATION_READINESS_PENDING / PRODUCT_VALIDATION_NOT_RUN. #146의 사전 의견은 수신했으며 실제 공급·제품 L2/검증 수용은 PENDING이다. 현재 범위·권한은 마지막 2026-11-21 후속 절을 따른다. 그 앞의 2026-11-14 검토·선행 티켓 대기·HOLD·검증 기록은 당시 이력으로 보존한다. 이번 승인은 문서 보완·Commit/Push/PR이며 제품 구현·실행·main 병합은 별도다.
+
 - 담당: Development / AGT-DEV-0004 / 2026-11-14.
 - 현재 상태: **DOCUMENT_REVIEW / CONTRACT_PROPOSED / OWNER_IMPLEMENTATION_DEFERRED**.
 - 기준 main: `9e6154e926d44cdbbb2fb117fb7d3fc56d152eac`. 브랜치 `codex/DEV-026-s01-exception-contract`.
@@ -92,6 +94,34 @@ Owner는 본 개발 대화에서 DEV-026의 현재 검토 내용을 디자이너
 Design의 사전 검토 대상은 지역 자료/행동군 의존성, 최소 메타데이터, 새 Session의 View 재생성, 실제 복귀 포커스, 적용/제외 사례다. RFC-DEV-026-01은 OPEN / PROPOSED이며 Design의 새 수용은 PENDING이다. 문서 PR 공유는 승인됐으며 B/C 구현·제품 검증은 Owner 결정으로 보류한다. 정확한 일정은 NOT_ESTIMATED다.
 
 게임/경제/세이브 명세 변경 필요 NONE. 기술 계약은 PROPOSED이며 구현 승인 후 검증과 영향 행 Design 인수가 필요하다. Q03~Q05 잔여 PASS, QA-001/002·OBS-01·A02-11·Q12의28조건 한정 수용, A01-Q12 상위 PARTIAL, F08-01~04 및 최종 규격 미확정을 보존한다. DSG-008 전체·S2-D01·Stage DONE을 선언하지 않는다.
+
+## 2026-11-21 후속 — Stage 3·Design 사전 의견 반영
+
+- 기준 main: `de0f03f9d2fcc301940a4176f1359b2788a51950` / 브랜치 `codex/DEV-026-design-plan-followup`.
+- 현재 효력: **STAGE3_SCOPE_CONFIRMED / IMPLEMENTATION_READINESS_PENDING / PRODUCT_VALIDATION_NOT_RUN**.
+- Owner 현 요청·문서5개 권한: [티켓 §7](DEV-026_S01_EXCEPTION_SCOPE.md).
+- 근거: [Track A](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7053550740), [Track B](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7053570152), [병합 PR #149](https://github.com/wisberry2022/MetroManager/pull/149).
+
+이전 OWNER_IMPLEMENTATION_DEFERRED·DEV-022~025 선행 대기는 당시 기록으로 보존한다. PM-020으로 공식 편입됐고 현재 사전 의미 의견도 수신했으므로 **미수신/무기한 HOLD를 현재 상태로 재사용하지 않는다**. 다만 현재 지시는 문서 보완 PR이며 실제 구현/게임 실행은 별도 승인 대기다.
+
+| 변경 파일 | 보완한 내용 |
+| --- | --- |
+| S01_EXCEPTION_SCOPE | Owner 요청·정확한 문서5개, 현재24개 미래 후보·4개 추가 이유, 제품/Git 권한 구분 |
+| S01_EXCEPTION_CONTRACT | 지역 의존표에 P06/P07/W04B 포함, FIXED_DAY·확인 사본·새 자식 수명/옛 callback, 실제 기존 Control을 근거로 한 화면별 fallback 후보, 요청 사본/현재 초안 표현 |
+| S01_EXCEPTION_VALIDATION_PLAN | 기존20사례·copy_ids 보존, RP-01~08·X 묶음의 최소 표본·기대·정상/fixture·공동 심사 구분 |
+| 본 결과서·PROVENANCE | 현재 문서 검증/잔여·새 base/4개 Markdown blob 선언 |
+
+구체 fallback 순서는 DEV 후보이며 Track B가 최종 수용한 구현으로 기록하지 않는다. P06 `controls.back/labels.title`, P07 `controls.day/controls.refresh/labels.title`의 존재는 위 main 소스로 확인했고 실제 복귀 실행은 하지 않았다. 심사/편집/접수의 게임 규칙은 DEV-027/Planning의 승인 의미를 따르며 Track B 표현 의견으로 신설하지 않는다.
+
+기존24개 미래 후보를 확대하지 않고 실제 문서5개만 수정했다. 과거20개 후보/최초 검토 원문은 이력으로 보존하며 현재 적용 차이는 후속 절에 명시했다. 기존 PROVENANCE의 최초 제출 원본은 [병합 기준 고정 파일](https://github.com/wisberry2022/MetroManager/blob/de0f03f9d2fcc301940a4176f1359b2788a51950/docs/engineering/tasks/DEV-026_PROVENANCE.json)에 보존하고 현재 manifest는 이번 base/수정 blob으로 갱신한다.
+
+- `.venv/Scripts/python.exe tools/policy.py doctor` 및 `check`: PASS / exit0. 파일708개·GDScript53개 정적 formatter/linter, 포맷 변경 없음. 로그 `doctor.log`·`check.log`.
+- `문서5개 한정·기존 본문/20사례·EX 적용/제외 보존·UTF-8/LF·링크·출처 blob`: PASS. 변경5개·Markdown blob4개·상대 링크19개·고정 SHA 링크16개·기존 본문4개와20사례/copy_ids·EX-05/16/18 보존. 일회성 문서 감사 `audit_docs.py`의 출력은 `audit.json`에 보관.
+- diff --check·정상 Commit 후 preflight·새 head 필수 CI: 제출 단계 확인, 실제 결과는 PR에 연결.
+- 정적 검사 로그: `.local/validation/design-plan-followup/`.
+- 제품 자동/프로젝트 로드/GUI/독립 실행/실험/빌드/export: **NOT_RUN**.
+
+미해결: 실제 공급/제품 L2·검증 수용, RFC-DEV-026-01 OPEN·PROPOSED, 별도 구현/실행·미래 제품 Git 및 main 병합 권한. DI-03 Planning 확인은 종속 W04B만의 잔여다. Track B RD별 최종 심사/F08 선택/적용은 #92에 유지한다. 새 게임 명세 변경 필요는 현재 확정하지 않았다.
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-026
