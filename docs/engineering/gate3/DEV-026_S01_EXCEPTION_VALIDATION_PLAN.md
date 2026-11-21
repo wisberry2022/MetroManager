@@ -1,5 +1,9 @@
 # DEV-026 — 적용 사례·검증 계획
 
+> **현재 로컬 후속 — 2026-11-21:** 경로 재지정 승인 적용·기존35개 실패 해소·자동 GUI266/266 PASS. LOCAL_REVIEW / PRODUCT_L2_PENDING. 후속8개 파일은 미커밋이며 Commit·Push·main 병합은 별도 승인이다. 아래 이전 본문의 PARTIAL·승인 대기·NOT_RUN은 당시 기록이고 최신 근거는 마지막 후속 절과 증거 JSON gui_followup을 따른다.
+
+<!-- 아래 이전 본문은 당시 상태로 보존한다. -->
+
 > **현재 상태 — 2026-11-21:** PR_REVIEW_PARTIAL / TEST_PATH_REASSIGNMENT_PENDING / PRODUCT_L2_PENDING. Owner가 기존23개 파일의 Commit·Push·Draft PR 공유를 요청했다([티켓 §9](../tasks/DEV-026_S01_EXCEPTION_SCOPE.md)). 기존 GUI35개 실패·검사기 재지정 승인 대기·Design 수용 대기는 유지한다. 앞선 HOLD/NOT_RUN·로컬 검토 기록은 당시 이력이며 main 병합은 별도 승인이다.
 
 - 기준: `9e6154e926d44cdbbb2fb117fb7d3fc56d152eac` / AGT-DEV-0004 / 2026-11-14.
@@ -117,6 +121,14 @@ Owner의 DEV-026 우선 진행 원문과 로컬 실행 권한은 [티켓 §8](..
 P06/P07 기존 GUI 소비 전환기의 경로 재지정 검토는 [티켓 §8.1](../tasks/DEV-026_S01_EXCEPTION_SCOPE.md)에 있다. 검사의 기대값을 새 구현에 맞춰 낮추지 않고 실제 Session 소속과 선택일 문맥을 맞추는 범위다. 승인 전에는 해당 파일을 수정하지 않는다. 관련 잔여는 실제 검증 결과서에 명시한다.
 
 DEV 자체 자동·GUI는 본 패킷, 독립 실행 주체/권한·Track B 실제 공급 L2·Design 검증 수용은 PENDING이다. Track A W04B 신규 실제 공급은 DEV-027에서 연결한다. 현재 패킷을 Stage DONE·최신 main 전체 자연 완주·RD/F08 최종 심사로 표시하지 않는다.
+
+## 6. 승인된 검사 보완 실행 — 2026-11-21
+
+[티켓 §10](../tasks/DEV-026_S01_EXCEPTION_SCOPE.md)에 따라 최대24개를 유지하며 run_operations_ui_tests.gd 수정 후보를 run_operations_gui_cases.gd로 재지정했다. 앞 절의 승인 대기는 당시 기록이다.
+
+수정 전245/35실패 보존 → Session/표본 수명·선택일 준비 정렬 → 기존 호출식86곳/단언245개 보존 대조 → 수정 후266PASS → 신규 경계334·공급158·W07 322PASS → 의도적 실패exit1·프로젝트 로드exit0 → 정책/경로/해시 감사를 수행했다. 종료코드와 SCRIPT ERROR/ERROR를 함께 대조했다. 명령·실행 ID·원본 해시는 증거 JSON gui_followup을 따른다.
+
+실제 GUI OS 입력·자연 완주·독립 실행·빌드는 NOT_RUN이다. 제품 소스 불변으로 기존 독립 수용과21캡처를 재사용하되 새 실행으로 합산하지 않는다. 실제 공급 L2/Design 수용은 PENDING이다.
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-026

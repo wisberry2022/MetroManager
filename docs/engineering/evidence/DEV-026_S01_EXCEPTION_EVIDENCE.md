@@ -1,5 +1,9 @@
 # DEV-026 — 로컬 구현·검증 증거 색인
 
+> **현재 로컬 후속 — 2026-11-21:** 경로 재지정 승인 적용·기존35개 실패 해소·자동 GUI266/266 PASS. LOCAL_REVIEW / PRODUCT_L2_PENDING. 후속8개 파일은 미커밋이며 Commit·Push·main 병합은 별도 승인이다. 아래 이전 본문의 PARTIAL·승인 대기·NOT_RUN은 당시 기록이고 최신 근거는 마지막 후속 절과 증거 JSON gui_followup을 따른다.
+
+<!-- 아래 이전 본문은 당시 상태로 보존한다. -->
+
 - 작업/담당: DEV-026 / AGT-DEV-0004 / 2026-11-21 KST.
 - 판정: **PR_REVIEW_PARTIAL / 검사기 경로 재지정 승인 대기**. 제품 전체 검증 종료나 Design 수용이 아니다.
 - base: `ecb2708bfa7bd3230d56c60b910d6831511953c6`. 브랜치 `codex/DEV-026-s01-exception-implementation`, 미커밋 소스다. [기계 판독 결과](DEV-026_S01_EXCEPTION_RESULTS.json)의 경로/해시·실행별 source-hashes로 식별한다.
@@ -77,6 +81,16 @@ Owner의 현재 작업본 PR 요청에 따라 기존23개 파일을 공유한다
 이 문서의 `.local/` 경로는 개발 작업 디렉터리의 보관 위치다. 원본 로그/PNG는 원격에 업로드하지 않았다. 원격에서 확인할 수 있는 단언 이름/판정334개와 남은 실패35개, 각 원본 해시는 결과 JSON의 `publication_evidence`에 제공한다. 실제 제품/Design 검수에 원본이 필요한 행은 후속 패킷에서 공급하며 현재 독립 수용으로 간주하지 않는다.
 
 제출 정책/출처 검사와 필수 원격 CI 결과는 PR에 연결한다. 저장소 CI와 Godot 게임 검증의 범위는 다르며35개 실패는 계속 잔여다.
+
+## 승인된 검사 보완 증거 — 2026-11-21
+
+현재 로컬 검토본은 main 3695c1eefc76fe257c66bd9c4fbbd7d62ae1f572 + 변경 파일 해시이며 codex/DEV-026-operations-gui-followup의 미커밋 결과다. **수정 전245/35FAIL → 수정 후266PASS**, 기존245개 단언과86곳 호출식을 보존하고35개를 모두 해소했다. 추가21개와 회귀334·158·322도 PASS, 의도적 실패exit1·프로젝트 로드exit0·오류0이다.
+
+후속 원본은 .local/validation/DEV-026/ 아래 gui-followup-baseline, gui-followup-01, gui-followup-regression의 results.json/로그·source-hashes.json과 assertion-preservation.json이다. 정적/경로 감사는 check.log·audit.json이다. [기계 판독 결과](DEV-026_S01_EXCEPTION_RESULTS.json)의 gui_followup에35개 이름별 전후 결과와 실행 식별을 연결한다.
+
+이전 원본은 기존 구현 worktree와 [Git 고정본](https://github.com/wisberry2022/MetroManager/blob/3695c1eefc76fe257c66bd9c4fbbd7d62ae1f572/docs/engineering/evidence/DEV-026_S01_EXCEPTION_RESULTS.json)에 보존한다. publication_evidence.pending_legacy_gui_failures는 과거 기록이며 현재 실패 목록이 아니다. 수정 후 자동 실행과 최종 LF 파일의 해시는 line_ending_normalization에 연결하고 차이가 CRLF→LF뿐임을 확인했다. 이후 회귀는 LF 파일로 실행했다.
+
+로컬 원본은 원격 다운로드 링크가 아니다. 이번 실제 GUI·독립 실행/Design 심사·빌드·전체 자연 VS-02·원격 CI는 NOT_RUN, 실제 공급 L2/검증 수용은 PENDING이다. 제품 코드가 바뀌지 않은 행의 기존 GUI를 반복하지 않았다.
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-026

@@ -1,5 +1,9 @@
 # DEV-026 — DSG-008 후속 계약·적용 범위 검토 티켓
 
+> **현재 로컬 후속 — 2026-11-21:** 경로 재지정 승인 적용·기존35개 실패 해소·자동 GUI266/266 PASS. LOCAL_REVIEW / PRODUCT_L2_PENDING. 후속8개 파일은 미커밋이며 Commit·Push·main 병합은 별도 승인이다. 아래 이전 본문의 PARTIAL·승인 대기·NOT_RUN은 당시 기록이고 최신 근거는 마지막 후속 절과 증거 JSON gui_followup을 따른다.
+
+<!-- 아래 이전 본문은 당시 상태로 보존한다. -->
+
 > **현재 상태 — 2026-11-21:** PR_REVIEW_PARTIAL / TEST_PATH_REASSIGNMENT_PENDING / PRODUCT_L2_PENDING. Owner가 기존23개 파일의 Commit·Push·Draft PR 공유를 요청했다([티켓 §9](DEV-026_S01_EXCEPTION_SCOPE.md)). 기존 GUI35개 실패·검사기 재지정 승인 대기·Design 수용 대기는 유지한다. 앞선 HOLD/NOT_RUN·로컬 검토 기록은 당시 이력이며 main 병합은 별도 승인이다.
 
 > **이전 문서 제출 상태 — 2026-11-21:** STAGE3_SCOPE_CONFIRMED / IMPLEMENTATION_READINESS_PENDING / PRODUCT_VALIDATION_NOT_RUN. #146의 사전 의견은 수신했으며 실제 공급·제품 L2/검증 수용은 PENDING이다. 현재 범위·권한은 §7을 따른다. 그 앞의 2026-11-14 검토·선행 티켓 대기·HOLD·검증 기록은 당시 이력으로 보존한다. 이번 승인은 문서 보완·Commit/Push/PR이며 제품 구현·실행·main 병합은 별도다.
@@ -158,6 +162,45 @@ Owner 원문(본 개발 대화): “개발 에이전트. 작업 내용을 PR로 
 제출 base는 `63550826af8b6ae9a46bda2e4bb826dd1ed7cd79`다. 최초 시험 base `ecb2708bfa7bd3230d56c60b910d6831511953c6` 이후 PR #152의 기획 문서3개만 진전했다. 겹치는 경로 없이 작업 브랜치만 fast-forward했고 원래 시험본/로그/해시는 보존했다. 제품/테스트16개 파일 해시를 로컬 검토본과 대조하여 기존 제품 검증을 재사용한다. 새 GUI·자연 완주를 실행한 것으로 기록하지 않는다.
 
 현재 main 보호는 strict `policy`·`department-policy`, 관리자 적용·선형 이력·대화 해결 필수, force push/삭제 금지, squash만 허용으로 확인했다. 리뷰0명은 기존 단일 계정 운영이며 Owner의 별도 main 병합 원칙을 유지한다. 실제 제출 head·preflight·CI는 PR 본문/Checks를 따른다.
+
+## 10. 검사 경로 재지정·로컬 보완 — 2026-11-21
+
+Owner 원문(본 개발 대화):
+
+> DEV-026의 검사 경로 재지정을 승인합니다. run_operations_ui_tests.gd 대신 run_operations_gui_cases.gd를 포함해 최대 24개 경로 안에서 GUI 검사 35개 실패를 수정·검증하고 로컬 결과부터 검토 요청해주세요. Commit·Push와 main 병합은 별도 승인하겠습니다.
+
+tests/game/run_operations_ui_tests.gd 수정 후보를 tests/game/run_operations_gui_cases.gd로 교체한다. 공급 자동검사는 수정 없이 실행한다. 기존 구현23개와 새 검사 경로1개를 합친 누적 허용 경로는 아래 **24개**다. 이번 실제 후속 변경은 검사1개·DEV 기록7개, **8개 파일**이다.
+
+| 번호 | 정확한 허용 경로 |
+| --- | --- |
+| 1 | `docs/engineering/evidence/DEV-026_S01_EXCEPTION_EVIDENCE.md` |
+| 2 | `docs/engineering/evidence/DEV-026_S01_EXCEPTION_RESULTS.json` |
+| 3 | `docs/engineering/gate3/DEV-026_S01_EXCEPTION_CONTRACT.md` |
+| 4 | `docs/engineering/gate3/DEV-026_S01_EXCEPTION_VALIDATION_PLAN.md` |
+| 5 | `docs/engineering/tasks/DEV-026_PROVENANCE.json` |
+| 6 | `docs/engineering/tasks/DEV-026_RESULT.md` |
+| 7 | `docs/engineering/tasks/DEV-026_S01_EXCEPTION_SCOPE.md` |
+| 8 | `scripts/ui/finance_view.gd` |
+| 9 | `scripts/ui/operations_view.gd` |
+| 10 | `scripts/ui/s01_observation_contract.gd` |
+| 11 | `scripts/ui/s01_observation_contract.gd.uid` |
+| 12 | `scripts/ui/stage1_map.gd` |
+| 13 | `scripts/ui/stage1_session.gd` |
+| 14 | `scripts/ui/stage1_view.gd` |
+| 15 | `tests/game/run_f08_gui_cases.gd` |
+| 16 | `tests/game/run_operations_gui_cases.gd` |
+| 17 | `tests/game/run_s01_exception_gui_cases.gd` |
+| 18 | `tests/game/run_s01_exception_gui_cases.gd.uid` |
+| 19 | `tests/game/run_s01_exception_tests.gd` |
+| 20 | `tests/game/run_s01_exception_tests.gd.uid` |
+| 21 | `tests/game/run_w07_gui_cases.gd` |
+| 22 | `tests/game/run_w07_tests.gd` |
+| 23 | `tests/game/w026_ui_fixtures.gd` |
+| 24 | `tests/game/w026_ui_fixtures.gd.uid` |
+
+원격 조회에서 [PR #153](https://github.com/wisberry2022/MetroManager/pull/153)의 병합과 main 3695c1eefc76fe257c66bd9c4fbbd7d62ae1f572를 확인했다. 이전 head 350a55b1b6f7f182774d4ae74772425e4bca2299와 트리는 같으며 이 조회로 과거 승인 원문을 생성하지 않는다. 해당 main에서 독립 worktree/브랜치 codex/DEV-026-operations-gui-followup를 만들고 기존 구현 worktree·공유 root의 작업물을 보존했다.
+
+이번 권한은 검사 준비의 Session 귀속·독립/연속 표본·P07 보고 선택 문맥 정렬, 관련 회귀·로드와 로컬 결과 보고다. 후속 Commit·Push·PR 갱신/생성·main 병합은 NOT_RUN / 별도 승인이다. 기존 제출 권한을 재사용하지 않는다. 독립 실행/Design 수용·W04B 공급은 별도이며 기존 단언·실패 원본·제품 guard를 보존한다.
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-026

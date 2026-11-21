@@ -11,9 +11,13 @@ const Main = preload("res://scenes/main.tscn")
 class DisplaySession:
 	extends "res://scripts/ui/stage1_session.gd"
 	var display: Dictionary = {}
+	var expected_report_day: int = -1
 
 	func snapshot() -> Dictionary:
 		return super.snapshot() if display.is_empty() else display.duplicate(true)
+
+	func finance_report_day() -> int:
+		return super.finance_report_day() if expected_report_day < 0 else expected_report_day
 
 
 var _host: Control
@@ -58,8 +62,6 @@ func _run() -> void:
 			FX.advance_to(_session, 5760)
 	else:
 		_kind = "CONSUMER_FIXTURE"
-		_session = DisplaySession.new(FX.Loader.load_data().data, {})
-		_session.enable_operations_ui()
 		var packet: Dictionary = (
 			_fixture
 			. scenarios
@@ -72,10 +74,7 @@ func _run() -> void:
 			packet.operations_ui.snapshot.source.construction_contract_id = "긴 공사 식별 정보 ".repeat(20)
 		if _case_id.begins_with("l2_"):
 			packet = _fixture.l2_supplement.scenarios[_case_id].get("packet", {})
-		var supplied := _state(packet, _session.snapshot())
-		supplied.fixture_label = "DEV023-CONSUMER_FIXTURE " + _case_id
-		_session.display = supplied
-		_session.fixture_label = supplied.fixture_label
+		_session = _display_session(packet, _case_id)
 	_session.pipeline.clock.paused = true
 	_host = Host.instantiate()
 	_host.session = _session
@@ -251,15 +250,11 @@ func _rejected_queries(confirmed: Dictionary, effects: String) -> void:
 
 
 func _consumer_cases() -> void:
-	var op := Operations.new()
-	var finance := Finance.new()
-	root.add_child(op)
-	root.add_child(finance)
-	var base := FX.session().snapshot()
 	for id: String in _fixture.scenarios:
-		var state := _state(_fixture.scenarios[id], base)
-		op.shown = {}
-		finance.shown = {}
+		var pair := _consumer_pair(_fixture.scenarios[id], id)
+		var op: Control = pair.operations
+		var finance: Control = pair.finance
+		var state: Dictionary = pair.session.snapshot()
 		_expect("U19_render_" + id, op.present(state) and finance.present(state), true)
 		if id == "preopen":
 			_expect("U05_preopen_reason", op.labels.status.text.contains("개통 전"), true)
@@ -283,23 +278,13 @@ func _consumer_cases() -> void:
 				finance.labels[key].autowrap_mode,
 				TextServer.AUTOWRAP_WORD_SMART
 			)
-	var recovery: Dictionary = _fixture.l2_supplement.scenarios.l2_restriction_recovery
-	for id: String in ["before", "restricted", "B0_still_insufficient", "resumed"]:
-		var state := _state(recovery[id], base)
-		op.shown = {}
-		finance.shown = {}
-		op.present(state)
-		finance.present(state)
-		var expected: String = {
-			"before": "신규 탑승 가능",
-			"restricted": "미지급금으로",
-			"B0_still_insufficient": "다음 구간 운영비 부족",
-			"resumed": "신규 탑승 가능"
-		}[id]
-		_expect("U06_" + id, op.labels.status.text.contains(expected), true)
-		_expect("U08_payment_label_" + id, finance.labels.activity.text.contains("운영비 지급 합계"), true)
-	var state := _state(_fixture.scenarios.actual_open, base)
-	op.shown = {}
+		op.queue_free()
+		finance.queue_free()
+	_restriction_cases()
+	var pair := _consumer_pair(_fixture.scenarios.actual_open, "invalid_recovery")
+	var op: Control = pair.operations
+	var finance: Control = pair.finance
+	var state: Dictionary = pair.session.snapshot()
 	op.present(state)
 	var invalid: Dictionary = state.duplicate(true)
 	invalid.operations_ui.snapshot = "wrong"
@@ -325,7 +310,100 @@ func _consumer_cases() -> void:
 	_expect("U10_no_rounding", Operations.fraction([151, 3]), "151/3점")
 	op.queue_free()
 	finance.queue_free()
+	_consumer_boundaries()
 	await process_frame
+
+
+func _restriction_cases() -> void:
+	var recovery: Dictionary = _fixture.l2_supplement.scenarios.l2_restriction_recovery
+	var pair := _consumer_pair(recovery.before, "restriction_recovery")
+	var op: Control = pair.operations
+	var finance: Control = pair.finance
+	for id: String in ["before", "restricted", "B0_still_insufficient", "resumed"]:
+		var state := _state(recovery[id], pair.session.snapshot())
+		op.present(state)
+		finance.present(state)
+		var expected: String = {
+			"before": "신규 탑승 가능",
+			"restricted": "미지급금으로",
+			"B0_still_insufficient": "다음 구간 운영비 부족",
+			"resumed": "신규 탑승 가능"
+		}[id]
+		_expect("U06_" + id, op.labels.status.text.contains(expected), true)
+		_expect("U08_payment_label_" + id, finance.labels.activity.text.contains("운영비 지급 합계"), true)
+	op.queue_free()
+	finance.queue_free()
+
+
+func _consumer_pair(packet: Dictionary, label: String) -> Dictionary:
+	var value := _display_session(packet, label)
+	var op := Operations.new()
+	var finance := Finance.new()
+	op.bind_session(value)
+	finance.bind_session(value)
+	root.add_child(op)
+	root.add_child(finance)
+	return {"session": value, "operations": op, "finance": finance}
+
+
+func _display_session(packet: Dictionary, label: String) -> DisplaySession:
+	var value := DisplaySession.new(FX.Loader.load_data().data, {})
+	value.enable_operations_ui()
+	value.fixture_label = "DEV023-CONSUMER_FIXTURE " + label
+	# 과거 소비 표본의 선택 문맥을 고정하고 후속 이상 관측에서 기대일을 다시 읽지 않는다.
+	value.expected_report_day = (
+		packet.finance_ui.report.day_id
+		if packet.finance_ui.report_selection == "FIXED_DAY"
+		else packet.operations_ui.observation.day_id - 1
+	)
+	value.display = _state(packet, value.snapshot())
+	value.display.fixture_label = value.fixture_label
+	value.pipeline.clock.paused = true
+	return value
+
+
+func _consumer_boundaries() -> void:
+	var original: Dictionary = _fixture.scenarios.actual_first_report.duplicate(true)
+	var pair := _consumer_pair(original, "binding_boundaries")
+	var op: Control = pair.operations
+	var finance: Control = pair.finance
+	var state: Dictionary = pair.session.snapshot()
+	var effects := FX.effects(pair.session)
+	op.present(state)
+	finance.present(state)
+	_expect("D26_fixture_unchanged", original, _fixture.scenarios.actual_first_report)
+	_expect("D26_valid_report_query", finance.controls.query.disabled, false)
+	_expect("D26_report_copy_current", finance.confirmation_current(finance._confirmed), true)
+	for kind: String in ["foreign", "stale"]:
+		var invalid := state.duplicate(true)
+		if kind == "foreign":
+			invalid.run_scope = "foreign-run"
+			invalid.view_revision += 1000
+		else:
+			invalid.view_revision -= 1
+		_expect("D26_reject_operations_" + kind, op.present(invalid), false)
+		_expect("D26_reject_finance_" + kind, finance.present(invalid), false)
+		_expect("D26_keep_operations_" + kind, op.shown, state)
+		_expect("D26_keep_finance_" + kind, finance.shown, state)
+	for kind: String in ["scope", "day", "value"]:
+		var invalid := state.duplicate(true)
+		match kind:
+			"scope":
+				invalid.finance_ui.report.display_key = "foreign/day-4"
+			"day":
+				invalid.finance_ui.report.day_id = 3
+			"value":
+				invalid.finance_ui.report.value.day_id = 3
+		finance.present(invalid)
+		_expect(
+			"D26_bad_report_hidden_" + kind, finance.labels.report.text.contains("고정 과거"), false
+		)
+		_expect("D26_bad_report_query_" + kind, finance.controls.query.disabled, true)
+		finance.present(state)
+		_expect("D26_report_recovery_" + kind, finance.controls.query.disabled, false)
+	_expect("D26_consumer_no_model_effect", FX.effects(pair.session), effects)
+	op.queue_free()
+	finance.queue_free()
 
 
 func _map_cases() -> void:
@@ -364,6 +442,16 @@ func _state(packet: Dictionary, base: Dictionary) -> Dictionary:
 	state.clock.day_id = observation.day_id
 	state.clock.paused = true
 	state.clock.remainder = 0
+	# 보관 표본은 불변이다. 복제본의 일치하는 보고/조회 키만 시험 Session에 귀속한다.
+	var report: Dictionary = state.finance_ui.report
+	var suffix := "/day-%d" % report.day_id
+	if report.display_key.begins_with("run-") and report.display_key.ends_with(suffix):
+		var recorded_scope: String = report.display_key.trim_suffix(suffix)
+		report.display_key = state.run_scope + suffix
+		var next: Dictionary = state.next_business_ui
+		var next_day: int = next.get("first_valid_report", {}).get("day_id", -1)
+		if next.get("report_key") == "%s/day-%d" % [recorded_scope, next_day]:
+			next.report_key = "%s/day-%d" % [state.run_scope, next_day]
 	return state
 
 
