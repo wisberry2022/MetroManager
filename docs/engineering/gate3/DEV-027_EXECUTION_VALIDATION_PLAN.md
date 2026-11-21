@@ -1,5 +1,7 @@
 # DEV-027 — W04B·VS-02 및 DEV-026 착수·실행 검증 계획
 
+> **2026-11-22 P1 최신 후속:** §13은 Owner가 승인한 비의존 모델 로컬 구현·검증 범위다. **LOCAL_REVIEW / GIT_SUBMISSION_NOT_AUTHORIZED**. DI-03 종속 범위·L2 전 화면 통합과 DEV-026 한정 수용/PARTIAL·S3-12 인수 대기는 유지한다. 아래 과거 기록은 당시 이력으로 보존한다.
+
 > **PM-021 최신 후속 — 2026-11-21:** §12가 현재 **LOCAL_REVIEW / TRACK_B_COMMON_TABLE_REVIEW_PENDING / GIT_SUBMISSION_NOT_AUTHORIZED** 상태를 설명한다. O01~07 방향 승인·DEV026 현재 공급/P07 수용은 유효하다. 아래 과거 제출·미실행·선택 대기는 당시 이력으로 보존한다. 이번 작업은 기존 DEV027 문서4개 로컬 보완·정적 검사다.
 
 > **2026-11-21 후속:** PR #149는 main `de0f03f9d2fcc301940a4176f1359b2788a51950`에 병합됐다. [Track A 사전 의견](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7053550740)은 **DESIGN_PRELIMINARY_NO_OBJECTION / L2_FINAL_PENDING**, [Track B 의견](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7053570152)은 RP/EX 제안 의미에 이견 없음·실제 공급/제품 수용 PENDING이다. 이번 후속은 티켓 §5의 문서 보완 PR이며 제품 구현·실행·미래 구현 Git·main 병합 승인이 아니다. §7.3·11이 이번 반영 범위를 설명한다. 아래 최초 제출 식별·검증 기록은 당시 이력으로 구분한다.
@@ -408,6 +410,27 @@ DEV026은 **OWNER_APPROVED_LIMITED_ACCEPTANCE / OVERALL_PARTIAL** 유지. P07 �
 ### 12.6 HQ·Track B 전달용 — 복사용 / NOT_SENT
 
 > DEV / AGT-DEV-0004 / DEV-027: PM021(main fa968b94641d24e8d68b3c6cb903f9e809d02814)과 #92 Owner 결정을 확인했습니다. O01~07 방향 승인 완료를 적용했고 계획 §12.2에 현재 제품/격리 실험 차이·변경0·공백·정확한 경로·최소 검증·권한을 연결했습니다. A/B는 실험용이며 현 제품을 A 완성본으로 판정하지 않았습니다. 동일 ID 목록/정보 선택은 재사용하되 제품 전체 이름 공급과 변경 후 키보드/선택 검증은 별도입니다. Noto Sans CJK KR 2.004 한 후보의 공식 구성/라이선스만 조사했으며 반입/선정/실험은 하지 않았습니다. Track B는 O/M 표현·후보 조건, Track A는 W04B 기능 영향 행을 같은 표에 대조할 준비가 필요합니다. DEV026 현재 공급/P07 한정 수용·원본 PARTIAL 유지, W04B 공급·S3-12 인수는 별도입니다. 다음 제품 단위는 DEV027 P1이며 로컬 구현/검증 권한·DI03 종속 의미·P3 실제 L2가 남습니다. 이번 산출물은 로컬 문서4개이며 원격 제출/제품 실행 완료가 아닙니다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027
+
+## 13. P1 비의존 모델 실행 승인·실제 범위 — 2026-11-22
+
+[티켓 §7](../tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md#7-p1-비의존-모델-로컬-구현검증-승인--2026-11-22)의 Owner 승인으로 **P1 로컬 구현·검증만 착수**했다. 기준 main `1a941196cc6d963db93a9fba6a0386b16710aa46`, 브랜치 `codex/DEV-027-w04b-p1-model`. §8.1 후보41개는 그대로이며 실제20개는 티켓에서 열거한다. P3/P4 및 Git 권한으로 확대하지 않는다.
+
+| 단계·행 | 이번 실제 처리 | 남은 범위 |
+| --- | --- | --- |
+| P1 / W4B-01~14·18~19·30 | 순수 모델·기존 W03/원장 재사용, 시청/정부/설득, 시간/명령 재검사·잠금/고정 사본, 동일성 계보, 정상 RNG/seed·분할 재현 | 실제 Session/Pipeline·UI·자연 실행 별도 |
+| DI-01 계약·W4B-12~13·21~23 일부 | 독립 모델의 허가와 별도 사업계약/원장 지급, 허가 사본 인계, 읽기 전용 실제 사업 출처 검증 | P3의 공통 단계·W05/W06 소비 통합·전체 SEM-03·VS-02 |
+| DI-03 / W4B-15~17 | 실패→1440분 기준은 대기 메타데이터. 관련/판정 후/미사용의 순수 자격 판별 fixture만 검사 | 대상 OD/동·반복/중첩·실제 fact 생성/수요·소수/carry·예측 무효화·소비/재접수 보류 |
+| P3 / #146 실제 공급 L2 | [P1 실제 모델 계약](DEV-027_W04B_SUPPLY_CONTRACT.md) 작성 | UI root 봉투·지역 의존표·실제 Session 명령/화면 미통합. 해당 L2 수용 후 화면 통합 |
+| P4·P5 | 로컬 결과/증거 제출 | GUI·독립 실행·Design·VS-02, Commit/Push/PR·CI·main 병합·HQ/Owner 인수 별도 |
+
+정부 적합·보류/설득·부적합 seed는 실제 고정 엔진의 정상 RNG에서 확보했다. 이 모델 검사를 자연 VS-02 완주로 표기하지 않는다. 음수/0 예측 및 순수 난수구간/사실 입력은 fixture로 표시한다. 원본 로그와 최초 실패를 보존하고 정상 실행·고의 실패 종료·회귀·로드를 분리한다. [결과서](../tasks/DEV-027_RESULT.md)와 [증거 색인](../evidence/DEV-027_W04B_VS02_RESULTS.json)이 실제 검증 결과를 연결한다.
+
+PM-021 공통표 후속은 [DEV 게시 회신](https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057935798)·[Track A 정적 검토 완료](https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057978655)를 연결한다. §12의 준비 당시 NOT_SENT/공동 검토 대기는 그 이력이며, 같은 표 제출/GUI 반복을 새 종료 조건으로 만들지 않는다. #92/F08 최종 규격과 S3-10-C는 별도다.
+
+DEV-026 현재 공급 한정 수용·PARTIAL/미관측·P07 구분은 변경하지 않았다. S3-12/Stage 최종 인수 대기와 RFC-DEV-027-01 종속 보류도 유지한다. 새 게임 규칙 변경 필요는 확인되지 않았다.
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-027

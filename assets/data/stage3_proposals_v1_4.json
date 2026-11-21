@@ -1,0 +1,26 @@
+{
+  "schema_version": "DEV-027-W04B-P1-1",
+  "data_version": "1.4",
+  "rules_version": "C0.7-D0.9-DATA1.4",
+  "source": {
+    "commit": "1a941196cc6d963db93a9fba6a0386b16710aa46",
+    "path": "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md"
+  },
+  "city_id": "C01",
+  "slot_ids": ["P-A", "P-B"],
+  "city_minutes": 30,
+  "government_minutes": 60,
+  "persuasion_minutes": 30,
+  "government_approved_below": 70,
+  "government_held_below": 90,
+  "persuasion_success_below": 60,
+  "government": 800000,
+  "persuasion_government": 640000,
+  "standard_cost": 600000,
+  "duration_minutes": 2880,
+  "fare": 100,
+  "office_opens_at": 360,
+  "day_minutes": 1440,
+  "fact_delay_minutes": 1440,
+  "di03_status": "DEPENDENT_SCOPE_PENDING"
+}
