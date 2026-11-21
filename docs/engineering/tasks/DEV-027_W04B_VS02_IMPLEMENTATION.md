@@ -1,5 +1,7 @@
 # DEV-027 — W04B·VS-02 착수 계획 및 문서 제출 티켓
 
+> **2026-11-22 P1 최신 후속:** §7은 Owner가 승인한 비의존 모델 로컬 구현·검증 범위다. **LOCAL_REVIEW / GIT_SUBMISSION_NOT_AUTHORIZED**. DI-03 종속 범위·L2 전 화면 통합과 DEV-026 한정 수용/PARTIAL·S3-12 인수 대기는 유지한다. 아래 과거 기록은 당시 이력으로 보존한다.
+
 > **PM-021 최신 후속 — 2026-11-21:** §6이 현재 **LOCAL_REVIEW / TRACK_B_COMMON_TABLE_REVIEW_PENDING / GIT_SUBMISSION_NOT_AUTHORIZED** 상태를 설명한다. O01~07 방향 승인·DEV026 현재 공급/P07 수용은 유효하다. 아래 과거 제출·미실행·선택 대기는 당시 이력으로 보존한다. 이번 작업은 기존 DEV027 문서4개 로컬 보완·정적 검사다.
 
 > **현재 후속 — 2026-11-21:** PR #149 병합 후 #146 Design 사전 의견을 반영한 문서 보완이다. 제출 base는 `de0f03f9d2fcc301940a4176f1359b2788a51950`, 브랜치는 `codex/DEV-027-design-plan-followup`이며 현재 권한·결과는 §5을 따른다. 앞선 제출 식별·검증은 PR #149 당시 기록으로 보존한다. 제품 구현·실행·최종 L2·main 병합은 별도 대기다.
@@ -84,6 +86,47 @@ Task-ID: DEV-027
 - 종료 신호: 문서/출처·링크·기존41개 후보 보존 검증과 로컬 검토 요청. DEV 준비를 공동 수용/S3-10-A 완료로 선기록하지 않음.
 
 DEV027 P1 구현·검증은 별도 승인 대상이다. DI03 대상/반복 효과 종속 행과 실제 UI L2는 남고 비의존 모델에 Design 추가 차단은 없다. DEV026은 이미 구현·검증·현재 공급 한정 수용됐으며 과거 HOLD/전체 NOT_RUN으로 되돌리지 않는다. 분담 수용·미래 W04B·S3-12/Stage·원본 PARTIAL은 보존한다. F08 검토를 기존41개 제품 후보 확대나 종료 DEV025 재개로 사용하지 않는다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027
+
+## 7. P1 비의존 모델 로컬 구현·검증 승인 — 2026-11-22
+
+Owner의 본 개발 대화 승인 원문:
+
+> DEV-027 P1 비의존 모델의 로컬 구현·검증 착수를 승인합니다. 계획서 범위로 진행하고 로컬 결과부터 검토 요청해주세요. DI-03 종속 범위와 Design L2 수용 전 화면 통합은 대기하고, Commit·Push·PR·main 병합은 별도 승인하겠습니다. DEV-026 한정 수용·PARTIAL과 S3-12 최종 인수 대기는 유지합니다.
+
+- 상태: **P1_LOCAL_IMPLEMENTATION_AUTHORIZED / LOCAL_REVIEW**. 아래 과거 승인 대기/문서 제출 기록은 당시 범위로 보존한다.
+- 기준 main `1a941196cc6d963db93a9fba6a0386b16710aa46`, 독립 worktree·브랜치 `codex/DEV-027-w04b-p1-model`. shared root의 기존 데이터2개 수정은 보존하고 가져오지 않았다.
+- 허용: P1 순수 모델·정상 RNG seed 탐색·자동 경계·재사용 모델 회귀·프로젝트 로드·로컬 문서화. Commit/Push/PR/main 병합·원격 댓글은 포함하지 않는다.
+- 정확한 변경은 기존41개 후보 중 **20개: 제품9 + 테스트4 + 문서/증거7**. 기존3개 Markdown은 후속 기록만 추가한다. 기존 provenance는 [base 원본](https://github.com/wisberry2022/MetroManager/blob/1a941196cc6d963db93a9fba6a0386b16710aa46/docs/engineering/tasks/DEV-027_PROVENANCE.json)에 보존하고 이번 변경19개 내용 식별자를 갱신한다.
+
+| # | 정확한 변경 경로 |
+| --- | --- |
+| 1 | `assets/data/stage3_proposals_v1_4.json` |
+| 2 | `scripts/data/proposal_data_loader.gd` |
+| 3 | `scripts/data/proposal_data_loader.gd.uid` |
+| 4 | `scripts/model/company_proposal.gd` |
+| 5 | `scripts/model/company_proposal.gd.uid` |
+| 6 | `scripts/simulation/proposal_service.gd` |
+| 7 | `scripts/simulation/proposal_service.gd.uid` |
+| 8 | `scripts/simulation/business_sources.gd` |
+| 9 | `scripts/simulation/business_sources.gd.uid` |
+| 10 | `tests/game/w04b_fixtures.gd` |
+| 11 | `tests/game/w04b_fixtures.gd.uid` |
+| 12 | `tests/game/run_w04b_tests.gd` |
+| 13 | `tests/game/run_w04b_tests.gd.uid` |
+| 14 | `docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md` |
+| 15 | `docs/engineering/tasks/DEV-027_RESULT.md` |
+| 16 | `docs/engineering/tasks/DEV-027_PROVENANCE.json` |
+| 17 | `docs/engineering/gate3/DEV-027_W04B_SUPPLY_CONTRACT.md` |
+| 18 | `docs/engineering/gate3/DEV-027_EXECUTION_VALIDATION_PLAN.md` |
+| 19 | `docs/engineering/evidence/DEV-027_W04B_VS02_RESULTS.json` |
+| 20 | `docs/engineering/evidence/DEV-027_W04B_VS02_EVIDENCE.md` |
+
+결과는 [결과서 §7](DEV-027_RESULT.md#7-p1-비의존-모델-로컬-결과--2026-11-22), API/실제 공급 경계는 [P1 공급 계약](../gate3/DEV-027_W04B_SUPPLY_CONTRACT.md), 명령·해시·잔여는 [증거 색인](../evidence/DEV-027_W04B_VS02_EVIDENCE.md)에 연결한다.
+
+제외·보존: DI-03 대상/반복 효과·실제 E01 생성/수요/소비, Session/Pipeline/화면 통합, Design L2·독립 실행·VS-02, DEV-026 변경, 타 부서·원본 데이터2개·정책/CI/도구/설정, 최종 폰트/아트·지원 조건·빌드/export. DEV-026 한정 수용·PARTIAL과 S3-12 최종 인수 대기 유지. 검증 PASS는 전체 DEV-027 DONE이 아니다.
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-027

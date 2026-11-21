@@ -1,5 +1,7 @@
 # DEV-027 — 이슈 철회·착수 계획 문서 PR 전환 결과
 
+> **2026-11-22 P1 최신 결과:** §7은 승인된 비의존 모델의 로컬 구현·검증 결과다. **LOCAL_REVIEW / GIT_SUBMISSION_NOT_AUTHORIZED**. DI-03 종속 범위·L2 전 화면 통합 및 DEV-026 한정 수용/PARTIAL·S3-12 최종 인수 대기는 유지한다. 아래 과거 기록은 보존한다.
+
 > **PM-021 최신 후속 — 2026-11-21:** §6이 현재 **LOCAL_REVIEW / TRACK_B_COMMON_TABLE_REVIEW_PENDING / GIT_SUBMISSION_NOT_AUTHORIZED** 상태를 설명한다. O01~07 방향 승인·DEV026 현재 공급/P07 수용은 유효하다. 아래 과거 제출·미실행·선택 대기는 당시 이력으로 보존한다. 이번 작업은 기존 DEV027 문서4개 로컬 보완·정적 검사다.
 
 > **현재 후속 — 2026-11-21:** PR #149 병합 후 #146 Design 사전 의견을 반영한 문서 보완이다. 제출 base는 `de0f03f9d2fcc301940a4176f1359b2788a51950`, 브랜치는 `codex/DEV-027-design-plan-followup`이며 현재 권한·결과는 §5을 따른다. 앞선 제출 식별·검증은 PR #149 당시 기록으로 보존한다. 제품 구현·실행·최종 L2·main 병합은 별도 대기다.
@@ -105,6 +107,49 @@ Task-ID: DEV-027
 - 출처 JSON은 이번 base/blob으로 갱신. 이전 manifest는 [이번 base의 원본](https://github.com/wisberry2022/MetroManager/blob/fa968b94641d24e8d68b3c6cb903f9e809d02814/docs/engineering/tasks/DEV-027_PROVENANCE.json)에 보존. REPORT_ONLY 정합성이 신원/승인을 인증하지 않음.
 
 잔여: 로컬4개 검토, Track B 공통표·Track A 영향 행 대조, 필요한 경우 이4개 문서 Git 제출/회신 게시 승인, DEV027 실제 구현·검증 승인, DI03 종속 의미 및 실제 UI L2. O01~07 재승인은 필요 없다. F08/#92 OPEN/FINAL_SPEC_PENDING, S3-10-C·S3-12·Stage 인수는 별도. 신규 게임 명세 변경 필요 확정 없음; 기존 RFC-DEV-027-01 OPEN.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027
+
+## 7. P1 비의존 모델 로컬 결과 — 2026-11-22
+
+**P1_LOCAL_REVIEW**. [Owner 승인·정확한20개 경로](DEV-027_W04B_VS02_IMPLEMENTATION.md#7-p1-비의존-모델-로컬-구현검증-승인--2026-11-22)로 구현·검증했다. 기준 main `1a941196cc6d963db93a9fba6a0386b16710aa46`, 브랜치 `codex/DEV-027-w04b-p1-model`. 작업 커밋은 없으며 시험본은 base와 [실제 파일 해시](../evidence/DEV-027_W04B_VS02_RESULTS.json)로 식별한다.
+
+### 변경·의미
+
+- 제안 데이터/검증 로더, CompanyProposal, ProposalService, BusinessSources와 각 UID, 모델 fixture/러너·UID를 추가했다. 제품9·검사4·문서7의 **총20개**이며 기존 승인 후보41개 안이다.
+- 시청 30분·정부60분·설득30분, 시청 −1/0/+1·정부3분기·설득1회, 업무시간/T+1 효력·접수 재검사·잠금·중복 요청, 현재 초안/심사·보류·허가 사본 분리, 이름/역순/역 교체/슬롯 변경의 정부 제한 계보를 구현했다.
+- 전용 정상 RNG의 seed/추출 상태·순서·심사 ID를 기록한다. seed2=정부50 적합, seed0=83→83 설득 실패, seed8=84→13 설득 성공, seed1=97 부적합을 실제 엔진에서 찾아 독립 모델로 재현했다.
+- 허가액800000/640000과 별도 계약의 실제 원장 지급을 구분했다. 기존 원장 API와 사업별 R/K를 재사용하며 계약의 허가 계획 사본·지급 거래를 읽기 전용 사업 출처로 연결한다. W04A 공급의 읽기 호환도 검사했다.
+- 이 공급은 [P1 단독 모델 계약](../gate3/DEV-027_W04B_SUPPLY_CONTRACT.md)이다. 실제 Session/Pipeline/공사·운영/UI 연결이나 자연 VS-02 완료는 아니다. 기존 제품/화면/수요 코드와 데이터2개는 변경0이다.
+
+### 검증
+
+| 구분 | 결과·범위 |
+| --- | --- |
+| Godot 프로젝트 로드 | exit0 · ERROR/SCRIPT ERROR0 |
+| P1 모델 자동 | 425개 통과 · exit0 · ERROR/SCRIPT ERROR0 |
+| 고의 실패 종료 계약 | 의도한1개 실패·exit1 확인 (검사 계약 PASS) |
+| 기존 W02 회귀 | 309개 통과 · exit0 · ERROR/SCRIPT ERROR0 |
+| 기존 W03 회귀 | 101개 통과 · exit0 · ERROR/SCRIPT ERROR0 |
+| 기존 W04A 회귀 | 204개 통과 · exit0 · ERROR/SCRIPT ERROR0 |
+| 기존 W05 회귀 | 191개 통과 · exit0 · ERROR/SCRIPT ERROR0 |
+| 정책/범위/출처 | PASS · doctor/check(exit0, 파일748·GDScript63) · 정확한20경로/기존 기록/19개 blob·UTF-8/LF·diff --check 확인 |
+| GUI·독립 실행·Design·VS-02·빌드/export | NOT_RUN / 실제 통합·수용 대기 |
+
+Godot `4.7.2.stable.official.ed1daf0bf`의 엔진 본체/console SHA-256, 실제 명령·exit·오류·소스/로그 해시 및 입력/기대/관측은 [증거 색인](../evidence/DEV-027_W04B_VS02_EVIDENCE.md)과 JSON에 연결한다. 원본은 작업 worktree의 `.local/validation/DEV-027/p1/`에 보존한다.
+
+최초 시도도 보존한다: 일반 권한 로드의 사용자 설정/디렉터리 오류, model-01 타입 추론 파싱 오류, model-02의 잘못된 타입 비교 SCRIPT ERROR(프로세스 exit0·일부 단언 통과를 PASS로 인정하지 않음), model-04의 검사 입력 오분류1건, 첫 W05 회귀의150초 시간 초과. 로더/명령/사업 지급의 잘못된 타입을 거부하도록 수정했고 추가 경계 검사로 확인했다. 고의 실패 exit 검사는 결함 건수와 분리한다.
+
+최종 파일 감사에서 formatter가 신규 GDScript6개에 기록한 CRLF를 규정된 LF로 정규화했다. 이전 시험 바이트·전후 해시는 보존하고 LF 본의 모델425개·실패 종료·프로젝트 로드를 재확인했다. 기존 회귀/의존 소스는 변경0이므로 W02/W03/W04A/W05 결과는 원 실행 식별자로 유지한다.
+
+### 잔여와 검토 요청
+
+- **DI-03 종속 보류:** E01 대상 OD/동·반복/중첩·실제 발생/수요/소수 carry·예측 무효화·소비 및 성공 재접수. 현재는 승인된+1440 기준 메타데이터와 순수 사실 자격 fixture만 공급한다. 모델은 사실이 없는데 시간이 지났다는 이유로 제한을 풀지 않는다.
+- **P3/P4 대기:** Session/Pipeline 전체 단계·W05/W06 실제 소비, UI root/지역 의존표·실제 공급 L2, 해당 화면 통합, GUI·독립 실행·Design 심사·자연 VS-02.
+- DEV-026 한정 수용·PARTIAL/미관측·P07 구분, S3-12/HQ·Owner 최종 인수 대기 유지. 과거 원본 검증·정정·승인 기록은 보존한다. #92 공통표는 [DEV 회신](https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057935798)·[Track A 검토 완료](https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057978655)로 연결하며 같은 문서/GUI 재제출을 요구하지 않는다.
+- 게임 규칙 변경 필요: **새 변경 요구 없음**. RFC-DEV-027-01의 DI-03 종속 의미 확인만 OPEN.
+- **Commit·Push·PR·CI·main 병합 미실행/별도 승인 대기.** 이번 보고는 승인된 P1 로컬 결과의 검토 요청이며 전체 DEV-027/Stage DONE 또는 Design 수용 선언이 아니다.
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-027
