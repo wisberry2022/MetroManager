@@ -1,5 +1,7 @@
 # DEV-026 — 로컬 구현·검증 증거 색인
 
+> **최신 승인 후속 — 2026-11-21:** [#104 Owner 승인 기록](https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7057161624)에 따라 **현재 공급 한정 수용은 OWNER_APPROVED_LIMITED_ACCEPTANCE**, **P07 일반 재진입·문맥 복귀 구분은 OWNER_APPROVED**다. 이 두 항목의 Owner 결정 대기는 해소했다. **OVERALL_PARTIAL**, 원본 PARTIAL·미관측, RFC OPEN 및 **S3-12·Stage 최종 인수 PENDING**은 유지한다. 아래 이전 승인 대기·NOT_SENT·미커밋 문구는 당시 이력이며 최신 적용 범위는 마지막 후속 절을 따른다.
+
 > **최신 후속 — 2026-11-21:** [Track B 검수 의견](https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7056903693) 수신 / LIMITED_ACCEPTANCE_RECOMMENDED / OVERALL_PARTIAL / OWNER_REVIEW_REQUESTED. PR #153·#154 병합과 현재 공급에 대한 독립 실행·Design 증거 심사 보고를 연결했다. 이는 Owner 최종 수용·RFC 종결·S3-12/DONE이 아니다. 아래 이전 PENDING/HOLD/미커밋 기록은 당시 이력이며 현재 판단과 잔여는 마지막 후속 절을 따른다.
 
 <!-- 이전 본문은 당시 상태로 보존하며 최신 효력은 후속 절을 따른다. -->
@@ -113,6 +115,19 @@ Owner의 현재 작업본 PR 요청에 따라 기존23개 파일을 공유한다
 P07 일4/스크롤605의 문맥 복귀와 일1/628→0의 일반 재진입은 별도 관측이다. 일1의 비영점 중첩 문맥 복귀는 미관측/PARTIAL로 남긴다. 새 Session 내부 수명의 OS 가시성 PARTIAL/INCONCLUSIVE는 자동/소스의 기술 근거와 함께 읽되 GUI PASS로 바꾸지 않는다. 환경/훅 실패·DPI 미확인·W04B NOT_SUPPLIED 및 F08 FINAL_SPEC_PENDING도 보존한다.
 
 기존 JSON/원본은 수정하지 않았다. 이전 PENDING/NOT_RUN은 각 수행 전 이력이며 Design 심사 수신 후의 현재 의견은 위 댓글과 [DEV 검토 결과](../tasks/DEV-026_RESULT.md), [RFC 후속](../gate3/DEV-026_S01_EXCEPTION_CONTRACT.md)에 연결한다. 새 코드·지원 환경·시험 입력 변경이나 반대 증거가 없어 이번 GUI/게임 실행은 NOT_RUN이다.
+
+## 2026-11-21 후속 — Owner 승인 원문과 PR #155 병합 연결
+
+- 승인 정본: [#104 Owner 승인 기록](https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7057161624). 현재 공급 한정 수용과 P07 구분에 대한 Owner 결정 대기는 해소됐다.
+- [Track B 검수 의견](https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7056903693) → [DEV 기술 검토 회신](https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7057092445) → 위 승인 원문의 순서로 연결한다.
+- 제품 시험 SHA: ae614d922c837eddf4e615fda985bd978e217461.
+- [PR #155](https://github.com/wisberry2022/MetroManager/pull/155) 문서 head: fc78f13aac10af60bdec6d60584f8d63f47d2cbb / 병합 main: c699f7d0f191aebd9ecb912895e9f34c0aef8cda. head와 병합 tree는 동일하다.
+- 시험본 이후 위 main까지 변경은 문서/출처 5개뿐이며 제품·검사·원본 실행 JSON은 동일하다. SHA 진전이나 승인 기록 추가만으로 제품 GUI를 반복하지 않는다.
+- PR #155 head의 [policy PASS](https://github.com/wisberry2022/MetroManager/actions/runs/44864832417/job/136726067883), [department-policy PASS](https://github.com/wisberry2022/MetroManager/actions/runs/44864832479/job/136726070510), [출처 검사 PASS](https://github.com/wisberry2022/MetroManager/actions/runs/44864832421/job/136726070030)는 원 head의 제출 근거다. 현재 미커밋 문서에 새 CI가 수행된 것으로 전용하지 않는다.
+
+현재 상태는 **OWNER_APPROVED_LIMITED_ACCEPTANCE / P07_BOUNDARY_OWNER_APPROVED / OVERALL_PARTIAL**이다. 승인은 관측 조건의 수용 판단이며 원본 미관측·미실행을 실행 PASS로 바꾸지 않는다. DEV 자체 GUI/자동검사, 독립 GUI 3프로세스·73캡처, Track B 심사는 원 수행에 한정한다. 이 수신 작업에서 제한 원본을 직접 다시 검증하지 않았다.
+
+고정일 1·비영점 중첩 문맥 복귀와 내부 수명 등의 PARTIAL/INCONCLUSIVE, 과거 환경 로드·훅 실패, DPI NOT_VERIFIED 및 NOT_CAPTURED는 유지한다. W04B NOT_SUPPLIED·F-08 FINAL_SPEC_PENDING·S3-12/Stage PENDING도 별도다. 전체 실행 JSON/원본은 불변이다. [계약 §11](../gate3/DEV-026_S01_EXCEPTION_CONTRACT.md)과 [결과서 최신 후속](../tasks/DEV-026_RESULT.md)에서 승인 범위와 남은 인수를 구분한다.
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-026

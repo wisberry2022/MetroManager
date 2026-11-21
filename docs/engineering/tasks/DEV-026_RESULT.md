@@ -1,5 +1,7 @@
 # DEV-026 — DSG-008 후속 계약 검토·Owner 착수 순서 결정
 
+> **최신 승인 후속 — 2026-11-21:** [#104 Owner 승인 기록](https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7057161624)에 따라 **현재 공급 한정 수용은 OWNER_APPROVED_LIMITED_ACCEPTANCE**, **P07 일반 재진입·문맥 복귀 구분은 OWNER_APPROVED**다. 이 두 항목의 Owner 결정 대기는 해소했다. **OVERALL_PARTIAL**, 원본 PARTIAL·미관측, RFC OPEN 및 **S3-12·Stage 최종 인수 PENDING**은 유지한다. 아래 이전 승인 대기·NOT_SENT·미커밋 문구는 당시 이력이며 최신 적용 범위는 마지막 후속 절을 따른다.
+
 > **최신 후속 — 2026-11-21:** [Track B 검수 의견](https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7056903693) 수신 / LIMITED_ACCEPTANCE_RECOMMENDED / OVERALL_PARTIAL / OWNER_REVIEW_REQUESTED. PR #153·#154 병합과 현재 공급에 대한 독립 실행·Design 증거 심사 보고를 연결했다. 이는 Owner 최종 수용·RFC 종결·S3-12/DONE이 아니다. 아래 이전 PENDING/HOLD/미커밋 기록은 당시 이력이며 현재 판단과 잔여는 마지막 후속 절을 따른다.
 
 <!-- 이전 본문은 당시 상태로 보존하며 최신 효력은 후속 절을 따른다. -->
@@ -223,6 +225,27 @@ Owner의 “개발 에이전트. 작업 내용을 PR로 만들어주세요”에
 ### HQ·Owner 인계용 요약 — 검토안
 
 DEV-026 구현/검사 보완은 PR153/154로 main에 반영됐으며35개 실패는266개 자동 PASS로 해소됐습니다. Track B는 위 #104에 독립 실행·자동/소스 근거를 결합한 현재 공급 한정 수용안을 제출했습니다. DEV는 현재 확정된 새 기능 결함을 확인하지 못했고 P07 문맥 복귀/일반 재진입 구분 및 추가 GUI 비요구 판단에 이견 없습니다. **Owner의 한정 수용안·의미 경계 판단, 필요한 Track A 분담 확인, HQ S3-12 최종 인수 연결이 남습니다.** 원본 PARTIAL/미관측·RFC OPEN, DEV-027 W04B/DI-03/E01과 #92 F-08 후속은 별도로 유지합니다.
+
+## 2026-11-21 후속 — Owner 한정 수용 승인 접수·잔여 분리
+
+[#104 승인 기록](https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7057161624)을 확인하여 **현재 공급 한정 수용과 P07 일반 재진입·문맥 복귀 구분의 Owner 결정 대기를 해소**했다. PR #155는 main c699f7d0f191aebd9ecb912895e9f34c0aef8cda에 병합됐고, 이전 회신 초안은 [기존 DEV 댓글](https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7057092445)로 게시됐다. 이전 본문의 미커밋·NOT_SENT·Owner 결정 대기는 각 작성 당시 기록이다.
+
+| 항목 | 현재 판정 | 후속 |
+| --- | --- | --- |
+| 현재 공급 한정 수용 | OWNER_APPROVED_LIMITED_ACCEPTANCE | 기존 검수 의견의 관측·자동/소스 근거 범위 유지 |
+| P07 일반 재진입·문맥 복귀 구분 | OWNER_APPROVED / 즉시 제품 수정 요구 없음 | 같은 의미 경계 승인 요청을 반복하지 않음 |
+| 원본 PARTIAL·미관측·환경 이력 | 보존 | 고정일 1 중첩 복귀, 내부 OS 가시성, 과거 환경/훅 실패·DPI 등 미확인을 PASS로 변경하지 않음 |
+| RFC-DEV-026-01·#104 | OPEN | 승인된 부분과 미종결 범위 분리. 임의 종료 없음 |
+| S3-12·Stage 최종 인수 | PENDING | 필요한 Track A 분담 수용·기존 CI·HQ 취합과 Owner 최종 인수 별도 |
+| W04B·F-08·DI-03/E01 | 미래 공급·최종 규격/해당 담당 후속 | DEV-027 실제 공급 후 해당 행 대조, #92 OPEN/FINAL_SPEC_PENDING, #97 기술 실험 종료 유지 |
+
+새 기능 결함·코드 보완·추가 GUI 요구는 없다. **OVERALL_PARTIAL은 유지**하며 독립 실행·Design 심사·Owner 결정은 각각의 원 수행/결정으로 연결한다. 이번 DEV가 원본 패킷을 다시 측정하거나 새 독립 실행을 수행한 것은 아니다.
+
+로컬 변경은 [티켓 §12](DEV-026_S01_EXCEPTION_SCOPE.md)의 문서/출처 5개다. 검증은 doctor/check, diff 공백, 정확한 경로, 기존 본문 보존, 상대 링크, UTF-8/LF, 출처 blob 및 제품·시험·원본 JSON 불변 대조다. 로컬 검사 기록은 .local/validation/DEV-026/owner-acceptance-note/에 둔다. 새 게임 자동검사·프로젝트 로드·GUI/독립 실행·자연 완주·빌드/export·성능은 NOT_RUN. 새 Commit·Push·PR·main 병합·댓글 게시·이슈/RFC 종료도 NOT_RUN이다.
+
+### HQ·Owner 인계용 요약 — 승인 결정 연결
+
+DEV-026의 현재 공급 한정 수용 및 P07 일반 재진입·문맥 복귀 구분은 #104의 Owner 승인 기록으로 확정됐습니다. PR #153/#154 구현·검사와 #155 문서 병합, 기존 DEV 회신을 연결했습니다. 이 두 결정의 승인 대기는 해소됐으며 현재 제품 수정·GUI 반복 요구는 없습니다. 원본 PARTIAL·미관측·NOT_RUN/NOT_VERIFIED와 W04B 미래 공급·F-08 미결은 보존합니다. 필요한 Track A 분담 수용·HQ 취합·S3-12/Stage 최종 인수와 RFC 종결은 별도입니다. 이번 로컬 문서 검토를 이미 유효한 Owner 한정 수용의 재승인이나 추가 종료 조건으로 삼지 않습니다.
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-026

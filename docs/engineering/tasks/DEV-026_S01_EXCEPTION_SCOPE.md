@@ -1,5 +1,7 @@
 # DEV-026 — DSG-008 후속 계약·적용 범위 검토 티켓
 
+> **최신 승인 후속 — 2026-11-21:** [#104 Owner 승인 기록](https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7057161624)에 따라 **현재 공급 한정 수용은 OWNER_APPROVED_LIMITED_ACCEPTANCE**, **P07 일반 재진입·문맥 복귀 구분은 OWNER_APPROVED**다. 이 두 항목의 Owner 결정 대기는 해소했다. **OVERALL_PARTIAL**, 원본 PARTIAL·미관측, RFC OPEN 및 **S3-12·Stage 최종 인수 PENDING**은 유지한다. 아래 이전 승인 대기·NOT_SENT·미커밋 문구는 당시 이력이며 최신 적용 범위는 마지막 후속 절을 따른다.
+
 > **최신 후속 — 2026-11-21:** [Track B 검수 의견](https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7056903693) 수신 / LIMITED_ACCEPTANCE_RECOMMENDED / OVERALL_PARTIAL / OWNER_REVIEW_REQUESTED. PR #153·#154 병합과 현재 공급에 대한 독립 실행·Design 증거 심사 보고를 연결했다. 이는 Owner 최종 수용·RFC 종결·S3-12/DONE이 아니다. 아래 이전 PENDING/HOLD/미커밋 기록은 당시 이력이며 현재 판단과 잔여는 마지막 후속 절을 따른다.
 
 <!-- 이전 본문은 당시 상태로 보존하며 최신 효력은 후속 절을 따른다. -->
@@ -225,6 +227,26 @@ Owner 원문(본 개발 대화):
 | docs/engineering/tasks/DEV-026_PROVENANCE.json | 현재4개 Markdown의 base/blob/출처 선언 |
 
 이 요청은 코드/Git 권한이나 Owner의 한정 수용안 승인을 새로 생성하지 않는다. 현재 후속의 Commit·Push·PR·main 병합·이슈/RFC 종료·댓글 게시는 NOT_RUN이다. 이전 8개 파일 제출 승인은 완료된 PR #154의 범위이며 재사용하지 않는다. 회신 초안은 로컬 검토용으로 준비했다.
+
+## 12. Owner 한정 수용 결정 연결 — 2026-11-21
+
+이번 작업 근거는 본 개발 대화의 Owner 요청이다.
+
+> 개발 에이전트. 104번 이슈에 디자이너 에이전트가 회신을 기록하였으니 확인해주시기 바랍니다 후속 작업이 필요한 경우 진행해주세요
+
+Design Track B / AGT-DSG-0003가 게시한 [Owner 승인 기록](https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7057161624)을 확인했다. 현재 공급 한정 수용과 P07 적용 경계의 승인 대기를 해소하고, 기존 문서에 후속 근거를 연결한다. 승인 원문·적용 한계는 [계약 §11](../gate3/DEV-026_S01_EXCEPTION_CONTRACT.md)에 보존한다.
+
+기준 main은 c699f7d0f191aebd9ecb912895e9f34c0aef8cda, 로컬 브랜치는 codex/DEV-026-owner-acceptance-note다. PR #155의 병합을 원격 조회로 확인했으며 이 작업에서 병합하지 않았다. 기존 공유 폴더·사용 중인 worktree의 파일을 보존하고 별도 worktree에서 문서만 수정한다.
+
+| 정확한 변경 경로 | 내용 |
+| --- | --- |
+| docs/engineering/tasks/DEV-026_S01_EXCEPTION_SCOPE.md | 이번 로컬 후속 근거·5개 경로·권한 범위 |
+| docs/engineering/gate3/DEV-026_S01_EXCEPTION_CONTRACT.md | 기존 RFC의 승인된 부분과 미종결 범위 구분 |
+| docs/engineering/tasks/DEV-026_RESULT.md | 두 결정의 대기 해소·잔여·HQ 인계 요약 |
+| docs/engineering/evidence/DEV-026_S01_EXCEPTION_EVIDENCE.md | 승인 댓글·PR #155 병합·원 시험 SHA와 CI 연결 |
+| docs/engineering/tasks/DEV-026_PROVENANCE.json | 현재 4개 Markdown의 출처와 blob 기록 |
+
+현재 제품 수정·새 실험·GUI 재실행 요청은 없다. 이번 실행 범위는 위 5개 파일의 로컬 기록과 정적 검사다. 제품·검사 코드·원본 실행 JSON·Design/HQ 산출물은 변경하지 않는다. 새 Commit·Push·PR·main 병합·댓글 게시·이슈/RFC 종료는 NOT_RUN이다. 이전 5개 파일 Git·회신 게시 승인은 PR #155와 기존 회신으로 수행됐으며 이번 새 제출 권한으로 확대하지 않는다.
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-026
