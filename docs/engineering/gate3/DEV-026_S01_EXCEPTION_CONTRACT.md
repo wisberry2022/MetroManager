@@ -1,5 +1,9 @@
 # DEV-026 — DSG-008 S01 예외 공급·소비 계약 검토안
 
+> **현재 로컬 후속 — 2026-11-21:** 경로 재지정 승인 적용·기존35개 실패 해소·자동 GUI266/266 PASS. LOCAL_REVIEW / PRODUCT_L2_PENDING. 후속8개 파일은 미커밋이며 Commit·Push·main 병합은 별도 승인이다. 아래 이전 본문의 PARTIAL·승인 대기·NOT_RUN은 당시 기록이고 최신 근거는 마지막 후속 절과 증거 JSON gui_followup을 따른다.
+
+<!-- 아래 이전 본문은 당시 상태로 보존한다. -->
+
 > **현재 상태 — 2026-11-21:** PR_REVIEW_PARTIAL / TEST_PATH_REASSIGNMENT_PENDING / PRODUCT_L2_PENDING. Owner가 기존23개 파일의 Commit·Push·Draft PR 공유를 요청했다([티켓 §9](../tasks/DEV-026_S01_EXCEPTION_SCOPE.md)). 기존 GUI35개 실패·검사기 재지정 승인 대기·Design 수용 대기는 유지한다. 앞선 HOLD/NOT_RUN·로컬 검토 기록은 당시 이력이며 main 병합은 별도 승인이다.
 
 - 작성: Development / AGT-DEV-0004 / 2026-11-14 / v0.1.
@@ -192,6 +196,12 @@ RFC-DEV-026-01의 **Design 의견은 수신됨**: Track B 제안 의미 이견 �
 EX-05는 소비 CALCULATING 표본에 한정하고 동기 제품에 인위 대기를 만들지 않았다. EX-16의 일반 S01 pending은 적용 제외다. EX-18은 기존 격리 외부역 검증이며 기본 DATA/12후보는 불변이다. W04B 신규 공급·기능 L2는 DEV-027 후속, DI-03/E01 미결·F08 전체 규격은 별도로 보존한다. 깊은 W04A/W05 내부 봉투 스키마 개편과 전체 자연 VS-02 완주는 이번 결과가 아니다.
 
 RFC-DEV-026-01은 OPEN / IMPLEMENTED_LOCALLY / PRODUCT_L2_PENDING. 사전 의견은 수신됐지만 실제 제품 L2·독립 실행·Design 심사는 아직 수용되지 않았다. 신규 게임/경제/세이브 명세 변경 필요 NONE. 확인된 실제 경로 차이만 [티켓 §8.1](../tasks/DEV-026_S01_EXCEPTION_SCOPE.md)에 명시한다.
+
+## 9. 검사 어댑터 후속 — 2026-11-21
+
+[티켓 §10](../tasks/DEV-026_S01_EXCEPTION_SCOPE.md)의 승인으로 소비 검사를 현재 계약에 맞췄다. **제품 API·guard·표시·행동은 변경하지 않았다.** 독립 표본은 새 Session binding, P07 기대일은 준비 때 고정한 TEST_ONLY 문맥, 연속 복구는 같은 Session/View를 사용한다. 보관 표본은 불변이며 복제본의 일치하는 보고/조회 key만 해당 시험 실행으로 귀속한다.
+
+이는 모델에서 보고/입찰을 생성한 증거가 아니다. 준비 후 다른 scope/day/value와 낡은 관측을 주입해 거부/복구를 검증했다. 기존 제품 사슬 단언은 그대로다.35개 실패 해소는 RP-03/04·RP-05/06 소비 회귀 보완이며 Design L2/독립 인수와 RFC/W04B 잔여는 유지한다.
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-026

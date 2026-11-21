@@ -1,5 +1,9 @@
 # DEV-026 — DSG-008 후속 계약 검토·Owner 착수 순서 결정
 
+> **현재 로컬 후속 — 2026-11-21:** 경로 재지정 승인 적용·기존35개 실패 해소·자동 GUI266/266 PASS. LOCAL_REVIEW / PRODUCT_L2_PENDING. 후속8개 파일은 미커밋이며 Commit·Push·main 병합은 별도 승인이다. 아래 이전 본문의 PARTIAL·승인 대기·NOT_RUN은 당시 기록이고 최신 근거는 마지막 후속 절과 증거 JSON gui_followup을 따른다.
+
+<!-- 아래 이전 본문은 당시 상태로 보존한다. -->
+
 > **현재 상태 — 2026-11-21:** PR_REVIEW_PARTIAL / TEST_PATH_REASSIGNMENT_PENDING / PRODUCT_L2_PENDING. Owner가 기존23개 파일의 Commit·Push·Draft PR 공유를 요청했다([티켓 §9](DEV-026_S01_EXCEPTION_SCOPE.md)). 기존 GUI35개 실패·검사기 재지정 승인 대기·Design 수용 대기는 유지한다. 앞선 HOLD/NOT_RUN·로컬 검토 기록은 당시 이력이며 main 병합은 별도 승인이다.
 
 - 담당: Development / AGT-DEV-0004 / 2026-11-14.
@@ -163,6 +167,28 @@ Owner의 “개발 에이전트. 작업 내용을 PR로 만들어주세요”에
 신규334/W07 322 및 기존 공급 회귀 PASS와 기존 GUI245개 중35개 FAIL을 구분한다. CI `policy`·`department-policy`는 저장소/경로 검사이며 Godot 게임 실행을 포함하지 않는다. CI 통과로35개 실패나 Design 수용 대기를 해소하지 않는다. 검토할 잔여는 그대로이며 main 병합 승인은 별도다.
 
 정상 훅/출처 선언·최신 main 포함/단일 부모·경로·preflight 및 원격 head CI를 제출 단계에서 확인한다. 정확한 head와 실제 검사 결과는 이 PR의 본문/Checks에 연결한다.
+
+## 2026-11-21 후속 — 승인된 GUI 검사 경로 보완 결과
+
+**LOCAL_REVIEW_GUI_REGRESSION_PASS / PRODUCT_L2_PENDING**. [티켓 §10](DEV-026_S01_EXCEPTION_SCOPE.md)의 재지정 승인에 따라 main 3695c1eefc76fe257c66bd9c4fbbd7d62ae1f572에서 codex/DEV-026-operations-gui-followup로 로컬 보완했다. 이전 PR #153의35개 실패는 당시 기록으로 보존한다.
+
+원인은 검사기의 P06/P07 미귀속, 여러 실행/시각 표본의 동일 View 재사용과 shown 초기화, 실제 Session 선택 보고일/실행별 보고 key 문맥 누락이다. 제품 코드 대신 검사1개에서 독립17표본을 새 Session/View에 귀속하고 제한→복구4단계는 같은 Session/View에서 연속 대조한다. 선택일 기대값을 준비 시 고정하며 보관 JSON 복제본의 일치하는 보고/조회 key만 시험 실행에 연결한다. 금액·상태·기대값·제품 guard는 변경하지 않는다.
+
+| 검증 | 결과 | 실행/원본 |
+| --- | --- | --- |
+| 수정 전 재현 | 245개 중35개 FAIL·exit1·오류0 | gui-followup-baseline |
+| 수정 후 GUI 자동 | **266/266 PASS·exit0·오류0** | gui-followup-01 |
+| 단언 보존 | 기존 호출식86곳·단언245개 보존,35개 모두 해소·추가21개 | assertion-preservation.json |
+| DEV-026 경계 / P06·P07 공급 / W07 | **334 / 158 / 322 모두 PASS** | gui-followup-regression |
+| 의도적 실패 감지 / 프로젝트 로드 | 실패1·exit1 / 로드exit0, 모두 엔진 오류0 | 같은 회귀 묶음 |
+| 정책·범위·출처/링크·해시 | PASS | doctor.log·check.log·audit.json |
+| 실제 GUI·자연 완주·독립 실행·빌드/export·성능 | **NOT_RUN** | 기존 GUI 원본/수용 범위 보존 |
+
+추가21개는 다른 실행/낡은 관측 거부·표시 유지·보고 scope/day/value 오류와 복구·정상 확인 사본·모델 무효과·표본 원문 불변을 확인한다. 실제 제품 사슬 V05/U11/U17의 기존 단언도 그대로 실행했다. 이번 자동 GUI는 headless Control/신호/포커스 검사이며 실제 OS 입력/Design 심사가 아니다.
+
+변경8개는 검사 파일·티켓·본 결과·계약/검증 계획·증거 Markdown/JSON·PROVENANCE다. 제품 소스·모델·DATA·씬·설정·공급 검사·UID는 불변이다. 정확한 경로/해시·명령·35개 전후 결과는 [증거 JSON](../evidence/DEV-026_S01_EXCEPTION_RESULTS.json)의 gui_followup을 따른다. 원본은 후속 worktree의 .local/validation/DEV-026/, 과거 로그/PNG는 기존 구현 worktree에 보존한다. 원격 업로드는 하지 않았다.
+
+남은 사항은 Owner 로컬 검토·실제 공급 L2/독립 실행·Design 수용 및 RFC-DEV-026-01 OPEN이다. DEV-027 W04B·DI-03/E01·F08 최종 규격은 별도이며 게임/경제/세이브 명세 변경 필요 NONE. 후속 Commit·Push·PR·원격 CI·main 병합은 NOT_RUN / 별도 승인이다. 기존 CI를 이 미커밋 보완의 검사로 전용하거나 DONE을 선언하지 않는다.
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-026

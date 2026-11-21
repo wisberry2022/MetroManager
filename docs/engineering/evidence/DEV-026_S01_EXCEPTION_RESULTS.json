@@ -3,7 +3,7 @@
   "task_id": "DEV-026",
   "agent_id": "AGT-DEV-0004",
   "date_kst": "2026-11-21",
-  "status": "PR_REVIEW_PARTIAL_PENDING_TEST_PATH_APPROVAL",
+  "status": "LOCAL_REVIEW_GUI_REGRESSION_PASS_PRODUCT_L2_PENDING",
   "base_sha": "ecb2708bfa7bd3230d56c60b910d6831511953c6",
   "branch": "codex/DEV-026-s01-exception-implementation",
   "head": "UNCOMMITTED",
@@ -3432,5 +3432,1999 @@
       "FAIL U19_recovery actual=false expected=true"
     ],
     "full_values_and_raw_screenshots": "LOCAL_ONLY; hashes and original paths retained"
+  },
+  "historical_status": "PR_REVIEW_PARTIAL_PENDING_TEST_PATH_APPROVAL",
+  "record_layout": "Original implementation fields, including publication_evidence, retain their historical scope. gui_followup identifies the current uncommitted review.",
+  "gui_followup": {
+    "date_kst": "2026-11-21",
+    "base_sha": "3695c1eefc76fe257c66bd9c4fbbd7d62ae1f572",
+    "head": "UNCOMMITTED",
+    "branch": "codex/DEV-026-operations-gui-followup",
+    "owner_approval": "DEV-026의 검사 경로 재지정을 승인합니다. run_operations_ui_tests.gd 대신 run_operations_gui_cases.gd를 포함해 최대 24개 경로 안에서 GUI 검사 35개 실패를 수정·검증하고 로컬 결과부터 검토 요청해주세요. Commit·Push와 main 병합은 별도 승인하겠습니다.",
+    "commit_push_merge_authorized": false,
+    "changed_files": [
+      "docs/engineering/evidence/DEV-026_S01_EXCEPTION_EVIDENCE.md",
+      "docs/engineering/evidence/DEV-026_S01_EXCEPTION_RESULTS.json",
+      "docs/engineering/gate3/DEV-026_S01_EXCEPTION_CONTRACT.md",
+      "docs/engineering/gate3/DEV-026_S01_EXCEPTION_VALIDATION_PLAN.md",
+      "docs/engineering/tasks/DEV-026_PROVENANCE.json",
+      "docs/engineering/tasks/DEV-026_RESULT.md",
+      "docs/engineering/tasks/DEV-026_S01_EXCEPTION_SCOPE.md",
+      "tests/game/run_operations_gui_cases.gd"
+    ],
+    "cumulative_allowed_paths": [
+      "docs/engineering/evidence/DEV-026_S01_EXCEPTION_EVIDENCE.md",
+      "docs/engineering/evidence/DEV-026_S01_EXCEPTION_RESULTS.json",
+      "docs/engineering/gate3/DEV-026_S01_EXCEPTION_CONTRACT.md",
+      "docs/engineering/gate3/DEV-026_S01_EXCEPTION_VALIDATION_PLAN.md",
+      "docs/engineering/tasks/DEV-026_PROVENANCE.json",
+      "docs/engineering/tasks/DEV-026_RESULT.md",
+      "docs/engineering/tasks/DEV-026_S01_EXCEPTION_SCOPE.md",
+      "scripts/ui/finance_view.gd",
+      "scripts/ui/operations_view.gd",
+      "scripts/ui/s01_observation_contract.gd",
+      "scripts/ui/s01_observation_contract.gd.uid",
+      "scripts/ui/stage1_map.gd",
+      "scripts/ui/stage1_session.gd",
+      "scripts/ui/stage1_view.gd",
+      "tests/game/run_f08_gui_cases.gd",
+      "tests/game/run_operations_gui_cases.gd",
+      "tests/game/run_s01_exception_gui_cases.gd",
+      "tests/game/run_s01_exception_gui_cases.gd.uid",
+      "tests/game/run_s01_exception_tests.gd",
+      "tests/game/run_s01_exception_tests.gd.uid",
+      "tests/game/run_w07_gui_cases.gd",
+      "tests/game/run_w07_tests.gd",
+      "tests/game/w026_ui_fixtures.gd",
+      "tests/game/w026_ui_fixtures.gd.uid"
+    ],
+    "prior_record": {
+      "url": "https://github.com/wisberry2022/MetroManager/blob/3695c1eefc76fe257c66bd9c4fbbd7d62ae1f572/docs/engineering/evidence/DEV-026_S01_EXCEPTION_RESULTS.json",
+      "sha256": "f31b21d4d906c2cf1fd70afaa1d843523f0aa864bc4e4c27feb1f82e733f0f8c"
+    },
+    "runs": {
+      "gui-followup-baseline": [
+        {
+          "test": "project-load",
+          "command": [
+            "godot",
+            "--headless",
+            "--path",
+            ".",
+            "--editor",
+            "--quit"
+          ],
+          "exit": 0,
+          "expected_exit": 0,
+          "seconds": 11.45,
+          "engine_errors": [],
+          "summaries": [],
+          "log_sha256": "d3ab075ef51d55727229029a5b217e5548fa61ba904199f6f5ab14f07bd48bc3",
+          "passed": true,
+          "log": ".local/validation/DEV-026/gui-followup-baseline/project-load.log"
+        },
+        {
+          "test": "run_operations_gui_cases",
+          "command": [
+            "godot",
+            "--headless",
+            "--path",
+            ".",
+            "--script",
+            "tests/game/run_operations_gui_cases.gd",
+            "--",
+            "--auto"
+          ],
+          "exit": 1,
+          "expected_exit": 0,
+          "seconds": 59.55,
+          "engine_errors": [],
+          "summaries": [
+            "W01_INIT_OK {\"available_cash\":1000000,\"capability\":80,\"cash\":1000000,\"city_id\":\"C01\",\"data_version\":\"1.3\",\"day_id\":1,\"financial_score\":100,\"free_cash\":1000000,\"reserved_by_project\":{},\"restricted_by_project\":{},\"simulation_minute\":360,\"unpaid\":0}",
+            "W07_INIT_OK S01_MINIMUM_UI",
+            "DEV023_UI_TEST_RESULT checks=245 failures=35"
+          ],
+          "log_sha256": "b884d7391ab157bb5ae46cc64c559f8923aa69bacae8ed8dc91d125eaf5cab6c",
+          "passed": false,
+          "log": ".local/validation/DEV-026/gui-followup-baseline/run_operations_gui_cases.log"
+        }
+      ],
+      "gui-followup-01": [
+        {
+          "test": "run_operations_gui_cases",
+          "command": [
+            "godot",
+            "--headless",
+            "--path",
+            ".",
+            "--script",
+            "tests/game/run_operations_gui_cases.gd",
+            "--",
+            "--auto"
+          ],
+          "exit": 0,
+          "expected_exit": 0,
+          "seconds": 58.33,
+          "engine_errors": [],
+          "summaries": [
+            "W01_INIT_OK {\"available_cash\":1000000,\"capability\":80,\"cash\":1000000,\"city_id\":\"C01\",\"data_version\":\"1.3\",\"day_id\":1,\"financial_score\":100,\"free_cash\":1000000,\"reserved_by_project\":{},\"restricted_by_project\":{},\"simulation_minute\":360,\"unpaid\":0}",
+            "W07_INIT_OK S01_MINIMUM_UI",
+            "DEV023_UI_TEST_RESULT checks=266 failures=0"
+          ],
+          "log_sha256": "fc019a0c00308dedcf5dde3faaa236a6c7ac38893b41596da38d7492dc469c81",
+          "passed": true,
+          "log": ".local/validation/DEV-026/gui-followup-01/run_operations_gui_cases.log"
+        }
+      ],
+      "gui-followup-regression": [
+        {
+          "test": "run_s01_exception_tests",
+          "command": [
+            "godot",
+            "--headless",
+            "--path",
+            ".",
+            "--script",
+            "tests/game/run_s01_exception_tests.gd",
+            "--",
+            "--output=res://.local/validation/DEV-026/gui-followup-regression/automatic.json"
+          ],
+          "exit": 0,
+          "expected_exit": 0,
+          "seconds": 71.66,
+          "engine_errors": [],
+          "summaries": [
+            "DEV026_TEST_RESULT checks=334 failures=0"
+          ],
+          "log_sha256": "836b5ec1cc43ac26000c93ad05ca86f34d0118783a3d7a94d926f58f2c3e1090",
+          "passed": true,
+          "log": ".local/validation/DEV-026/gui-followup-regression/run_s01_exception_tests.log"
+        },
+        {
+          "test": "run_operations_ui_tests",
+          "command": [
+            "godot",
+            "--headless",
+            "--path",
+            ".",
+            "--script",
+            "tests/game/run_operations_ui_tests.gd"
+          ],
+          "exit": 0,
+          "expected_exit": 0,
+          "seconds": 68.78,
+          "engine_errors": [],
+          "summaries": [
+            "DEV023_SUPPLY_TEST_RESULT checks=158 failures=0"
+          ],
+          "log_sha256": "1dd53aad430184166c46044698332745a6331aff578a631705bba28ecca20c92",
+          "passed": true,
+          "log": ".local/validation/DEV-026/gui-followup-regression/run_operations_ui_tests.log"
+        },
+        {
+          "test": "run_w07_tests",
+          "command": [
+            "godot",
+            "--headless",
+            "--path",
+            ".",
+            "--script",
+            "tests/game/run_w07_tests.gd"
+          ],
+          "exit": 0,
+          "expected_exit": 0,
+          "seconds": 3.3,
+          "engine_errors": [],
+          "summaries": [
+            "W07_TEST_RESULT checks=322 failures=0"
+          ],
+          "log_sha256": "407438419507d149328db9909d67f1f146f43f8265eacc4fda1814738d2eefb4",
+          "passed": true,
+          "log": ".local/validation/DEV-026/gui-followup-regression/run_w07_tests.log"
+        },
+        {
+          "test": "run_operations_gui_cases:failure",
+          "command": [
+            "godot",
+            "--headless",
+            "--path",
+            ".",
+            "--script",
+            "tests/game/run_operations_gui_cases.gd",
+            "--",
+            "--verify-failure-exit"
+          ],
+          "exit": 1,
+          "expected_exit": 1,
+          "seconds": 0.81,
+          "engine_errors": [],
+          "summaries": [
+            "DEV023_UI_TEST_RESULT checks=1 failures=1"
+          ],
+          "log_sha256": "c4388634c51a1f0537762f680904a26913ad54bfb1739b8f302f9c36b6cb000a",
+          "passed": true,
+          "log": ".local/validation/DEV-026/gui-followup-regression/run_operations_gui_cases-failure.log"
+        },
+        {
+          "test": "project-load",
+          "command": [
+            "godot",
+            "--headless",
+            "--path",
+            ".",
+            "--editor",
+            "--quit"
+          ],
+          "exit": 0,
+          "expected_exit": 0,
+          "seconds": 3.62,
+          "engine_errors": [],
+          "summaries": [],
+          "log_sha256": "91c01cadb6117fe6663ebcaca5993cb4db75e51039796b4552940602e355ae71",
+          "passed": true,
+          "log": ".local/validation/DEV-026/gui-followup-regression/project-load.log"
+        }
+      ]
+    },
+    "assertion_preservation": {
+      "base_sha": "3695c1eefc76fe257c66bd9c4fbbd7d62ae1f572",
+      "before_checks": 245,
+      "before_failures": 35,
+      "after_checks": 266,
+      "after_failures": 0,
+      "original_assertion_call_sites": 86,
+      "original_assertion_call_sites_preserved": true,
+      "original_runtime_assertions_preserved": 245,
+      "additional_assertions": [
+        "D26_fixture_unchanged",
+        "D26_valid_report_query",
+        "D26_report_copy_current",
+        "D26_reject_operations_foreign",
+        "D26_reject_finance_foreign",
+        "D26_keep_operations_foreign",
+        "D26_keep_finance_foreign",
+        "D26_reject_operations_stale",
+        "D26_reject_finance_stale",
+        "D26_keep_operations_stale",
+        "D26_keep_finance_stale",
+        "D26_bad_report_hidden_scope",
+        "D26_bad_report_query_scope",
+        "D26_report_recovery_scope",
+        "D26_bad_report_hidden_day",
+        "D26_bad_report_query_day",
+        "D26_report_recovery_day",
+        "D26_bad_report_hidden_value",
+        "D26_bad_report_query_value",
+        "D26_report_recovery_value",
+        "D26_consumer_no_model_effect"
+      ],
+      "resolved_failures": [
+        {
+          "label": "U19_render_SERVICE_FUNDS_INSUFFICIENT",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U19_render_SERVICE_FUNDS_INSUFFICIENT",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U19_render_SERVICE_FUNDS_INSUFFICIENT",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U19_render_UNPAID_BALANCE",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U19_render_UNPAID_BALANCE",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U19_render_UNPAID_BALANCE",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U19_render_activation_failed",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U19_render_activation_failed",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U19_render_activation_failed",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U19_render_actual_first_report",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U19_render_actual_first_report",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U19_render_actual_first_report",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U19_render_actual_open",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U19_render_actual_open",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U19_render_actual_open",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U19_render_fixture_conflict",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U19_render_fixture_conflict",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U19_render_fixture_conflict",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U19_render_midnight_residual",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U19_render_midnight_residual",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U19_render_midnight_residual",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U19_render_next_supply_unavailable",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U19_render_next_supply_unavailable",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U19_render_next_supply_unavailable",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U13_query_failure",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U13_query_failure",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U13_query_failure",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U19_render_partial_payment",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U19_render_partial_payment",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U19_render_partial_payment",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U19_render_preopen",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U19_render_preopen",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U19_render_preopen",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U05_preopen_reason",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U05_preopen_reason",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U05_preopen_reason",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U19_render_report_failure",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U19_render_report_failure",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U19_render_report_failure",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U09_report_error",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U09_report_error",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U09_report_error",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U09_current_kept",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U09_current_kept",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U09_current_kept",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U19_render_same_T_recovery",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U19_render_same_T_recovery",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U19_render_same_T_recovery",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U19_render_satisfaction_unavailable",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U19_render_satisfaction_unavailable",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U19_render_satisfaction_unavailable",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U10_arithmetic",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U10_arithmetic",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U10_arithmetic",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U19_render_settlement",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U19_render_settlement",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U19_render_settlement",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U19_render_unknown_source_failure",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U19_render_unknown_source_failure",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U19_render_unknown_source_failure",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U19_render_zero_demand",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U19_render_zero_demand",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U19_render_zero_demand",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U05_real_zero",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U05_real_zero",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U05_real_zero",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U10_unclosed",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U10_unclosed",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U10_unclosed",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U19_render_zero_fixed_report",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U19_render_zero_fixed_report",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U19_render_zero_fixed_report",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U10_zero_report",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U10_zero_report",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U10_zero_report",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U06_before",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U06_before",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U06_before",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U08_payment_label_before",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U08_payment_label_before",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U08_payment_label_before",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U06_restricted",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U06_restricted",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U06_restricted",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U08_payment_label_restricted",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U08_payment_label_restricted",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U08_payment_label_restricted",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U06_B0_still_insufficient",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U06_B0_still_insufficient",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U06_B0_still_insufficient",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U08_payment_label_B0_still_insufficient",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U08_payment_label_B0_still_insufficient",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U08_payment_label_B0_still_insufficient",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U06_resumed",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U06_resumed",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U06_resumed",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U08_payment_label_resumed",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U08_payment_label_resumed",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U08_payment_label_resumed",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U19_bad_type_failure",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U19_bad_type_failure",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U19_bad_type_failure",
+              "passed": true
+            }
+          ]
+        },
+        {
+          "label": "U19_recovery",
+          "before": {
+            "actual": "false",
+            "expected": "true",
+            "label": "U19_recovery",
+            "passed": false
+          },
+          "after": [
+            {
+              "actual": "true",
+              "expected": "true",
+              "label": "U19_recovery",
+              "passed": true
+            }
+          ]
+        }
+      ],
+      "runtime_source_sha256": "eeb298822716b9207eb85c40ab016d87048f4a3e6efef5c99cd7a0ba857369ad",
+      "line_ending_normalization": {
+        "path": "tests/game/run_operations_gui_cases.gd",
+        "before_sha256": "5579305a284854d6d1e646b30aac34b5dd230c060c31ccacfd7544df56b30ed2",
+        "after_sha256": "eeb298822716b9207eb85c40ab016d87048f4a3e6efef5c99cd7a0ba857369ad",
+        "only_crlf_to_lf": true
+      },
+      "original_fixture_blob": "bce8c39097d96494c62b4cdbe4a69c9601a13277",
+      "product_sources_unchanged": true,
+      "reassigned_out_test_unchanged": true
+    },
+    "automatic_assertions": [
+      {
+        "label": "U01_product_opt_in",
+        "passed": true
+      },
+      {
+        "label": "U01_preopen",
+        "passed": true
+      },
+      {
+        "label": "V05_detail_precondition",
+        "passed": true
+      },
+      {
+        "label": "V05_P05_precondition",
+        "passed": true
+      },
+      {
+        "label": "V05_P05_visible",
+        "passed": true
+      },
+      {
+        "label": "U03_actual_completed",
+        "passed": true
+      },
+      {
+        "label": "U04_fixed_completed",
+        "passed": true
+      },
+      {
+        "label": "U04_current_transit",
+        "passed": true
+      },
+      {
+        "label": "U04_fixed_transit",
+        "passed": true
+      },
+      {
+        "label": "U17_open_P06",
+        "passed": true
+      },
+      {
+        "label": "U17_open_P07",
+        "passed": true
+      },
+      {
+        "label": "U17_hidden_P06",
+        "passed": true
+      },
+      {
+        "label": "U09_selected",
+        "passed": true
+      },
+      {
+        "label": "U13_other_report_blocks_query",
+        "passed": true
+      },
+      {
+        "label": "U13_first_report",
+        "passed": true
+      },
+      {
+        "label": "U13_display_confirmed",
+        "passed": true
+      },
+      {
+        "label": "U18_End_reads",
+        "passed": true
+      },
+      {
+        "label": "U18_Home_reads",
+        "passed": true
+      },
+      {
+        "label": "V05_rejected_stays_report",
+        "passed": true
+      },
+      {
+        "label": "V05_rejected_no_tenders",
+        "passed": true
+      },
+      {
+        "label": "V05_rejected_keeps_P05",
+        "passed": true
+      },
+      {
+        "label": "V05_rejected_feedback",
+        "passed": true
+      },
+      {
+        "label": "V05_rejected_no_return",
+        "passed": true
+      },
+      {
+        "label": "V05_rejected_no_effect",
+        "passed": true
+      },
+      {
+        "label": "V05_rejected_stays_report",
+        "passed": true
+      },
+      {
+        "label": "V05_rejected_no_tenders",
+        "passed": true
+      },
+      {
+        "label": "V05_rejected_keeps_P05",
+        "passed": true
+      },
+      {
+        "label": "V05_rejected_feedback",
+        "passed": true
+      },
+      {
+        "label": "V05_rejected_no_return",
+        "passed": true
+      },
+      {
+        "label": "V05_rejected_no_effect",
+        "passed": true
+      },
+      {
+        "label": "V05_rejected_stays_report",
+        "passed": true
+      },
+      {
+        "label": "V05_rejected_no_tenders",
+        "passed": true
+      },
+      {
+        "label": "V05_rejected_keeps_P05",
+        "passed": true
+      },
+      {
+        "label": "V05_rejected_feedback",
+        "passed": true
+      },
+      {
+        "label": "V05_rejected_no_return",
+        "passed": true
+      },
+      {
+        "label": "V05_rejected_no_effect",
+        "passed": true
+      },
+      {
+        "label": "U14_query_P01",
+        "passed": true
+      },
+      {
+        "label": "V05_immediate_page",
+        "passed": true
+      },
+      {
+        "label": "V05_list_visible",
+        "passed": true
+      },
+      {
+        "label": "V05_detail_visible",
+        "passed": true
+      },
+      {
+        "label": "V05_hidden_back",
+        "passed": true
+      },
+      {
+        "label": "V05_hidden_submit",
+        "passed": true
+      },
+      {
+        "label": "V05_hidden_handoff",
+        "passed": true
+      },
+      {
+        "label": "V05_hidden_construction",
+        "passed": true
+      },
+      {
+        "label": "V05_query_focus",
+        "passed": true
+      },
+      {
+        "label": "V05_focus_visible",
+        "passed": true
+      },
+      {
+        "label": "V05_selected_tender_kept",
+        "passed": true
+      },
+      {
+        "label": "V05_history_kept",
+        "passed": true
+      },
+      {
+        "label": "V05_query_no_effect",
+        "passed": true
+      },
+      {
+        "label": "U14_hidden_finance",
+        "passed": true
+      },
+      {
+        "label": "V05_hidden_report_no_effect",
+        "passed": true
+      },
+      {
+        "label": "U17_return_report",
+        "passed": true
+      },
+      {
+        "label": "U17_report_preserved",
+        "passed": true
+      },
+      {
+        "label": "V05_report_packet_preserved",
+        "passed": true
+      },
+      {
+        "label": "V05_confirmed_preserved",
+        "passed": true
+      },
+      {
+        "label": "V05_return_consumed",
+        "passed": true
+      },
+      {
+        "label": "U17_focus_restored",
+        "passed": true
+      },
+      {
+        "label": "U17_scroll_restored",
+        "passed": true
+      },
+      {
+        "label": "U12_read_only",
+        "passed": true
+      },
+      {
+        "label": "U11_old_model_rejected",
+        "passed": true
+      },
+      {
+        "label": "U11_selected_retained",
+        "passed": true
+      },
+      {
+        "label": "U11_old_view_rejected",
+        "passed": true
+      },
+      {
+        "label": "U11_equal_revision_remainder",
+        "passed": true
+      },
+      {
+        "label": "U12_display_only",
+        "passed": true
+      },
+      {
+        "label": "U17_finance_back_P06",
+        "passed": true
+      },
+      {
+        "label": "V05_detail_precondition",
+        "passed": true
+      },
+      {
+        "label": "V05_P05_precondition",
+        "passed": true
+      },
+      {
+        "label": "V05_P05_visible",
+        "passed": true
+      },
+      {
+        "label": "V05_ordinary_open_keeps_P05",
+        "passed": true
+      },
+      {
+        "label": "U17_P05_entry",
+        "passed": true
+      },
+      {
+        "label": "U17_P05_return",
+        "passed": true
+      },
+      {
+        "label": "U17_P05_preserved",
+        "passed": true
+      },
+      {
+        "label": "U17_P05_focus",
+        "passed": true
+      },
+      {
+        "label": "U12_P05_no_effect",
+        "passed": true
+      },
+      {
+        "label": "V05_construction_back_keeps_P05",
+        "passed": true
+      },
+      {
+        "label": "V05_construction_back_visible",
+        "passed": true
+      },
+      {
+        "label": "U19_render_SERVICE_FUNDS_INSUFFICIENT",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_SERVICE_FUNDS_INSUFFICIENT_title",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_SERVICE_FUNDS_INSUFFICIENT_current",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_SERVICE_FUNDS_INSUFFICIENT_activity",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_SERVICE_FUNDS_INSUFFICIENT_selection",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_SERVICE_FUNDS_INSUFFICIENT_report",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_SERVICE_FUNDS_INSUFFICIENT_query",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_SERVICE_FUNDS_INSUFFICIENT_feedback",
+        "passed": true
+      },
+      {
+        "label": "U19_render_UNPAID_BALANCE",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_UNPAID_BALANCE_title",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_UNPAID_BALANCE_current",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_UNPAID_BALANCE_activity",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_UNPAID_BALANCE_selection",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_UNPAID_BALANCE_report",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_UNPAID_BALANCE_query",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_UNPAID_BALANCE_feedback",
+        "passed": true
+      },
+      {
+        "label": "U19_render_activation_failed",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_activation_failed_title",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_activation_failed_current",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_activation_failed_activity",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_activation_failed_selection",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_activation_failed_report",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_activation_failed_query",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_activation_failed_feedback",
+        "passed": true
+      },
+      {
+        "label": "U19_render_actual_first_report",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_actual_first_report_title",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_actual_first_report_current",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_actual_first_report_activity",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_actual_first_report_selection",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_actual_first_report_report",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_actual_first_report_query",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_actual_first_report_feedback",
+        "passed": true
+      },
+      {
+        "label": "U19_render_actual_open",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_actual_open_title",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_actual_open_current",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_actual_open_activity",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_actual_open_selection",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_actual_open_report",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_actual_open_query",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_actual_open_feedback",
+        "passed": true
+      },
+      {
+        "label": "U19_render_fixture_conflict",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_fixture_conflict_title",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_fixture_conflict_current",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_fixture_conflict_activity",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_fixture_conflict_selection",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_fixture_conflict_report",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_fixture_conflict_query",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_fixture_conflict_feedback",
+        "passed": true
+      },
+      {
+        "label": "U19_render_midnight_residual",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_midnight_residual_title",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_midnight_residual_current",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_midnight_residual_activity",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_midnight_residual_selection",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_midnight_residual_report",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_midnight_residual_query",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_midnight_residual_feedback",
+        "passed": true
+      },
+      {
+        "label": "U19_render_next_supply_unavailable",
+        "passed": true
+      },
+      {
+        "label": "U13_query_failure",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_next_supply_unavailable_title",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_next_supply_unavailable_current",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_next_supply_unavailable_activity",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_next_supply_unavailable_selection",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_next_supply_unavailable_report",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_next_supply_unavailable_query",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_next_supply_unavailable_feedback",
+        "passed": true
+      },
+      {
+        "label": "U19_render_partial_payment",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_partial_payment_title",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_partial_payment_current",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_partial_payment_activity",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_partial_payment_selection",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_partial_payment_report",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_partial_payment_query",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_partial_payment_feedback",
+        "passed": true
+      },
+      {
+        "label": "U19_render_preopen",
+        "passed": true
+      },
+      {
+        "label": "U05_preopen_reason",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_preopen_title",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_preopen_current",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_preopen_activity",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_preopen_selection",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_preopen_report",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_preopen_query",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_preopen_feedback",
+        "passed": true
+      },
+      {
+        "label": "U19_render_report_failure",
+        "passed": true
+      },
+      {
+        "label": "U09_report_error",
+        "passed": true
+      },
+      {
+        "label": "U09_current_kept",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_report_failure_title",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_report_failure_current",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_report_failure_activity",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_report_failure_selection",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_report_failure_report",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_report_failure_query",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_report_failure_feedback",
+        "passed": true
+      },
+      {
+        "label": "U19_render_same_T_recovery",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_same_T_recovery_title",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_same_T_recovery_current",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_same_T_recovery_activity",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_same_T_recovery_selection",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_same_T_recovery_report",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_same_T_recovery_query",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_same_T_recovery_feedback",
+        "passed": true
+      },
+      {
+        "label": "U19_render_satisfaction_unavailable",
+        "passed": true
+      },
+      {
+        "label": "U10_arithmetic",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_satisfaction_unavailable_title",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_satisfaction_unavailable_current",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_satisfaction_unavailable_activity",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_satisfaction_unavailable_selection",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_satisfaction_unavailable_report",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_satisfaction_unavailable_query",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_satisfaction_unavailable_feedback",
+        "passed": true
+      },
+      {
+        "label": "U19_render_settlement",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_settlement_title",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_settlement_current",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_settlement_activity",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_settlement_selection",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_settlement_report",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_settlement_query",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_settlement_feedback",
+        "passed": true
+      },
+      {
+        "label": "U19_render_unknown_source_failure",
+        "passed": true
+      },
+      {
+        "label": "U19_outer_failure",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_unknown_source_failure_title",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_unknown_source_failure_current",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_unknown_source_failure_activity",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_unknown_source_failure_selection",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_unknown_source_failure_report",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_unknown_source_failure_query",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_unknown_source_failure_feedback",
+        "passed": true
+      },
+      {
+        "label": "U19_render_zero_demand",
+        "passed": true
+      },
+      {
+        "label": "U05_real_zero",
+        "passed": true
+      },
+      {
+        "label": "U10_unclosed",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_zero_demand_title",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_zero_demand_current",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_zero_demand_activity",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_zero_demand_selection",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_zero_demand_report",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_zero_demand_query",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_zero_demand_feedback",
+        "passed": true
+      },
+      {
+        "label": "U19_render_zero_fixed_report",
+        "passed": true
+      },
+      {
+        "label": "U10_zero_report",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_zero_fixed_report_title",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_zero_fixed_report_current",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_zero_fixed_report_activity",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_zero_fixed_report_selection",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_zero_fixed_report_report",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_zero_fixed_report_query",
+        "passed": true
+      },
+      {
+        "label": "U18_wrap_zero_fixed_report_feedback",
+        "passed": true
+      },
+      {
+        "label": "U06_before",
+        "passed": true
+      },
+      {
+        "label": "U08_payment_label_before",
+        "passed": true
+      },
+      {
+        "label": "U06_restricted",
+        "passed": true
+      },
+      {
+        "label": "U08_payment_label_restricted",
+        "passed": true
+      },
+      {
+        "label": "U06_B0_still_insufficient",
+        "passed": true
+      },
+      {
+        "label": "U08_payment_label_B0_still_insufficient",
+        "passed": true
+      },
+      {
+        "label": "U06_resumed",
+        "passed": true
+      },
+      {
+        "label": "U08_payment_label_resumed",
+        "passed": true
+      },
+      {
+        "label": "U19_bad_type_clears",
+        "passed": true
+      },
+      {
+        "label": "U19_bad_type_failure",
+        "passed": true
+      },
+      {
+        "label": "U19_missing_clears",
+        "passed": true
+      },
+      {
+        "label": "U19_recovery",
+        "passed": true
+      },
+      {
+        "label": "U19_no_stale_allow",
+        "passed": true
+      },
+      {
+        "label": "U10_fraction_integer",
+        "passed": true
+      },
+      {
+        "label": "U10_fraction_exact",
+        "passed": true
+      },
+      {
+        "label": "U10_no_rounding",
+        "passed": true
+      },
+      {
+        "label": "D26_fixture_unchanged",
+        "passed": true
+      },
+      {
+        "label": "D26_valid_report_query",
+        "passed": true
+      },
+      {
+        "label": "D26_report_copy_current",
+        "passed": true
+      },
+      {
+        "label": "D26_reject_operations_foreign",
+        "passed": true
+      },
+      {
+        "label": "D26_reject_finance_foreign",
+        "passed": true
+      },
+      {
+        "label": "D26_keep_operations_foreign",
+        "passed": true
+      },
+      {
+        "label": "D26_keep_finance_foreign",
+        "passed": true
+      },
+      {
+        "label": "D26_reject_operations_stale",
+        "passed": true
+      },
+      {
+        "label": "D26_reject_finance_stale",
+        "passed": true
+      },
+      {
+        "label": "D26_keep_operations_stale",
+        "passed": true
+      },
+      {
+        "label": "D26_keep_finance_stale",
+        "passed": true
+      },
+      {
+        "label": "D26_bad_report_hidden_scope",
+        "passed": true
+      },
+      {
+        "label": "D26_bad_report_query_scope",
+        "passed": true
+      },
+      {
+        "label": "D26_report_recovery_scope",
+        "passed": true
+      },
+      {
+        "label": "D26_bad_report_hidden_day",
+        "passed": true
+      },
+      {
+        "label": "D26_bad_report_query_day",
+        "passed": true
+      },
+      {
+        "label": "D26_report_recovery_day",
+        "passed": true
+      },
+      {
+        "label": "D26_bad_report_hidden_value",
+        "passed": true
+      },
+      {
+        "label": "D26_bad_report_query_value",
+        "passed": true
+      },
+      {
+        "label": "D26_report_recovery_value",
+        "passed": true
+      },
+      {
+        "label": "D26_consumer_no_model_effect",
+        "passed": true
+      },
+      {
+        "label": "U16_actual_route",
+        "passed": true
+      },
+      {
+        "label": "U16_cohort_markers",
+        "passed": true
+      },
+      {
+        "label": "U16_draw_no_advance",
+        "passed": true
+      },
+      {
+        "label": "U16_authoritative_interpolation",
+        "passed": true
+      },
+      {
+        "label": "U16_same_time_speed_1",
+        "passed": true
+      },
+      {
+        "label": "U16_same_time_speed_2",
+        "passed": true
+      },
+      {
+        "label": "U16_same_time_speed_4",
+        "passed": true
+      },
+      {
+        "label": "U19_failed_map_clears",
+        "passed": true
+      }
+    ],
+    "prior_35_failures_reproduced_exactly": true,
+    "raw_artifact_sha256": {
+      ".local/validation/DEV-026/assertion-preservation.json": "aae38d8a9c3003a9e6de19be34a762afb76d786ac6c4cb26a3417b656cf24405",
+      ".local/validation/DEV-026/generated-imports-manifest.json": "ee87edf74981d05270a9428a7df75410216dc91ed276bc35bb19cd114de8e9c2",
+      ".local/validation/DEV-026/line-ending-normalization.json": "c23f625fab049df36944b0ef53fec05b5727a0a556aa47462441088d7552617f",
+      ".local/validation/DEV-026/gui-followup-01/automatic.json": "c2326071b21291d255c6f1b8155b9420d33930eda3873c3347b6f7579db45330",
+      ".local/validation/DEV-026/gui-followup-01/results.json": "efb64daae37229a1e0c6207b88defadd8507d87a88051679544773b66f380981",
+      ".local/validation/DEV-026/gui-followup-01/run_operations_gui_cases.log": "fc019a0c00308dedcf5dde3faaa236a6c7ac38893b41596da38d7492dc469c81",
+      ".local/validation/DEV-026/gui-followup-01/source-hashes.json": "c42a95ec1b915063162b580e70447df02b6f3c7b4549379ebbc6b9a3b58a093c",
+      ".local/validation/DEV-026/gui-followup-baseline/automatic.json": "c9b06c107fde9f56530ab1335923c213c288b62ec6cddbfab199baa9731b9d15",
+      ".local/validation/DEV-026/gui-followup-baseline/project-load.log": "d3ab075ef51d55727229029a5b217e5548fa61ba904199f6f5ab14f07bd48bc3",
+      ".local/validation/DEV-026/gui-followup-baseline/results.json": "7cc50392b877b20072d1348b9737b37eb6c2f3024bccaaaa57aabee1658c32a1",
+      ".local/validation/DEV-026/gui-followup-baseline/run_operations_gui_cases.log": "b884d7391ab157bb5ae46cc64c559f8923aa69bacae8ed8dc91d125eaf5cab6c",
+      ".local/validation/DEV-026/gui-followup-baseline/source-hashes.json": "714478f8dc861dcede505282469b39b66c6b5bb3bf7eb811dba712f9a3645004",
+      ".local/validation/DEV-026/gui-followup-regression/automatic.json": "c91a87d69eb08802cc5ed4dfdd2cc8fca056c56c21746b2329a73fff74bbe303",
+      ".local/validation/DEV-026/gui-followup-regression/project-load.log": "91c01cadb6117fe6663ebcaca5993cb4db75e51039796b4552940602e355ae71",
+      ".local/validation/DEV-026/gui-followup-regression/results.json": "82801ab7a1ebc7df24e147cb72e071df3af216608cb7a43e7e1f4f1ed474b13b",
+      ".local/validation/DEV-026/gui-followup-regression/run_operations_gui_cases-failure.log": "c4388634c51a1f0537762f680904a26913ad54bfb1739b8f302f9c36b6cb000a",
+      ".local/validation/DEV-026/gui-followup-regression/run_operations_ui_tests.log": "1dd53aad430184166c46044698332745a6331aff578a631705bba28ecca20c92",
+      ".local/validation/DEV-026/gui-followup-regression/run_s01_exception_tests.log": "836b5ec1cc43ac26000c93ad05ca86f34d0118783a3d7a94d926f58f2c3e1090",
+      ".local/validation/DEV-026/gui-followup-regression/run_w07_tests.log": "407438419507d149328db9909d67f1f146f43f8265eacc4fda1814738d2eefb4",
+      ".local/validation/DEV-026/gui-followup-regression/source-hashes.json": "2fe28aecef4773506dbaf3b2195e942826a4be9ba2d601b31ebb6345824929dc"
+    },
+    "raw_artifact_location": "LOCAL_ONLY: current worktree .local/validation/DEV-026; prior implementation worktree preserves older logs/PNGs.",
+    "changed_artifact_sha256": {
+      "docs/engineering/evidence/DEV-026_S01_EXCEPTION_EVIDENCE.md": "0f2fedf495d6ddefc597c26594c9e0cd860a9accafe0e477ff07116d209a08a7",
+      "docs/engineering/gate3/DEV-026_S01_EXCEPTION_CONTRACT.md": "81f8a509a6571b9cced60a93730563fd8d1e4395162ffa9f2bbfa55d52a25d08",
+      "docs/engineering/gate3/DEV-026_S01_EXCEPTION_VALIDATION_PLAN.md": "28e16ca71a23eef90784fc523bd5f3891d2183a6e69b06e547df446edb2cfec3",
+      "docs/engineering/tasks/DEV-026_RESULT.md": "672be64f9789c40ab0a21e0c9dd30e70b3a37bd8b3dd7adb9b8802cd600953e5",
+      "docs/engineering/tasks/DEV-026_S01_EXCEPTION_SCOPE.md": "506acb206f702ff782cce285288dc768820ec491246b653762963edd7eb88dc4",
+      "tests/game/run_operations_gui_cases.gd": "eeb298822716b9207eb85c40ab016d87048f4a3e6efef5c99cd7a0ba857369ad"
+    },
+    "hash_exclusions": "Evidence JSON and provenance self/cross hashes are excluded from changed_artifact_sha256; provenance covers the completed JSON and a local audit covers all 8 files.",
+    "generated_imports": "176 newly generated untracked import/translation files preserved under .local/validation/DEV-026/generated-imports; none included in tracked changes.",
+    "validation_scope": {
+      "automated_gui": "PASS_266_OF_266",
+      "related_automatic": "PASS_334_158_322",
+      "project_load": "PASS",
+      "intentional_failure_exit": "EXPECTED_EXIT_1",
+      "real_gui": "NOT_RUN",
+      "independent_execution": "NOT_RUN",
+      "design_acceptance": "PENDING",
+      "build_export": "NOT_RUN",
+      "performance": "NOT_RUN",
+      "natural_vs02": "NOT_RUN",
+      "commit_push_pr_ci_merge": "NOT_RUN"
+    },
+    "remaining": [
+      "Owner local review",
+      "Product L2 / independent Design acceptance",
+      "RFC-DEV-026-01 OPEN",
+      "DEV-027 W04B / DI-03 E01 / F08 final specification remain separate"
+    ],
+    "specification_change_required": "NONE"
   }
 }
