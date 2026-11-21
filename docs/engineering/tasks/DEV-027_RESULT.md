@@ -1,5 +1,7 @@
 # DEV-027 — 이슈 철회·착수 계획 문서 PR 전환 결과
 
+> **PM-021 최신 후속 — 2026-11-21:** §6이 현재 **LOCAL_REVIEW / TRACK_B_COMMON_TABLE_REVIEW_PENDING / GIT_SUBMISSION_NOT_AUTHORIZED** 상태를 설명한다. O01~07 방향 승인·DEV026 현재 공급/P07 수용은 유효하다. 아래 과거 제출·미실행·선택 대기는 당시 이력으로 보존한다. 이번 작업은 기존 DEV027 문서4개 로컬 보완·정적 검사다.
+
 > **현재 후속 — 2026-11-21:** PR #149 병합 후 #146 Design 사전 의견을 반영한 문서 보완이다. 제출 base는 `de0f03f9d2fcc301940a4176f1359b2788a51950`, 브랜치는 `codex/DEV-027-design-plan-followup`이며 현재 권한·결과는 §5을 따른다. 앞선 제출 식별·검증은 PR #149 당시 기록으로 보존한다. 제품 구현·실행·최종 L2·main 병합은 별도 대기다.
 
 - 작성: Development / AGT-DEV-0004 / 2026-11-21 (Asia/Seoul).
@@ -76,6 +78,33 @@ Owner의 후속 요청에 따라 [#148](https://github.com/wisberry2022/MetroMan
 - diff --check 및 정상 Commit 후 preflight: 제출 단계에 확인, 실제 결과는 PR에 연결.
 - 필수 CI: 새 head에서 확인, PR #149 CI를 재사용하지 않는다.
 - 새 게임 명세 변경 필요 확정 없음. RFC-DEV-027-01 OPEN, 실제 L2·제품 수용·구현 승인·main 병합 별도.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027
+
+## 6. PM-021 공통 적용표 준비 결과 — 로컬 검토
+
+- 기준 `fa968b94641d24e8d68b3c6cb903f9e809d02814`; 브랜치 `codex/DEV-027-pm021-application-plan`. Owner 요청/정확한4개 경로는 [티켓 §6](DEV-027_W04B_VS02_IMPLEMENTATION.md#6-pm-021-적용표착수-상태-후속--로컬-검토).
+- [계획 §12](../gate3/DEV-027_EXECUTION_VALIDATION_PLAN.md#12-pm-021-후속--f-08-공통-적용표의-dev-검토안)에 O01~07·M01~05의 현재 제품/격리 실험 차이·변경0·공백·경로·입력/기대/최소 검증·권한을 정리했다. Track B 공동 검토 **PENDING**. 소관 Design/HQ 문서는 수정하지 않았다.
+- 중요한 공백: A/B는 실험 배치, 실제12역에는 전체 이름 필드 없음, 폰트/최소창/최종 아트·필터/성능 목표 미확정. 이를 제품 필수 결함으로 확정하거나 표시 이름/규칙을 새로 만들지 않았다.
+- 공식 자료로 Noto Sans CJK KR2.004 Regular OTF 후보·라이선스·조건부 최소 경로만 준비. 파일 반입·선정·호환/렌더·fallback 실행은 **NOT_RUN**.
+- DEV026 현재 공급/P07 한정 수용과 PR158 반영, 원본 PARTIAL/미관측·W04B 미래 공급·S3-12 대기 보존. 제품 시험본 ae614d9…→이번 main의 제품/게임 검사 경로 diff0 확인. 현재 main에서 새 제품 시험을 수행했다고 기록하지 않았다.
+- 다음 제품 단위 DEV027 P1의 유효 권한/부족 범위와 DI03 종속 행·P3 실제 L2를 연결했다. 후보41개 및 과거 DEV02624개 표·DI02/03 원문은 수정하지 않았다. DEV026 검사 경로는 자기 티켓의 후속 재지정 승인이 우선한다.
+- 원격 댓글은 게시하지 않았고 계획 §12.6에 **복사용/NOT_SENT** 전달문을 마련했다.
+
+### 이번 검증·한계
+
+정적 검사 결과는 실행 로그와 대조하여 아래에 기록한다. 검사는 제품 실행·Design 수용·승인을 대신하지 않는다. 로컬 보조 자료는 `.local/validation/pm021-followup/`에 보관한다.
+
+- doctor: PASS / exit0. 첫 일반 권한의 .venv junction 생성은 Access denied로 실패해 doctor가 실행되지 않았다. 권한 있는 연결 생성 후 정상 doctor를 실행했다. 정책/패키지 변경·검사 우회 없음.
+- `.venv/Scripts/python.exe tools/policy.py check`: PASS / exit0, 파일729개·GDScript57개 정적 검사, 포맷 변경 없음.
+- `git diff --check` 및 `.venv/Scripts/python.exe .local/validation/pm021-followup/audit_docs.py`: PASS / exit0. 정확한4개 변경·기존 Markdown3개 본문 보존·상대 링크/절19개·새 표2개·O7행/M5조건·기존 후보65행/고유63경로·출처 blob3개·UTF-8/LF 대조. E26 이후 제품/검사 변경0, 실제12역 데이터 필드·W04B 미공급 경로도 정적으로 확인했다.
+- 신규 게임 자동검사·Godot 프로젝트 로드·게임 플레이/실제 GUI·독립 실행·프로파일·빌드/export: 각각 **NOT_RUN**.
+- 비공개 raw 재해시·물리 DPI/신원: **NOT_VERIFIED**. 원문 증거/공식 수용만 재사용.
+- 새 Commit·Push·PR·필수 CI: **NOT_RUN**, 원격 게시 **NOT_SENT**, main 병합 미수행.
+- 출처 JSON은 이번 base/blob으로 갱신. 이전 manifest는 [이번 base의 원본](https://github.com/wisberry2022/MetroManager/blob/fa968b94641d24e8d68b3c6cb903f9e809d02814/docs/engineering/tasks/DEV-027_PROVENANCE.json)에 보존. REPORT_ONLY 정합성이 신원/승인을 인증하지 않음.
+
+잔여: 로컬4개 검토, Track B 공통표·Track A 영향 행 대조, 필요한 경우 이4개 문서 Git 제출/회신 게시 승인, DEV027 실제 구현·검증 승인, DI03 종속 의미 및 실제 UI L2. O01~07 재승인은 필요 없다. F08/#92 OPEN/FINAL_SPEC_PENDING, S3-10-C·S3-12·Stage 인수는 별도. 신규 게임 명세 변경 필요 확정 없음; 기존 RFC-DEV-027-01 OPEN.
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-027
