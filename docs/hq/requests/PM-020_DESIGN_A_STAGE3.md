@@ -1,7 +1,17 @@
 # [HQ → Design Track A] Stage 3 기능 UI·DEV-026 영향·VS-02 독립 인수 요청
 
 수신: **AGT-DSG-0002**. 새 제품 흐름의 정보/조작 계약 L2와 독립 GUI 증거 심사 책임.
-상태: **OWNER 전달용 요청안 / PLAN_REVIEW**. 기준 main `96c51ae6c3352195b9a8e8b89f92dd51c13be81c`. [Stage 3 공통 계획](../PM-020_STAGE3_EXECUTION_PLAN.md)·[Owner 요청/Git 범위](../tasks/PM-020_STAGE3_ENTRY_PLAN.md)를 함께 읽는다. Stage 2 DONE은 유지하며, 실제 새 제작/검증/Git은 자기 티켓의 유효한 개별 승인 범위에서 수행한다. 기존 유효 승인을 재사용하고 부족한 범위만 제시한다. 이 파일 게시가 자동 전달·숙지 완료 또는 새 포괄 권한 부여는 아니다.
+최초 요청(2026-11-15) 상태: **OWNER 전달용 요청안 / PLAN_REVIEW**. 당시 기준 main `96c51ae6c3352195b9a8e8b89f92dd51c13be81c`. [Stage 3 공통 계획](../PM-020_STAGE3_EXECUTION_PLAN.md)·[Owner 요청/Git 범위](../tasks/PM-020_STAGE3_ENTRY_PLAN.md)를 함께 읽는다. Stage 2 DONE은 유지하며, 실제 새 제작/검증/Git은 자기 티켓의 유효한 개별 승인 범위에서 수행한다. 기존 유효 승인을 재사용하고 부족한 범위만 제시한다. 이 파일 게시가 자동 전달·숙지 완료 또는 새 포괄 권한 부여는 아니다.
+
+## PM-021 최신 적용 — 2026-11-21
+
+기준 main `74cd75045feb1369aa429feaec64fd3558c14813`. [Owner O-01~07 승인](https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057405335) / [계획 §2.2](../PM-020_STAGE3_EXECUTION_PLAN.md#22-o-0107-owner-승인-방향과-최종-규격-잔여--pm-021) / [S3-10 하위 인수표](../PM-020_STAGE3_EXECUTION_PLAN.md#61-s3-10-하위-인수적용-시점표).
+
+**방향 승인 완료 / FINAL_SPEC_PENDING / PRODUCT_APPLICATION_SCOPE_PENDING**. DEV-025 공급·Track B 심사는 완료, #97 기술 종료 유지, #92 OPEN이다. A 잠정 우선/B 비교 유지이며 최종 폰트·지원 창/배율·필터/배치·FPS를 이번 방향 승인으로 확정하지 않는다. 아래 초기 요청은 이미 제출·수용된 부분을 다시 요구하지 않고 실제 남은 범위에만 적용한다.
+
+이번 부서 후속: **실제 F-08 제품 변경의 포커스·선택·정보/편집·복귀·명령 무효과 등 기능 영향 행만 DEV·Track B 공통표에 연결한다. 같은 패킷을 공동 심사하며 이미 수용한 Stage 2·DEV-026 GUI를 반복하지 않는다.**
+
+현재 DEV-026의 [한정 수용·P07 구분 승인](https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7057161624)과 PR #158은 유효하다. 원본 PARTIAL/미관측·W04B 미래 공급·필요한 분담 수용·S3-12/Stage 최종 인수는 별도다. 이 문서는 기존 유효 개별 실행/Git 승인을 재사용하며 새 포괄 권한을 부여하지 않는다.
 
 ## 먼저 준비할 일
 

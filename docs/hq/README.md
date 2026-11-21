@@ -17,7 +17,7 @@ HQ의 신규 계획·일정·공유 보고서는 이 디렉터리에 둡니다. 
 ## Stage 2 완료와 Stage 3 준비
 
 - [S2 최종 인수표](STAGE2_ACCEPTANCE_MATRIX.md) — Owner 최종 인수로 **Stage 2 DONE**. [#141 최종 결정](https://github.com/wisberry2022/MetroManager/issues/141#issuecomment-6892772104) 및 PR #144 merge `96c51ae6c3352195b9a8e8b89f92dd51c13be81c`를 따른다. 전체 MVP DONE은 아니다.
-- [PM-020 Stage 3 계획안](PM-020_STAGE3_EXECUTION_PLAN.md) — W04B·VS-02와 **DEV-026 구현·제품 검증을 공식 개발 범위**로 연결하고 DEV-025 Design 심사/F-08을 병행한다. 진입·S3-01~12 기준안·담당별 요청을 제공한다. DEV-026 편입은 Owner 후속 요청에 따른 결정이며 정확한 계약/실행/Git 준비는 별도 확인한다. 전체 세부 계획은 **PLAN_REVIEW**다.
+- [PM-020 Stage 3 계획안](PM-020_STAGE3_EXECUTION_PLAN.md) — W04B·VS-02와 **DEV-026 구현·제품 검증을 공식 개발 범위**로 연결하고 DEV-025 심사 완료·F-08 O-01~07 방향 승인 후속을 연결한다. 진입·S3-01~12 기준안·담당별 요청을 제공한다. DEV-026 편입과 현재 공급의 한정 수용은 승인 완료이며 W04B 미래 공급·분담 수용 연결·S3-12 최종 인수는 별도다. 문서 반영과 Stage 최종 인수를 구별한다.
 - 부서 요청: [개발](requests/PM-020_DEVELOPMENT_STAGE3.md), [기획](requests/PM-020_PLANNING_STAGE3.md), [Design A](requests/PM-020_DESIGN_A_STAGE3.md), [Design B](requests/PM-020_DESIGN_B_STAGE3.md), [INF](requests/PM-020_INFRA_STAGE3.md), [Convention](requests/PM-020_CONVENTION_STAGE3.md). Owner 전달용이며 자동 전달·숙지 완료를 가정하지 않는다.
-- 최신 작업: [PM-020 승인·범위](tasks/PM-020_STAGE3_ENTRY_PLAN.md) / [결과](tasks/PM-020_RESULT.md).
+- 최신 작업: [PM-021 승인·범위](tasks/PM-021_STAGE3_F08_DIRECTIONS.md) / [결과](tasks/PM-021_RESULT.md). [계획 내 S3 인수표](PM-020_STAGE3_EXECUTION_PLAN.md#6-stage-3-종료-기준안)와 S3-10 하위 행에서 **방향 승인 완료 / 최종 규격·제품 적용 잔여**를 분리한다. #92 OPEN, DEV-026 현재 공급 한정 수용·S3-12 최종 인수 별도. 이전 [PM-020](tasks/PM-020_STAGE3_ENTRY_PLAN.md) / [결과](tasks/PM-020_RESULT.md)는 작성 당시 이력이다.
 - 기존 집계: [PM-019](tasks/PM-019_STAGE2_FINAL_ACCEPTANCE.md) / [결과](tasks/PM-019_RESULT.md), [PM-018](tasks/PM-018_DEV023_CLOSEOUT.md) / [결과](tasks/PM-018_RESULT.md), [PM-017](tasks/PM-017_Q12_W06_ACCEPTANCE_UPDATE.md) / [PM-016](tasks/PM-016_STAGE2_ACCEPTANCE_UPDATE.md). 과거 승인 대기 표현은 해당 작성 시점 이력이다.

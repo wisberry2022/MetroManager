@@ -1,11 +1,21 @@
 # [HQ → Development] Stage 3 W04B·VS-02·DEV-026 구현 준비 요청
 
 수신: Development Project Leader / **AGT-DEV-0004**. 해당 단계의 DEV 기술 분해·구현·검증 책임. 기존 DESKTOP 세션의 새 공동 쓰기 업무를 이 요청으로 배정하지 않는다.
-상태: **OWNER 전달용 요청안 / PLAN_REVIEW**. 기준 main `96c51ae6c3352195b9a8e8b89f92dd51c13be81c`. [Stage 3 공통 계획](../PM-020_STAGE3_EXECUTION_PLAN.md)·[Owner 요청/Git 범위](../tasks/PM-020_STAGE3_ENTRY_PLAN.md)를 함께 읽는다. Stage 2 DONE은 유지하며, 실제 새 제작/검증/Git은 자기 티켓의 유효한 개별 승인 범위에서 수행한다. 기존 유효 승인을 재사용하고 부족한 범위만 제시한다. 이 파일 게시가 자동 전달·숙지 완료 또는 새 포괄 권한 부여는 아니다.
+최초 요청(2026-11-15) 상태: **OWNER 전달용 요청안 / PLAN_REVIEW**. 당시 기준 main `96c51ae6c3352195b9a8e8b89f92dd51c13be81c`. [Stage 3 공통 계획](../PM-020_STAGE3_EXECUTION_PLAN.md)·[Owner 요청/Git 범위](../tasks/PM-020_STAGE3_ENTRY_PLAN.md)를 함께 읽는다. Stage 2 DONE은 유지하며, 실제 새 제작/검증/Git은 자기 티켓의 유효한 개별 승인 범위에서 수행한다. 기존 유효 승인을 재사용하고 부족한 범위만 제시한다. 이 파일 게시가 자동 전달·숙지 완료 또는 새 포괄 권한 부여는 아니다.
+
+## PM-021 최신 적용 — 2026-11-21
+
+기준 main `74cd75045feb1369aa429feaec64fd3558c14813`. [Owner O-01~07 승인](https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057405335) / [계획 §2.2](../PM-020_STAGE3_EXECUTION_PLAN.md#22-o-0107-owner-승인-방향과-최종-규격-잔여--pm-021) / [S3-10 하위 인수표](../PM-020_STAGE3_EXECUTION_PLAN.md#61-s3-10-하위-인수적용-시점표).
+
+**방향 승인 완료 / FINAL_SPEC_PENDING / PRODUCT_APPLICATION_SCOPE_PENDING**. DEV-025 공급·Track B 심사는 완료, #97 기술 종료 유지, #92 OPEN이다. A 잠정 우선/B 비교 유지이며 최종 폰트·지원 창/배율·필터/배치·FPS를 이번 방향 승인으로 확정하지 않는다. 아래 초기 요청은 이미 제출·수용된 부분을 다시 요구하지 않고 실제 남은 범위에만 적용한다.
+
+이번 부서 후속: **Track B와 공통 적용표를 제출한다: O/M ID → 현재 만족·재사용/변경0 → 실제 파일/자원·자기 티켓 → 입력/기대·최소 검증 → 담당/시점 → 유효 승인/부족 범위. A 우선·M-01~05의 적용 조건을 지키며 새 러너·전면 리팩터링·전체 GUI 반복을 기본 의무로 만들지 않는다.**
+
+현재 DEV-026의 [한정 수용·P07 구분 승인](https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7057161624)과 PR #158은 유효하다. 원본 PARTIAL/미관측·W04B 미래 공급·필요한 분담 수용·S3-12/Stage 최종 인수는 별도다. 이 문서는 기존 유효 개별 실행/Git 승인을 재사용하며 새 포괄 권한을 부여하지 않는다.
 
 ## 먼저 처리할 일
 
-1. **DEV-025 공급 상태 연결:** [PR #143](https://github.com/wisberry2022/MetroManager/pull/143)의 Owner 결과 수용·23파일 병합·필수 CI를 [#97](https://github.com/wisberry2022/MetroManager/issues/97)/[#92](https://github.com/wisberry2022/MetroManager/issues/92)의 과거 미실행 기록과 연결할 정리안을 준비한다. 게시가 기존 권한에 포함되면 한 번의 후속 회신으로 연결하고, 아니라면 HQ/Owner에게 전달한다. 실험을 다시 수행하거나 Design 최종 수용을 선행 선언하지 않는다. RD-03/07 등 최소 보완 요구에 답할 담당으로 남는다.
+1. **F-08 승인 후속:** 공급·심사·방향 승인은 완료. 위 공통 적용표로 실제 공백과 최소 검증을 제시한다. M-01은 B/관련 배치 채택 시, M-02는 실제 밀집 표현 변경 시, M-03/04는 해당 규격 적용 전, M-05는 목표환경·성능 인수 시점에 연결한다. 기존 증거로 충족하면 변경0으로 처리할 수 있다.
 2. **W04B 공백·재사용 분석:** 승인 C/D/DATA, 기존 W03 노선/예측, W02 시각/원장, W04A 계약, W05 공사, W06 운영/보고, Session/UI를 대조한다. 제안·시청/정부·설득·RNG·E01·동일성 제한 중 구현/검증된 것과 없는 것을 경로/증거로 구별한다.
 3. **실행 단위 제안:** 모델·자동 경계 / 실제 UI·공급 계약 / VS-02·회귀의 단위로 자기 신규 티켓·정확한 수정 경로·의존성·실행/Git 승인 범위를 제시한다. 한 티켓으로 가능한 범위를 불필요하게 쪼개지 않으며 DEV-026은 자체 티켓으로 유지하고 W04B 기능 티켓에 흡수하거나 번호를 전용하지 않는다.
 4. **DEV-026 공식 범위 편입:** [계획 §2.1](../PM-020_STAGE3_EXECUTION_PLAN.md#21-rfc-pm-020-01--dev-026-편입-판단과-범위-결정)에 따라 기존 계약·RP-01~08·EX 적용/제외를 최신 P06/P07·보고/조회/복귀 및 W04B 공통 영향에 대조한다. DEV-022~024 완료와 DEV-025 공급/관련 Design 판정을 연결하고, 구현·실험·Git의 정확한 경로/기존 승인·부족 범위만 한 묶음으로 제출한다. 동일 편입 승인 요청은 반복하지 않는다.
@@ -21,6 +31,6 @@
 
 ## 경계·첫 회신
 
-DEV-026은 **STAGE3_SCOPE_CONFIRMED / IMPLEMENTATION_READINESS_PENDING**이다. 과거 무기한 제외 상태로 두지 않으며 [S3-12](../PM-020_STAGE3_EXECUTION_PLAN.md#6-stage-3-종료-기준안)의 실제 구현·제품 검증·부서 수용까지 완료 대상으로 삼는다. 새 Session/old scope·P06/P07의 깊은 내부 개편은 자동 확대하지 않는다. P07 FIXED_DAY를 S01 직전일 규칙으로 덮지 않는다. F-08 최종 폰트/배치/지원 환경은 Design 대조와 Owner 선택 대상이다. 제품 아키텍처는 DEV 소관이며 HQ가 클래스 구조를 지정하지 않는다.
+DEV-026은 **STAGE3_SCOPE_CONFIRMED / OWNER_APPROVED_LIMITED_ACCEPTANCE / OVERALL_PARTIAL**이다. 과거 무기한 제외 상태로 두지 않으며 [S3-12](../PM-020_STAGE3_EXECUTION_PLAN.md#6-stage-3-종료-기준안)의 실제 구현·제품 검증·부서 수용까지 완료 대상으로 삼는다. 새 Session/old scope·P06/P07의 깊은 내부 개편은 자동 확대하지 않는다. P07 FIXED_DAY를 S01 직전일 규칙으로 덮지 않는다. F-08 최종 폰트/배치/지원 환경은 Design 대조와 Owner 선택 대상이다. 제품 아키텍처는 DEV 소관이며 HQ가 클래스 구조를 지정하지 않는다.
 
-첫 회신: **기준 SHA·자기 티켓/경로·현재 구현/증거 재사용·정확한 공백·필요 계약·최소 검증·유효 승인/부족한 범위·일정 산정 가능 조건**을 한 묶음으로 제출한다. 현재 신규 W04B 실행/VS-02/DEV-026 구현·제품 검증은 NOT_RUN. 게임 규칙 변경 필요가 발견되면 해당 의미만 RFC로 보고한다.
+첫 회신: **기준 SHA·자기 티켓/경로·현재 구현/증거 재사용·정확한 공백·필요 계약·최소 검증·유효 승인/부족한 범위·일정 산정 가능 조건**을 한 묶음으로 제출한다. 최초 요청 당시 W04B/VS-02/DEV-026 NOT_RUN은 이력이며 이후 제출·한정 수용을 되돌리지 않는다. 이번 HQ 문서 작업의 제품 실행은 NOT_RUN이다. 게임 규칙 변경 필요가 발견되면 해당 의미만 RFC로 보고한다.
