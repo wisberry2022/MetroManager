@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "task_id": "PM-021",
+  "primary_agent_id": "AGT-PM-0002",
+  "base_sha": "74cd75045feb1369aa429feaec64fd3558c14813",
+  "artifacts": [
+    {
+      "path": "docs/hq/PM-020_STAGE3_EXECUTION_PLAN.md",
+      "change_type": "modify",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "AGT-PM-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-021_STAGE3_F08_DIRECTIONS.md#owner-요청과-승인-범위",
+        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057405335",
+        "https://github.com/wisberry2022/MetroManager/pull/157",
+        "https://github.com/wisberry2022/MetroManager/pull/158"
+      ],
+      "blob_sha": "f6d248a218ebb10df012a79e095fd441fdce8f74",
+      "old_blob_sha": "4e2f10f4904c4572427f8acc3c6f647414eced18"
+    },
+    {
+      "path": "docs/hq/requests/PM-020_DESIGN_A_STAGE3.md",
+      "change_type": "modify",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "AGT-PM-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-021_STAGE3_F08_DIRECTIONS.md#owner-요청과-승인-범위",
+        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057405335",
+        "https://github.com/wisberry2022/MetroManager/pull/157",
+        "https://github.com/wisberry2022/MetroManager/pull/158"
+      ],
+      "blob_sha": "55d90b6d93a34fde233014a09c4e4f610dd5131d",
+      "old_blob_sha": "f838f4949124d343106572a22267897c908d70b7"
+    },
+    {
+      "path": "docs/hq/requests/PM-020_PLANNING_STAGE3.md",
+      "change_type": "modify",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "AGT-PM-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-021_STAGE3_F08_DIRECTIONS.md#owner-요청과-승인-범위",
+        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057405335",
+        "https://github.com/wisberry2022/MetroManager/pull/157",
+        "https://github.com/wisberry2022/MetroManager/pull/158"
+      ],
+      "blob_sha": "02e81fe0f62283b4796cbdfc50e8a840e73ad4d0",
+      "old_blob_sha": "c206c83c8bcfc27da39e62c73bb80af6097e3afa"
+    },
+    {
+      "path": "docs/hq/requests/PM-020_INFRA_STAGE3.md",
+      "change_type": "modify",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "AGT-PM-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-021_STAGE3_F08_DIRECTIONS.md#owner-요청과-승인-범위",
+        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057405335",
+        "https://github.com/wisberry2022/MetroManager/pull/157",
+        "https://github.com/wisberry2022/MetroManager/pull/158"
+      ],
+      "blob_sha": "1eb6878f0a26f687634bff72b41ea39af20df938",
+      "old_blob_sha": "30e55eb46f9b1e799b44bc3416547a88c577d2f4"
+    },
+    {
+      "path": "docs/hq/requests/PM-020_CONVENTION_STAGE3.md",
+      "change_type": "modify",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "AGT-PM-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-021_STAGE3_F08_DIRECTIONS.md#owner-요청과-승인-범위",
+        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057405335",
+        "https://github.com/wisberry2022/MetroManager/pull/157",
+        "https://github.com/wisberry2022/MetroManager/pull/158"
+      ],
+      "blob_sha": "11fe5e6e24b500902dede53631ac646e0c033826",
+      "old_blob_sha": "3fd242211c4d72e3b548b840119e2880aac65993"
+    },
+    {
+      "path": "docs/hq/requests/PM-020_DEVELOPMENT_STAGE3.md",
+      "change_type": "modify",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "AGT-PM-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-021_STAGE3_F08_DIRECTIONS.md#owner-요청과-승인-범위",
+        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057405335",
+        "https://github.com/wisberry2022/MetroManager/pull/157",
+        "https://github.com/wisberry2022/MetroManager/pull/158"
+      ],
+      "blob_sha": "cefceeca364cc65fcbb30cc6b406473ead885145",
+      "old_blob_sha": "41834ae664d75a0cc42921f4a87f34758e3cc9c4"
+    },
+    {
+      "path": "docs/hq/requests/PM-020_DESIGN_B_STAGE3.md",
+      "change_type": "modify",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "AGT-PM-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-021_STAGE3_F08_DIRECTIONS.md#owner-요청과-승인-범위",
+        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057405335",
+        "https://github.com/wisberry2022/MetroManager/pull/157",
+        "https://github.com/wisberry2022/MetroManager/pull/158"
+      ],
+      "blob_sha": "37cea0a5b7359cec80a7de4b59f21931ab106370",
+      "old_blob_sha": "eaac21ed999a64050be56b07dc5ba77631e1e524"
+    },
+    {
+      "path": "docs/hq/README.md",
+      "change_type": "modify",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "UNKNOWN",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-021_STAGE3_F08_DIRECTIONS.md#owner-요청과-승인-범위",
+        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057405335",
+        "https://github.com/wisberry2022/MetroManager/pull/157",
+        "https://github.com/wisberry2022/MetroManager/pull/158"
+      ],
+      "blob_sha": "54d0d0f04dbf92b1d2d41ee8a02ef15a95877649",
+      "old_blob_sha": "53c4628d0beab75f027710971e8b34aa00811ab8"
+    },
+    {
+      "path": "docs/hq/tasks/PM-021_STAGE3_F08_DIRECTIONS.md",
+      "change_type": "add",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "AGT-PM-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-021_STAGE3_F08_DIRECTIONS.md#owner-요청과-승인-범위",
+        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057405335",
+        "https://github.com/wisberry2022/MetroManager/pull/157",
+        "https://github.com/wisberry2022/MetroManager/pull/158"
+      ],
+      "blob_sha": "32d379d78221a0d75b0345a1b76fd49747b2f385"
+    },
+    {
+      "path": "docs/hq/tasks/PM-021_RESULT.md",
+      "change_type": "add",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "AGT-PM-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-021_STAGE3_F08_DIRECTIONS.md#owner-요청과-승인-범위",
+        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057405335",
+        "https://github.com/wisberry2022/MetroManager/pull/157",
+        "https://github.com/wisberry2022/MetroManager/pull/158"
+      ],
+      "blob_sha": "2f0379a721be7f08d8fa4e1b8cd60ee2404f4092"
+    }
+  ],
+  "notes": "REPORT_ONLY declaration, not identity/approval/test authentication. Earlier authorship and limited acceptance remain unchanged. Manifest excludes itself."
+}
