@@ -1,3 +1,7 @@
+> **현재 효력 — PM-021 후속 / 2026-11-21:** [Owner 결정](https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057405335)에 따라 **O-01~07 권고 방향 전부 승인 완료**. O01_O07_OWNER_DIRECTION_APPROVED / FINAL_SPEC_PENDING / PRODUCT_APPLICATION_SCOPE_PENDING / F08_OPEN. 아래 원문의 미선택·OPTIONS_NOT_APPROVED는 승인 이전 작성 이력이며 현재 방향 결정 대기가 아니다. 같은 방향의 재승인을 요청하지 않는다. 상세 후속은 마지막 §5와 [공통 적용표](DSG-008_PM021_F08_APPLICATION_MATRIX.md)를 따른다.
+
+<!-- 아래 v0.1 원문은 과거 승인·검증 이력을 위해 보존한다. -->
+
 # DSG-008 — F-08 Owner 선택안
 
 - 담당: AGT-DSG-0003 / 2026-11-21 / v0.1
@@ -50,3 +54,24 @@
 | Planning | 새 게임 규칙 영향이 실제 발견된 경우에만 확인 | 현재 새 규칙 요청 없음 |
 
 F-08 미결은 방향/권리/규격/제품 적용·인수의 잔여다. 이번 신규 게임/GUI/성능/export NOT_RUN과 혼동하지 않는다. DEV026 한정 수용·P07 구분 승인 및 S3-12·Stage 최종 인수 별도 상태를 유지한다. #92/#104 신규 게시와 Git 제출은 하지 않는다.
+
+## 5. PM-021 후속 — 승인 완료7개와 규격·적용 잔여
+
+- 기록: Design Track B / AGT-DSG-0003 / 2026-11-21 / LOCAL_REVIEW.
+- 기준 main: `fa968b94641d24e8d68b3c6cb903f9e809d02814`, [PM-021 / PR159](https://github.com/wisberry2022/MetroManager/pull/159).
+- 결정 정본: [#92 Owner O-01~07 승인](https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057405335). 이 결정은 이미 효력이 있으며 이번 로컬 문서 제출/병합 여부를 기다리는 승인이 아니다.
+
+| ID | 현재 방향 판정 | 승인한 방향·남은 조건 |
+| --- | --- | --- |
+| O-01 | OWNER_DIRECTION_APPROVED | 현행 기본/fallback 임시 유지·배포용 한글 후보 권리/구성 확인 준비. 구체 폰트/버전·번들·권리·fallback/export 최종 미정 |
+| O-02 | OWNER_DIRECTION_APPROVED | 1280×720/root1은 비교 기준만 유지, 최소창/지원 배율 결정 보류. 보류 방향 자체는 승인 완료 |
+| O-03 | OWNER_DIRECTION_APPROVED | 픽셀 도형 정수 nearest 우선 비교·동적 문자 분리. 실제 아트 크기/위상·역할별 최종 필터/배율 미정 |
+| O-04 | OWNER_DIRECTION_APPROVED | A 잠정 우선/B 비교 유지. B 또는 관련 반응형 변경 채택 전 M-01, 최종 배치/치수/브레이크포인트 미정 |
+| O-05 | OWNER_DIRECTION_APPROVED | 안정ID 후보/목록·전체 이름 기본 대안. 실제 순서/키보드·선택 가시성·정보/편집 구분 조건 미정. 새 지도 기능 추가 아님 |
+| O-06 | OWNER_DIRECTION_APPROVED | Theme/시각 자원·텍스트·상태/행동 소비 분리 원칙. 실제 재사용 단위·공급계약/경로는 DEV 대조 전이며 전면 리팩터링 의무 없음 |
+| O-07 | OWNER_DIRECTION_APPROVED | 원시 Debug 보존·목표환경/성능 인수 시점 목표 결정. FPS/상한 수치 미정, 결정 시점 이월 방향 승인 완료 |
+
+새 문서에서 현재 선택7개를 미선택/재승인 대기로 되돌리지 않는다. 위 원문 표는 당시 기록이다. 방향 승인을 실제 제품 적용·새 실험·Git 권한 또는 최종 규격 승인으로 확대하지 않는다. 공통 적용표는 Track B 준비안이며 DEV 공동 확인 전이다. 구체 일정/공수 NOT_ESTIMATED, #92 OPEN / FINAL_SPEC_PENDING 유지.
+
+Agent-ID: AGT-DSG-0003
+Task-ID: DSG-008

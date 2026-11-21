@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "task_id": "DSG-008",
+  "primary_agent_id": "AGT-DSG-0003",
+  "base_sha": "fa968b94641d24e8d68b3c6cb903f9e809d02814",
+  "artifacts": [
+    {
+      "path": "docs/design/tasks/DSG-008_F08_OWNER_OPTIONS.md",
+      "change_type": "modify",
+      "agent_id": "AGT-DSG-0003",
+      "contributors": [],
+      "source_refs": [
+        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057405335",
+        "docs/hq/tasks/PM-021_STAGE3_F08_DIRECTIONS.md",
+        "docs/hq/requests/PM-020_DESIGN_B_STAGE3.md"
+      ],
+      "blob_sha": "bc40f4f9d57768dd6cbf9864ae72fc5cab36a83c",
+      "old_blob_sha": "def99f019529b96fc663e1419afb834a1ffc2a24"
+    },
+    {
+      "path": "docs/design/tasks/DSG-008_PM021_F08_APPLICATION_MATRIX.md",
+      "change_type": "add",
+      "agent_id": "AGT-DSG-0003",
+      "contributors": [],
+      "source_refs": [
+        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057405335",
+        "docs/hq/tasks/PM-021_STAGE3_F08_DIRECTIONS.md",
+        "docs/hq/requests/PM-020_DESIGN_B_STAGE3.md"
+      ],
+      "blob_sha": "7a72ffb3d99e7edcb026a7afa830181218feaf2f"
+    },
+    {
+      "path": "docs/design/tasks/DSG-008_PM021_F08_FOLLOWUP_RESULT.md",
+      "change_type": "add",
+      "agent_id": "AGT-DSG-0003",
+      "contributors": [],
+      "source_refs": [
+        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057405335",
+        "docs/hq/tasks/PM-021_STAGE3_F08_DIRECTIONS.md",
+        "docs/hq/requests/PM-020_DESIGN_B_STAGE3.md"
+      ],
+      "blob_sha": "4103e2ef824c0abb6965e19a7f9d1e7d12f11845"
+    }
+  ]
+}
