@@ -1,5 +1,7 @@
 # DEV-027 — W04B·VS-02 착수 계획 및 문서 제출 티켓
 
+> **PM-021 최신 후속 — 2026-11-21:** §6이 현재 **LOCAL_REVIEW / TRACK_B_COMMON_TABLE_REVIEW_PENDING / GIT_SUBMISSION_NOT_AUTHORIZED** 상태를 설명한다. O01~07 방향 승인·DEV026 현재 공급/P07 수용은 유효하다. 아래 과거 제출·미실행·선택 대기는 당시 이력으로 보존한다. 이번 작업은 기존 DEV027 문서4개 로컬 보완·정적 검사다.
+
 > **현재 후속 — 2026-11-21:** PR #149 병합 후 #146 Design 사전 의견을 반영한 문서 보완이다. 제출 base는 `de0f03f9d2fcc301940a4176f1359b2788a51950`, 브랜치는 `codex/DEV-027-design-plan-followup`이며 현재 권한·결과는 §5을 따른다. 앞선 제출 식별·검증은 PR #149 당시 기록으로 보존한다. 제품 구현·실행·최종 L2·main 병합은 별도 대기다.
 
 - 담당: Development / AGT-DEV-0004 / 2026-11-21 (Asia/Seoul).
@@ -67,6 +69,21 @@ Owner의 이번 개발 대화 요청:
 - DEV-026 자체 문서5개는 별도 `codex/DEV-026-design-plan-followup` PR로 처리한다. 현재 PR에는 섞지 않는다.
 
 계획 §3·4.2·7.3·11에 사전 의견/실제 수용 상태, 제출 사본·초안, 실제 공급/증거 항목, 종속 부분만의 차단을 반영했다. 후보 경로41/24개는 그대로이며 새 정책·수치·Stage DONE을 선언하지 않는다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027
+
+## 6. PM-021 적용표·착수 상태 후속 — 로컬 검토
+
+- Owner 현재 요청: “개발 에이전트 HQ로부터 신규 지시사항(PM-021)이 발생했으니 확인하여 followup 해주시기 바랍니다”.
+- 근거: [개발 요청](../../hq/requests/PM-020_DEVELOPMENT_STAGE3.md), [Owner O01~07 결정](https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057405335), [DEV026 한정 수용](https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7057161624).
+- 기준 main: `fa968b94641d24e8d68b3c6cb903f9e809d02814` / [PR #159](https://github.com/wisberry2022/MetroManager/pull/159). 로컬 브랜치 `codex/DEV-027-pm021-application-plan`.
+- 상태: **LOCAL_REVIEW / TRACK_B_COMMON_TABLE_REVIEW_PENDING / GIT_SUBMISSION_NOT_AUTHORIZED**. 기존 §2의 정확한4개만 수정. 공통표는 [계획 §12](../gate3/DEV-027_EXECUTION_VALIDATION_PLAN.md#12-pm-021-후속--f-08-공통-적용표의-dev-검토안)에 한 번 작성하고 티켓/결과에서 참조.
+- 포함: 제품/격리 실험 대조, 승인7행·M01~05 재사용/변경0·공백·경로·최소 검증/권한, 폰트 후보 공식 자료, W04B/DEV026 최신 상태, 복사 전달문. DEV025 원시·Design 원문·DEV026 증거·과거 계획 보존.
+- 제외: 제품/게임 테스트·데이터·폰트/아트 반입·새 실험, 타 부서/정책/CI 수정, 원격 댓글/Issue 변경, Commit·Push·PR·main 병합. 과거 제출 승인은 당시 PR 범위로 보존.
+- 종료 신호: 문서/출처·링크·기존41개 후보 보존 검증과 로컬 검토 요청. DEV 준비를 공동 수용/S3-10-A 완료로 선기록하지 않음.
+
+DEV027 P1 구현·검증은 별도 승인 대상이다. DI03 대상/반복 효과 종속 행과 실제 UI L2는 남고 비의존 모델에 Design 추가 차단은 없다. DEV026은 이미 구현·검증·현재 공급 한정 수용됐으며 과거 HOLD/전체 NOT_RUN으로 되돌리지 않는다. 분담 수용·미래 W04B·S3-12/Stage·원본 PARTIAL은 보존한다. F08 검토를 기존41개 제품 후보 확대나 종료 DEV025 재개로 사용하지 않는다.
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-027
