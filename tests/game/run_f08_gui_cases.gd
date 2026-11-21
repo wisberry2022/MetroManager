@@ -89,8 +89,7 @@ func _apply(row: Dictionary, reset: bool) -> void:
 	root.content_scale_factor = row.get("scale", 1.0)
 	if reset:
 		_session = Fixtures.create_model(row.state)
-		_product.session = _session
-		_product.reset_observation()
+		_product = _product.replace_session(_product, _session)
 	_panel.configure(_session, row)
 	_panel.visible = row.source != "PRODUCT"
 	_product.visible = row.source == "PRODUCT"

@@ -15,6 +15,22 @@ var _stops: Array = []
 var _enabled: bool = true
 
 
+func clear_observation() -> void:
+	_enabled = false
+	_stations = []
+	_edges = []
+	_stops = []
+	flow_markers.clear()
+	operating_stops = []
+	station_flow.clear()
+	for button: Button in markers.values():
+		button.disabled = true
+		remove_child(button)
+		button.queue_free()
+	markers.clear()
+	queue_redraw()
+
+
 func _ready() -> void:
 	custom_minimum_size = Vector2(390, 230)
 	resized.connect(_layout_markers)
@@ -105,6 +121,8 @@ func _present_flow(state: Dictionary) -> void:
 			return
 	operating_stops = stops.duplicate()
 	var clock: Dictionary = state.clock
+	if not clock.get("remainder") is int:
+		return
 	var observed := float(clock.simulation_minute) + float(clock.remainder) / 5000000.0
 	for row: Variant in value.cohorts:
 		if (

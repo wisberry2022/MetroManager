@@ -385,11 +385,9 @@ func _test_views() -> void:
 				true
 			)
 		if case_id == "QA-X01":
-			view.session = Fixtures.create("QA-M02")
-			view.reset_observation()
+			view = view.replace_session(view, Fixtures.create("QA-M02"))
 			_expect("case_switch_full", view.plan_list.item_count, 6)
-			view.session = Fixtures.create("QA-M01")
-			view.reset_observation()
+			view = view.replace_session(view, Fixtures.create("QA-M01"))
 			_expect("case_switch_clears", view.plan_list.item_count, 0)
 		if case_id == "QA-M03":
 			_expect("ui_locked_disabled", view.controls.undo.disabled, true)

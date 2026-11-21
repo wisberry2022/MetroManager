@@ -1,6 +1,7 @@
 extends MarginContainer
 ## 기본 도형/컨트롤의 최소 S01. 화면은 공급값만 소비한다.
 
+const Contract = preload("res://scripts/ui/s01_observation_contract.gd")
 const Session = preload("res://scripts/ui/stage1_session.gd")
 const TenderPanel = preload("res://scenes/tender_panel.tscn")
 const ConstructionPanel = preload("res://scenes/construction_panel.tscn")
@@ -33,9 +34,18 @@ var _focus_feedback: String = ""
 var _planning_sections: Array[Node] = []
 var _scroll: ScrollContainer
 var _focus_sequence: int = 0
+var _bound_session: Session
+var _scope: String = ""
+var _retired: bool = false
+var _navigation_generation: int = 0
+var _suspended_child: String = ""
+var _observation: Dictionary = {}
 
 
 func _ready() -> void:
+	_bound_session = session
+	_scope = session.observation_scope()
+	_observation = Contract.inspect(null, _scope, -1)
 	for side: String in ["left", "right", "top", "bottom"]:
 		add_theme_constant_override("margin_" + side, 12)
 	_scroll = ScrollContainer.new()
@@ -115,7 +125,6 @@ func _ready() -> void:
 	_candidates = GridContainer.new()
 	_candidates.columns = 4
 	right.add_child(_candidates)
-	_build_candidates()
 	_label(right, "selection", "선택한 역 없음")
 	plan_list = ItemList.new()
 	plan_list.name = "PlanList"
@@ -138,6 +147,9 @@ func _ready() -> void:
 	_label(root, "report", "확정 보고 없음")
 	_label(root, "feedback", "후보역을 선택해 노선을 편집하세요.")
 	_label(root, "operations_summary", "")
+	operations_view.bind_session(session)
+	finance_view.bind_session(session)
+	_labels.title.focus_mode = Control.FOCUS_ALL
 	_label(root, "scope", "노선 계획/예측 · 공공입찰 → 사업 인계 → 공사·검증·개통 · 운영 현황 · 재무·보고")
 	var after_panel := false
 	for section: Node in root.get_children():
@@ -152,7 +164,8 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if session == null:
+	if not _binding_valid():
+		present(null)
 		return
 	var now := Time.get_ticks_usec()
 	session.advance_usec(maxi(0, now - _last_usec))
@@ -185,103 +198,121 @@ func _label(parent: Node, id: String, text: String) -> void:
 
 
 func _select_station(id: String) -> void:
+	if not _binding_valid() or not _observation.regions.map or not _observation.regions.plan:
+		return
+	if not candidate_buttons.has(id):
+		return
 	_selected_id = id
-	if id in session.snapshot().plan.station_ids:
+	if id in shown.plan.station_ids:
 		_focus_station(id)
 		return
 	_act("select", {"station_id": id})
 
 
 func _plan_selected(index: int) -> void:
-	_focus_station(shown.plan.station_ids[index])
+	if not _binding_valid() or not _observation.regions.map or not _observation.regions.plan:
+		return
+	if index >= 0 and index < shown.plan.station_ids.size():
+		_focus_station(shown.plan.station_ids[index])
 
 
 func _focus_station(id: String) -> void:
+	if not _binding_valid() or not _observation.regions.map:
+		return
 	_selected_id = id
-	var before: Dictionary = session.snapshot()
-	_focus_feedback = "정보 선택: %s · 노선 변경 없음 · 계획판 %d" % [id, before.plan.plan_revision]
-	present(session.snapshot())
+	_focus_feedback = "정보 선택: %s · 노선 변경 없음 · 계획판 %d" % [id, shown.plan.plan_revision]
+	# 렌더한 관측을 유지한다. 부분 자료를 명령 callback의 재조회로 우회하지 않는다.
+	present(shown)
 	plan_list.ensure_current_is_visible()
-	print(
-		"W07_FOCUS ",
-		JSON.stringify(
-			{
-				"station_id": id,
-				"plan_revision_before": before.plan.plan_revision,
-				"plan_revision_after": session.snapshot().plan.plan_revision,
-				"command_dispatched": false
-			}
-		)
-	)
+	print("W07_FOCUS ", JSON.stringify({"station_id": id, "command_dispatched": false}))
 
 
 func _act(action: String, payload: Dictionary = {}) -> void:
+	if not _binding_valid() or not Contract.action_allowed(shown, _observation.regions, action):
+		return
+	if action == "speed" and payload.get("value") not in shown.allowed_actions.speed:
+		return
 	_focus_feedback = ""
 	_sequence += 1
 	var command := payload.duplicate(true)
 	command.merge({"command_id": "ui-%d-%d" % [get_instance_id(), _sequence], "action": action})
-	var current := session.snapshot()
+	if action in ["select", "remove", "reorder", "undo", "predict"]:
+		command.expected_plan_revision = shown.plan.plan_revision
 	if action in ["remove", "reorder"]:
+		if _selected_id not in shown.plan.station_ids:
+			return
 		command.station_id = _selected_id
-		command.expected_plan_revision = current.plan.plan_revision
 	if action == "reorder":
-		command.from = current.plan.station_ids.find(_selected_id)
+		command.from = shown.plan.station_ids.find(_selected_id)
 		command.to = command.from + command.direction
 	var result := session.dispatch(command)
 	print("W07_COMMAND ", JSON.stringify(result))
 	present(session.snapshot())
 
 
-func present(state: Dictionary) -> bool:
-	if state.view_revision < _displayed_revision or Operations.is_older(state, shown):
+func present(state: Variant) -> bool:
+	var check := Contract.inspect(state, _scope, _displayed_revision)
+	if not _binding_valid():
+		check = Contract.inspect(null, _scope, _displayed_revision)
+	if (
+		check.discard_observation
+		or (check.global_current_valid and Operations.is_older(state, shown))
+	):
+		print("DEV026_DISCARD ", check.diagnostic)
 		return false
-	_displayed_revision = state.view_revision
-	shown = state.duplicate(true)
-	var clock: Dictionary = state.clock
-	_labels.title.text = (
-		"MetroManager · S01 노선 계획"
-		+ (" · 검증 전용: " + state.fixture_label if not state.fixture_label.is_empty() else "")
-	)
-	_labels.clock.text = (
-		"게임일 %d %02d:%02d · %s · %d×"
-		% [
-			clock.day_id,
-			(clock.simulation_minute / 60) % 24,
-			clock.simulation_minute % 60,
-			"일시정지" if clock.paused else "진행 중",
-			clock.speed
-		]
-	)
-	controls.pause.disabled = not state.allowed_actions.pause
-	controls.resume.disabled = not state.allowed_actions.resume
-	for speed: int in [1, 2, 4]:
-		controls["speed%d" % speed].text = ("[%d×]" if speed == clock.speed else "%d×") % speed
-	tender_view.present(state.tender_ui)
-	construction_view.present(state.construction_ui)
-	operations_view.present(state)
-	finance_view.present(state)
-	_labels.operations_summary.text = "운행 흐름(대표 표시)\n" + Operations.summary(state)
-	_render_plan(state)
-	_render_finance(state)
-	_render_prediction(state.prediction)
-	var result: Dictionary = state.command_result
-	if not result.is_empty():
-		_labels.feedback.text = (
-			"마지막 요청: %s · %s · 당시 게임분 %d"
-			% [
-				"처리됨" if result.accepted else "거부됨",
-				reason_text(result.get("reason", "")),
-				result.effective_at
-			]
+	_observation = check
+	shown = state.duplicate(true) if check.global_current_valid else {}
+	if check.global_current_valid:
+		_displayed_revision = maxi(_displayed_revision, state.view_revision)
+	var region: Dictionary = check.regions
+	var owner := get_viewport().gui_get_focus_owner()
+	var owned_focus := owner != null and is_ancestor_of(owner)
+	_render_clock(region.clock)
+	_render_children(region)
+	if region.plan:
+		_render_plan(shown)
+	else:
+		map_view.clear_observation()
+		_list_stops = []
+		plan_list.clear()
+		_labels.validation.text = "계획 자료를 확인하지 못했습니다"
+		_labels.selection.text = "선택 정보 확인 중"
+		_labels.connections.text = ""
+		_disable_plan()
+	_render_finance(shown)
+	if region.prediction:
+		_render_prediction(shown.prediction)
+	else:
+		_labels.prediction.text = "예측을 확인하지 못했습니다 · 자료 없음"
+		_labels.previous.text = ""
+	if region.previous:
+		var previous: Dictionary = shown.prediction.previous
+		_labels.previous.text = (
+			"이전 입력판 %d (비교용): %s" % [previous.input_revision, _prediction_value(previous)]
 		)
-	if not _focus_feedback.is_empty():
-		_labels.feedback.text = _focus_feedback
-	return true
+	_render_result(region.command)
+	if owned_focus and not Contract.focus_valid(owner):
+		var fallback := _fallback(_reading_context().screen)
+		if fallback != null:
+			fallback.grab_focus()
+	return check.global_current_valid
 
 
 func _render_plan(state: Dictionary) -> void:
-	var route: Dictionary = state.plan
-	map_view.present(state, _selected_id)
+	var route: Dictionary = state.plan.duplicate(true)
+	route.allowed_actions = {
+		"edit": Contract.action_allowed(state, _observation.regions, "select"),
+		"undo": Contract.action_allowed(state, _observation.regions, "undo")
+	}
+	_build_candidates()
+	if _observation.regions.map:
+		if not _selected_id.is_empty() and not candidate_buttons.has(_selected_id):
+			_selected_id = ""
+		var map_state := state.duplicate(true)
+		map_state.plan = route
+		map_view.present(map_state, _selected_id)
+	else:
+		map_view.clear_observation()
 	if _list_stops != route.station_ids:
 		_list_stops = route.station_ids.duplicate()
 		plan_list.clear()
@@ -298,10 +329,11 @@ func _render_plan(state: Dictionary) -> void:
 	)
 	controls.remove.disabled = not route.allowed_actions.edit or selected < 0
 	controls.undo.disabled = not route.allowed_actions.undo
-	controls.predict.disabled = not state.allowed_actions.predict
+	controls.predict.disabled = not Contract.action_allowed(state, _observation.regions, "predict")
 	for id: String in candidate_buttons:
 		candidate_buttons[id].disabled = (
-			not route.allowed_actions.edit and id not in route.station_ids
+			not _observation.regions.map
+			or (not route.allowed_actions.edit and id not in route.station_ids)
 		)
 		candidate_buttons[id].button_pressed = id == _selected_id
 		var number: int = route.station_ids.find(id)
@@ -319,7 +351,10 @@ func _render_plan(state: Dictionary) -> void:
 		]
 	)
 	_labels.selection.text = "선택: " + (_selected_id if not _selected_id.is_empty() else "없음")
-	for station: Dictionary in state.stations:
+	if not _observation.regions.map:
+		_labels.selection.text = "선택 정보 확인 중 · 지도·후보 자료 없음"
+	var stations: Array = state.stations if _observation.regions.map else []
+	for station: Dictionary in stations:
 		if station.id == _selected_id:
 			var path: Array[String] = [station.id]
 			var cursor: String = station.neighborhood_id
@@ -329,7 +364,11 @@ func _render_plan(state: Dictionary) -> void:
 			_labels.selection.text += " / " + " > ".join(path)
 	if route.locked:
 		_labels.validation.text += " · 편집 잠금"
-	_render_connections(state)
+	_labels.connections.text = "지도·후보 자료를 확인 중입니다"
+	if _observation.regions.map:
+		var connected := state.duplicate(true)
+		connected.plan = route
+		_render_connections(connected)
 
 
 func _render_connections(state: Dictionary) -> void:
@@ -352,56 +391,53 @@ func _render_connections(state: Dictionary) -> void:
 
 
 func _render_finance(state: Dictionary) -> void:
-	var funds: Dictionary = state.current.funds
-	_labels.funds.text = (
-		"현재 자금 · 게임분 %d · 게임 통화 단위\nC 총현금 %d / R 제한 %d / F 자유 %d / K 예약 %d / A 신규약정 가용 %d / B 미지급 %d"
-		% [
-			state.current.simulation_minute,
-			funds.cash,
-			funds.restricted,
-			funds.free_cash,
-			funds.reserved,
-			funds.available_cash,
-			funds.unpaid
-		]
-	)
-	var report: Dictionary = state.report
-	if report.available:
-		var value: Dictionary = report.value
-		_labels.report.text = (
-			"확정 과거 보고 · 마감일 %d · %s\n운영비 %d / 지급 %d / 운임 %d / 마감 현금 %d"
+	var region: Dictionary = _observation.regions
+	_labels.funds.text = "현재 자금의 기준 시각을 확인 중입니다 · 자료 없음"
+	if region.funds:
+		var funds: Dictionary = state.current.funds
+		_labels.funds.text = (
+			"현재 자금 · 게임분 %d · 게임 통화 단위\nC 총현금 %d / R 제한 %d / F 자유 %d / K 예약 %d / A 신규약정 가용 %d / B 미지급 %d"
 			% [
-				report.day_id,
-				report.display_key,
-				value.operating_cost,
-				value.payment,
-				value.fare,
-				value.closing_funds.cash
+				state.current.simulation_minute,
+				funds.cash,
+				funds.restricted,
+				funds.free_cash,
+				funds.reserved,
+				funds.available_cash,
+				funds.unpaid
 			]
 		)
-	else:
-		_labels.report.text = (
-			"확정 보고 없음 (미마감)"
-			if report.status == "UNAVAILABLE"
-			else ("보고 조회 실패: " + reason_text(report.reason))
-		)
-	if not state.coherent:
-		_labels.funds.text = "현재 상태 확인 중: 게임 시각 불일치"
+	_labels.report.text = "보고의 조회 대상을 확인 중입니다 · 자료 없음"
+	if region.report:
+		var report: Dictionary = state.report
+		if report.available:
+			var value: Dictionary = report.value
+			_labels.report.text = (
+				"확정 과거 보고 · 마감일 %d · %s\n운영비 %d / 지급 %d / 운임 %d / 마감 현금 %d"
+				% [
+					report.day_id,
+					report.display_key,
+					value.operating_cost,
+					value.payment,
+					value.fare,
+					value.closing_funds.cash
+				]
+			)
+		elif report.status == "FAILED":
+			_labels.report.text = ("과거 보고 조회 실패 · " + reason_text(str(report.get("reason", ""))))
+		else:
+			_labels.report.text = "확정 보고 자료 없음"
+			if state.clock.day_id == 1 and report.day_id == 0:
+				_labels.report.text += " (첫 마감 전)"
 	_render_activity(state)
 
 
 func _render_activity(state: Dictionary) -> void:
-	var daily: Dictionary = state.get("daily_activity", {})
-	for key: String in ["operating_cost", "payment", "debt_payment", "cash_payment"]:
-		if not daily.get(key) is int or daily[key] < 0:
-			_labels.activity.text = "당일 운영비 확인 실패: 자료 없음/오류"
-			return
-	if (
-		not state.coherent
-		or daily.get("day_id") != state.current.day_id
-		or daily.get("simulation_minute") != state.current.simulation_minute
-		or daily.get("snapshot_revision") != state.current.snapshot_revision
-	):
+	var daily := Contract.dictionary(state.get("daily_activity"))
+	if not Contract.integers(daily, Contract.DAILY):
+		_labels.activity.text = "당일 운영비 확인 실패: 자료 없음/오류"
+		return
+	if not _observation.regions.daily:
 		_labels.activity.text = "당일 운영비 확인 중: 관측 시점 불일치"
 		return
 	_labels.activity.text = (
@@ -411,102 +447,42 @@ func _render_activity(state: Dictionary) -> void:
 
 
 func _render_prediction(prediction: Dictionary) -> void:
-	_labels.prediction.text = (
-		"예측: %s · 입력판 %d / 계획판 %d"
-		% [
-			(
-				{
-					"NOT_CALCULATED": "미계산",
-					"CALCULATING": "계산 중",
-					"READY": "계산 완료",
-					"FAILED": "계산 실패"
-				}
-				. get(prediction.prediction_status, prediction.prediction_status)
-			),
-			prediction.prediction_input_revision,
-			prediction.plan_revision
-		]
-	)
-	if prediction.available:
-		_labels.prediction.text += "\n" + _prediction_value(prediction.current)
-	elif prediction.prediction_status == "FAILED":
-		_labels.prediction.text += " · 자료 없음: " + reason_text(prediction.reason)
-	else:
-		_labels.prediction.text += " · 자료 없음 / 예측 계산을 선택하세요"
-	_labels.previous.text = ""
-	if not prediction.previous.is_empty():
-		_labels.previous.text = (
-			"이전 입력판 %d (비교용): %s"
-			% [prediction.previous.input_revision, _prediction_value(prediction.previous)]
-		)
+	var text := Operations.prediction_messages(prediction, _observation.regions.previous)
+	_labels.prediction.text = text.current
+	_labels.previous.text = text.previous
 
 
 func _prediction_value(result: Dictionary) -> String:
-	var value: Dictionary = result.value
-	return (
-		(
-			"예측 기간 [%d, %d) 게임분 · %d km / 종단 %d 게임분\n"
-			+ "요청 %d / 탑승 %d / 완료 %d 통행 · 예상 운임 %d / 운영비 %d (실적 아님) · 생성 게임분 %d"
-		)
-		% [
-			value.period_start,
-			value.period_end,
-			value.distance_km,
-			value.end_to_end_minutes,
-			value.totals.requested,
-			value.totals.boarded,
-			value.totals.completed,
-			value.totals.predicted_fare,
-			value.totals.operating_cost,
-			result.generated_minute
-		]
-	)
+	return Operations.prediction_value(result)
 
 
 func reason_text(code: String) -> String:
-	return (
-		{
-			"": "현재 상태를 확인하세요",
-			"STATION_COUNT": "서로 다른 역 6~8개가 필요합니다",
-			"DUPLICATE_STATION": "이미 선택한 역입니다",
-			"DISCONNECTED": "이어지지 않은 역 구간이 있습니다",
-			"OUTSIDE_JURISDICTION": "관할에 없는 역입니다",
-			"PLAN_LOCKED": "계획이 잠겨 있습니다",
-			"NO_UNDO_HISTORY": "되돌릴 이력이 없습니다",
-			"UNDO_FAILED": "되돌리기 실패: 상태를 다시 확인하세요",
-			"STATE_CHANGED": "계획이 변경됐습니다. 다시 확인하세요",
-			"INVALID_SPEED": "배속은 1·2·4만 가능합니다",
-			"INVALID_PLAN": "계획 조건을 먼저 확인하세요",
-			"INVALID_INPUT": "예측 입력을 확인하세요",
-			"STATION_NOT_SELECTED": "선택된 노선 역이 아닙니다",
-			"INVALID_INDEX": "이동할 순서를 확인하세요"
-		}
-		. get(code, "정보를 확인하지 못했습니다: " + code)
-	)
+	return Operations.reason_text(code)
 
 
 func reset_observation() -> void:
-	_displayed_revision = -1
-	shown = {}
-	operations_view.shown = {}
-	finance_view.shown = {}
-	_selected_id = ""
+	# 같은 Session의 표시만 갱신한다. 관측 하한/자식 이력을 되감지 않는다.
 	_focus_feedback = ""
-	_list_stops = []
-	plan_list.clear()
-	_labels.feedback.text = "후보역을 선택해 노선을 편집하세요."
 	_last_usec = Time.get_ticks_usec()
-	_build_candidates()
-	present(session.snapshot())
+	present(session.snapshot() if _binding_valid() else null)
 
 
 func _build_candidates() -> void:
-	for child: Node in _candidates.get_children():
-		_candidates.remove_child(child)
-		child.queue_free()
-	candidate_buttons.clear()
-	for station: Dictionary in session.snapshot().stations:
-		var id: String = station.id
+	if not _observation.regions.map:
+		for button: Button in candidate_buttons.values():
+			button.disabled = true
+		return
+	var ids: Array = shown.stations.map(func(row: Dictionary) -> String: return row.id)
+	for id: String in candidate_buttons.keys():
+		if id not in ids:
+			var old: Button = candidate_buttons[id]
+			old.disabled = true
+			_candidates.remove_child(old)
+			old.queue_free()
+			candidate_buttons.erase(id)
+	for id: String in ids:
+		if candidate_buttons.has(id):
+			continue
 		var button := Button.new()
 		button.text = id
 		button.name = "List_" + id
@@ -517,6 +493,8 @@ func _build_candidates() -> void:
 
 
 func _open_tenders() -> void:
+	if not _binding_valid() or not _observation.regions.tender_ui:
+		return
 	tender_view.controls.exit.text = (
 		"재무·보고로 돌아가기" if not _report_return.is_empty() else "S01 노선 계획으로"
 	)
@@ -531,6 +509,8 @@ func _open_tenders() -> void:
 
 
 func _close_tenders() -> void:
+	if not _binding_valid():
+		return
 	if not _report_return.is_empty():
 		var previous := _report_return
 		_report_return = {}
@@ -545,16 +525,22 @@ func _close_tenders() -> void:
 
 
 func _bid_requested(id: String, tender_id: String, confirmed: Dictionary) -> void:
+	if not _binding_valid() or not tender_view.visible or not _observation.regions.tender_ui:
+		return
 	session.request_bid(id, tender_id, confirmed)
 	present(session.snapshot())
 
 
 func _refresh_tenders() -> void:
+	if not _binding_valid() or not tender_view.visible or not _observation.regions.tender_ui:
+		return
 	session.refresh_tenders()
 	present(session.snapshot())
 
 
 func _open_construction(project_id: String) -> void:
+	if not _binding_valid() or not _observation.regions.construction_ui:
+		return
 	_scroll.follow_focus = true
 	tender_view.hide()
 	construction_view.select_project(project_id)
@@ -564,6 +550,8 @@ func _open_construction(project_id: String) -> void:
 
 
 func _close_construction() -> void:
+	if not _binding_valid():
+		return
 	_scroll.follow_focus = false
 	construction_view.hide()
 	tender_view.show()
@@ -573,11 +561,23 @@ func _close_construction() -> void:
 
 
 func _construction_requested(id: String, action: String, confirmed: Dictionary) -> void:
+	if (
+		not _binding_valid()
+		or not construction_view.visible
+		or not _observation.regions.construction_ui
+	):
+		return
 	session.request_construction(id, action, confirmed)
 	present(session.snapshot())
 
 
 func _refresh_construction() -> void:
+	if (
+		not _binding_valid()
+		or not construction_view.visible
+		or not _observation.regions.construction_ui
+	):
+		return
 	_scroll.follow_focus = true
 	session.refresh_construction()
 	present(session.snapshot())
@@ -587,6 +587,8 @@ func _refresh_construction() -> void:
 
 
 func _focus_resized() -> void:
+	if not _binding_valid():
+		return
 	if construction_view != null and construction_view.visible:
 		_scroll.follow_focus = true
 		var region: Control = construction_view.focus_region()
@@ -596,7 +598,12 @@ func _focus_resized() -> void:
 
 func _ensure_focus_region(region: Control) -> void:
 	# 레이아웃 반영 후에도 같은 대상에 포커스가 있을 때만 스크롤한다.
+	if not _binding_valid():
+		return
+	var generation := _navigation_generation
 	await get_tree().process_frame
+	if not _binding_valid() or generation != _navigation_generation:
+		return
 	if not is_instance_valid(region) or not region.is_visible_in_tree():
 		return
 	if construction_view.is_ancestor_of(region) and not _scroll.follow_focus:
@@ -605,6 +612,8 @@ func _ensure_focus_region(region: Control) -> void:
 	if owner != null and (owner == region or region.is_ancestor_of(owner)):
 		_scroll.ensure_control_visible(region)
 		await get_tree().process_frame
+		if not _binding_valid() or generation != _navigation_generation:
+			return
 		if not is_instance_valid(region) or get_viewport().gui_get_focus_owner() != owner:
 			return
 		_focus_sequence += 1
@@ -672,6 +681,8 @@ static func read_construction_key(
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
+	if not _binding_valid():
+		return
 	for panel: Control in [construction_view, operations_view, finance_view]:
 		if read_construction_key(_scroll, panel, event):
 			get_viewport().set_input_as_handled()
@@ -679,6 +690,8 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if not _binding_valid():
+		return
 	# 새 읽기 패널은 ScrollContainer가 Home/End를 먼저 소비하기 전에 처리한다.
 	for panel: Control in [operations_view, finance_view]:
 		if read_construction_key(_scroll, panel, event):
@@ -691,7 +704,9 @@ func _input(event: InputEvent) -> void:
 
 
 func _reading_context() -> Dictionary:
-	var screen := "plan"
+	var screen := _suspended_child.trim_suffix("_ui") if not _suspended_child.is_empty() else "plan"
+	if screen == "tender":
+		screen = "tenders"
 	for entry: Array in [
 		["tenders", tender_view],
 		["construction", construction_view],
@@ -701,6 +716,7 @@ func _reading_context() -> Dictionary:
 		if entry[1].visible:
 			screen = entry[0]
 	return {
+		"scope": _scope,
 		"screen": screen,
 		"focus": get_viewport().gui_get_focus_owner(),
 		"scroll": _scroll.scroll_vertical
@@ -708,6 +724,10 @@ func _reading_context() -> Dictionary:
 
 
 func _show_reading(screen: String) -> void:
+	if not _binding_valid():
+		return
+	_navigation_generation += 1
+	_suspended_child = ""
 	for section: Control in _planning_sections:
 		section.visible = screen == "plan"
 	tender_view.visible = screen == "tenders"
@@ -720,6 +740,8 @@ func _show_reading(screen: String) -> void:
 
 
 func _open_reading(screen: String) -> void:
+	if not _binding_valid() or not _observation.regions.get(screen + "_ui", false):
+		return
 	if _reading_context().screen == screen:
 		return
 	_screen_history.append(_reading_context())
@@ -727,13 +749,17 @@ func _open_reading(screen: String) -> void:
 	var target: Control = (
 		operations_view.controls.finance if screen == "operations" else finance_view.controls.first
 	)
-	if target.disabled:
-		target = finance_view.controls.refresh
+	if not Contract.focus_valid(target):
+		target = _fallback(screen)
+	if target == null:
+		return
 	target.grab_focus()
 	_ensure_focus_region(target)
 
 
 func _return_reading() -> void:
+	if not _binding_valid():
+		return
 	if _screen_history.is_empty():
 		_show_reading("plan")
 		return
@@ -741,18 +767,30 @@ func _return_reading() -> void:
 
 
 func _restore_reading(context: Dictionary) -> void:
+	if not _binding_valid() or context.get("scope") != _scope:
+		return
 	_show_reading(context.screen)
+	var owner := get_viewport().gui_get_focus_owner()
+	var generation := _navigation_generation
 	await get_tree().process_frame
 	await get_tree().process_frame
+	if not _binding_valid() or generation != _navigation_generation:
+		return
+	if _reading_context().screen != context.screen or get_viewport().gui_get_focus_owner() != owner:
+		return
 	var target: Variant = context.focus
-	if is_instance_valid(target) and target is Control and target.is_visible_in_tree():
+	if not Contract.focus_valid(target):
+		target = _fallback(context.screen)
+	if target != null and is_ancestor_of(target):
 		target.grab_focus()
 	_scroll.follow_focus = false
 	_scroll.scroll_vertical = context.scroll
 
 
 func _select_report(day: int) -> void:
-	if not finance_view.visible:
+	if not finance_view.day_allowed(day):
+		return
+	if not _binding_valid() or not finance_view.visible or not _observation.regions.finance_ui:
 		return
 	var result := session.select_finance_report(day)
 	present(session.snapshot())
@@ -761,7 +799,7 @@ func _select_report(day: int) -> void:
 
 
 func _refresh_finance() -> void:
-	if not finance_view.visible:
+	if not _binding_valid() or not finance_view.visible or not _observation.regions.finance_ui:
 		return
 	present(session.snapshot())
 	finance_view.show_result({"accepted": true})
@@ -769,7 +807,10 @@ func _refresh_finance() -> void:
 
 
 func _query_business(confirmed: Dictionary) -> void:
-	if not finance_view.visible:
+	if not _binding_valid() or not finance_view.visible:
+		return
+	if not finance_view.confirmation_current(confirmed):
+		finance_view.labels.feedback.text = "표시한 보고와 현재 허용 행동을 다시 확인해 주세요"
 		return
 	var result := session.query_next_business(confirmed)
 	present(session.snapshot())
@@ -796,3 +837,143 @@ func _log_reading(action: String, result: Dictionary) -> void:
 			}
 		)
 	)
+
+
+## 새 Session에는 호스트와 전체 자식을 새로 만든다. 기존 인스턴스를 재바인딩하지 않는다.
+static func replace_session(previous: Control, next: Session) -> Control:
+	var parent := previous.get_parent()
+	var index := previous.get_index()
+	var vertical := previous.size_flags_vertical
+	previous.retire()
+	parent.remove_child(previous)
+	previous.queue_free()
+	var replacement: Control = load("res://scenes/stage1.tscn").instantiate()
+	replacement.session = next
+	replacement.size_flags_vertical = vertical
+	parent.add_child(replacement)
+	parent.move_child(replacement, index)
+	return replacement
+
+
+func retire() -> void:
+	_retired = true
+	_navigation_generation += 1
+	set_process(false)
+	set_process_input(false)
+	set_process_unhandled_key_input(false)
+	hide()
+	for panel: Node in [map_view, tender_view, construction_view, operations_view, finance_view]:
+		for entry: Dictionary in panel.get_signal_list():
+			for connection: Dictionary in panel.get_signal_connection_list(entry.name):
+				if connection.callable.get_object() == self:
+					panel.disconnect(entry.name, connection.callable)
+
+
+func _binding_valid() -> bool:
+	return (
+		not _retired
+		and is_inside_tree()
+		and not is_queued_for_deletion()
+		and _bound_session != null
+		and session == _bound_session
+	)
+
+
+func _render_clock(valid: bool) -> void:
+	var fixture: Variant = shown.get("fixture_label", "")
+	_labels.title.text = "MetroManager · S01 노선 계획"
+	if fixture is String and not fixture.is_empty():
+		_labels.title.text += " · 검증 전용: " + fixture
+	_labels.clock.text = "게임 시간 확인 중 · 자료 없음"
+	if valid:
+		var clock: Dictionary = shown.clock
+		_labels.clock.text = (
+			"게임일 %d %02d:%02d · %s · %d×"
+			% [
+				clock.day_id,
+				(clock.simulation_minute / 60) % 24,
+				clock.simulation_minute % 60,
+				"일시정지" if clock.paused else "진행 중",
+				clock.speed
+			]
+		)
+	for action: String in ["pause", "resume"]:
+		controls[action].disabled = not Contract.action_allowed(shown, _observation.regions, action)
+	for speed: int in [1, 2, 4]:
+		var enabled := Contract.action_allowed(shown, _observation.regions, "speed")
+		controls["speed%d" % speed].disabled = (
+			not enabled or speed not in shown.allowed_actions.speed
+		)
+		controls["speed%d" % speed].text = (
+			("[%d×]" if valid and shown.clock.speed == speed else "%d×") % speed
+		)
+
+
+func _render_children(region: Dictionary) -> void:
+	for entry: Array in [["tender_ui", tender_view], ["construction_ui", construction_view]]:
+		var panel: Control = entry[1]
+		if region[entry[0]]:
+			panel.process_mode = Node.PROCESS_MODE_INHERIT
+			panel.mouse_filter = Control.MOUSE_FILTER_STOP
+			panel.present(shown[entry[0]])
+			if _suspended_child == entry[0]:
+				panel.show()
+				_suspended_child = ""
+		else:
+			# 이전 자식의 입력·표시는 정상 공급 복귀까지 숨긴다.
+			if panel.visible:
+				_suspended_child = entry[0]
+			panel.hide()
+			panel.process_mode = Node.PROCESS_MODE_DISABLED
+			panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	controls.open_tenders.disabled = not region.tender_ui
+	controls.open_operations.disabled = not region.operations_ui
+	controls.open_finance.disabled = not region.finance_ui
+	operations_view.present(shown)
+	finance_view.present(shown)
+	_labels.operations_summary.text = "운행 흐름(대표 표시)\n" + Operations.summary(shown)
+
+
+func _disable_plan() -> void:
+	for id: String in ["up", "down", "remove", "undo", "predict"]:
+		controls[id].disabled = true
+	for button: Button in candidate_buttons.values():
+		button.disabled = true
+
+
+func _render_result(valid: bool) -> void:
+	_labels.feedback.text = "현재 상태와 허용된 행동을 확인하세요"
+	if valid:
+		var result: Dictionary = shown.command_result
+		if not result.is_empty():
+			_labels.feedback.text = (
+				"당시 요청 %s: %s · %s · 게임분 %d"
+				% [
+					result.command_id,
+					"처리됨" if result.accepted else "처리되지 않음",
+					reason_text(result.get("reason", "")),
+					result.effective_at
+				]
+			)
+	if not _focus_feedback.is_empty() and _observation.regions.plan and _observation.regions.map:
+		_labels.feedback.text = _focus_feedback
+
+
+func _fallback(screen: String) -> Control:
+	var options: Array
+	match screen:
+		"operations":
+			options = [operations_view.controls.back, operations_view.labels.title]
+		"finance":
+			options = [
+				finance_view.controls.day, finance_view.controls.refresh, finance_view.labels.title
+			]
+		"tenders":
+			options = [tender_view.controls.refresh, _labels.title]
+		"construction":
+			options = [construction_view.controls.back, _labels.title]
+		_:
+			options = [plan_list] if _observation.regions.plan and plan_list.item_count > 0 else []
+			options.append_array(candidate_buttons.values())
+			options.append(_labels.title)
+	return Contract.focus_fallback(self, options)

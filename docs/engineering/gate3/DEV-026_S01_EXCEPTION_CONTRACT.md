@@ -1,6 +1,6 @@
 # DEV-026 — DSG-008 S01 예외 공급·소비 계약 검토안
 
-> **현재 상태 — 2026-11-21:** STAGE3_SCOPE_CONFIRMED / IMPLEMENTATION_READINESS_PENDING / PRODUCT_VALIDATION_NOT_RUN. #146의 사전 의견은 수신했으며 실제 공급·제품 L2/검증 수용은 PENDING이다. 현재 범위·권한은 §7을 따른다. 그 앞의 2026-11-14 검토·선행 티켓 대기·HOLD·검증 기록은 당시 이력으로 보존한다. 이번 승인은 문서 보완·Commit/Push/PR이며 제품 구현·실행·main 병합은 별도다.
+> **현재 상태 — 2026-11-21:** PR_REVIEW_PARTIAL / TEST_PATH_REASSIGNMENT_PENDING / PRODUCT_L2_PENDING. Owner가 기존23개 파일의 Commit·Push·Draft PR 공유를 요청했다([티켓 §9](../tasks/DEV-026_S01_EXCEPTION_SCOPE.md)). 기존 GUI35개 실패·검사기 재지정 승인 대기·Design 수용 대기는 유지한다. 앞선 HOLD/NOT_RUN·로컬 검토 기록은 당시 이력이며 main 병합은 별도 승인이다.
 
 - 작성: Development / AGT-DEV-0004 / 2026-11-14 / v0.1.
 - 상태: **DOCUMENT_REVIEW / CONTRACT_PROPOSED / OWNER_IMPLEMENTATION_DEFERRED**.
@@ -177,6 +177,21 @@ F08-01~04·최종 글꼴/창/DPI/배율/필터/FPS/상한은 별도 OPEN/미확�
 이 내용은 DEV-027의 제안 전이를 소비하는 표현 요구다. DEV-026/Track B가 잠금·편집·접수 효력의 게임 규칙을 새로 정하거나 Track A 기능 L2 수용을 대신하지 않는다. W04B 실제 대기는 신규 실제 공급 행으로 다루고 EX-16의 일반 S01 가짜 대기 제외는 유지한다. EX-05 소비 fixture 한정·EX-18 격리 외부역도 유지한다.
 
 RFC-DEV-026-01의 **Design 의견은 수신됨**: Track B 제안 의미 이견 없음, Track A 공통 기능 영향 방향 이견 없음. **실제 계약 표본/제품 L2·검증 수용 PENDING / RFC OPEN·PROPOSED**로 추적한다. HQ가 정한 Stage 3 편입을 다시 승인 대기로 돌리지 않으며, UI 최종 수용을 비의존 모델 공급 생성의 선행조건으로 역전하지 않는다. Planning의 E01 미결은 해당 종속 W04B 연결만 보류한다.
+
+## 8. 로컬 구현 계약 — 2026-11-21 / 실제 공급 심사 대기
+
+착수 base `ecb2708bfa7bd3230d56c60b910d6831511953c6`, 브랜치 `codex/DEV-026-s01-exception-implementation`. 미커밋 시험본은 [결과·파일 해시](../evidence/DEV-026_S01_EXCEPTION_RESULTS.json)로 식별한다. §1~7의 제안/당시 권한 기록을 보존하며 다음은 로컬 구현된 사실이다. 정식 Design 인수로 승격하지 않는다.
+
+- `Stage1Session.snapshot()`은 `ui_contract_revision=DEV026-S01-EX-v0.1`·`run_scope`를 공급한다. `observation_scope()`는 실제 Session 소속, `finance_report_day()`는 실제 선택 문맥의 마감일을 읽는다. 영구 식별·모델 enum·경제/세이브 규칙은 추가하지 않았다.
+- `s01_observation_contract.gd`는 순수 구조/소속 검사와 영역별 유효성·행동 의존성을 제공한다. 금액/상태를 계산하거나 원장을 수정하지 않는다. 최상위 무효는 현재 표시/행동 제한, 역행/다른 scope는 기존 표시 유지·폐기다. 같은 판의 remainder 변화는 수용하며 `reset_observation()`이 수신 하한을 되감지 않는다.
+- S01은 시계·계획·지도·현재 자금·당일·현재/이전 예측·보고·과거 결과·자식 전달을 나누어 검사한다. 부분 자금/당일 공급은 서로와 유효한 고정 과거 보고를 일괄 숨기지 않는다. 정보 선택은 모델 명령을 만들지 않고 편집 요청은 표시한 계획판을 전달한다.
+- P06/P07은 실제 Session에 한 번 귀속한다. P07은 root 직전일 대신 실제 선택일을 기대값으로 삼으며, 표시 보고·확인 사본·현재 허용 조건과 맞지 않는 조회는 전달하지 않는다. 유효0/자료 없음/실패/관측 불일치를 구별한다. UI 열람 성공은 계약/응찰 성공이 아니다.
+- 새 Session 전환은 `Stage1View.replace_session(previous, next)`로 새 호스트/전체 자식을 만든다. 옛 호스트의 process·입력·자식 signal 연결을 해제하고 binding을 무효화한다. 옛 callback·확인 사본·화면 이력·선택일을 새 실행으로 이관하지 않는다. 제품 main의 기존 신규 생성 경로는 변경하지 않았다.
+- 복귀의 비동기 프레임 대기는 binding·화면 세대·현재 화면·사용자 포커스를 다시 확인한다. 유효 목적지가 없으면 S01 목록/후보/제목, P06 뒤로/제목, P07 보고일/재확인/제목 순의 살아 있는 Control을 사용한다. 목적지 포커스만으로 모델 요청을 만들지 않는다. 검증 가능한 직접 영향 행은 증거 색인에 연결한다.
+
+EX-05는 소비 CALCULATING 표본에 한정하고 동기 제품에 인위 대기를 만들지 않았다. EX-16의 일반 S01 pending은 적용 제외다. EX-18은 기존 격리 외부역 검증이며 기본 DATA/12후보는 불변이다. W04B 신규 공급·기능 L2는 DEV-027 후속, DI-03/E01 미결·F08 전체 규격은 별도로 보존한다. 깊은 W04A/W05 내부 봉투 스키마 개편과 전체 자연 VS-02 완주는 이번 결과가 아니다.
+
+RFC-DEV-026-01은 OPEN / IMPLEMENTED_LOCALLY / PRODUCT_L2_PENDING. 사전 의견은 수신됐지만 실제 제품 L2·독립 실행·Design 심사는 아직 수용되지 않았다. 신규 게임/경제/세이브 명세 변경 필요 NONE. 확인된 실제 경로 차이만 [티켓 §8.1](../tasks/DEV-026_S01_EXCEPTION_SCOPE.md)에 명시한다.
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-026

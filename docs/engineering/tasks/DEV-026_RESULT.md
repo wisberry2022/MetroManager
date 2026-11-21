@@ -1,6 +1,6 @@
 # DEV-026 — DSG-008 후속 계약 검토·Owner 착수 순서 결정
 
-> **현재 상태 — 2026-11-21:** STAGE3_SCOPE_CONFIRMED / IMPLEMENTATION_READINESS_PENDING / PRODUCT_VALIDATION_NOT_RUN. #146의 사전 의견은 수신했으며 실제 공급·제품 L2/검증 수용은 PENDING이다. 현재 범위·권한은 마지막 2026-11-21 후속 절을 따른다. 그 앞의 2026-11-14 검토·선행 티켓 대기·HOLD·검증 기록은 당시 이력으로 보존한다. 이번 승인은 문서 보완·Commit/Push/PR이며 제품 구현·실행·main 병합은 별도다.
+> **현재 상태 — 2026-11-21:** PR_REVIEW_PARTIAL / TEST_PATH_REASSIGNMENT_PENDING / PRODUCT_L2_PENDING. Owner가 기존23개 파일의 Commit·Push·Draft PR 공유를 요청했다([티켓 §9](DEV-026_S01_EXCEPTION_SCOPE.md)). 기존 GUI35개 실패·검사기 재지정 승인 대기·Design 수용 대기는 유지한다. 앞선 HOLD/NOT_RUN·로컬 검토 기록은 당시 이력이며 main 병합은 별도 승인이다.
 
 - 담당: Development / AGT-DEV-0004 / 2026-11-14.
 - 현재 상태: **DOCUMENT_REVIEW / CONTRACT_PROPOSED / OWNER_IMPLEMENTATION_DEFERRED**.
@@ -122,6 +122,47 @@ Design의 사전 검토 대상은 지역 자료/행동군 의존성, 최소 메�
 - 제품 자동/프로젝트 로드/GUI/독립 실행/실험/빌드/export: **NOT_RUN**.
 
 미해결: 실제 공급/제품 L2·검증 수용, RFC-DEV-026-01 OPEN·PROPOSED, 별도 구현/실행·미래 제품 Git 및 main 병합 권한. DI-03 Planning 확인은 종속 W04B만의 잔여다. Track B RD별 최종 심사/F08 선택/적용은 #92에 유지한다. 새 게임 명세 변경 필요는 현재 확정하지 않았다.
+
+## 2026-11-21 후속 — DEV-026 로컬 구현·검증
+
+Owner가 두 문서 PR의 main 병합 후 DEV-026 우선 진행을 지시했다. [티켓 §8](DEV-026_S01_EXCEPTION_SCOPE.md)의 원문·범위에 따라 base `ecb2708bfa7bd3230d56c60b910d6831511953c6`에서 독립 worktree/브랜치 `codex/DEV-026-s01-exception-implementation`로 작업했다. 공유 root의 기존 DATA 수정2개는 보존했다. 앞선 문서 검토/보류·기존 Stage 2 증거는 당시 기록이며 이번 구현을 과거 수용으로 소급하지 않는다.
+
+현재 결과는 **LOCAL_REVIEW_PARTIAL / OWNER_TEST_PATH_REASSIGNMENT_PENDING / PRODUCT_L2_PENDING**이다. [증거 색인](../evidence/DEV-026_S01_EXCEPTION_EVIDENCE.md)과 [결과 JSON](../evidence/DEV-026_S01_EXCEPTION_RESULTS.json)에 실제 명령·종료·오류·범위별 근거·파일 해시·남은 행을 연결한다.
+
+| 변경 묶음 | 실제 효과 |
+| --- | --- |
+| Session·신규 순수 계약 검사기 | 최소 메타데이터/실행 소속·선택 보고일 공급, 구조·지역·판·행동 guard, 부분 자금/당일 독립 공급 |
+| Stage1 View/Map | 잘못된 현재 관측의 표시·입력 제한, 사라진 marker 제거, 표시 계획판 명령 전달, 새 Session 전체 View 재생성·옛 callback 차단·유효 포커스 복귀 |
+| P06/P07 | 실제 Session 귀속, 독립 유효 영역 유지, FIXED_DAY/확인 사본 검증 및 오래된 조회 보류 |
+| W07/F08 기존 전환기·신규 자동/GUI fixture | 기존 새 Session 대입을 새 호스트로 정렬, 경계 반례·실패 감지·실제 OS 입력/화면/무효과 기록. F08 규격 재선정 없음 |
+| 계약/범위/계획/본 결과·출처/증거 | 현재 구현 권한·행 의존성·실행 구분·원본 로그 식별과 남은 검토 범위 |
+
+실제 경로 목록과 변경 해시는 JSON의 `changed_files`를 정본으로 삼는다. 승인된 최대24개 경로 밖 제품 변경은 없으며 `run_operations_gui_cases.gd` 재지정은 §8.1 승인 대기다. 원장/시각/경제 모델·DATA·scenes·project.godot·타 부서 문서·정책/CI는 변경하지 않았다.
+
+미해결은 기존 소비 전환기 경로 재지정/관련 회귀, 실제 공급 L2·독립 실행·Design 검증 수용 및 Owner 로컬 검토다. W04B 실제 공급은 DEV-027 후속, DI-03/E01과 F08 최종 규격은 별도다. 새 게임/경제/세이브 명세 변경 필요 NONE, RFC-DEV-026-01은 제품 수용까지 OPEN이다.
+
+이번 제품 Commit·Push·PR·원격 필수 CI·main 병합·릴리스/배포는 **NOT_RUN / 별도 승인**이다. 승인된 이전 문서 PR의 CI를 이번 미커밋 제품 검증으로 전용하지 않는다. 빌드/export·성능·전체 자연 VS-02는 NOT_RUN이다. 완료 보고는 검수 요청이며 공식 승인/DONE이 아니다.
+
+### 최종 로컬 대조 — 승인 대기 잔여 분리
+
+- 신규 자동 경계 **334/334 PASS**, W07 **322/322 PASS**, 각 exit0·엔진/스크립트 오류0. 타입 검사를 선행하도록 보완하고 첫날 이후 보고 없음·root/P07 보고 식별·부분 재무 공급·복귀를 단언했다.
+- W03 **101**, 입찰 UI **460**, 공사 UI **898**, P06/P07 공급 **158** 검사 PASS. 각 실행의 원본 SHA 대신 착수 full base와 당시 파일 해시를 연결하며 최신 main에서 새로 실행한 것으로 기록하지 않는다.
+- 기존 GUI 자동 검사 **245개 중35개 FAIL / exit1 / 엔진 오류0**. V05·U11·U17의 최초 실패6개는 후속 대조에서 해소됐고, 남은35개는 `_consumer_cases()`의 Session 미귀속/다중 실행 표본 경로에 있다. 검사기를 아직 수정하지 않았고 전체 PASS를 선언하지 않는다. 정확한 단언/로그는 증거 JSON `operations-02`에 연결한다.
+- DEV 자체 GUI2회에서 총21개 viewport 캡처를 보관했다. 전체 자료/자금 지역 누락·동일 Session 복구, 지도→목록 포커스·같은 ID, P07 Tab/Enter 왕복·고정 과거 보고, 새 Session의 새 View를 관찰했다. 자동 단언 수에 합산하지 않는다.
+- 프로젝트 로드·제품 headless 초기화 PASS. 격리 DATA 실패는 실제 main의 exit1, 제품 DATA 불변. 제한 환경 Safe save 오류·초기 parse 오류·포커스 실패1/263·타입 경계 SCRIPT ERROR6개는 원본 보존했다. **종료0이나 failures0만으로 PASS로 처리하지 않는다.**
+- doctor/check PASS. gdtoolkit GDScript57개 포맷·lint 정상. 최종 문서/23개 경로·UTF-8/LF·상대 링크·출처 blob·미수정 모델/DATA 대조는 `.local/validation/DEV-026/final-audit.json`을 따른다. SHA-256 정본은 결과 JSON이며 마지막 LF 정리는 전후 바이트 해시를 별도 기록한다.
+
+현재 로컬 변경은 **23개 파일**이다. 최대24개를 유지하는 검사기1개 재지정 승인을 받으면 기존 단언을 보존한 전환기 정렬과 해당 회귀를 마무리할 수 있다. 이는 현재 정확한 후보 경로에 없는 파일이므로 [AGENTS.md](../../../AGENTS.md)의 “작업 티켓의 포함·제외 범위를 준수”에 따라 요청한 구체 차이다. 요청 원문/제안은 티켓 §8.1에 보존했다. 이 승인을 Commit·Push·PR 권한으로 확대하지 않는다.
+
+## 2026-11-21 후속 — 기존 PARTIAL 작업본의 Draft PR 제출
+
+Owner의 “개발 에이전트. 작업 내용을 PR로 만들어주세요”에 따라 [티켓 §9](DEV-026_S01_EXCEPTION_SCOPE.md)의 기존23개 파일 Commit·Push·Draft PR·필수 CI 확인을 진행한다. 현재 판정은 **PR_REVIEW_PARTIAL / TEST_PATH_REASSIGNMENT_PENDING / PRODUCT_L2_PENDING**이다. 앞 절의 Git 미승인/미실행은 로컬 검토 당시 상태로 보존한다.
+
+제출 base `63550826af8b6ae9a46bda2e4bb826dd1ed7cd79`는 최초 시험 base 이후 기획 문서3개만 포함한다. 소스/시험16개와 기존334·322·101·460·898·158 검사·GUI21캡처의 원본 해시는 보존했다. 제출 준비에서 새 게임 실행·GUI·빌드를 반복하지 않는다. 원본은 로컬 `.local/validation/DEV-026/`, PR에는 결과 JSON/단언 요약·35개 실패 항목·해시 색인만 포함한다. 로컬 경로는 GitHub에서 제공되는 원본 다운로드 링크가 아니다.
+
+신규334/W07 322 및 기존 공급 회귀 PASS와 기존 GUI245개 중35개 FAIL을 구분한다. CI `policy`·`department-policy`는 저장소/경로 검사이며 Godot 게임 실행을 포함하지 않는다. CI 통과로35개 실패나 Design 수용 대기를 해소하지 않는다. 검토할 잔여는 그대로이며 main 병합 승인은 별도다.
+
+정상 훅/출처 선언·최신 main 포함/단일 부모·경로·preflight 및 원격 head CI를 제출 단계에서 확인한다. 정확한 head와 실제 검사 결과는 이 PR의 본문/Checks에 연결한다.
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-026
