@@ -1,5 +1,9 @@
 # DEV-026 — DSG-008 S01 예외 공급·소비 계약 검토안
 
+> **최신 후속 — 2026-11-21:** [Track B 검수 의견](https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7056903693) 수신 / LIMITED_ACCEPTANCE_RECOMMENDED / OVERALL_PARTIAL / OWNER_REVIEW_REQUESTED. PR #153·#154 병합과 현재 공급에 대한 독립 실행·Design 증거 심사 보고를 연결했다. 이는 Owner 최종 수용·RFC 종결·S3-12/DONE이 아니다. 아래 이전 PENDING/HOLD/미커밋 기록은 당시 이력이며 현재 판단과 잔여는 마지막 후속 절을 따른다.
+
+<!-- 이전 본문은 당시 상태로 보존하며 최신 효력은 후속 절을 따른다. -->
+
 > **현재 로컬 후속 — 2026-11-21:** 경로 재지정 승인 적용·기존35개 실패 해소·자동 GUI266/266 PASS. LOCAL_REVIEW / PRODUCT_L2_PENDING. 후속8개 파일은 미커밋이며 Commit·Push·main 병합은 별도 승인이다. 아래 이전 본문의 PARTIAL·승인 대기·NOT_RUN은 당시 기록이고 최신 근거는 마지막 후속 절과 증거 JSON gui_followup을 따른다.
 
 <!-- 아래 이전 본문은 당시 상태로 보존한다. -->
@@ -202,6 +206,31 @@ RFC-DEV-026-01은 OPEN / IMPLEMENTED_LOCALLY / PRODUCT_L2_PENDING. 사전 의견
 [티켓 §10](../tasks/DEV-026_S01_EXCEPTION_SCOPE.md)의 승인으로 소비 검사를 현재 계약에 맞췄다. **제품 API·guard·표시·행동은 변경하지 않았다.** 독립 표본은 새 Session binding, P07 기대일은 준비 때 고정한 TEST_ONLY 문맥, 연속 복구는 같은 Session/View를 사용한다. 보관 표본은 불변이며 복제본의 일치하는 보고/조회 key만 해당 시험 실행으로 귀속한다.
 
 이는 모델에서 보고/입찰을 생성한 증거가 아니다. 준비 후 다른 scope/day/value와 낡은 관측을 주입해 거부/복구를 검증했다. 기존 제품 사슬 단언은 그대로다.35개 실패 해소는 RP-03/04·RP-05/06 소비 회귀 보완이며 Design L2/독립 인수와 RFC/W04B 잔여는 유지한다.
+
+## 10. RFC-DEV-026-01 후속 — Track B 검수 의견과 P07 의미 경계
+
+- 상태: **OPEN / IMPLEMENTED / TRACK_B_REVIEW_RECEIVED / OWNER_DECISION_PENDING**. 기존 RFC를 유지하며 새 DEC 또는 승인 기록을 생성하지 않는다.
+- 요청 부서: DEV / 응답: Design Track B / 검토 관련: Track A·HQ·Owner.
+- 근거: [Track B #104 검수 의견](https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7056903693), 시험본 ae614d922c837eddf4e615fda985bd978e217461, [DEV-023 동선 계약](DEV-023_UI_SUPPLY_AND_EXECUTION_PLAN.md) §3·9.3·11, [U17](DEV-023_UI_VALIDATION_PLAN.md), 본 문서 §7.3.
+
+### 현황과 DEV 판단
+
+Track B는 현재 공급의 L2/RP/EX 행에 **한정 수용 가능** 의견을 제출했다. 새 기능 결함을 확정하지 않았고 내부 수명/옛 callback의 자동·소스 근거를 재사용할 수 있다고 판단했다. DEV는 해당 의견을 접수하며 독립 OS 관측의 PARTIAL/INCONCLUSIVE를 PASS로 변경하지 않는다.
+
+| 구분 | 기존 계약/실제 구현과 증거 | DEV 의견 및 한계 |
+| --- | --- | --- |
+| 저장한 문맥으로 복귀 | Host _reading_context/_query_business/_close_tenders/_restore_reading이 scope·화면·focus·scroll을 저장/복원하고 세대·사용자 이동을 재확인. 독립 관측은 마감일4·스크롤605의 P07→P01→보고 복원 | 기존 읽기 문맥 보존 요구와 일치. 해당 관측 범위의 한정 수용안에 이견 없음 |
+| 닫은 뒤 일반 재진입 | _return_reading은 이전 화면 문맥으로 돌아가며 _open_reading은 새 진입 목적지에 포커스를 배치. 선택일1·본문 유지/스크롤628→0은 Track B가 보고한 관측 | 검토한 계약에서 일반 재진입까지 마지막 P07 스크롤을 항상 보관할 명시 의무는 확인하지 못함. 즉시 결함/수정으로 처리하지 않는 판단안에 이견 없음. 요구의 최종 해석은 Owner/Track A 검토 대기 |
+| 고정일1·비영점 스크롤의 중첩 문맥 복귀 | 원본 미관측. 일4의 복귀와 일1의 일반 재진입은 서로 다른 증거 | NOT_OBSERVED/PARTIAL 보존. 일4 관측을 일1로 소급하거나 현재 필수 실패로 자동 집계하지 않음 |
+
+이는 기존 복귀 요구를 삭제하거나 새 영속 UI 상태를 도입하는 결정이 아니다. **현재 코드 변경·추가 GUI 필요 없음**이라는 DEV 검토 의견이다. 일반 재진입 보존 의무의 승인 근거, 반대 증거 또는 사용자에게 보이는 결함이 제시되면 해당 동선만 기존 RFC에 연결한다. 최소 보완은 실제 영향 동선/보고일/스크롤·포커스와 무효과를 정한 뒤 유효 권한으로 실행하며 전체 GUI를 기본 반복하지 않는다.
+
+### 영향·답변 및 남은 결정
+
+- 게임/경제/시간/세이브 명세 변경 필요 NONE. 현재 구현/시험 변경 없음.
+- Track B 의견 수신과 DEV 기술 검토는 완료. HQ 조정·Owner의 한정 수용안/의미 경계 최종 결정, 필요한 Track A 적용 범위 확인은 후속이다.
+- S3-12는 DEV 구현·증거·Track A/B 분담 수용·필수 CI·HQ/Owner 인수를 연결해야 한다. 이 검토로 RFC·#104·S3-12·Stage를 닫지 않는다.
+- RP-08 W04B는 PARTIAL_FUTURE_SUPPLY / NOT_SUPPLIED로 DEV-027 실제 공급 후 담당 행만 대조한다. F-08 최종 선택/적용은 #92, DI-03/E01은 해당 DEV/Planning 후속으로 분리한다.
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-026
