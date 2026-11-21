@@ -1,3 +1,7 @@
+> **현재 후속 — v0.2 로컬 반영안 / 2026-11-21:** [DEV 공동 확인 회신](https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057935798)을 수신·대조했다. **DEV_RESPONSE_REVIEWED / PREPARATION_BOUNDARY_NO_OBJECTION / LOCAL_REVIEW_REQUESTED / FINAL_SPEC_PENDING / PRODUCT_APPLICATION_SCOPE_PENDING / F08_OPEN**. 아래 v0.1 원문·DEV_CONFIRMATION_PENDING·NOT_SENT는 PR160 준비 당시 이력이다. [#92 전달](https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057792628)과 DEV 회신은 완료됐으며 최초 회신 대기로 되돌리지 않는다. 현재 효력의 반영 제안은 §6, 검토 결과는 [후속 결과서](DSG-008_PM021_DEV_RESPONSE_REVIEW_RESULT.md)를 따른다. 제품 공동 인수 완료나 이 로컬 개정안의 Owner 승인은 아니다.
+
+<!-- 아래 v0.1 원문은 이력 보존. 현재 후속은 §6. -->
+
 # DSG-008 — PM-021 승인 방향의 공통 적용 준비표
 
 - 담당: Design Track B / AGT-DSG-0003 / 2026-11-21 / v0.1.
@@ -61,6 +65,40 @@
 O01~07 승인 완료와 FINAL_SPEC_PENDING을 동시에 유지한다. 기존 RD의 ISSUE_OBSERVED(B 포커스/겹침), INCONCLUSIVE·원본 실패/미확인·DEV026 원본 PARTIAL은 그대로다. DEV025 기술 공급/#97 종료·PR157 심사·DEV026 현재 공급 한정 수용/P07 구분 승인·Stage2 DONE을 재개방하지 않는다.
 
 이번 후속은 정적 조사·로컬 표 작성이다. 신규 자동게임 검사·Godot 로드·실제 GUI/독립 입력·font/DPI/타PC·프로파일·빌드/export는 **각각 NOT_RUN**이다. 최종 규격 미결/F08 OPEN과 다른 열로 관리한다. S3-10-A는 **TRACK_B_PREPARED / DEV_CONFIRMATION_PENDING**, S3-10-C 및 S3-12·Stage 최종 인수는 별도 PENDING이다. 초기 로컬 준비 시 Git/외부 게시 승인은 없었으며 현재 제품/테스트 수정0이다. 이후 Owner가 이 산출물 4개의 커밋·푸시·PR 생성을 승인했다. 이슈 전달·main 병합은 이번 제출 범위에 포함하지 않는다.
+
+Agent-ID: AGT-DSG-0003
+Task-ID: DSG-008
+
+## 6. DEV 회신 반영 제안 — v0.2 / 로컬 검토
+
+- 기준 main: `1a941196cc6d963db93a9fba6a0386b16710aa46` (PR161 병합본). [DEV 회신](https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057935798), [DEV 계획 §12.2~12.5](../../engineering/gate3/DEV-027_EXECUTION_VALIDATION_PLAN.md#122-om-공통-적용표--dev-준비--공동-검토-대기), [Track A 영향 행](https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057637207)을 연결한다.
+- DEV는 준비·재사용·조건부 적용 경계에 기술적 이견 없음으로 회신했다. Track B 정적 대조에서도 이 범위에 추가 이견은 없다. **준비 경계의 상호 의견 연결**이며 최종 규격/제품 적용/L2/공동 인수 수용이 아니다. 이번 개정안은 로컬 검토 전이고 원격에 전달하지 않았다.
+- 기존 표 §2의 DEV 제안/확인 대기 중 아래 항목은 답변 수신으로 갱신한다. 신규 기능·규칙·권한을 창작하지 않는다. DEV 계획의 LOCAL_REVIEW/NOT_SENT·공동 검토 대기 문구는 그 작성 시점 기록이며 PR161 병합과 #92 회신을 현재 후속으로 함께 읽는다.
+
+| O/M | 후속 반영 범위 — 수신한 DEV 확인·Track B 대조 | 남은 적용 조건·최소 확인 / 담당·시점 |
+| --- | --- | --- |
+| O01 / M03 | F-CURRENT 기본/fallback 유지 **변경0** 확인. F-SYSTEM은 기존 맑은 고딕 관측이며 배포권/번들 수용 아님. F-BUNDLE은 **DEV 조사 후보 식별 완료**로 갱신: Noto Sans CJK KR 2.004 / tag Sans2.004 / 정적 Regular OTF. 후보 채택 아님 | DEV 계획 §12.3의 조건부 4경로는 `assets/fonts/noto_sans_cjk_kr/NotoSansCJKkr-Regular.otf`, `LICENSE.txt`, `SOURCE.md`(앞과 같은 디렉터리), `assets/themes/default_ui.tres`; Host `scripts/ui/stage1_view.gd` 적용점. 기존 DEV027 41개 밖 제안이며 반입 전 자기 티켓/정확한 경로·권한 확정. 실제 파일·해시·고지 구성/fallback·호환/렌더 미검증. DEV 구성→Track B STR01~07·끝자리/행동 접근, 폰트 반입/규격 확정 전 |
+| O02 / M03 | 1280×720/root1 비교 기준·설정 변경0에 이견 없음. 최소 지원/OS DPI 보장으로 쓰지 않음. 수치 이월 승인 완료 | 실제 지원 조건을 정할 때 client/논리영역/OS 배율을 분리해 필수 정보·행동 도달 확인. DEV/Track B, 지원 규격 채택 전 |
+| O03 / M04 | T02 격리 TextureRect/Label과 제품 draw/Control의 구분·현재 변경0 확인. 정수 nearest 우선 비교/동적 문자 분리 유지 | 실제 아트 경로 **NOT_SUPPLIED**. 선택한 크기·위상·필터/문자·포커스 직접 영향만 대조. DEV/Track B, 규격 종속 자원 채택 전 |
+| O04 / M01 | A 잠정 우선/B 비교·현재 B 수정0 확인. Host가 실험 A 완성본이라는 수용 아님. W04B 관련 변경 후보는 Host 및 proposal View/scene으로 DEV027 계획에 특정됨 | B/관련 배치 채택 전 포커스 가시성·키보드 도달·사용자 이동 존중·선택/스크롤·정보 전환 명령효과0 확인. 실제 W04B 영향 시 `stage1_view.gd`, 신규 `proposal_view.gd`·`.gd.uid`/`scenes/proposal_panel.tscn` 및 해당 GUI 행만. Track B 표현·Track A 동선·DEV 공급. A 유지 중 전면 B 수정/재실험 비요구 |
+| O05 / M02 | 같은 안정ID·포함 역 정보 선택/편집 경계 재사용·현재 변경0 확인. **제품 전체 이름 공급 없음**을 DEV 확인 사실로 명시. 실제12역 필드는 id/neighborhood_id/x_km/y_km; 긴 이름/겹침 판독은 DEV025 fixture 범위 | `stage1_session.gd::snapshot`→`stage1_view.gd::_build_candidates/_select_station/_focus_station`, `stage1_map.gd::present` 연결. Track B 표시 요구·콘텐츠 공급 주체/형식부터 확인 후 승인된 이름/목록 변경 영향의 동일ID·전체 이름 도달·순서/키보드·선택·정보/편집 검증. 이름/좌표·게임 규칙 임의 생성 없음. 콘텐츠 담당 미지정이면 HQ 조정, 실제 이름/밀집 목록 변경 전 |
+| O06 | Session→순수 관측 guard→Host/View 소비 경계 재사용·현재 변경0 확인. DEV027의 최소 적용 단위가 제시됨: `scripts/ui/stage1_session.gd`, `stage1_view.gd`, 신규 `proposal_view.gd`·`.gd.uid`, `scenes/proposal_panel.tscn` | 실제 W04B payload/지역 의존표 **NOT_SUPPLIED**. 공급 후 정상/누락/오류/old scope·당시 사본/현재 초안·행동 효력의 영향 행 L2를 Track A/B 분담 후 화면 통합. `s01_observation_contract.gd` 등 기존41개 밖 수정 필요 시 먼저 경로/권한 특정. 전면 Theme·문구 추출 의무 없음 |
+| O07 / M05 | Debug22조건/2639프레임 보존·새 측정/변경0 확인. 목표 결정 이월 승인 유지 | 목표환경·장면/표현량·기간·Debug/export 조건·최소 계측안을 실제 성능 인수 시점에 연결. DEV 측정안·HQ/Owner 목표·Track B 정보 보존. 현 시점 FPS/상한·벤치마크 추가 없음 |
+
+### 6.1 범위·권한·종료 신호
+
+O01~07은 방향 승인 완료다. 위 변경0은 **지금 제품을 수정할 필요 없음이라는 범위 의견**이며 미공급 규격·미관측 행의 PASS가 아니다. DEV의 구체 경로/후속은 DEV027 계획으로 참조하고 타 부서 문서를 복제·수정하지 않는다. 추가 폰트 후보 경로는 제품 수정 승인 목록이 아니다.
+
+S3-10-A에는 Track B 준비표·DEV 확인·Track A 기능 영향 의견이 연결된 상태를 후속 근거로 제시한다. **HQ 취합/판정 및 이 로컬 개정안 검토는 별도**이며 S3-10-A 전체 수용·S3-10-C·S3-12/Stage 최종 인수를 선언하지 않는다. 같은 준비표의 최초 DEV 회신을 다시 요청하지 않는다. 필요한 추가 협의는 실제 공급·변경·미입증 영향 행에 한정한다.
+
+DEV 회신 시점의 다음 제품 단위는 DEV027 P1 비의존 모델이며 로컬 구현·검증 권한이 별도 필요하다고 보고됐다. DI03/E01 종속 의미만 구분하고 실제 W04B 공급 이후 P3 L2를 연결한다. 이번 Track B 대조는 그 권한/규칙을 확정하지 않고 F08 전체를 W04B 일괄 착수 차단으로 만들지 않는다. 일정/공수는 NOT_ESTIMATED다.
+
+### 6.2 미결·관측 한계·이번 미실행
+
+- **FINAL_SPEC_PENDING / F08-01~04 OPEN:** 후보 선정/배포 구성·지원 창/배율·실제 아트/필터/배치·목록/전체 이름·재사용 적용·성능 목표는 미확정. O02/O07 결정 이월은 승인된 방향이다.
+- **PARTIAL/INCONCLUSIVE 보존:** DEV025 B 전환 후 화면 밖 포커스·합성 마커 겹침, DEV026 고정일1 비영점 중첩 복귀 미관측·내부 수명/옛 callback 추가 OS 가시성 한계. 제품 결함 확정이나 완료로 확대하지 않음.
+- **이번 NOT_RUN:** 새 자동 게임 검사·Godot 로드·OS GUI/독립 입력·DEV025 재실험·폰트 반입/실물 권리 고지 구성 및 fallback 실행·DPI/타PC 인수·성능·빌드/export. 제한 raw 직접 재해시·물리 DPI/신원은 NOT_VERIFIED. 회신 대조는 수행했으므로 DEV 회신 자체를 NOT_RUN으로 남기지 않는다.
+- DEV026 현재 공급 한정 수용·P07 일반 재진입/저장 문맥 복귀 구분·#97 기술 종료·PR157 심사·과거 승인/실패/미포착을 유지한다. 미래 W04B 수용·최종 규격·Stage 최종 인수는 별도다. 새 GUI 요청을 뒷받침할 변경/결함/증거 신뢰성 문제는 이번 대조에서 확인되지 않았다.
 
 Agent-ID: AGT-DSG-0003
 Task-ID: DSG-008
