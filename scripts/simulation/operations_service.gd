@@ -7,6 +7,7 @@ const Network = preload("res://scripts/model/administrative_network.gd")
 const Plan = preload("res://scripts/model/route_plan.gd")
 const Predictor = preload("res://scripts/simulation/demand_predictor.gd")
 const Ledger = preload("res://scripts/model/company_ledger.gd")
+const Sources = preload("res://scripts/simulation/business_sources.gd")
 const UI_REVISION := "DEV022-W06-UI-1"
 
 var _network: Network
@@ -24,6 +25,7 @@ var _cost_due_at: int = -1
 var _boarding: Dictionary = {"boarding_allowed": false, "reason_codes": ["SERVICE_NOT_READY"]}
 var _first_report: Dictionary = {}
 var _verified_business: Dictionary = {}
+var _verified_sources: Dictionary = {}
 
 
 func _init(network: Network, parameters: Dictionary, ledger: Ledger) -> void:
@@ -176,9 +178,9 @@ func snapshot(minute: int, revision: int) -> Dictionary:
 	return value
 
 
-func next_business_query(tenders: Dictionary) -> Dictionary:
+func next_business_query(tenders: Dictionary, proposals: Dictionary = {}) -> Dictionary:
 	var ready := not _first_report.is_empty()
-	return {
+	var value := {
 		"available": ready and tenders.get("available", false),
 		"reason_codes":
 		(
@@ -190,6 +192,18 @@ func next_business_query(tenders: Dictionary) -> Dictionary:
 		"tenders": tenders.duplicate(true) if ready else {},
 		"allowed_actions": {"query": ready}
 	}
+	if not proposals.is_empty():
+		value["proposals"] = proposals.duplicate(true) if ready else {}
+		value["source_availability"] = {
+			"PUBLIC_TENDER": tenders.get("available", false),
+			"COMPANY_PROPOSAL": proposals.get("available", false)
+		}
+		value.available = (
+			ready and (tenders.get("available", false) or proposals.get("available", false))
+		)
+		if ready:
+			value.reason_codes = [] if value.available else ["BUSINESS_SOURCE_UNAVAILABLE"]
+	return value
 
 
 func _unavailable(reason: String) -> Dictionary:
@@ -208,7 +222,13 @@ func _valid_envelope(tenders: Dictionary, construction: Dictionary, minute: int)
 		):
 			return false
 	return (
-		tenders.get("tenders") is Array
+		(
+			tenders.get("tenders") is Array
+			or (
+				tenders.get("source_contract_revision") == Sources.REVISION
+				and tenders.get("sources") is Array
+			)
+		)
 		and construction.get("projects") is Array
 		and tenders.snapshot_revision == construction.snapshot_revision
 	)
@@ -235,10 +255,13 @@ func _source(project: Dictionary, tenders: Dictionary, minute: int) -> Dictionar
 		or not project.get("station_ids") is Array
 	):
 		return {}
-	for row: Variant in tenders.tenders:
+	var rows: Array = tenders.get("tenders", [])
+	if tenders.has("source_contract_revision"):
+		rows = Sources.rows(tenders, _ledger, minute, _verified_sources)
+	for row: Variant in rows:
 		if not row is Dictionary or row.get("business_contract") != business:
 			continue
-		var terms: Variant = row.get("terms")
+		var terms: Variant = row if row.has("source_kind") else row.get("terms")
 		if not terms is Dictionary or terms.get("station_ids") != project.station_ids:
 			continue
 		if terms.get("fare") != 100 or terms.get("project_id") != business.project_id:
@@ -251,9 +274,10 @@ func _source(project: Dictionary, tenders: Dictionary, minute: int) -> Dictionar
 			stops.size() != project.station_ids.size()
 			or not Plan.new(_network).validate(stops).valid
 			or (project.get("status") == "OPEN" and not _valid_open(project, minute))
+			or not _source_identity_matches(project, row)
 		):
 			return {}
-		return {
+		var result := {
 			"project_id": business.project_id,
 			"business_contract_id": business.business_contract_id,
 			"construction_contract_id": project.construction_contract_id,
@@ -261,7 +285,24 @@ func _source(project: Dictionary, tenders: Dictionary, minute: int) -> Dictionar
 			"opened_at": project.get("opened_at") if project.get("status") == "OPEN" else null,
 			"station_ids": stops
 		}
+		if row.has("source_kind"):
+			result["source_kind"] = row.source_kind
+			result["source_id"] = row.source_id
+		return result
 	return {}
+
+
+func _source_identity_matches(project: Dictionary, row: Dictionary) -> bool:
+	# W04B를 뒤에 켠 기존 공고 공사는 원 계약/역 대조를 유지하며 출처를 읽기 확장한다.
+	if is_same(row.get("source_kind"), "PUBLIC_TENDER") and not project.has("source_kind"):
+		return not project.has("source_id")
+	return (
+		not row.has("source_kind")
+		or (
+			project.get("source_kind") == row.source_kind
+			and project.get("source_id") == row.source_id
+		)
+	)
 
 
 func _valid_open(project: Dictionary, minute: int) -> bool:

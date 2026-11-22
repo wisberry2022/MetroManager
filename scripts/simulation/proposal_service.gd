@@ -1,6 +1,6 @@
 class_name ProposalService
 extends RefCounted
-## P1 단독 모델 실행 경계. 제품 Pipeline/Session, E01 수요 효과와 화면은 아직 연결하지 않는다.
+## W04B 모델·공유 분 단계 경계. E01 수요 효과와 화면 통합은 포함하지 않는다.
 
 const Loader = preload("res://scripts/data/proposal_data_loader.gd")
 const Network = preload("res://scripts/model/administrative_network.gd")
@@ -28,6 +28,7 @@ var _reviews: Array[Dictionary] = []
 var _draws: Array[Dictionary] = []
 var _links: Dictionary = {}
 var _errors: Array[String] = []
+var _contract_complete: bool = true
 
 
 ## context의 parameters/ledger는 모델 조립 입력이며 UI 명령으로 바꿀 수 없다.
@@ -119,11 +120,38 @@ func result(id: String) -> Dictionary:
 func advance_to(completed_minute: int) -> Dictionary:
 	if not _errors.is_empty() or completed_minute < _minute:
 		return {"accepted": false, "reason": "INVALID_TIME_OR_CONTEXT"}
+	if not _contract_complete:
+		process_contract_phase(_minute)
 	for minute: int in range(_minute + 1, completed_minute + 1):
-		_minute = minute
-		_complete_due()
-		_admit_due()
+		process_review_phase(minute)
+		process_contract_phase(minute)
 	return {"accepted": true, "completed_minute": _minute}
+
+
+## Pipeline 마감 뒤 호출한다. 지급은 CONTRACT까지 지연한다.
+func process_review_phase(minute: int) -> Dictionary:
+	if not _errors.is_empty() or minute < _minute or minute > _minute + 1:
+		return {"accepted": false, "reason": "INVALID_PROPOSAL_PHASE"}
+	if minute == _minute:
+		return {"accepted": true, "changes": 0}
+	if not _contract_complete:
+		return {"accepted": false, "reason": "INCOMPLETE_PROPOSAL_PHASE"}
+	var before := _revision
+	_minute = minute
+	_contract_complete = false
+	_complete_due()
+	_admit_due(false)
+	return {"accepted": true, "changes": _revision - before}
+
+
+func process_contract_phase(minute: int) -> Dictionary:
+	if not _errors.is_empty() or minute != _minute:
+		return {"accepted": false, "reason": "INVALID_PROPOSAL_PHASE"}
+	var before := _revision
+	if not _contract_complete:
+		_admit_due(true)
+		_contract_complete = true
+	return {"accepted": true, "changes": _revision - before}
 
 
 func snapshot() -> Dictionary:
@@ -326,10 +354,13 @@ func _related_slots(slot: String) -> Array[String]:
 	return related
 
 
-func _admit_due() -> void:
+func _admit_due(contracts: bool) -> void:
 	var remaining: Array[Dictionary] = []
 	for record: Dictionary in _pending:
-		if record.effective_not_before > _minute:
+		if (
+			record.effective_not_before > _minute
+			or (ACTIONS[record.command.action] == "CONTRACT") != contracts
+		):
 			remaining.append(record)
 			continue
 		var command: Dictionary = record.command

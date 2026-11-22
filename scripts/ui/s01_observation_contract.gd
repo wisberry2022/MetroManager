@@ -59,7 +59,8 @@ static func inspect(state: Variant, scope: String, floor_revision: int) -> Dicti
 		"construction_ui",
 		"operations_ui",
 		"finance_ui",
-		"next_business_ui"
+		"next_business_ui",
+		"proposal_ui"
 	]
 	for name: String in names:
 		regions[name] = false
@@ -81,6 +82,7 @@ static func inspect(state: Variant, scope: String, floor_revision: int) -> Dicti
 			and report_valid(dictionary(value.get("report")), scope, clock.get("day_id", 0) - 1)
 		)
 		regions.command = _command_valid(value.get("command_result"))
+		regions.proposal_ui = proposal_region(value, scope).available
 		for key: String in ["tender_ui", "construction_ui"]:
 			regions[key] = value.get(key) is Dictionary and not value[key].is_empty()
 		for key: String in ["operations_ui", "finance_ui", "next_business_ui"]:
@@ -378,3 +380,188 @@ static func focus_fallback(panel: Node, candidates: Array) -> Control:
 		if focus_valid(target) and (panel == target or panel.is_ancestor_of(target)):
 			return target
 	return null
+
+
+## P3-A 선택적 지역. 이전 봉투는 실제 소비자가 보관하며 같은판 상충을 거부한다.
+static func proposal_region(state: Variant, scope: String, previous: Dictionary = {}) -> Dictionary:
+	var invalid := {"available": false, "reason": "PROPOSAL_UNCONFIRMED"}
+	if not root_valid(state) or not text_equal(state.get("run_scope"), scope):
+		return invalid
+	var packet := dictionary(state.get("proposal_ui"))
+	if (
+		not text_equal(packet.get("ui_contract_revision"), "DEV027-W04B-UI-1")
+		or not text_equal(packet.get("run_scope"), scope)
+		or not integers(packet, ["view_revision"])
+		or packet.view_revision != state.view_revision
+		or not text_equal(packet.get("status"), "READY")
+		or not enabled(packet.get("available"))
+		or not strings(packet.get("reason_codes"))
+		or not packet.reason_codes.is_empty()
+		or not packet.get("requests") is Array
+	):
+		return invalid
+	var observed := dictionary(packet.get("observation"))
+	var current := dictionary(state.get("current"))
+	if not _current_valid(current, dictionary(state.get("clock"))):
+		return invalid
+	for key: String in [
+		"data_version", "simulation_minute", "day_id", "snapshot_revision", "observation_phase"
+	]:
+		if (
+			typeof(observed.get(key)) != typeof(current.get(key))
+			or observed.get(key) != current.get(key)
+		):
+			return invalid
+	if not previous.is_empty() and text_equal(previous.get("run_scope"), scope):
+		if (
+			not integers(previous, ["view_revision"])
+			or packet.view_revision < previous.view_revision
+		):
+			return {"available": false, "reason": "STALE_PROPOSAL_OBSERVATION"}
+		if packet.view_revision == previous.view_revision and packet != previous:
+			return {"available": false, "reason": "CONFLICTING_PROPOSAL_OBSERVATION"}
+	var model := dictionary(packet.get("snapshot"))
+	if (
+		not enabled(model.get("available"))
+		or not text_equal(model.get("data_version"), "1.4")
+		or not text_equal(model.get("run_scope"), scope)
+		or not integers(model, ["snapshot_revision", "simulation_minute"])
+		or model.simulation_minute != current.simulation_minute
+		or not model.get("proposals") is Array
+		or not model.get("commands") is Array
+	):
+		return invalid
+	var facts := dictionary(model.get("fact_supply"))
+	if (
+		not is_same(facts.get("available"), false)
+		or not text_equal(facts.get("status"), "DI03_PENDING")
+	):
+		return invalid
+	if not facts.get("facts") is Array or not facts.facts.is_empty():
+		return invalid
+	var seen := {}
+	for row: Variant in model.proposals:
+		if not _proposal_row_valid(row):
+			return invalid
+		var id: String = row.identity.slot_id
+		if (
+			row.identity.proposal_id != scope + ":proposal:" + id
+			or row.identity.business_identity_id != scope + ":business:" + id
+		):
+			return invalid
+		if seen.has(id):
+			return invalid
+		seen[id] = true
+	if seen.size() != 2 or not seen.has("P-A") or not seen.has("P-B"):
+		return invalid
+	for record: Variant in packet.requests:
+		if (
+			not record is Dictionary
+			or not record.get("command") is Dictionary
+			or not record.get("result") is Dictionary
+		):
+			return invalid
+		if (
+			not integers(record, ["requested_at"])
+			or not text_equal(record.command.get("run_scope"), scope)
+		):
+			return invalid
+	return {"available": true, "reason": ""}
+
+
+static func _proposal_row_valid(row: Variant) -> bool:
+	if not row is Dictionary:
+		return false
+	for key: String in [
+		"identity", "binding", "draft", "review", "business_contract", "action_states"
+	]:
+		if not row.get(key) is Dictionary:
+			return false
+	for key: String in ["slot_id", "proposal_id", "business_identity_id"]:
+		if not row.identity.get(key) is String or row.identity[key].is_empty():
+			return false
+	var plan := dictionary(row.draft.get("plan"))
+	if (
+		not _plan_valid(plan)
+		or not _prediction_valid(dictionary(row.draft.get("prediction")), plan)
+	):
+		return false
+	if (
+		not integers(row.binding, ["plan_revision", "prediction_input_revision"])
+		or not text_equal(row.binding.get("proposal_id"), row.identity.proposal_id)
+		or row.binding.plan_revision != plan.plan_revision
+		or row.binding.prediction_input_revision != row.draft.prediction.prediction_input_revision
+		or not row.get("decisions") is Array
+	):
+		return false
+	if not row.review.is_empty() and not _proposal_review(row.review, false):
+		return false
+	for decision: Variant in row.decisions:
+		if not _proposal_review(decision, true):
+			return false
+	var business: Dictionary = row.business_contract
+	if (
+		not business.is_empty()
+		and (
+			not text_equal(business.get("status"), "EFFECTIVE")
+			or not text_equal(business.get("source_kind"), "COMPANY_PROPOSAL")
+			or not text_equal(business.get("source_id"), row.identity.proposal_id)
+			or not text_equal(business.get("project_id"), row.identity.business_identity_id)
+			or not business.get("permitted_plan") is Dictionary
+			or not business.get("government_payment") is Dictionary
+		)
+	):
+		return false
+	for key: String in ["edit_state", "predict_state"]:
+		if not _proposal_action(row.get(key)):
+			return false
+	for key: String in [
+		"submit_city_review",
+		"submit_government_review",
+		"submit_persuasion",
+		"sign_proposal_contract"
+	]:
+		if not _proposal_action(row.action_states.get(key)):
+			return false
+	return true
+
+
+static func _proposal_action(value: Variant) -> bool:
+	return (
+		value is Dictionary
+		and value.get("allowed") is bool
+		and strings(value.get("reason_codes"))
+		and value.allowed == value.reason_codes.is_empty()
+	)
+
+
+static func _proposal_review(value: Variant, completed: bool) -> bool:
+	if not value is Dictionary:
+		return false
+	if not integers(value, ["requested_at", "registered_at", "admitted_at", "completes_at"]):
+		return false
+	if (
+		value.get("kind") not in ["CITY", "GOVERNMENT", "PERSUASION"]
+		or not value.get("review_id") is String
+	):
+		return false
+	var submission := dictionary(value.get("submission"))
+	var plan := dictionary(submission.get("plan"))
+	if (
+		not _plan_valid(plan)
+		or not _prediction_valid(dictionary(submission.get("prediction")), plan)
+	):
+		return false
+	if value.requested_at > value.registered_at or value.registered_at > value.admitted_at:
+		return false
+	if value.completes_at != value.admitted_at + (60 if value.kind == "GOVERNMENT" else 30):
+		return false
+	return (
+		not completed
+		or (
+			integers(value, ["completed_at", "authorized_government"])
+			and value.completed_at == value.completes_at
+			and value.get("decision_id") is String
+			and value.get("outcome") in ["APPROVED", "HELD", "REJECTED"]
+		)
+	)

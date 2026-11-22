@@ -7,6 +7,7 @@ const Network = preload("res://scripts/model/administrative_network.gd")
 const Service = preload("res://scripts/simulation/proposal_service.gd")
 const Predictor = preload("res://scripts/simulation/demand_predictor.gd")
 const Ledger = preload("res://scripts/model/company_ledger.gd")
+const Session = preload("res://scripts/ui/stage1_session.gd")
 const ROUTE_A: Array[String] = ["S01", "S02", "S03", "S04", "S08", "S12"]
 const ROUTE_B: Array[String] = ["S01", "S05", "S09", "S10", "S11", "S12"]
 const ROUTE_8: Array[String] = ["S01", "S02", "S06", "S05", "S09", "S10", "S11", "S12"]
@@ -90,10 +91,10 @@ static func last(service: Service, slot: String = "P-A") -> Dictionary:
 	return {} if decisions.is_empty() else decisions.back()
 
 
-## 고정 엔진의 정상 RNG로 분기 seed를 찾는다. 판정값을 Service에 주입하지 않는다.
+## P1에서 확보한 네 seed만 재사용한다. 새 탐색이나 Service 판정 주입은 하지 않는다.
 static func seeds() -> Dictionary:
 	var found: Dictionary = {}
-	for candidate: int in range(10000):
+	for candidate: int in [2, 0, 8, 1]:
 		var rng := RandomNumberGenerator.new()
 		rng.seed = candidate
 		var first := rng.randi_range(0, 99)
@@ -113,3 +114,80 @@ static func negative_parameters() -> Dictionary:
 	for key: String in params.daily_demand:
 		params.daily_demand[key] = 0
 	return params
+
+
+static func session(seed_value: int = 2, minute: int = 360, params: Dictionary = {}) -> Session:
+	var data: Dictionary = Data.load_data().data
+	var initial: Dictionary = data.initial_company.duplicate(true)
+	initial.simulation_minute = minute
+	var value := Session.new(data, initial, params)
+	value.enable_proposals(seed_value)
+	return value
+
+
+static func session_row(value: Session, slot: String = "P-A") -> Dictionary:
+	for item: Dictionary in value.snapshot().proposal_ui.snapshot.proposals:
+		if item.identity.slot_id == slot:
+			return item
+	return {}
+
+
+static func session_command(
+	value: Session, id: String, action: String, slot: String = "P-A"
+) -> Dictionary:
+	var item := session_row(value, slot)
+	var cmd := {
+		"command_id": id,
+		"run_scope": value.observation_scope(),
+		"slot_id": slot,
+		"action": action,
+		"binding": item.binding
+	}
+	if action in ["edit_proposal", "predict_proposal"]:
+		if action == "edit_proposal":
+			cmd.station_ids = ROUTE_A.duplicate()
+			cmd.name = "P3-A " + slot
+		return cmd
+	cmd.expected_snapshot_revision = value.snapshot().proposal_ui.snapshot.snapshot_revision
+	if action != "submit_city_review":
+		var kind := "CITY" if action == "submit_government_review" else "GOVERNMENT"
+		cmd.decision_id = ""
+		for index: int in range(item.decisions.size() - 1, -1, -1):
+			var decision: Dictionary = item.decisions[index]
+			if (
+				decision.kind == kind
+				or (action == "sign_proposal_contract" and decision.kind != "CITY")
+			):
+				cmd.decision_id = decision.decision_id
+				break
+	return cmd
+
+
+static func session_prepare(value: Session, prefix: String = "prepare") -> void:
+	value.request_proposal(session_command(value, prefix + "-edit", "edit_proposal"))
+	value.request_proposal(session_command(value, prefix + "-predict", "predict_proposal"))
+
+
+## 실제 GameClock 입력을 환산한다. 시계/모델 상태를 직접 대입하지 않는다.
+static func advance(value: Session, target: int) -> void:
+	var clock := value.pipeline.clock
+	var delta := target - clock.minute
+	if delta > 0:
+		value.advance_usec(
+			(delta * 5000000 - clock.remainder + 12 * clock.speed - 1) / (12 * clock.speed)
+		)
+
+
+static func sample(value: Session) -> Dictionary:
+	var state := value.snapshot()
+	state.current.erase("trace")
+	return {"kind": "ACTUAL_SESSION_API", "state": state, "ledger": value.pipeline.ledger.entries()}
+
+
+static func save(output: String, record: Dictionary) -> bool:
+	DirAccess.make_dir_recursive_absolute(output.get_base_dir())
+	var file := FileAccess.open(output, FileAccess.WRITE)
+	if file == null:
+		return false
+	file.store_string(JSON.stringify(record, "\t") + "\n")
+	return true

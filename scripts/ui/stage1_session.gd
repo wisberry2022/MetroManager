@@ -8,6 +8,7 @@ const Prediction = preload("res://scripts/model/prediction_state.gd")
 const Tender = preload("res://scripts/model/public_tender.gd")
 const Predictor = preload("res://scripts/simulation/demand_predictor.gd")
 const OPERATIONS_UI_REVISION := "DEV023-UI-1"
+const PROPOSAL_UI_REVISION := "DEV027-W04B-UI-1"
 const OBSERVATION_REVISION := "DEV026-S01-EX-v0.1"
 
 var pipeline: Pipeline
@@ -32,6 +33,9 @@ var _construction_requests: Dictionary = {}
 var _operations_enabled: bool = false
 var _operations_error: String = ""
 var _finance_day: int = -1
+var _proposal_enabled: bool = false
+var _proposal_error: String = ""
+var _proposal_requests: Dictionary = {}
 
 
 func _init(data: Dictionary, initial: Dictionary, parameters: Dictionary = {}) -> void:
@@ -109,7 +113,8 @@ func snapshot() -> Dictionary:
 		"construction_ui": _construction_snapshot(current),
 		"operations_ui": _operations_snapshot(current),
 		"finance_ui": _finance_snapshot(current, daily),
-		"next_business_ui": _next_business_snapshot(current)
+		"next_business_ui": _next_business_snapshot(current),
+		"proposal_ui": _proposal_snapshot(current)
 	}
 
 
@@ -327,7 +332,8 @@ func query_next_business(confirmed: Dictionary) -> Dictionary:
 		"observed_at": current.simulation_minute,
 		"report_key": packet.get("report_key", ""),
 		"first_valid_report": packet.get("first_valid_report", {}).duplicate(true),
-		"tenders": packet.get("tenders", {}).duplicate(true) if reason.is_empty() else {}
+		"tenders": packet.get("tenders", {}).duplicate(true) if reason.is_empty() else {},
+		"proposals": packet.get("proposals", {}).duplicate(true) if reason.is_empty() else {}
 	}
 
 
@@ -447,13 +453,26 @@ func _ready_business_query(
 			"TENDER_SUPPLY_UNAVAILABLE" if value.reason_codes.is_empty() else value.reason_codes[0]
 		)
 		return _ui_failure(packet, reason)
-	if (
-		not _same_observation(value.tenders, current)
-		or value.tenders.get("available") != true
-		or not value.tenders.get("tenders") is Array
-	):
+	if _proposal_enabled:
+		var proposals: Dictionary = value.get("proposals", {})
+		if (
+			not is_same(proposals.get("available"), true)
+			or not proposals.get("proposals") is Array
+			or not is_same(proposals.get("run_scope"), _report_scope)
+			or not is_same(proposals.get("simulation_minute"), current.simulation_minute)
+		):
+			return _ui_failure(packet, "INVALID_NEXT_BUSINESS_SUPPLY")
+		packet["proposals"] = proposals.duplicate(true)
+	if not value.tenders.is_empty():
+		if (
+			not _same_observation(value.tenders, current)
+			or value.tenders.get("available") != true
+			or not value.tenders.get("tenders") is Array
+		):
+			return _ui_failure(packet, "INVALID_NEXT_BUSINESS_SUPPLY")
+		packet.tenders = value.tenders.duplicate(true)
+	elif not _proposal_enabled:
 		return _ui_failure(packet, "INVALID_NEXT_BUSINESS_SUPPLY")
-	packet.tenders = value.tenders.duplicate(true)
 	return packet
 
 
@@ -669,7 +688,7 @@ func _evaluation_criteria(envelope: Dictionary) -> Dictionary:
 func enable_construction_ui() -> Dictionary:
 	if _construction_enabled:
 		return {"accepted": true}
-	if not _tender_enabled:
+	if not _tender_enabled and not _proposal_enabled:
 		enable_tender_ui()
 	var result := pipeline.enable_construction()
 	_construction_enabled = result.get("accepted", false)
@@ -729,3 +748,117 @@ func _construction_snapshot(current: Dictionary) -> Dictionary:
 		"next_effective_at": current.simulation_minute + 1,
 		"fixture_label": fixture_label
 	}
+
+
+## P3-A 공급만 활성화한다. main/View 진입 연결은 해당 L2 뒤 별도다.
+func enable_proposals(seed_value: int) -> Dictionary:
+	if _proposal_enabled:
+		return {"accepted": false, "reason": "PROPOSALS_ALREADY_ENABLED"}
+	var result := pipeline.enable_proposals(network, _parameters, _report_scope, seed_value)
+	_proposal_enabled = result.get("accepted", false)
+	_proposal_error = result.get("reason", "")
+	revision += 1
+	return result
+
+
+## 기대 소속은 Session이 소유한다. 중복은 원 요청 결과를 재사용한다.
+func request_proposal(command: Dictionary) -> Dictionary:
+	var id: Variant = command.get("command_id")
+	if not id is String or id.is_empty() or not is_same(command.get("run_scope"), _report_scope):
+		return {"accepted": false, "reason": "INVALID_COMMAND_SCOPE"}
+	if _proposal_requests.has(id):
+		return proposal_result(id)
+	var result := {"accepted": false, "reason": "PROPOSALS_NOT_ENABLED"}
+	if _proposal_enabled:
+		result = _apply_proposal(command)
+	_proposal_requests[id] = {
+		"command": command.duplicate(true),
+		"result": result.duplicate(true),
+		"requested_at": pipeline.clock.minute
+	}
+	revision += 1
+	return result.duplicate(true)
+
+
+func proposal_result(id: String) -> Dictionary:
+	if not _proposal_requests.has(id):
+		return {}
+	var current := pipeline.proposal_result(id)
+	return current if not current.is_empty() else _proposal_requests[id].result.duplicate(true)
+
+
+func _apply_proposal(command: Dictionary) -> Dictionary:
+	var action: Variant = command.get("action")
+	if not action is String:
+		return {"accepted": false, "reason": "INVALID_ACTION"}
+	if action not in ["edit_proposal", "predict_proposal"]:
+		return pipeline.proposal_request(command)
+	var keys := ["command_id", "run_scope", "slot_id", "action", "binding"]
+	if action == "edit_proposal":
+		keys.append_array(["station_ids", "name"])
+	for key: Variant in command:
+		if key not in keys:
+			return {"accepted": false, "reason": "UNSUPPORTED_COMMAND_FIELD"}
+	var slot: Variant = command.get("slot_id")
+	var item := {}
+	for row: Dictionary in pipeline.proposal_snapshot().get("proposals", []):
+		if is_same(row.identity.slot_id, slot):
+			item = row
+	if item.is_empty():
+		return {"accepted": false, "reason": "INVALID_SLOT"}
+	if not command.get("binding") is Dictionary or command.binding != item.binding:
+		return {"accepted": false, "reason": "STALE_PLAN_OR_PREDICTION"}
+	return _edit_or_predict(command, item)
+
+
+func _edit_or_predict(command: Dictionary, item: Dictionary) -> Dictionary:
+	var slot: String = command.slot_id
+	var action: String = command.action
+	if action == "predict_proposal":
+		if not item.draft.plan.validation.valid:
+			return {"accepted": false, "reason": "INVALID_PLAN"}
+		return pipeline.proposal_predict(slot)
+	if not command.get("station_ids") is Array or not command.get("name", "") is String:
+		return {"accepted": false, "reason": "INVALID_PLAN_INPUT"}
+	var stops: Array[String] = []
+	for id: Variant in command.station_ids:
+		if not id is String:
+			return {"accepted": false, "reason": "INVALID_PLAN_INPUT"}
+		stops.append(id)
+	return pipeline.proposal_edit(slot, stops, command.get("name", ""))
+
+
+func _proposal_snapshot(current: Dictionary) -> Dictionary:
+	var packet := _ui_packet(current)
+	packet.ui_contract_revision = PROPOSAL_UI_REVISION
+	packet["run_scope"] = _report_scope
+	packet["snapshot"] = {}
+	packet["requests"] = []
+	if not _proposal_enabled:
+		return _ui_failure(
+			packet, _proposal_error if not _proposal_error.is_empty() else "PROPOSALS_NOT_ENABLED"
+		)
+	var model := pipeline.proposal_snapshot()
+	if (
+		not is_same(model.get("available"), true)
+		or not is_same(model.get("run_scope"), _report_scope)
+		or not is_same(model.get("simulation_minute"), current.simulation_minute)
+	):
+		return _ui_failure(packet, "INVALID_PROPOSAL_SUPPLY")
+	for row: Dictionary in model.proposals:
+		var plan_state: Dictionary = row.draft.plan
+		var reason := "PLAN_LOCKED" if plan_state.locked else ""
+		row["edit_state"] = {
+			"allowed": reason.is_empty(), "reason_codes": [] if reason.is_empty() else [reason]
+		}
+		if reason.is_empty() and not plan_state.validation.valid:
+			reason = "INVALID_PLAN"
+		row["predict_state"] = {
+			"allowed": reason.is_empty(), "reason_codes": [] if reason.is_empty() else [reason]
+		}
+	packet.snapshot = model
+	for id: String in _proposal_requests:
+		var record: Dictionary = _proposal_requests[id].duplicate(true)
+		record.result = proposal_result(id)
+		packet.requests.append(record)
+	return packet

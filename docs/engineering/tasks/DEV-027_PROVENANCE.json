@@ -2,265 +2,194 @@
   "schema_version": 1,
   "task_id": "DEV-027",
   "primary_agent_id": "AGT-DEV-0004",
-  "base_sha": "cd4bb457f9b9380c4aedc1438d5842b9bc74f4ce",
+  "base_sha": "690823927e97a29131dbb572bab4aa9d7f6cfd97",
   "artifacts": [
     {
-      "path": "assets/data/stage3_proposals_v1_4.json",
-      "change_type": "add",
+      "path": "scripts/ui/stage1_session.gd",
+      "change_type": "modify",
       "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
-        "docs/planning/PLN-013_W04B_RULES_AND_BOUNDARIES.md",
-        "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
-        "docs/engineering/gate3/DEV-027_EXECUTION_VALIDATION_PLAN.md",
-        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md",
-        "docs/engineering/gate3/DEV-027_W04B_SUPPLY_CONTRACT.md",
-        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7053550740",
-        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057978655"
+        "docs/engineering/gate3/DEV-027_SESSION_PIPELINE_L2_PLAN.md",
+        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md#9-p3-a-로컬-구현검증-승인과-제출--2026-11-22"
       ],
-      "blob_sha": "c2846534490b455e631efa8b09b8589e92a60f06"
+      "blob_sha": "861e5a2cc5a8cdc4539e0b5b5f787a0a0a873e46",
+      "old_blob_sha": "c114a2a1efbc4e4567ffb65ac4c21d93e3591d03"
     },
     {
-      "path": "scripts/data/proposal_data_loader.gd",
-      "change_type": "add",
+      "path": "scripts/simulation/minute_pipeline.gd",
+      "change_type": "modify",
       "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
-        "docs/planning/PLN-013_W04B_RULES_AND_BOUNDARIES.md",
-        "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
-        "docs/engineering/gate3/DEV-027_EXECUTION_VALIDATION_PLAN.md",
-        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md",
-        "docs/engineering/gate3/DEV-027_W04B_SUPPLY_CONTRACT.md",
-        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7053550740",
-        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057978655"
+        "docs/engineering/gate3/DEV-027_SESSION_PIPELINE_L2_PLAN.md",
+        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md#9-p3-a-로컬-구현검증-승인과-제출--2026-11-22"
       ],
-      "blob_sha": "c0b28b23e6462d5b049a03fbc3d1f72b92fc3904"
-    },
-    {
-      "path": "scripts/data/proposal_data_loader.gd.uid",
-      "change_type": "add",
-      "agent_id": "AGT-DEV-0004",
-      "contributors": [],
-      "source_refs": [
-        "docs/planning/PLN-013_W04B_RULES_AND_BOUNDARIES.md",
-        "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
-        "docs/engineering/gate3/DEV-027_EXECUTION_VALIDATION_PLAN.md",
-        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md",
-        "docs/engineering/gate3/DEV-027_W04B_SUPPLY_CONTRACT.md",
-        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7053550740",
-        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057978655"
-      ],
-      "blob_sha": "1e22ab846a6232b6a87c913d0b4e3277fe614013"
-    },
-    {
-      "path": "scripts/model/company_proposal.gd",
-      "change_type": "add",
-      "agent_id": "AGT-DEV-0004",
-      "contributors": [],
-      "source_refs": [
-        "docs/planning/PLN-013_W04B_RULES_AND_BOUNDARIES.md",
-        "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
-        "docs/engineering/gate3/DEV-027_EXECUTION_VALIDATION_PLAN.md",
-        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md",
-        "docs/engineering/gate3/DEV-027_W04B_SUPPLY_CONTRACT.md",
-        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7053550740",
-        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057978655"
-      ],
-      "blob_sha": "d9e3665d156546bf40ce3753a25e1445797c568e"
-    },
-    {
-      "path": "scripts/model/company_proposal.gd.uid",
-      "change_type": "add",
-      "agent_id": "AGT-DEV-0004",
-      "contributors": [],
-      "source_refs": [
-        "docs/planning/PLN-013_W04B_RULES_AND_BOUNDARIES.md",
-        "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
-        "docs/engineering/gate3/DEV-027_EXECUTION_VALIDATION_PLAN.md",
-        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md",
-        "docs/engineering/gate3/DEV-027_W04B_SUPPLY_CONTRACT.md",
-        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7053550740",
-        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057978655"
-      ],
-      "blob_sha": "d4c8ffbdbcd7930b7a7e1f1ce5857c330165c31b"
+      "blob_sha": "daa87b10fcbbdd01b602483000e5dcd296e80130",
+      "old_blob_sha": "d20e6aed5cfd61462eba080e85028ccc6437cba3"
     },
     {
       "path": "scripts/simulation/proposal_service.gd",
-      "change_type": "add",
+      "change_type": "modify",
       "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
-        "docs/planning/PLN-013_W04B_RULES_AND_BOUNDARIES.md",
-        "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
-        "docs/engineering/gate3/DEV-027_EXECUTION_VALIDATION_PLAN.md",
-        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md",
-        "docs/engineering/gate3/DEV-027_W04B_SUPPLY_CONTRACT.md",
-        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7053550740",
-        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057978655"
+        "docs/engineering/gate3/DEV-027_SESSION_PIPELINE_L2_PLAN.md",
+        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md#9-p3-a-로컬-구현검증-승인과-제출--2026-11-22"
       ],
-      "blob_sha": "375c024f292387dc91dc3eb76cb33a86ada2f0e7"
-    },
-    {
-      "path": "scripts/simulation/proposal_service.gd.uid",
-      "change_type": "add",
-      "agent_id": "AGT-DEV-0004",
-      "contributors": [],
-      "source_refs": [
-        "docs/planning/PLN-013_W04B_RULES_AND_BOUNDARIES.md",
-        "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
-        "docs/engineering/gate3/DEV-027_EXECUTION_VALIDATION_PLAN.md",
-        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md",
-        "docs/engineering/gate3/DEV-027_W04B_SUPPLY_CONTRACT.md",
-        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7053550740",
-        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057978655"
-      ],
-      "blob_sha": "382c6ea324fc8b2698dda56e4c2b4feaa62c03da"
+      "blob_sha": "a9eb81faf5840c519b54fbcb8d5e843fdcf99530",
+      "old_blob_sha": "375c024f292387dc91dc3eb76cb33a86ada2f0e7"
     },
     {
       "path": "scripts/simulation/business_sources.gd",
-      "change_type": "add",
+      "change_type": "modify",
       "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
-        "docs/planning/PLN-013_W04B_RULES_AND_BOUNDARIES.md",
-        "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
-        "docs/engineering/gate3/DEV-027_EXECUTION_VALIDATION_PLAN.md",
-        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md",
-        "docs/engineering/gate3/DEV-027_W04B_SUPPLY_CONTRACT.md",
-        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7053550740",
-        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057978655"
+        "docs/engineering/gate3/DEV-027_SESSION_PIPELINE_L2_PLAN.md",
+        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md#9-p3-a-로컬-구현검증-승인과-제출--2026-11-22"
       ],
-      "blob_sha": "c1a08fecd936e64610354ef939972cd41031b4af"
+      "blob_sha": "306befe1eadd8cb5c417bbf57d9778b3ac44edb2",
+      "old_blob_sha": "c1a08fecd936e64610354ef939972cd41031b4af"
     },
     {
-      "path": "scripts/simulation/business_sources.gd.uid",
-      "change_type": "add",
+      "path": "scripts/simulation/construction_service.gd",
+      "change_type": "modify",
       "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
-        "docs/planning/PLN-013_W04B_RULES_AND_BOUNDARIES.md",
-        "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
-        "docs/engineering/gate3/DEV-027_EXECUTION_VALIDATION_PLAN.md",
-        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md",
-        "docs/engineering/gate3/DEV-027_W04B_SUPPLY_CONTRACT.md",
-        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7053550740",
-        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057978655"
+        "docs/engineering/gate3/DEV-027_SESSION_PIPELINE_L2_PLAN.md",
+        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md#9-p3-a-로컬-구현검증-승인과-제출--2026-11-22"
       ],
-      "blob_sha": "59d66ff19eb167a22d2d84c2968106ea6073744e"
+      "blob_sha": "a0906bdf38ea8eae8da0efc6b1f860d2c589ea4d",
+      "old_blob_sha": "fb3377a76c85e1156f23d04dd96869848932dfe5"
+    },
+    {
+      "path": "scripts/model/construction_project.gd",
+      "change_type": "modify",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/gate3/DEV-027_SESSION_PIPELINE_L2_PLAN.md",
+        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md#9-p3-a-로컬-구현검증-승인과-제출--2026-11-22"
+      ],
+      "blob_sha": "74e983bdfe2fdb3f94a9e2ba4dff48592783825b",
+      "old_blob_sha": "c6cfc8fd0b4c450f66e53a4b5c97f065df9c20bf"
+    },
+    {
+      "path": "scripts/simulation/operations_service.gd",
+      "change_type": "modify",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/gate3/DEV-027_SESSION_PIPELINE_L2_PLAN.md",
+        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md#9-p3-a-로컬-구현검증-승인과-제출--2026-11-22"
+      ],
+      "blob_sha": "e3bb2dc1f10c1a675631760a8f9948dde3226190",
+      "old_blob_sha": "714070c5b25ecb6fd162b9805086ae804a0cb057"
+    },
+    {
+      "path": "scripts/ui/s01_observation_contract.gd",
+      "change_type": "modify",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/gate3/DEV-027_SESSION_PIPELINE_L2_PLAN.md",
+        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md#9-p3-a-로컬-구현검증-승인과-제출--2026-11-22"
+      ],
+      "blob_sha": "4a634215284e1e9f3c04a24a046553bf8128aae8",
+      "old_blob_sha": "cc2d1581c44eee2dfbfd0585e1ef287cab892d56"
     },
     {
       "path": "tests/game/w04b_fixtures.gd",
-      "change_type": "add",
+      "change_type": "modify",
       "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
-        "docs/planning/PLN-013_W04B_RULES_AND_BOUNDARIES.md",
-        "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
-        "docs/engineering/gate3/DEV-027_EXECUTION_VALIDATION_PLAN.md",
-        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md",
-        "docs/engineering/gate3/DEV-027_W04B_SUPPLY_CONTRACT.md",
-        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7053550740",
-        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057978655"
+        "docs/engineering/gate3/DEV-027_SESSION_PIPELINE_L2_PLAN.md",
+        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md#9-p3-a-로컬-구현검증-승인과-제출--2026-11-22"
       ],
-      "blob_sha": "7c39738a08bff9efcdd1b544ddd13ce1b45617b3"
-    },
-    {
-      "path": "tests/game/w04b_fixtures.gd.uid",
-      "change_type": "add",
-      "agent_id": "AGT-DEV-0004",
-      "contributors": [],
-      "source_refs": [
-        "docs/planning/PLN-013_W04B_RULES_AND_BOUNDARIES.md",
-        "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
-        "docs/engineering/gate3/DEV-027_EXECUTION_VALIDATION_PLAN.md",
-        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md",
-        "docs/engineering/gate3/DEV-027_W04B_SUPPLY_CONTRACT.md",
-        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7053550740",
-        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057978655"
-      ],
-      "blob_sha": "c0dd78adbc2b796785e5027ae74bea064c5bda2d"
+      "blob_sha": "bcad5e57fbb8d098195a1756abbc622db2ff3b37",
+      "old_blob_sha": "7c39738a08bff9efcdd1b544ddd13ce1b45617b3"
     },
     {
       "path": "tests/game/run_w04b_tests.gd",
-      "change_type": "add",
-      "agent_id": "AGT-DEV-0004",
-      "contributors": [],
-      "source_refs": [
-        "docs/planning/PLN-013_W04B_RULES_AND_BOUNDARIES.md",
-        "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
-        "docs/engineering/gate3/DEV-027_EXECUTION_VALIDATION_PLAN.md",
-        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md",
-        "docs/engineering/gate3/DEV-027_W04B_SUPPLY_CONTRACT.md",
-        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7053550740",
-        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057978655"
-      ],
-      "blob_sha": "a45d753b2c0030c1192529e99f7b7fef01eb957c"
-    },
-    {
-      "path": "tests/game/run_w04b_tests.gd.uid",
-      "change_type": "add",
-      "agent_id": "AGT-DEV-0004",
-      "contributors": [],
-      "source_refs": [
-        "docs/planning/PLN-013_W04B_RULES_AND_BOUNDARIES.md",
-        "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
-        "docs/engineering/gate3/DEV-027_EXECUTION_VALIDATION_PLAN.md",
-        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md",
-        "docs/engineering/gate3/DEV-027_W04B_SUPPLY_CONTRACT.md",
-        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7053550740",
-        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057978655"
-      ],
-      "blob_sha": "7f4867e1e84ae7072bf90d3e1f3e065c757fe24b"
-    },
-    {
-      "path": "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md",
       "change_type": "modify",
       "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
-        "docs/planning/PLN-013_W04B_RULES_AND_BOUNDARIES.md",
-        "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
-        "docs/engineering/gate3/DEV-027_EXECUTION_VALIDATION_PLAN.md",
-        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md",
-        "docs/engineering/gate3/DEV-027_W04B_SUPPLY_CONTRACT.md",
-        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7053550740",
-        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057978655"
+        "docs/engineering/gate3/DEV-027_SESSION_PIPELINE_L2_PLAN.md",
+        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md#9-p3-a-로컬-구현검증-승인과-제출--2026-11-22"
       ],
-      "blob_sha": "5197fdd4bb18c0ede94fb59c80584ff9faa58454",
-      "old_blob_sha": "0c7e3823494b75288bb9315ecb361267001e0a37"
+      "blob_sha": "712ea01c46f8b5c1dafc10e7626337e240df8fb1",
+      "old_blob_sha": "a45d753b2c0030c1192529e99f7b7fef01eb957c"
     },
     {
-      "path": "docs/engineering/tasks/DEV-027_RESULT.md",
-      "change_type": "modify",
+      "path": "tests/game/run_proposal_ui_tests.gd",
+      "change_type": "add",
       "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
-        "docs/planning/PLN-013_W04B_RULES_AND_BOUNDARIES.md",
-        "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
-        "docs/engineering/gate3/DEV-027_EXECUTION_VALIDATION_PLAN.md",
-        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md",
-        "docs/engineering/gate3/DEV-027_W04B_SUPPLY_CONTRACT.md",
-        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7053550740",
-        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057978655"
+        "docs/engineering/gate3/DEV-027_SESSION_PIPELINE_L2_PLAN.md",
+        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md#9-p3-a-로컬-구현검증-승인과-제출--2026-11-22"
       ],
-      "blob_sha": "da98b9bf3d29f49e673ff61730e32ed5f153bdb2",
-      "old_blob_sha": "b9204127d498f8046fdcfdd532b945414b8307ad"
+      "blob_sha": "439f2f0dda028bd163a5a42c6026dc644f08c761"
+    },
+    {
+      "path": "tests/game/run_proposal_ui_tests.gd.uid",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/gate3/DEV-027_SESSION_PIPELINE_L2_PLAN.md",
+        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md#9-p3-a-로컬-구현검증-승인과-제출--2026-11-22"
+      ],
+      "blob_sha": "72f451883c489aa724a34b6446f6f8681e22e83c"
+    },
+    {
+      "path": "tests/game/run_vs02_tests.gd",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/gate3/DEV-027_SESSION_PIPELINE_L2_PLAN.md",
+        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md#9-p3-a-로컬-구현검증-승인과-제출--2026-11-22"
+      ],
+      "blob_sha": "9d4b4beecf0f05d6d0e5ee327fac157b986f214b"
+    },
+    {
+      "path": "tests/game/run_vs02_tests.gd.uid",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/gate3/DEV-027_SESSION_PIPELINE_L2_PLAN.md",
+        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md#9-p3-a-로컬-구현검증-승인과-제출--2026-11-22"
+      ],
+      "blob_sha": "3b10a519fde87a0a25d88d45437200b954e76f71"
     },
     {
       "path": "docs/engineering/gate3/DEV-027_W04B_SUPPLY_CONTRACT.md",
+      "change_type": "modify",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/gate3/DEV-027_SESSION_PIPELINE_L2_PLAN.md",
+        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md#9-p3-a-로컬-구현검증-승인과-제출--2026-11-22"
+      ],
+      "blob_sha": "78bb15eb74cb54475271b899a425aae658377bfd",
+      "old_blob_sha": "32a42260ecefcb69f72a0e58b354d853ac153c2e"
+    },
+    {
+      "path": "docs/engineering/gate3/DEV-027_SESSION_PIPELINE_L2_PLAN.md",
       "change_type": "add",
       "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
-        "docs/planning/PLN-013_W04B_RULES_AND_BOUNDARIES.md",
-        "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
-        "docs/engineering/gate3/DEV-027_EXECUTION_VALIDATION_PLAN.md",
-        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md",
-        "docs/engineering/gate3/DEV-027_W04B_SUPPLY_CONTRACT.md",
-        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7053550740",
-        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057978655"
+        "docs/engineering/gate3/DEV-027_SESSION_PIPELINE_L2_PLAN.md",
+        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md#9-p3-a-로컬-구현검증-승인과-제출--2026-11-22"
       ],
-      "blob_sha": "32a42260ecefcb69f72a0e58b354d853ac153c2e"
+      "blob_sha": "81c33b32789124097088143fc186d8d76eccf485"
     },
     {
       "path": "docs/engineering/gate3/DEV-027_EXECUTION_VALIDATION_PLAN.md",
@@ -268,48 +197,57 @@
       "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
-        "docs/planning/PLN-013_W04B_RULES_AND_BOUNDARIES.md",
-        "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
-        "docs/engineering/gate3/DEV-027_EXECUTION_VALIDATION_PLAN.md",
-        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md",
-        "docs/engineering/gate3/DEV-027_W04B_SUPPLY_CONTRACT.md",
-        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7053550740",
-        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057978655"
+        "docs/engineering/gate3/DEV-027_SESSION_PIPELINE_L2_PLAN.md",
+        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md#9-p3-a-로컬-구현검증-승인과-제출--2026-11-22"
       ],
-      "blob_sha": "a684781e0b35717dca437926115c0c747ff327fb",
-      "old_blob_sha": "94e6f854d90acb240a04d5ab06c05cc78a15f980"
+      "blob_sha": "eba5c6d30db73a9d62b3cb36212d3d13c727e298",
+      "old_blob_sha": "a684781e0b35717dca437926115c0c747ff327fb"
     },
     {
-      "path": "docs/engineering/evidence/DEV-027_W04B_VS02_RESULTS.json",
+      "path": "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md",
+      "change_type": "modify",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/gate3/DEV-027_SESSION_PIPELINE_L2_PLAN.md",
+        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md#9-p3-a-로컬-구현검증-승인과-제출--2026-11-22"
+      ],
+      "blob_sha": "fad646238603431c67c99e81c5b16ad082b8f27d",
+      "old_blob_sha": "5197fdd4bb18c0ede94fb59c80584ff9faa58454"
+    },
+    {
+      "path": "docs/engineering/tasks/DEV-027_RESULT.md",
+      "change_type": "modify",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/gate3/DEV-027_SESSION_PIPELINE_L2_PLAN.md",
+        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md#9-p3-a-로컬-구현검증-승인과-제출--2026-11-22"
+      ],
+      "blob_sha": "3ca774a3d77601f115f5006a52a7b3fce7298acd",
+      "old_blob_sha": "da98b9bf3d29f49e673ff61730e32ed5f153bdb2"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-027_SESSION_PIPELINE_L2_RESULTS.json",
       "change_type": "add",
       "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
-        "docs/planning/PLN-013_W04B_RULES_AND_BOUNDARIES.md",
-        "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
-        "docs/engineering/gate3/DEV-027_EXECUTION_VALIDATION_PLAN.md",
-        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md",
-        "docs/engineering/gate3/DEV-027_W04B_SUPPLY_CONTRACT.md",
-        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7053550740",
-        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057978655"
+        "docs/engineering/gate3/DEV-027_SESSION_PIPELINE_L2_PLAN.md",
+        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md#9-p3-a-로컬-구현검증-승인과-제출--2026-11-22"
       ],
-      "blob_sha": "71d3fbf0ea2618d2e045aedd490db1dfa2c08625"
+      "blob_sha": "8fdefc19327e9b457e3ea029beddd8665a8bf039"
     },
     {
-      "path": "docs/engineering/evidence/DEV-027_W04B_VS02_EVIDENCE.md",
+      "path": "docs/engineering/evidence/DEV-027_SESSION_PIPELINE_L2_EVIDENCE.md",
       "change_type": "add",
       "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
-        "docs/planning/PLN-013_W04B_RULES_AND_BOUNDARIES.md",
-        "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
-        "docs/engineering/gate3/DEV-027_EXECUTION_VALIDATION_PLAN.md",
-        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md",
-        "docs/engineering/gate3/DEV-027_W04B_SUPPLY_CONTRACT.md",
-        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7053550740",
-        "https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057978655"
+        "docs/engineering/gate3/DEV-027_SESSION_PIPELINE_L2_PLAN.md",
+        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md#9-p3-a-로컬-구현검증-승인과-제출--2026-11-22"
       ],
-      "blob_sha": "00ba29ff6b5e26364216d81cd51bae3c5beef9e3"
+      "blob_sha": "ebd107eec87cc279830a52c6f233b17a5d4a8c84"
     }
   ]
 }
