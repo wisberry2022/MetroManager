@@ -98,6 +98,16 @@ func _automatic() -> void:
 	product.set_process(false)
 	_expect("U01_product_opt_in", product.session.snapshot().operations_ui.status, "READY")
 	_expect("U01_preopen", product.operations_view.labels.status.text.contains("개통 전"), true)
+	_expect("U01_w04b_opt_in", product.session.snapshot().proposal_ui.available, true)
+	var initial: Dictionary = product.session.snapshot()
+	product.controls.open_proposals.pressed.emit()
+	_expect("U01_w04b_real_view", product.proposal_view.visible, true)
+	_expect("U01_w04b_selection_empty", product.proposal_view.selected_slot, "")
+	_expect("U01_w04b_entry_no_effect", product.session.snapshot(), initial)
+	product.proposal_view.controls.back.pressed.emit()
+	await process_frame
+	await process_frame
+	_expect("U01_w04b_back_plan", product.map_view.is_visible_in_tree(), true)
 	main.queue_free()
 	await process_frame
 	_session = FX.opened().session

@@ -24,10 +24,38 @@ func _ready() -> void:
 	view.session = Session.new(loaded.data, state)
 	var operations: Dictionary = view.session.enable_operations_ui()
 	print("DEV023_ACTIVATION ", JSON.stringify(operations))
+	var seed_choice := proposal_seed(OS.get_cmdline_user_args())
+	if seed_choice.accepted:
+		var proposals: Dictionary = view.session.enable_proposals(seed_choice.seed)
+		print(
+			"DEV027_ACTIVATION ",
+			JSON.stringify({"seed": str(seed_choice.seed), "result": proposals})
+		)
+	else:
+		push_warning("W04B 초기 seed 인수가 유효하지 않아 회사 제안 진입을 활성화하지 않았습니다")
 	$Margin.hide()
 	add_child(view)
 	print("W01_INIT_OK ", JSON.stringify(state))
 	print("W07_INIT_OK S01_MINIMUM_UI")
+
+
+## 명시 재현은 기존 네 seed만 받는다. 기본 플레이는 정상 난수 초기화를 사용한다.
+static func proposal_seed(arguments: PackedStringArray) -> Dictionary:
+	var selected: Variant = null
+	for argument: String in arguments:
+		if not argument.begins_with("--w04b-seed"):
+			continue
+		if selected != null or not argument.begins_with("--w04b-seed="):
+			return {"accepted": false}
+		var value := argument.trim_prefix("--w04b-seed=")
+		if value not in ["0", "1", "2", "8"]:
+			return {"accepted": false}
+		selected = int(value)
+	if selected == null:
+		var random := RandomNumberGenerator.new()
+		random.randomize()
+		selected = random.randi()
+	return {"accepted": true, "seed": selected}
 
 
 func _fail(errors: Array) -> void:
