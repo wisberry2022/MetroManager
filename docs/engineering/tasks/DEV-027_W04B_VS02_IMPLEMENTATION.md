@@ -260,3 +260,39 @@ Owner 승인 원문 — 본 개발 대화:
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-027
+
+
+## 13. P3-B 로컬 구현·검증 승인 — 2026-11-22
+
+Owner 승인 원문 — 본 개발 대화:
+
+> DEV-027 P3-B의 로컬 구현·검증 착수를 승인합니다. Track A/B L2 조건과 B02 시각 표현 보완을 반영하여 최대 19개 경로 안에서 진행하고, 로컬 결과부터 검토 요청해주세요. Commit·Push·PR·main 병합과 독립 GUI 실행은 별도 승인하며, DI-03 보류와 기존 대기 상태는 유지합니다.
+
+- 상태: **P3B_LOCAL_IMPLEMENTATION_IN_PROGRESS / REMOTE_NOT_SENT**. 앞 절의 작성 당시 미승인·미공급 기록은 보존하며 현재 권한은 본 절을 따른다.
+- base: `1a24e3346d0ec46ca692fe54d5de5656913c3450`; 별도 로컬 브랜치 `codex/DEV-027-p3b-screen-integration`. 상세 계획 §6.2의 정확한 최대19경로(제품7·검사3·문서/증거9)만 허용한다.
+- [Track A](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7074162935) / [Track B](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7074161321)의 B01~06 방향 확인 회신 완료. 기존 P3-A 한정 수용을 재심사하지 않으며 이 확인을 제품 PASS로 쓰지 않는다.
+- B02 보완: `effective_not_before`는 접수 가능 최저 시각(성공 보장 아님), `admitted_at`은 실제 접수, `completes_at`은 실제 접수 기준 완료 예정이다. 효력 재검사 실패·명시적 새 요청과 현재 행동 사유를 구분한다. 기존 공급 필드/게임 규칙 변경 없음.
+- 비의존 main/Host·제안 View·명령/상태·P05/P06/P07·후보/복귀를 구현하고 자동 Control/회귀·Godot 로드를 분리 검증한다. 실제/합성 입력/시간 환산을 구분하고 소스·실패 로그·원 시험 식별을 보존한다.
+- 제외: DI03 실제 생성·수요/carry·소비·재접수, 새 규칙·모델/원장·CI·새 GUI runner·폰트/이름/아트 반입. 독립 GUI·자연 VS02·Design 화면 최종 수용은 별도 대기.
+- Commit·Push·PR·main 병합·이슈 댓글·배포0. DEV026 한정 수용/PARTIAL·미관측·P07 구분, #92 규격/공급과 S3-10-C·S3-12 최종 인수 대기 유지.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027
+
+
+## 14. P3-B 로컬 검토 요청 — 2026-11-22
+
+- 기준: `1a24e3346d0ec46ca692fe54d5de5656913c3450` + [실행 JSON](../evidence/DEV-027_SCREEN_INTEGRATION_RESULTS.json)의 최종 파일 해시. 신규 commit 없음.
+- [Track A](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7074162935) / [Track B](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7074161321) B01~06 방향 확인과 Owner 최대19경로 승인에 따라 구현했다. 현재 **LOCAL_REVIEW_PENDING / P4_GUI_INDEPENDENT_NOT_RUN / REMOTE_NOT_SENT**.
+- 새 실제 View 자동 **225 PASS**, 영향 회귀 **3120 PASS**(그중 P3-A 모델/공급/VS02 재실행677), 정상 실패0·SCRIPT ERROR0. 새 runner 의도 실패 exit1을 별도로 확인했다. Godot4.7.2 최종 로드 exit0·오류0.
+- 제품 코드는 main/Host와 새 proposal View/표시 매핑/씬에 한정한다. 모델·Session·Pipeline·원장·시계·기존 씬·자산/데이터·CI 변경0. 기존 UI 입력 공통 처리와 표시 helper를 재사용해 Host를1000행 이내로 유지했다.
+- B02는 `effective_not_before`→접수 가능 최저 시각(성공 보장 아님), `admitted_at`→실제 접수, `completes_at`→실제 접수부터의 완료 예정으로 소비한다. 기존 게임 규칙·심사/난수/지급 계산 추가0.
+- 자동 검사에는 실제 Control 신호/합성 키보드와 게임 시간 환산이 있다. 실제 OS GUI·독립 실행·자연 VS02·최종 가독성/물리 DPI·빌드/export·성능은 각각 NOT_RUN. 표시0/실패 등 사본 fixture는 실제 자연 발생과 분리했다.
+- P1/P3-A 결과·실패/원본과 Markdown 원문을 보존했다. 비변경 추적774개·공유 데이터2개·별도 F08 문서9개 해시 일치. 검사 당시 CRLF 바이트는 로컬 보관하고 LF 정규화 외 변경0을 검증했다. 최종 로드는 LF 파일로 실행했다.
+- DI03 종속 범위 보류, DEV026 한정 수용/PARTIAL·미관측·P07 구분, #92 실제 이름/환경/폰트/아트·최종 규격, S3-10-C·S3-12/HQ·Owner 최종 인수 대기 유지. 새 명세 변경/RFC 필요 없음.
+- 로컬 제출 검사: `.venv/Scripts/python.exe tools/policy.py doctor` 및 `check` PASS(793파일/68 GDScript), `git diff --check` PASS. 정확한19경로·18개 provenance blob·UTF-8/LF·원문 보존을 재확인했다. 원격 필수 CI는 PR 미생성으로 NOT_RUN이다.
+
+최대19경로 승인 안에서 구현·자동/회귀·로드를 완료했다. 실제 파일/검증 명령은 DEV-027_RESULT §13 및 새 증거 색인을 따른다. 로컬 결과 검토 단계이며 Git/독립 GUI·최종 인수 권한은 별도다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027
