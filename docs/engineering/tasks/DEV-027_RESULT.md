@@ -513,3 +513,59 @@ Task-ID: DEV-027
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-027
+
+## 17. #146 Track A 확인사항 수정·PR177 후속 — 2026-11-22
+
+Owner의 새 확인사항 수정·기존 PR 포함 지시를 [계획 §12](../gate3/DEV-027_KEYBOARD_FOCUS_VALIDATION_PLAN.md)에 기록했다. [Track A 댓글](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7076149744)의 원본 패킷181개, REPORT/manifest 해시·정정문·FOCUS 연결·046화면을 대조했으며 원문/과거 검증은 보존했다. 제품 시험37596bd의 관측을 최신 main 실행으로 바꾸지 않는다.
+
+### 변경 파일·실제 보완
+
+이번 후속의 정확한9개 파일은 아래와 같다. 초기 PR의stage1_view.gd는 그대로이므로 **PR 전체10개 경로**다.
+
+1. `scripts/ui/proposal_view.gd`
+2. `tests/game/run_proposal_view_tests.gd`
+3. `docs/engineering/gate3/DEV-027_KEYBOARD_FOCUS_VALIDATION_PLAN.md`
+4. `docs/engineering/gate3/DEV-027_SCREEN_INTEGRATION_PLAN.md`
+5. `docs/engineering/evidence/DEV-027_KEYBOARD_FOCUS_EVIDENCE.md`
+6. `docs/engineering/evidence/DEV-027_KEYBOARD_FOCUS_RESULTS.json`
+7. `docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md`
+8. `docs/engineering/tasks/DEV-027_RESULT.md`
+9. `docs/engineering/tasks/DEV-027_PROVENANCE.json`
+
+K01-12/13/14의 비활성 건너뜀은 초기 Host 수정으로 동작하므로 제품 추가 변경 없이 **단일 Tab/역Tab11경로**를 고정했다. 즉시 owner→실제 Host.present fallback→안정 owner/가시성 및 모델 무효과를 확인한다. 계약/설득의 Enter/Space 명령1회도 실제 합성 입력으로 확인한다. 기존 `_tab_to`의 최종 도달만으로 보고된 잘못된 중간 경로를 통과시키지 않는다.
+
+K01-04는 S12 선택인데 마지막 행이 내부scroll0·y139+27/목록높이130 밖으로 잘리는 것을 확인했다. `proposal_view._render_map`의 동일 선택에 대한 deselect/select 반복을 제거하고 선택 변경/선택 없음 분기는 유지했다. 수정 뒤 내부scroll40·행y99+27로 목록/외부 영역 안에 들어온다. 버튼 활성화·유효성/focus 소유권 검사·기획 규칙·모델·CI 변경0이다.
+
+### 실행 명령·검증
+
+[증거 §6](../evidence/DEV-027_KEYBOARD_FOCUS_EVIDENCE.md)과 [JSON followups[0]](../evidence/DEV-027_KEYBOARD_FOCUS_RESULTS.json)에 실제 명령·소스161개·실패/최종 raw 해시를 연결했다. 기존 JSON 최상위의737/0 등은 과거 근거로 그대로 보존한다.
+
+| 구분 | 실행 / 결과 |
+| --- | --- |
+| 수정 전/후 동일 runner | `<Godot> --headless --path <worktree> --script res://tests/game/run_proposal_view_tests.gd -- --output=<fresh-evidence>`: **819/1→819/0**, 각각 engine exit1→0, ERROR/SCRIPT ERROR0. 원 실패는 K01-04:last_row_inside_list1개 |
+| 직접 영향 회귀 | `--headless --script res://tests/game/run_s01_exception_tests.gd`: **334/0**, exit0·ERROR/SCRIPT ERROR0 |
+| 프로젝트 로드 | `--headless --editor --quit`: 초기/최종 각각 exit0·ERROR/SCRIPT ERROR0 |
+| 이전 회귀 | 초기 PR의1503회귀는 당시 범위 재사용. 이번334와 중복 합산하지 않음 |
+| OS GUI·독립 실행·새 자연 VS02 | 각각 **NOT_RUN**. 보완본 Design 재수용 별도 |
+| 게임 플레이·빌드/export·성능 | 각각 **NOT_RUN** |
+
+원 view-01의807/3은 목록1개와 이미 소유한 요청 버튼의 시작 가시성 가정2개로 구분해 보존했다. helper는 새 도달이 필요할 때만 시작점의 Tab 가시성을 단언하고 이미 소유한 시작점은 실제 owner/trace를 기록한다. 한 Tab 후 목적지 owner/가시성 단언은 강화했다. 목록 좌표는 내부 스크롤을 차감하여 비교한다. 이 검사 정정 후 view-02/03은 정확히 같은 runner 해시이며 다른 제품 변경은 없다.
+
+### 범위·대기 상태
+
+기존 main이 기획 문서7개로 d8b6f4a에 진전하여 무충돌 GitHub base-sync325b54a를 fast-forward로 수신했고, 사전 검사에서 `work=1, verified_base_sync=1` PASS를 확인했다. main 병합/강제 push/기획 산출물 직접 수정은 아니다. 이번 제출도 정상 Commit·Push와 동일 PR177의필수 policy/department-policy를 사용한다.
+
+원 K01 OS FAIL/PARTIAL 및 순수 OS 계약·설득 NOT_VERIFIED는 수정본 독립 재검수 전까지 유지한다. 재검수 제안은 K01-12/13/14·K01-04 국소 행이며 전체 자연 완주를 새 조건으로 삼지 않는다. F01 RACE INCONCLUSIVE·기존 F04 자동 우선순위5개/INCONCLUSIVE10, GUI shader cache 오류 실행별4개(원인/연관 미확인)를 구분한다. 기존 DEV026 한정 수용/PARTIAL·P07 구분·DI03 정책결정/실제구현 HOLD·F08 선택/최종인증·S3-10-C/S3-12·HQ/Owner 최종 인수 대기를 유지한다. 기획 명세 변경 필요 없음.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027
+
+### 후속 제출 전 정적 검사
+
+- `policy.py doctor` PASS, `policy.py check` **PASS(810파일/68GDScript)**, formatter/linter·`git diff --check` PASS.
+- `keyboard-focus-issue146/audit.py --manifest`: **PASS**. PR10경로·provenance9개·기존 Markdown5개 prefix·원 JSON 최상위 값·기존736개 JSON 단언(+저장1)·현재 소스161개·PR 경로 밖800추적파일·기존 Host·공유 데이터2개·Design 패킷181개 보존.
+- 생성된 import/translation176개는 해시 확인 후 새 로컬 generated-imports 보관 위치로 이동했다. 추적된 디자인/제품 파일 삭제 없음.
+- 원격 보호: policy·department-policy/Actions15368 strict, 관리자 적용·선형 이력·force/delete 금지 확인. 로컬 감사/실행 원본은 `.local/validation/DEV-027/keyboard-focus-issue146/`. 원격 CI는 후속 commit head로 다시 확인하며 검증 통과를 main 병합 승인으로 사용하지 않는다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027

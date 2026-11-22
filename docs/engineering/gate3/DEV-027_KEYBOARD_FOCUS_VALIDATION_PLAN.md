@@ -213,3 +213,20 @@ Owner는 §10의 추가 경로·두 최소 수정·회귀와 제출 요청에 �
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-027
+
+## 12. #146 Track A 재현 후속·PR177 반영 — 2026-11-22
+
+Owner 최신 지시: “146번 이슈에 다른 확인사항이 등록되었으니 확인하여 수정한뒤 방금 등록한 PR에 포함시켜주세요”(본 개발 대화). [Track A 결함 전달](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7076149744)의 K01-12/13/14 실제 이동 경로 및 K01-04 목록 가시성을 확인·보완하고 기존 PR177에 정상 Commit·Push한다. Design 댓글 자체를 권한으로 사용하지 않으며 이번 Owner 지시를 후속 수정·제출 근거로 삼는다. main 병합·독립 OS GUI·DI03 구현은 포함하지 않는다.
+
+PR 초기 head4f18678의 Tab 수정은 이미 비활성 버튼을 제외한다. 추가 자동 검사는 이름→제거, 정부 요청 대기/심사 중의 다음 유효 Control, 허가 시 재조회→역Tab→계약, 보류 시 재조회→역Tab→설득·예측→시청→설득을 **한 번의 Tab 직후 및 Host.present 뒤** 비교한다. 시작점 준비는 합성 Tab, 명시 실행은 Enter/Space이며 목표 직접 grab_focus·pressed 신호로 이동을 대체하지 않는다. 상태 준비의 기존 fixture·시간 환산은 구분한다.
+
+K01-04는 기존9경로 검사에서 실제 선택S12·목록 scroll0·마지막 행 y139/높이27·목록 높이130으로 잘림을 재현했다. 필요한 최소 제품 수정은 `scripts/ui/proposal_view.gd`의 현재 선택 재설정 제어다. 기존 `_render_map`이 이미 선택된 행을 deselect/select하여 키 입력의 자동 가시화 요청을 취소하는 경로를 보완한다. **이번 #146 수정 지시에 필요한 이 파일1개를 추가하여 PR 전체10경로**가 된다. §7/11의9경로는 직전 제출 이력이며 포괄 신규 기능 승인이 아니다. Host source·유효성 검사·명령 허용 상태·기획 규칙은 추가 변경하지 않는다.
+
+변경 경로는 §7.2의8개 + §11의stage1_view.gd + 이번proposal_view.gd다. 이번 후속 실제 수정은 그 중 Host를 제외한9개이며 계획/결과·증거는 원문 뒤에 추가한다. JSON의 기존 실행 자료도 별도 후속 객체로 보존한다. 공개 Git에는 Design 원본 ZIP/캡처/로그·개인 절대경로를 추가하지 않는다.
+
+검증은 동일 runner의 전체 수정 전/후 대조, 선택 행의 내부/외부 clipping·명령 무효과, S01 예외/수명 회귀, headless 프로젝트 로드, policy/문서·provenance/원본 무결성 및 PR 두 필수 CI로 한정한다. Host 변경이 없으므로 직전 operations271/construction898/S01334의1503회귀는 당시 증거이며 이번 재실행 수와 합산하지 않는다. F01 OS 경쟁은 INCONCLUSIVE, F04 자동5행·휠/return10행은 기존 상태로 유지한다.
+
+main이 PLN-019 문서7개로 d8b6f4a에 진전하여 GitHub 무충돌 Update branch를 사용했다. 서버 sync `325b54a0ab45d297add709238a80f881c899912d`는 부모4f18678/d8b6f4a의 정확한 clean tree로 preflight `work=1, verified_base_sync=1` PASS를 확인했다. 제품/테스트 차이0이며 새 기획 문서를 이번 구현 규칙 변경 승인으로 간주하지 않는다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027

@@ -78,3 +78,41 @@ Tab 대상60건·명시 명령 활성화13건·순환3건을 JSON에 기록했�
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-027
+
+## 6. #146 Track A 재현 후속 — 2026-11-22 / PR177 추가 제출
+
+[Track A 전달](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7076149744)의 시험37596bd와 패킷 `supplement-k01-f01-20261122-a02`를 확인했다. REPORT SHA256 `471bddfdf6fd29931b96031eb15d2e851929143e1826d9683102862db8de87c1`, manifest `1b824f620372ad4205160e046bcaf57657019765cbe91b0b36d9df8762eb3fc1`, 원본181개 불일치0이다. RECORD_CORRECTIONS·FOCUS_LINKS·cases와 원046화면을 대조했다. 개인 절대경로·원 캡처/로그는 공개 업로드하지 않는다. 본문 앞의 수치는4f18678 당시 근거이며 아래 실행으로 덮어쓰지 않는다.
+
+| 전달 행 / 원본 식별 | DEV 후속 | 남는 판정 |
+| --- | --- | --- |
+| K01-12 이름→Tab,047/048·seq14→15·rev104·log2008/2010 | 한 Tab 직후 및 Host.present 후 다음 유효 제거 버튼 확인. 정부 요청 대기079/080·seq36→37·rev191 및 실제 심사중도 분리 | 기존 Host Tab 수정의 합성 이동 PASS. 수정본 OS 재검수 NOT_RUN |
+| K01-13 재조회→Shift+Tab,084~086·seq40→41→42·rev321 | 비활성 P05를 건너 활성 계약 도달, Enter 명령1회/action/slot 확인 | 순수 OS 계약 실행 NOT_VERIFIED를 자동 PASS로 승격하지 않음 |
+| K01-14 seed8 보류,141~147·seq16→17→18·rev324/325 | 재조회 역방향→설득과 예측→시청→설득 정방향을 각각 단일 Tab으로 확인. Space 설득1회/action/slot | 순수 OS 설득 실행 NOT_VERIFIED 유지 |
+| K01-04 목록,043~047 | 이름→역Tab 목록→Up S08→Down S12. 선택S12지만 내부scroll0/행y139+27이 높이130 밖인 불일치 재현. 이미 선택된 행의 재선택 제거 후 내부scroll40.0, 행[P: (4.0, 99.0), S: (1104.0, 27.0)]·내부/외부영역 포함 PASS | 국소 자동 보완. 기존 OS PARTIAL의 Design 재수용 대기 |
+| F01 안정 읽기·경쟁 | 새 OS 실행 없음. 기존28개 자동 순서/읽기 무효과 보존, F04 우선순위5행·INCONCLUSIVE10 유지 | OS 안정 관측과1~2frame RACE INCONCLUSIVE를 구분 |
+
+수정 제품은 **proposal_view.gd의 _render_map 선택 갱신**뿐이다(이번 후속 기준). 선택이 같으면 deselect/select를 반복하지 않아 키 입력이 예약한 행 가시화가 유지된다. 선택 변경 시 select, 선택 없음 시 deselect는 유지한다. 기존 Host invalid-focus fallback·유효성·명령 허용 상태는 그대로이며 버튼을 강제로 활성화하지 않는다. ItemList 행 좌표는 [공식 API](https://docs.godotengine.org/en/stable/classes/class_itemlist.html#class-itemlist-method-get-item-rect)를 참고하고 실제 내부 스크롤을 차감해 clipping을 대조했다. 전수 시각 품질/지원환경 인증이 아니다.
+
+### 새 실행·식별
+
+기준 sync `325b54a0ab45d297add709238a80f881c899912d`, 신뢰 base `d8b6f4abb3e4e6bcb9b8a53394bb600ca14938fc`. 제품 proposal_view SHA256 `1bb18196e273b9961329120d35c3baf6f1dee7c1e0b1b86c29733d377c727249`, 검사 SHA256 `9ac0bf1065eb8f22e658ce081ccb6217de4888609819388154ab61dc24c4b5fa`. [JSON](DEV-027_KEYBOARD_FOCUS_RESULTS.json)의 `followups[0]`에 실제 소스161개, 전체 단언·단일 Tab11경로·선택 행·명령 활성화·실패 원본 해시를 연결했다. 기존 JSON 최상위 실행/판정은 모두 그대로다.
+
+| run | 결과 | 해석 |
+| --- | --- | --- |
+| initial-load | exit0, ERROR/SCRIPT ERROR0 | 후속 초기 headless import |
+| view-01 |807단언/3실패, exit1, ERROR/SCRIPT ERROR0 | 목록 잘림1 + 이미 focus된 정부 요청 버튼을 새로 도달한 것으로 가정한 시작 가시성2. 원 실패 보존 |
+| view-02-before-list-fix | **819/1**, exit1, ERROR/SCRIPT ERROR0 | 시작 owner를 직접 확인하고 실제 한 Tab 후 가시성을 단언, 내부 좌표 보정 후 목록 잘림만 FAIL |
+| view-03-fixed | **819/0**, exit0, ERROR/SCRIPT ERROR0 | 수정 전과 정확히 같은 runner. 새 이동/목록 및 기존 전체 검사 |
+| regression-s01 | **334/0**, exit0, ERROR/SCRIPT ERROR0 | 공통 관측 무효/복구·Session 수명 영향 |
+| final-load | exit0, ERROR/SCRIPT ERROR0 | 최종 제품 headless editor 로드 |
+
+이미 focus를 보유한 정부 요청 직후 시작점은 텍스트 증가로 화면 밖일 수 있음을 trace에 남겼다. 시작점을 다시 Tab으로 획득한 것으로 오인한 view-01의 가시성 단언2개와, 요구된 **다음 Control의 즉시/안정 owner·가시성** 검증을 구분한다. 새 helper는 현재 owner가 시작점이면 이를 확인하고 한 Tab을 보낸다. 새로 시작점에 접근하는 경우에는 여전히 실제 Tab 및 가시성 단언을 적용한다. 실패 숨김을 위해 목적지 단언을 제거하지 않았다.
+
+모든 신규 명령은 §5의 공통 Godot4.7.2 `--headless --path <worktree>`를 사용하며 출력 폴더는 `.local/validation/DEV-027/keyboard-focus-issue146/<run>/`다. View에는 `--script res://tests/game/run_proposal_view_tests.gd -- --output=<fresh-run>/evidence.json`, S01에는 `--script res://tests/game/run_s01_exception_tests.gd`, 로드는 `--editor --quit`. 실제 OS GUI·새 자연 VS02·빌드/export·성능은 각각 NOT_RUN이다. 기존1503회귀는 당시 수치로 보존하고 이번334에 중복 합산하지 않는다.
+
+Design 원본 두 GUI 실행의 shader cache 저장 ERROR는 **실행별4건**, exit0/SCRIPT ERROR0과 구분한다. engine/stderr 중복을8건으로 세지 않으며 원인·키보드 결함과의 연관은 미확인이다. 이번 headless 오류0으로 해결했다고 주장하지 않는다.
+
+후속 독립 GUI는 K01-12/13/14 국소 정·역 이동과 활성 계약/설득 실행, K01-04 마지막 행만 요청 대상으로 삼는다. 상태 준비 마우스·합성 자동과 실제 OS 입력을 분리하고 자연 VS02·공사·영업·첫 보고 전체 재완주를 추가 조건으로 만들지 않는다. 독립 실행/Design 판정은 별도 승인 대기다. DI03 A1+B1 정책 결정과 실제 사건·동/OD·수요/carry·소비·성공 재접수 HOLD, F08 선택과 최종 인증, 기존 한정 수용/PARTIAL·S3-10-C/S3-12·HQ/Owner 최종 인수를 구분해 유지한다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027

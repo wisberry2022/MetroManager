@@ -346,3 +346,12 @@ Owner의 “제품 1개 추가·수정 검증 및 PR 승인”으로 [검증 계
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-027
+
+## 19. #146 Track A 키보드 경로·목록 후속 — 2026-11-22
+
+Owner의 새 확인사항 수정·기존 PR 반영 지시에 따라 [계획 §12](../gate3/DEV-027_KEYBOARD_FOCUS_VALIDATION_PLAN.md)를 적용한다. 초기 PR177의9경로에 K01-04 최소 수정 proposal_view.gd1개가 추가돼 전체10경로이며 이번 실제 변경은 Host를 제외한9개다. [후속 증거 §6](../evidence/DEV-027_KEYBOARD_FOCUS_EVIDENCE.md)에 K01-12/13/14 단일 Tab/역Tab11경로·계약/설득 명령, 선택 행 가시성819/1→819/0, S01회귀334/0·로드 및 원본181개 보존을 연결했다.
+
+Design 댓글은 수정 범위/기대 근거이고 Git 권한은 이번 Owner 지시다. main 병합·독립 GUI·새 자연 완주·DI03은 포함하지 않는다. 원 OS FAIL/PARTIAL/NOT_VERIFIED·F01 RACE INCONCLUSIVE, 기존 DEV026 한정 수용/PARTIAL·최종 인수 대기를 유지한다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027
