@@ -389,3 +389,37 @@ Commit·Push·PR·main 병합·독립 GUI·이슈 회신·릴리스/배포는 �
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-027
+
+
+## 14. 통합 GUI 심사 수신·잔여 매핑 로컬 결과 — 2026-11-22
+
+- 근거: [Track A 자연 VS02 결과](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7075072443), [Track B 최종 증거 심사](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7075447846). PR #174는 main에 병합됐으며 양 Track 고정 시험본과 이번 기준 main은 `37596bd6d646f9d0454280477e60a2e652f06613`이다.
+- Track A의 정상 자연 VS02 관측 구간 PASS, Track B의 관측18행 **TRACK_B_P3B_GUI_LIMITED_ACCEPTANCE / OVERALL_PARTIAL**을 후속 연결했다. 전체 PARTIAL, B06-02/03 PARTIAL2와 신규 GUI NOT_RUN5를 유지한다. 이전 “독립 GUI 전체 대기/NOT_RUN”은 당시 이력이며 현재는 확인한 구간만 갱신한다.
+- 확정 제품 결함은 보고되지 않았으며 DEV의 이번 확인도 새 제품 FAIL을 확정하지 않았다. 제품 재구현·전체 자연 완주 반복을 추가하지 않았다. [근거 매핑·최소 후속안·#146 회신 초안](../evidence/DEV-027_GUI_REVIEW_FOLLOWUP.md)을 준비했다.
+- B06-02는 fallback/1프레임 ensure-visible/2프레임 저장문맥 복귀와 일반 P07 진입을 원 로그·캡처에 대응시켰다. 다른 focus로 이동하는 경쟁과 같은 focus의 휠/읽기 키 경합을 분리했다. 후자는 기존 자동 근거의 공백이며 원인 확정·수정 완료·OS PASS가 아니다.
+- A manifest256개/B SHA256SUMS307개 재해시 불일치0, 댓글 핵심 SHA6개 일치. 기존 DEV 소스161개 및 raw로그12개·full view evidence도 일치. View225/회귀3120은 당시 실행을 재사용하며 이번 재실행이 아니다. A/B의 일4 실적·게임 시각과 seed8 지급 관측 범위를 서로 대체하지 않는다.
+- DI03 실제 종속 구현·검증 HOLD, DEV026 한정 수용/PARTIAL·미관측·P07 일반 재진입/저장문맥 구분, #92 규격/입력 및 S3-10-C·S3-12/HQ·Owner 최종 인수 대기를 유지한다. 전체 Design 수용·필수 미충족0·DEV027 DONE·이슈 종료는 선언하지 않는다.
+- 이번 게임 자동·프로젝트 로드·GUI/플레이·독립 실행·자연 VS02·빌드/export·성능·새 계측/반입은 각각 NOT_RUN. Commit·Push·PR·병합·이슈 게시0. 현재 **LOCAL_REVIEW_PENDING / 원격 미제출**이며 이번 결과로 추가 실행/Git 권한을 만들지 않는다.
+
+### 변경 경로와 검토 요청
+
+1. `docs/engineering/evidence/DEV-027_GUI_REVIEW_FOLLOWUP.md`
+2. `docs/engineering/gate3/DEV-027_SCREEN_INTEGRATION_PLAN.md`
+3. `docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md`
+4. `docs/engineering/tasks/DEV-027_RESULT.md`
+5. `docs/engineering/tasks/DEV-027_PROVENANCE.json`
+
+제품·테스트 소스·씬·데이터·CI·디자인 원본 변경0. 기존 Markdown3개는 원문 뒤 후속을 추가하고 provenance는 기준 main의 원 manifest를 보존한 채 이번4개 산출물을 선언한다. #146 회신 초안은 새 증거 문서 §7에 포함한다. 후속5개 파일과 최소 보완안의 로컬 검토를 요청한다.
+
+### 검증 명령과 결과
+
+- `.venv/Scripts/python.exe tools/policy.py doctor`: PASS, 로컬 훅/도구 확인. 원격 보호 확인·게임 검증이 아님.
+- `.venv/Scripts/python.exe -X utf8 .local/validation/DEV-027/gui-review-followup/check_inputs.py`: PASS. 원본 manifest·댓글 SHA·기존 실행 해시 대조. 제품 실행 없음.
+- `.venv/Scripts/python.exe tools/policy.py check`: **PASS**, 801파일/68GDScript. 제품 재실행이 아닌 정책/형식 검사다.
+- `git diff --check`, 정확한5경로·Markdown 원문 prefix·provenance4 blob·나머지796개 추적 파일·공유 기존 데이터2개·Design 원본 재대조: **PASS**. 최종 감사에 기록했다.
+- 감사 원본: `.local/validation/DEV-027/gui-review-followup/input-audit.json` / `final-audit.json`. 신규 게임 검사/GUI/로드를 수행했다고 합산하지 않는다.
+
+추가 명세 변경/RFC는 현재 필요 없음. 같은-focus 휠/지연 복원 기대가 달라져야 하는 것으로 확인되면 기존 RFC 절차로 먼저 보고한다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027
