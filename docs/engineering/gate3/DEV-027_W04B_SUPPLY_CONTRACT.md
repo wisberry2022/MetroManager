@@ -1,5 +1,8 @@
 # DEV-027 W04B P1 모델 공급 계약
 
+> **2026-11-22 P3-A 수용·P3-B 계획 후속:** Track A 공급 L2 한정 수용·Track B 정적 이견 없음을 마지막 후속 절에 연결한다. [화면 계획](DEV-027_SCREEN_INTEGRATION_PLAN.md)은 이번 문서7개와 미래 실행19개를 구분한다. 실제 화면 통합은 계획에 포함하되 구현·게임 검증·Git/GUI·DI03 보류는 유지한다. 앞선 상태/증거는 당시 이력이다.
+
+
 > **2026-11-22 P3-A 구현 후속:** 승인된 Session·Pipeline 연결과 L2 공급 준비의 로컬 검토 결과는 문서 마지막의 P3-A 후속 절을 따른다. 앞선 미실행/미승인 문구는 당시 기록이다. DI03·L2 전 화면 통합·Git/최종 인수 대기는 유지한다.
 
 - 작성: Development / AGT-DEV-0004 / 2026-11-22 KST.
@@ -111,6 +114,20 @@ Pipeline: 이전 구간 비용/발생 → 자정 마감 → process_review_phase
 ConstructionProject가 실제 station_ids/출처를 보존하고 기존 공사 규칙을 적용한다. Operations는 원 계약/지급/출처·계획/개통 상태를 대조하며 기존 단일 운행·동시 제한을 넓히지 않는다. W04B를 나중에 켜도 기존 PUBLIC_TENDER 공사는 원 계약/역 대조로 유지한다. `query_next_business(confirmed)`는 기존 report_key/first_valid_report 확인을 유지하고 tenders와 선택적 proposals를 구분해 반환한다. 조회로 지급/심사/난수를 실행하지 않는다. 화면의 새 이동/복귀는 P3-B다.
 
 DI03 fact_supply는 available=false/status=DI03_PENDING/facts=[]다. 적격 사실이 정상 공급된0건과 같지 않다. +1440 이후 실제 사건·수요·소비·재접수는 여전히 NOT_RUN이다. 이름/환경/폰트/아트의 기존 공급·미공급·담당/차단 시점은 상세 계획 §5를 그대로 보존한다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027
+
+
+## 9. P3-A 공급 수용·P3-B 소비 계약 준비 — 2026-11-22
+
+[PR #171](https://github.com/wisberry2022/MetroManager/pull/171)은 main `cc8814097634013be8df8b27f166bdee09c7bac6`에 병합됐다. 제출 head `a9111742a74c7369ab7c52f5e24ef5ca51d2c217`와 병합 tree가 동일하며 기존 모델/연결677·영향 회귀3204·로드/의도 실패 및 필수 CI는 원 실행 식별로 재사용한다. 이번 새 게임 실행이나 최신 main 자연 VS02 결과가 아니다.
+
+- [Track A / AGT-DSG-0004](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7073746341): **TRACK_A_P3A_L2_LIMITED_ACCEPTANCE**. 비의존 기능 공급·백엔드 연결 한정 수용, 기능 의미의 추가 필수 수정 없음. UI11은 제한/미공급 의미만, UI12 실제 DI03은 보류.
+- [Track B / AGT-DSG-0003](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7073690611): **P3A_SUPPLY_REVIEWED / TRACK_B_STATIC_NO_OBJECTION / SCREEN_ACCEPTANCE_PENDING / GUI_NOT_REQUESTED_NOW**. 공급 의미 이견 없음이며 실제 화면/표현·읽기·수명·복귀 수용은 별도다.
+- 과거 P1의 Session/Pipeline 미공급, 승인 전 Git/실행 대기는 당시 이력이다. 원문·기존 검증·raw·실제/fixture 구분과 DEV026 한정 수용/PARTIAL·미관측·P07 구분을 보존한다. DI03 실제 종속 구현·검증 및 S3-10-C·S3-12/HQ·Owner 최종 인수 대기도 유지한다.
+
+[P3-B 계획](DEV-027_SCREEN_INTEGRATION_PLAN.md) §4~5가 실제 Control의 채택본/행동·문구·읽기·화면별 복귀에 대한 **제안/확인 대기**다. §8의 실제 API·게임 의미는 변경하지 않았다. 이미 수용된 공급을 재작성하지 않으며, 남은 소비 계약의 필수 차이만 해당 행 통합 전에 해결한다. 실제 main/View 연결은 다음 P3-B 구현 후보에 포함되지만 이번에는 문서만 작성한다.
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-027

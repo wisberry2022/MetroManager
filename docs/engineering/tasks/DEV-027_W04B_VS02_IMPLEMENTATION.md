@@ -1,5 +1,11 @@
 # DEV-027 — W04B·VS-02 착수 계획 및 문서 제출 티켓
 
+> **2026-11-22 문서 Git 제출 후속:** §12의 Owner 승인에 따라 이번 문서7개만 지정 브랜치에 Commit·Push·PR 제출한다. P3-B 구현·검증/Track A·B L2/DI03·main 병합 대기는 유지한다. 앞선 Git 미승인·미제출 표시는 당시 기록이다.
+
+
+> **2026-11-22 P3-A 수용·P3-B 계획 후속:** Track A 공급 L2 한정 수용·Track B 정적 이견 없음을 마지막 후속 절에 연결한다. [화면 계획](../gate3/DEV-027_SCREEN_INTEGRATION_PLAN.md)은 이번 문서7개와 미래 실행19개를 구분한다. 실제 화면 통합은 계획에 포함하되 구현·게임 검증·Git/GUI·DI03 보류는 유지한다. 앞선 상태/증거는 당시 이력이다.
+
+
 > **2026-11-22 Git 제출 후속:** §10에 Owner의 지정 브랜치 Commit·Push·PR 및 필수 CI 확인 승인을 기록한다. 기존 로컬 시험 원본은 보존하며 main 병합·DI03·L2 전 화면 통합·독립 심사 대기는 유지한다.
 
 > **2026-11-22 P3-A 구현 후속:** 승인된 Session·Pipeline 연결과 L2 공급 준비의 로컬 검토 결과는 문서 마지막의 P3-A 후속 절을 따른다. 앞선 미실행/미승인 문구는 당시 기록이다. DI03·L2 전 화면 통합·Git/최종 인수 대기는 유지한다.
@@ -200,6 +206,57 @@ Task-ID: DEV-027
 - 모델·Session·자동 연결677 / 영향 회귀3204 / 로드·고의 실패 종료의 기존 실행을 재사용한다. 실제 시험 소스 해시 동일성을 대조하며 문서 동기화만으로 GUI·게임 전체를 반복하지 않는다. 제출 정책·preflight 및 실제 head의 CI 결과는 PR에서 확인한다.
 - DI03 종속 범위, L2 전 화면 통합·독립/Design 심사, DEV026 한정 수용·PARTIAL/미관측, S3-12/HQ·Owner 최종 인수 대기를 유지한다. 신규 명세 변경 요구 없음.
 - 이 문서는 제출 직전 기록이다. 실제 commit/head·PR·필수 CI는 PR 본문과 완료 보고를 따른다. 과거 GIT_NOT_AUTHORIZED/REMOTE_NOT_SENT는 당시 기록으로 남긴다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027
+
+
+## 11. P3-A 수용 후속·P3-B 로컬 계획 권한 — 2026-11-22
+
+Owner 요청 원문 — 본 개발 대화:
+
+> 개발 에이전트. P3-A 수용 결과를 후속 기록하고, P3-B의 착수 범위와 실행·검증 계획을 로컬로 준비해주세요. 정확한 변경 경로와 Track A/B L2 확인사항·승인 필요 범위를 포함해주세요. 구현·검증 및 Commit·Push·PR·main 병합은 별도 승인하며, DI-03 보류와 기존 대기 상태는 유지합니다.
+>
+> 그리고 TrackA,TrackB가 통합 GUI 테스트 실행 조건으로 화면 통합 연결을 요구했으니 해당 범위가 이번 작업에 포함되는지도 확인해주세요
+
+상태: **LOCAL_PLAN_REVIEW / P3B_IMPLEMENTATION_VALIDATION_NOT_AUTHORIZED / REMOTE_NOT_SENT**. 기준 `cc8814097634013be8df8b27f166bdee09c7bac6`, 로컬 브랜치 `codex/DEV-027-p3b-screen-plan`. 이 요청은 아래7개 문서 로컬 작성·정적 확인만 허용한다.
+
+| 종류 | 정확한 경로 |
+| --- | --- |
+| 신규 | `docs/engineering/gate3/DEV-027_SCREEN_INTEGRATION_PLAN.md` |
+| 수정 | `docs/engineering/gate3/DEV-027_W04B_SUPPLY_CONTRACT.md` |
+| 수정 | `docs/engineering/gate3/DEV-027_SESSION_PIPELINE_L2_PLAN.md` |
+| 수정 | `docs/engineering/gate3/DEV-027_EXECUTION_VALIDATION_PLAN.md` |
+| 수정 | `docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md` |
+| 수정 | `docs/engineering/tasks/DEV-027_RESULT.md` |
+| 수정 | `docs/engineering/tasks/DEV-027_PROVENANCE.json` |
+
+[PR #171](https://github.com/wisberry2022/MetroManager/pull/171)은 main `cc8814097634013be8df8b27f166bdee09c7bac6`에 병합됐다. 제출 head `a9111742a74c7369ab7c52f5e24ef5ca51d2c217`와 병합 tree가 동일하며 기존 모델/연결677·영향 회귀3204·로드/의도 실패 및 필수 CI는 원 실행 식별로 재사용한다. 이번 새 게임 실행이나 최신 main 자연 VS02 결과가 아니다.
+
+- [Track A / AGT-DSG-0004](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7073746341): **TRACK_A_P3A_L2_LIMITED_ACCEPTANCE**. 비의존 기능 공급·백엔드 연결 한정 수용, 기능 의미의 추가 필수 수정 없음. UI11은 제한/미공급 의미만, UI12 실제 DI03은 보류.
+- [Track B / AGT-DSG-0003](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7073690611): **P3A_SUPPLY_REVIEWED / TRACK_B_STATIC_NO_OBJECTION / SCREEN_ACCEPTANCE_PENDING / GUI_NOT_REQUESTED_NOW**. 공급 의미 이견 없음이며 실제 화면/표현·읽기·수명·복귀 수용은 별도다.
+- 과거 P1의 Session/Pipeline 미공급, 승인 전 Git/실행 대기는 당시 이력이다. 원문·기존 검증·raw·실제/fixture 구분과 DEV026 한정 수용/PARTIAL·미관측·P07 구분을 보존한다. DI03 실제 종속 구현·검증 및 S3-10-C·S3-12/HQ·Owner 최종 인수 대기도 유지한다.
+
+[상세 계획](../gate3/DEV-027_SCREEN_INTEGRATION_PLAN.md) §6.2의 **최대19개**는 다음 로컬 구현·자동/회귀·로드 검증 승인 후보다. 실제 화면 통합(main/Host·제안 View·P05/P06/P07/후보 동선)은 그 후보에 포함된다. Track A/B B01~06의 해당 L2 필수 차이 정리와 Owner의 실행 승인을 만족하기 전 구현하지 않는다. P4 GUI/자연 VS02·독립 실행·Design 화면 수용은 고정 시험본/주체·범위 확인 후 별도다.
+
+이번 제품 소스/검사/씬/에셋 변경0, 게임 자동/로드/GUI·빌드/export는 NOT_RUN. staging/Commit·Push·PR·원격 댓글 게시·main 병합/auto-merge·릴리스/배포도 허용되지 않았다. 과거 Git 승인/PR171 병합 사실을 미래 작업에 전용하지 않는다. 새 게임 명세 변경/RFC 요구 없음. 실제 계약 충돌이 드러나면 해당 행만 기존 RFC 양식으로 상정한다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027
+
+
+## 12. P3-B 계획 문서 제출 승인 — 2026-11-22
+
+Owner 승인 원문 — 본 개발 대화:
+
+> DEV-027 로컬 문서 7개를 승인합니다. codex/DEV-027-p3b-screen-plan 브랜치에 Commit·Push하고 PR을 생성한 뒤 필수 CI 결과까지 확인해주세요. P3-B 구현·검증과 main 병합은 별도 승인하며, Track A/B L2 확인 대기·DI-03 보류 및 기존 대기 상태는 유지합니다.
+
+- 대상: `wisberry2022/MetroManager` / DEV-027 / AGT-DEV-0004. 브랜치 `codex/DEV-027-p3b-screen-plan`, 제출 base `cc8814097634013be8df8b27f166bdee09c7bac6`.
+- 허용 범위: §11 및 [상세 계획 §6.1](../gate3/DEV-027_SCREEN_INTEGRATION_PLAN.md)의 승인된 문서7개에 대한 정상 훅 Commit·일반 Push·PR 생성·필수 CI 확인. 미래 최대19개 제품 실행 후보의 구현·검증 승인이 아니다.
+- 유지: P3-B 구현·검증 미착수, Track A/B B01~06 L2 확인 대기, DI03 종속 구현·검증 보류, DEV026 한정 수용/PARTIAL·미관측·P07 구분과 S3-10-C·S3-12/HQ·Owner 최종 인수 대기. main 병합·auto-merge·릴리스/배포 및 #146 신규 댓글 게시 권한 없음.
+- 승인7개 원본과 해시는 `.local/validation/DEV-027/p3b-plan/submission/approved-7/` 및 `approved-audit.json`에 보관한다. 승인된 계획·계약·후속 내용은 보존하고 이 티켓/결과의 제출 승인 기록과 provenance blob만 갱신한다.
+- 문서 doctor/check·정확한7경로·상대 링크·원문/소스/공유 보존 검사를 수행하며 커밋 후 fetch/preflight, 원격 실제 head의 `policy`·`department-policy`를 확인한다. 실제 commit/head·PR·CI 결과는 제출 PR과 완료 보고에 연결한다.
+- 신규 게임 자동/프로젝트 로드/GUI·플레이·독립 실행·자연 VS02·빌드/export는 각각 NOT_RUN. 원 P3-A 시험/CI와 문서 검사를 구분하며 새 명세 변경 요구 없음. 이 기록은 제출 직전이며 PR 작성/CI는 승인·DONE을 뜻하지 않는다.
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-027
