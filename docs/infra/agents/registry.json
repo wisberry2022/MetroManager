@@ -137,15 +137,15 @@
       "agent_id": "AGT-DSG-0002",
       "department": "DSG",
       "generation": 2,
-      "status": "ACTIVE",
+      "status": "RETIRED",
       "role": "Art Director & UI/UX Designer / Stage 2 Track A successor",
       "session_scope": "DESIGN-TRACK-A-SUCCESSOR-CURRENT",
       "session_kind": "CHATGPT",
       "predecessor_agent_id": "AGT-DSG-0001",
       "activated_at": "2026-11-08T15:49:28+09:00",
-      "retired_at": null,
+      "retired_at": "2026-11-22T08:42:00+09:00",
       "role_observed_on": "2026-11-08",
-      "role_retirement_observed_on": null,
+      "role_retirement_observed_on": "2026-11-22",
       "owner_approval_ref": "docs/infra/tasks/INF-003_TRACK_A_DESIGNER_SUCCESSION.md#owner-activation",
       "agent_id_activation_approval_ref": "docs/infra/tasks/INF-003_TRACK_A_DESIGNER_SUCCESSION.md#owner-activation",
       "handoff_ref": "docs/infra/tasks/INF-003_TRACK_A_DESIGNER_SUCCESSION.md#handoff-acceptance",
@@ -154,10 +154,11 @@
         "docs/hq/PM-014_STAGE2_VS01_EXECUTION_PLAN.md",
         "docs/design/tasks/DSG-010_A01_P01_P02_DESIGN.md",
         "docs/design/tasks/DSG-010_A01_QA_PLAN.md",
-        "https://github.com/wisberry2022/MetroManager/issues/81"
+        "https://github.com/wisberry2022/MetroManager/issues/81",
+        "docs/infra/tasks/INF-013_TRACK_A_SUCCESSION.md#owner-transfer"
       ],
-      "record_version": 1,
-      "notes": "Owner-approved Track A successor after INF handoff acceptance and HQ PM_SWITCH_CONFIRMED. Effective activation uses the approved HQ timestamp. Track B DSG-006/007 ownership and AGT-DSG-0003 reservation are separate. ACTIVE does not authenticate a technical session or inherit Commit/Push/PR permissions; each new task requires its own authorization."
+      "record_version": 2,
+      "notes": "Owner-approved Track A successor after INF handoff acceptance and HQ PM_SWITCH_CONFIRMED. Effective activation uses the approved HQ timestamp. Track B DSG-006/007 ownership and AGT-DSG-0003 reservation are separate. ACTIVE does not authenticate a technical session or inherit Commit/Push/PR permissions; each new task requires its own authorization. Owner directed Track A retirement effective 2026-11-22T08:42:00+09:00 and succession by AGT-DSG-0004 under INF-009. Original activation, authorship and approval history remain unchanged; successor acknowledgement and actual work start are separate and NOT_RECORDED in the evidence reviewed for INF-013."
     },
     {
       "agent_id": "AGT-DSG-0003",
@@ -364,6 +365,32 @@
       ],
       "record_version": 1,
       "notes": "Owner-appointed LAPTOP Project Leader successor under INF-009. Handoff HOF-20261114-DEV-AGT-DEV-0001-AGT-DEV-0004 records transfer effective 2026-11-14T17:37:00+09:00 and successor acknowledgement 2026-11-14T17:38:10+09:00; acknowledgement, recording and merge times are distinct. Same LAPTOP role scope; Convention and DESKTOP remain independent. session_kind is UNCONFIRMED because no explicit successor session-kind declaration was verified. Routine ACHC/T1-T10 were not required and are not certified here. ACTIVE is lifecycle status, not identity authentication or a blanket grant of ticket-specific Git authority."
+    },
+    {
+      "agent_id": "AGT-DSG-0004",
+      "department": "DSG",
+      "generation": 3,
+      "status": "ACTIVE",
+      "role": "Design Track A / Art Director & UI/UX Designer",
+      "session_scope": "DESIGN-TRACK-A-SUCCESSOR-CURRENT",
+      "session_kind": "UNCONFIRMED",
+      "predecessor_agent_id": "AGT-DSG-0002",
+      "activated_at": "2026-11-22T08:42:00+09:00",
+      "retired_at": null,
+      "role_observed_on": "2026-11-22",
+      "role_retirement_observed_on": null,
+      "owner_approval_ref": "docs/infra/tasks/INF-013_TRACK_A_SUCCESSION.md#owner-transfer",
+      "agent_id_activation_approval_ref": "docs/infra/tasks/INF-013_TRACK_A_SUCCESSION.md#owner-transfer",
+      "handoff_ref": "docs/infra/tasks/INF-013_TRACK_A_SUCCESSION.md#handoff-record",
+      "role_evidence_refs": [
+        "docs/infra/tasks/INF-013_TRACK_A_SUCCESSION.md#owner-transfer",
+        "docs/infra/tasks/INF-013_TRACK_A_SUCCESSION.md#handoff-record",
+        "docs/infra/tasks/INF-009_LIGHTWEIGHT_SUCCESSION.md",
+        "docs/infra/agents/REGISTRY_TRANSITION_RULES.md",
+        "https://github.com/wisberry2022/MetroManager/issues/146"
+      ],
+      "record_version": 1,
+      "notes": "Owner-designated third-generation Track A successor to AGT-DSG-0002 under INF-009. Effective start is 2026-11-22T08:42:00+09:00. Actual successor acknowledgement and actual work start are NOT_RECORDED in the reviewed evidence and are not backdated. The inherited session_scope identifies the same logical Track A role, not the same physical session; session_kind remains UNCONFIRMED. Existing valid Track A authority transfers within its original scope; Track B AGT-DSG-0003 remains independent. ACTIVE records Owner lifecycle authority, not technical identity authentication, acceptance-test PASS or new blanket Git authority."
     }
   ],
   "unresolved_identity_checks": [
