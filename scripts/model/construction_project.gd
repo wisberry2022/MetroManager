@@ -13,7 +13,8 @@ func _init(source: Dictionary, mode: String, minute: int) -> void:
 	state = {
 		"project_id": business.project_id,
 		"business_contract": business.duplicate(true),
-		"station_ids": source.terms.station_ids.duplicate(),
+		"station_ids":
+		source.get("station_ids", source.get("terms", {}).get("station_ids", [])).duplicate(),
 		"construction_contract_id": business.business_contract_id + "-CONSTRUCTION",
 		"construction_contract_status": "EFFECTIVE",
 		"contract_effective_at": minute,
@@ -40,6 +41,10 @@ func _init(source: Dictionary, mode: String, minute: int) -> void:
 		"repair_paid": 0,
 		"opened_at": null
 	}
+
+	if source.has("source_kind"):
+		state["source_kind"] = source.source_kind
+		state["source_id"] = source.source_id
 
 
 func snapshot() -> Dictionary:

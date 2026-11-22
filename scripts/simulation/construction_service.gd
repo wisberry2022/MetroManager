@@ -1,9 +1,10 @@
 class_name ConstructionService
 extends RefCounted
-## W05 명령과 단계 어댑터. W04A 지급 증거를 소비하며 정부금을 다시 지급하지 않는다.
+## W05 명령과 단계 어댑터. 실제 사업 지급 증거를 소비하며 정부금을 다시 지급하지 않는다.
 
 const Project = preload("res://scripts/model/construction_project.gd")
 const Ledger = preload("res://scripts/model/company_ledger.gd")
+const Sources = preload("res://scripts/simulation/business_sources.gd")
 const COMMAND_KEYS := [
 	"command_id",
 	"project_id",
@@ -20,6 +21,7 @@ var _ledger: Ledger
 var _projects: Dictionary = {}
 var _pending: Dictionary = {}
 var _results: Dictionary = {}
+var _verified_sources: Dictionary = {}
 
 
 func _init(ledger: Ledger) -> void:
@@ -114,7 +116,7 @@ func snapshot(minute: int, revision: int, tenders: Dictionary = {}) -> Dictionar
 
 func _candidates(tenders: Dictionary, minute: int) -> Array[Dictionary]:
 	var values: Array[Dictionary] = []
-	for row: Dictionary in tenders.get("tenders", []):
+	for row: Dictionary in _rows(tenders, minute):
 		var business: Dictionary = row.get("business_contract", {})
 		if business.is_empty():
 			continue
@@ -197,7 +199,7 @@ func _pay(project: Project, minute: int) -> bool:
 
 
 func _source(command: Dictionary, tenders: Dictionary, minute: int) -> Dictionary:
-	for row: Dictionary in tenders.get("tenders", []):
+	for row: Dictionary in _rows(tenders, minute):
 		var business: Dictionary = row.get("business_contract", {})
 		var payment: Dictionary = business.get("government_payment", {})
 		if not _valid_source_types(business, payment):
@@ -232,6 +234,12 @@ func _source(command: Dictionary, tenders: Dictionary, minute: int) -> Dictionar
 		):
 			return row.duplicate(true)
 	return {}
+
+
+func _rows(supply: Dictionary, minute: int) -> Array:
+	if supply.has("source_contract_revision"):
+		return Sources.rows(supply, _ledger, minute, _verified_sources)
+	return supply.get("tenders", [])
 
 
 func _valid_source_types(business: Dictionary, payment: Dictionary) -> bool:

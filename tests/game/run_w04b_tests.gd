@@ -33,6 +33,7 @@ func _run() -> void:
 		_test_time_and_observation()
 		_test_fact_boundaries()
 		_test_malformed_boundaries()
+		_test_pipeline_phases()
 		_write_evidence()
 	print("W04B_P1_TEST_RESULT checks=", _checks, " failures=", _failures)
 	quit(0 if _failures == 0 else 1)
@@ -522,6 +523,31 @@ func _test_malformed_boundaries() -> void:
 		_expect(
 			"payment_type:" + key, Sources.collect({}, copy, bundle.ledger, 453).available, false
 		)
+
+
+func _test_pipeline_phases() -> void:
+	var bundle := FX.bundle(2)
+	var service: Service = bundle.service
+	FX.prepare(service)
+	FX.city(service)
+	FX.government(service)
+	service.submit(FX.command(service, "phase-sign", "sign_proposal_contract"))
+	_expect("phase_contract_before_review", service.process_contract_phase(453).accepted, false)
+	_expect("phase_review", service.process_review_phase(453).accepted, true)
+	_expect("phase_no_early_payment", bundle.ledger.snapshot().cash, 1000000)
+	_expect(
+		"phase_incomplete", service.process_review_phase(454).reason, "INCOMPLETE_PROPOSAL_PHASE"
+	)
+	_expect("phase_review_duplicate", service.process_review_phase(453).changes, 0)
+	_expect("phase_contract", service.process_contract_phase(453).accepted, true)
+	_expect("phase_payment", bundle.ledger.snapshot().cash, 1800000)
+	var before := service.snapshot()
+	_expect("phase_contract_duplicate", service.process_contract_phase(453).changes, 0)
+	_expect("phase_snapshot_stable", service.snapshot(), before)
+	_expect("phase_backwards", service.process_review_phase(452).accepted, false)
+	_expect("phase_skip", service.process_review_phase(455).accepted, false)
+	service.advance_to(454)
+	_expect("phase_compatibility", service.snapshot().simulation_minute, 454)
 
 
 func _expect(id: String, actual: Variant, expected: Variant) -> void:

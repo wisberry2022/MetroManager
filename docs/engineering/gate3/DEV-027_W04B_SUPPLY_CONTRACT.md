@@ -1,5 +1,7 @@
 # DEV-027 W04B P1 모델 공급 계약
 
+> **2026-11-22 P3-A 구현 후속:** 승인된 Session·Pipeline 연결과 L2 공급 준비의 로컬 검토 결과는 문서 마지막의 P3-A 후속 절을 따른다. 앞선 미실행/미승인 문구는 당시 기록이다. DI03·L2 전 화면 통합·Git/최종 인수 대기는 유지한다.
+
 - 작성: Development / AGT-DEV-0004 / 2026-11-22 KST.
 - 상태: **P1_LOCAL_REVIEW / PRODUCT_INTEGRATION_PENDING / L2_FINAL_PENDING**.
 - 기준 main: `1a941196cc6d963db93a9fba6a0386b16710aa46`. 미커밋 시험본은 [증거 색인](../evidence/DEV-027_W04B_VS02_RESULTS.json)의 소스 SHA-256으로 식별한다.
@@ -80,6 +82,35 @@ slot은 P-A/P-B, proposal은 `scope:proposal:slot`, 사업 원장은 `scope:busi
 - #146의 실제 공급 L2·지역 의존표·표시/행동 경계 대조 전 화면 통합 대기. 현재 모델 snapshot을 완성된 UI payload로 간주하지 않는다.
 - DEV-026 한정 수용/PARTIAL·미관측, S3-12/HQ·Owner 최종 인수 대기 유지. 새 제품 GUI·독립 실행·Design 수용·VS-02·빌드/export는 NOT_RUN.
 - 새 게임 명세 변경 필요는 확인되지 않았다. 기존 RFC-DEV-027-01만 OPEN이며 새 정책을 만들지 않았다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027
+
+## 8. P3-A 실제 Session·Pipeline 공급 계약 — 2026-11-22
+
+상위 P1 원문은 당시 격리 모델 계약으로 보존한다. 현재 실행 식별과 실제/fixture 표본은 [P3-A 증거 색인](../evidence/DEV-027_SESSION_PIPELINE_L2_EVIDENCE.md) 및 [JSON](../evidence/DEV-027_SESSION_PIPELINE_L2_RESULTS.json)을 따른다. **공급 준비 완료 ≠ Design L2 수용 ≠ 화면 통합**.
+
+### 명시적 API와 상태 권위
+
+`Stage1Session.enable_proposals(seed:int)`가 기존 network/parameters/run_scope/clock/ledger로 Pipeline의 서비스를 한 번 설치한다. 재활성화는 거부하며 main/View에서 호출하지 않는다. `request_proposal(command)`·`proposal_result(id)`로 편집/예측/네 심사·계약을 요청/조회한다. scope는 Session에서 먼저 검사하며 동일 ID는 payload를 바꿔도 최초 결과를 재사용한다. service 명령은 효력 후 최신 결과로 조회된다.
+
+편집 필드는 command_id/run_scope/slot_id/action=`edit_proposal`/현재 binding/station_ids/name, 예측은 action=`predict_proposal`이며 station_ids/name은 받지 않는다. 두 명령의 current binding은 proposal_id/plan_revision/prediction_input_revision이다. 네 기존 심사/계약 명령·decision 참조는 §3을 재사용한다. seed/원장/판정값은 명령에 넣지 않는다.
+
+`snapshot().proposal_ui`는 `ui_contract_revision=DEV027-W04B-UI-1`, run_scope/view_revision/status/available/reason_codes/observation/snapshot/requests를 공급한다. observation은 기존 Pipeline의1.3/T_COMPLETE/게임분·일·snapshot_revision이며 내부 모델 snapshot은1.4/별도 snapshot_revision이다. root의 DEV026-S01-EX-v0.1/1.3 판을 변경하지 않는다. `requests[].command/result/requested_at`, 모델의 `commands`, `review`, `decisions`, `business_contract`는 각각 실제 기록이다.
+
+각 행 `edit_state`는 계획 잠금, `predict_state`는 잠금/유효 계획, `action_states`는 네 심사/계약의 현재 허용·사유다. 요청 당시 거절 reason과 현재 행동 reason을 대체하지 않는다. 현재 draft·예약 submission·심사/보류 decision.submission·contract.permitted_plan을 분리한다. 미계산/실패/유효0/음수도 분리한다.
+
+`S01ObservationContract.proposal_region(root, expected_scope, previous_packet={})`는 root/지역 타입·소속·관측·행동과 심사 사본을 확인한다. expected_scope는 Session이 정하고 previous_packet은 소비자가 마지막 채택본을 보관해 전달한다. 이전 view는 STALE_PROPOSAL_OBSERVATION, 같은 view의 다른 내용은 CONFLICTING_PROPOSAL_OBSERVATION이다. 동일 재수신은 읽기만 허용한다. `inspect`는 proposal_ui를 별도 지역으로 공급하며 자금/보고 등의 기존 지역은 각자의 의존으로 판정한다. 이번에 실제 Control의 이전봉투 저장·focus·화면 복귀는 연결하지 않는다.
+
+### 공유 단계와 실제 사업 출처
+
+Pipeline: 이전 구간 비용/발생 → 자정 마감 → process_review_phase → CONTRACT(일반→W04A→W04B process_contract_phase→W05) → PROGRESS → VALIDATION → ARRIVAL → SETTLEMENT → BOARDING/보고. 일괄 advance의 마지막 clock.minute를 중간 tick에 전달하지 않는다. 제안 심사/계약 단계 API의 중복은 무효과이고 역행/건너뜀은 거부한다. 독립 advance_to는 같은 두 단계를 순차 호출한다.
+
+`BusinessSources.packet`은 `DEV027-BUSINESS-1`, 1.3/관측분·판, sources, source_status를 공급한다. 각 source는 PUBLIC_TENDER/COMPANY_PROPOSAL의 source_id·project_id·business_contract_id·station_ids·business_contract·fare와 원 출처 terms/permission을 보유한다. 제안 terms는 빈 사본이며 가짜 tender를 만들지 않는다. 허가 decision/submission과 지급 transaction/index/amount/분·사업 보호금 존재를 대조한다. 없는 공급은 NOT_INSTALLED, 실패는 INVALID, 유효는 READY로 분리한다. 실패한 제안 공급이 유효 공고 후보를 제거하지 않는다. 소비 `rows`는 변조/중복/다른 원장·분을 다시 확인한다. 같은 원장의 추가 전용 항목 캐시는 소비자별이며 모델/조회/RNG/원장 효과를 만들지 않는다.
+
+ConstructionProject가 실제 station_ids/출처를 보존하고 기존 공사 규칙을 적용한다. Operations는 원 계약/지급/출처·계획/개통 상태를 대조하며 기존 단일 운행·동시 제한을 넓히지 않는다. W04B를 나중에 켜도 기존 PUBLIC_TENDER 공사는 원 계약/역 대조로 유지한다. `query_next_business(confirmed)`는 기존 report_key/first_valid_report 확인을 유지하고 tenders와 선택적 proposals를 구분해 반환한다. 조회로 지급/심사/난수를 실행하지 않는다. 화면의 새 이동/복귀는 P3-B다.
+
+DI03 fact_supply는 available=false/status=DI03_PENDING/facts=[]다. 적격 사실이 정상 공급된0건과 같지 않다. +1440 이후 실제 사건·수요·소비·재접수는 여전히 NOT_RUN이다. 이름/환경/폰트/아트의 기존 공급·미공급·담당/차단 시점은 상세 계획 §5를 그대로 보존한다.
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-027

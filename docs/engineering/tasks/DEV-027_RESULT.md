@@ -1,5 +1,11 @@
 # DEV-027 — 이슈 철회·착수 계획 문서 PR 전환 결과
 
+> **2026-11-22 Git 제출 후속:** §10에 Owner의 지정 브랜치 Commit·Push·PR 및 필수 CI 확인 승인을 기록한다. 기존 로컬 시험 원본은 보존하며 main 병합·DI03·L2 전 화면 통합·독립 심사 대기는 유지한다.
+
+> **2026-11-22 P3-A 구현 후속:** 승인된 Session·Pipeline 연결과 L2 공급 준비의 로컬 검토 결과는 문서 마지막의 P3-A 후속 절을 따른다. 앞선 미실행/미승인 문구는 당시 기록이다. DI03·L2 전 화면 통합·Git/최종 인수 대기는 유지한다.
+
+> **2026-11-22 최신 로컬 결과:** §8과 [다음 착수안](../gate3/DEV-027_SESSION_PIPELINE_L2_PLAN.md)은 문서5개 준비 결과다. 새 Session/Pipeline·제품 구현/검증은 NOT_RUN이며 P1/PR166의 기존 결과와 구별한다. DI03·화면 L2·최종 인수 대기를 유지한다.
+
 > **2026-11-22 P1 최신 결과:** §7은 승인된 비의존 모델의 로컬 구현·검증 결과다. **LOCAL_REVIEW / GIT_SUBMISSION_NOT_AUTHORIZED**. DI-03 종속 범위·L2 전 화면 통합 및 DEV-026 한정 수용/PARTIAL·S3-12 최종 인수 대기는 유지한다. 아래 과거 기록은 보존한다.
 
 > **PM-021 최신 후속 — 2026-11-21:** §6이 현재 **LOCAL_REVIEW / TRACK_B_COMMON_TABLE_REVIEW_PENDING / GIT_SUBMISSION_NOT_AUTHORIZED** 상태를 설명한다. O01~07 방향 승인·DEV026 현재 공급/P07 수용은 유효하다. 아래 과거 제출·미실행·선택 대기는 당시 이력으로 보존한다. 이번 작업은 기존 DEV027 문서4개 로컬 보완·정적 검사다.
@@ -150,6 +156,102 @@ Godot `4.7.2.stable.official.ed1daf0bf`의 엔진 본체/console SHA-256, 실제
 - DEV-026 한정 수용·PARTIAL/미관측·P07 구분, S3-12/HQ·Owner 최종 인수 대기 유지. 과거 원본 검증·정정·승인 기록은 보존한다. #92 공통표는 [DEV 회신](https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057935798)·[Track A 검토 완료](https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057978655)로 연결하며 같은 문서/GUI 재제출을 요구하지 않는다.
 - 게임 규칙 변경 필요: **새 변경 요구 없음**. RFC-DEV-027-01의 DI-03 종속 의미 확인만 OPEN.
 - **Commit·Push·PR·CI·main 병합 미실행/별도 승인 대기.** 이번 보고는 승인된 P1 로컬 결과의 검토 요청이며 전체 DEV-027/Stage DONE 또는 Design 수용 선언이 아니다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027
+
+## 8. Session·Pipeline/L2 착수안 로컬 결과 — 2026-11-22
+
+**LOCAL_PLAN_REVIEW / PRODUCT_IMPLEMENTATION_NOT_RUN / REMOTE_NOT_SENT**. [Owner 요청·문서5개](DEV-027_W04B_VS02_IMPLEMENTATION.md#8-92146-후속-착수안-로컬-준비--2026-11-22)에 따라 계획만 준비했다.
+
+### 결과·변경 파일
+
+- [신규 상세 계획](../gate3/DEV-027_SESSION_PIPELINE_L2_PLAN.md): P3-A 비의존 Session/Pipeline·공유 원장/분 단계·실제 사업 소비와 L2 입력 준비를 다음 단위로 제안했다. 화면 없는 공급 검사와 UI 통합/자연 VS02를 구분한다.
+- 기존 실행계획·티켓·이 결과서에 최신 안내/후속을 추가했고 provenance를 이번4개 Markdown의 base/blob·근거로 갱신했다. **총5개 문서만 변경**했다.
+- 미래 최대22개(제품8/검사6/문서·증거8)를 열거하고 기존41개 밖5경로를 명시했다. 특히 ConstructionProject의 tender.terms 의존과 guard 변경을 추가 범위로 드러냈다.
+- #92의 NR/DA 기준은 수신 완료다. 실제 이름12행·작성/승인 담당·기준 PC 목적/배율/접근·폰트 실물/고지/fallback은 남은 입력이다. 앞선 미게시 F08 검토6파일은 보존하고 공식 댓글만 연결했다.
+- #146의 실제/모델/fixture·현재/당시·행동 권위·예외/지역 의존을 L01~10 및 V01~09로 정리했다. 신규 증거2개는 미래 생성 후보이며 현재 실제 공급 표본은 없다.
+- DI03의 A1+B1 정책 완료를 연결하고 종속 생성/수요/carry/소비·성공 재접수 구현/검증 보류를 유지했다. 새 게임/경제/시간/세이브 명세 변경 요구 없음. 공동 원장 경쟁 등 실제 의미 충돌이 드러나면 해당 행만 RFC로 다룬다.
+
+### 정적 검수
+
+검사 결과: **PASS — 문서/저장소 정적 검사에 한정**.
+
+| 검사 | 결과 |
+| --- | --- |
+| `.venv/Scripts/python.exe tools/policy.py doctor` | PASS. 원격 보호/승인 인증 아님 |
+| `.venv/Scripts/python.exe tools/policy.py check` | PASS·exit0, worktree761파일/GDScript63. formatter/linter이며 게임 자동검사가 아님 |
+| `git diff --check`·UTF-8/LF | PASS |
+| 실제/미래 경로·참조 | 실제5개·미래22개(8/6/8), 기존41개 안17/밖5, 이번 후속의 상대 링크/anchor19개 확인 |
+| 기록/출처 | 기존 Markdown3개 원문 보존, pinned base·이번4개 blob 일치, 기존 P1 증거/제품 변경0 |
+| 기존 로컬/공유 상태 | F08 검토6파일·공유 데이터2개 해시 불변, HEAD=기준 main·index 비어 있음 |
+
+감사 원본은 이 worktree의 `.local/validation/DEV-027/session-pipeline-plan/audit.json` 및 최종 `audit-final.json`에 보관한다. 로컬 도구 연결 과정의 권한 오류는 기존 venv junction을 정상 생성한 뒤 doctor/check로 해소했으며 게임 실행은 하지 않았다. Git 커밋이 없어 preflight·신규 원격 CI는 NOT_RUN이다.
+
+### 실행·승인 경계와 잔여
+
+이번 신규 게임 자동 / Godot 프로젝트 로드 / GUI·플레이·독립 실행·자연 VS02 / 환경·DPI·폰트·아트 계측/반입 / 성능·빌드/export는 각각 **NOT_RUN**. 신규 Commit·Push·PR·CI·main 병합 및 #92/#146 원격 댓글 게시도 미실행이다. 기존 P1 자동425/회귀805/로드/CI·제출/병합 식별과 과거 실패·timeout은 원래 증거에 보존한다.
+
+검토 요청은 [상세 계획 §7.2·8](../gate3/DEV-027_SESSION_PIPELINE_L2_PLAN.md#72-다음-p3-a-실행-후보--최대22개--현재-미승인)의 최대22경로 P3-A 로컬 구현·자동/직접 영향 회귀·프로젝트 로드·L2 패킷 로컬 준비다. 이번 문서 승인은 그 실행 권한을 만들지 않는다. 실제 L2 수용 전 화면 통합, DI03 종속 범위, DEV026 한정 수용/PARTIAL·미관측·P07 구분, #92/F08 및 S3-10-C·S3-12/HQ·Owner 최종 인수는 유지한다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027
+
+## 9. P3-A 로컬 구현·검증 결과 — 2026-11-22
+
+**LOCAL_IMPLEMENTATION_REVIEW / L2_INPUT_SUPPLIED_LOCALLY / L2_ACCEPTANCE_PENDING / GIT_NOT_AUTHORIZED**.
+
+- base `97cc5472f11a97d5f7d7c1b89dc12edeace36e1f` + [실행 소스 SHA256](../evidence/DEV-027_SESSION_PIPELINE_L2_RESULTS.json). 실제 변경 **22개 = 제품8 + 검사6 + 문서·증거8**. 목록은 상세 계획 §7.2를 그대로 따른다.
+- 모델/Session/자동 연결 **677개**, 영향 회귀 **3204개** 정상 통과. 프로젝트 로드 오류0, 새 runner2개의 고의 실패 exit1 검출. 자동 검사는 GUI·자연 VS02·Design/독립 수용이 아니다.
+- 실제 Session opt-in·공유 시계/원장, 마감 뒤 심사·CONTRACT 지급 분리, 허가 사본/지급→공사→실제 운행/첫 보고/후보 조회를 연결했다. W04A 기존 기본 진입과 뒤늦은 W04B 활성화를 검사했다.
+- `proposal_ui`/지역 guard 및 L01~10 실제 출력·오류/표시 fixture를 [L2 색인](../evidence/DEV-027_SESSION_PIPELINE_L2_EVIDENCE.md)에 준비했다. main/View·화면 호출은 추가하지 않았다.
+- DI03 생성·×5/4 수요/소비/재접수, 이름12행/실제 loader·폰트·환경·아트 적용은 미실행. PLN016 A1+B1 결정 완료를 보존하며 정책 미답변으로 되돌리지 않는다.
+- DEV026 한정 수용·PARTIAL/미관측·P07 구분, #92/F08 FINAL_SPEC_PENDING, S3-10-C·S3-12/HQ·Owner 최종 인수 대기를 유지한다. 신규 게임 명세 변경/RFC 요구 없음.
+- Commit·Push·PR·CI·main 병합·원격 댓글은 미실행/별도 승인. 이 결과는 P3-A 로컬 검토 요청이며 DEV027/Stage DONE 또는 Design 수용 선언이 아니다.
+
+### 검증과 보완 이력
+
+| 실행 | checks | exit | 판정 |
+| --- | --- | --- | --- |
+| load | — | 0 | PASS / 오류0 |
+| w04b | 437 | 0 | PASS / 오류0 |
+| proposal_ui | 165 | 0 | PASS / 오류0 |
+| vs02 | 75 | 0 | PASS / 오류0 |
+| w02 | 309 | 0 | PASS / 오류0 |
+| w03 | 101 | 0 | PASS / 오류0 |
+| w04a | 204 | 0 | PASS / 오류0 |
+| w05 | 191 | 0 | PASS / 오류0 |
+| w06 | 179 | 0 | PASS / 오류0 |
+| w07 | 322 | 0 | PASS / 오류0 |
+| tender_ui | 460 | 0 | PASS / 오류0 |
+| construction_ui | 898 | 0 | PASS / 오류0 |
+| operations_ui | 158 | 0 | PASS / 오류0 |
+| s01_exception | 334 | 0 | PASS / 오류0 |
+| vs01 | 48 | 0 | PASS / 오류0 |
+| proposal_ui-intentional | — | 1 | 의도한 실패1 검출 |
+| vs02-intentional | — | 1 | 의도한 실패1 검출 |
+
+검증 명령·원본 로그/해시·실행별 표본·소스 바이트는 신규 JSON에 있다. 첫 사용자 설정 경로 접근 실패, 새 검사 타입/API/정지 fixture 오류, 잘못된 기대 사유, 설득30분 소비 guard 보완 이력을 모두 보존했다. exit0/실패0 표시가 있더라도 SCRIPT ERROR가 있던 실행은 PASS로 세지 않았다. 반복 원장 복사는 소비자 소유 캐시로 줄이며 다른 원장/변경 지급 재사용 거부를 검사했다. 성능 벤치마크로 판정하지 않는다.
+
+### 로컬 검토 요청
+
+22개 파일 및 새 L2 공급 표본을 검토 요청한다. 승인 뒤 Git 제출이 별도 허용되기 전까지 staging/commit/push/PR을 하지 않는다. `policy.py doctor/check`, diff·경로·출처/원본 보존 감사의 최종 결과는 L2 색인과 로컬 audit-final.json을 따른다. preflight/원격 CI는 새 커밋이 없으므로 NOT_RUN이다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027
+
+## 10. P3-A 제출 준비 후속 — 2026-11-22
+
+> Owner 승인 원문 — 본 개발 대화
+>
+> DEV-027 P3-A 로컬 구현·검증 결과를 승인합니다. 승인된 22개 파일을 codex/DEV-027-session-pipeline-plan 브랜치에 Commit·Push하고 PR을 생성한 뒤 필수 CI 결과까지 확인해주세요. DI-03 종속 범위와 L2 전 화면 통합·독립 심사 대기는 유지하고, main 병합은 별도 승인하겠습니다.
+
+- 대상: `wisberry2022/MetroManager`, 브랜치 `codex/DEV-027-session-pipeline-plan`, 승인된22경로. 이 제출의 Commit·일반 Push·PR 작성·필수 CI 확인에 한정하며 main 병합·auto-merge·릴리스/배포는 제외한다.
+- 제출 기준: `690823927e97a29131dbb572bab4aa9d7f6cfd97`. 승인 시험 기준 `97cc5472f11a97d5f7d7c1b89dc12edeace36e1f` 및 source SHA256·원 실행 결과를 보존한다. 사이의 PR169/170은 기획·디자인 문서19개이며 제품/검사·Godot 설정·CI/도구 변화0이다. 겹치는 경로0을 확인해 작업 브랜치만 fast-forward했다. main을 새 게임 시험 SHA로 바꾸지 않는다.
+- 승인22개 원본 해시는 `.local/validation/DEV-027/session-pipeline/submission/approval-baseline.json`과 `approved-22/`에 보존했다. 제품8·검사6·L2 증거2개 등은 그대로다. 이 티켓/결과에 제출 승인 후속만 추가하고 provenance를 제출 base/실제 blob으로 갱신한다.
+- 모델·Session·자동 연결677 / 영향 회귀3204 / 로드·고의 실패 종료의 기존 실행을 재사용한다. 실제 시험 소스 해시 동일성을 대조하며 문서 동기화만으로 GUI·게임 전체를 반복하지 않는다. 제출 정책·preflight 및 실제 head의 CI 결과는 PR에서 확인한다.
+- DI03 종속 범위, L2 전 화면 통합·독립/Design 심사, DEV026 한정 수용·PARTIAL/미관측, S3-12/HQ·Owner 최종 인수 대기를 유지한다. 신규 명세 변경 요구 없음.
+- 이 문서는 제출 직전 기록이다. 실제 commit/head·PR·필수 CI는 PR 본문과 완료 보고를 따른다. 과거 GIT_NOT_AUTHORIZED/REMOTE_NOT_SENT는 당시 기록으로 남긴다.
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-027

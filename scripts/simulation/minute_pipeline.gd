@@ -1,6 +1,6 @@
 class_name MinutePipeline
 extends RefCounted
-## 고정 분의 W02/W04A/W05/W06 처리. 실제 운행은 명시적으로 활성화한다.
+## 고정 분의 W02/W04A/W04B/W05/W06 처리. 각 공급은 명시적으로 활성화한다.
 
 const Clock = preload("res://scripts/simulation/game_clock.gd")
 const Queue = preload("res://scripts/simulation/command_queue.gd")
@@ -13,12 +13,18 @@ const Construction = preload("res://scripts/simulation/construction_service.gd")
 const Operations = preload("res://scripts/simulation/operations_service.gd")
 const Network = preload("res://scripts/model/administrative_network.gd")
 const Predictor = preload("res://scripts/simulation/demand_predictor.gd")
+const Proposals = preload("res://scripts/simulation/proposal_service.gd")
+const ProposalLoader = preload("res://scripts/data/proposal_data_loader.gd")
+const Sources = preload("res://scripts/simulation/business_sources.gd")
 
 var clock: Clock
 var commands: Queue = Queue.new()
 var ledger: Ledger
 var reports: Reports = Reports.new()
 var target_revisions: Dictionary = {}
+var _proposals: Proposals
+var _proposal_error: String = ""
+var _verified_sources: Dictionary = {}
 var _tenders: Tenders
 var _construction: Construction
 var _operations: Operations
@@ -60,7 +66,7 @@ func bid_result(command_id: String) -> Dictionary:
 
 ## 모델 공급만 활성화한다. 실제 P05 화면 연결은 DEV-021 소관이다.
 func enable_construction() -> Dictionary:
-	if _tenders == null or _construction != null:
+	if (_tenders == null and _proposals == null) or _construction != null:
 		return {"accepted": false, "reason": "CONSTRUCTION_ENABLE_PREREQUISITE"}
 	_construction = Construction.new(ledger)
 	return {"accepted": true}
@@ -92,7 +98,7 @@ func enable_operations(network: Network = null, parameters: Dictionary = {}) -> 
 	var service := Operations.new(network, values, ledger)
 	if not service.valid():
 		return {"accepted": false, "reason": "INVALID_OPERATIONS_INPUT"}
-	var tenders := _tenders.snapshot(clock.minute, _revision)
+	var tenders := _business_supply(clock.minute, _revision)
 	var result := service.bind_sources(
 		tenders, _construction.snapshot(clock.minute, _revision, tenders), clock.minute
 	)
@@ -111,7 +117,9 @@ func operations_snapshot() -> Dictionary:
 func next_business_query() -> Dictionary:
 	if _operations == null:
 		return {"available": false, "reason_codes": ["OPERATIONS_NOT_ENABLED"]}
-	return _operations.next_business_query(_tenders.snapshot(clock.minute, _revision))
+	return _operations.next_business_query(
+		_tender_snapshot(clock.minute, _revision), proposal_snapshot()
+	)
 
 
 ## 테스트 전용 주입점이며 제품 UI에 연결하지 않는다.
@@ -146,11 +154,13 @@ func snapshot() -> Dictionary:
 		"boarding": _boarding.duplicate(true),
 		"trace": _trace.duplicate(true)
 	}
+	if _proposals != null:
+		value["proposals"] = proposal_snapshot()
 	if _tenders != null:
 		value["tenders"] = _tenders.snapshot(clock.minute, _revision)
 	if _construction != null:
 		value["construction"] = _construction.snapshot(
-			clock.minute, _revision, _tenders.snapshot(clock.minute, _revision)
+			clock.minute, _revision, _business_supply(clock.minute, _revision)
 		)
 	if _operations != null:
 		value["operations"] = operations_snapshot()
@@ -172,6 +182,9 @@ func _tick(minute: int) -> void:
 			var day := minute / 1440
 			reports.sync_operations(day, _operations.close_day(day, reports.current(day).fare))
 		reports.close(minute / 1440, ledger.snapshot())
+	if _proposals != null:
+		var reviewed := _proposals.process_review_phase(minute)
+		_revision += int(reviewed.get("changes", 0))
 	_stage(minute, "CONTRACT")
 	for command: Dictionary in commands.due(minute):
 		var result: Dictionary
@@ -200,6 +213,9 @@ func _tick(minute: int) -> void:
 		commands.finish(command.command_id, result)
 	if _tenders != null:
 		_revision += _tenders.process_contract_phase(minute, _revision)
+	if _proposals != null:
+		var contracted := _proposals.process_contract_phase(minute)
+		_revision += int(contracted.get("changes", 0))
 	_construction_phase("CONTRACT", minute)
 	_stage(minute, "PROGRESS")
 	for payment: Dictionary in input.get("construction", []):
@@ -208,7 +224,7 @@ func _tick(minute: int) -> void:
 	_stage(minute, "VALIDATION")
 	_construction_phase("VALIDATION", minute)
 	if _operations != null:
-		var tenders := _tenders.snapshot(minute, _revision)
+		var tenders := _business_supply(minute, _revision)
 		_operations.bind_sources(
 			tenders, _construction.snapshot(minute, _revision, tenders), minute
 		)
@@ -238,7 +254,7 @@ func _tick(minute: int) -> void:
 func _construction_phase(phase: String, minute: int) -> void:
 	if _construction != null:
 		_revision += _construction.process_phase(
-			phase, minute, _revision, _tenders.snapshot(minute, _revision)
+			phase, minute, _revision, _business_supply(minute, _revision)
 		)
 
 
@@ -268,3 +284,73 @@ func _operations_fixture(input: Dictionary) -> bool:
 		if input.has(key):
 			return true
 	return false
+
+
+## 명시적 제품 조립. UI 명령에서 network/seed/ledger를 바꾸지 않는다.
+func enable_proposals(
+	network: Network, parameters: Dictionary, scope: String, seed_value: int, data: Dictionary = {}
+) -> Dictionary:
+	if _proposals != null:
+		return {"accepted": false, "reason": "PROPOSALS_ALREADY_ENABLED"}
+	var loaded := (
+		ProposalLoader.load_data() if data.is_empty() else ProposalLoader.validate_data(data)
+	)
+	if not loaded.ok or network == null or not network.valid():
+		_proposal_error = "INVALID_PROPOSAL_INPUT"
+		return {"accepted": false, "reason": _proposal_error}
+	var service := Proposals.new(
+		network,
+		loaded.data,
+		{
+			"run_scope": scope,
+			"seed": seed_value,
+			"completed_minute": clock.minute,
+			"ledger": ledger,
+			"parameters": parameters
+		}
+	)
+	if not loaded.ok or not service.snapshot().available:
+		_proposal_error = "INVALID_PROPOSAL_INPUT"
+		return {"accepted": false, "reason": _proposal_error}
+	_proposals = service
+	_proposal_error = ""
+	return {"accepted": true}
+
+
+func proposal_snapshot() -> Dictionary:
+	if _proposals != null:
+		return _proposals.snapshot()
+	return {} if _proposal_error.is_empty() else {"available": false, "errors": [_proposal_error]}
+
+
+func proposal_request(command: Dictionary) -> Dictionary:
+	if _proposals == null:
+		return {"accepted": false, "reason": "PROPOSALS_NOT_ENABLED"}
+	return _proposals.submit(command)
+
+
+func proposal_edit(slot: String, stops: Array[String], name: String) -> Dictionary:
+	if _proposals == null:
+		return {"accepted": false, "reason": "PROPOSALS_NOT_ENABLED"}
+	return _proposals.edit(slot, stops, name)
+
+
+func proposal_predict(slot: String) -> Dictionary:
+	if _proposals == null:
+		return {"accepted": false, "reason": "PROPOSALS_NOT_ENABLED"}
+	return _proposals.predict(slot)
+
+
+func proposal_result(id: String) -> Dictionary:
+	return {} if _proposals == null else _proposals.result(id)
+
+
+func _tender_snapshot(minute: int, revision: int) -> Dictionary:
+	return {} if _tenders == null else _tenders.snapshot(minute, revision)
+
+
+func _business_supply(minute: int, revision: int) -> Dictionary:
+	var tenders := _tender_snapshot(minute, revision)
+	if _proposals == null and _proposal_error.is_empty():
+		return tenders
+	return Sources.packet(tenders, proposal_snapshot(), ledger, minute, revision, _verified_sources)
