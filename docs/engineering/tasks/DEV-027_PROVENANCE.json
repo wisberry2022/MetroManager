@@ -2,19 +2,45 @@
   "schema_version": 1,
   "task_id": "DEV-027",
   "primary_agent_id": "AGT-DEV-0004",
-  "base_sha": "37596bd6d646f9d0454280477e60a2e652f06613",
+  "base_sha": "1b80303636c5eddfbeddac9d288b0124b0093966",
   "artifacts": [
     {
-      "path": "docs/engineering/evidence/DEV-027_GUI_REVIEW_FOLLOWUP.md",
+      "path": "tests/game/run_proposal_view_tests.gd",
+      "change_type": "modify",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md",
+        "docs/engineering/gate3/DEV-027_KEYBOARD_FOCUS_VALIDATION_PLAN.md",
+        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7075447846"
+      ],
+      "blob_sha": "b043d0a0fc68afd6300b3d08921671b4614b86ad",
+      "old_blob_sha": "53eea2d9c81427b4c409e99564170acc5dd0ee5f"
+    },
+    {
+      "path": "scripts/ui/stage1_view.gd",
+      "change_type": "modify",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md",
+        "docs/engineering/gate3/DEV-027_KEYBOARD_FOCUS_VALIDATION_PLAN.md",
+        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7075447846"
+      ],
+      "blob_sha": "8a2a6205d83425c26bd6cb29aceb9cb9eb2c61a7",
+      "old_blob_sha": "643d8dc2ebd6fc3ce7f340138e24845c9a0d0635"
+    },
+    {
+      "path": "docs/engineering/gate3/DEV-027_KEYBOARD_FOCUS_VALIDATION_PLAN.md",
       "change_type": "add",
       "agent_id": "AGT-DEV-0004",
       "contributors": [],
       "source_refs": [
         "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md",
-        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7075072443",
+        "docs/engineering/gate3/DEV-027_KEYBOARD_FOCUS_VALIDATION_PLAN.md",
         "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7075447846"
       ],
-      "blob_sha": "2412caafebfcdfd6e5778407696e74503612c487"
+      "blob_sha": "efdaf912266c196d3d740e07fffac6a6ef4194a7"
     },
     {
       "path": "docs/engineering/gate3/DEV-027_SCREEN_INTEGRATION_PLAN.md",
@@ -23,11 +49,35 @@
       "contributors": [],
       "source_refs": [
         "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md",
-        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7075072443",
+        "docs/engineering/gate3/DEV-027_KEYBOARD_FOCUS_VALIDATION_PLAN.md",
         "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7075447846"
       ],
-      "blob_sha": "25a4d5c474c52fc1591fe0be0993bad8f9a50c41",
-      "old_blob_sha": "b008092705ef54bebfcec1f8b0a98dec32ef1846"
+      "blob_sha": "594c5a19ecc2565929859dbe1eeae36b17081201",
+      "old_blob_sha": "25a4d5c474c52fc1591fe0be0993bad8f9a50c41"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-027_KEYBOARD_FOCUS_EVIDENCE.md",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md",
+        "docs/engineering/gate3/DEV-027_KEYBOARD_FOCUS_VALIDATION_PLAN.md",
+        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7075447846"
+      ],
+      "blob_sha": "f1a59d0a1b6b3a0448e0fcd1baf9fc5e76087afb"
+    },
+    {
+      "path": "docs/engineering/evidence/DEV-027_KEYBOARD_FOCUS_RESULTS.json",
+      "change_type": "add",
+      "agent_id": "AGT-DEV-0004",
+      "contributors": [],
+      "source_refs": [
+        "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md",
+        "docs/engineering/gate3/DEV-027_KEYBOARD_FOCUS_VALIDATION_PLAN.md",
+        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7075447846"
+      ],
+      "blob_sha": "de90d0079e8fb3f0aa9344882b89afa4942d3200"
     },
     {
       "path": "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md",
@@ -36,11 +86,11 @@
       "contributors": [],
       "source_refs": [
         "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md",
-        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7075072443",
+        "docs/engineering/gate3/DEV-027_KEYBOARD_FOCUS_VALIDATION_PLAN.md",
         "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7075447846"
       ],
-      "blob_sha": "2416b65dc6c044944dec008ed10adb6cf0985c90",
-      "old_blob_sha": "36d867294924d2cd171b2bde56c9e378e8a7662a"
+      "blob_sha": "759d9044c3200eddea96f4fbf2f5297f4606468c",
+      "old_blob_sha": "2416b65dc6c044944dec008ed10adb6cf0985c90"
     },
     {
       "path": "docs/engineering/tasks/DEV-027_RESULT.md",
@@ -49,11 +99,11 @@
       "contributors": [],
       "source_refs": [
         "docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md",
-        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7075072443",
+        "docs/engineering/gate3/DEV-027_KEYBOARD_FOCUS_VALIDATION_PLAN.md",
         "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7075447846"
       ],
-      "blob_sha": "85e25f9632dd61db7c2af51dd55e8ef6779bf3ce",
-      "old_blob_sha": "ccb57c22f1b66b4fcd0774c525f120a43b678c19"
+      "blob_sha": "9258c079dc5ee5a4a45a1cb0665f26f59debb28e",
+      "old_blob_sha": "85e25f9632dd61db7c2af51dd55e8ef6779bf3ce"
     }
   ]
 }
