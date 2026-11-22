@@ -423,3 +423,149 @@ Task-ID: DEV-027
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-027
+
+
+## 15. 키보드 접근·포커스/스크롤 로컬 계획 결과 — 2026-11-22
+
+- 상태: **LOCAL_PLAN_REVIEW / IMPLEMENTATION_AND_EXECUTION_AUTH_PENDING**. Owner의 PR175 병합 후 로컬 착수·실행/검증 계획 작성 지시를 이행했다.
+- 원격 확인: [PR175](https://github.com/wisberry2022/MetroManager/pull/175) MERGED, main `1b80303636c5eddfbeddac9d288b0124b0093966`. [#146 승인 회신](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7075655059)은 게시 완료이며 이후 Design 응답은 확인되지 않았다. §14의 로컬/미게시 문구는 당시 이력이다.
+- 새 [검증 계획](../gate3/DEV-027_KEYBOARD_FOCUS_VALIDATION_PLAN.md)에 K01~12 Control군·하위행, F01~06 같은/다른 focus·입력 프레임 순서, 기대/실제 관측과 종료선을 구체화했다. A 자동8개 경로, 재현·기대 확인 후 B 제품1개 추가, C 독립 OS/Design을 구분한다.
+- 기존 직접 grab_focus·합성 Enter 근거는 순수 OS Tab 전수 도달이 아니다. 1프레임 ensure/2프레임 restore의 같은 owner 사용자 휠/읽기 키는 검증 공백으로 유지한다. 확정 제품 FAIL이나 수정 완료를 선언하지 않았다.
+- 양 Track 시험37596bd→현재 main은 후속 문서5개만 달라 제품/테스트/씬/데이터/설정 차이0. 기존 View225/회귀3120/로드·A/B 관측·원본 무결성은 PR175 근거로 재사용하며 이번 재실행·원본 전체 재해시가 아니다.
+
+### 이번 정확한 변경 파일
+
+1. `docs/engineering/gate3/DEV-027_KEYBOARD_FOCUS_VALIDATION_PLAN.md`
+2. `docs/engineering/gate3/DEV-027_SCREEN_INTEGRATION_PLAN.md`
+3. `docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md`
+4. `docs/engineering/tasks/DEV-027_RESULT.md`
+5. `docs/engineering/tasks/DEV-027_PROVENANCE.json`
+
+기존 Markdown3개는 원문 뒤에 추가하고 기존 GUI 후속 증거·자동 JSON·A/B 패킷은 수정하지 않는다. 이전 provenance 원본은 PR175 병합본에 보존하며 이번 문서4개의 출처를 새로 기록한다. 공유 작업 경로의 기존 데이터2개는 보존한다.
+
+### 이번 문서 검증·한계
+
+- `.venv/Scripts/python.exe tools/policy.py doctor`: PASS. 로컬 훅/도구 확인이며 원격 보호·게임 실행 검증이 아니다.
+- `git diff --exit-code 37596bd6d646f9d0454280477e60a2e652f06613 HEAD -- scripts tests scenes assets project.godot`: PASS, 제품 관련 차이0.
+- `.venv/Scripts/python.exe tools/policy.py check`: **PASS**, 802파일/68GDScript. 정책/형식 검사이며 게임 자동 검증이 아니다.
+- `.venv/Scripts/python.exe -X utf8 .local/validation/DEV-027/keyboard-focus-plan/audit.py`: **PASS**. 정확한5경로·provenance4개·원 Markdown3개 prefix·비변경 추적파일797개·공유 데이터2개 보존, 새 상대 링크8개·K12개 그룹/F6개 순서 확인. 신규 문서까지 UTF-8/LF·줄 끝 공백 검사 포함.
+- `git diff --check`: PASS. 원격 제출용 stage/commit은 하지 않았다. 결과 기록 후 변경 문서/provenance를 다시 검사하며 최종 해시를 `final-audit.json`에 보관한다.
+- 게임 자동 테스트 / Godot 프로젝트 로드 / 게임 플레이 / DEV·독립 GUI / 자연 VS02 / 빌드·export / 성능·새 계측·자원 반입은 각각 **NOT_RUN**. Git commit/push/PR/병합·원격 댓글 게시0.
+- 로컬 감사/명령 로그: `.local/validation/DEV-027/keyboard-focus-plan/`. 초기 환경 연결 실패는 보존하고 절대경로 .venv junction 설정 후 doctor PASS를 구분한다.
+
+추가 기획 명세 변경은 현재 필요 없음. 같은-focus 우선순위와 K/F 공통 필수 하위행은 Track A/B 확인 대기이며 전체 기존 L2 재승인으로 확대하지 않는다. DI03 HOLD, 기존 PARTIAL·미관측·DEV026 한정 수용/P07 구분·#92/F08·S3-10-C·S3-12/HQ·Owner 최종 인수 대기를 유지한다. 실행·Git 권한은 별도이며 이번5개 문서부터 로컬 검토를 요청한다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027
+
+## 16. 키보드 접근·포커스/스크롤 구현·회귀 결과 — 2026-11-22
+
+- 상태: **DEV_LOCAL_VALIDATION_PASS / OS_AND_DESIGN_REVIEW_PARTIAL**. [계획 §9·11](../gate3/DEV-027_KEYBOARD_FOCUS_VALIDATION_PLAN.md)에 Owner의 구현·PR 및 제품1개 추가 승인을 구분해 기록했다. 이번 결과는 검수 요청이며 DONE/Stage 최종 인수가 아니다.
+- 저장소 wisberry2022/MetroManager, 브랜치 codex/DEV-027-keyboard-focus-plan, 기준 main `1b80303636c5eddfbeddac9d288b0124b0093966`. Commit·Push·PR·필수 CI는 승인 범위다. main 병합·#146 게시·독립 GUI는 수행하지 않는다.
+- `stage1_view.gd`: 제안 Tab/Shift+Tab 직전 비활성 버튼/빈 목록의 focus_mode 동기화, follow_focus=false인 제안의 지연 ensure 중지. 로그 필드·fallback 순서를 유지하는 표현 정리로 기본1000줄 규칙을 만족했다.
+- 기존 검사·문서·A/B 증거를 보존하고 [새 증거](../evidence/DEV-027_KEYBOARD_FOCUS_EVIDENCE.md)·[JSON](../evidence/DEV-027_KEYBOARD_FOCUS_RESULTS.json)에 입력/프레임·소스 해시·실패 이력·최종 결과를 분리했다. 기존 Markdown4개는 승인본 뒤 추가하고 provenance는 이번8개 산출물로 갱신한다.
+
+### 정확한 변경 파일9개
+
+1. `scripts/ui/stage1_view.gd`
+2. `tests/game/run_proposal_view_tests.gd`
+3. `docs/engineering/gate3/DEV-027_KEYBOARD_FOCUS_VALIDATION_PLAN.md`
+4. `docs/engineering/gate3/DEV-027_SCREEN_INTEGRATION_PLAN.md`
+5. `docs/engineering/evidence/DEV-027_KEYBOARD_FOCUS_EVIDENCE.md`
+6. `docs/engineering/evidence/DEV-027_KEYBOARD_FOCUS_RESULTS.json`
+7. `docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md`
+8. `docs/engineering/tasks/DEV-027_RESULT.md`
+9. `docs/engineering/tasks/DEV-027_PROVENANCE.json`
+
+### 실행·검증 결과
+
+| 구분 | 명령 / 결과 | 근거 |
+| --- | --- | --- |
+| 제안 View 자동 | `--headless --script res://tests/game/run_proposal_view_tests.gd -- --output=<fresh-evidence>` / **737단언·실패0, exit0, ERROR/SCRIPT ERROR0** | view-05-final. 기존225(저장1 포함) 보존 + Tab 대상60·명시 command13·순환3·순서28사례 |
+| 운영 화면 자동 | `--headless --script res://tests/game/run_operations_gui_cases.gd -- --auto` / **271/0** | regression-operations |
+| 공사 화면 자동 | `--headless --script res://tests/game/run_construction_ui_tests.gd` / **898/0** | regression-construction |
+| S01 예외·복구 자동 | `--headless --script res://tests/game/run_s01_exception_tests.gd` / **334/0** | regression-s01 |
+| 프로젝트 로드 | `--headless --editor --quit` / **exit0·ERROR/SCRIPT ERROR0** | final-load; 초기 import와 구분 |
+| 기존 자연/OS GUI | **NOT_RUN** | 기존 Track A/B의 당시 한정 수용을 재사용. 새 OS/독립 실행·자연 완주·Design 재수용 아님 |
+| 실제 게임 플레이·빌드/export·성능 | 각각 **NOT_RUN** | 이번 자동/최소 수정 범위 밖 |
+
+엔진 공통 인자는 `--path <worktree> --log-file <fresh-run>/engine.log`; Godot4.7.2 `ed1daf0bf` console, 실행별 APPDATA/LOCALAPPDATA 격리다. 마지막 View와 최종 로드는 최종 소스161개 해시로 식별한다. 직접 영향 회귀와 최종 View 사이 제품 변경0, 동일성 차이는 새 단언을 추가한 검사 파일1개뿐이며 run별 해시를 공개 JSON에 보존한다.
+
+수정 전 동일 runner의745/44에서 제품 수정 후703/0으로 바뀌었다. 비활성 Tab 정지점42회가 제외되어 동적 순환 단언 수가 줄었고 무입력 저장 복귀2개도 통과했다. 이후 계획의 역방향/가시성34단언을 보완해 최종737/0을 확인했다. 개발 중 view-01 검사 오류, view-02의709/47(HUD3 포함), view-03의745/44 raw를 삭제/승격하지 않았다. 실패 집계/저장 코드는 바꾸지 않아 별도 deliberate failure는 NOT_RUN이며 동일 runner view-03의 exit1 근거를 연결한다.
+
+### 미해결·승인 범위
+
+F04 same-owner restore의 Home/End/PageUp/PageDown(delay0)·End(delay1) **5개 관측은 사용자 위치 우선 제안을 충족하지 않음**을 그대로 남겼다. 입력 취소 세대 확장은 이번 최소 수정 밖이며 Track B 기대 확인 후 필요한 행만 별도 계획한다. 합성 휠6행·실제 return의 읽기/휠4행은 전제 미성립으로 INCONCLUSIVE다. 공통 HUD resume3회도 원 FAIL/범위 밖 관측을 보존한다. 이를 자동 통과나 B06-02 전체 해소로 바꾸지 않는다.
+
+기획 명세 변경은 현재 없음. 같은-owner 기대 변경이 필요한 경우 해당 행에만 RFC 절차를 적용한다. DI03 HOLD·DEV026 한정 수용/PARTIAL·일1 미관측·P07 구분·#92/F08·기존 A/B PARTIAL·S3-10-C/S3-12/HQ·Owner Stage 최종 인수 대기를 유지한다. 정책/무결성 검사는 아래 후속과 PR에 연결하고 원격 CI 완료는 PR head 기준으로 확인한다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027
+
+### 제출 전 정책·무결성 후속
+
+- `policy.py doctor`: PASS. 훅/도구 유효; 원격 보호와 별도.
+- `policy.py check`: **PASS**,804파일/68GDScript, formatter/linter 오류0.
+- `.local/validation/DEV-027/keyboard-focus/audit.py --manifest`: **PASS**, 정확한9경로·provenance8개·승인 Markdown4개 prefix·원 View JSON224단언·소스161개·비변경 추적795개·공유 기존 데이터2개 보존. `git diff --check`도 PASS.
+- Godot가 생성한 untracked import/translation176개는 경로·해시 확인 후 `.local/validation/DEV-027/keyboard-focus/generated-imports/`에 보존 이동했다. 원본 추적 파일·디자인 산출물을 수정/삭제하지 않았으며 제출 파일에 포함하지 않는다.
+- 로그/최종 산출물 해시는 `.local/validation/DEV-027/keyboard-focus/`의 `doctor.txt`, `policy-check.txt`, `final-audit.json`에 보관한다. JSON 포장 중 summary 변수 충돌은 문서 생성 전 감사에서 중단되어 정정했고, 원 실행 결과·제품에는 영향이 없다.
+- 원격 main 보호는 policy·department-policy strict/Actions App15368·관리자 적용·선형 이력·force/delete 금지 확인. 이 확인은 병합 권한을 부여하지 않는다. Commit 이후 fetch·preflight, push·PR·CI 완료는 실제 PR head에 연결하며 본 문서에서 미래 PASS를 선언하지 않는다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027
+
+## 17. #146 Track A 확인사항 수정·PR177 후속 — 2026-11-22
+
+Owner의 새 확인사항 수정·기존 PR 포함 지시를 [계획 §12](../gate3/DEV-027_KEYBOARD_FOCUS_VALIDATION_PLAN.md)에 기록했다. [Track A 댓글](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7076149744)의 원본 패킷181개, REPORT/manifest 해시·정정문·FOCUS 연결·046화면을 대조했으며 원문/과거 검증은 보존했다. 제품 시험37596bd의 관측을 최신 main 실행으로 바꾸지 않는다.
+
+### 변경 파일·실제 보완
+
+이번 후속의 정확한9개 파일은 아래와 같다. 초기 PR의stage1_view.gd는 그대로이므로 **PR 전체10개 경로**다.
+
+1. `scripts/ui/proposal_view.gd`
+2. `tests/game/run_proposal_view_tests.gd`
+3. `docs/engineering/gate3/DEV-027_KEYBOARD_FOCUS_VALIDATION_PLAN.md`
+4. `docs/engineering/gate3/DEV-027_SCREEN_INTEGRATION_PLAN.md`
+5. `docs/engineering/evidence/DEV-027_KEYBOARD_FOCUS_EVIDENCE.md`
+6. `docs/engineering/evidence/DEV-027_KEYBOARD_FOCUS_RESULTS.json`
+7. `docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md`
+8. `docs/engineering/tasks/DEV-027_RESULT.md`
+9. `docs/engineering/tasks/DEV-027_PROVENANCE.json`
+
+K01-12/13/14의 비활성 건너뜀은 초기 Host 수정으로 동작하므로 제품 추가 변경 없이 **단일 Tab/역Tab11경로**를 고정했다. 즉시 owner→실제 Host.present fallback→안정 owner/가시성 및 모델 무효과를 확인한다. 계약/설득의 Enter/Space 명령1회도 실제 합성 입력으로 확인한다. 기존 `_tab_to`의 최종 도달만으로 보고된 잘못된 중간 경로를 통과시키지 않는다.
+
+K01-04는 S12 선택인데 마지막 행이 내부scroll0·y139+27/목록높이130 밖으로 잘리는 것을 확인했다. `proposal_view._render_map`의 동일 선택에 대한 deselect/select 반복을 제거하고 선택 변경/선택 없음 분기는 유지했다. 수정 뒤 내부scroll40·행y99+27로 목록/외부 영역 안에 들어온다. 버튼 활성화·유효성/focus 소유권 검사·기획 규칙·모델·CI 변경0이다.
+
+### 실행 명령·검증
+
+[증거 §6](../evidence/DEV-027_KEYBOARD_FOCUS_EVIDENCE.md)과 [JSON followups[0]](../evidence/DEV-027_KEYBOARD_FOCUS_RESULTS.json)에 실제 명령·소스161개·실패/최종 raw 해시를 연결했다. 기존 JSON 최상위의737/0 등은 과거 근거로 그대로 보존한다.
+
+| 구분 | 실행 / 결과 |
+| --- | --- |
+| 수정 전/후 동일 runner | `<Godot> --headless --path <worktree> --script res://tests/game/run_proposal_view_tests.gd -- --output=<fresh-evidence>`: **819/1→819/0**, 각각 engine exit1→0, ERROR/SCRIPT ERROR0. 원 실패는 K01-04:last_row_inside_list1개 |
+| 직접 영향 회귀 | `--headless --script res://tests/game/run_s01_exception_tests.gd`: **334/0**, exit0·ERROR/SCRIPT ERROR0 |
+| 프로젝트 로드 | `--headless --editor --quit`: 초기/최종 각각 exit0·ERROR/SCRIPT ERROR0 |
+| 이전 회귀 | 초기 PR의1503회귀는 당시 범위 재사용. 이번334와 중복 합산하지 않음 |
+| OS GUI·독립 실행·새 자연 VS02 | 각각 **NOT_RUN**. 보완본 Design 재수용 별도 |
+| 게임 플레이·빌드/export·성능 | 각각 **NOT_RUN** |
+
+원 view-01의807/3은 목록1개와 이미 소유한 요청 버튼의 시작 가시성 가정2개로 구분해 보존했다. helper는 새 도달이 필요할 때만 시작점의 Tab 가시성을 단언하고 이미 소유한 시작점은 실제 owner/trace를 기록한다. 한 Tab 후 목적지 owner/가시성 단언은 강화했다. 목록 좌표는 내부 스크롤을 차감하여 비교한다. 이 검사 정정 후 view-02/03은 정확히 같은 runner 해시이며 다른 제품 변경은 없다.
+
+### 범위·대기 상태
+
+기존 main이 기획 문서7개로 d8b6f4a에 진전하여 무충돌 GitHub base-sync325b54a를 fast-forward로 수신했고, 사전 검사에서 `work=1, verified_base_sync=1` PASS를 확인했다. main 병합/강제 push/기획 산출물 직접 수정은 아니다. 이번 제출도 정상 Commit·Push와 동일 PR177의필수 policy/department-policy를 사용한다.
+
+원 K01 OS FAIL/PARTIAL 및 순수 OS 계약·설득 NOT_VERIFIED는 수정본 독립 재검수 전까지 유지한다. 재검수 제안은 K01-12/13/14·K01-04 국소 행이며 전체 자연 완주를 새 조건으로 삼지 않는다. F01 RACE INCONCLUSIVE·기존 F04 자동 우선순위5개/INCONCLUSIVE10, GUI shader cache 오류 실행별4개(원인/연관 미확인)를 구분한다. 기존 DEV026 한정 수용/PARTIAL·P07 구분·DI03 정책결정/실제구현 HOLD·F08 선택/최종인증·S3-10-C/S3-12·HQ/Owner 최종 인수 대기를 유지한다. 기획 명세 변경 필요 없음.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027
+
+### 후속 제출 전 정적 검사
+
+- `policy.py doctor` PASS, `policy.py check` **PASS(810파일/68GDScript)**, formatter/linter·`git diff --check` PASS.
+- `keyboard-focus-issue146/audit.py --manifest`: **PASS**. PR10경로·provenance9개·기존 Markdown5개 prefix·원 JSON 최상위 값·기존736개 JSON 단언(+저장1)·현재 소스161개·PR 경로 밖800추적파일·기존 Host·공유 데이터2개·Design 패킷181개 보존.
+- 생성된 import/translation176개는 해시 확인 후 새 로컬 generated-imports 보관 위치로 이동했다. 추적된 디자인/제품 파일 삭제 없음.
+- 원격 보호: policy·department-policy/Actions15368 strict, 관리자 적용·선형 이력·force/delete 금지 확인. 로컬 감사/실행 원본은 `.local/validation/DEV-027/keyboard-focus-issue146/`. 원격 CI는 후속 commit head로 다시 확인하며 검증 통과를 main 병합 승인으로 사용하지 않는다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027

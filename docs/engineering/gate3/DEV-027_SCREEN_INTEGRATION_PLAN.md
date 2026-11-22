@@ -287,3 +287,42 @@ Task-ID: DEV-027
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-027
+
+
+## 13. PR175 병합 후 키보드·포커스 잔여 계획 — 2026-11-22
+
+[PR #175](https://github.com/wisberry2022/MetroManager/pull/175)는 main `1b80303636c5eddfbeddac9d288b0124b0093966`에 병합됐고 승인된 [#146 회신](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7075655059)도 게시됐다. §12의 로컬 미제출/미게시 표기는 당시 이력으로 보존한다. 양 Track 시험 SHA37596bd부터 제품·테스트·씬·데이터·설정 차이0이며 기존 수용과 실행 증거를 재사용한다.
+
+Owner의 새 지시에 따라 [키보드 접근·포커스/스크롤 검증 계획](DEV-027_KEYBOARD_FOCUS_VALIDATION_PLAN.md)을 로컬로 준비했다. K01~12 Control군과 F01~06 입력 순서, DEV 자동8개 경로 후보·재현 후 조건부 Host1개 추가, Track A/B 공동 확인 및 별도 독립 OS 실행 조건을 구분했다. 추가 구현·게임 자동/로드·GUI·Git 제출·원격 게시는 하지 않았다.
+
+이번 변경은 새 계획·본 문서·티켓·결과서·provenance의5개 문서다. 기존 근거 문서와 원본 패킷은 변경하지 않는다. 계획의 후보 경로는 실행 승인이 아니다. DI03 HOLD, 기존 PARTIAL·미관측·DEV026 한정 수용·P07 구분·#92/F08 및 S3-10-C·S3-12/HQ·Owner 최종 인수 대기를 유지한다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027
+
+## 14. 키보드·포커스 A 자동 보완 착수 승인 — 2026-11-22
+
+Owner의 “계획서대로 구현 진행하고 PR까지 생성” 지시로 [잔여 검증 계획](DEV-027_KEYBOARD_FOCUS_VALIDATION_PLAN.md) §7.2의8개 경로와 §9의 제출 범위를 승인받았다. 기존 제품·씬·데이터는 보존하고 View 검사에 실제 합성 Tab 도달·단일 명령·같은-owner 지연 순서를 보완한다. F행의 미확정 우선순위는 원시 관측과 Design 판단 대기로 남긴다.
+
+B 제품 수정과 C 독립 GUI는 별도 승인이고, 기존 자연 VS02·A/B18행 수용·PARTIAL·미관측과 DI03/F08/최종 인수 대기는 유지한다. 실행 결과는 [새 증거 색인](../evidence/DEV-027_KEYBOARD_FOCUS_EVIDENCE.md)과 결과서 후속에 연결한다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027
+
+## 15. 키보드/저장 복귀 보완 구현 — 2026-11-22
+
+후속 [검증 계획 §9·11](DEV-027_KEYBOARD_FOCUS_VALIDATION_PLAN.md)의 A8개 + B 제품1개 추가 승인을 이행했다. stage1_view.gd에서 제안 Tab 직전 비활성/빈 목록 제외와 follow_focus=false의 제안 ensure 존중만 보완했다. 기존 P3-B 화면 계약·명령·지급·DI03 규칙은 바꾸지 않았다.
+
+[신규 증거](../evidence/DEV-027_KEYBOARD_FOCUS_EVIDENCE.md)는 View737/0·직접 영향 회귀1503/0·프로젝트 로드와 수정 전 실패를 별도로 연결한다. 동일 runner에서 Tab 정지점42개가 제외되어745→703단언이 되었고 실패44개가0으로 바뀌었다. same-owner restore5행의 우선순위 제안 불충족·휠/return10행 INCONCLUSIVE는 그대로 공개한다. 이는 신규 OS/독립 GUI·Design 재수용이 아니다. 기존 Track A/B 한정 수용·PARTIAL·DI03·DEV026·F08·S3-10-C/S3-12/HQ/Owner 최종 인수 대기를 유지한다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027
+
+## 16. Track A K01 후속 적용 — 2026-11-22
+
+[#146 추가 전달](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7076149744)과 Owner의 수정·PR177 반영 지시에 따라 [키보드 계획 §12](DEV-027_KEYBOARD_FOCUS_VALIDATION_PLAN.md)의 국소 범위를 적용했다. 기존 Host 비활성 Tab 수정에 실제 단일 정·역 이동 경로 검사를 연결하고, proposal_view의 동일 선택 재설정만 제거해 마지막 행 가시성을 보완했다. View819/0·S01334/0·로드 근거는 [증거 §6](../evidence/DEV-027_KEYBOARD_FOCUS_EVIDENCE.md)다.
+
+전체 PR10경로, 이번 후속9경로이며 기존 화면/명령·유효성·기획 규칙은 유지한다. 원 OS K01-12/13/14 FAIL 및 계약/설득 NOT_VERIFIED·목록PARTIAL의 수정본 Design 재수용과 F01 RACE INCONCLUSIVE를 별도로 남긴다. DI03·기존 한정 수용/PARTIAL·F08 최종 인증·S3-10-C/S3-12/HQ/Owner 최종 인수는 변경하지 않는다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027

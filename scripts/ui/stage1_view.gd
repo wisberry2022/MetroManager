@@ -623,8 +623,9 @@ func _ensure_focus_region(region: Control) -> void:
 		return
 	if not is_instance_valid(region) or not region.is_visible_in_tree():
 		return
-	if construction_view.is_ancestor_of(region) and not _scroll.follow_focus:
-		return
+	for panel: Control in [construction_view, proposal_view]:
+		if panel.is_ancestor_of(region) and not _scroll.follow_focus:
+			return
 	var owner := get_viewport().gui_get_focus_owner()
 	if owner != null and (owner == region or region.is_ancestor_of(owner)):
 		_scroll.ensure_control_visible(region)
@@ -634,25 +635,21 @@ func _ensure_focus_region(region: Control) -> void:
 		if not is_instance_valid(region) or get_viewport().gui_get_focus_owner() != owner:
 			return
 		_focus_sequence += 1
-		print(
-			"DEV021_OBS01_PRODUCT_FOCUS ",
-			JSON.stringify(
-				{
-					"sequence": _focus_sequence,
-					"fixture_label": session.fixture_label,
-					"minute": session.pipeline.clock.minute,
-					"view_revision": session.revision,
-					"owner_path": str(owner.get_path()),
-					"owner_rect": str(owner.get_global_rect()),
-					"region_path": str(region.get_path()),
-					"region_rect": str(region.get_global_rect()),
-					"scroll_rect": str(_scroll.get_global_rect()),
-					"scroll": _scroll.scroll_vertical,
-					"window_raw": [get_window().size.x, get_window().size.y],
-					"viewport_rect": str(get_viewport().get_visible_rect())
-				}
-			)
-		)
+		var record := {
+			"sequence": _focus_sequence,
+			"fixture_label": session.fixture_label,
+			"minute": session.pipeline.clock.minute,
+			"view_revision": session.revision,
+			"owner_path": str(owner.get_path()),
+			"owner_rect": str(owner.get_global_rect()),
+			"region_path": str(region.get_path()),
+			"region_rect": str(region.get_global_rect()),
+			"scroll_rect": str(_scroll.get_global_rect()),
+			"scroll": _scroll.scroll_vertical,
+			"window_raw": [get_window().size.x, get_window().size.y],
+			"viewport_rect": str(get_viewport().get_visible_rect())
+		}
+		print("DEV021_OBS01_PRODUCT_FOCUS ", JSON.stringify(record))
 
 
 ## W05 읽기 키만 소비한다. 보조 검수 호스트도 이 제어를 그대로 재사용한다.
@@ -700,6 +697,14 @@ static func read_construction_key(
 func _input(event: InputEvent) -> void:
 	if not _binding_valid():
 		return
+	var proposal := proposal_view
+	if proposal.visible and event is InputEventKey and event.pressed and event.keycode == KEY_TAB:
+		var buttons: Array = proposal.controls.values() + proposal.station_buttons.values()
+		buttons.append_array(proposal.map_view.markers.values())
+		for button: BaseButton in buttons:
+			button.focus_mode = Control.FOCUS_NONE if button.disabled else Control.FOCUS_ALL
+		var list: ItemList = proposal.plan_list
+		list.focus_mode = Control.FOCUS_ALL if list.item_count > 0 else Control.FOCUS_NONE
 	# 읽기 키는 ScrollContainer보다 먼저 처리하고 Tab/마우스는 포커스 추적만 복구한다.
 	for panel: Control in [construction_view, operations_view, finance_view, proposal_view]:
 		if read_construction_key(_scroll, panel, event):
@@ -979,15 +984,11 @@ func _fallback(screen: String) -> Control:
 		"operations":
 			options = [operations_view.controls.back, operations_view.labels.title]
 		"finance":
-			options = [
-				finance_view.controls.day, finance_view.controls.refresh, finance_view.labels.title
-			]
+			var panel: Control = finance_view
+			options = [panel.controls.day, panel.controls.refresh, panel.labels.title]
 		"proposal":
-			options = [
-				proposal_view.controls["P-A"],
-				proposal_view.controls.back,
-				proposal_view.labels.title
-			]
+			var panel: Control = proposal_view
+			options = [panel.controls["P-A"], panel.controls.back, panel.labels.title]
 		"tenders":
 			options = [tender_view.controls.refresh, _labels.title]
 		"construction":

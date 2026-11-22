@@ -263,9 +263,13 @@ func _render_map() -> void:
 		map_view.present(render, selected_station)
 	else:
 		map_view.clear_observation()
-	plan_list.deselect_all()
 	if selected_station in stops:
-		plan_list.select(stops.find(selected_station))
+		var index: int = stops.find(selected_station)
+		# Keep the keyboard's pending ensure-visible request for an unchanged selection.
+		if not plan_list.is_selected(index):
+			plan_list.select(index)
+	else:
+		plan_list.deselect_all()
 
 
 func _edit(operation: String) -> void:

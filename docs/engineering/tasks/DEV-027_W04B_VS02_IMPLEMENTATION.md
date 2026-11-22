@@ -312,3 +312,46 @@ Owner의 이번 지시: “작업물에 대한 통합 GUI 검증이 종료되어
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-027
+
+
+## 16. 키보드 접근·포커스 잔여 로컬 계획 권한 — 2026-11-22
+
+Owner의 본 개발 대화 요청:
+
+> PR #175가 main에 머지되었습니다. 키보드 접근·포커스/스크롤 잔여 검증의 착수 범위와 실행·검증 계획을 로컬로 준비해주세요. 추가 구현·GUI 실행과 Commit·Push·PR은 별도 승인하며, DI-03 보류와 기존 PARTIAL·최종 인수 대기는 유지합니다.
+
+[PR175](https://github.com/wisberry2022/MetroManager/pull/175) 병합 SHA `1b80303636c5eddfbeddac9d288b0124b0093966` 및 [기존 회신 게시](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7075655059)를 확인했다. §15와 기존 문서의 미게시/로컬 대기는 그 당시 기록이다. 이번 요청의 유효 범위는 새 [잔여 실행·검증 계획](../gate3/DEV-027_KEYBOARD_FOCUS_VALIDATION_PLAN.md) §7.1의 문서5개 작성·정적 대조·정책 검사다.
+
+향후 A의 자동 검사 보완은 정확한8개 경로, 기대 위반이 확인된 경우 B의 Host 수정은1개 추가(최대9개)로 제안한다. 둘 다 현재 착수 승인 전이며 C 독립 GUI·새 계측/runner·Commit·Push·PR·이슈 게시·main 병합은 포함하지 않는다. 기존 제품 경로나 새 티켓 범위를 임의 확장하지 않는다. 이번 문서 작성으로 권한이나 Design 수용을 생성하지 않는다.
+
+DI03 HOLD·기존 PARTIAL/미관측·DEV026 한정 수용·P07 구분·F08 및 S3-10-C·S3-12/Stage 최종 인수 대기를 유지한다. A/B 확인은 K/F 미관측 행과 같은-focus 입력 기대에 한정하며 정상 자연 완주 전체 재수용을 요구하지 않는다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027
+
+## 17. 키보드·포커스 A 구현 및 PR 승인 — 2026-11-22
+
+Owner 원문: “개발 에이전트. 계획서를 승인합니다. 계획서대로 구현 진행하고 PR까지 생성해주세요”. [검증 계획](../gate3/DEV-027_KEYBOARD_FOCUS_VALIDATION_PLAN.md) §7.2의8개 경로와 §9 권한에 따라 기존 View 자동 검사에 K/F 보완을 구현·검증하고 Commit·Push·PR·필수 CI까지 진행한다. 이전 로컬 문서5개를 이번 승인된8개 안에 함께 제출한다.
+
+제품 수정(stage1_view.gd의 B 단계), 독립 OS GUI(C), #146 신규 게시, main 병합은 수행하지 않는다. 미확정 같은-owner scroll 기대는 관측값/제안 기대/Design 판정을 구분하며 PARTIAL을 자동 해소하지 않는다. DI03 HOLD·DEV026 한정 수용/PARTIAL·F08·S3-10-C/S3-12 및 HQ/Owner 최종 인수 대기는 유지한다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027
+
+## 18. 키보드/저장 복귀 B 승인·구현 후속 — 2026-11-22
+
+Owner의 “제품 1개 추가·수정 검증 및 PR 승인”으로 [검증 계획 §11](../gate3/DEV-027_KEYBOARD_FOCUS_VALIDATION_PLAN.md)의 stage1_view.gd 1개를 포함한 정확한9개 경로를 이행했다. 제안 비활성 Tab 정지점과 저장 복귀 뒤 지연 ensure의 덮어쓰기를 수정했고 [자동 증거](../evidence/DEV-027_KEYBOARD_FOCUS_EVIDENCE.md)에 동일 runner의 수정 전745/44→수정 후703/0 및 추가 도달/가시성 단언737/0, 직접 영향 회귀1503/0·로드를 연결한다. 기존 승인 원문·실패/검증 기록을 보존한다.
+
+이는 DEV 자동 보완 결과다. F04 same-owner restore5행의 제안 우선순위 불충족, 휠/return10행 INCONCLUSIVE와 OS·Design 확인은 별도로 남는다. DI03·DEV026 한정 수용/기존 PARTIAL·미관측·P07 구분·F08·S3-10-C/S3-12·HQ/Owner 최종 인수 대기는 그대로 유지한다. Commit·Push·PR은 현재 승인 범위이며 main 병합·독립 GUI·#146 신규 댓글은 별도다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027
+
+## 19. #146 Track A 키보드 경로·목록 후속 — 2026-11-22
+
+Owner의 새 확인사항 수정·기존 PR 반영 지시에 따라 [계획 §12](../gate3/DEV-027_KEYBOARD_FOCUS_VALIDATION_PLAN.md)를 적용한다. 초기 PR177의9경로에 K01-04 최소 수정 proposal_view.gd1개가 추가돼 전체10경로이며 이번 실제 변경은 Host를 제외한9개다. [후속 증거 §6](../evidence/DEV-027_KEYBOARD_FOCUS_EVIDENCE.md)에 K01-12/13/14 단일 Tab/역Tab11경로·계약/설득 명령, 선택 행 가시성819/1→819/0, S01회귀334/0·로드 및 원본181개 보존을 연결했다.
+
+Design 댓글은 수정 범위/기대 근거이고 Git 권한은 이번 Owner 지시다. main 병합·독립 GUI·새 자연 완주·DI03은 포함하지 않는다. 원 OS FAIL/PARTIAL/NOT_VERIFIED·F01 RACE INCONCLUSIVE, 기존 DEV026 한정 수용/PARTIAL·최종 인수 대기를 유지한다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027

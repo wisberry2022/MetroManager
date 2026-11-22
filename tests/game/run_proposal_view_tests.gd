@@ -15,6 +15,7 @@ var _checks: int = 0
 var _failures: int = 0
 var _assertions: Array[Dictionary] = []
 var _samples: Dictionary = {}
+var _access_cases: Array[Dictionary] = []
 
 
 func _initialize() -> void:
@@ -33,6 +34,12 @@ func _run() -> void:
 		await _display_boundaries()
 		await _business_flow()
 		_prediction_boundaries()
+		print("KEYBOARD_FOCUS_STAGE inventory")
+		await _keyboard_inventory()
+		print("KEYBOARD_FOCUS_STAGE actions")
+		await _keyboard_actions()
+		print("KEYBOARD_FOCUS_STAGE ordering")
+		await _focus_ordering()
 	var output := "res://.local/validation/DEV-027/screen-integration/view.json"
 	for argument: String in OS.get_cmdline_user_args():
 		if argument.begins_with("--output="):
@@ -46,6 +53,7 @@ func _run() -> void:
 				"failures": _failures,
 				"assertions": _assertions,
 				"samples": _samples,
+				"keyboard_focus": _access_cases,
 				"scope": "HEADLESS_CONTROL_SYNTHETIC_INPUT_NOT_OS_GUI"
 			}
 		),
@@ -95,7 +103,10 @@ func _main_entry() -> void:
 	)
 	_expect("main_operations_preserved", product.session.snapshot().operations_ui.available, true)
 	var before: Dictionary = product.session.snapshot()
-	product.controls.open_proposals.pressed.emit()
+	_host = product
+	_view = product.proposal_view
+	_session = product.session
+	await _activate(product.controls.open_proposals, "K01:main_initial")
 	_expect("main_real_view", product.proposal_view.visible, true)
 	_expect("first_no_selection", product.proposal_view.selected_slot, "")
 	_expect("entry_no_effect", product.session.snapshot(), before)
@@ -497,3 +508,467 @@ func _prediction_boundaries() -> void:
 			),
 			true
 		)
+
+
+func _input_key(code: int, reverse: bool = false, character: int = 0) -> void:
+	for pressed: bool in [true, false]:
+		var event := InputEventKey.new()
+		event.keycode = code
+		event.unicode = character
+		event.shift_pressed = reverse
+		event.pressed = pressed
+		root.push_input(event)
+
+
+func _frames(count: int = 4) -> void:
+	for index: int in range(count):
+		await process_frame
+
+
+func _focus_state() -> Dictionary:
+	var owner := root.gui_get_focus_owner()
+	var bar: VScrollBar = _host._scroll.get_v_scroll_bar()
+	return {
+		"frame": Engine.get_process_frames(),
+		"owner": str(owner.get_path()) if owner != null else "",
+		"screen": _host._reading_context().screen,
+		"scope": _session.observation_scope(),
+		"generation": _host._navigation_generation,
+		"follow_focus": _host._scroll.follow_focus,
+		"scroll": _host._scroll.scroll_vertical,
+		"limit": maxi(0, int(bar.max_value - bar.page)),
+		"page": bar.page,
+		"owner_rect": str(owner.get_global_rect()) if owner != null else "",
+		"scroll_rect": str(_host._scroll.get_global_rect()),
+		"owner_intersects_scroll":
+		owner != null and _host._scroll.get_global_rect().intersects(owner.get_global_rect()),
+		"viewport_rect": str(root.get_visible_rect()),
+		"commands": _session.snapshot().proposal_ui.snapshot.commands.size(),
+		"model_sha256": JSON.stringify(_session.snapshot()).sha256_text()
+	}
+
+
+func _tab_to(target: Control, id: String, reverse: bool = false) -> bool:
+	var trace: Array = []
+	for step: int in range(100):
+		var owner := root.gui_get_focus_owner()
+		if owner == target:
+			break
+		_input_key(KEY_TAB, reverse)
+		await _frames(2)
+		owner = root.gui_get_focus_owner()
+		trace.append(str(owner.get_path()) if owner != null else "")
+	var reached: bool = root.gui_get_focus_owner() == target
+	_expect(id + ":tab_reached", reached, true)
+	_expect(
+		id + ":focus_intersects_scroll",
+		reached and _host._scroll.get_global_rect().intersects(target.get_global_rect()),
+		true
+	)
+	_access_cases.append(
+		{
+			"id": id,
+			"kind": "SYNTHETIC_TAB_NOT_OS",
+			"reverse": reverse,
+			"target": str(target.get_path()),
+			"reached": reached,
+			"trace": trace,
+			"state": _focus_state(),
+			"os_status": "NOT_RUN"
+		}
+	)
+	return reached
+
+
+func _activate(target: Control, id: String, code: int = KEY_ENTER) -> void:
+	if not await _tab_to(target, id):
+		return
+	_input_key(code)
+	await _frames()
+
+
+func _command_key(id: String, case_id: String, code: int = KEY_ENTER) -> void:
+	var commands: Array[Dictionary] = []
+	var capture := func(command: Dictionary) -> void: commands.append(command.duplicate(true))
+	_view.command_requested.connect(capture)
+	await _activate(_view.controls[id], case_id, code)
+	_view.command_requested.disconnect(capture)
+	_expect(case_id + ":one_command", commands.size(), 1)
+	if commands.size() != 1:
+		return
+	var command: Dictionary = commands[0]
+	var action: String = id if id in Text.ACTIONS else "edit_proposal"
+	if id == "predict":
+		action = "predict_proposal"
+	_expect(case_id + ":action", command.action, action)
+	_expect(case_id + ":slot", command.slot_id, _view.selected_slot)
+	_access_cases.append(
+		{"id": case_id + ":activation", "kind": "SYNTHETIC_ACTIVATION", "command": command}
+	)
+
+
+func _tab_cycle(id: String) -> void:
+	var before := _session.snapshot()
+	var initial := root.gui_get_focus_owner()
+	var visited: Array = []
+	var outside_controls: Array = []
+	for step: int in range(100):
+		_input_key(KEY_TAB)
+		await _frames(2)
+		var owner := root.gui_get_focus_owner()
+		var valid: bool = owner != null and Guard.focus_valid(owner)
+		if owner == null or _view.is_ancestor_of(owner):
+			_expect(id + ":valid:" + str(step), valid, true)
+		else:
+			outside_controls.append({"path": str(owner.get_path()), "focus_valid": valid})
+		if owner == null:
+			break
+		visited.append(str(owner.get_path()))
+		if owner == initial:
+			break
+	_expect(id + ":cycle_returns", root.gui_get_focus_owner(), initial)
+	_expect(id + ":no_model_effect", _session.snapshot(), before)
+	_access_cases.append(
+		{
+			"id": id,
+			"kind": "SYNTHETIC_TAB_CYCLE",
+			"visited": visited,
+			"outside_proposal_scope": outside_controls
+		}
+	)
+
+
+func _keyboard_inventory() -> void:
+	root.size = Vector2i(1100, 900)
+	await _setup()
+	await _frames()
+	# Only this starting anchor is assigned; every target below is reached with Tab.
+	_view.labels.title.grab_focus()
+	var before := _session.snapshot()
+	await _activate(_view.controls["P-B"], "K02:P-B", KEY_SPACE)
+	_expect("K02:explicit_P-B", _view.selected_slot, "P-B")
+	await _tab_to(_view.controls["P-A"], "K02:P-A:reverse", true)
+	_expect("K02:focus_is_not_selection", _view.selected_slot, "P-B")
+	_input_key(KEY_ENTER)
+	await _frames()
+	_expect("K02:explicit_P-A", _view.selected_slot, "P-A")
+	_expect("K02:read_effect0", _session.snapshot(), before)
+	_route()  # State preparation with existing fixture; not keyboard route construction.
+	await _frames()
+	await _step_to(_view.name_input, _view.controls.remove, "K01-12:disabled_add")
+	before = _session.snapshot()
+	for id: String in _view.station_buttons:
+		for group: String in ["list", "map"]:
+			var target: Control = (
+				_view.station_buttons[id] if group == "list" else _view.map_view.markers[id]
+			)
+			await _activate(target, "K03:" + group + ":" + id)
+			_expect("K03:selected:" + group + ":" + id, _view.selected_station, id)
+	_expect("K03:all_reads_effect0", _session.snapshot(), before)
+	await _step_to(_view.name_input, _view.plan_list, "K01-04:reverse", true)
+	await _tab_to(_view.plan_list, "K04:list")
+	_input_key(KEY_UP)
+	await _frames()
+	_expect("K04:selection", _view.selected_station, FX.ROUTE_A[-2])
+	_expect("K04:read_effect0", _session.snapshot(), before)
+	_input_key(KEY_DOWN)
+	await _frames()
+	_expect("K01-04:last_selected", _view.selected_station, "S12")
+	var list: ItemList = _view.plan_list
+	var rect := list.get_item_rect(list.item_count - 1)
+	rect.position.y -= list.get_v_scroll_bar().value
+	var global_rect := Rect2(list.global_position + rect.position, rect.size)
+	_expect("K01-04:last_row_inside_list", Rect2(Vector2.ZERO, list.size).encloses(rect), true)
+	_expect(
+		"K01-04:last_row_inside_outer", _host._scroll.get_global_rect().encloses(global_rect), true
+	)
+	_expect("K01-04:read_effect0", _session.snapshot(), before)
+	_access_cases.append(
+		{
+			"id": "K01-04",
+			"kind": "SELECTED_ROW_GEOMETRY_NOT_OS",
+			"row_rect": str(rect),
+			"list_rect": str(list.get_global_rect()),
+			"outer_rect": str(_host._scroll.get_global_rect()),
+			"list_scroll": list.get_v_scroll_bar().value,
+			"state": _focus_state()
+		}
+	)
+	await _tab_to(_view.map_view.markers.S12, "K04:exit_reverse", true)
+	await _tab_to(_view.name_input, "K05:name")
+	var scroll: int = _host._scroll.scroll_vertical
+	_input_key(KEY_END)
+	_input_key(KEY_A, false, 97)
+	await _frames()
+	_expect("K05:buffer_only", _session.snapshot(), before)
+	_expect("K05:typed_character", _view.name_input.text.ends_with("a"), true)
+	_input_key(KEY_LEFT)
+	_input_key(KEY_RIGHT)
+	_input_key(KEY_LEFT, true)
+	_expect("K05:select_character", _view.name_input.get_selected_text(), "a")
+	_input_key(KEY_BACKSPACE)
+	_expect("K05:delete_selection", _view.name_input.text, _view.row.name)
+	_input_key(KEY_A, false, 97)
+	_input_key(KEY_HOME)
+	await _frames()
+	_expect("K05:caret_home", _view.name_input.caret_column, 0)
+	_expect("K05:no_outer_scroll", _host._scroll.scroll_vertical, scroll)
+	_expect("K05:editing_still_buffer_only", _session.snapshot(), before)
+	await _command_key("name", "K05:apply", KEY_SPACE)
+	_expect("K05:applied_name", _view.row.name.ends_with("a"), true)
+	await _command_key("predict", "K07:predict")
+	await _activate(_view.station_buttons.S02, "K06:select")
+	for action: String in ["up", "down", "remove", "add"]:
+		var stops: Array = _view.row.draft.plan.station_ids.duplicate()
+		var index: int = stops.find("S02")
+		if action == "add":
+			stops.append("S02")
+		else:
+			stops.remove_at(index)
+			if action in ["up", "down"]:
+				stops.insert(index + (-1 if action == "up" else 1), "S02")
+		await _command_key(action, "K06:" + action)
+		_expect("K06:payload:" + action, _view.row.draft.plan.station_ids, stops)
+	before = _session.snapshot()
+	await _activate(_view.controls.refresh, "K11:refresh")
+	_expect("K11:refresh_effect0", _session.snapshot(), before)
+	await _tab_cycle("K12:enabled_cycle")
+	await _activate(_view.controls.back, "K11:back")
+	_expect("K11:back_to_plan", _view.visible, false)
+	await _activate(_host.controls.open_proposals, "K01:host_entry")
+	_expect("K01:real_view", _view.visible, true)
+	_expect("K11:reentry_keeps_explicit_slot", _view.selected_slot, "P-A")
+	await _tab_to(_view.labels.title, "K12:title")
+	before = _session.snapshot()
+	_input_key(KEY_ENTER)
+	await _frames()
+	_expect("K12:title_has_no_command", _session.snapshot(), before)
+	await _dispose()
+
+
+func _keyboard_actions() -> void:
+	for seed_value: int in [2, 8]:
+		await _setup(seed_value, 360)
+		_route()
+		await _frames()
+		_view.labels.title.grab_focus()
+		await _tab_to(_view.controls.submit_city_review, "K08:reverse:" + str(seed_value), true)
+		await _command_key("submit_city_review", "K08:city:" + str(seed_value))
+		_at(361)
+		await _frames()
+		_expect("K12:locked_owner_valid", Guard.focus_valid(root.gui_get_focus_owner()), true)
+		var before := _session.snapshot()
+		await _activate(_view.station_buttons.S05, "K03:locked_list:" + str(seed_value))
+		_expect("K03:locked_read_effect0", _session.snapshot(), before)
+		await _tab_cycle("K12:locked:" + str(seed_value))
+		_at(391)
+		await _frames()
+		await _command_key("submit_government_review", "K09:government:" + str(seed_value))
+		await _step_to(
+			_view.controls.submit_government_review,
+			_view.controls.refresh,
+			"K01-12:request_pending:" + str(seed_value)
+		)
+		_at(392)
+		await _step_to(
+			_view.name_input, _view.controls.refresh, "K01-12:review_pending:" + str(seed_value)
+		)
+		_at(452)
+		await _frames()
+		if seed_value == 8:
+			await _step_to(
+				_view.controls.refresh, _view.controls.submit_persuasion, "K01-14:reverse", true
+			)
+			await _step_to(
+				_view.controls.predict, _view.controls.submit_city_review, "K01-14:forward_city"
+			)
+			await _step_to(
+				_view.controls.submit_city_review,
+				_view.controls.submit_persuasion,
+				"K01-14:forward_persuasion"
+			)
+			await _command_key("submit_persuasion", "K09:persuasion", KEY_SPACE)
+			_at(483)
+			await _frames()
+		await _step_to(
+			_view.controls.refresh,
+			_view.controls.sign_proposal_contract,
+			"K01-13:reverse:" + str(seed_value),
+			true
+		)
+		await _command_key("sign_proposal_contract", "K09:contract:" + str(seed_value))
+		_at(_session.pipeline.clock.minute + 1)
+		await _frames()
+		await _activate(_view.controls.construction, "K10:P05:" + str(seed_value))
+		_expect(
+			"K10:same_project",
+			_host.construction_view.selected_id,
+			_view.row.business_contract.project_id
+		)
+		await _activate(_host.construction_view.controls.back, "K10:return:" + str(seed_value))
+		_expect("K10:return_slot", _view.selected_slot, "P-A")
+		before = _session.snapshot()
+		await _activate(_host.controls.open_finance, "K11:finance:" + str(seed_value))
+		await _activate(_host.finance_view.controls.back, "K11:saved_return:" + str(seed_value))
+		_expect("K11:finance_return_effect0", _session.snapshot(), before)
+		await _dispose()
+
+
+func _wheel(code: int) -> void:
+	var rect: Rect2 = _host._scroll.get_global_rect()
+	for pressed: bool in [true, false]:
+		var event := InputEventMouseButton.new()
+		event.button_index = code
+		event.factor = 1.0
+		event.position = rect.position + Vector2(rect.size.x - 28, rect.size.y / 2)
+		event.global_position = event.position
+		event.pressed = pressed
+		root.push_input(event)
+
+
+func _focus_probe(mode: String, input: String, delay: int) -> void:
+	await _setup(2, 360)
+	if mode == "return_p05":
+		_route()
+		_click("submit_city_review")
+		_at(391)
+		_click("submit_government_review")
+		_at(452)
+		_click("sign_proposal_contract")
+		_at(453)
+	await _frames()
+	_view.controls["P-A"].grab_focus()
+	await _frames()
+	var limit: int = _focus_state().limit
+	_host._scroll.scroll_vertical = limit / 2
+	var context: Dictionary = _host._reading_context()
+	var trace: Array = [_focus_state()]
+	var before := _session.snapshot()
+	if mode == "ensure":
+		_host._ensure_focus_region(_view.controls["P-A"])
+	elif mode == "return_p07":
+		_host.controls.open_finance.pressed.emit()
+		await _frames()
+		trace[0] = _focus_state()
+		_host.finance_view.controls.back.pressed.emit()
+	elif mode == "return_p05":
+		_view.controls.construction.pressed.emit()
+		await _frames()
+		trace[0] = _focus_state()
+		_host.construction_view.controls.back.pressed.emit()
+	else:
+		# Component ordering test: retain a visible owner; not an OS P05/P07 return.
+		_host._restore_reading(context)
+	await _frames(delay)
+	trace.append(_focus_state())
+	if input == "wheel_up":
+		_wheel(MOUSE_BUTTON_WHEEL_UP)
+	elif input == "wheel_down":
+		_wheel(MOUSE_BUTTON_WHEEL_DOWN)
+	elif input == "navigate":
+		_host.controls.open_finance.pressed.emit()
+	elif input != "none":
+		_input_key(
+			{
+				"home": KEY_HOME,
+				"end": KEY_END,
+				"page_up": KEY_PAGEUP,
+				"page_down": KEY_PAGEDOWN,
+				"tab": KEY_TAB
+			}[input]
+		)
+	var after_input := _focus_state()
+	trace.append(after_input)
+	for frame: int in range(5):
+		await process_frame
+		trace.append(_focus_state())
+	var last: Dictionary = trace.back()
+	var moved: bool = after_input.scroll != trace[1].scroll
+	var same_owner: bool = after_input.owner == trace[1].owner
+	var row_id := ("F02" if mode == "ensure" else "F04") + ":" + input + ":" + str(delay)
+	if input.begins_with("wheel"):
+		row_id = ("F03" if mode == "ensure" else "F04") + ":" + input + ":" + str(delay)
+	if input == "none":
+		row_id = "F01:" + mode
+	elif input in ["tab", "navigate"]:
+		row_id = "F05:" + mode + ":" + input
+	_expect(row_id + ":read_effect0", _session.snapshot(), before)
+	var status := "OBSERVED_REVIEW_REQUIRED"
+	if input not in ["none", "tab", "navigate"] and (not moved or not same_owner):
+		status = "INCONCLUSIVE"
+	# Pending same-owner priority has no automatic Design PASS. Record both outcomes,
+	# including a false proposed expectation, without converting it into a green assertion.
+	_access_cases.append(
+		{
+			"id": row_id + ":" + mode,
+			"kind": "SYNTHETIC_INPUT_COMPONENT_ORDERING",
+			"mode": mode,
+			"input": input,
+			"delay_frames": delay,
+			"trace": trace,
+			"input_moved_scroll": moved,
+			"same_owner_at_input": same_owner,
+			"proposed_user_scroll_preserved": last.scroll == after_input.scroll,
+			"priority_expectation_applicable":
+			input not in ["none", "tab", "navigate"] and moved and same_owner,
+			"status": status,
+			"design_status": "PENDING",
+			"os_status": "NOT_RUN"
+		}
+	)
+	if input == "none" and mode != "ensure":
+		_expect("F01:restore_without_input", last.scroll, context.scroll)
+	if input in ["tab", "navigate"]:
+		_expect("F05:late_callback_keeps_new_owner", last.owner, after_input.owner)
+		_expect("F05:late_callback_keeps_screen", last.screen, after_input.screen)
+	_input_key(KEY_TAB)
+	await _frames()
+	_expect("F06:follow_reenabled", _host._scroll.follow_focus, true)
+	_expect("F06:focus_valid", Guard.focus_valid(root.gui_get_focus_owner()), true)
+	_expect("F06:focus_visible", _focus_state().owner_intersects_scroll, true)
+	await _dispose()
+
+
+func _focus_ordering() -> void:
+	root.size = Vector2i(800, 600)
+	for mode: String in ["ensure", "restore"]:
+		for input: String in [
+			"none", "home", "end", "page_up", "page_down", "wheel_up", "wheel_down", "tab"
+		]:
+			await _focus_probe(mode, input, 0)
+	for input: String in ["end", "wheel_down"]:
+		for delay: int in [1, 3]:
+			await _focus_probe("restore", input, delay)
+	for mode: String in ["ensure", "restore"]:
+		await _focus_probe(mode, "navigate", 0)
+	for mode: String in ["return_p05", "return_p07"]:
+		for input: String in ["none", "end", "wheel_down"]:
+			await _focus_probe(mode, input, 1)
+
+
+func _step_to(start: Control, target: Control, id: String, reverse: bool = false) -> void:
+	if root.gui_get_focus_owner() != start:
+		await _tab_to(start, id + ":start")
+	_expect(id + ":starting_owner", root.gui_get_focus_owner(), start)
+	var before := _session.snapshot()
+	var trace: Array = [_focus_state()]
+	_input_key(KEY_TAB, reverse)
+	trace.append(_focus_state())
+	_expect(id + ":immediate_owner", root.gui_get_focus_owner(), target)
+	# Exercise the real invalid-focus fallback after the input, like periodic present.
+	_host.present(_session.snapshot())
+	await _frames()
+	trace.append(_focus_state())
+	_expect(id + ":settled_owner", root.gui_get_focus_owner(), target)
+	_expect(id + ":settled_visible", _focus_state().owner_intersects_scroll, true)
+	_expect(id + ":read_effect0", _session.snapshot(), before)
+	_expect(id + ":valid", Guard.focus_valid(root.gui_get_focus_owner()), true)
+	_access_cases.append(
+		{
+			"id": id,
+			"kind": "SINGLE_TAB_CHAIN_NOT_OS",
+			"reverse": reverse,
+			"target": str(target.get_path()),
+			"trace": trace
+		}
+	)
