@@ -42,6 +42,7 @@ var _bound_session: Session
 var _scope: String = ""
 var _retired: bool = false
 var _navigation_generation: int = 0
+var _reading_input_generation: int = 0
 var _suspended_child: String = ""
 var _observation: Dictionary = {}
 
@@ -75,12 +76,9 @@ func _ready() -> void:
 	var reading := HFlowContainer.new()
 	root.add_child(reading)
 	for screen: String in ["operations", "finance"]:
+		var caption := "운영 현황" if screen == "operations" else "재무·보고"
 		Operations.add_action(
-			reading,
-			controls,
-			"open_" + screen,
-			"운영 현황" if screen == "operations" else "재무·보고",
-			_open_reading.bind(screen)
+			reading, controls, "open_" + screen, caption, _open_reading.bind(screen)
 		)
 	Operations.add_action(reading, controls, "open_proposals", "회사 제안", _open_proposals)
 	proposal_view = ProposalPanel.instantiate()
@@ -578,22 +576,16 @@ func _close_construction() -> void:
 
 
 func _construction_requested(id: String, action: String, confirmed: Dictionary) -> void:
-	if (
-		not _binding_valid()
-		or not construction_view.visible
-		or not _observation.regions.construction_ui
-	):
+	var panel := construction_view
+	if not _binding_valid() or not panel.visible or not _observation.regions.construction_ui:
 		return
 	session.request_construction(id, action, confirmed)
 	present(session.snapshot())
 
 
 func _refresh_construction() -> void:
-	if (
-		not _binding_valid()
-		or not construction_view.visible
-		or not _observation.regions.construction_ui
-	):
+	var panel := construction_view
+	if not _binding_valid() or not panel.visible or not _observation.regions.construction_ui:
 		return
 	_scroll.follow_focus = true
 	session.refresh_construction()
@@ -707,7 +699,10 @@ func _input(event: InputEvent) -> void:
 		list.focus_mode = Control.FOCUS_ALL if list.item_count > 0 else Control.FOCUS_NONE
 	# 읽기 키는 ScrollContainer보다 먼저 처리하고 Tab/마우스는 포커스 추적만 복구한다.
 	for panel: Control in [construction_view, operations_view, finance_view, proposal_view]:
+		var before := _scroll.scroll_vertical
 		if read_construction_key(_scroll, panel, event):
+			if _scroll.scroll_vertical != before:
+				_reading_input_generation += 1
 			get_viewport().set_input_as_handled()
 			return
 
@@ -790,9 +785,13 @@ func _restore_reading(context: Dictionary) -> void:
 	_show_reading(context.screen)
 	var owner := get_viewport().gui_get_focus_owner()
 	var generation := _navigation_generation
+	var reading_generation := _reading_input_generation
 	await get_tree().process_frame
 	await get_tree().process_frame
 	if not _binding_valid() or generation != _navigation_generation:
+		return
+	# 실제 읽기 이동 이후에는 오래된 저장 복원을 적용하지 않는다.
+	if reading_generation != _reading_input_generation:
 		return
 	if _reading_context().screen != context.screen or get_viewport().gui_get_focus_owner() != owner:
 		return

@@ -116,3 +116,71 @@ Design 원본 두 GUI 실행의 shader cache 저장 ERROR는 **실행별4건**, 
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-027
+
+
+## 7. PR177 병합본 K01 Track A/B 수용 후속 — 2026-11-27
+
+기준 main/Design 시험 SHA는 b0447defe57abe173d10dcc05784f79313ff69ca다. 2026-11-27 fetch에서 동일 main을 확인했고, PR177 head cc5727ee13c720cb59c8cab7fdc41872e961af95와 전체 tree 차이0이다. 위 §1~6의 실행·실패·OS 대기 문장은 작성 당시 이력으로 보존한다. 아래는 별도 실행자의 OS 증거에 대한 A/B 판정 연결이며 DEV의 새 GUI 실행이나 전체 Design 수용이 아니다.
+
+- [Track A / AGT-DSG-0004](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7077287550): K01 지정 이동·실행·마지막 행 및 P05 저장 복귀·안정 읽기 관측 한정 수용. 전체 PARTIAL·F01/F04 잔여 유지.
+- [Track B / AGT-DSG-0003](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7077351699): TRACK_B_PR177_LOCAL_REACCEPTANCE / OVERALL_PARTIAL. 지정 K01 과거 FAIL/순수 OS 실행 NOT_VERIFIED·마지막 행 PARTIAL을 해당 관측 범위에서 해소·재수용. B06-02 전체 해소는 아님.
+
+### 지정 수용·서로 다른 실행의 관측 범위
+
+| 항목 | Track A 원본·판정 | Track B 원본·판정 | DEV 후속 |
+| --- | --- | --- | --- |
+| K01-12 편집 skip |019~021,seq11/rev98. 이름→Tab→제거 안정 |020~022,seq10/rev91. 동일 지정 경로 안정 | 지정 비활성add→P-A 실패 해소를 후속 기록 |
+| K01-12 요청 대기/심사중 |038~041·046~050,seq18→19/rev201·seq22/rev221 |044~046·106~108,seq16→17/rev164·seq17→18/rev154 | 정부/읽기전용 이름→재조회 수용. 준비 오류는 제외 |
+| K01-13 계약 |056~065·068,재조회 역Tab→계약. Enter요청11:18→효력11:19·지급800000 |050~054·058·061,요청09:50→09:51효력·지급800000 | 실제 OS 접근/명시 입력 공백 해소. 시각을 서로 대체하지 않음 |
+| K01-14 설득 |110~119·125/126·130,역/정Tab→설득. Space13:20→접수13:21→허가13:51/640000 |113~123·128/129,역/정Tab→설득. Space09:16→접수09:17·기회사용. 종료 심사중/예정09:47 | A 허가를 B 결과로 전용0. 이 두 보완 패킷의 seed8 실제640000 사업계약/지급은 미관측 |
+| K01-04 마지막 행 |022~026,특히025/026. Up S08→Down S12 행전체 가시·유지 |023~030,특히026/027. 내부행 전체 가시·재진입 | 해당 마지막행 잘림 PARTIAL의 지정 해소. 모든 환경/역명 수용 아님 |
+| P05 저장 복귀·안정 읽기 |067~077,출발seq30/scroll1125·후속seq33. 복귀069/070 화면 |060~071,출발seq25/scroll1125·후속seq28. 복귀062/063 화면 | 동일사업 복귀·완료 뒤Home/End/바깥휠·새Tab 한정 수용. 복귀 자체 별도raw 수치/1~2frame 경쟁 인증 없음 |
+
+계약/설득 효력 후 버튼 비활성화에 따른 정상 fallback과 Tab 순회 결함을 구분한다. 같은 지정 K01 GUI 반복이나 무관한 자연 VS02 전체 재완주를 새 종료 조건으로 추가하지 않는다. Track B PASS_LOCAL15행과 기존 관측18행은 분모가 다르므로33조건 전체 PASS로 합산하지 않는다. 실행자/Design 심사/DEV 정적 연결의 책임을 분리한다.
+
+### 원본 보관 식별·정정·오류
+
+원본은 프로젝트의 .local/validation 아래 각각 DSG-011/track-a-recheck-20261122-codex-01 및 DSG-008/20261122-trackb-b0447def-local01이다. 이번 DEV 정적 확인에서 A manifest195파일·B manifest167파일을 재해시해 불일치0을 확인했다. 새 이미지 판독·GUI 재실행을 했다는 뜻은 아니다. 원본 이미지/로그·개인 절대경로·내부 대화는 공개 산출물에 복사하지 않았다.
+
+| 원본 | SHA256 |
+| --- | --- |
+| A artifact-manifest.json |0e8f6055352cf27798161b6aa27c17714ac643b5eece23cc2c20d8cf2a506c37 |
+| A REPORT.md |577f31d2765c8087a66ce840482e469a5b3f7d396b480b9fe7e3ec6917ab6e1e |
+| A RECORD_CORRECTIONS.md |c610fde6da508847c76dc9bfaeb6c20eac01c6889c289bd2a70abd26e13d996c |
+| A cases.json |d726040fedd6246b07772c44c6d9169dc72255491c912df94d090ae156b4967a |
+| B manifest.json |3e1686a386cb2b818bbdd54d447cabf142e1a4893f5ee893fddd7e9790bc2ce7 |
+| B REVIEW.md |b95a9baf4eb413ce0becefc41bb317d433320ad20e23113e012b6c5afaafea77 |
+| B RECORD_CORRECTIONS.md |5748d9014faec10da71b9d75584895856065567e0d00c9e9611ac32e790301a3 |
+| B CASES.json |7d6927bc654850c8fc4e197fd83ca46366d4004d900de8d52c2c20090110046c |
+
+- A035/036은 정부 시작focus 준비 오류여서038~041을 사용한다. A124는 내부 목록휠이며 바깥 이력 읽기로 세지 않는다.
+- B039~041은 시작focus 미확보, B049는 이미 허가되어 심사중 근거 제외. B098 HUD End는 읽기 성공 아님. B062의 무입력은 Return 완료 뒤 추가 읽기가 없다는 뜻이며 engine 첫 frame 인증이 아니다.
+- A 실행자의 이번 GUI2개는 ERROR/SCRIPT ERROR0 기록. B GUI2개는 exit0/SCRIPT ERROR0이지만 cache folder 생성 ERROR 각각1건/합계2건. engine/stderr 중복 합산0. 이전 실행별4건과 구별하며 원인/제품 연관·영구 해결 NOT_VERIFIED 유지.
+- B seed2 최초 창 미관측 시도의 exit NOT_CAPTURED는 정상 GUI2개에서 제외하고 원본 보존. A PNG130, B JPEG129/고유payload102를 서로 합산하거나 전수 새관측으로 세지 않는다.
+
+### 현재 개발 잔여
+
+F04 원5행의 입력0/430→저장215 관측과 Track B의 최신 읽기 우선 기대를 연결해 보완 대상으로 분류했다. 원 JSON 상태는 덮지 않고 [최소 계획 §3](../gate3/DEV-027_F04_RESTORE_PLAN.md)에 새 기대 대조를 추가했다. F01 RACE INCONCLUSIVE·합성휠/return10행·B06-02 전체 PARTIAL은 그대로다. [공동 처분표](../gate3/DEV-027_RESIDUAL_DISPOSITION.md)의 필수성은 DEV 제안이며 A/B·필요시 HQ/Owner 처분 대기다.
+
+기존 View819/0·S01334/0·이전737/0/1503회귀·로드와 cc5727e 필수 CI는 당시 근거로 재사용한다. 새 게임 자동·프로젝트 로드·GUI/플레이·자연VS02·빌드/export·성능은 이번 NOT_RUN. 신규 구현·검증·Git 제출도 승인 전이다. DI03 HOLD·기존 DEV026 한정 수용/PARTIAL·일1 미관측·P07 구분·F08 최종규격 및 S3-10-C/S3-12/HQ·Owner 인수 대기를 유지한다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027
+
+
+## 8. F04 최소 구현의 DEV 자동 증거 — 2026-11-27
+
+기존 [KEYBOARD_FOCUS_RESULTS](DEV-027_KEYBOARD_FOCUS_RESULTS.json) 원본과 §1~7의 A/B 검수·정정은 보존한다. 새 [F04_RESTORE_RESULTS](DEV-027_F04_RESTORE_RESULTS.json)에 실행별 소스161개 해시·명령·exit·ERROR·원 로그/JSON 해시·단언 ID/판정·프레임 trace를 기록했다. 통과 단언의 대형 snapshot 값은 원 실행 JSON에 보관하고 공개 색인에는 ID/판정만 기록한다. 실패 단언의 actual/expected는 색인에도 남겼다. 원 로그/JSON은 .local/validation/DEV-027/f04-run/<run>/에서 보존한다.
+
+before-02-focus와 after-01-focus는 runner SHA가 같으며209/6→209/0이다. before-01 전체846/6은 초기 재현으로 보존하며 후속 runner 표현 정리/집중 선택 옵션과 구분한다. 최종 full846/0은 LF 정규화 소스로 실행했다. 이전819/0·737/0·회귀·Design 수용/CI와 합산하지 않는다. 이번 실행에는 GPU/OS 관측이 없으므로 과거 Design 실행의 cache ERROR나 NOT_CAPTURED를 수정하지 않는다.
+
+새10행 전제/유효owner 휠4행 덮임·null-owner 휠2행 판단 대기는 [공동 표 §5](../gate3/DEV-027_RESIDUAL_DISPOSITION.md)와 연결한다. 단언 성공은 이 관측 잔여를 PASS로 선언하지 않는다. DEV 키 보완과 독립 GUI/Design 재수용 PENDING, B06-02 전체 PARTIAL, DI03/F08·최종 인수 대기는 구분한다.
+
+
+## 9. 제출 상태·최신 적용 정정 — 2026-11-27
+
+[Track B B2](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7216115783), [Track A A2](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7216152833), [Planning P2](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7216239510)를 제출 전 확인했다. B2는 유효 바깥휠 이동이면 owner=null에도 보호 계약이 적용된다고 명시한다. 새 자동 trace의 return_p05/return_p07 휠2행은 proposal 화면·동일 scope·generation3, handled=true, 각각0→105→462 및22→127→215다. 따라서 앞선 “적용 기대 판단 대기”는 당시 검토 기록으로 보존하고, 최신 계약에 따른 DEV 판단은 기존4행과 합친 **휠6행 실제 보완 잔여**로 갱신한다. 수정본 Design 수용은 별도다. 기대 재승인 요청은 없으며 기술 보완 범위의 Owner 승인만 남는다. End return2행의 정확한 null-owner 시점 비적용과 안정휠 재사용도 B2 원범위로 연결한다.
+
+키5행의 전후 성공·공통 회귀/로드와 원 INCONCLUSIVE10을 보존한다. B2/A2는 신규 OS timing 인증·전체 자연VS02 반복을 종료 조건으로 요구하지 않는다. P2는 A1+B1 정책 해결과 DI03 실제 구현 HOLD를 구분한다. 이 제출은 게임/경제/시간/세이브 명세를 변경하지 않는다.
+
+새 F04 JSON의 submission_followups[0]에 승인·GUI 대기·6행의 최신 적용을 추가했다. 기존 runs/소스해시/단언/trace/원10행 필드는 변경하지 않았다. 새 자동·프로젝트 로드·GUI 실행 없이 이미 검증한161소스 해시 일치를 재확인하여 제출한다.
