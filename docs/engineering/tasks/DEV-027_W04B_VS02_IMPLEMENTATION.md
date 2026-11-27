@@ -355,3 +355,36 @@ Design 댓글은 수정 범위/기대 근거이고 Git 권한은 이번 Owner �
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-027
+
+
+## 20. K01 A/B 수용 후속·공동 잔여/F04 로컬 계획 권한 — 2026-11-27
+
+Owner의 이번 직접 지시:
+
+> 개발 에이전트. K01의 Track A/B 수용 결과를 후속 기록하고, 공동 잔여 처분표와 F04 5행의 최소 수정·검증 계획을 로컬로 준비해주세요. INCONCLUSIVE 10행의 필수 여부, 정확한 변경 경로와 승인 필요 범위를 포함해주세요. 구현·검증 및 Commit·Push·PR은 별도 승인하며, DI-03 보류와 기존 PARTIAL·최종 인수 대기는 유지합니다.
+
+기준 main b0447defe57abe173d10dcc05784f79313ff69ca / PR177 병합본. [K01 A/B 수용 후속 §7](../evidence/DEV-027_KEYBOARD_FOCUS_EVIDENCE.md), [공동 잔여 처분표](../gate3/DEV-027_RESIDUAL_DISPOSITION.md), [F04 최소 계획](../gate3/DEV-027_F04_RESTORE_PLAN.md)을 로컬로 준비한다. 정확한 변경은 계획 §6.1의 개발 문서7개다.
+
+F04 same-owner restore5행은 최신 Track B 기대에 비춰 보완 필요로 분류한다. 과거 자동의 관측/PENDING 기록은 보존한다. INCONCLUSIVE10은 유효 휠 이동6행과 실제복귀 owner/이동 전제4행으로 나누고, 특정probe 재실행과 동작 계약의 필수 여부를 구분했다. 공동 최종 면제/이관은 아직 승인되지 않았다.
+
+향후 제품/검사2개+새결과JSON1을 더한 최대10경로 구현·검증은 별도 승인 후보다. 현재 제품·게임검사·GUI/로드·계측/반입·Commit·Push·PR·main병합·#146댓글은 미수행. DI03 종속 구현 HOLD, DEV026 한정 수용/PARTIAL·미관측·P07 일반/저장 구분, F08 및 S3-10-C/S3-12·HQ/Owner 최종 인수 대기를 유지한다. 전체DONE·필수미충족0을 선언하지 않는다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027
+
+
+## 21. F04 승인 실행·로컬 결과 검토 요청 — 2026-11-27
+
+> DEV-027 F04 최소 수정·검증 계획을 승인합니다. 최대 10개 경로 안에서 F04 5행 보완과 INCONCLUSIVE 10행의 전제 확인을 진행하고 로컬 결과부터 검토 요청해주세요. 독립 GUI·Commit·Push·PR·main 병합은 별도 승인하며, DI-03 보류와 기존 PARTIAL·최종 인수 대기는 유지합니다.
+
+승인 경로는 [F04 계획 §6.2/§8](../gate3/DEV-027_F04_RESTORE_PLAN.md)의10개이며 추가 경로 없이 구현·검증했다. Host 읽기 입력 세대 보호와 기존 View runner 보강, 새 JSON 및 기존7문서 후속 기록이다. F04 키5행의 결정적 전후 성공·10행 전제와 실제 휠 잔여·회귀/로드를 [결과 §19](DEV-027_RESULT.md)에 연결했다.
+
+로컬 검토 요청이며 전체DONE/필수미충족0 또는 A/B 재수용이 아니다. 유효owner 휠4행은 별도 제품 확장 승인 필요, null-owner 휠2행은 적용 기대 판단 대기다. 기존 K01·안정 P05 수용, DI03 HOLD·DEV026 한정 수용/PARTIAL·일1 미관측·P07 구분·F08 및 S3-10-C/S3-12/HQ·Owner 최종 인수 대기를 유지한다. Commit·Push·PR·#146 게시·main 병합·독립 GUI는 수행하지 않았다.
+
+
+## 22. F04 Commit·Push·PR 승인 및 독립 GUI 담당 — 2026-11-27
+
+
+Owner의 이번 제출 승인 원문: “독립 GUI Commit, Push PR 생성까지 승인합니다”. 실행 주체 확인 후 선택: “Design Track A/B의 독립 GUI 실행 대기”. 승인된10경로의 Commit·Push·PR 및 필수 CI 확인을 진행한다. 독립 GUI는 Design 대기이며 DEV GUI를 독립 실행으로 대체하지 않는다. main 병합·휠 제품 확장·DI03 보류 해제는 승인 범위에 포함하지 않는다. 이번 #146 댓글 게시는 수행하지 않는다.
+
+[결과 §20](DEV-027_RESULT.md), [공동 처분표 §6](../gate3/DEV-027_RESIDUAL_DISPOSITION.md)에 최신 회신·제출 경계를 연결한다. 키5행 보완과 휠6행 필수 잔여, 기존 수용/DI03 HOLD/PARTIAL/최종 인수를 분리한다.

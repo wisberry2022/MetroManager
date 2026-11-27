@@ -16,6 +16,7 @@ var _failures: int = 0
 var _assertions: Array[Dictionary] = []
 var _samples: Dictionary = {}
 var _access_cases: Array[Dictionary] = []
+var _input_observation: Dictionary = {}
 
 
 func _initialize() -> void:
@@ -25,6 +26,9 @@ func _initialize() -> void:
 func _run() -> void:
 	if "--verify-failure-exit" in OS.get_cmdline_user_args():
 		_expect("intentional_failure", false, true)
+	elif "--f04-only" in OS.get_cmdline_user_args():
+		await _focus_ordering()
+		await _restore_edges()
 	else:
 		await _main_entry()
 		await _keyboard_and_reading()
@@ -40,25 +44,20 @@ func _run() -> void:
 		await _keyboard_actions()
 		print("KEYBOARD_FOCUS_STAGE ordering")
 		await _focus_ordering()
+		await _restore_edges()
 	var output := "res://.local/validation/DEV-027/screen-integration/view.json"
 	for argument: String in OS.get_cmdline_user_args():
 		if argument.begins_with("--output="):
 			output = argument.trim_prefix("--output=")
-	_expect(
-		"write_evidence",
-		FX.save(
-			output,
-			{
-				"checks": _checks,
-				"failures": _failures,
-				"assertions": _assertions,
-				"samples": _samples,
-				"keyboard_focus": _access_cases,
-				"scope": "HEADLESS_CONTROL_SYNTHETIC_INPUT_NOT_OS_GUI"
-			}
-		),
-		true
-	)
+	var evidence := {
+		"checks": _checks,
+		"failures": _failures,
+		"assertions": _assertions,
+		"samples": _samples,
+		"keyboard_focus": _access_cases,
+		"scope": "HEADLESS_CONTROL_SYNTHETIC_INPUT_NOT_OS_GUI"
+	}
+	_expect("write_evidence", FX.save(output, evidence), true)
 	print("PROPOSAL_VIEW_TEST_RESULT checks=", _checks, " failures=", _failures)
 	quit(0 if _failures == 0 else 1)
 
@@ -81,28 +80,22 @@ func _expect(id: String, actual: Variant, expected: Variant) -> void:
 
 func _main_entry() -> void:
 	for seed_value: String in ["0", "1", "2", "8"]:
-		_expect(
-			"seed:" + seed_value,
-			MainScript.proposal_seed(["--w04b-seed=" + seed_value]).seed,
-			int(seed_value)
-		)
+		var parsed: Dictionary = MainScript.proposal_seed(["--w04b-seed=" + seed_value])
+		_expect("seed:" + seed_value, parsed.seed, int(seed_value))
 	for arguments: PackedStringArray in [
 		["--w04b-seed"], ["--w04b-seed=3"], ["--w04b-seed=-1"], ["--w04b-seed=2", "--w04b-seed=2"]
 	]:
-		_expect(
-			"invalid_seed:" + str(arguments), MainScript.proposal_seed(arguments).accepted, false
-		)
+		var accepted: bool = MainScript.proposal_seed(arguments).accepted
+		_expect("invalid_seed:" + str(arguments), accepted, false)
 	_expect("default_random_seed", MainScript.proposal_seed([]).accepted, true)
 	var main := Main.instantiate()
 	root.add_child(main)
 	await process_frame
 	var product: Control = main.get_child(main.get_child_count() - 1)
 	product.set_process(false)
-	_expect(
-		"actual_main_installs_proposals", product.session.snapshot().proposal_ui.available, true
-	)
-	_expect("main_operations_preserved", product.session.snapshot().operations_ui.available, true)
 	var before: Dictionary = product.session.snapshot()
+	_expect("actual_main_installs_proposals", before.proposal_ui.available, true)
+	_expect("main_operations_preserved", before.operations_ui.available, true)
 	_host = product
 	_view = product.proposal_view
 	_session = product.session
@@ -184,9 +177,8 @@ func _editing_and_office() -> void:
 	_expect("B02_no_early_review", _view.row.review.is_empty(), true)
 	var count: int = _session.snapshot().proposal_ui.snapshot.commands.size()
 	_click("submit_city_review")
-	_expect(
-		"pending_same_request_id", _session.snapshot().proposal_ui.snapshot.commands.size(), count
-	)
+	var pending: int = _session.snapshot().proposal_ui.snapshot.commands.size()
+	_expect("pending_same_request_id", pending, count)
 	_view.station_buttons.S12.pressed.emit()
 	_click("remove")
 	_at(360)
@@ -221,11 +213,8 @@ func _branches() -> void:
 		_click("submit_government_review")
 		_at(452)
 		var decision: Dictionary = _view.row.decisions.back().duplicate(true)
-		_expect(
-			"normal_rng:" + str(seed_value),
-			decision.outcome,
-			{2: "APPROVED", 0: "HELD", 8: "HELD", 1: "REJECTED"}[seed_value]
-		)
+		var expected: String = {2: "APPROVED", 0: "HELD", 8: "HELD", 1: "REJECTED"}[seed_value]
+		_expect("normal_rng:" + str(seed_value), decision.outcome, expected)
 		if decision.outcome == "HELD":
 			_view.name_input.text = "현재 초안"
 			_click("name")
@@ -235,32 +224,26 @@ func _branches() -> void:
 			_expect("persuasion_used_on_admission", _view.row.persuasion_used_for.size(), 1)
 			_expect("held_copy", _view.row.review.submission, decision.submission)
 			_at(483)
+			expected = "APPROVED" if seed_value == 8 else "REJECTED"
 			_expect(
-				"persuasion_branch:" + str(seed_value),
-				_view.row.decisions.back().outcome,
-				"APPROVED" if seed_value == 8 else "REJECTED"
+				"persuasion_branch:" + str(seed_value), _view.row.decisions.back().outcome, expected
 			)
 		_expect("DI03_visible", _view.labels.facts.text.contains("미공급"), true)
 		if seed_value in [1, 0]:
 			_expect("failure_reentry_block", _view.controls.submit_government_review.disabled, true)
-			_expect(
-				"failure_not_zero_facts",
-				_view.labels.submit_government_review.text.contains("미공급"),
-				true
-			)
+			var facts: String = _view.labels.submit_government_review.text
+			_expect("failure_not_zero_facts", facts.contains("미공급"), true)
 		else:
 			_expect("permit_no_contract", _view.row.business_contract.is_empty(), true)
 			_expect("permit_no_p05", _view.controls.construction.disabled, true)
 			_click("sign_proposal_contract")
 			_at(_session.pipeline.clock.minute + 1)
+			var amount: int = _view.row.business_contract.government_payment.amount
 			_expect(
-				"actual_payment:" + str(seed_value),
-				_view.row.business_contract.government_payment.amount,
-				800000 if seed_value == 2 else 640000
+				"actual_payment:" + str(seed_value), amount, 800000 if seed_value == 2 else 640000
 			)
-			_expect(
-				"contract_repeat_disabled", _view.controls.sign_proposal_contract.disabled, true
-			)
+			var disabled: bool = _view.controls.sign_proposal_contract.disabled
+			_expect("contract_repeat_disabled", disabled, true)
 		_record("B03_branch_" + str(seed_value))
 		await _dispose()
 
@@ -359,14 +342,10 @@ func _display_boundaries() -> void:
 	_expect("stale_keeps_latest", _view.shown.view_revision, failed.view_revision)
 	for dimensions: Vector2i in [Vector2i(800, 600), Vector2i(1100, 900)]:
 		root.size = dimensions
-		await process_frame
-		await process_frame
+		await _frames(2)
 		for key: String in ["prediction", "requests", "facts", "contract"]:
-			_expect(
-				"headless_layout_width:" + str(dimensions) + key,
-				_view.labels[key].size.x <= _view.size.x + 1,
-				true
-			)
+			var fits: bool = _view.labels[key].size.x <= _view.size.x + 1
+			_expect("headless_layout_width:" + str(dimensions) + key, fits, true)
 	_samples.B06_display_fixtures = {
 		"kind": "DISPLAY_VALUE_FIXTURE_NOT_NATURAL_GAME",
 		"zero": zero.proposal_ui,
@@ -402,17 +381,13 @@ func _keyboard_and_reading() -> void:
 	var saved_scroll: int = _host._scroll.scroll_vertical
 	_host.controls.open_finance.pressed.emit()
 	_host.finance_view.controls.back.pressed.emit()
-	await process_frame
-	await process_frame
-	await process_frame
+	await _frames(3)
 	_expect("read_return_slot", _view.selected_slot, "P-B")
 	_expect("read_return_scroll", _host._scroll.scroll_vertical, saved_scroll)
 	_host.controls.open_finance.pressed.emit()
 	_host.finance_view.controls.back.pressed.emit()
 	_view.controls.back.grab_focus()
-	await process_frame
-	await process_frame
-	await process_frame
+	await _frames(3)
 	_expect("return_respects_user_focus", root.gui_get_focus_owner(), _view.controls.back)
 	await _dispose()
 
@@ -449,8 +424,7 @@ func _business_flow() -> void:
 		"actual_report_ready", _session.pipeline.operations_snapshot().first_valid_report.day_id, 3
 	)
 	_host.construction_view.controls.back.pressed.emit()
-	await process_frame
-	await process_frame
+	await _frames(2)
 	_expect("P05_return_proposal", _view.visible, true)
 	_expect("P05_return_same_slot", _view.selected_slot, "P-A")
 	var before := _session.snapshot()
@@ -470,19 +444,15 @@ func _business_flow() -> void:
 		"candidate_query_no_rng", _session.snapshot().proposal_ui.snapshot.rng.draw_count, draws
 	)
 	_view.controls.back.pressed.emit()
-	await process_frame
-	await process_frame
-	await process_frame
+	await _frames(3)
 	_expect("candidate_return_report", _host.finance_view.visible, true)
 	_expect("candidate_return_report_day", _session.snapshot().finance_ui.report.day_id, 3)
 	_record("B05_control_chain_report_candidate")
 	before = _session.snapshot()
 	_host.finance_view.controls.back.pressed.emit()
-	await process_frame
-	await process_frame
+	await _frames(2)
 	_host.operations_view.controls.back.pressed.emit()
-	await process_frame
-	await process_frame
+	await _frames(2)
 	_expect("P06_P07_return_proposal", _view.visible, true)
 	_expect("reading_roundtrip_effect0", _session.snapshot(), before)
 	await _dispose()
@@ -518,6 +488,8 @@ func _input_key(code: int, reverse: bool = false, character: int = 0) -> void:
 		event.shift_pressed = reverse
 		event.pressed = pressed
 		root.push_input(event)
+		if pressed:
+			_input_observation = {"handled": root.is_input_handled(), "kind": "key"}
 
 
 func _frames(count: int = 4) -> void:
@@ -534,6 +506,8 @@ func _focus_state() -> Dictionary:
 		"screen": _host._reading_context().screen,
 		"scope": _session.observation_scope(),
 		"generation": _host._navigation_generation,
+		"reading_generation": _host.get("_reading_input_generation"),
+		"owner_valid": Guard.focus_valid(owner),
 		"follow_focus": _host._scroll.follow_focus,
 		"scroll": _host._scroll.scroll_vertical,
 		"limit": maxi(0, int(bar.max_value - bar.page)),
@@ -816,6 +790,7 @@ func _keyboard_actions() -> void:
 
 func _wheel(code: int) -> void:
 	var rect: Rect2 = _host._scroll.get_global_rect()
+	root.notify_mouse_entered()
 	for pressed: bool in [true, false]:
 		var event := InputEventMouseButton.new()
 		event.button_index = code
@@ -823,7 +798,14 @@ func _wheel(code: int) -> void:
 		event.position = rect.position + Vector2(rect.size.x - 28, rect.size.y / 2)
 		event.global_position = event.position
 		event.pressed = pressed
-		root.push_input(event)
+		root.push_input(event, true)
+		if pressed:
+			_input_observation = {
+				"handled": root.is_input_handled(),
+				"kind": "wheel",
+				"position": str(event.position),
+				"local_coordinates": true
+			}
 
 
 func _focus_probe(mode: String, input: String, delay: int) -> void:
@@ -861,6 +843,7 @@ func _focus_probe(mode: String, input: String, delay: int) -> void:
 		_host._restore_reading(context)
 	await _frames(delay)
 	trace.append(_focus_state())
+	_input_observation = {}
 	if input == "wheel_up":
 		_wheel(MOUSE_BUTTON_WHEEL_UP)
 	elif input == "wheel_down":
@@ -868,15 +851,14 @@ func _focus_probe(mode: String, input: String, delay: int) -> void:
 	elif input == "navigate":
 		_host.controls.open_finance.pressed.emit()
 	elif input != "none":
-		_input_key(
-			{
-				"home": KEY_HOME,
-				"end": KEY_END,
-				"page_up": KEY_PAGEUP,
-				"page_down": KEY_PAGEDOWN,
-				"tab": KEY_TAB
-			}[input]
-		)
+		var keys := {
+			"home": KEY_HOME,
+			"end": KEY_END,
+			"page_up": KEY_PAGEUP,
+			"page_down": KEY_PAGEDOWN,
+			"tab": KEY_TAB
+		}
+		_input_key(keys[input])
 	var after_input := _focus_state()
 	trace.append(after_input)
 	for frame: int in range(5):
@@ -884,10 +866,9 @@ func _focus_probe(mode: String, input: String, delay: int) -> void:
 		trace.append(_focus_state())
 	var last: Dictionary = trace.back()
 	var moved: bool = after_input.scroll != trace[1].scroll
-	var same_owner: bool = after_input.owner == trace[1].owner
-	var row_id := ("F02" if mode == "ensure" else "F04") + ":" + input + ":" + str(delay)
-	if input.begins_with("wheel"):
-		row_id = ("F03" if mode == "ensure" else "F04") + ":" + input + ":" + str(delay)
+	var same_owner: bool = after_input.owner_valid and after_input.owner == trace[1].owner
+	var group := ("F03" if input.begins_with("wheel") else "F02") if mode == "ensure" else "F04"
+	var row_id := group + ":" + input + ":" + str(delay)
 	if input == "none":
 		row_id = "F01:" + mode
 	elif input in ["tab", "navigate"]:
@@ -896,8 +877,10 @@ func _focus_probe(mode: String, input: String, delay: int) -> void:
 	var status := "OBSERVED_REVIEW_REQUIRED"
 	if input not in ["none", "tab", "navigate"] and (not moved or not same_owner):
 		status = "INCONCLUSIVE"
-	# Pending same-owner priority has no automatic Design PASS. Record both outcomes,
-	# including a false proposed expectation, without converting it into a green assertion.
+	# Reading-key priority is now confirmed; wheel evidence and Design remain separate.
+	if mode == "restore" and input in ["home", "end", "page_up", "page_down"]:
+		_expect(row_id + ":valid_input", moved and same_owner, true)
+		_expect(row_id + ":preserves_reading", last.scroll, after_input.scroll)
 	_access_cases.append(
 		{
 			"id": row_id + ":" + mode,
@@ -907,6 +890,8 @@ func _focus_probe(mode: String, input: String, delay: int) -> void:
 			"delay_frames": delay,
 			"trace": trace,
 			"input_moved_scroll": moved,
+			"input_observation": _input_observation.duplicate(),
+			"saved_scroll": context.scroll,
 			"same_owner_at_input": same_owner,
 			"proposed_user_scroll_preserved": last.scroll == after_input.scroll,
 			"priority_expectation_applicable":
@@ -972,3 +957,44 @@ func _step_to(start: Control, target: Control, id: String, reverse: bool = false
 			"trace": trace
 		}
 	)
+
+
+func _restore_edges() -> void:
+	for action: String in ["clamp", "inner", "roundtrip", "old_scope", "replace"]:
+		await _setup(2, 360)
+		_view.controls["P-A"].grab_focus()
+		await _frames()
+		_host._scroll.scroll_vertical = _focus_state().limit / 2
+		var context: Dictionary = _host._reading_context()
+		_host._scroll.scroll_vertical = 0
+		if action == "inner":
+			_view.name_input.grab_focus()
+		if action == "old_scope":
+			context.scope = "old scope"
+		var before := _session.snapshot()
+		_host._restore_reading(context)
+		var trace: Array = [_focus_state()]
+		if action == "roundtrip":
+			_input_key(KEY_END)
+			trace.append(_focus_state())
+			_input_key(KEY_HOME)
+		elif action == "replace":
+			var next := FX.session(2)
+			next.enable_operations_ui()
+			_host = HostScript.replace_session(_host, next)
+			_host.set_process(false)
+			_session = next
+			before = next.snapshot()
+		else:
+			_input_key(KEY_END if action == "inner" else KEY_HOME)
+		trace.append(_focus_state())
+		for frame: int in range(5):
+			await process_frame
+			trace.append(_focus_state())
+		var expected: int = context.scroll if action in ["clamp", "inner"] else 0
+		_expect("F04:edge:" + action, trace.back().scroll, expected)
+		_expect("F04:edge_effect0:" + action, _session.snapshot(), before)
+		_access_cases.append(
+			{"id": "F04:edge:" + action, "trace": trace, "kind": "COMPONENT_NOT_OS"}
+		)
+		await _dispose()

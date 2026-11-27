@@ -569,3 +569,124 @@ Task-ID: DEV-027
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-027
+
+
+## 18. K01 A/B 수용 기록·공동 잔여·F04 최소안 — 2026-11-27 로컬 검토
+
+- 담당 Development / AGT-DEV-0004. 상태 LOCAL_REVIEW_PENDING / IMPLEMENTATION_NOT_STARTED / REMOTE_NOT_SENT.
+- 기준 main b0447defe57abe173d10dcc05784f79313ff69ca. 2026-11-27 fetch에서 확인. PR177의 cc5727e와 tree 동일; 원문 이전 절은 작성 당시 이력 보존.
+- Owner 요청은 [티켓 §20](DEV-027_W04B_VS02_IMPLEMENTATION.md) 및 [계획 §1](../gate3/DEV-027_F04_RESTORE_PLAN.md)에 연결한다.
+
+### 작성 결과와 정확한 경로
+
+| 경로 | 작성 결과 |
+| --- | --- |
+| docs/engineering/gate3/DEV-027_F04_RESTORE_PLAN.md | F04 5행 전제/기대/최소 수정·결정적 전후·공유 영향 회귀·로드·승인 단계 |
+| docs/engineering/gate3/DEV-027_RESIDUAL_DISPOSITION.md | UI/B/L/K/F별 수용/필수/잔여/차단/담당과 INCONCLUSIVE10 각 행의 판단 제안 |
+| docs/engineering/gate3/DEV-027_KEYBOARD_FOCUS_VALIDATION_PLAN.md | §13에 새 수용·계획 연결 |
+| docs/engineering/evidence/DEV-027_KEYBOARD_FOCUS_EVIDENCE.md | §7에 Track A/B 지정 K01·안정 복귀 수용·원본/정정/오류 구분 |
+| docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md | §20에 이번 문서 권한·실행 제외 |
+| docs/engineering/tasks/DEV-027_RESULT.md | 본 §18 로컬 결과·검토 요청 |
+| docs/engineering/tasks/DEV-027_PROVENANCE.json | base b0447de 대비6개 문서 출처/blob. 과거 선언 원본은 Git 이력 보존 |
+
+K01 지정 경로는 A/B 한정 수용을 후속 기록했다. F04의0/430→215 덮어쓰기5행은 기존trace에서 유효owner·같은scope/세대·실제이동이 확인돼 최신 기대의 보완 대상이다. INCONCLUSIVE10의 원 상태를 보존하고 필수동작/특정시도/대체증거 충분성을 구분했다. 5행 해결만으로 전체10행·B06-02·Design 최종 수용을 완료하지 않는다.
+
+향후 구현 후보는 이번7개+C1제품 Host1/T1기존View검사1/E1새F04결과JSON1의 최대10개다(정확한 이름은 계획 §6.2의 C1/T1/E1). 신규 구현/게임검증·Git 제출 승인 전이며 실제 변경은 문서7개뿐이다.
+
+### 이번 정적 검토와 보존
+
+이번 수행은 원격 댓글/main·기존 소스/JSON의 정적 대조와 문서 작성이다. A manifest195파일·B manifest167파일을 재해시해 불일치0, 댓글의 REPORT/REVIEW·manifest 식별 일치를 확인했다. 이미지 새 판독·실행자 성과 재인증은 하지 않았다. .local/validation/DEV-027/f04-plan/packet-audit.json과 trace-review.json에 결과를 보관한다.
+
+신규 게임 자동·영향 회귀·Godot 프로젝트 로드·OS GUI/플레이·독립 실행·자연VS02·빌드/export·성능·새 계측/반입은 각각 NOT_RUN. 기존819/0·334/0·737/0·1503회귀 및 cc5727e CI는 당시 결과이며 이번 재실행/합산하지 않는다.
+
+문서 검사 명령: .venv/Scripts/python.exe tools/policy.py doctor 및 check, git diff --check, .venv/Scripts/python.exe -X utf8 .local/validation/DEV-027/f04-plan/audit.py. 원문4개 prefix·기존JSON·비변경 추적파일·공유 수정 데이터2개·정확한7경로·provenance6개·상대링크/표를 대조하고 결과는 아래 최종 기록에 추가한다. 신규 PR/원격 CI/preflight는 NOT_RUN이다.
+
+### 검토 요청·남은 승인
+
+검토 대상은 문서7개와 향후 최대10경로의 최소안이다. 실제 구현·게임검증, 독립GUI, Commit·Push·PR·#146게시·main병합은 각각 별도 승인 범위를 따른다. 이미 완료한 K01/자연VS02 수용은 유지하며 같은 선택·과거검증의 재승인을 요청하지 않는다.
+
+DI03 실제 종속 구현/검증 HOLD, 기존 PARTIAL/INCONCLUSIVE·DEV026 한정 수용/일1 미관측·P07 구분, F08 최종규격/인증·S3-10-C/S3-12·HQ/Owner 최종 인수 대기 유지. 현재 새 게임·경제·시간·세이브 명세 변경 필요 없음. Design 기대와 기술안 적용이 충돌하는 행이 생길 때만 해당 RFC를 제시한다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027
+
+### 문서 최종 정적 확인 — 2026-11-27
+
+- doctor PASS. policy.py check PASS: 812파일/68GDScript, formatter/linter 오류0. 게임 실행 검증과 구분한다.
+- 문서 감사 PASS: 정확한7경로(신규2), 기존 Markdown4개 원문 prefix·기존 결과JSON 포함 비변경 추적805파일·공유 수정 데이터2개 보존, provenance6개와 상대링크84개·표 구조·5+10행 대응 확인. git diff --check PASS.
+- A195/B167 증거 파일 불일치0. 이번 원본 재해시 결과는 새 GUI 관측/Design 재심사가 아니다.
+- 기준 HEAD b0447de 유지, stage/commit/push/PR/댓글/병합0. 게임 자동·프로젝트 로드·GUI/플레이·빌드/export·성능 NOT_RUN. 정확한7개 로컬 문서의 검토를 요청한다.
+
+
+## 19. F04 키5행 최소 보완·10행 전제 확인 로컬 결과 — 2026-11-27
+
+작업 DEV-027 / AGT-DEV-0004. Owner의 최대10경로 실행 승인은 [계획 §8](../gate3/DEV-027_F04_RESTORE_PLAN.md)에 원문으로 연결한다. 기준 main/HEAD b0447defe57abe173d10dcc05784f79313ff69ca, 브랜치 codex/DEV-027-f04-restore-plan. 미커밋 로컬 결과이며 SHA 진전·원격 게시·main 변경은 없다.
+
+F04 키5행은 DEV 자동 보완 완료다. 실제 읽기 이동만 Host 세대를 갱신하고, 더 최근 이동이 있으면 오래된 저장 복원을 적용하지 않는다. End→Home으로 원좌표에 돌아와도 세대2로 이전 복원을 막는다. clamp0·LineEdit 내부키·무입력 복원·새 Tab/역Tab·다른 owner/화면·옛scope/Session 교체 보호를 검증했다. 게임/경제/시간/세이브 명세 변경은 없다.
+
+### 정확한 변경10경로
+
+| 경로 | 변경 효과 |
+| --- | --- |
+| scripts/ui/stage1_view.gd | 읽기 세대·저장 복원 보호. 기존 조건/문자열의 지역 참조 정리 |
+| tests/game/run_proposal_view_tests.gd | F04 전후 단언/경계5·입력소비/유효owner/세대 trace·휠 전달 전제·집중 선택. 기존 단언 보존 |
+| docs/engineering/evidence/DEV-027_F04_RESTORE_RESULTS.json | 새 실행별161소스 해시·원로그/결과 해시·단언 색인·프레임/잔여 분리 |
+| docs/engineering/gate3/DEV-027_F04_RESTORE_PLAN.md | 승인/실행·새 휠 잔여와 별도 승인 최소안 후속 |
+| docs/engineering/gate3/DEV-027_RESIDUAL_DISPOSITION.md |10행 전제/필수·후속담당을 §5에 추가 |
+| docs/engineering/gate3/DEV-027_KEYBOARD_FOCUS_VALIDATION_PLAN.md | §14 결과 연결 |
+| docs/engineering/evidence/DEV-027_KEYBOARD_FOCUS_EVIDENCE.md | §8 원본/새증거 구분 |
+| docs/engineering/tasks/DEV-027_W04B_VS02_IMPLEMENTATION.md | §21 실행 승인·상태 |
+| docs/engineering/tasks/DEV-027_RESULT.md | 본 결과 |
+| docs/engineering/tasks/DEV-027_PROVENANCE.json |9개 산출물의 base/blob 출처. 자기참조 제외 |
+
+### 실행·검증 증거
+
+모두 Godot4.7.2-stable console의 --headless --path <worktree> 실행이다. 매 run의 APPDATA/LOCALAPPDATA·로그/JSON은 별도 폴더로 격리했다. 명령과 원파일 SHA는 [F04 JSON](../evidence/DEV-027_F04_RESTORE_RESULTS.json)의 runs에 있다. 세부 호출은 계획 §5.2, 집중 전후는 View runner에 --f04-only를 추가한다.
+
+| 실행 ID | 결과/집계 | exit | ERROR/SCRIPT ERROR 합계 |
+| --- | --- | --- | --- |
+| initial-load | 프로젝트 로드 | 0 | 0 |
+| before-01 | PROPOSAL_VIEW_TEST_RESULT checks=846 failures=6 | 1 | 0 |
+| before-02-focus | PROPOSAL_VIEW_TEST_RESULT checks=209 failures=6 | 1 | 0 |
+| after-01-focus | PROPOSAL_VIEW_TEST_RESULT checks=209 failures=0 | 0 | 0 |
+| final-view | PROPOSAL_VIEW_TEST_RESULT checks=846 failures=0 | 0 | 0 |
+| operations | DEV023_UI_TEST_RESULT checks=271 failures=0 | 0 | 0 |
+| construction | DEV021_UI_TEST_RESULT checks=898 failures=0 | 0 | 0 |
+| s01 | DEV026_TEST_RESULT checks=334 failures=0 | 0 | 0 |
+| final-load | 프로젝트 로드 | 0 | 0 |
+
+before-02-focus / after-01-focus runner SHA 동일: 4af397ca0800be3f861fca8b9916b43726d336a8702589a8cfde8b1157f0b8f5.209개 중6개 실패→0: 원5행 및 원좌표 재이동1행. before-01은 초기 전체 재현이며 파일 길이 정리/집중 옵션 추가 전의 소스도 원본 보존했다. 개발 중 파일 길이 검사 실패는 동일 파일 표현 정리로 해소했고 정책 완화·단언 삭제0, 최종 Host999/runner1000행이다.
+
+최종 제품 SHA256 6c76572059b660b15a33def0e14b5c529408e28191c6e1434528fcde64a4c463; 최종 runner SHA256 f437791d0bdde68016f9b4aa989afb9fd39b448eb8e9c948e829e91d21636005. 최종 전체846개 중 실패0, 기존818개 JSON 단언의 ID/중복개수를 모두 보존했다(이전 출력저장 포함819; 이번 출력저장 포함846). 집중 전후와 전체검사 수를 합산하지 않는다. 새 raw JSON은 저장 단언 직전에 쓰므로 내부 checks는 출력 최종보다1 작다.
+
+### 실제 잔여와 검토 요청
+
+INCONCLUSIVE10 전제 확인은 완료했다. 유효owner 휠6행 중2행은 이동 보존 관측,4행은 입력 후 ensure/restore 덮임을 확인했다. 복귀 End2행은 owner=null/미소비/이동0, 복귀 휠2행은 owner=null이지만 실제 이동 후 덮였다. 원10행 판정은 그대로 보존하고 [공동 표 §5](../gate3/DEV-027_RESIDUAL_DISPOSITION.md)에 행별로 추가했다. 통과한 자동 단언은 휠 우선순위 관측행의 성공까지 주장하지 않는다.
+
+유효owner 휠4행은 관련 읽기 최종 수용 전 실제 필수 보완이다. 계획 §4의 별도 승인 조항에 따라 제품 휠 확장은 시행하지 않았다. [계획 §9](../gate3/DEV-027_F04_RESTORE_PLAN.md)의 최대10경로 후속 후보와 null-owner 휠2행 적용 기대를 함께 검토할 필요가 있다. 자동 증거 충분성·최소 독립 GUI 여부는 A/B가 판단하며 DEV가 최종 면제하지 않는다.
+
+독립 GUI/플레이·새 자연VS02·빌드/export·성능·새 도구/제품 계측은 NOT_RUN. CI/preflight·Commit·Push·PR·#146 게시·main 병합은 NOT_RUN. 기존 K01·안정P05 수용, DI03 HOLD, 기존 PARTIAL/미관측·DEV026 한정 수용·P07 일반/저장/일1 구분, F08 최종규격 및 S3-10-C/S3-12/HQ·Owner 최종 인수 대기를 유지한다. 위10개 로컬 산출물의 검토를 요청한다.
+
+### 최종 정적 검사·보존 확인
+
+- policy.py doctor PASS; policy.py check PASS(813파일/68GDScript, formatter/linter 오류0); git diff --check PASS. 원격 보호/CI 검증과 구분한다.
+- .local/validation/DEV-027/f04-run/audit.py 감사 PASS: 정확한10경로(신규3), 승인된6개 Markdown 원문 prefix·비변경 추적803파일·공유 수정 데이터2개·기존 KEYBOARD_FOCUS_RESULTS 원본 보존, provenance9개/상대링크101개/표 구조·최종161소스 해시 일치.
+- A195/B167 원본 증거 파일을 재해시하여 불일치0. 새 독립 GUI나 Design 재심사가 아니다. 자동 생성 import/translation176개는 추적파일과 분리하여 .local의 검증 보관소로 이동하고 해시 보존을 확인했다.
+- 집중 전후161소스 해시 중 실제 차이는 scripts/ui/stage1_view.gd 1개뿐이다. runner는 동일하며5행과 경계1행의 전후 차이를 분리했다. 최종 전체/회귀는 LF 정규화 소스로 수행했다.
+- HEAD b0447de, staged0, Commit·Push·PR·댓글·병합0 유지. 감사 원본은 .local/validation/DEV-027/f04-run/audit.json에 보관한다.
+
+
+## 20. F04 제출 승인·최신 회신 반영 — 2026-11-27
+
+
+Owner의 이번 제출 승인 원문: “독립 GUI Commit, Push PR 생성까지 승인합니다”. 실행 주체 확인 후 선택: “Design Track A/B의 독립 GUI 실행 대기”. 승인된10경로의 Commit·Push·PR 및 필수 CI 확인을 진행한다. 독립 GUI는 Design 대기이며 DEV GUI를 독립 실행으로 대체하지 않는다. main 병합·휠 제품 확장·DI03 보류 해제는 승인 범위에 포함하지 않는다. 이번 #146 댓글 게시는 수행하지 않는다.
+
+[Track B B2](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7216115783), [Track A A2](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7216152833), [Planning P2](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7216239510)를 제출 전 확인했다. B2는 유효 바깥휠 이동이면 owner=null에도 보호 계약이 적용된다고 명시한다. 새 자동 trace의 return_p05/return_p07 휠2행은 proposal 화면·동일 scope·generation3, handled=true, 각각0→105→462 및22→127→215다. 따라서 앞선 “적용 기대 판단 대기”는 당시 검토 기록으로 보존하고, 최신 계약에 따른 DEV 판단은 기존4행과 합친 **휠6행 실제 보완 잔여**로 갱신한다. 수정본 Design 수용은 별도다. 기대 재승인 요청은 없으며 기술 보완 범위의 Owner 승인만 남는다. End return2행의 정확한 null-owner 시점 비적용과 안정휠 재사용도 B2 원범위로 연결한다.
+
+키5행의 전후 성공·공통 회귀/로드와 원 INCONCLUSIVE10을 보존한다. B2/A2는 신규 OS timing 인증·전체 자연VS02 반복을 종료 조건으로 요구하지 않는다. P2는 A1+B1 정책 해결과 DI03 실제 구현 HOLD를 구분한다. 이 제출은 게임/경제/시간/세이브 명세를 변경하지 않는다.
+
+제품/검사2개 및161소스 해시는 §19의 검증 완료본과 같다. 새 GUI·게임 자동·프로젝트 로드·플레이·빌드/export는 이번 제출 단계에서 NOT_RUN이며 §19 실행 증거를 재사용한다.6문서 후속과 새 결과JSON의 submission_followups만 추가하고 provenance를 갱신했다. 정확한10경로·원본 보존 검사를 다시 수행한다.
+
+원격 main b0447defe57abe173d10dcc05784f79313ff69ca와 작업 base가 일치한다. GitHub 연결의 branches/main 조회에서 protected=true, 필수 policy·department-policy 및 GitHub Actions app_id15368을 확인했다. 상세 protection endpoint는 연결 권한403이므로 strict/admin/bypass 등 상세 재확인은 UNKNOWN으로 남긴다. 자격 증명을 직접 읽는 별도 방식은 자동 승인 검토에서 거절되어 실행하지 않았다. 필수 보호 정보는 허용된 연결의 branch 조회로 확인했으며 보호 설정을 바꾸지 않았다.
+
+브랜치 codex/DEV-027-f04-restore-plan, PR 제목 [DEV][fix] DEV-027 F04 읽기 입력의 저장 복원 우선순위를 보완합니다. 정상 훅·커밋 후 preflight·PR head의 필수 CI를 확인하며 실제 commit/PR/CI 식별자는 PR과 최종 제출 보고에 연결한다. 본 기록은 main 병합·Design 최종 수용·Stage DONE이 아니다.

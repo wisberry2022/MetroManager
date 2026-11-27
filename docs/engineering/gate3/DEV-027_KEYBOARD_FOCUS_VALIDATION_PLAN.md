@@ -230,3 +230,30 @@ main이 PLN-019 문서7개로 d8b6f4a에 진전하여 GitHub 무충돌 Update br
 
 Agent-ID: AGT-DEV-0004
 Task-ID: DEV-027
+
+
+## 13. K01 A/B 수용 및 F04 잔여 계획 연결 — 2026-11-27
+
+PR177은 b0447defe57abe173d10dcc05784f79313ff69ca로 main에 병합됐다. [Track A](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7077287550)와 [Track B](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7077351699)가 해당 SHA의 K01-12/13/14 실제 접근·명시 실행, K01-04 마지막 행, P05 안정 복귀/읽기를 관측 범위에서 수용했다. §12의 OS/Design 대기는 당시 이력이며 [증거 §7](../evidence/DEV-027_KEYBOARD_FOCUS_EVIDENCE.md)의 후속 판정을 연결한다.
+
+전체 PARTIAL·F01 RACE·F04 same-owner restore5행·INCONCLUSIVE10·B06-02 잔여는 유지한다. Track B가 읽기 우선 기대를 명확히 했으므로 §9~11의 당시 기대 미확정과 구분하고, 실제5행 전제/관측을 [새 F04 계획](DEV-027_F04_RESTORE_PLAN.md)에 연결했다. [공동 잔여표](DEV-027_RESIDUAL_DISPOSITION.md)는10행의 필수성/대체증거/차단시점을 구분한 DEV 검토안이다.
+
+이번 Owner 요청은 로컬 문서7개의 작성·정적 대조만 승인한다. 향후 최대10경로는 새 계획 §6.2의7문서+Host1+기존View검사1+새F04결과JSON1이며 구현·게임검증과 Commit·Push·PR은 별도다. 새 독립GUI·제품계측/runner·main병합·#146게시·DI03 보류 해제를 포함하지 않는다. 기존 실행과 실패/정정·수용 원본은 보존하며, 수용된 K01/자연VS02 전체 반복을 추가하지 않는다.
+
+Agent-ID: AGT-DEV-0004
+Task-ID: DEV-027
+
+
+## 14. F04 키5행 로컬 보완·휠 전제 후속 — 2026-11-27
+
+Owner의 최대10경로 로컬 구현·검증 승인을 [F04 계획 §8](DEV-027_F04_RESTORE_PLAN.md)에 기록했다. 최근 유효 읽기 세대로 오래된 저장 복원을 취소하는 최소 보호를 적용했다. 동일 runner 집중 전후209/6→209/0, 전체846/0, 원818 JSON 단언 보존(출력 저장 단언은 별도1개)이다. 결과·회귀·로드·해시는 [새 실행 JSON](../evidence/DEV-027_F04_RESTORE_RESULTS.json)과 [결과 §19](../tasks/DEV-027_RESULT.md)에 연결한다.
+
+기존 NOT_RUN/수용 기록은 해당 당시 상태로 유지한다. 이번에는 DEV headless 자동/회귀/프로젝트 로드만 수행했고 독립 GUI/자연VS02/플레이·빌드/export/성능은 NOT_RUN이다. INCONCLUSIVE10의 새 전제는 [처분표 §5](DEV-027_RESIDUAL_DISPOSITION.md)에 별도 추가했다. 키5행 수정으로 휠4행의 실제 덮어쓰기·null-owner 휠2행의 적용 판단을 종료하지 않는다. 휠 제품 확장·원격 제출 및 DI03/최종 인수 권한을 확대하지 않는다.
+
+
+## 15. 제출 및 독립 GUI 대기 — 2026-11-27
+
+
+Owner의 이번 제출 승인 원문: “독립 GUI Commit, Push PR 생성까지 승인합니다”. 실행 주체 확인 후 선택: “Design Track A/B의 독립 GUI 실행 대기”. 승인된10경로의 Commit·Push·PR 및 필수 CI 확인을 진행한다. 독립 GUI는 Design 대기이며 DEV GUI를 독립 실행으로 대체하지 않는다. main 병합·휠 제품 확장·DI03 보류 해제는 승인 범위에 포함하지 않는다. 이번 #146 댓글 게시는 수행하지 않는다.
+
+[F04 계획 §10](DEV-027_F04_RESTORE_PLAN.md)과 [공동 처분표 §6](DEV-027_RESIDUAL_DISPOSITION.md)에 최신 B2/A2 적용을 추가했다. return 휠2행을 포함한 휠6행의 보완 잔여가 있으며, 이번 제출은 소스/검사 실행본을 변경하지 않는다.
