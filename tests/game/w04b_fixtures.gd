@@ -8,6 +8,7 @@ const Service = preload("res://scripts/simulation/proposal_service.gd")
 const Predictor = preload("res://scripts/simulation/demand_predictor.gd")
 const Ledger = preload("res://scripts/model/company_ledger.gd")
 const Session = preload("res://scripts/ui/stage1_session.gd")
+const FocusGuard = preload("res://scripts/ui/s01_observation_contract.gd")
 const ROUTE_A: Array[String] = ["S01", "S02", "S03", "S04", "S08", "S12"]
 const ROUTE_B: Array[String] = ["S01", "S05", "S09", "S10", "S11", "S12"]
 const ROUTE_8: Array[String] = ["S01", "S02", "S06", "S05", "S09", "S10", "S11", "S12"]
@@ -191,3 +192,52 @@ static func save(output: String, record: Dictionary) -> bool:
 		return false
 	file.store_string(JSON.stringify(record, "\t") + "\n")
 	return true
+
+
+static func focus_state(host: Control, session: Session, root: Window) -> Dictionary:
+	var owner := root.gui_get_focus_owner()
+	var bar: VScrollBar = host._scroll.get_v_scroll_bar()
+	var reading: Variant = host._scroll.get("reading_generation")
+	if reading == null:
+		reading = host.get("_reading_input_generation")
+	return {
+		"frame": Engine.get_process_frames(),
+		"owner": str(owner.get_path()) if owner != null else "",
+		"screen": host._reading_context().screen,
+		"scope": session.observation_scope(),
+		"generation": host._navigation_generation,
+		"reading_generation": reading,
+		"owner_valid": FocusGuard.focus_valid(owner),
+		"follow_focus": host._scroll.follow_focus,
+		"scroll": host._scroll.scroll_vertical,
+		"limit": maxi(0, int(bar.max_value - bar.page)),
+		"page": bar.page,
+		"owner_rect": str(owner.get_global_rect()) if owner != null else "",
+		"scroll_rect": str(host._scroll.get_global_rect()),
+		"owner_intersects_scroll":
+		owner != null and host._scroll.get_global_rect().intersects(owner.get_global_rect()),
+		"viewport_rect": str(root.get_visible_rect()),
+		"commands": session.snapshot().proposal_ui.snapshot.commands.size(),
+		"model_sha256": JSON.stringify(session.snapshot()).sha256_text()
+	}
+
+
+static func wheel(root: Window, scroll: ScrollContainer, code: int, target: Control) -> Dictionary:
+	var rect := scroll.get_global_rect()
+	var position := rect.position + Vector2(rect.size.x - 28, rect.size.y / 2)
+	if target != null:
+		position = target.get_global_rect().get_center()
+	var handled := false
+	for pressed: bool in [true, false]:
+		var event := InputEventMouseButton.new()
+		event.button_index = code
+		event.factor = 1.0
+		event.position = position
+		event.global_position = position
+		event.pressed = pressed
+		root.push_input(event, true)
+		if pressed:
+			handled = root.is_input_handled()
+	return {
+		"handled": handled, "kind": "wheel", "position": str(position), "local_coordinates": true
+	}
