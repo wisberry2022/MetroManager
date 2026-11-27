@@ -6,6 +6,7 @@
 - base main: 03c7d9346f49eb04347343e6e7f510cf9f549d47 (작성 시작 b0447def, 미게시 커밋을 최신 main으로 정렬)
 - 기존 회사 문서: v0.19 / blob 0e323c3616745a7cb3260cd8e6ecf257cbf9663e
 - 작업 브랜치: codex/PLN-020-central-institution-linkage-design
+- 통합 게시: [PR #179](https://github.com/wisberry2022/MetroManager/pull/179), main 1daeea11f8573a1aedceef71c56dab794cdcabda. 같은 승인 범위의 게시 상태 정정은 codex/PLN-020-central-publication-status에서 수행하며 게임 정책은 바꾸지 않는다.
 - Agent-ID: 현 세션의 발급/활성 ID 미확인. 다른 담당자 ID나 Manifest를 차용하지 않음.
 
 ## 승인과 작업 범위

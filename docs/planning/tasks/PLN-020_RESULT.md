@@ -25,7 +25,8 @@
 | 문서 정합성 | PASS — 기존 102개 절 보존, 허용된 현재 상태/참조 18개 역대조, 원문 전체 보존, 신규 정책 7개 절 일치, 승인 20·개발 18·디자인 10·검증 36개, 상대 링크 98개·표 211개·UTF-8/LF 확인 |
 | 로컬 저장소 정책 | policy.py doctor/check/pre-commit 및 commit-msg PASS, git diff --check PASS. 최신 base 03c7d934의 로컬 커밋 훅은 816파일·GDScript 68개 PASS, preflight는 기획 1커밋·단일 부모 PASS. 후속 승인 기록을 반영한 최종 커밋·원격 head 검사도 완료 보고에 기록 |
 | 정책 도구 단위 테스트 | 89개 중 88개 PASS, Windows 실행 제한으로 실패한 1개는 제한 없는 로컬 임시 환경에서 동일 테스트를 재실행해 PASS. 전체 단일 실행 PASS로 표기하지 않음 |
-| 로컬 커밋/원격 게시 | 공개 게시 보류 후 OWNER가 정확한 점수·산식 포함 개발용 문서의 공개 저장소 게시·Push·main 병합을 추가 승인했다. 동일 회사 문서 blob 4231eed1ac997e24731da8abcac9bb7295b7371f 업로드 성공. 실제 브랜치·PR·CI·병합 결과는 완료 보고와 PR에 기록 |
+| 로컬 커밋/원격 게시 | 공개 게시 보류 후 OWNER가 정확한 점수·산식 포함 개발용 문서의 공개 저장소 게시·Push·main 병합을 추가 승인했다. 원격 head bc47c820c99a02e2410ea0d36bcbf309af1d4fda의 4파일·단일 부모·tree를 대조하고 실제 head의 preflight PASS. [PR #179](https://github.com/wisberry2022/MetroManager/pull/179)를 squash 병합하여 main 1daeea11f8573a1aedceef71c56dab794cdcabda에 반영했으며 fetch 후 제출 tree와 main 전체 내용 일치를 확인 |
+| 통합 PR 필수 검사 | [policy](https://github.com/wisberry2022/MetroManager/actions/runs/45992001833/job/140481872103)·[department-policy](https://github.com/wisberry2022/MetroManager/actions/runs/45992001857/job/140481877661) 모두 PASS, agent-provenance-report PASS. 실제 제출 head·GitHub Actions app_id 15368·main 보호·clean 상태 확인 후 병합 |
 
 정적 문서 검사에서는 기존 본문의 제한된 현재 상태 갱신을 역대조하고, 원래 로컬 파일·제출 기준선·회사 신규 절의 전체 정책 일치, 승인/확인/검증 ID·링크·표·인코딩을 확인한다. 문서 검산을 실제 게임 테스트로 표시하지 않는다.
 
@@ -42,7 +43,11 @@
 | 부서 확인 | 개발 18·디자인 10 질문 준비, 요청 NOT_SENT |
 | 검증 기대 묶음 | 측정 12·승계 12·표시 12, 총 36개. 실제 실행 통과 건수 아님 |
 | 제품 실행 | 자동 게임 테스트·Godot 로드·플레이·세이브 전환/복원·UI/접근성·성능/밸런스·Windows 빌드·독립 검수 NOT_RUN — 문서 통합 |
-| 원격 CI·병합 | PR의 실제 head에서 policy·department-policy 통과를 확인한 뒤 승인된 squash 병합 수행. PR URL·head·검사 링크·병합 SHA는 완료 보고에 기록하며 실행 전 성공으로 간주하지 않음 |
+| 원격 CI·병합 | PR #179의 실제 head에서 policy·department-policy 통과 확인 후 승인된 squash 병합 완료. 위 검증 기록에 검사 링크·head·main SHA 기록 |
 | 제외 동작 | 부서 검토/착수 요청·리뷰어 지정·main 직접 쓰기·보호 우회·auto-merge·릴리스/배포 NOT_PERFORMED |
 
 커밋·게시와 검사 통과는 부서 인수·구현 착수·공식 DONE·제품 출시를 뜻하지 않는다.
+
+## 게시 상태 정정
+
+PR #179 병합 후 회사 문서 §115에 이전 승인 범위의 PR/병합 미진행 문구가 남아 있음을 확인했다. 같은 OWNER 승인 범위에서 §115에 DEC-PLN-020-05와 실제 공개 게시·병합 결과를 반영하고, 이 티켓/결과에 이력을 기록한다. 후속 브랜치는 codex/PLN-020-central-publication-status, base는 1daeea11f8573a1aedceef71c56dab794cdcabda이며 변경은 기획 3문서의 승인·상태 기록뿐이다. 회사 §1~114와 기준선 원문, 모든 게임 정책·기존 승인 사항·플레이어 비공개 원칙을 유지한다. 후속 PR의 필수 검사·실제 병합 결과는 해당 PR과 완료 보고에서 확인한다.
