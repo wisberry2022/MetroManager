@@ -690,3 +690,44 @@ Owner의 이번 제출 승인 원문: “독립 GUI Commit, Push PR 생성까지
 원격 main b0447defe57abe173d10dcc05784f79313ff69ca와 작업 base가 일치한다. GitHub 연결의 branches/main 조회에서 protected=true, 필수 policy·department-policy 및 GitHub Actions app_id15368을 확인했다. 상세 protection endpoint는 연결 권한403이므로 strict/admin/bypass 등 상세 재확인은 UNKNOWN으로 남긴다. 자격 증명을 직접 읽는 별도 방식은 자동 승인 검토에서 거절되어 실행하지 않았다. 필수 보호 정보는 허용된 연결의 branch 조회로 확인했으며 보호 설정을 바꾸지 않았다.
 
 브랜치 codex/DEV-027-f04-restore-plan, PR 제목 [DEV][fix] DEV-027 F04 읽기 입력의 저장 복원 우선순위를 보완합니다. 정상 훅·커밋 후 preflight·PR head의 필수 CI를 확인하며 실제 commit/PR/CI 식별자는 PR과 최종 제출 보고에 연결한다. 본 기록은 main 병합·Design 최종 수용·Stage DONE이 아니다.
+
+
+## 21. F04 휠 6행과 P05 무입력 복귀 확인 — 2026-11-27
+
+DEV-027 / AGT-DEV-0004. [Track A](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7217256518)와 [Track B](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7217623381)의 PR178 시험 SHA `03c7d9346f49eb04347343e6e7f510cf9f549d47`를 확인했다. 키 5행·End→Home과 G01~03의 범위별 수용, P05의 별도 PARTIAL을 [처분표 §7](../gate3/DEV-027_RESIDUAL_DISPOSITION.md)에 기록했다. A 1,252파일·B 96파일을 원 manifest와 재해시해 불일치 0을 확인했다. 원 경로의 Windows 장경로를 처리해 cache 파일 해시도 대조했다. 원 기록의 격리 clone doctor 실패·실행별 경고와 정정은 그대로 보존한다.
+
+Owner는 #146 검수에서 필요한 보완의 즉시 진행을 지시했다. 최신 main `b4010d4169b7c66a833820ee03905ffd242ff84a` 기준의 `codex/DEV-027-f04-wheel-priority`에서 제품·자동 검사와 문서를 보완했다. 시험 SHA 이후 main 차이는 기획 문서 4개였다. 기존 F04 실행 JSON과 이전 코드/시험 SHA는 보존했다.
+
+바깥 ScrollContainer와 세로 스크롤바의 GUI 이벤트에서 휠 후보를 잡고, 엔진의 해당 세로 바 `scrolling`으로 실제 이동을 확인한 경우에만 읽기 세대를 올린다. 키와 휠은 같은 세대를 사용한다. 예약 당시 세대가 달라진 ensure/복원은 적용을 중단한다. Godot 고유의 hit 검사, 전달, 소비, 휠 간격과 방향을 사용한다. 후보는 다음 입력 또는 지연 정리에서 해제한다. 새 Tab과 무입력 복원의 경계 및 Session 수명 회귀를 확인했다. [Godot GUI 입력 순서](https://github.com/godotengine/godot/blob/ed1daf0bf001b61586d9930840f2f1394092c079/scene/gui/control.cpp#L2352) · [Godot ScrollBar 이동](https://github.com/godotengine/godot/blob/ed1daf0bf001b61586d9930840f2f1394092c079/scene/gui/scroll_bar.cpp#L517)
+
+### 검증
+
+Godot 4.7.2 콘솔 `--headless --path <worktree>`에서 집중 전후는 `--script res://tests/game/run_proposal_view_tests.gd -- --f04-only --output=<run>/evidence.json`으로 실행했다. 전체 제안은 동일 runner의 전체 경로, 운영·공사·S01은 기존 검사, 프로젝트 로드는 `--editor --quit`다. 실행별 명령, 소스/로그 SHA256, 원 JSON과 프레임 자료는 [실행 증거](../evidence/DEV-027_F04_WHEEL_RESULTS.json)에 연결했다.
+
+| 실행 | 최종 stdout | exit | ERROR/SCRIPT ERROR |
+| --- | --- | --- | --- |
+| before-paired | PROPOSAL_VIEW_TEST_RESULT checks=253 failures=7 | 1 | 0 |
+| final-focus | PROPOSAL_VIEW_TEST_RESULT checks=253 failures=0 | 0 | 0 |
+| final-view | PROPOSAL_VIEW_TEST_RESULT checks=890 failures=0 | 0 | 0 |
+| operations | DEV023_UI_TEST_RESULT checks=271 failures=0 | 0 | 0 |
+| construction | DEV021_UI_TEST_RESULT checks=898 failures=0 | 0 | 0 |
+| s01 | DEV026_TEST_RESULT checks=334 failures=0 | 0 | 0 |
+| final-load | 프로젝트 로드 | 0 | 0 |
+
+집중 253개 중 7실패→0실패. 기존 6행과 새 스크롤바 직접 입력 1행이 모두 해결됐다. 원 846개 전체 검사의 JSON 단언 845개 및 저장 단언을 보존했다. 실제 소비 직후 5프레임 위치, 화면/scope/명령·모델 불변을 대조했다. P05 무입력 복귀는 출발 시 유효한 공사 버튼과 비영점 위치 924를 확보하고 다음 입력 전 동일 버튼·위치 및 가시성 복원을 확인했다. 이 숫자는 시험 환경의 값이다. `return_p07`은 재무→제안 경로다.
+
+독립 GUI, 게임 플레이, 자연 VS-02, 빌드/export와 신규 CI는 NOT_RUN. 보완본 검수는 휠 6행의 결정적 증거와 P05 무입력 복귀 직후의 국소 관측을 대상으로 한다. OS RACE 및 P05 원 PARTIAL, DI-03 HOLD, 전체 PARTIAL, F08와 S3-12 최종 인수 대기다. 게임·경제·시간·세이브 명세 변경 필요 없음.
+
+`policy.py doctor`, `policy.py check`(819파일·GDScript 69개), `git diff --check`와 9개 변경 경로 감사 PASS. 검증 소스 163개와 공유 데이터 2개를 대조했다. 원본 JSON·패킷을 보존하고 자동 생성 import/translation 176개는 로컬 검증 폴더로 옮겨 해시를 확인했다. 제출 상태는 로컬이며 커밋·푸시·PR·병합은 미수행이다.
+
+### 변경 파일
+
+- `scripts/ui/stage1_view.gd`
+- `scripts/ui/stage1_reading_scroll.gd`
+- `scripts/ui/stage1_reading_scroll.gd.uid`
+- `tests/game/run_proposal_view_tests.gd`
+- `tests/game/w04b_fixtures.gd`
+- `docs/engineering/tasks/DEV-027_RESULT.md`
+- `docs/engineering/gate3/DEV-027_RESIDUAL_DISPOSITION.md`
+- `docs/engineering/evidence/DEV-027_F04_WHEEL_RESULTS.json`
+- `docs/engineering/tasks/DEV-027_PROVENANCE.json`

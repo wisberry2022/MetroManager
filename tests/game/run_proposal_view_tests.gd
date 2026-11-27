@@ -469,15 +469,10 @@ func _prediction_boundaries() -> void:
 	_expect("unknown_reason_neutral", Text.reason("UNKNOWN_INTERNAL_CODE"), "상태를 확인할 수 없습니다")
 	_expect("unreceived_time", Text.time_text(null), "미확인")
 	_expect("midnight_time", Text.time_text(1440), "게임일 2 00:00")
-	for status: String in ["NOT_CALCULATED", "FAILED", "READY"]:
+	var expected := {"NOT_CALCULATED": "예측 전", "FAILED": "예측 실패", "READY": "현재 예측"}
+	for status: String in expected:
 		var output := Text.prediction({"prediction_status": status, "available": false})
-		_expect(
-			"prediction_state:" + status,
-			output.contains(
-				{"NOT_CALCULATED": "예측 전", "FAILED": "예측 실패", "READY": "현재 예측"}[status]
-			),
-			true
-		)
+		_expect("prediction_state:" + status, output.contains(expected[status]), true)
 
 
 func _input_key(code: int, reverse: bool = false, character: int = 0) -> void:
@@ -498,28 +493,7 @@ func _frames(count: int = 4) -> void:
 
 
 func _focus_state() -> Dictionary:
-	var owner := root.gui_get_focus_owner()
-	var bar: VScrollBar = _host._scroll.get_v_scroll_bar()
-	return {
-		"frame": Engine.get_process_frames(),
-		"owner": str(owner.get_path()) if owner != null else "",
-		"screen": _host._reading_context().screen,
-		"scope": _session.observation_scope(),
-		"generation": _host._navigation_generation,
-		"reading_generation": _host.get("_reading_input_generation"),
-		"owner_valid": Guard.focus_valid(owner),
-		"follow_focus": _host._scroll.follow_focus,
-		"scroll": _host._scroll.scroll_vertical,
-		"limit": maxi(0, int(bar.max_value - bar.page)),
-		"page": bar.page,
-		"owner_rect": str(owner.get_global_rect()) if owner != null else "",
-		"scroll_rect": str(_host._scroll.get_global_rect()),
-		"owner_intersects_scroll":
-		owner != null and _host._scroll.get_global_rect().intersects(owner.get_global_rect()),
-		"viewport_rect": str(root.get_visible_rect()),
-		"commands": _session.snapshot().proposal_ui.snapshot.commands.size(),
-		"model_sha256": JSON.stringify(_session.snapshot()).sha256_text()
-	}
+	return FX.focus_state(_host, _session, root)
 
 
 func _tab_to(target: Control, id: String, reverse: bool = false) -> bool:
@@ -788,26 +762,6 @@ func _keyboard_actions() -> void:
 		await _dispose()
 
 
-func _wheel(code: int) -> void:
-	var rect: Rect2 = _host._scroll.get_global_rect()
-	root.notify_mouse_entered()
-	for pressed: bool in [true, false]:
-		var event := InputEventMouseButton.new()
-		event.button_index = code
-		event.factor = 1.0
-		event.position = rect.position + Vector2(rect.size.x - 28, rect.size.y / 2)
-		event.global_position = event.position
-		event.pressed = pressed
-		root.push_input(event, true)
-		if pressed:
-			_input_observation = {
-				"handled": root.is_input_handled(),
-				"kind": "wheel",
-				"position": str(event.position),
-				"local_coordinates": true
-			}
-
-
 func _focus_probe(mode: String, input: String, delay: int) -> void:
 	await _setup(2, 360)
 	if mode == "return_p05":
@@ -824,6 +778,11 @@ func _focus_probe(mode: String, input: String, delay: int) -> void:
 	var limit: int = _focus_state().limit
 	_host._scroll.scroll_vertical = limit / 2
 	var context: Dictionary = _host._reading_context()
+	if mode == "return_p05" and input == "none":
+		_view.controls.construction.grab_focus()
+		await _frames()
+		context = _host._reading_context()
+		_expect("F01:P05_saved_focus_visible", _focus_state().owner_intersects_scroll, true)
 	var trace: Array = [_focus_state()]
 	var before := _session.snapshot()
 	if mode == "ensure":
@@ -844,10 +803,11 @@ func _focus_probe(mode: String, input: String, delay: int) -> void:
 	await _frames(delay)
 	trace.append(_focus_state())
 	_input_observation = {}
-	if input == "wheel_up":
-		_wheel(MOUSE_BUTTON_WHEEL_UP)
-	elif input == "wheel_down":
-		_wheel(MOUSE_BUTTON_WHEEL_DOWN)
+	var wheel := input.begins_with("wheel")
+	if wheel:
+		var code := MOUSE_BUTTON_WHEEL_UP if input == "wheel_up" else MOUSE_BUTTON_WHEEL_DOWN
+		var target: Control = _host._scroll.get_v_scroll_bar() if input == "wheel_bar" else null
+		_input_observation = FX.wheel(root, _host._scroll, code, target)
 	elif input == "navigate":
 		_host.controls.open_finance.pressed.emit()
 	elif input != "none":
@@ -874,10 +834,18 @@ func _focus_probe(mode: String, input: String, delay: int) -> void:
 	elif input in ["tab", "navigate"]:
 		row_id = "F05:" + mode + ":" + input
 	_expect(row_id + ":read_effect0", _session.snapshot(), before)
+	var applicable: bool = moved and same_owner
+	if wheel:
+		var start: Dictionary = trace[1]
+		applicable = moved and _input_observation.handled and start.screen == after_input.screen
+		applicable = (
+			applicable and start.scope == last.scope and start.generation == last.generation
+		)
+		_expect(row_id + ":wheel_input:" + mode, applicable, true)
+		_expect(row_id + ":wheel_preserved:" + mode, last.scroll, after_input.scroll)
 	var status := "OBSERVED_REVIEW_REQUIRED"
-	if input not in ["none", "tab", "navigate"] and (not moved or not same_owner):
+	if input not in ["none", "tab", "navigate"] and not applicable:
 		status = "INCONCLUSIVE"
-	# Reading-key priority is now confirmed; wheel evidence and Design remain separate.
 	if mode == "restore" and input in ["home", "end", "page_up", "page_down"]:
 		_expect(row_id + ":valid_input", moved and same_owner, true)
 		_expect(row_id + ":preserves_reading", last.scroll, after_input.scroll)
@@ -895,7 +863,7 @@ func _focus_probe(mode: String, input: String, delay: int) -> void:
 			"same_owner_at_input": same_owner,
 			"proposed_user_scroll_preserved": last.scroll == after_input.scroll,
 			"priority_expectation_applicable":
-			input not in ["none", "tab", "navigate"] and moved and same_owner,
+			input not in ["none", "tab", "navigate"] and applicable,
 			"status": status,
 			"design_status": "PENDING",
 			"os_status": "NOT_RUN"
@@ -903,6 +871,9 @@ func _focus_probe(mode: String, input: String, delay: int) -> void:
 	)
 	if input == "none" and mode != "ensure":
 		_expect("F01:restore_without_input", last.scroll, context.scroll)
+		if mode == "return_p05":
+			_expect("F01:P05_no_input_owner", last.owner, str(context.focus.get_path()))
+			_expect("F01:P05_no_input_visible", last.owner_intersects_scroll, true)
 	if input in ["tab", "navigate"]:
 		_expect("F05:late_callback_keeps_new_owner", last.owner, after_input.owner)
 		_expect("F05:late_callback_keeps_screen", last.screen, after_input.screen)
@@ -916,6 +887,7 @@ func _focus_probe(mode: String, input: String, delay: int) -> void:
 
 func _focus_ordering() -> void:
 	root.size = Vector2i(800, 600)
+	root.notify_mouse_entered()
 	for mode: String in ["ensure", "restore"]:
 		for input: String in [
 			"none", "home", "end", "page_up", "page_down", "wheel_up", "wheel_down", "tab"
@@ -926,9 +898,11 @@ func _focus_ordering() -> void:
 			await _focus_probe("restore", input, delay)
 	for mode: String in ["ensure", "restore"]:
 		await _focus_probe(mode, "navigate", 0)
+	await _focus_probe("restore", "wheel_bar", 0)
 	for mode: String in ["return_p05", "return_p07"]:
 		for input: String in ["none", "end", "wheel_down"]:
 			await _focus_probe(mode, input, 1)
+	root.notify_mouse_exited()
 
 
 func _step_to(start: Control, target: Control, id: String, reverse: bool = false) -> void:
@@ -960,8 +934,15 @@ func _step_to(start: Control, target: Control, id: String, reverse: bool = false
 
 
 func _restore_edges() -> void:
-	for action: String in ["clamp", "inner", "roundtrip", "old_scope", "replace"]:
+	root.notify_mouse_entered()
+	for action: String in [
+		"clamp", "inner", "roundtrip", "old_scope", "replace", "clamp_wheel", "inner_wheel"
+	]:
 		await _setup(2, 360)
+		if action == "inner_wheel":
+			for id: String in FX.ROUTE_8:
+				_view.station_buttons[id].pressed.emit()
+				_click("add")
 		_view.controls["P-A"].grab_focus()
 		await _frames()
 		_host._scroll.scroll_vertical = _focus_state().limit / 2
@@ -973,6 +954,9 @@ func _restore_edges() -> void:
 			context.scope = "old scope"
 		var before := _session.snapshot()
 		_host._restore_reading(context)
+		if action == "inner_wheel":
+			_host._scroll.ensure_control_visible(_view.plan_list)
+			await process_frame
 		var trace: Array = [_focus_state()]
 		if action == "roundtrip":
 			_input_key(KEY_END)
@@ -985,16 +969,30 @@ func _restore_edges() -> void:
 			_host.set_process(false)
 			_session = next
 			before = next.snapshot()
+		elif action in ["clamp_wheel", "inner_wheel"]:
+			var list_bar: VScrollBar = _view.plan_list.get_v_scroll_bar()
+			var inner_before := list_bar.value
+			var target: Control = _view.plan_list if action == "inner_wheel" else null
+			var code := MOUSE_BUTTON_WHEEL_DOWN if target != null else MOUSE_BUTTON_WHEEL_UP
+			_input_observation = FX.wheel(root, _host._scroll, code, target)
+			_expect(
+				"F04:edge:inner_wheel_moved:" + action,
+				list_bar.value > inner_before,
+				target != null
+			)
+			_expect("F04:edge:no_outer_move:" + action, _focus_state().scroll, trace[0].scroll)
 		else:
 			_input_key(KEY_END if action == "inner" else KEY_HOME)
 		trace.append(_focus_state())
 		for frame: int in range(5):
 			await process_frame
 			trace.append(_focus_state())
-		var expected: int = context.scroll if action in ["clamp", "inner"] else 0
+		var restores := action.begins_with("clamp") or action.begins_with("inner")
+		var expected: int = context.scroll if restores else 0
 		_expect("F04:edge:" + action, trace.back().scroll, expected)
 		_expect("F04:edge_effect0:" + action, _session.snapshot(), before)
 		_access_cases.append(
 			{"id": "F04:edge:" + action, "trace": trace, "kind": "COMPONENT_NOT_OS"}
 		)
 		await _dispose()
+	root.notify_mouse_exited()
