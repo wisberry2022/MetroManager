@@ -10,6 +10,7 @@ const FinancePanel = preload("res://scenes/finance_panel.tscn")
 const ProposalPanel = preload("res://scenes/proposal_panel.tscn")
 const Operations = preload("res://scripts/ui/operations_view.gd")
 const MapView = preload("res://scripts/ui/stage1_map.gd")
+const ReadingScroll = preload("res://scripts/ui/stage1_reading_scroll.gd")
 
 var session: Session
 var map_view: MapView
@@ -36,13 +37,12 @@ var _candidates: GridContainer
 var _list_stops: Array = []
 var _focus_feedback: String = ""
 var _planning_sections: Array[Node] = []
-var _scroll: ScrollContainer
+var _scroll: ReadingScroll
 var _focus_sequence: int = 0
 var _bound_session: Session
 var _scope: String = ""
 var _retired: bool = false
 var _navigation_generation: int = 0
-var _reading_input_generation: int = 0
 var _suspended_child: String = ""
 var _observation: Dictionary = {}
 
@@ -53,7 +53,7 @@ func _ready() -> void:
 	_observation = Contract.inspect(null, _scope, -1)
 	for side: String in ["left", "right", "top", "bottom"]:
 		add_theme_constant_override("margin_" + side, 12)
-	_scroll = ScrollContainer.new()
+	_scroll = ReadingScroll.new()
 	add_child(_scroll)
 	_scroll.resized.connect(_focus_resized)
 	var root := VBoxContainer.new()
@@ -610,8 +610,10 @@ func _ensure_focus_region(region: Control) -> void:
 	if not _binding_valid():
 		return
 	var generation := _navigation_generation
+	var reading_generation := _scroll.reading_generation
 	await get_tree().process_frame
-	if not _binding_valid() or generation != _navigation_generation:
+	var reading_changed := reading_generation != _scroll.reading_generation
+	if not _binding_valid() or generation != _navigation_generation or reading_changed:
 		return
 	if not is_instance_valid(region) or not region.is_visible_in_tree():
 		return
@@ -653,12 +655,10 @@ static func read_construction_key(
 		return false
 	if not event is InputEventKey or not event.pressed or not panel.is_visible_in_tree():
 		return false
-	if event.alt_pressed or event.meta_pressed or event.shift_pressed:
-		if event.keycode == KEY_TAB:
-			scroll.follow_focus = true
-		return false
 	if event.keycode == KEY_TAB:
 		scroll.follow_focus = true
+		return false
+	if event.alt_pressed or event.meta_pressed or event.shift_pressed:
 		return false
 	if event.keycode not in [KEY_PAGEUP, KEY_PAGEDOWN, KEY_HOME, KEY_END]:
 		return false
@@ -687,7 +687,7 @@ static func read_construction_key(
 
 
 func _input(event: InputEvent) -> void:
-	if not _binding_valid():
+	if not _binding_valid() or ReadingScroll.is_wheel(event):
 		return
 	var proposal := proposal_view
 	if proposal.visible and event is InputEventKey and event.pressed and event.keycode == KEY_TAB:
@@ -702,7 +702,7 @@ func _input(event: InputEvent) -> void:
 		var before := _scroll.scroll_vertical
 		if read_construction_key(_scroll, panel, event):
 			if _scroll.scroll_vertical != before:
-				_reading_input_generation += 1
+				_scroll.reading_generation += 1
 			get_viewport().set_input_as_handled()
 			return
 
@@ -785,13 +785,13 @@ func _restore_reading(context: Dictionary) -> void:
 	_show_reading(context.screen)
 	var owner := get_viewport().gui_get_focus_owner()
 	var generation := _navigation_generation
-	var reading_generation := _reading_input_generation
+	var reading_generation := _scroll.reading_generation
 	await get_tree().process_frame
 	await get_tree().process_frame
 	if not _binding_valid() or generation != _navigation_generation:
 		return
 	# 실제 읽기 이동 이후에는 오래된 저장 복원을 적용하지 않는다.
-	if reading_generation != _reading_input_generation:
+	if reading_generation != _scroll.reading_generation:
 		return
 	if _reading_context().screen != context.screen or get_viewport().gui_get_focus_owner() != owner:
 		return

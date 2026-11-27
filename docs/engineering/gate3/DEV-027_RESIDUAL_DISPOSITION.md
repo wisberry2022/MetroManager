@@ -112,3 +112,21 @@ Task-ID: DEV-027
 키5행의 전후 성공·공통 회귀/로드와 원 INCONCLUSIVE10을 보존한다. B2/A2는 신규 OS timing 인증·전체 자연VS02 반복을 종료 조건으로 요구하지 않는다. P2는 A1+B1 정책 해결과 DI03 실제 구현 HOLD를 구분한다. 이 제출은 게임/경제/시간/세이브 명세를 변경하지 않는다.
 
 최종 분류: 키 F04 5행 DEV 자동 보완 완료/Design 대기; 휠6행 실제 보완 필요; 휠2행 이동 보존 관측(안정행은 기존 수용 재사용); End2행 해당 시점 전제 비적용, 원 INCONCLUSIVE 보존. 독립 GUI는 Owner 선택에 따라 Track A/B 대기다. 전체 PARTIAL·DI03 HOLD·F08/S3-12 최종 인수는 유지한다.
+
+
+## 7. PR178 독립 검수·휠 보완 후속 — 2026-11-27
+
+시험 SHA `03c7d9346f49eb04347343e6e7f510cf9f549d47`의 키 F04 5행과 End→Home은 Track A/B가 한정 수용했다. Track B의 G01~03도 각 실제 OS 관측 범위에서 한정 수용됐다. Track A의 P05 반환 직후 포커스 PARTIAL과 Track B의 비영점 위치·버튼 테두리 관측은 실행별로 보존한다. [Track A](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7217256518) · [Track B](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7217623381)
+
+아래 6행은 수정본 DEV 자동에서 통과했다. 수치는 입력 직후→지연 처리 완료 후 위치다. input 처리·실제 이동·화면/scope/navigation·읽기 세대·프레임은 실행 JSON에 있다.
+
+| 행 | 수정 전 | 수정 후 |
+| --- | --- | --- |
+| F03:wheel_down:0:ensure | 320→178 | 320→320 |
+| F04:wheel_up:0:restore | 110→215 | 110→110 |
+| F04:wheel_down:0:restore | 320→215 | 320→320 |
+| F04:wheel_down:1:restore | 320→215 | 320→320 |
+| F04:wheel_down:1:return_p05 | 105→462 | 105→105 |
+| F04:wheel_down:1:return_p07 | 127→215 | 127→127 |
+
+바깥 세로 스크롤바에 직접 전달한 휠도 추가 검증했다. clamp와 내부 목록 이동은 바깥 읽기 세대를 갱신하지 않으며 저장 복원이 적용된다. P05 무입력 복귀에서 출발 버튼·저장 위치와 복귀 직후 동일 버튼 포커스/가시성을 자동 확인했다. 보완본의 Design 재수용 및 P05 첫 관측 보완은 대기한다. F01 OS RACE INCONCLUSIVE, 전체 PARTIAL, DI-03 HOLD, S3-12 최종 인수 대기다. 원 trace·판정은 [기존 증거](../evidence/DEV-027_F04_RESTORE_RESULTS.json)에 남아 있다. [새 휠 실행 증거](../evidence/DEV-027_F04_WHEEL_RESULTS.json)
