@@ -388,3 +388,21 @@ Task-ID: DEV-027
 Owner의 이번 제출 승인 원문: “독립 GUI Commit, Push PR 생성까지 승인합니다”. 실행 주체 확인 후 선택: “Design Track A/B의 독립 GUI 실행 대기”. 승인된10경로의 Commit·Push·PR 및 필수 CI 확인을 진행한다. 독립 GUI는 Design 대기이며 DEV GUI를 독립 실행으로 대체하지 않는다. main 병합·휠 제품 확장·DI03 보류 해제는 승인 범위에 포함하지 않는다. 이번 #146 댓글 게시는 수행하지 않는다.
 
 [결과 §20](DEV-027_RESULT.md), [공동 처분표 §6](../gate3/DEV-027_RESIDUAL_DISPOSITION.md)에 최신 회신·제출 경계를 연결한다. 키5행 보완과 휠6행 필수 잔여, 기존 수용/DI03 HOLD/PARTIAL/최종 인수를 분리한다.
+
+
+## 23. PM-022 DI-03 모델과 공급 착수 — 2026-11-28
+
+Development / AGT-DEV-0004. 별도 작업 트리 `codex/DEV-027-di03-supply`의 기준은 최신 원격 main `a1e2534232e4cc71425a47c530240625784c0ae9`다. [#185](https://github.com/wisberry2022/MetroManager/issues/185), [PM-022 요청서 §2](../../hq/requests/PM-022_DI03_DEPARTMENT_REQUESTS.md), [A1+B1 결정](../../planning/tasks/PLN-016_E01_OWNER_DECISION.md)을 적용한다. OD-S312-01·02의 비의존 한정 종료와 기존 관측 한계를 보존한다. 일정상 HOLD가 해제된 DI-03의 D01-01~05 실제 공급·국소 자동 검증을 시작한다.
+
+| 단위 | 선택한 경로와 직접 영향 |
+| --- | --- |
+| 실패 사본·사건·접수 | `scripts/model/company_proposal.gd`, `scripts/simulation/proposal_service.gd`. 동일 사업 첫 실패 근거 고정, 기존 review 단계의 만기 발생 및 수요판, 효과와 사용을 분리. Session의 기존 명령 전달 경로에서 명시한 fact ID를 접수 시 재검사한다. |
+| 수요와 실제 운행 | `scripts/simulation/proposal_demand_profile.gd` 및 같은 이름의 `.gd.uid`, `scripts/simulation/demand_predictor.gd`, `scripts/model/operating_line.gd`, `scripts/simulation/business_sources.gd`, `scripts/simulation/operations_service.gd`. 승인 대상의 OD만 정확한 ×5/4, 기존 분행 carry 보존, 계약에 고정된 동일 수요 원천 소비. |
+| 실제 공급 guard | `scripts/ui/s01_observation_contract.gd`. 정상 0건과 공급 실패를 구분하고 소속·시점·지역 데이터 검증. 기존 화면의 재접수 조작은 실제 공급 L2 후 연결한다. |
+| 자동검증·증거 | `tests/game/run_w04b_tests.gd`, `tests/game/run_proposal_ui_tests.gd`, `tests/game/run_vs02_tests.gd`, 본 티켓, `docs/engineering/evidence/DEV-027_DI03_EVIDENCE.md`, `docs/engineering/evidence/DEV-027_DI03_RESULTS.json`. 기존 VS-02 자동 runner에는 DI-03 허가→실제 첫 운행의 직접 영향 검사를 추가한다. 실제 명령과 격리 경계 입력을 구분하고 한 패킷으로 A/B에 전달한다. |
+
+검증은 Godot 4.7.2 `--headless --editor --quit` 로드, `--headless --script tests/game/run_w04b_tests.gd`와 `run_proposal_ui_tests.gd`, 직접 영향 회귀 `run_w03_tests.gd`, `run_w06_tests.gd`, `run_proposal_view_tests.gd`, 필요 시 기존 `run_vs02_tests.gd`의 자동 공급 연결을 사용한다. `policy.py doctor/check`와 `git diff --check`, 고정 base/소스·실행 증거 해시를 기록한다.
+
+PM-022 Owner 조건부 착수 및 HQ 준비도 판단을 근거로 로컬 구현·자동/회귀·로드·DEV 자체 국소 확인을 진행한다. 기존 Pipeline 분 처리, 도시 원본·원장·시계·심사 확률·세이브·F-08은 제외한다. D01-06 제품 화면은 실제 공급의 Track A/B L2 확인 뒤 연결한다. 부서 제출 Git과 독립 GUI는 해당 단계의 유효 승인으로 진행하며, S3-12 및 전체 DEV-027·Stage 인수는 대기다.
+
+**후속 결과.** D01-01~05 모델·실제 공급, D01-06의 공급/소속 검사와 D01-07 직접 영향 자동 증거를 [공급·L2 패킷](../evidence/DEV-027_DI03_EVIDENCE.md)과 [결과 JSON](../evidence/DEV-027_DI03_RESULTS.json)에 연결한다. T600→T2040, T2099 등록→T2100 성공 소비, T2160 재실패→T3600 추가 없음과 T2072 접수 실패 미소비를 확인했다. 실제 운행 OD와 허가 당시 수요판이 예측과 일치했다. Planning의 [D01 정적 대조](https://github.com/wisberry2022/MetroManager/issues/185#issuecomment-7237184859)에 실제 로컬 표본을 제공한다. 명세 변경 필요 없음. 실제 제품 화면 통합·독립 GUI·원격 제출·최종 수용은 대기다.

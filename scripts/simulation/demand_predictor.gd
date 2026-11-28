@@ -4,7 +4,11 @@ extends RefCounted
 
 const Network = preload("res://scripts/model/administrative_network.gd")
 const Plan = preload("res://scripts/model/route_plan.gd")
+const Profile = preload("res://scripts/simulation/proposal_demand_profile.gd")
 const DENOMINATOR: int = 10800
+const MAX_SCALED_DEMAND: int = (
+	(9223372036854775807 - DENOMINATOR * Profile.BASE_UNITS) / (10 * Profile.BOOST_UNITS)
+)
 
 
 static func load_parameters() -> Dictionary:
@@ -46,12 +50,12 @@ static func selection_tenths(minutes: int) -> int:
 
 
 static func od_pairs(
-	network: Network, stops: Array[String], demand: Dictionary
+	network: Network, stops: Array[String], demand: Dictionary, profile: Dictionary = {}
 ) -> Array[Dictionary]:
 	var pairs: Array[Dictionary] = []
 	for index: int in range(1, 9):
 		var origin := "D%02d" % index
-		var destination := "D%02d" % (index % 8 + 1)
+		var destination := Profile.destination_district(origin)
 		var best: Dictionary = {}
 		for a: int in stops.size():
 			for b: int in stops.size():
@@ -75,8 +79,19 @@ static func od_pairs(
 						"daily_demand": int(demand[origin])
 					}
 		if not best.is_empty():
+			if origin in profile.get("origin_districts", []):
+				best["effective_daily_demand"] = [
+					best.daily_demand * Profile.BOOST_UNITS, Profile.BASE_UNITS
+				]
 			pairs.append(best)
 	return pairs
+
+
+static func demand_increment(pair: Dictionary, scale: int) -> int:
+	var demand: int = pair.daily_demand * scale
+	if pair.has("effective_daily_demand"):
+		demand = pair.effective_daily_demand[0]
+	return demand * selection_tenths(pair.minutes)
 
 
 static func predict(
@@ -85,7 +100,8 @@ static func predict(
 	parameters: Dictionary,
 	start: int = 360,
 	end: int = 1440,
-	carry: Dictionary = {}
+	carry: Dictionary = {},
+	profile: Dictionary = {}
 ) -> Dictionary:
 	var plan := Plan.new(network)
 	var validation := plan.validate(stops)
@@ -93,12 +109,28 @@ static func predict(
 		return {"ok": false, "reason": "INVALID_PLAN", "details": validation.reason_codes}
 	if not _valid_parameters(parameters) or start < 0 or end < start:
 		return {"ok": false, "reason": "INVALID_INPUT"}
-	var pairs := od_pairs(network, stops, parameters.daily_demand)
+	if not Profile.valid(profile):
+		return {"ok": false, "reason": "INVALID_DEMAND_PROFILE"}
+	var scale := 1 if profile.is_empty() else Profile.BASE_UNITS
+	if scale > 1:
+		for index: int in range(1, 9):
+			if parameters.daily_demand["D%02d" % index] > MAX_SCALED_DEMAND:
+				return {"ok": false, "reason": "DEMAND_ARITHMETIC_LIMIT"}
+	var denominator := DENOMINATOR * scale
+	var pairs := od_pairs(network, stops, parameters.daily_demand, profile)
 	var state: Dictionary = {"remainders": {}, "pending_arrivals": [], "as_of": start}
 	if not carry.is_empty():
 		if not _valid_carry(carry, stops, parameters, start):
 			return {"ok": false, "reason": "CARRY_MISMATCH"}
 		state = carry.duplicate(true)
+		var previous_profile: Dictionary = carry.get("demand_profile", {})
+		if not previous_profile.is_empty() and previous_profile != profile:
+			return {"ok": false, "reason": "CARRY_MISMATCH"}
+		if previous_profile.is_empty() and scale > 1:
+			for id: String in state.remainders:
+				state.remainders[id] *= scale
+	if scale > 1:
+		state["demand_profile"] = profile.duplicate(true)
 	state.route = stops.duplicate()
 	state.parameters = parameters.duplicate(true)
 	var totals := {
@@ -115,9 +147,9 @@ static func predict(
 			totals.operating_cost += int(parameters.operating_cost_per_minute)
 			for pair: Dictionary in pairs:
 				var numerator: int = state.remainders.get(pair.id, 0)
-				numerator += pair.daily_demand * selection_tenths(pair.minutes)
-				var requested: int = numerator / DENOMINATOR
-				state.remainders[pair.id] = numerator % DENOMINATOR
+				numerator += demand_increment(pair, scale)
+				var requested: int = numerator / denominator
+				state.remainders[pair.id] = numerator % denominator
 				var boarded := mini(requested, capacity)
 				capacity -= boarded
 				totals.requested += requested
@@ -173,8 +205,12 @@ static func _valid_carry(
 		return false
 	if not carry.get("remainders") is Dictionary or not carry.get("pending_arrivals") is Array:
 		return false
+	var profile: Variant = carry.get("demand_profile", {})
+	if not profile is Dictionary or not Profile.valid(profile):
+		return false
+	var denominator := DENOMINATOR * (1 if profile.is_empty() else Profile.BASE_UNITS)
 	for amount: Variant in carry.remainders.values():
-		if not amount is int or amount < 0 or amount >= DENOMINATOR:
+		if not amount is int or amount < 0 or amount >= denominator:
 			return false
 	for arrival: Variant in carry.pending_arrivals:
 		if not arrival is Dictionary or not arrival.get("minute") is int:

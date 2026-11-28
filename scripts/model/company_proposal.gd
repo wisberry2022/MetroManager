@@ -12,6 +12,7 @@ var _network: Network
 var _prediction := Prediction.new()
 var _parameters: Dictionary
 var _identity: Dictionary
+var _demand_profile: Dictionary = {}
 var _name: String = ""
 var _input_revision: int = 0
 var _review: Dictionary = {}
@@ -50,12 +51,21 @@ func predict(minute: int) -> Dictionary:
 	stops.assign(_plan.snapshot().station_ids)
 	_prediction.begin()
 	# 승인된 W03의 같은 하루 기간을 재사용한다. 회사 원장에는 접근하지 않는다.
-	var value := Predictor.predict(_network, stops, _parameters)
+	var value := Predictor.predict(_network, stops, _parameters, 360, 1440, {}, _demand_profile)
 	if value.ok:
 		_prediction.complete(_input_revision, value, minute)
 	else:
 		_prediction.fail(_input_revision, value.reason)
 	return {"accepted": value.ok, "prediction": _prediction.snapshot()}
+
+
+func update_demand_profile(profile: Dictionary, minute: int) -> bool:
+	if profile == _demand_profile:
+		return false
+	_demand_profile = profile.duplicate(true)
+	_input_revision += 1
+	_prediction.change_input(_plan.snapshot().plan_revision, _input_revision, minute)
+	return true
 
 
 func binding() -> Dictionary:
@@ -72,7 +82,8 @@ func submission() -> Dictionary:
 		"name": _name,
 		"binding": binding(),
 		"plan": _plan.snapshot(),
-		"prediction": _prediction.snapshot()
+		"prediction": _prediction.snapshot(),
+		"demand_profile": _demand_profile.duplicate(true),
 	}
 
 
@@ -89,6 +100,13 @@ func preparation_error() -> String:
 func latest_decision(kind: String = "") -> Dictionary:
 	for index: int in range(_decisions.size() - 1, -1, -1):
 		if kind.is_empty() or _decisions[index].kind == kind:
+			return _decisions[index].duplicate(true)
+	return {}
+
+
+func latest_authority_decision() -> Dictionary:
+	for index: int in range(_decisions.size() - 1, -1, -1):
+		if _decisions[index].kind != "CITY":
 			return _decisions[index].duplicate(true)
 	return {}
 
@@ -157,7 +175,7 @@ static func persuasion_outcome(sample: int) -> String:
 	return "APPROVED" if sample < 60 else "REJECTED"
 
 
-## DI-03와 독립적인 사실 자격의 정적 경계만 대조한다. 사실 생성/소비 API가 아니다.
+## 접수 자격은 발생한 관련 사실과 해당 실패 당시 근거로 확인한다.
 static func fact_error(fact: Dictionary, failure: Dictionary, minute: int) -> String:
 	for key: String in ["fact_id", "business_identity_id", "decision_id"]:
 		if not fact.get(key) is String or fact[key].is_empty():

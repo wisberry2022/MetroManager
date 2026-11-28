@@ -1,0 +1,5928 @@
+{
+  "actual_operations": {
+    "kind": "ACTUAL_SESSION_OPERATIONS",
+    "ledger_at_open_sha256": "a9a7097b8de1426019d9e112ced953f250208b38d1330fcb50efeb911a827194",
+    "ledger_next_sha256": "9ccf44bd7f7c713ff37da0a943157696aa7a7444b40d6d2c64dc2d764a4f3da7",
+    "next": {
+      "available": true,
+      "boarding": {
+        "boarding_allowed": true,
+        "reason_codes": []
+      },
+      "carry": {
+        "D01:D02": 27200,
+        "D02:D03": 20400,
+        "D03:D04": 33600,
+        "D08:D01": 16000
+      },
+      "carry_denominator": 43200,
+      "cohorts": [
+        {
+          "boarded_at": 5139,
+          "count": 2,
+          "expected_at": 5140,
+          "od_id": "D01:D02"
+        },
+        {
+          "boarded_at": 5139,
+          "count": 2,
+          "expected_at": 5140,
+          "od_id": "D02:D03"
+        },
+        {
+          "boarded_at": 5139,
+          "count": 1,
+          "expected_at": 5140,
+          "od_id": "D03:D04"
+        }
+      ],
+      "daily": {
+        "boarded": 9,
+        "closing_in_transit": 5,
+        "completed": 4,
+        "day_id": 4,
+        "late_completed": 0,
+        "opening_in_transit": 0,
+        "reason_codes": [],
+        "requested": 9,
+        "satisfaction_after": [],
+        "satisfaction_available": true,
+        "satisfaction_before": [
+          50,
+          1
+        ],
+        "service_minutes": 2,
+        "unboarded": 0
+      },
+      "data_version": "1.3",
+      "day_id": 4,
+      "first_valid_report": {},
+      "in_transit": 5,
+      "observation_phase": "T_COMPLETE",
+      "od_pairs": [
+        {
+          "daily_demand": 2000,
+          "destination": "S02",
+          "effective_daily_demand": [
+            10000,
+            4
+          ],
+          "id": "D01:D02",
+          "minutes": 1,
+          "origin": "S01",
+          "tie": "S01:S02"
+        },
+        {
+          "daily_demand": 1500,
+          "destination": "S03",
+          "effective_daily_demand": [
+            7500,
+            4
+          ],
+          "id": "D02:D03",
+          "minutes": 1,
+          "origin": "S02",
+          "tie": "S02:S03"
+        },
+        {
+          "daily_demand": 1200,
+          "destination": "S04",
+          "effective_daily_demand": [
+            6000,
+            4
+          ],
+          "id": "D03:D04",
+          "minutes": 1,
+          "origin": "S03",
+          "tie": "S03:S04"
+        },
+        {
+          "daily_demand": 200,
+          "destination": "S01",
+          "effective_daily_demand": [
+            1000,
+            4
+          ],
+          "id": "D08:D01",
+          "minutes": 7,
+          "origin": "S08",
+          "tie": "S08:S01"
+        }
+      ],
+      "reason_codes": [],
+      "satisfaction": [
+        50,
+        1
+      ],
+      "service_ready": true,
+      "simulation_minute": 5139,
+      "snapshot_revision": 37063,
+      "source": {
+        "business_contract_id": "run--9223371929077938727:review:000004:decision:business",
+        "condition_revision": 0,
+        "construction_contract_id": "run--9223371929077938727:review:000004:decision:business-CONSTRUCTION",
+        "demand_profile": {
+          "business_identity_id": "run--9223371929077938727:business:P-A",
+          "effective_at": 2040,
+          "fact_id": "run--9223371929077938727:review:000002:decision:E01",
+          "multiplier": [
+            5,
+            4
+          ],
+          "origin_districts": [
+            "D01",
+            "D02",
+            "D03",
+            "D04",
+            "D08"
+          ],
+          "revision": 1
+        },
+        "opened_at": 5138,
+        "project_id": "run--9223371929077938727:business:P-A",
+        "source_id": "run--9223371929077938727:proposal:P-A",
+        "source_kind": "COMPANY_PROPOSAL",
+        "station_ids": [
+          "S01",
+          "S02",
+          "S03",
+          "S04",
+          "S08",
+          "S12"
+        ]
+      },
+      "ui_contract_revision": "DEV022-W06-UI-1"
+    },
+    "opening": {
+      "available": true,
+      "boarding": {
+        "boarding_allowed": true,
+        "reason_codes": []
+      },
+      "carry": {
+        "D01:D02": 13600,
+        "D02:D03": 31800,
+        "D03:D04": 16800,
+        "D08:D01": 8000
+      },
+      "carry_denominator": 43200,
+      "cohorts": [
+        {
+          "boarded_at": 5138,
+          "count": 2,
+          "expected_at": 5139,
+          "od_id": "D01:D02"
+        },
+        {
+          "boarded_at": 5138,
+          "count": 1,
+          "expected_at": 5139,
+          "od_id": "D02:D03"
+        },
+        {
+          "boarded_at": 5138,
+          "count": 1,
+          "expected_at": 5139,
+          "od_id": "D03:D04"
+        }
+      ],
+      "daily": {
+        "boarded": 4,
+        "closing_in_transit": 4,
+        "completed": 0,
+        "day_id": 4,
+        "late_completed": 0,
+        "opening_in_transit": 0,
+        "reason_codes": [],
+        "requested": 4,
+        "satisfaction_after": [],
+        "satisfaction_available": true,
+        "satisfaction_before": [
+          50,
+          1
+        ],
+        "service_minutes": 1,
+        "unboarded": 0
+      },
+      "data_version": "1.3",
+      "day_id": 4,
+      "first_valid_report": {},
+      "in_transit": 4,
+      "observation_phase": "T_COMPLETE",
+      "od_pairs": [
+        {
+          "daily_demand": 2000,
+          "destination": "S02",
+          "effective_daily_demand": [
+            10000,
+            4
+          ],
+          "id": "D01:D02",
+          "minutes": 1,
+          "origin": "S01",
+          "tie": "S01:S02"
+        },
+        {
+          "daily_demand": 1500,
+          "destination": "S03",
+          "effective_daily_demand": [
+            7500,
+            4
+          ],
+          "id": "D02:D03",
+          "minutes": 1,
+          "origin": "S02",
+          "tie": "S02:S03"
+        },
+        {
+          "daily_demand": 1200,
+          "destination": "S04",
+          "effective_daily_demand": [
+            6000,
+            4
+          ],
+          "id": "D03:D04",
+          "minutes": 1,
+          "origin": "S03",
+          "tie": "S03:S04"
+        },
+        {
+          "daily_demand": 200,
+          "destination": "S01",
+          "effective_daily_demand": [
+            1000,
+            4
+          ],
+          "id": "D08:D01",
+          "minutes": 7,
+          "origin": "S08",
+          "tie": "S08:S01"
+        }
+      ],
+      "reason_codes": [],
+      "satisfaction": [
+        50,
+        1
+      ],
+      "service_ready": true,
+      "simulation_minute": 5138,
+      "snapshot_revision": 37055,
+      "source": {
+        "business_contract_id": "run--9223371929077938727:review:000004:decision:business",
+        "condition_revision": 0,
+        "construction_contract_id": "run--9223371929077938727:review:000004:decision:business-CONSTRUCTION",
+        "demand_profile": {
+          "business_identity_id": "run--9223371929077938727:business:P-A",
+          "effective_at": 2040,
+          "fact_id": "run--9223371929077938727:review:000002:decision:E01",
+          "multiplier": [
+            5,
+            4
+          ],
+          "origin_districts": [
+            "D01",
+            "D02",
+            "D03",
+            "D04",
+            "D08"
+          ],
+          "revision": 1
+        },
+        "opened_at": 5138,
+        "project_id": "run--9223371929077938727:business:P-A",
+        "source_id": "run--9223371929077938727:proposal:P-A",
+        "source_kind": "COMPANY_PROPOSAL",
+        "station_ids": [
+          "S01",
+          "S02",
+          "S03",
+          "S04",
+          "S08",
+          "S12"
+        ]
+      },
+      "ui_contract_revision": "DEV022-W06-UI-1"
+    },
+    "prediction_od_pairs": [
+      {
+        "daily_demand": 2000,
+        "destination": "S02",
+        "effective_daily_demand": [
+          10000,
+          4
+        ],
+        "id": "D01:D02",
+        "minutes": 1,
+        "origin": "S01",
+        "tie": "S01:S02"
+      },
+      {
+        "daily_demand": 1500,
+        "destination": "S03",
+        "effective_daily_demand": [
+          7500,
+          4
+        ],
+        "id": "D02:D03",
+        "minutes": 1,
+        "origin": "S02",
+        "tie": "S02:S03"
+      },
+      {
+        "daily_demand": 1200,
+        "destination": "S04",
+        "effective_daily_demand": [
+          6000,
+          4
+        ],
+        "id": "D03:D04",
+        "minutes": 1,
+        "origin": "S03",
+        "tie": "S03:S04"
+      },
+      {
+        "daily_demand": 200,
+        "destination": "S01",
+        "effective_daily_demand": [
+          1000,
+          4
+        ],
+        "id": "D08:D01",
+        "minutes": 7,
+        "origin": "S08",
+        "tie": "S08:S01"
+      }
+    ]
+  },
+  "agent_id": "AGT-DEV-0004",
+  "automatic_boundaries": [
+    {
+      "actual": [
+        "REJECTED",
+        600
+      ],
+      "expected": [
+        "REJECTED",
+        600
+      ],
+      "id": "DI03/failure_T600",
+      "passed": true
+    },
+    {
+      "actual": 2040,
+      "expected": 2040,
+      "id": "DI03/schedule_T2040",
+      "passed": true
+    },
+    {
+      "actual": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D08"
+      ],
+      "expected": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D08"
+      ],
+      "id": "DI03/fixed_origins",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "id": "DI03/fixed_disabled_od",
+      "passed": true
+    },
+    {
+      "actual": "FACT_NOT_OCCURRED",
+      "expected": "FACT_NOT_OCCURRED",
+      "id": "DI03/early_fact_cannot_admit",
+      "passed": true
+    },
+    {
+      "actual": [],
+      "expected": [],
+      "id": "DI03/T2039_no_fact",
+      "passed": true
+    },
+    {
+      "actual": 2039,
+      "expected": 2039,
+      "id": "DI03/pause_keeps_T2039",
+      "passed": true
+    },
+    {
+      "actual": [],
+      "expected": [],
+      "id": "DI03/paused_no_fact",
+      "passed": true
+    },
+    {
+      "actual": [
+        2040,
+        2040
+      ],
+      "expected": [
+        2040,
+        2040
+      ],
+      "id": "DI03/occur_and_effect_at_T2040",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "id": "DI03/fact_unused_at_effect",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "id": "DI03/forecast_invalidated",
+      "passed": true
+    },
+    {
+      "actual": {
+        "action_states": {
+          "sign_proposal_contract": {
+            "allowed": false,
+            "reason_codes": [
+              "PERMISSION_REQUIRED"
+            ]
+          },
+          "submit_city_review": {
+            "allowed": true,
+            "reason_codes": []
+          },
+          "submit_government_review": {
+            "allowed": false,
+            "reason_codes": [
+              "CURRENT_CITY_APPROVAL_REQUIRED"
+            ]
+          },
+          "submit_persuasion": {
+            "allowed": false,
+            "reason_codes": [
+              "HELD_DECISION_REQUIRED"
+            ]
+          }
+        },
+        "attempts": {
+          "city": 0,
+          "government": 0,
+          "persuasion": 0
+        },
+        "binding": {
+          "plan_revision": 1,
+          "prediction_input_revision": 1,
+          "proposal_id": "run--9223371989660465703:proposal:P-B"
+        },
+        "business_alias_slots": [
+          "P-B"
+        ],
+        "business_contract": {},
+        "decisions": [],
+        "di03_status": "MODEL_SUPPLIED",
+        "draft": {
+          "binding": {
+            "plan_revision": 1,
+            "prediction_input_revision": 1,
+            "proposal_id": "run--9223371989660465703:proposal:P-B"
+          },
+          "demand_profile": {},
+          "identity": {
+            "business_identity_id": "run--9223371989660465703:business:P-B",
+            "proposal_id": "run--9223371989660465703:proposal:P-B",
+            "slot_id": "P-B"
+          },
+          "name": "P3-A P-B",
+          "plan": {
+            "allowed_actions": {
+              "edit": true,
+              "undo": true
+            },
+            "locked": false,
+            "plan_revision": 1,
+            "station_ids": [
+              "S01",
+              "S05",
+              "S09",
+              "S10",
+              "S11",
+              "S12"
+            ],
+            "validation": {
+              "allowed_actions": {
+                "submit": true
+              },
+              "reason_codes": [],
+              "valid": true
+            }
+          },
+          "prediction": {
+            "available": true,
+            "current": {
+              "generated_minute": 600,
+              "input_revision": 1,
+              "value": {
+                "carry": {
+                  "as_of": 1440,
+                  "parameters": {
+                    "capacity_per_minute": 10,
+                    "daily_demand": {
+                      "D01": 2000,
+                      "D02": 1500,
+                      "D03": 1200,
+                      "D04": 800,
+                      "D05": 600,
+                      "D06": 400,
+                      "D07": 300,
+                      "D08": 200
+                    },
+                    "data_version": "1.3",
+                    "fare": 100,
+                    "operating_cost_per_minute": 100,
+                    "source": {
+                      "commit": "604751d79bba86cad179ca6434a5ec5b42640d71",
+                      "path": "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
+                      "section": "4"
+                    }
+                  },
+                  "pending_arrivals": [
+                    {
+                      "count": 1,
+                      "minute": 1442
+                    },
+                    {
+                      "count": 1,
+                      "minute": 1440
+                    },
+                    {
+                      "count": 1,
+                      "minute": 1440
+                    },
+                    {
+                      "count": 1,
+                      "minute": 1440
+                    },
+                    {
+                      "count": 1,
+                      "minute": 1448
+                    }
+                  ],
+                  "remainders": {
+                    "D05:D06": 0,
+                    "D06:D07": 0,
+                    "D07:D08": 0,
+                    "D08:D01": 0
+                  },
+                  "route": [
+                    "S01",
+                    "S05",
+                    "S09",
+                    "S10",
+                    "S11",
+                    "S12"
+                  ]
+                },
+                "data_version": "1.3",
+                "distance_km": 5,
+                "end_to_end_minutes": 9,
+                "od_pairs": [
+                  {
+                    "daily_demand": 600,
+                    "destination": "S10",
+                    "id": "D05:D06",
+                    "minutes": 1,
+                    "origin": "S09",
+                    "tie": "S09:S10"
+                  },
+                  {
+                    "daily_demand": 400,
+                    "destination": "S11",
+                    "id": "D06:D07",
+                    "minutes": 1,
+                    "origin": "S10",
+                    "tie": "S10:S11"
+                  },
+                  {
+                    "daily_demand": 300,
+                    "destination": "S12",
+                    "id": "D07:D08",
+                    "minutes": 1,
+                    "origin": "S11",
+                    "tie": "S11:S12"
+                  },
+                  {
+                    "daily_demand": 200,
+                    "destination": "S01",
+                    "id": "D08:D01",
+                    "minutes": 9,
+                    "origin": "S12",
+                    "tie": "S12:S01"
+                  }
+                ],
+                "ok": true,
+                "period_end": 1440,
+                "period_start": 360,
+                "totals": {
+                  "boarded": 1460,
+                  "completed": 1455,
+                  "operating_cost": 108000,
+                  "predicted_fare": 145500,
+                  "requested": 1460,
+                  "unboarded": 0
+                }
+              }
+            },
+            "input_minute": 600,
+            "plan_revision": 1,
+            "prediction_input_revision": 1,
+            "prediction_status": "READY",
+            "previous": {},
+            "reason": ""
+          }
+        },
+        "edit_state": {
+          "allowed": true,
+          "reason_codes": []
+        },
+        "government_retry_state": {
+          "allowed": false,
+          "applicable": false,
+          "fact_id": "",
+          "failure_decision_id": "",
+          "reason_codes": [
+            "RETRY_NOT_REQUIRED"
+          ]
+        },
+        "identity": {
+          "business_identity_id": "run--9223371989660465703:business:P-B",
+          "proposal_id": "run--9223371989660465703:proposal:P-B",
+          "slot_id": "P-B"
+        },
+        "name": "P3-A P-B",
+        "persuasion_used_for": [],
+        "predict_state": {
+          "allowed": true,
+          "reason_codes": []
+        },
+        "review": {}
+      },
+      "expected": {
+        "action_states": {
+          "sign_proposal_contract": {
+            "allowed": false,
+            "reason_codes": [
+              "PERMISSION_REQUIRED"
+            ]
+          },
+          "submit_city_review": {
+            "allowed": true,
+            "reason_codes": []
+          },
+          "submit_government_review": {
+            "allowed": false,
+            "reason_codes": [
+              "CURRENT_CITY_APPROVAL_REQUIRED"
+            ]
+          },
+          "submit_persuasion": {
+            "allowed": false,
+            "reason_codes": [
+              "HELD_DECISION_REQUIRED"
+            ]
+          }
+        },
+        "attempts": {
+          "city": 0,
+          "government": 0,
+          "persuasion": 0
+        },
+        "binding": {
+          "plan_revision": 1,
+          "prediction_input_revision": 1,
+          "proposal_id": "run--9223371989660465703:proposal:P-B"
+        },
+        "business_alias_slots": [
+          "P-B"
+        ],
+        "business_contract": {},
+        "decisions": [],
+        "di03_status": "MODEL_SUPPLIED",
+        "draft": {
+          "binding": {
+            "plan_revision": 1,
+            "prediction_input_revision": 1,
+            "proposal_id": "run--9223371989660465703:proposal:P-B"
+          },
+          "demand_profile": {},
+          "identity": {
+            "business_identity_id": "run--9223371989660465703:business:P-B",
+            "proposal_id": "run--9223371989660465703:proposal:P-B",
+            "slot_id": "P-B"
+          },
+          "name": "P3-A P-B",
+          "plan": {
+            "allowed_actions": {
+              "edit": true,
+              "undo": true
+            },
+            "locked": false,
+            "plan_revision": 1,
+            "station_ids": [
+              "S01",
+              "S05",
+              "S09",
+              "S10",
+              "S11",
+              "S12"
+            ],
+            "validation": {
+              "allowed_actions": {
+                "submit": true
+              },
+              "reason_codes": [],
+              "valid": true
+            }
+          },
+          "prediction": {
+            "available": true,
+            "current": {
+              "generated_minute": 600,
+              "input_revision": 1,
+              "value": {
+                "carry": {
+                  "as_of": 1440,
+                  "parameters": {
+                    "capacity_per_minute": 10,
+                    "daily_demand": {
+                      "D01": 2000,
+                      "D02": 1500,
+                      "D03": 1200,
+                      "D04": 800,
+                      "D05": 600,
+                      "D06": 400,
+                      "D07": 300,
+                      "D08": 200
+                    },
+                    "data_version": "1.3",
+                    "fare": 100,
+                    "operating_cost_per_minute": 100,
+                    "source": {
+                      "commit": "604751d79bba86cad179ca6434a5ec5b42640d71",
+                      "path": "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
+                      "section": "4"
+                    }
+                  },
+                  "pending_arrivals": [
+                    {
+                      "count": 1,
+                      "minute": 1442
+                    },
+                    {
+                      "count": 1,
+                      "minute": 1440
+                    },
+                    {
+                      "count": 1,
+                      "minute": 1440
+                    },
+                    {
+                      "count": 1,
+                      "minute": 1440
+                    },
+                    {
+                      "count": 1,
+                      "minute": 1448
+                    }
+                  ],
+                  "remainders": {
+                    "D05:D06": 0,
+                    "D06:D07": 0,
+                    "D07:D08": 0,
+                    "D08:D01": 0
+                  },
+                  "route": [
+                    "S01",
+                    "S05",
+                    "S09",
+                    "S10",
+                    "S11",
+                    "S12"
+                  ]
+                },
+                "data_version": "1.3",
+                "distance_km": 5,
+                "end_to_end_minutes": 9,
+                "od_pairs": [
+                  {
+                    "daily_demand": 600,
+                    "destination": "S10",
+                    "id": "D05:D06",
+                    "minutes": 1,
+                    "origin": "S09",
+                    "tie": "S09:S10"
+                  },
+                  {
+                    "daily_demand": 400,
+                    "destination": "S11",
+                    "id": "D06:D07",
+                    "minutes": 1,
+                    "origin": "S10",
+                    "tie": "S10:S11"
+                  },
+                  {
+                    "daily_demand": 300,
+                    "destination": "S12",
+                    "id": "D07:D08",
+                    "minutes": 1,
+                    "origin": "S11",
+                    "tie": "S11:S12"
+                  },
+                  {
+                    "daily_demand": 200,
+                    "destination": "S01",
+                    "id": "D08:D01",
+                    "minutes": 9,
+                    "origin": "S12",
+                    "tie": "S12:S01"
+                  }
+                ],
+                "ok": true,
+                "period_end": 1440,
+                "period_start": 360,
+                "totals": {
+                  "boarded": 1460,
+                  "completed": 1455,
+                  "operating_cost": 108000,
+                  "predicted_fare": 145500,
+                  "requested": 1460,
+                  "unboarded": 0
+                }
+              }
+            },
+            "input_minute": 600,
+            "plan_revision": 1,
+            "prediction_input_revision": 1,
+            "prediction_status": "READY",
+            "previous": {},
+            "reason": ""
+          }
+        },
+        "edit_state": {
+          "allowed": true,
+          "reason_codes": []
+        },
+        "government_retry_state": {
+          "allowed": false,
+          "applicable": false,
+          "fact_id": "",
+          "failure_decision_id": "",
+          "reason_codes": [
+            "RETRY_NOT_REQUIRED"
+          ]
+        },
+        "identity": {
+          "business_identity_id": "run--9223371989660465703:business:P-B",
+          "proposal_id": "run--9223371989660465703:proposal:P-B",
+          "slot_id": "P-B"
+        },
+        "name": "P3-A P-B",
+        "persuasion_used_for": [],
+        "predict_state": {
+          "allowed": true,
+          "reason_codes": []
+        },
+        "review": {}
+      },
+      "id": "DI03/distinct_forecast_unchanged",
+      "passed": true
+    },
+    {
+      "actual": [
+        "PREVIOUS_INTERVAL",
+        "CONTRACT",
+        "PROGRESS",
+        "VALIDATION",
+        "ARRIVAL",
+        "SETTLEMENT",
+        "BOARDING"
+      ],
+      "expected": [
+        "PREVIOUS_INTERVAL",
+        "CONTRACT",
+        "PROGRESS",
+        "VALIDATION",
+        "ARRIVAL",
+        "SETTLEMENT",
+        "BOARDING"
+      ],
+      "id": "DI03/effect_keeps_phase_order",
+      "passed": true
+    },
+    {
+      "actual": 2,
+      "expected": 2,
+      "id": "DI03/effect_revision_visible_at_contract",
+      "passed": true
+    },
+    {
+      "actual": [
+        {
+          "basis_decision_id": "run--9223371989660465703:review:000002:decision",
+          "basis_plan_revision": 1,
+          "basis_station_ids": [
+            "S01",
+            "S02",
+            "S03",
+            "S04",
+            "S08",
+            "S12"
+          ],
+          "business_identity_id": "run--9223371989660465703:business:P-A",
+          "consumed_at": null,
+          "consumed_by": "",
+          "decision_id": "run--9223371989660465703:review:000002:decision",
+          "effect_at": 2040,
+          "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+          "failed_at": 600,
+          "kind": "E01",
+          "occurred_at": 2040,
+          "origin_districts": [
+            "D01",
+            "D02",
+            "D03",
+            "D04",
+            "D08"
+          ],
+          "scheduled_at": 2040,
+          "slot_id": "P-A",
+          "target_od_ids": [
+            "D01:D02",
+            "D02:D03",
+            "D03:D04",
+            "D04:D05",
+            "D08:D01"
+          ],
+          "used": false
+        }
+      ],
+      "expected": [
+        {
+          "basis_decision_id": "run--9223371989660465703:review:000002:decision",
+          "basis_plan_revision": 1,
+          "basis_station_ids": [
+            "S01",
+            "S02",
+            "S03",
+            "S04",
+            "S08",
+            "S12"
+          ],
+          "business_identity_id": "run--9223371989660465703:business:P-A",
+          "consumed_at": null,
+          "consumed_by": "",
+          "decision_id": "run--9223371989660465703:review:000002:decision",
+          "effect_at": 2040,
+          "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+          "failed_at": 600,
+          "kind": "E01",
+          "occurred_at": 2040,
+          "origin_districts": [
+            "D01",
+            "D02",
+            "D03",
+            "D04",
+            "D08"
+          ],
+          "scheduled_at": 2040,
+          "slot_id": "P-A",
+          "target_od_ids": [
+            "D01:D02",
+            "D02:D03",
+            "D03:D04",
+            "D04:D05",
+            "D08:D01"
+          ],
+          "used": false
+        }
+      ],
+      "id": "DI03/T2041_no_second_effect",
+      "passed": true
+    },
+    {
+      "actual": [
+        1000,
+        4
+      ],
+      "expected": [
+        1000,
+        4
+      ],
+      "id": "DI03/D08_twice_in_plan_boosted_once",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "id": "DI03/D04_no_access",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "id": "DI03/actual_retry_available",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "id": "DI03/legacy_action_requires_fact",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "id": "DI03/foreign_fact_region_rejected",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "id": "DI03/foreign_fact_does_not_invalidate_funds",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "id": "DI03/T2099_queue",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "id": "DI03/registration_not_consumed",
+      "passed": true
+    },
+    {
+      "actual": 2100,
+      "expected": 2100,
+      "id": "DI03/consumed_T2100",
+      "passed": true
+    },
+    {
+      "actual": "run--9223371989660465703:review:000002:decision:E01",
+      "expected": "run--9223371989660465703:review:000002:decision:E01",
+      "id": "DI03/consume_link",
+      "passed": true
+    },
+    {
+      "actual": {
+        "accepted": true,
+        "admitted_at": 2100,
+        "command": {
+          "action": "submit_government_review",
+          "binding": {
+            "plan_revision": 1,
+            "prediction_input_revision": 2,
+            "proposal_id": "run--9223371989660465703:proposal:P-A"
+          },
+          "command_id": "retry",
+          "decision_id": "run--9223371989660465703:review:000003:decision",
+          "expected_snapshot_revision": 16,
+          "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+          "run_scope": "run--9223371989660465703",
+          "slot_id": "P-A"
+        },
+        "command_id": "retry",
+        "consumed_fact_id": "run--9223371989660465703:review:000002:decision:E01",
+        "effective_at": 2100,
+        "effective_not_before": 2100,
+        "fact_consumed_at": 2100,
+        "pending": false,
+        "reason": "",
+        "reason_codes": [],
+        "registered_at": 2099,
+        "requested_at": 2099,
+        "requires_new_request": false,
+        "review_id": "run--9223371989660465703:review:000004",
+        "submission": {
+          "binding": {
+            "plan_revision": 1,
+            "prediction_input_revision": 2,
+            "proposal_id": "run--9223371989660465703:proposal:P-A"
+          },
+          "demand_profile": {
+            "business_identity_id": "run--9223371989660465703:business:P-A",
+            "effective_at": 2040,
+            "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+            "multiplier": [
+              5,
+              4
+            ],
+            "origin_districts": [
+              "D01",
+              "D02",
+              "D03",
+              "D04",
+              "D08"
+            ],
+            "revision": 1
+          },
+          "identity": {
+            "business_identity_id": "run--9223371989660465703:business:P-A",
+            "proposal_id": "run--9223371989660465703:proposal:P-A",
+            "slot_id": "P-A"
+          },
+          "name": "P3-A P-A",
+          "plan": {
+            "allowed_actions": {
+              "edit": true,
+              "undo": true
+            },
+            "locked": false,
+            "plan_revision": 1,
+            "station_ids": [
+              "S01",
+              "S02",
+              "S03",
+              "S04",
+              "S08",
+              "S12"
+            ],
+            "validation": {
+              "allowed_actions": {
+                "submit": true
+              },
+              "reason_codes": [],
+              "valid": true
+            }
+          },
+          "prediction": {
+            "available": true,
+            "current": {
+              "generated_minute": 2041,
+              "input_revision": 2,
+              "value": {
+                "carry": {
+                  "as_of": 1440,
+                  "demand_profile": {
+                    "business_identity_id": "run--9223371989660465703:business:P-A",
+                    "effective_at": 2040,
+                    "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+                    "multiplier": [
+                      5,
+                      4
+                    ],
+                    "origin_districts": [
+                      "D01",
+                      "D02",
+                      "D03",
+                      "D04",
+                      "D08"
+                    ],
+                    "revision": 1
+                  },
+                  "parameters": {
+                    "capacity_per_minute": 10,
+                    "daily_demand": {
+                      "D01": 2000,
+                      "D02": 1500,
+                      "D03": 1200,
+                      "D04": 800,
+                      "D05": 600,
+                      "D06": 400,
+                      "D07": 300,
+                      "D08": 200
+                    },
+                    "data_version": "1.3",
+                    "fare": 100,
+                    "operating_cost_per_minute": 100,
+                    "source": {
+                      "commit": "604751d79bba86cad179ca6434a5ec5b42640d71",
+                      "path": "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
+                      "section": "4"
+                    }
+                  },
+                  "pending_arrivals": [
+                    {
+                      "count": 1,
+                      "minute": 1441
+                    },
+                    {
+                      "count": 3,
+                      "minute": 1440
+                    },
+                    {
+                      "count": 2,
+                      "minute": 1440
+                    },
+                    {
+                      "count": 2,
+                      "minute": 1440
+                    },
+                    {
+                      "count": 1,
+                      "minute": 1446
+                    }
+                  ],
+                  "remainders": {
+                    "D01:D02": 0,
+                    "D02:D03": 0,
+                    "D03:D04": 0,
+                    "D08:D01": 0
+                  },
+                  "route": [
+                    "S01",
+                    "S02",
+                    "S03",
+                    "S04",
+                    "S08",
+                    "S12"
+                  ]
+                },
+                "data_version": "1.3",
+                "distance_km": 5,
+                "end_to_end_minutes": 9,
+                "od_pairs": [
+                  {
+                    "daily_demand": 2000,
+                    "destination": "S02",
+                    "effective_daily_demand": [
+                      10000,
+                      4
+                    ],
+                    "id": "D01:D02",
+                    "minutes": 1,
+                    "origin": "S01",
+                    "tie": "S01:S02"
+                  },
+                  {
+                    "daily_demand": 1500,
+                    "destination": "S03",
+                    "effective_daily_demand": [
+                      7500,
+                      4
+                    ],
+                    "id": "D02:D03",
+                    "minutes": 1,
+                    "origin": "S02",
+                    "tie": "S02:S03"
+                  },
+                  {
+                    "daily_demand": 1200,
+                    "destination": "S04",
+                    "effective_daily_demand": [
+                      6000,
+                      4
+                    ],
+                    "id": "D03:D04",
+                    "minutes": 1,
+                    "origin": "S03",
+                    "tie": "S03:S04"
+                  },
+                  {
+                    "daily_demand": 200,
+                    "destination": "S01",
+                    "effective_daily_demand": [
+                      1000,
+                      4
+                    ],
+                    "id": "D08:D01",
+                    "minutes": 7,
+                    "origin": "S08",
+                    "tie": "S08:S01"
+                  }
+                ],
+                "ok": true,
+                "period_end": 1440,
+                "period_start": 360,
+                "totals": {
+                  "boarded": 6075,
+                  "completed": 6066,
+                  "operating_cost": 108000,
+                  "predicted_fare": 606600,
+                  "requested": 6075,
+                  "unboarded": 0
+                }
+              }
+            },
+            "input_minute": 2040,
+            "plan_revision": 1,
+            "prediction_input_revision": 2,
+            "prediction_status": "READY",
+            "previous": {
+              "generated_minute": 508,
+              "input_revision": 1,
+              "value": {
+                "carry": {
+                  "as_of": 1440,
+                  "parameters": {
+                    "capacity_per_minute": 10,
+                    "daily_demand": {
+                      "D01": 2000,
+                      "D02": 1500,
+                      "D03": 1200,
+                      "D04": 800,
+                      "D05": 600,
+                      "D06": 400,
+                      "D07": 300,
+                      "D08": 200
+                    },
+                    "data_version": "1.3",
+                    "fare": 100,
+                    "operating_cost_per_minute": 100,
+                    "source": {
+                      "commit": "604751d79bba86cad179ca6434a5ec5b42640d71",
+                      "path": "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
+                      "section": "4"
+                    }
+                  },
+                  "pending_arrivals": [
+                    {
+                      "count": 1,
+                      "minute": 1440
+                    },
+                    {
+                      "count": 2,
+                      "minute": 1440
+                    },
+                    {
+                      "count": 2,
+                      "minute": 1440
+                    },
+                    {
+                      "count": 2,
+                      "minute": 1440
+                    },
+                    {
+                      "count": 1,
+                      "minute": 1446
+                    }
+                  ],
+                  "remainders": {
+                    "D01:D02": 0,
+                    "D02:D03": 0,
+                    "D03:D04": 0,
+                    "D08:D01": 0
+                  },
+                  "route": [
+                    "S01",
+                    "S02",
+                    "S03",
+                    "S04",
+                    "S08",
+                    "S12"
+                  ]
+                },
+                "data_version": "1.3",
+                "distance_km": 5,
+                "end_to_end_minutes": 9,
+                "od_pairs": [
+                  {
+                    "daily_demand": 2000,
+                    "destination": "S02",
+                    "id": "D01:D02",
+                    "minutes": 1,
+                    "origin": "S01",
+                    "tie": "S01:S02"
+                  },
+                  {
+                    "daily_demand": 1500,
+                    "destination": "S03",
+                    "id": "D02:D03",
+                    "minutes": 1,
+                    "origin": "S02",
+                    "tie": "S02:S03"
+                  },
+                  {
+                    "daily_demand": 1200,
+                    "destination": "S04",
+                    "id": "D03:D04",
+                    "minutes": 1,
+                    "origin": "S03",
+                    "tie": "S03:S04"
+                  },
+                  {
+                    "daily_demand": 200,
+                    "destination": "S01",
+                    "id": "D08:D01",
+                    "minutes": 7,
+                    "origin": "S08",
+                    "tie": "S08:S01"
+                  }
+                ],
+                "ok": true,
+                "period_end": 1440,
+                "period_start": 360,
+                "totals": {
+                  "boarded": 4860,
+                  "completed": 4852,
+                  "operating_cost": 108000,
+                  "predicted_fare": 485200,
+                  "requested": 4860,
+                  "unboarded": 0
+                }
+              }
+            },
+            "reason": ""
+          }
+        }
+      },
+      "expected": {
+        "accepted": true,
+        "admitted_at": 2100,
+        "command": {
+          "action": "submit_government_review",
+          "binding": {
+            "plan_revision": 1,
+            "prediction_input_revision": 2,
+            "proposal_id": "run--9223371989660465703:proposal:P-A"
+          },
+          "command_id": "retry",
+          "decision_id": "run--9223371989660465703:review:000003:decision",
+          "expected_snapshot_revision": 16,
+          "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+          "run_scope": "run--9223371989660465703",
+          "slot_id": "P-A"
+        },
+        "command_id": "retry",
+        "consumed_fact_id": "run--9223371989660465703:review:000002:decision:E01",
+        "effective_at": 2100,
+        "effective_not_before": 2100,
+        "fact_consumed_at": 2100,
+        "pending": false,
+        "reason": "",
+        "reason_codes": [],
+        "registered_at": 2099,
+        "requested_at": 2099,
+        "requires_new_request": false,
+        "review_id": "run--9223371989660465703:review:000004",
+        "submission": {
+          "binding": {
+            "plan_revision": 1,
+            "prediction_input_revision": 2,
+            "proposal_id": "run--9223371989660465703:proposal:P-A"
+          },
+          "demand_profile": {
+            "business_identity_id": "run--9223371989660465703:business:P-A",
+            "effective_at": 2040,
+            "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+            "multiplier": [
+              5,
+              4
+            ],
+            "origin_districts": [
+              "D01",
+              "D02",
+              "D03",
+              "D04",
+              "D08"
+            ],
+            "revision": 1
+          },
+          "identity": {
+            "business_identity_id": "run--9223371989660465703:business:P-A",
+            "proposal_id": "run--9223371989660465703:proposal:P-A",
+            "slot_id": "P-A"
+          },
+          "name": "P3-A P-A",
+          "plan": {
+            "allowed_actions": {
+              "edit": true,
+              "undo": true
+            },
+            "locked": false,
+            "plan_revision": 1,
+            "station_ids": [
+              "S01",
+              "S02",
+              "S03",
+              "S04",
+              "S08",
+              "S12"
+            ],
+            "validation": {
+              "allowed_actions": {
+                "submit": true
+              },
+              "reason_codes": [],
+              "valid": true
+            }
+          },
+          "prediction": {
+            "available": true,
+            "current": {
+              "generated_minute": 2041,
+              "input_revision": 2,
+              "value": {
+                "carry": {
+                  "as_of": 1440,
+                  "demand_profile": {
+                    "business_identity_id": "run--9223371989660465703:business:P-A",
+                    "effective_at": 2040,
+                    "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+                    "multiplier": [
+                      5,
+                      4
+                    ],
+                    "origin_districts": [
+                      "D01",
+                      "D02",
+                      "D03",
+                      "D04",
+                      "D08"
+                    ],
+                    "revision": 1
+                  },
+                  "parameters": {
+                    "capacity_per_minute": 10,
+                    "daily_demand": {
+                      "D01": 2000,
+                      "D02": 1500,
+                      "D03": 1200,
+                      "D04": 800,
+                      "D05": 600,
+                      "D06": 400,
+                      "D07": 300,
+                      "D08": 200
+                    },
+                    "data_version": "1.3",
+                    "fare": 100,
+                    "operating_cost_per_minute": 100,
+                    "source": {
+                      "commit": "604751d79bba86cad179ca6434a5ec5b42640d71",
+                      "path": "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
+                      "section": "4"
+                    }
+                  },
+                  "pending_arrivals": [
+                    {
+                      "count": 1,
+                      "minute": 1441
+                    },
+                    {
+                      "count": 3,
+                      "minute": 1440
+                    },
+                    {
+                      "count": 2,
+                      "minute": 1440
+                    },
+                    {
+                      "count": 2,
+                      "minute": 1440
+                    },
+                    {
+                      "count": 1,
+                      "minute": 1446
+                    }
+                  ],
+                  "remainders": {
+                    "D01:D02": 0,
+                    "D02:D03": 0,
+                    "D03:D04": 0,
+                    "D08:D01": 0
+                  },
+                  "route": [
+                    "S01",
+                    "S02",
+                    "S03",
+                    "S04",
+                    "S08",
+                    "S12"
+                  ]
+                },
+                "data_version": "1.3",
+                "distance_km": 5,
+                "end_to_end_minutes": 9,
+                "od_pairs": [
+                  {
+                    "daily_demand": 2000,
+                    "destination": "S02",
+                    "effective_daily_demand": [
+                      10000,
+                      4
+                    ],
+                    "id": "D01:D02",
+                    "minutes": 1,
+                    "origin": "S01",
+                    "tie": "S01:S02"
+                  },
+                  {
+                    "daily_demand": 1500,
+                    "destination": "S03",
+                    "effective_daily_demand": [
+                      7500,
+                      4
+                    ],
+                    "id": "D02:D03",
+                    "minutes": 1,
+                    "origin": "S02",
+                    "tie": "S02:S03"
+                  },
+                  {
+                    "daily_demand": 1200,
+                    "destination": "S04",
+                    "effective_daily_demand": [
+                      6000,
+                      4
+                    ],
+                    "id": "D03:D04",
+                    "minutes": 1,
+                    "origin": "S03",
+                    "tie": "S03:S04"
+                  },
+                  {
+                    "daily_demand": 200,
+                    "destination": "S01",
+                    "effective_daily_demand": [
+                      1000,
+                      4
+                    ],
+                    "id": "D08:D01",
+                    "minutes": 7,
+                    "origin": "S08",
+                    "tie": "S08:S01"
+                  }
+                ],
+                "ok": true,
+                "period_end": 1440,
+                "period_start": 360,
+                "totals": {
+                  "boarded": 6075,
+                  "completed": 6066,
+                  "operating_cost": 108000,
+                  "predicted_fare": 606600,
+                  "requested": 6075,
+                  "unboarded": 0
+                }
+              }
+            },
+            "input_minute": 2040,
+            "plan_revision": 1,
+            "prediction_input_revision": 2,
+            "prediction_status": "READY",
+            "previous": {
+              "generated_minute": 508,
+              "input_revision": 1,
+              "value": {
+                "carry": {
+                  "as_of": 1440,
+                  "parameters": {
+                    "capacity_per_minute": 10,
+                    "daily_demand": {
+                      "D01": 2000,
+                      "D02": 1500,
+                      "D03": 1200,
+                      "D04": 800,
+                      "D05": 600,
+                      "D06": 400,
+                      "D07": 300,
+                      "D08": 200
+                    },
+                    "data_version": "1.3",
+                    "fare": 100,
+                    "operating_cost_per_minute": 100,
+                    "source": {
+                      "commit": "604751d79bba86cad179ca6434a5ec5b42640d71",
+                      "path": "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
+                      "section": "4"
+                    }
+                  },
+                  "pending_arrivals": [
+                    {
+                      "count": 1,
+                      "minute": 1440
+                    },
+                    {
+                      "count": 2,
+                      "minute": 1440
+                    },
+                    {
+                      "count": 2,
+                      "minute": 1440
+                    },
+                    {
+                      "count": 2,
+                      "minute": 1440
+                    },
+                    {
+                      "count": 1,
+                      "minute": 1446
+                    }
+                  ],
+                  "remainders": {
+                    "D01:D02": 0,
+                    "D02:D03": 0,
+                    "D03:D04": 0,
+                    "D08:D01": 0
+                  },
+                  "route": [
+                    "S01",
+                    "S02",
+                    "S03",
+                    "S04",
+                    "S08",
+                    "S12"
+                  ]
+                },
+                "data_version": "1.3",
+                "distance_km": 5,
+                "end_to_end_minutes": 9,
+                "od_pairs": [
+                  {
+                    "daily_demand": 2000,
+                    "destination": "S02",
+                    "id": "D01:D02",
+                    "minutes": 1,
+                    "origin": "S01",
+                    "tie": "S01:S02"
+                  },
+                  {
+                    "daily_demand": 1500,
+                    "destination": "S03",
+                    "id": "D02:D03",
+                    "minutes": 1,
+                    "origin": "S02",
+                    "tie": "S02:S03"
+                  },
+                  {
+                    "daily_demand": 1200,
+                    "destination": "S04",
+                    "id": "D03:D04",
+                    "minutes": 1,
+                    "origin": "S03",
+                    "tie": "S03:S04"
+                  },
+                  {
+                    "daily_demand": 200,
+                    "destination": "S01",
+                    "id": "D08:D01",
+                    "minutes": 7,
+                    "origin": "S08",
+                    "tie": "S08:S01"
+                  }
+                ],
+                "ok": true,
+                "period_end": 1440,
+                "period_start": 360,
+                "totals": {
+                  "boarded": 4860,
+                  "completed": 4852,
+                  "operating_cost": 108000,
+                  "predicted_fare": 485200,
+                  "requested": 4860,
+                  "unboarded": 0
+                }
+              }
+            },
+            "reason": ""
+          }
+        }
+      },
+      "id": "DI03/duplicate_original_result",
+      "passed": true
+    },
+    {
+      "actual": [
+        "REJECTED",
+        2160
+      ],
+      "expected": [
+        "REJECTED",
+        2160
+      ],
+      "id": "DI03/refailure_T2160",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "id": "DI03/retry_no_new_schedule",
+      "passed": true
+    },
+    {
+      "actual": 1,
+      "expected": 1,
+      "id": "DI03/T3600_only_first_fact",
+      "passed": true
+    },
+    {
+      "actual": [
+        true,
+        2100
+      ],
+      "expected": [
+        true,
+        2100
+      ],
+      "id": "DI03/after_use_stays_used",
+      "passed": true
+    },
+    {
+      "actual": {
+        "business_identity_id": "run--9223371989660465703:business:P-A",
+        "effective_at": 2040,
+        "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+        "multiplier": [
+          5,
+          4
+        ],
+        "origin_districts": [
+          "D01",
+          "D02",
+          "D03",
+          "D04",
+          "D08"
+        ],
+        "revision": 1
+      },
+      "expected": {
+        "business_identity_id": "run--9223371989660465703:business:P-A",
+        "effective_at": 2040,
+        "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+        "multiplier": [
+          5,
+          4
+        ],
+        "origin_districts": [
+          "D01",
+          "D02",
+          "D03",
+          "D04",
+          "D08"
+        ],
+        "revision": 1
+      },
+      "id": "DI03/consumption_does_not_change_profile",
+      "passed": true
+    },
+    {
+      "actual": {
+        "available_cash": 1000000,
+        "cash": 1000000,
+        "free_cash": 1000000,
+        "reserved": 0,
+        "reserved_by_project": {},
+        "restricted": 0,
+        "restricted_by_project": {},
+        "unpaid": 0
+      },
+      "expected": {
+        "available_cash": 1000000,
+        "cash": 1000000,
+        "free_cash": 1000000,
+        "reserved": 0,
+        "reserved_by_project": {},
+        "restricted": 0,
+        "restricted_by_project": {},
+        "unpaid": 0
+      },
+      "id": "DI03/no_money_side_effect",
+      "passed": true
+    },
+    {
+      "actual": {
+        "closing_funds": {
+          "available_cash": 1000000,
+          "cash": 1000000,
+          "free_cash": 1000000,
+          "reserved": 0,
+          "reserved_by_project": {},
+          "restricted": 0,
+          "restricted_by_project": {},
+          "unpaid": 0
+        },
+        "construction_cost": 0,
+        "construction_payment": 0,
+        "day_id": 1,
+        "debt_payment": 0,
+        "fare": 0,
+        "government": 0,
+        "operating_cost": 0,
+        "payment": 0
+      },
+      "expected": {
+        "closing_funds": {
+          "available_cash": 1000000,
+          "cash": 1000000,
+          "free_cash": 1000000,
+          "reserved": 0,
+          "reserved_by_project": {},
+          "restricted": 0,
+          "restricted_by_project": {},
+          "unpaid": 0
+        },
+        "construction_cost": 0,
+        "construction_payment": 0,
+        "day_id": 1,
+        "debt_payment": 0,
+        "fare": 0,
+        "government": 0,
+        "operating_cost": 0,
+        "payment": 0
+      },
+      "id": "DI03/closed_report_unchanged",
+      "passed": true
+    },
+    {
+      "actual": 2,
+      "expected": 2,
+      "id": "DI03/repeat_exact_draws",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "id": "DI03/stale_fixture_registered",
+      "passed": true
+    },
+    {
+      "actual": "STALE_PLAN_OR_PREDICTION",
+      "expected": "STALE_PLAN_OR_PREDICTION",
+      "id": "DI03/admission_binding_rechecked",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "id": "DI03/admission_no_consumption",
+      "passed": true
+    },
+    {
+      "actual": 1,
+      "expected": 1,
+      "id": "DI03/admission_no_draw",
+      "passed": true
+    },
+    {
+      "actual": "P1-MODEL:review:000002:decision",
+      "expected": "P1-MODEL:review:000002:decision",
+      "id": "DI03/persuasion_held_basis",
+      "passed": true
+    },
+    {
+      "actual": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S08",
+        "S12"
+      ],
+      "expected": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S08",
+        "S12"
+      ],
+      "id": "DI03/persuasion_held_stops",
+      "passed": true
+    },
+    {
+      "actual": 1923,
+      "expected": 1923,
+      "id": "DI03/persuasion_occurs_from_failure",
+      "passed": true
+    },
+    {
+      "actual": 1,
+      "expected": 1,
+      "id": "DI03/aliases_share_one_fact",
+      "passed": true
+    },
+    {
+      "actual": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S08",
+        "S12"
+      ],
+      "expected": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S08",
+        "S12"
+      ],
+      "id": "DI03/no_edited_basis",
+      "passed": true
+    },
+    {
+      "actual": "P1-MODEL:review:000002:decision:E01",
+      "expected": "P1-MODEL:review:000002:decision:E01",
+      "id": "DI03/alias_uses_same_fact",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "id": "DI03/impact_invalidates_prediction",
+      "passed": true
+    },
+    {
+      "actual": {},
+      "expected": {},
+      "id": "DI03/separate_business_has_no_early_effect",
+      "passed": true
+    },
+    {
+      "actual": 2,
+      "expected": 2,
+      "id": "DI03/independent_facts",
+      "passed": true
+    },
+    {
+      "actual": "P1-MODEL:review:000002:decision:E01",
+      "expected": "P1-MODEL:review:000002:decision:E01",
+      "id": "DI03/independent_fact_a",
+      "passed": true
+    },
+    {
+      "actual": "P1-MODEL:review:000004:decision:E01",
+      "expected": "P1-MODEL:review:000004:decision:E01",
+      "id": "DI03/independent_fact_b",
+      "passed": true
+    },
+    {
+      "actual": "D08:D01",
+      "expected": "D08:D01",
+      "id": "DI03/carry_fixture_OD",
+      "passed": true
+    },
+    {
+      "actual": [
+        505,
+        4
+      ],
+      "expected": [
+        505,
+        4
+      ],
+      "id": "DI03/exact_101_x_5_4",
+      "passed": true
+    },
+    {
+      "actual": false,
+      "expected": false,
+      "id": "DI03/non_target_od_unscaled",
+      "passed": true
+    },
+    {
+      "actual": 808,
+      "expected": 808,
+      "id": "DI03/carry_before",
+      "passed": true
+    },
+    {
+      "actual": 7272,
+      "expected": 7272,
+      "id": "DI03/carry_exact_units",
+      "passed": true
+    },
+    {
+      "actual": 3,
+      "expected": 3,
+      "id": "DI03/pending_arrival_before",
+      "passed": true
+    },
+    {
+      "actual": 3,
+      "expected": 3,
+      "id": "DI03/old_cohort_arrives_after_effect",
+      "passed": true
+    },
+    {
+      "actual": {
+        "as_of": 2047,
+        "demand_profile": {
+          "business_identity_id": "P1-MODEL:business:P-A",
+          "effective_at": 2040,
+          "fact_id": "carry-fixture:E01",
+          "multiplier": [
+            5,
+            4
+          ],
+          "origin_districts": [
+            "D01",
+            "D08"
+          ],
+          "revision": 1
+        },
+        "parameters": {
+          "capacity_per_minute": 10,
+          "daily_demand": {
+            "D01": 2000,
+            "D02": 1500,
+            "D03": 1200,
+            "D04": 800,
+            "D05": 600,
+            "D06": 400,
+            "D07": 300,
+            "D08": 101
+          },
+          "data_version": "1.3",
+          "fare": 100,
+          "operating_cost_per_minute": 100,
+          "source": {
+            "commit": "604751d79bba86cad179ca6434a5ec5b42640d71",
+            "path": "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
+            "section": "4"
+          }
+        },
+        "pending_arrivals": [
+          {
+            "count": 3,
+            "minute": 2047
+          },
+          {
+            "count": 2,
+            "minute": 2047
+          },
+          {
+            "count": 1,
+            "minute": 2047
+          }
+        ],
+        "remainders": {
+          "D01:D02": 2400,
+          "D02:D03": 4800,
+          "D03:D04": 38400,
+          "D08:D01": 31512
+        },
+        "route": [
+          "S01",
+          "S02",
+          "S03",
+          "S04",
+          "S08",
+          "S12"
+        ]
+      },
+      "expected": {
+        "as_of": 2047,
+        "demand_profile": {
+          "business_identity_id": "P1-MODEL:business:P-A",
+          "effective_at": 2040,
+          "fact_id": "carry-fixture:E01",
+          "multiplier": [
+            5,
+            4
+          ],
+          "origin_districts": [
+            "D01",
+            "D08"
+          ],
+          "revision": 1
+        },
+        "parameters": {
+          "capacity_per_minute": 10,
+          "daily_demand": {
+            "D01": 2000,
+            "D02": 1500,
+            "D03": 1200,
+            "D04": 800,
+            "D05": 600,
+            "D06": 400,
+            "D07": 300,
+            "D08": 101
+          },
+          "data_version": "1.3",
+          "fare": 100,
+          "operating_cost_per_minute": 100,
+          "source": {
+            "commit": "604751d79bba86cad179ca6434a5ec5b42640d71",
+            "path": "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
+            "section": "4"
+          }
+        },
+        "pending_arrivals": [
+          {
+            "count": 3,
+            "minute": 2047
+          },
+          {
+            "count": 2,
+            "minute": 2047
+          },
+          {
+            "count": 1,
+            "minute": 2047
+          }
+        ],
+        "remainders": {
+          "D01:D02": 2400,
+          "D02:D03": 4800,
+          "D03:D04": 38400,
+          "D08:D01": 31512
+        },
+        "route": [
+          "S01",
+          "S02",
+          "S03",
+          "S04",
+          "S08",
+          "S12"
+        ]
+      },
+      "id": "DI03/boosted_split_carry",
+      "passed": true
+    },
+    {
+      "actual": [
+        0,
+        4
+      ],
+      "expected": [
+        0,
+        4
+      ],
+      "id": "DI03/zero_remains_zero",
+      "passed": true
+    },
+    {
+      "actual": "REJECTED",
+      "expected": "REJECTED",
+      "id": "DI03/operation_prereq_rejected",
+      "passed": true
+    },
+    {
+      "actual": "APPROVED",
+      "expected": "APPROVED",
+      "id": "DI03/permission_after_fact",
+      "passed": true
+    },
+    {
+      "actual": {
+        "business_identity_id": "run--9223371929077938727:business:P-A",
+        "effective_at": 2040,
+        "fact_id": "run--9223371929077938727:review:000002:decision:E01",
+        "multiplier": [
+          5,
+          4
+        ],
+        "origin_districts": [
+          "D01",
+          "D02",
+          "D03",
+          "D04",
+          "D08"
+        ],
+        "revision": 1
+      },
+      "expected": {
+        "business_identity_id": "run--9223371929077938727:business:P-A",
+        "effective_at": 2040,
+        "fact_id": "run--9223371929077938727:review:000002:decision:E01",
+        "multiplier": [
+          5,
+          4
+        ],
+        "origin_districts": [
+          "D01",
+          "D02",
+          "D03",
+          "D04",
+          "D08"
+        ],
+        "revision": 1
+      },
+      "id": "DI03/sealed_profile",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "id": "DI03/ready_service",
+      "passed": true
+    },
+    {
+      "actual": {
+        "business_identity_id": "run--9223371929077938727:business:P-A",
+        "effective_at": 2040,
+        "fact_id": "run--9223371929077938727:review:000002:decision:E01",
+        "multiplier": [
+          5,
+          4
+        ],
+        "origin_districts": [
+          "D01",
+          "D02",
+          "D03",
+          "D04",
+          "D08"
+        ],
+        "revision": 1
+      },
+      "expected": {
+        "business_identity_id": "run--9223371929077938727:business:P-A",
+        "effective_at": 2040,
+        "fact_id": "run--9223371929077938727:review:000002:decision:E01",
+        "multiplier": [
+          5,
+          4
+        ],
+        "origin_districts": [
+          "D01",
+          "D02",
+          "D03",
+          "D04",
+          "D08"
+        ],
+        "revision": 1
+      },
+      "id": "DI03/operation_profile",
+      "passed": true
+    },
+    {
+      "actual": [
+        {
+          "daily_demand": 2000,
+          "destination": "S02",
+          "effective_daily_demand": [
+            10000,
+            4
+          ],
+          "id": "D01:D02",
+          "minutes": 1,
+          "origin": "S01",
+          "tie": "S01:S02"
+        },
+        {
+          "daily_demand": 1500,
+          "destination": "S03",
+          "effective_daily_demand": [
+            7500,
+            4
+          ],
+          "id": "D02:D03",
+          "minutes": 1,
+          "origin": "S02",
+          "tie": "S02:S03"
+        },
+        {
+          "daily_demand": 1200,
+          "destination": "S04",
+          "effective_daily_demand": [
+            6000,
+            4
+          ],
+          "id": "D03:D04",
+          "minutes": 1,
+          "origin": "S03",
+          "tie": "S03:S04"
+        },
+        {
+          "daily_demand": 200,
+          "destination": "S01",
+          "effective_daily_demand": [
+            1000,
+            4
+          ],
+          "id": "D08:D01",
+          "minutes": 7,
+          "origin": "S08",
+          "tie": "S08:S01"
+        }
+      ],
+      "expected": [
+        {
+          "daily_demand": 2000,
+          "destination": "S02",
+          "effective_daily_demand": [
+            10000,
+            4
+          ],
+          "id": "D01:D02",
+          "minutes": 1,
+          "origin": "S01",
+          "tie": "S01:S02"
+        },
+        {
+          "daily_demand": 1500,
+          "destination": "S03",
+          "effective_daily_demand": [
+            7500,
+            4
+          ],
+          "id": "D02:D03",
+          "minutes": 1,
+          "origin": "S02",
+          "tie": "S02:S03"
+        },
+        {
+          "daily_demand": 1200,
+          "destination": "S04",
+          "effective_daily_demand": [
+            6000,
+            4
+          ],
+          "id": "D03:D04",
+          "minutes": 1,
+          "origin": "S03",
+          "tie": "S03:S04"
+        },
+        {
+          "daily_demand": 200,
+          "destination": "S01",
+          "effective_daily_demand": [
+            1000,
+            4
+          ],
+          "id": "D08:D01",
+          "minutes": 7,
+          "origin": "S08",
+          "tie": "S08:S01"
+        }
+      ],
+      "id": "DI03/forecast_operation_od_parity",
+      "passed": true
+    },
+    {
+      "actual": 43200,
+      "expected": 43200,
+      "id": "DI03/actual_carry_denominator",
+      "passed": true
+    },
+    {
+      "actual": 8000,
+      "expected": 8000,
+      "id": "DI03/actual_first_boarding_carry",
+      "passed": true
+    },
+    {
+      "actual": 16000,
+      "expected": 16000,
+      "id": "DI03/next_boarding_keeps_prior_carry",
+      "passed": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "id": "DI03/first_actual_arrival",
+      "passed": true
+    }
+  ],
+  "base_sha": "a1e2534232e4cc71425a47c530240625784c0ae9",
+  "branch": "codex/DEV-027-di03-supply",
+  "build_identity": "LOCAL_WORKTREE_SHA256_MANIFEST",
+  "engine": "4.7.2-stable (official)",
+  "execution": {
+    "Project load": {
+      "command": "godot --headless --path . --editor --quit",
+      "exit": 0,
+      "log": ".local/validation/di03/verified/load/engine.log",
+      "log_sha256": "f570c54cc447847af72f15a1682fb7d4696fd5538cedbfe63b4820141cd0afb1"
+    },
+    "Proposal View automatic": {
+      "checks": 890,
+      "command": "godot --headless --path . --script tests/game/run_proposal_view_tests.gd",
+      "exit": 0,
+      "failures": 0,
+      "log": ".local/validation/di03/verified/view/engine.log",
+      "log_sha256": "04f1f63586eaf2b383ab452efce082c55e0cf85a5a014b3919b32d81a340ed9f",
+      "raw_json": ".local/validation/di03/verified/view/results.json",
+      "raw_json_sha256": "6d674dc1dff4baee669e2a93cecf00981e1f3e1e6780b93b445dce5beaf4f8a2"
+    },
+    "Session / proposal API": {
+      "checks": 210,
+      "command": "godot --headless --path . --script tests/game/run_proposal_ui_tests.gd",
+      "exit": 0,
+      "failures": 0,
+      "log": ".local/validation/di03/acceptance/proposal-api/engine.log",
+      "log_sha256": "0d17e2883d5a4278373fef98a9fe09ceac40cae74a6ad95f446e54db130cb22f",
+      "raw_json": ".local/validation/di03/acceptance/proposal-api/results.json",
+      "raw_json_sha256": "1954e2a54a6fe0b064dc8089ed75838705d51c85820541bdf0680b46977b6611"
+    },
+    "VS-02 automatic": {
+      "checks": 95,
+      "command": "godot --headless --path . --script tests/game/run_vs02_tests.gd",
+      "exit": 0,
+      "failures": 0,
+      "log": ".local/validation/di03/verified/vs02-auto/engine.log",
+      "log_sha256": "7b9765725700b096232bfe5871be0cb441fb7d680ec1bb31408c4872cbde5ef6",
+      "raw_json": ".local/validation/di03/verified/vs02-auto/results.json",
+      "raw_json_sha256": "2d55655b52f72c61220c0328f5dd0c7af5b85c8c70dc573dcc0ba8afebab9951"
+    },
+    "W03": {
+      "checks": 101,
+      "command": "godot --headless --path . --script tests/game/run_w03_tests.gd",
+      "exit": 0,
+      "failures": 0,
+      "log": ".local/validation/di03/acceptance/w03/engine.log",
+      "log_sha256": "de227183b88adba101f5644ec66d669a56295c32acf350a624e2d4310e886b37"
+    },
+    "W04B": {
+      "checks": 455,
+      "command": "godot --headless --path . --script tests/game/run_w04b_tests.gd",
+      "exit": 0,
+      "failures": 0,
+      "log": ".local/validation/di03/acceptance/w04b/engine.log",
+      "log_sha256": "16141d0bd78dafb44da7d0b14b00017b58627d98f76489bf0c43042bc0ab434b",
+      "raw_json": ".local/validation/di03/acceptance/w04b/results.json",
+      "raw_json_sha256": "a1065925de24872f083ce8a2df149d740c8fa0174a1503310b76f3c10c5f3d58"
+    },
+    "W06": {
+      "checks": 179,
+      "command": "godot --headless --path . --script tests/game/run_w06_tests.gd",
+      "exit": 0,
+      "failures": 0,
+      "log": ".local/validation/di03/acceptance/w06/engine.log",
+      "log_sha256": "6d51d73cf112d93291de185de131d8d2dc26e35bd2a795784e4c5a426a680e92"
+    }
+  },
+  "fractional_predictor_fixture": {
+    "at_effect": {
+      "carry": {
+        "as_of": 2041,
+        "demand_profile": {
+          "business_identity_id": "P1-MODEL:business:P-A",
+          "effective_at": 2040,
+          "fact_id": "carry-fixture:E01",
+          "multiplier": [
+            5,
+            4
+          ],
+          "origin_districts": [
+            "D01",
+            "D08"
+          ],
+          "revision": 1
+        },
+        "parameters": {
+          "capacity_per_minute": 10,
+          "daily_demand": {
+            "D01": 2000,
+            "D02": 1500,
+            "D03": 1200,
+            "D04": 800,
+            "D05": 600,
+            "D06": 400,
+            "D07": 300,
+            "D08": 101
+          },
+          "data_version": "1.3",
+          "fare": 100,
+          "operating_cost_per_minute": 100,
+          "source": {
+            "commit": "604751d79bba86cad179ca6434a5ec5b42640d71",
+            "path": "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
+            "section": "4"
+          }
+        },
+        "pending_arrivals": [
+          {
+            "count": 3,
+            "minute": 2041
+          },
+          {
+            "count": 1,
+            "minute": 2041
+          },
+          {
+            "count": 1,
+            "minute": 2041
+          }
+        ],
+        "remainders": {
+          "D01:D02": 7200,
+          "D02:D03": 33600,
+          "D03:D04": 9600,
+          "D08:D01": 7272
+        },
+        "route": [
+          "S01",
+          "S02",
+          "S03",
+          "S04",
+          "S08",
+          "S12"
+        ]
+      },
+      "data_version": "1.3",
+      "distance_km": 5,
+      "end_to_end_minutes": 9,
+      "od_pairs": [
+        {
+          "daily_demand": 2000,
+          "destination": "S02",
+          "effective_daily_demand": [
+            10000,
+            4
+          ],
+          "id": "D01:D02",
+          "minutes": 1,
+          "origin": "S01",
+          "tie": "S01:S02"
+        },
+        {
+          "daily_demand": 1500,
+          "destination": "S03",
+          "id": "D02:D03",
+          "minutes": 1,
+          "origin": "S02",
+          "tie": "S02:S03"
+        },
+        {
+          "daily_demand": 1200,
+          "destination": "S04",
+          "id": "D03:D04",
+          "minutes": 1,
+          "origin": "S03",
+          "tie": "S03:S04"
+        },
+        {
+          "daily_demand": 101,
+          "destination": "S01",
+          "effective_daily_demand": [
+            505,
+            4
+          ],
+          "id": "D08:D01",
+          "minutes": 7,
+          "origin": "S08",
+          "tie": "S08:S01"
+        }
+      ],
+      "ok": true,
+      "period_end": 2041,
+      "period_start": 2040,
+      "totals": {
+        "boarded": 5,
+        "completed": 3,
+        "operating_cost": 100,
+        "predicted_fare": 300,
+        "requested": 5,
+        "unboarded": 0
+      }
+    },
+    "before": {
+      "carry": {
+        "as_of": 2040,
+        "parameters": {
+          "capacity_per_minute": 10,
+          "daily_demand": {
+            "D01": 2000,
+            "D02": 1500,
+            "D03": 1200,
+            "D04": 800,
+            "D05": 600,
+            "D06": 400,
+            "D07": 300,
+            "D08": 101
+          },
+          "data_version": "1.3",
+          "fare": 100,
+          "operating_cost_per_minute": 100,
+          "source": {
+            "commit": "604751d79bba86cad179ca6434a5ec5b42640d71",
+            "path": "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
+            "section": "4"
+          }
+        },
+        "pending_arrivals": [
+          {
+            "count": 1,
+            "minute": 2040
+          },
+          {
+            "count": 1,
+            "minute": 2040
+          },
+          {
+            "count": 1,
+            "minute": 2040
+          }
+        ],
+        "remainders": {
+          "D01:D02": 9200,
+          "D02:D03": 4200,
+          "D03:D04": 1200,
+          "D08:D01": 808
+        },
+        "route": [
+          "S01",
+          "S02",
+          "S03",
+          "S04",
+          "S08",
+          "S12"
+        ]
+      },
+      "data_version": "1.3",
+      "distance_km": 5,
+      "end_to_end_minutes": 9,
+      "od_pairs": [
+        {
+          "daily_demand": 2000,
+          "destination": "S02",
+          "id": "D01:D02",
+          "minutes": 1,
+          "origin": "S01",
+          "tie": "S01:S02"
+        },
+        {
+          "daily_demand": 1500,
+          "destination": "S03",
+          "id": "D02:D03",
+          "minutes": 1,
+          "origin": "S02",
+          "tie": "S02:S03"
+        },
+        {
+          "daily_demand": 1200,
+          "destination": "S04",
+          "id": "D03:D04",
+          "minutes": 1,
+          "origin": "S03",
+          "tie": "S03:S04"
+        },
+        {
+          "daily_demand": 101,
+          "destination": "S01",
+          "id": "D08:D01",
+          "minutes": 7,
+          "origin": "S08",
+          "tie": "S08:S01"
+        }
+      ],
+      "ok": true,
+      "period_end": 2040,
+      "period_start": 2039,
+      "totals": {
+        "boarded": 3,
+        "completed": 0,
+        "operating_cost": 100,
+        "predicted_fare": 0,
+        "requested": 3,
+        "unboarded": 0
+      }
+    },
+    "kind": "ISOLATED_PREDICTOR_FIXTURE",
+    "zero": {
+      "carry": {
+        "as_of": 2041,
+        "demand_profile": {
+          "business_identity_id": "P1-MODEL:business:P-A",
+          "effective_at": 2040,
+          "fact_id": "carry-fixture:E01",
+          "multiplier": [
+            5,
+            4
+          ],
+          "origin_districts": [
+            "D01",
+            "D08"
+          ],
+          "revision": 1
+        },
+        "parameters": {
+          "capacity_per_minute": 10,
+          "daily_demand": {
+            "D01": 2000,
+            "D02": 1500,
+            "D03": 1200,
+            "D04": 800,
+            "D05": 600,
+            "D06": 400,
+            "D07": 300,
+            "D08": 0
+          },
+          "data_version": "1.3",
+          "fare": 100,
+          "operating_cost_per_minute": 100,
+          "source": {
+            "commit": "604751d79bba86cad179ca6434a5ec5b42640d71",
+            "path": "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
+            "section": "4"
+          }
+        },
+        "pending_arrivals": [
+          {
+            "count": 2,
+            "minute": 2041
+          },
+          {
+            "count": 1,
+            "minute": 2041
+          },
+          {
+            "count": 1,
+            "minute": 2041
+          }
+        ],
+        "remainders": {
+          "D01:D02": 13600,
+          "D02:D03": 16800,
+          "D03:D04": 4800,
+          "D08:D01": 0
+        },
+        "route": [
+          "S01",
+          "S02",
+          "S03",
+          "S04",
+          "S08",
+          "S12"
+        ]
+      },
+      "data_version": "1.3",
+      "distance_km": 5,
+      "end_to_end_minutes": 9,
+      "od_pairs": [
+        {
+          "daily_demand": 2000,
+          "destination": "S02",
+          "effective_daily_demand": [
+            10000,
+            4
+          ],
+          "id": "D01:D02",
+          "minutes": 1,
+          "origin": "S01",
+          "tie": "S01:S02"
+        },
+        {
+          "daily_demand": 1500,
+          "destination": "S03",
+          "id": "D02:D03",
+          "minutes": 1,
+          "origin": "S02",
+          "tie": "S02:S03"
+        },
+        {
+          "daily_demand": 1200,
+          "destination": "S04",
+          "id": "D03:D04",
+          "minutes": 1,
+          "origin": "S03",
+          "tie": "S03:S04"
+        },
+        {
+          "daily_demand": 0,
+          "destination": "S01",
+          "effective_daily_demand": [
+            0,
+            4
+          ],
+          "id": "D08:D01",
+          "minutes": 7,
+          "origin": "S08",
+          "tie": "S08:S01"
+        }
+      ],
+      "ok": true,
+      "period_end": 2041,
+      "period_start": 2040,
+      "totals": {
+        "boarded": 4,
+        "completed": 0,
+        "operating_cost": 100,
+        "predicted_fare": 0,
+        "requested": 4,
+        "unboarded": 0
+      }
+    }
+  },
+  "issue": 185,
+  "samples": {
+    "DI03_T2039": {
+      "command_records": [
+        {
+          "accepted": false,
+          "admitted_at": null,
+          "command": {
+            "action": "submit_government_review",
+            "binding": {
+              "plan_revision": 1,
+              "prediction_input_revision": 1,
+              "proposal_id": "run--9223371989660465703:proposal:P-A"
+            },
+            "command_id": "early-retry",
+            "decision_id": "run--9223371989660465703:review:000001:decision",
+            "expected_snapshot_revision": 10,
+            "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+            "run_scope": "run--9223371989660465703",
+            "slot_id": "P-A"
+          },
+          "command_id": "early-retry",
+          "effective_at": null,
+          "effective_not_before": 2040,
+          "pending": false,
+          "reason": "FACT_NOT_OCCURRED",
+          "reason_codes": [
+            "FACT_NOT_OCCURRED"
+          ],
+          "registered_at": null,
+          "requested_at": 2039
+        }
+      ],
+      "current_binding": {
+        "plan_revision": 1,
+        "prediction_input_revision": 1,
+        "proposal_id": "run--9223371989660465703:proposal:P-A"
+      },
+      "current_demand_profile": {},
+      "current_od_pairs": [
+        {
+          "daily_demand": 2000,
+          "destination": "S02",
+          "id": "D01:D02",
+          "minutes": 1,
+          "origin": "S01",
+          "tie": "S01:S02"
+        },
+        {
+          "daily_demand": 1500,
+          "destination": "S03",
+          "id": "D02:D03",
+          "minutes": 1,
+          "origin": "S02",
+          "tie": "S02:S03"
+        },
+        {
+          "daily_demand": 1200,
+          "destination": "S04",
+          "id": "D03:D04",
+          "minutes": 1,
+          "origin": "S03",
+          "tie": "S03:S04"
+        },
+        {
+          "daily_demand": 200,
+          "destination": "S01",
+          "id": "D08:D01",
+          "minutes": 7,
+          "origin": "S08",
+          "tie": "S08:S01"
+        }
+      ],
+      "envelope": {
+        "model_snapshot_revision": 11,
+        "observation": {
+          "data_version": "1.3",
+          "day_id": 2,
+          "observation_phase": "T_COMPLETE",
+          "simulation_minute": 2039,
+          "snapshot_revision": 12252
+        },
+        "run_scope": "run--9223371989660465703",
+        "view_revision": 12
+      },
+      "fact_supply": {
+        "available": true,
+        "facts": [],
+        "scheduled": [
+          {
+            "basis_decision_id": "run--9223371989660465703:review:000002:decision",
+            "basis_plan_revision": 1,
+            "basis_station_ids": [
+              "S01",
+              "S02",
+              "S03",
+              "S04",
+              "S08",
+              "S12"
+            ],
+            "business_identity_id": "run--9223371989660465703:business:P-A",
+            "consumed_at": null,
+            "consumed_by": "",
+            "decision_id": "run--9223371989660465703:review:000002:decision",
+            "effect_at": null,
+            "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+            "failed_at": 600,
+            "kind": "E01",
+            "occurred_at": null,
+            "origin_districts": [
+              "D01",
+              "D02",
+              "D03",
+              "D04",
+              "D08"
+            ],
+            "scheduled_at": 2040,
+            "slot_id": "P-A",
+            "target_od_ids": [
+              "D01:D02",
+              "D02:D03",
+              "D03:D04",
+              "D04:D05",
+              "D08:D01"
+            ],
+            "used": false
+          }
+        ],
+        "status": "READY"
+      },
+      "funds": {
+        "available_cash": 1000000,
+        "cash": 1000000,
+        "free_cash": 1000000,
+        "reserved": 0,
+        "reserved_by_project": {},
+        "restricted": 0,
+        "restricted_by_project": {},
+        "unpaid": 0
+      },
+      "general_government_action": {
+        "allowed": false,
+        "reason_codes": [
+          "NEW_FACT_REQUIRED_DI03_PENDING"
+        ]
+      },
+      "historical_authority_decisions": [
+        {
+          "business_identity_id": "run--9223371989660465703:business:P-A",
+          "completed_at": 600,
+          "consumed_fact_id": null,
+          "decision_id": "run--9223371989660465703:review:000002:decision",
+          "fact_pending": {
+            "decision_id": "run--9223371989660465703:review:000002:decision",
+            "earliest_at": 2040,
+            "fact_created": false,
+            "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+            "status": "E01_SCHEDULED"
+          },
+          "kind": "GOVERNMENT",
+          "outcome": "REJECTED",
+          "target_decision_id": "run--9223371989660465703:review:000001:decision"
+        }
+      ],
+      "kind": "ACTUAL_SESSION_API",
+      "ledger_canonical_sha256": "7a89a602847fd19ce6396fe78644a5789c8f00472319cabc5e08c3b2787f56a4",
+      "ledger_entry_count": 1531,
+      "prediction_input_revision": 1,
+      "prediction_status": "READY",
+      "retry_state": {
+        "allowed": false,
+        "applicable": true,
+        "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+        "failure_decision_id": "run--9223371989660465703:review:000002:decision",
+        "reason_codes": [
+          "FACT_NOT_OCCURRED"
+        ]
+      },
+      "rng_draws": [
+        {
+          "command_id": "gov",
+          "decision_id": "run--9223371989660465703:review:000002:decision",
+          "domain": [
+            0,
+            99
+          ],
+          "draw_index": 1,
+          "kind": "GOVERNMENT",
+          "minute": 600,
+          "outcome": "REJECTED",
+          "phase": "REVIEW_COMPLETE",
+          "review_id": "run--9223371989660465703:review:000002",
+          "sample": 97,
+          "seed": "4",
+          "state_after": "-7485862620809337107",
+          "state_before": "-1320785020568185274"
+        }
+      ]
+    },
+    "DI03_T2040": {
+      "command_records": [
+        {
+          "accepted": false,
+          "admitted_at": null,
+          "command": {
+            "action": "submit_government_review",
+            "binding": {
+              "plan_revision": 1,
+              "prediction_input_revision": 1,
+              "proposal_id": "run--9223371989660465703:proposal:P-A"
+            },
+            "command_id": "early-retry",
+            "decision_id": "run--9223371989660465703:review:000001:decision",
+            "expected_snapshot_revision": 10,
+            "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+            "run_scope": "run--9223371989660465703",
+            "slot_id": "P-A"
+          },
+          "command_id": "early-retry",
+          "effective_at": null,
+          "effective_not_before": 2040,
+          "pending": false,
+          "reason": "FACT_NOT_OCCURRED",
+          "reason_codes": [
+            "FACT_NOT_OCCURRED"
+          ],
+          "registered_at": null,
+          "requested_at": 2039
+        }
+      ],
+      "current_binding": {
+        "plan_revision": 1,
+        "prediction_input_revision": 2,
+        "proposal_id": "run--9223371989660465703:proposal:P-A"
+      },
+      "current_demand_profile": {
+        "business_identity_id": "run--9223371989660465703:business:P-A",
+        "effective_at": 2040,
+        "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+        "multiplier": [
+          5,
+          4
+        ],
+        "origin_districts": [
+          "D01",
+          "D02",
+          "D03",
+          "D04",
+          "D08"
+        ],
+        "revision": 1
+      },
+      "current_od_pairs": [],
+      "envelope": {
+        "model_snapshot_revision": 12,
+        "observation": {
+          "data_version": "1.3",
+          "day_id": 2,
+          "observation_phase": "T_COMPLETE",
+          "simulation_minute": 2040,
+          "snapshot_revision": 12261
+        },
+        "run_scope": "run--9223371989660465703",
+        "view_revision": 15
+      },
+      "fact_supply": {
+        "available": true,
+        "facts": [
+          {
+            "basis_decision_id": "run--9223371989660465703:review:000002:decision",
+            "basis_plan_revision": 1,
+            "basis_station_ids": [
+              "S01",
+              "S02",
+              "S03",
+              "S04",
+              "S08",
+              "S12"
+            ],
+            "business_identity_id": "run--9223371989660465703:business:P-A",
+            "consumed_at": null,
+            "consumed_by": "",
+            "decision_id": "run--9223371989660465703:review:000002:decision",
+            "effect_at": 2040,
+            "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+            "failed_at": 600,
+            "kind": "E01",
+            "occurred_at": 2040,
+            "origin_districts": [
+              "D01",
+              "D02",
+              "D03",
+              "D04",
+              "D08"
+            ],
+            "scheduled_at": 2040,
+            "slot_id": "P-A",
+            "target_od_ids": [
+              "D01:D02",
+              "D02:D03",
+              "D03:D04",
+              "D04:D05",
+              "D08:D01"
+            ],
+            "used": false
+          }
+        ],
+        "scheduled": [],
+        "status": "READY"
+      },
+      "funds": {
+        "available_cash": 1000000,
+        "cash": 1000000,
+        "free_cash": 1000000,
+        "reserved": 0,
+        "reserved_by_project": {},
+        "restricted": 0,
+        "restricted_by_project": {},
+        "unpaid": 0
+      },
+      "general_government_action": {
+        "allowed": false,
+        "reason_codes": [
+          "PREDICTION_NOT_CURRENT"
+        ]
+      },
+      "historical_authority_decisions": [
+        {
+          "business_identity_id": "run--9223371989660465703:business:P-A",
+          "completed_at": 600,
+          "consumed_fact_id": null,
+          "decision_id": "run--9223371989660465703:review:000002:decision",
+          "fact_pending": {
+            "decision_id": "run--9223371989660465703:review:000002:decision",
+            "earliest_at": 2040,
+            "fact_created": false,
+            "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+            "status": "E01_SCHEDULED"
+          },
+          "kind": "GOVERNMENT",
+          "outcome": "REJECTED",
+          "target_decision_id": "run--9223371989660465703:review:000001:decision"
+        }
+      ],
+      "kind": "ACTUAL_SESSION_API",
+      "ledger_canonical_sha256": "24b8654174b61f439568aead96a0075befe5b1fe13fbe726f86e2f86f0c39ad1",
+      "ledger_entry_count": 1532,
+      "phase_trace": [
+        {
+          "effective_at": 2040,
+          "phase": "PREVIOUS_INTERVAL",
+          "snapshot_revision": 12253
+        },
+        {
+          "effective_at": 2040,
+          "phase": "CONTRACT",
+          "snapshot_revision": 12255
+        },
+        {
+          "effective_at": 2040,
+          "phase": "PROGRESS",
+          "snapshot_revision": 12256
+        },
+        {
+          "effective_at": 2040,
+          "phase": "VALIDATION",
+          "snapshot_revision": 12257
+        },
+        {
+          "effective_at": 2040,
+          "phase": "ARRIVAL",
+          "snapshot_revision": 12258
+        },
+        {
+          "effective_at": 2040,
+          "phase": "SETTLEMENT",
+          "snapshot_revision": 12259
+        },
+        {
+          "effective_at": 2040,
+          "phase": "BOARDING",
+          "snapshot_revision": 12260
+        }
+      ],
+      "prediction_input_revision": 2,
+      "prediction_status": "NOT_CALCULATED",
+      "retry_state": {
+        "allowed": false,
+        "applicable": true,
+        "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+        "failure_decision_id": "run--9223371989660465703:review:000002:decision",
+        "reason_codes": [
+          "PREDICTION_NOT_CURRENT"
+        ]
+      },
+      "rng_draws": [
+        {
+          "command_id": "gov",
+          "decision_id": "run--9223371989660465703:review:000002:decision",
+          "domain": [
+            0,
+            99
+          ],
+          "draw_index": 1,
+          "kind": "GOVERNMENT",
+          "minute": 600,
+          "outcome": "REJECTED",
+          "phase": "REVIEW_COMPLETE",
+          "review_id": "run--9223371989660465703:review:000002",
+          "sample": 97,
+          "seed": "4",
+          "state_after": "-7485862620809337107",
+          "state_before": "-1320785020568185274"
+        }
+      ]
+    },
+    "DI03_T2100": {
+      "command_records": [
+        {
+          "accepted": false,
+          "admitted_at": null,
+          "command": {
+            "action": "submit_government_review",
+            "binding": {
+              "plan_revision": 1,
+              "prediction_input_revision": 1,
+              "proposal_id": "run--9223371989660465703:proposal:P-A"
+            },
+            "command_id": "early-retry",
+            "decision_id": "run--9223371989660465703:review:000001:decision",
+            "expected_snapshot_revision": 10,
+            "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+            "run_scope": "run--9223371989660465703",
+            "slot_id": "P-A"
+          },
+          "command_id": "early-retry",
+          "effective_at": null,
+          "effective_not_before": 2040,
+          "pending": false,
+          "reason": "FACT_NOT_OCCURRED",
+          "reason_codes": [
+            "FACT_NOT_OCCURRED"
+          ],
+          "registered_at": null,
+          "requested_at": 2039
+        },
+        {
+          "accepted": true,
+          "admitted_at": 2100,
+          "command": {
+            "action": "submit_government_review",
+            "binding": {
+              "plan_revision": 1,
+              "prediction_input_revision": 2,
+              "proposal_id": "run--9223371989660465703:proposal:P-A"
+            },
+            "command_id": "retry",
+            "decision_id": "run--9223371989660465703:review:000003:decision",
+            "expected_snapshot_revision": 16,
+            "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+            "run_scope": "run--9223371989660465703",
+            "slot_id": "P-A"
+          },
+          "command_id": "retry",
+          "consumed_fact_id": "run--9223371989660465703:review:000002:decision:E01",
+          "effective_at": 2100,
+          "effective_not_before": 2100,
+          "fact_consumed_at": 2100,
+          "pending": false,
+          "reason": "",
+          "reason_codes": [],
+          "registered_at": 2099,
+          "requested_at": 2099,
+          "requires_new_request": false,
+          "review_id": "run--9223371989660465703:review:000004",
+          "submission": {
+            "binding": {
+              "plan_revision": 1,
+              "prediction_input_revision": 2,
+              "proposal_id": "run--9223371989660465703:proposal:P-A"
+            },
+            "demand_profile": {
+              "business_identity_id": "run--9223371989660465703:business:P-A",
+              "effective_at": 2040,
+              "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+              "multiplier": [
+                5,
+                4
+              ],
+              "origin_districts": [
+                "D01",
+                "D02",
+                "D03",
+                "D04",
+                "D08"
+              ],
+              "revision": 1
+            },
+            "identity": {
+              "business_identity_id": "run--9223371989660465703:business:P-A",
+              "proposal_id": "run--9223371989660465703:proposal:P-A",
+              "slot_id": "P-A"
+            },
+            "name": "P3-A P-A",
+            "plan": {
+              "allowed_actions": {
+                "edit": true,
+                "undo": true
+              },
+              "locked": false,
+              "plan_revision": 1,
+              "station_ids": [
+                "S01",
+                "S02",
+                "S03",
+                "S04",
+                "S08",
+                "S12"
+              ],
+              "validation": {
+                "allowed_actions": {
+                  "submit": true
+                },
+                "reason_codes": [],
+                "valid": true
+              }
+            },
+            "prediction": {
+              "available": true,
+              "current": {
+                "generated_minute": 2041,
+                "input_revision": 2,
+                "value": {
+                  "carry": {
+                    "as_of": 1440,
+                    "demand_profile": {
+                      "business_identity_id": "run--9223371989660465703:business:P-A",
+                      "effective_at": 2040,
+                      "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+                      "multiplier": [
+                        5,
+                        4
+                      ],
+                      "origin_districts": [
+                        "D01",
+                        "D02",
+                        "D03",
+                        "D04",
+                        "D08"
+                      ],
+                      "revision": 1
+                    },
+                    "parameters": {
+                      "capacity_per_minute": 10,
+                      "daily_demand": {
+                        "D01": 2000,
+                        "D02": 1500,
+                        "D03": 1200,
+                        "D04": 800,
+                        "D05": 600,
+                        "D06": 400,
+                        "D07": 300,
+                        "D08": 200
+                      },
+                      "data_version": "1.3",
+                      "fare": 100,
+                      "operating_cost_per_minute": 100,
+                      "source": {
+                        "commit": "604751d79bba86cad179ca6434a5ec5b42640d71",
+                        "path": "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
+                        "section": "4"
+                      }
+                    },
+                    "pending_arrivals": [
+                      {
+                        "count": 1,
+                        "minute": 1441
+                      },
+                      {
+                        "count": 3,
+                        "minute": 1440
+                      },
+                      {
+                        "count": 2,
+                        "minute": 1440
+                      },
+                      {
+                        "count": 2,
+                        "minute": 1440
+                      },
+                      {
+                        "count": 1,
+                        "minute": 1446
+                      }
+                    ],
+                    "remainders": {
+                      "D01:D02": 0,
+                      "D02:D03": 0,
+                      "D03:D04": 0,
+                      "D08:D01": 0
+                    },
+                    "route": [
+                      "S01",
+                      "S02",
+                      "S03",
+                      "S04",
+                      "S08",
+                      "S12"
+                    ]
+                  },
+                  "data_version": "1.3",
+                  "distance_km": 5,
+                  "end_to_end_minutes": 9,
+                  "od_pairs": [
+                    {
+                      "daily_demand": 2000,
+                      "destination": "S02",
+                      "effective_daily_demand": [
+                        10000,
+                        4
+                      ],
+                      "id": "D01:D02",
+                      "minutes": 1,
+                      "origin": "S01",
+                      "tie": "S01:S02"
+                    },
+                    {
+                      "daily_demand": 1500,
+                      "destination": "S03",
+                      "effective_daily_demand": [
+                        7500,
+                        4
+                      ],
+                      "id": "D02:D03",
+                      "minutes": 1,
+                      "origin": "S02",
+                      "tie": "S02:S03"
+                    },
+                    {
+                      "daily_demand": 1200,
+                      "destination": "S04",
+                      "effective_daily_demand": [
+                        6000,
+                        4
+                      ],
+                      "id": "D03:D04",
+                      "minutes": 1,
+                      "origin": "S03",
+                      "tie": "S03:S04"
+                    },
+                    {
+                      "daily_demand": 200,
+                      "destination": "S01",
+                      "effective_daily_demand": [
+                        1000,
+                        4
+                      ],
+                      "id": "D08:D01",
+                      "minutes": 7,
+                      "origin": "S08",
+                      "tie": "S08:S01"
+                    }
+                  ],
+                  "ok": true,
+                  "period_end": 1440,
+                  "period_start": 360,
+                  "totals": {
+                    "boarded": 6075,
+                    "completed": 6066,
+                    "operating_cost": 108000,
+                    "predicted_fare": 606600,
+                    "requested": 6075,
+                    "unboarded": 0
+                  }
+                }
+              },
+              "input_minute": 2040,
+              "plan_revision": 1,
+              "prediction_input_revision": 2,
+              "prediction_status": "READY",
+              "previous": {
+                "generated_minute": 508,
+                "input_revision": 1,
+                "value": {
+                  "carry": {
+                    "as_of": 1440,
+                    "parameters": {
+                      "capacity_per_minute": 10,
+                      "daily_demand": {
+                        "D01": 2000,
+                        "D02": 1500,
+                        "D03": 1200,
+                        "D04": 800,
+                        "D05": 600,
+                        "D06": 400,
+                        "D07": 300,
+                        "D08": 200
+                      },
+                      "data_version": "1.3",
+                      "fare": 100,
+                      "operating_cost_per_minute": 100,
+                      "source": {
+                        "commit": "604751d79bba86cad179ca6434a5ec5b42640d71",
+                        "path": "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
+                        "section": "4"
+                      }
+                    },
+                    "pending_arrivals": [
+                      {
+                        "count": 1,
+                        "minute": 1440
+                      },
+                      {
+                        "count": 2,
+                        "minute": 1440
+                      },
+                      {
+                        "count": 2,
+                        "minute": 1440
+                      },
+                      {
+                        "count": 2,
+                        "minute": 1440
+                      },
+                      {
+                        "count": 1,
+                        "minute": 1446
+                      }
+                    ],
+                    "remainders": {
+                      "D01:D02": 0,
+                      "D02:D03": 0,
+                      "D03:D04": 0,
+                      "D08:D01": 0
+                    },
+                    "route": [
+                      "S01",
+                      "S02",
+                      "S03",
+                      "S04",
+                      "S08",
+                      "S12"
+                    ]
+                  },
+                  "data_version": "1.3",
+                  "distance_km": 5,
+                  "end_to_end_minutes": 9,
+                  "od_pairs": [
+                    {
+                      "daily_demand": 2000,
+                      "destination": "S02",
+                      "id": "D01:D02",
+                      "minutes": 1,
+                      "origin": "S01",
+                      "tie": "S01:S02"
+                    },
+                    {
+                      "daily_demand": 1500,
+                      "destination": "S03",
+                      "id": "D02:D03",
+                      "minutes": 1,
+                      "origin": "S02",
+                      "tie": "S02:S03"
+                    },
+                    {
+                      "daily_demand": 1200,
+                      "destination": "S04",
+                      "id": "D03:D04",
+                      "minutes": 1,
+                      "origin": "S03",
+                      "tie": "S03:S04"
+                    },
+                    {
+                      "daily_demand": 200,
+                      "destination": "S01",
+                      "id": "D08:D01",
+                      "minutes": 7,
+                      "origin": "S08",
+                      "tie": "S08:S01"
+                    }
+                  ],
+                  "ok": true,
+                  "period_end": 1440,
+                  "period_start": 360,
+                  "totals": {
+                    "boarded": 4860,
+                    "completed": 4852,
+                    "operating_cost": 108000,
+                    "predicted_fare": 485200,
+                    "requested": 4860,
+                    "unboarded": 0
+                  }
+                }
+              },
+              "reason": ""
+            }
+          }
+        }
+      ],
+      "current_binding": {
+        "plan_revision": 1,
+        "prediction_input_revision": 2,
+        "proposal_id": "run--9223371989660465703:proposal:P-A"
+      },
+      "current_demand_profile": {
+        "business_identity_id": "run--9223371989660465703:business:P-A",
+        "effective_at": 2040,
+        "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+        "multiplier": [
+          5,
+          4
+        ],
+        "origin_districts": [
+          "D01",
+          "D02",
+          "D03",
+          "D04",
+          "D08"
+        ],
+        "revision": 1
+      },
+      "current_od_pairs": [
+        {
+          "daily_demand": 2000,
+          "destination": "S02",
+          "effective_daily_demand": [
+            10000,
+            4
+          ],
+          "id": "D01:D02",
+          "minutes": 1,
+          "origin": "S01",
+          "tie": "S01:S02"
+        },
+        {
+          "daily_demand": 1500,
+          "destination": "S03",
+          "effective_daily_demand": [
+            7500,
+            4
+          ],
+          "id": "D02:D03",
+          "minutes": 1,
+          "origin": "S02",
+          "tie": "S02:S03"
+        },
+        {
+          "daily_demand": 1200,
+          "destination": "S04",
+          "effective_daily_demand": [
+            6000,
+            4
+          ],
+          "id": "D03:D04",
+          "minutes": 1,
+          "origin": "S03",
+          "tie": "S03:S04"
+        },
+        {
+          "daily_demand": 200,
+          "destination": "S01",
+          "effective_daily_demand": [
+            1000,
+            4
+          ],
+          "id": "D08:D01",
+          "minutes": 7,
+          "origin": "S08",
+          "tie": "S08:S01"
+        }
+      ],
+      "envelope": {
+        "model_snapshot_revision": 18,
+        "observation": {
+          "data_version": "1.3",
+          "day_id": 2,
+          "observation_phase": "T_COMPLETE",
+          "simulation_minute": 2100,
+          "snapshot_revision": 12744
+        },
+        "run_scope": "run--9223371989660465703",
+        "view_revision": 22
+      },
+      "fact_supply": {
+        "available": true,
+        "facts": [
+          {
+            "basis_decision_id": "run--9223371989660465703:review:000002:decision",
+            "basis_plan_revision": 1,
+            "basis_station_ids": [
+              "S01",
+              "S02",
+              "S03",
+              "S04",
+              "S08",
+              "S12"
+            ],
+            "business_identity_id": "run--9223371989660465703:business:P-A",
+            "consumed_at": 2100,
+            "consumed_by": "retry",
+            "decision_id": "run--9223371989660465703:review:000002:decision",
+            "effect_at": 2040,
+            "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+            "failed_at": 600,
+            "kind": "E01",
+            "occurred_at": 2040,
+            "origin_districts": [
+              "D01",
+              "D02",
+              "D03",
+              "D04",
+              "D08"
+            ],
+            "scheduled_at": 2040,
+            "slot_id": "P-A",
+            "target_od_ids": [
+              "D01:D02",
+              "D02:D03",
+              "D03:D04",
+              "D04:D05",
+              "D08:D01"
+            ],
+            "used": true
+          }
+        ],
+        "scheduled": [],
+        "status": "READY"
+      },
+      "funds": {
+        "available_cash": 1000000,
+        "cash": 1000000,
+        "free_cash": 1000000,
+        "reserved": 0,
+        "reserved_by_project": {},
+        "restricted": 0,
+        "restricted_by_project": {},
+        "unpaid": 0
+      },
+      "general_government_action": {
+        "allowed": false,
+        "reason_codes": [
+          "REVIEW_IN_PROGRESS"
+        ]
+      },
+      "historical_authority_decisions": [
+        {
+          "business_identity_id": "run--9223371989660465703:business:P-A",
+          "completed_at": 600,
+          "consumed_fact_id": null,
+          "decision_id": "run--9223371989660465703:review:000002:decision",
+          "fact_pending": {
+            "decision_id": "run--9223371989660465703:review:000002:decision",
+            "earliest_at": 2040,
+            "fact_created": false,
+            "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+            "status": "E01_SCHEDULED"
+          },
+          "kind": "GOVERNMENT",
+          "outcome": "REJECTED",
+          "target_decision_id": "run--9223371989660465703:review:000001:decision"
+        }
+      ],
+      "kind": "ACTUAL_SESSION_API",
+      "ledger_canonical_sha256": "598d315ef7afd9b6a7ea13905f7fc04fcde117b69587d75c947c4a571d74b968",
+      "ledger_entry_count": 1592,
+      "prediction_input_revision": 2,
+      "prediction_status": "READY",
+      "retry_state": {
+        "allowed": false,
+        "applicable": true,
+        "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+        "failure_decision_id": "run--9223371989660465703:review:000002:decision",
+        "reason_codes": [
+          "REVIEW_IN_PROGRESS"
+        ]
+      },
+      "rng_draws": [
+        {
+          "command_id": "gov",
+          "decision_id": "run--9223371989660465703:review:000002:decision",
+          "domain": [
+            0,
+            99
+          ],
+          "draw_index": 1,
+          "kind": "GOVERNMENT",
+          "minute": 600,
+          "outcome": "REJECTED",
+          "phase": "REVIEW_COMPLETE",
+          "review_id": "run--9223371989660465703:review:000002",
+          "sample": 97,
+          "seed": "4",
+          "state_after": "-7485862620809337107",
+          "state_before": "-1320785020568185274"
+        }
+      ]
+    },
+    "DI03_T3600": {
+      "command_records": [
+        {
+          "accepted": false,
+          "admitted_at": null,
+          "command": {
+            "action": "submit_government_review",
+            "binding": {
+              "plan_revision": 1,
+              "prediction_input_revision": 1,
+              "proposal_id": "run--9223371989660465703:proposal:P-A"
+            },
+            "command_id": "early-retry",
+            "decision_id": "run--9223371989660465703:review:000001:decision",
+            "expected_snapshot_revision": 10,
+            "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+            "run_scope": "run--9223371989660465703",
+            "slot_id": "P-A"
+          },
+          "command_id": "early-retry",
+          "effective_at": null,
+          "effective_not_before": 2040,
+          "pending": false,
+          "reason": "FACT_NOT_OCCURRED",
+          "reason_codes": [
+            "FACT_NOT_OCCURRED"
+          ],
+          "registered_at": null,
+          "requested_at": 2039
+        },
+        {
+          "accepted": true,
+          "admitted_at": 2100,
+          "command": {
+            "action": "submit_government_review",
+            "binding": {
+              "plan_revision": 1,
+              "prediction_input_revision": 2,
+              "proposal_id": "run--9223371989660465703:proposal:P-A"
+            },
+            "command_id": "retry",
+            "decision_id": "run--9223371989660465703:review:000003:decision",
+            "expected_snapshot_revision": 16,
+            "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+            "run_scope": "run--9223371989660465703",
+            "slot_id": "P-A"
+          },
+          "command_id": "retry",
+          "consumed_fact_id": "run--9223371989660465703:review:000002:decision:E01",
+          "effective_at": 2100,
+          "effective_not_before": 2100,
+          "fact_consumed_at": 2100,
+          "pending": false,
+          "reason": "",
+          "reason_codes": [],
+          "registered_at": 2099,
+          "requested_at": 2099,
+          "requires_new_request": false,
+          "review_id": "run--9223371989660465703:review:000004",
+          "submission": {
+            "binding": {
+              "plan_revision": 1,
+              "prediction_input_revision": 2,
+              "proposal_id": "run--9223371989660465703:proposal:P-A"
+            },
+            "demand_profile": {
+              "business_identity_id": "run--9223371989660465703:business:P-A",
+              "effective_at": 2040,
+              "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+              "multiplier": [
+                5,
+                4
+              ],
+              "origin_districts": [
+                "D01",
+                "D02",
+                "D03",
+                "D04",
+                "D08"
+              ],
+              "revision": 1
+            },
+            "identity": {
+              "business_identity_id": "run--9223371989660465703:business:P-A",
+              "proposal_id": "run--9223371989660465703:proposal:P-A",
+              "slot_id": "P-A"
+            },
+            "name": "P3-A P-A",
+            "plan": {
+              "allowed_actions": {
+                "edit": true,
+                "undo": true
+              },
+              "locked": false,
+              "plan_revision": 1,
+              "station_ids": [
+                "S01",
+                "S02",
+                "S03",
+                "S04",
+                "S08",
+                "S12"
+              ],
+              "validation": {
+                "allowed_actions": {
+                  "submit": true
+                },
+                "reason_codes": [],
+                "valid": true
+              }
+            },
+            "prediction": {
+              "available": true,
+              "current": {
+                "generated_minute": 2041,
+                "input_revision": 2,
+                "value": {
+                  "carry": {
+                    "as_of": 1440,
+                    "demand_profile": {
+                      "business_identity_id": "run--9223371989660465703:business:P-A",
+                      "effective_at": 2040,
+                      "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+                      "multiplier": [
+                        5,
+                        4
+                      ],
+                      "origin_districts": [
+                        "D01",
+                        "D02",
+                        "D03",
+                        "D04",
+                        "D08"
+                      ],
+                      "revision": 1
+                    },
+                    "parameters": {
+                      "capacity_per_minute": 10,
+                      "daily_demand": {
+                        "D01": 2000,
+                        "D02": 1500,
+                        "D03": 1200,
+                        "D04": 800,
+                        "D05": 600,
+                        "D06": 400,
+                        "D07": 300,
+                        "D08": 200
+                      },
+                      "data_version": "1.3",
+                      "fare": 100,
+                      "operating_cost_per_minute": 100,
+                      "source": {
+                        "commit": "604751d79bba86cad179ca6434a5ec5b42640d71",
+                        "path": "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
+                        "section": "4"
+                      }
+                    },
+                    "pending_arrivals": [
+                      {
+                        "count": 1,
+                        "minute": 1441
+                      },
+                      {
+                        "count": 3,
+                        "minute": 1440
+                      },
+                      {
+                        "count": 2,
+                        "minute": 1440
+                      },
+                      {
+                        "count": 2,
+                        "minute": 1440
+                      },
+                      {
+                        "count": 1,
+                        "minute": 1446
+                      }
+                    ],
+                    "remainders": {
+                      "D01:D02": 0,
+                      "D02:D03": 0,
+                      "D03:D04": 0,
+                      "D08:D01": 0
+                    },
+                    "route": [
+                      "S01",
+                      "S02",
+                      "S03",
+                      "S04",
+                      "S08",
+                      "S12"
+                    ]
+                  },
+                  "data_version": "1.3",
+                  "distance_km": 5,
+                  "end_to_end_minutes": 9,
+                  "od_pairs": [
+                    {
+                      "daily_demand": 2000,
+                      "destination": "S02",
+                      "effective_daily_demand": [
+                        10000,
+                        4
+                      ],
+                      "id": "D01:D02",
+                      "minutes": 1,
+                      "origin": "S01",
+                      "tie": "S01:S02"
+                    },
+                    {
+                      "daily_demand": 1500,
+                      "destination": "S03",
+                      "effective_daily_demand": [
+                        7500,
+                        4
+                      ],
+                      "id": "D02:D03",
+                      "minutes": 1,
+                      "origin": "S02",
+                      "tie": "S02:S03"
+                    },
+                    {
+                      "daily_demand": 1200,
+                      "destination": "S04",
+                      "effective_daily_demand": [
+                        6000,
+                        4
+                      ],
+                      "id": "D03:D04",
+                      "minutes": 1,
+                      "origin": "S03",
+                      "tie": "S03:S04"
+                    },
+                    {
+                      "daily_demand": 200,
+                      "destination": "S01",
+                      "effective_daily_demand": [
+                        1000,
+                        4
+                      ],
+                      "id": "D08:D01",
+                      "minutes": 7,
+                      "origin": "S08",
+                      "tie": "S08:S01"
+                    }
+                  ],
+                  "ok": true,
+                  "period_end": 1440,
+                  "period_start": 360,
+                  "totals": {
+                    "boarded": 6075,
+                    "completed": 6066,
+                    "operating_cost": 108000,
+                    "predicted_fare": 606600,
+                    "requested": 6075,
+                    "unboarded": 0
+                  }
+                }
+              },
+              "input_minute": 2040,
+              "plan_revision": 1,
+              "prediction_input_revision": 2,
+              "prediction_status": "READY",
+              "previous": {
+                "generated_minute": 508,
+                "input_revision": 1,
+                "value": {
+                  "carry": {
+                    "as_of": 1440,
+                    "parameters": {
+                      "capacity_per_minute": 10,
+                      "daily_demand": {
+                        "D01": 2000,
+                        "D02": 1500,
+                        "D03": 1200,
+                        "D04": 800,
+                        "D05": 600,
+                        "D06": 400,
+                        "D07": 300,
+                        "D08": 200
+                      },
+                      "data_version": "1.3",
+                      "fare": 100,
+                      "operating_cost_per_minute": 100,
+                      "source": {
+                        "commit": "604751d79bba86cad179ca6434a5ec5b42640d71",
+                        "path": "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
+                        "section": "4"
+                      }
+                    },
+                    "pending_arrivals": [
+                      {
+                        "count": 1,
+                        "minute": 1440
+                      },
+                      {
+                        "count": 2,
+                        "minute": 1440
+                      },
+                      {
+                        "count": 2,
+                        "minute": 1440
+                      },
+                      {
+                        "count": 2,
+                        "minute": 1440
+                      },
+                      {
+                        "count": 1,
+                        "minute": 1446
+                      }
+                    ],
+                    "remainders": {
+                      "D01:D02": 0,
+                      "D02:D03": 0,
+                      "D03:D04": 0,
+                      "D08:D01": 0
+                    },
+                    "route": [
+                      "S01",
+                      "S02",
+                      "S03",
+                      "S04",
+                      "S08",
+                      "S12"
+                    ]
+                  },
+                  "data_version": "1.3",
+                  "distance_km": 5,
+                  "end_to_end_minutes": 9,
+                  "od_pairs": [
+                    {
+                      "daily_demand": 2000,
+                      "destination": "S02",
+                      "id": "D01:D02",
+                      "minutes": 1,
+                      "origin": "S01",
+                      "tie": "S01:S02"
+                    },
+                    {
+                      "daily_demand": 1500,
+                      "destination": "S03",
+                      "id": "D02:D03",
+                      "minutes": 1,
+                      "origin": "S02",
+                      "tie": "S02:S03"
+                    },
+                    {
+                      "daily_demand": 1200,
+                      "destination": "S04",
+                      "id": "D03:D04",
+                      "minutes": 1,
+                      "origin": "S03",
+                      "tie": "S03:S04"
+                    },
+                    {
+                      "daily_demand": 200,
+                      "destination": "S01",
+                      "id": "D08:D01",
+                      "minutes": 7,
+                      "origin": "S08",
+                      "tie": "S08:S01"
+                    }
+                  ],
+                  "ok": true,
+                  "period_end": 1440,
+                  "period_start": 360,
+                  "totals": {
+                    "boarded": 4860,
+                    "completed": 4852,
+                    "operating_cost": 108000,
+                    "predicted_fare": 485200,
+                    "requested": 4860,
+                    "unboarded": 0
+                  }
+                }
+              },
+              "reason": ""
+            }
+          }
+        }
+      ],
+      "current_binding": {
+        "plan_revision": 1,
+        "prediction_input_revision": 2,
+        "proposal_id": "run--9223371989660465703:proposal:P-A"
+      },
+      "current_demand_profile": {
+        "business_identity_id": "run--9223371989660465703:business:P-A",
+        "effective_at": 2040,
+        "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+        "multiplier": [
+          5,
+          4
+        ],
+        "origin_districts": [
+          "D01",
+          "D02",
+          "D03",
+          "D04",
+          "D08"
+        ],
+        "revision": 1
+      },
+      "current_od_pairs": [
+        {
+          "daily_demand": 2000,
+          "destination": "S02",
+          "effective_daily_demand": [
+            10000,
+            4
+          ],
+          "id": "D01:D02",
+          "minutes": 1,
+          "origin": "S01",
+          "tie": "S01:S02"
+        },
+        {
+          "daily_demand": 1500,
+          "destination": "S03",
+          "effective_daily_demand": [
+            7500,
+            4
+          ],
+          "id": "D02:D03",
+          "minutes": 1,
+          "origin": "S02",
+          "tie": "S02:S03"
+        },
+        {
+          "daily_demand": 1200,
+          "destination": "S04",
+          "effective_daily_demand": [
+            6000,
+            4
+          ],
+          "id": "D03:D04",
+          "minutes": 1,
+          "origin": "S03",
+          "tie": "S03:S04"
+        },
+        {
+          "daily_demand": 200,
+          "destination": "S01",
+          "effective_daily_demand": [
+            1000,
+            4
+          ],
+          "id": "D08:D01",
+          "minutes": 7,
+          "origin": "S08",
+          "tie": "S08:S01"
+        }
+      ],
+      "envelope": {
+        "model_snapshot_revision": 19,
+        "observation": {
+          "data_version": "1.3",
+          "day_id": 3,
+          "observation_phase": "T_COMPLETE",
+          "simulation_minute": 3600,
+          "snapshot_revision": 24745
+        },
+        "run_scope": "run--9223371989660465703",
+        "view_revision": 24
+      },
+      "fact_supply": {
+        "available": true,
+        "facts": [
+          {
+            "basis_decision_id": "run--9223371989660465703:review:000002:decision",
+            "basis_plan_revision": 1,
+            "basis_station_ids": [
+              "S01",
+              "S02",
+              "S03",
+              "S04",
+              "S08",
+              "S12"
+            ],
+            "business_identity_id": "run--9223371989660465703:business:P-A",
+            "consumed_at": 2100,
+            "consumed_by": "retry",
+            "decision_id": "run--9223371989660465703:review:000002:decision",
+            "effect_at": 2040,
+            "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+            "failed_at": 600,
+            "kind": "E01",
+            "occurred_at": 2040,
+            "origin_districts": [
+              "D01",
+              "D02",
+              "D03",
+              "D04",
+              "D08"
+            ],
+            "scheduled_at": 2040,
+            "slot_id": "P-A",
+            "target_od_ids": [
+              "D01:D02",
+              "D02:D03",
+              "D03:D04",
+              "D04:D05",
+              "D08:D01"
+            ],
+            "used": true
+          }
+        ],
+        "scheduled": [],
+        "status": "READY"
+      },
+      "funds": {
+        "available_cash": 1000000,
+        "cash": 1000000,
+        "free_cash": 1000000,
+        "reserved": 0,
+        "reserved_by_project": {},
+        "restricted": 0,
+        "restricted_by_project": {},
+        "unpaid": 0
+      },
+      "general_government_action": {
+        "allowed": false,
+        "reason_codes": [
+          "NEW_FACT_REQUIRED_DI03_PENDING"
+        ]
+      },
+      "historical_authority_decisions": [
+        {
+          "business_identity_id": "run--9223371989660465703:business:P-A",
+          "completed_at": 600,
+          "consumed_fact_id": null,
+          "decision_id": "run--9223371989660465703:review:000002:decision",
+          "fact_pending": {
+            "decision_id": "run--9223371989660465703:review:000002:decision",
+            "earliest_at": 2040,
+            "fact_created": false,
+            "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+            "status": "E01_SCHEDULED"
+          },
+          "kind": "GOVERNMENT",
+          "outcome": "REJECTED",
+          "target_decision_id": "run--9223371989660465703:review:000001:decision"
+        },
+        {
+          "business_identity_id": "run--9223371989660465703:business:P-A",
+          "completed_at": 2160,
+          "consumed_fact_id": "run--9223371989660465703:review:000002:decision:E01",
+          "decision_id": "run--9223371989660465703:review:000004:decision",
+          "fact_pending": null,
+          "kind": "GOVERNMENT",
+          "outcome": "REJECTED",
+          "target_decision_id": "run--9223371989660465703:review:000003:decision"
+        }
+      ],
+      "kind": "ACTUAL_SESSION_API",
+      "ledger_canonical_sha256": "078d429b18471fea98534166ac498b6cf8430f3e3f186944ef6afc20272a835c",
+      "ledger_entry_count": 3092,
+      "prediction_input_revision": 2,
+      "prediction_status": "READY",
+      "retry_state": {
+        "allowed": false,
+        "applicable": true,
+        "fact_id": "",
+        "failure_decision_id": "run--9223371989660465703:review:000004:decision",
+        "reason_codes": [
+          "NEW_FACT_REQUIRED"
+        ]
+      },
+      "rng_draws": [
+        {
+          "command_id": "gov",
+          "decision_id": "run--9223371989660465703:review:000002:decision",
+          "domain": [
+            0,
+            99
+          ],
+          "draw_index": 1,
+          "kind": "GOVERNMENT",
+          "minute": 600,
+          "outcome": "REJECTED",
+          "phase": "REVIEW_COMPLETE",
+          "review_id": "run--9223371989660465703:review:000002",
+          "sample": 97,
+          "seed": "4",
+          "state_after": "-7485862620809337107",
+          "state_before": "-1320785020568185274"
+        },
+        {
+          "command_id": "retry",
+          "decision_id": "run--9223371989660465703:review:000004:decision",
+          "domain": [
+            0,
+            99
+          ],
+          "draw_index": 2,
+          "kind": "GOVERNMENT",
+          "minute": 2160,
+          "outcome": "REJECTED",
+          "phase": "REVIEW_COMPLETE",
+          "review_id": "run--9223371989660465703:review:000004",
+          "sample": 99,
+          "seed": "4",
+          "state_after": "-4236811974108762808",
+          "state_before": "-7485862620809337107"
+        }
+      ]
+    },
+    "DI03_queued": {
+      "command_records": [
+        {
+          "accepted": false,
+          "admitted_at": null,
+          "command": {
+            "action": "submit_government_review",
+            "binding": {
+              "plan_revision": 1,
+              "prediction_input_revision": 1,
+              "proposal_id": "run--9223371989660465703:proposal:P-A"
+            },
+            "command_id": "early-retry",
+            "decision_id": "run--9223371989660465703:review:000001:decision",
+            "expected_snapshot_revision": 10,
+            "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+            "run_scope": "run--9223371989660465703",
+            "slot_id": "P-A"
+          },
+          "command_id": "early-retry",
+          "effective_at": null,
+          "effective_not_before": 2040,
+          "pending": false,
+          "reason": "FACT_NOT_OCCURRED",
+          "reason_codes": [
+            "FACT_NOT_OCCURRED"
+          ],
+          "registered_at": null,
+          "requested_at": 2039
+        },
+        {
+          "accepted": false,
+          "admitted_at": null,
+          "command": {
+            "action": "submit_government_review",
+            "binding": {
+              "plan_revision": 1,
+              "prediction_input_revision": 2,
+              "proposal_id": "run--9223371989660465703:proposal:P-A"
+            },
+            "command_id": "retry",
+            "decision_id": "run--9223371989660465703:review:000003:decision",
+            "expected_snapshot_revision": 16,
+            "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+            "run_scope": "run--9223371989660465703",
+            "slot_id": "P-A"
+          },
+          "command_id": "retry",
+          "effective_at": null,
+          "effective_not_before": 2100,
+          "pending": true,
+          "reason": "",
+          "reason_codes": [],
+          "registered_at": 2099,
+          "requested_at": 2099,
+          "submission": {
+            "binding": {
+              "plan_revision": 1,
+              "prediction_input_revision": 2,
+              "proposal_id": "run--9223371989660465703:proposal:P-A"
+            },
+            "demand_profile": {
+              "business_identity_id": "run--9223371989660465703:business:P-A",
+              "effective_at": 2040,
+              "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+              "multiplier": [
+                5,
+                4
+              ],
+              "origin_districts": [
+                "D01",
+                "D02",
+                "D03",
+                "D04",
+                "D08"
+              ],
+              "revision": 1
+            },
+            "identity": {
+              "business_identity_id": "run--9223371989660465703:business:P-A",
+              "proposal_id": "run--9223371989660465703:proposal:P-A",
+              "slot_id": "P-A"
+            },
+            "name": "P3-A P-A",
+            "plan": {
+              "allowed_actions": {
+                "edit": true,
+                "undo": true
+              },
+              "locked": false,
+              "plan_revision": 1,
+              "station_ids": [
+                "S01",
+                "S02",
+                "S03",
+                "S04",
+                "S08",
+                "S12"
+              ],
+              "validation": {
+                "allowed_actions": {
+                  "submit": true
+                },
+                "reason_codes": [],
+                "valid": true
+              }
+            },
+            "prediction": {
+              "available": true,
+              "current": {
+                "generated_minute": 2041,
+                "input_revision": 2,
+                "value": {
+                  "carry": {
+                    "as_of": 1440,
+                    "demand_profile": {
+                      "business_identity_id": "run--9223371989660465703:business:P-A",
+                      "effective_at": 2040,
+                      "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+                      "multiplier": [
+                        5,
+                        4
+                      ],
+                      "origin_districts": [
+                        "D01",
+                        "D02",
+                        "D03",
+                        "D04",
+                        "D08"
+                      ],
+                      "revision": 1
+                    },
+                    "parameters": {
+                      "capacity_per_minute": 10,
+                      "daily_demand": {
+                        "D01": 2000,
+                        "D02": 1500,
+                        "D03": 1200,
+                        "D04": 800,
+                        "D05": 600,
+                        "D06": 400,
+                        "D07": 300,
+                        "D08": 200
+                      },
+                      "data_version": "1.3",
+                      "fare": 100,
+                      "operating_cost_per_minute": 100,
+                      "source": {
+                        "commit": "604751d79bba86cad179ca6434a5ec5b42640d71",
+                        "path": "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
+                        "section": "4"
+                      }
+                    },
+                    "pending_arrivals": [
+                      {
+                        "count": 1,
+                        "minute": 1441
+                      },
+                      {
+                        "count": 3,
+                        "minute": 1440
+                      },
+                      {
+                        "count": 2,
+                        "minute": 1440
+                      },
+                      {
+                        "count": 2,
+                        "minute": 1440
+                      },
+                      {
+                        "count": 1,
+                        "minute": 1446
+                      }
+                    ],
+                    "remainders": {
+                      "D01:D02": 0,
+                      "D02:D03": 0,
+                      "D03:D04": 0,
+                      "D08:D01": 0
+                    },
+                    "route": [
+                      "S01",
+                      "S02",
+                      "S03",
+                      "S04",
+                      "S08",
+                      "S12"
+                    ]
+                  },
+                  "data_version": "1.3",
+                  "distance_km": 5,
+                  "end_to_end_minutes": 9,
+                  "od_pairs": [
+                    {
+                      "daily_demand": 2000,
+                      "destination": "S02",
+                      "effective_daily_demand": [
+                        10000,
+                        4
+                      ],
+                      "id": "D01:D02",
+                      "minutes": 1,
+                      "origin": "S01",
+                      "tie": "S01:S02"
+                    },
+                    {
+                      "daily_demand": 1500,
+                      "destination": "S03",
+                      "effective_daily_demand": [
+                        7500,
+                        4
+                      ],
+                      "id": "D02:D03",
+                      "minutes": 1,
+                      "origin": "S02",
+                      "tie": "S02:S03"
+                    },
+                    {
+                      "daily_demand": 1200,
+                      "destination": "S04",
+                      "effective_daily_demand": [
+                        6000,
+                        4
+                      ],
+                      "id": "D03:D04",
+                      "minutes": 1,
+                      "origin": "S03",
+                      "tie": "S03:S04"
+                    },
+                    {
+                      "daily_demand": 200,
+                      "destination": "S01",
+                      "effective_daily_demand": [
+                        1000,
+                        4
+                      ],
+                      "id": "D08:D01",
+                      "minutes": 7,
+                      "origin": "S08",
+                      "tie": "S08:S01"
+                    }
+                  ],
+                  "ok": true,
+                  "period_end": 1440,
+                  "period_start": 360,
+                  "totals": {
+                    "boarded": 6075,
+                    "completed": 6066,
+                    "operating_cost": 108000,
+                    "predicted_fare": 606600,
+                    "requested": 6075,
+                    "unboarded": 0
+                  }
+                }
+              },
+              "input_minute": 2040,
+              "plan_revision": 1,
+              "prediction_input_revision": 2,
+              "prediction_status": "READY",
+              "previous": {
+                "generated_minute": 508,
+                "input_revision": 1,
+                "value": {
+                  "carry": {
+                    "as_of": 1440,
+                    "parameters": {
+                      "capacity_per_minute": 10,
+                      "daily_demand": {
+                        "D01": 2000,
+                        "D02": 1500,
+                        "D03": 1200,
+                        "D04": 800,
+                        "D05": 600,
+                        "D06": 400,
+                        "D07": 300,
+                        "D08": 200
+                      },
+                      "data_version": "1.3",
+                      "fare": 100,
+                      "operating_cost_per_minute": 100,
+                      "source": {
+                        "commit": "604751d79bba86cad179ca6434a5ec5b42640d71",
+                        "path": "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
+                        "section": "4"
+                      }
+                    },
+                    "pending_arrivals": [
+                      {
+                        "count": 1,
+                        "minute": 1440
+                      },
+                      {
+                        "count": 2,
+                        "minute": 1440
+                      },
+                      {
+                        "count": 2,
+                        "minute": 1440
+                      },
+                      {
+                        "count": 2,
+                        "minute": 1440
+                      },
+                      {
+                        "count": 1,
+                        "minute": 1446
+                      }
+                    ],
+                    "remainders": {
+                      "D01:D02": 0,
+                      "D02:D03": 0,
+                      "D03:D04": 0,
+                      "D08:D01": 0
+                    },
+                    "route": [
+                      "S01",
+                      "S02",
+                      "S03",
+                      "S04",
+                      "S08",
+                      "S12"
+                    ]
+                  },
+                  "data_version": "1.3",
+                  "distance_km": 5,
+                  "end_to_end_minutes": 9,
+                  "od_pairs": [
+                    {
+                      "daily_demand": 2000,
+                      "destination": "S02",
+                      "id": "D01:D02",
+                      "minutes": 1,
+                      "origin": "S01",
+                      "tie": "S01:S02"
+                    },
+                    {
+                      "daily_demand": 1500,
+                      "destination": "S03",
+                      "id": "D02:D03",
+                      "minutes": 1,
+                      "origin": "S02",
+                      "tie": "S02:S03"
+                    },
+                    {
+                      "daily_demand": 1200,
+                      "destination": "S04",
+                      "id": "D03:D04",
+                      "minutes": 1,
+                      "origin": "S03",
+                      "tie": "S03:S04"
+                    },
+                    {
+                      "daily_demand": 200,
+                      "destination": "S01",
+                      "id": "D08:D01",
+                      "minutes": 7,
+                      "origin": "S08",
+                      "tie": "S08:S01"
+                    }
+                  ],
+                  "ok": true,
+                  "period_end": 1440,
+                  "period_start": 360,
+                  "totals": {
+                    "boarded": 4860,
+                    "completed": 4852,
+                    "operating_cost": 108000,
+                    "predicted_fare": 485200,
+                    "requested": 4860,
+                    "unboarded": 0
+                  }
+                }
+              },
+              "reason": ""
+            }
+          }
+        }
+      ],
+      "current_binding": {
+        "plan_revision": 1,
+        "prediction_input_revision": 2,
+        "proposal_id": "run--9223371989660465703:proposal:P-A"
+      },
+      "current_demand_profile": {
+        "business_identity_id": "run--9223371989660465703:business:P-A",
+        "effective_at": 2040,
+        "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+        "multiplier": [
+          5,
+          4
+        ],
+        "origin_districts": [
+          "D01",
+          "D02",
+          "D03",
+          "D04",
+          "D08"
+        ],
+        "revision": 1
+      },
+      "current_od_pairs": [
+        {
+          "daily_demand": 2000,
+          "destination": "S02",
+          "effective_daily_demand": [
+            10000,
+            4
+          ],
+          "id": "D01:D02",
+          "minutes": 1,
+          "origin": "S01",
+          "tie": "S01:S02"
+        },
+        {
+          "daily_demand": 1500,
+          "destination": "S03",
+          "effective_daily_demand": [
+            7500,
+            4
+          ],
+          "id": "D02:D03",
+          "minutes": 1,
+          "origin": "S02",
+          "tie": "S02:S03"
+        },
+        {
+          "daily_demand": 1200,
+          "destination": "S04",
+          "effective_daily_demand": [
+            6000,
+            4
+          ],
+          "id": "D03:D04",
+          "minutes": 1,
+          "origin": "S03",
+          "tie": "S03:S04"
+        },
+        {
+          "daily_demand": 200,
+          "destination": "S01",
+          "effective_daily_demand": [
+            1000,
+            4
+          ],
+          "id": "D08:D01",
+          "minutes": 7,
+          "origin": "S08",
+          "tie": "S08:S01"
+        }
+      ],
+      "envelope": {
+        "model_snapshot_revision": 17,
+        "observation": {
+          "data_version": "1.3",
+          "day_id": 2,
+          "observation_phase": "T_COMPLETE",
+          "simulation_minute": 2099,
+          "snapshot_revision": 12735
+        },
+        "run_scope": "run--9223371989660465703",
+        "view_revision": 21
+      },
+      "fact_supply": {
+        "available": true,
+        "facts": [
+          {
+            "basis_decision_id": "run--9223371989660465703:review:000002:decision",
+            "basis_plan_revision": 1,
+            "basis_station_ids": [
+              "S01",
+              "S02",
+              "S03",
+              "S04",
+              "S08",
+              "S12"
+            ],
+            "business_identity_id": "run--9223371989660465703:business:P-A",
+            "consumed_at": null,
+            "consumed_by": "",
+            "decision_id": "run--9223371989660465703:review:000002:decision",
+            "effect_at": 2040,
+            "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+            "failed_at": 600,
+            "kind": "E01",
+            "occurred_at": 2040,
+            "origin_districts": [
+              "D01",
+              "D02",
+              "D03",
+              "D04",
+              "D08"
+            ],
+            "scheduled_at": 2040,
+            "slot_id": "P-A",
+            "target_od_ids": [
+              "D01:D02",
+              "D02:D03",
+              "D03:D04",
+              "D04:D05",
+              "D08:D01"
+            ],
+            "used": false
+          }
+        ],
+        "scheduled": [],
+        "status": "READY"
+      },
+      "funds": {
+        "available_cash": 1000000,
+        "cash": 1000000,
+        "free_cash": 1000000,
+        "reserved": 0,
+        "reserved_by_project": {},
+        "restricted": 0,
+        "restricted_by_project": {},
+        "unpaid": 0
+      },
+      "general_government_action": {
+        "allowed": false,
+        "reason_codes": [
+          "NEW_FACT_REQUIRED_DI03_PENDING"
+        ]
+      },
+      "historical_authority_decisions": [
+        {
+          "business_identity_id": "run--9223371989660465703:business:P-A",
+          "completed_at": 600,
+          "consumed_fact_id": null,
+          "decision_id": "run--9223371989660465703:review:000002:decision",
+          "fact_pending": {
+            "decision_id": "run--9223371989660465703:review:000002:decision",
+            "earliest_at": 2040,
+            "fact_created": false,
+            "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+            "status": "E01_SCHEDULED"
+          },
+          "kind": "GOVERNMENT",
+          "outcome": "REJECTED",
+          "target_decision_id": "run--9223371989660465703:review:000001:decision"
+        }
+      ],
+      "kind": "ACTUAL_SESSION_API",
+      "ledger_canonical_sha256": "7a01abfc7254da7989731e2a8d179c15ff6bd89ab7e1e46c6e6402f36ff3d19c",
+      "ledger_entry_count": 1591,
+      "prediction_input_revision": 2,
+      "prediction_status": "READY",
+      "retry_state": {
+        "allowed": true,
+        "applicable": true,
+        "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+        "failure_decision_id": "run--9223371989660465703:review:000002:decision",
+        "reason_codes": []
+      },
+      "rng_draws": [
+        {
+          "command_id": "gov",
+          "decision_id": "run--9223371989660465703:review:000002:decision",
+          "domain": [
+            0,
+            99
+          ],
+          "draw_index": 1,
+          "kind": "GOVERNMENT",
+          "minute": 600,
+          "outcome": "REJECTED",
+          "phase": "REVIEW_COMPLETE",
+          "review_id": "run--9223371989660465703:review:000002",
+          "sample": 97,
+          "seed": "4",
+          "state_after": "-7485862620809337107",
+          "state_before": "-1320785020568185274"
+        }
+      ]
+    },
+    "DI03_ready": {
+      "command_records": [
+        {
+          "accepted": false,
+          "admitted_at": null,
+          "command": {
+            "action": "submit_government_review",
+            "binding": {
+              "plan_revision": 1,
+              "prediction_input_revision": 1,
+              "proposal_id": "run--9223371989660465703:proposal:P-A"
+            },
+            "command_id": "early-retry",
+            "decision_id": "run--9223371989660465703:review:000001:decision",
+            "expected_snapshot_revision": 10,
+            "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+            "run_scope": "run--9223371989660465703",
+            "slot_id": "P-A"
+          },
+          "command_id": "early-retry",
+          "effective_at": null,
+          "effective_not_before": 2040,
+          "pending": false,
+          "reason": "FACT_NOT_OCCURRED",
+          "reason_codes": [
+            "FACT_NOT_OCCURRED"
+          ],
+          "registered_at": null,
+          "requested_at": 2039
+        }
+      ],
+      "current_binding": {
+        "plan_revision": 1,
+        "prediction_input_revision": 2,
+        "proposal_id": "run--9223371989660465703:proposal:P-A"
+      },
+      "current_demand_profile": {
+        "business_identity_id": "run--9223371989660465703:business:P-A",
+        "effective_at": 2040,
+        "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+        "multiplier": [
+          5,
+          4
+        ],
+        "origin_districts": [
+          "D01",
+          "D02",
+          "D03",
+          "D04",
+          "D08"
+        ],
+        "revision": 1
+      },
+      "current_od_pairs": [
+        {
+          "daily_demand": 2000,
+          "destination": "S02",
+          "effective_daily_demand": [
+            10000,
+            4
+          ],
+          "id": "D01:D02",
+          "minutes": 1,
+          "origin": "S01",
+          "tie": "S01:S02"
+        },
+        {
+          "daily_demand": 1500,
+          "destination": "S03",
+          "effective_daily_demand": [
+            7500,
+            4
+          ],
+          "id": "D02:D03",
+          "minutes": 1,
+          "origin": "S02",
+          "tie": "S02:S03"
+        },
+        {
+          "daily_demand": 1200,
+          "destination": "S04",
+          "effective_daily_demand": [
+            6000,
+            4
+          ],
+          "id": "D03:D04",
+          "minutes": 1,
+          "origin": "S03",
+          "tie": "S03:S04"
+        },
+        {
+          "daily_demand": 200,
+          "destination": "S01",
+          "effective_daily_demand": [
+            1000,
+            4
+          ],
+          "id": "D08:D01",
+          "minutes": 7,
+          "origin": "S08",
+          "tie": "S08:S01"
+        }
+      ],
+      "envelope": {
+        "model_snapshot_revision": 16,
+        "observation": {
+          "data_version": "1.3",
+          "day_id": 2,
+          "observation_phase": "T_COMPLETE",
+          "simulation_minute": 2072,
+          "snapshot_revision": 12519
+        },
+        "run_scope": "run--9223371989660465703",
+        "view_revision": 19
+      },
+      "fact_supply": {
+        "available": true,
+        "facts": [
+          {
+            "basis_decision_id": "run--9223371989660465703:review:000002:decision",
+            "basis_plan_revision": 1,
+            "basis_station_ids": [
+              "S01",
+              "S02",
+              "S03",
+              "S04",
+              "S08",
+              "S12"
+            ],
+            "business_identity_id": "run--9223371989660465703:business:P-A",
+            "consumed_at": null,
+            "consumed_by": "",
+            "decision_id": "run--9223371989660465703:review:000002:decision",
+            "effect_at": 2040,
+            "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+            "failed_at": 600,
+            "kind": "E01",
+            "occurred_at": 2040,
+            "origin_districts": [
+              "D01",
+              "D02",
+              "D03",
+              "D04",
+              "D08"
+            ],
+            "scheduled_at": 2040,
+            "slot_id": "P-A",
+            "target_od_ids": [
+              "D01:D02",
+              "D02:D03",
+              "D03:D04",
+              "D04:D05",
+              "D08:D01"
+            ],
+            "used": false
+          }
+        ],
+        "scheduled": [],
+        "status": "READY"
+      },
+      "funds": {
+        "available_cash": 1000000,
+        "cash": 1000000,
+        "free_cash": 1000000,
+        "reserved": 0,
+        "reserved_by_project": {},
+        "restricted": 0,
+        "restricted_by_project": {},
+        "unpaid": 0
+      },
+      "general_government_action": {
+        "allowed": false,
+        "reason_codes": [
+          "NEW_FACT_REQUIRED_DI03_PENDING"
+        ]
+      },
+      "historical_authority_decisions": [
+        {
+          "business_identity_id": "run--9223371989660465703:business:P-A",
+          "completed_at": 600,
+          "consumed_fact_id": null,
+          "decision_id": "run--9223371989660465703:review:000002:decision",
+          "fact_pending": {
+            "decision_id": "run--9223371989660465703:review:000002:decision",
+            "earliest_at": 2040,
+            "fact_created": false,
+            "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+            "status": "E01_SCHEDULED"
+          },
+          "kind": "GOVERNMENT",
+          "outcome": "REJECTED",
+          "target_decision_id": "run--9223371989660465703:review:000001:decision"
+        }
+      ],
+      "kind": "ACTUAL_SESSION_API",
+      "ledger_canonical_sha256": "fdf4a9c4889a5db3541047320ff7cefff21e793b4014b20c201767b5085fc6ce",
+      "ledger_entry_count": 1564,
+      "prediction_input_revision": 2,
+      "prediction_status": "READY",
+      "retry_state": {
+        "allowed": true,
+        "applicable": true,
+        "fact_id": "run--9223371989660465703:review:000002:decision:E01",
+        "failure_decision_id": "run--9223371989660465703:review:000002:decision",
+        "reason_codes": []
+      },
+      "rng_draws": [
+        {
+          "command_id": "gov",
+          "decision_id": "run--9223371989660465703:review:000002:decision",
+          "domain": [
+            0,
+            99
+          ],
+          "draw_index": 1,
+          "kind": "GOVERNMENT",
+          "minute": 600,
+          "outcome": "REJECTED",
+          "phase": "REVIEW_COMPLETE",
+          "review_id": "run--9223371989660465703:review:000002",
+          "sample": 97,
+          "seed": "4",
+          "state_after": "-7485862620809337107",
+          "state_before": "-1320785020568185274"
+        }
+      ]
+    },
+    "DI03_rejected_admission": {
+      "command_records": [
+        {
+          "accepted": false,
+          "admitted_at": null,
+          "command": {
+            "action": "submit_government_review",
+            "binding": {
+              "plan_revision": 1,
+              "prediction_input_revision": 2,
+              "proposal_id": "run--9223371989173926443:proposal:P-A"
+            },
+            "command_id": "stale-retry",
+            "decision_id": "run--9223371989173926443:review:000003:decision",
+            "expected_snapshot_revision": 13,
+            "fact_id": "run--9223371989173926443:review:000002:decision:E01",
+            "run_scope": "run--9223371989173926443",
+            "slot_id": "P-A"
+          },
+          "command_id": "stale-retry",
+          "effective_at": 2072,
+          "effective_not_before": 2072,
+          "pending": false,
+          "reason": "STALE_PLAN_OR_PREDICTION",
+          "reason_codes": [
+            "STALE_PLAN_OR_PREDICTION"
+          ],
+          "registered_at": 2071,
+          "requested_at": 2071,
+          "requires_new_request": true,
+          "submission": {
+            "binding": {
+              "plan_revision": 1,
+              "prediction_input_revision": 2,
+              "proposal_id": "run--9223371989173926443:proposal:P-A"
+            },
+            "demand_profile": {
+              "business_identity_id": "run--9223371989173926443:business:P-A",
+              "effective_at": 2040,
+              "fact_id": "run--9223371989173926443:review:000002:decision:E01",
+              "multiplier": [
+                5,
+                4
+              ],
+              "origin_districts": [
+                "D01",
+                "D02",
+                "D03",
+                "D04",
+                "D08"
+              ],
+              "revision": 1
+            },
+            "identity": {
+              "business_identity_id": "run--9223371989173926443:business:P-A",
+              "proposal_id": "run--9223371989173926443:proposal:P-A",
+              "slot_id": "P-A"
+            },
+            "name": "P3-A P-A",
+            "plan": {
+              "allowed_actions": {
+                "edit": true,
+                "undo": true
+              },
+              "locked": false,
+              "plan_revision": 1,
+              "station_ids": [
+                "S01",
+                "S02",
+                "S03",
+                "S04",
+                "S08",
+                "S12"
+              ],
+              "validation": {
+                "allowed_actions": {
+                  "submit": true
+                },
+                "reason_codes": [],
+                "valid": true
+              }
+            },
+            "prediction": {
+              "available": true,
+              "current": {
+                "generated_minute": 2040,
+                "input_revision": 2,
+                "value": {
+                  "carry": {
+                    "as_of": 1440,
+                    "demand_profile": {
+                      "business_identity_id": "run--9223371989173926443:business:P-A",
+                      "effective_at": 2040,
+                      "fact_id": "run--9223371989173926443:review:000002:decision:E01",
+                      "multiplier": [
+                        5,
+                        4
+                      ],
+                      "origin_districts": [
+                        "D01",
+                        "D02",
+                        "D03",
+                        "D04",
+                        "D08"
+                      ],
+                      "revision": 1
+                    },
+                    "parameters": {
+                      "capacity_per_minute": 10,
+                      "daily_demand": {
+                        "D01": 2000,
+                        "D02": 1500,
+                        "D03": 1200,
+                        "D04": 800,
+                        "D05": 600,
+                        "D06": 400,
+                        "D07": 300,
+                        "D08": 200
+                      },
+                      "data_version": "1.3",
+                      "fare": 100,
+                      "operating_cost_per_minute": 100,
+                      "source": {
+                        "commit": "604751d79bba86cad179ca6434a5ec5b42640d71",
+                        "path": "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
+                        "section": "4"
+                      }
+                    },
+                    "pending_arrivals": [
+                      {
+                        "count": 1,
+                        "minute": 1441
+                      },
+                      {
+                        "count": 3,
+                        "minute": 1440
+                      },
+                      {
+                        "count": 2,
+                        "minute": 1440
+                      },
+                      {
+                        "count": 2,
+                        "minute": 1440
+                      },
+                      {
+                        "count": 1,
+                        "minute": 1446
+                      }
+                    ],
+                    "remainders": {
+                      "D01:D02": 0,
+                      "D02:D03": 0,
+                      "D03:D04": 0,
+                      "D08:D01": 0
+                    },
+                    "route": [
+                      "S01",
+                      "S02",
+                      "S03",
+                      "S04",
+                      "S08",
+                      "S12"
+                    ]
+                  },
+                  "data_version": "1.3",
+                  "distance_km": 5,
+                  "end_to_end_minutes": 9,
+                  "od_pairs": [
+                    {
+                      "daily_demand": 2000,
+                      "destination": "S02",
+                      "effective_daily_demand": [
+                        10000,
+                        4
+                      ],
+                      "id": "D01:D02",
+                      "minutes": 1,
+                      "origin": "S01",
+                      "tie": "S01:S02"
+                    },
+                    {
+                      "daily_demand": 1500,
+                      "destination": "S03",
+                      "effective_daily_demand": [
+                        7500,
+                        4
+                      ],
+                      "id": "D02:D03",
+                      "minutes": 1,
+                      "origin": "S02",
+                      "tie": "S02:S03"
+                    },
+                    {
+                      "daily_demand": 1200,
+                      "destination": "S04",
+                      "effective_daily_demand": [
+                        6000,
+                        4
+                      ],
+                      "id": "D03:D04",
+                      "minutes": 1,
+                      "origin": "S03",
+                      "tie": "S03:S04"
+                    },
+                    {
+                      "daily_demand": 200,
+                      "destination": "S01",
+                      "effective_daily_demand": [
+                        1000,
+                        4
+                      ],
+                      "id": "D08:D01",
+                      "minutes": 7,
+                      "origin": "S08",
+                      "tie": "S08:S01"
+                    }
+                  ],
+                  "ok": true,
+                  "period_end": 1440,
+                  "period_start": 360,
+                  "totals": {
+                    "boarded": 6075,
+                    "completed": 6066,
+                    "operating_cost": 108000,
+                    "predicted_fare": 606600,
+                    "requested": 6075,
+                    "unboarded": 0
+                  }
+                }
+              },
+              "input_minute": 2040,
+              "plan_revision": 1,
+              "prediction_input_revision": 2,
+              "prediction_status": "READY",
+              "previous": {
+                "generated_minute": 508,
+                "input_revision": 1,
+                "value": {
+                  "carry": {
+                    "as_of": 1440,
+                    "parameters": {
+                      "capacity_per_minute": 10,
+                      "daily_demand": {
+                        "D01": 2000,
+                        "D02": 1500,
+                        "D03": 1200,
+                        "D04": 800,
+                        "D05": 600,
+                        "D06": 400,
+                        "D07": 300,
+                        "D08": 200
+                      },
+                      "data_version": "1.3",
+                      "fare": 100,
+                      "operating_cost_per_minute": 100,
+                      "source": {
+                        "commit": "604751d79bba86cad179ca6434a5ec5b42640d71",
+                        "path": "docs/planning/PLN-001_GATE2_DATA_v1_DRAFT.md",
+                        "section": "4"
+                      }
+                    },
+                    "pending_arrivals": [
+                      {
+                        "count": 1,
+                        "minute": 1440
+                      },
+                      {
+                        "count": 2,
+                        "minute": 1440
+                      },
+                      {
+                        "count": 2,
+                        "minute": 1440
+                      },
+                      {
+                        "count": 2,
+                        "minute": 1440
+                      },
+                      {
+                        "count": 1,
+                        "minute": 1446
+                      }
+                    ],
+                    "remainders": {
+                      "D01:D02": 0,
+                      "D02:D03": 0,
+                      "D03:D04": 0,
+                      "D08:D01": 0
+                    },
+                    "route": [
+                      "S01",
+                      "S02",
+                      "S03",
+                      "S04",
+                      "S08",
+                      "S12"
+                    ]
+                  },
+                  "data_version": "1.3",
+                  "distance_km": 5,
+                  "end_to_end_minutes": 9,
+                  "od_pairs": [
+                    {
+                      "daily_demand": 2000,
+                      "destination": "S02",
+                      "id": "D01:D02",
+                      "minutes": 1,
+                      "origin": "S01",
+                      "tie": "S01:S02"
+                    },
+                    {
+                      "daily_demand": 1500,
+                      "destination": "S03",
+                      "id": "D02:D03",
+                      "minutes": 1,
+                      "origin": "S02",
+                      "tie": "S02:S03"
+                    },
+                    {
+                      "daily_demand": 1200,
+                      "destination": "S04",
+                      "id": "D03:D04",
+                      "minutes": 1,
+                      "origin": "S03",
+                      "tie": "S03:S04"
+                    },
+                    {
+                      "daily_demand": 200,
+                      "destination": "S01",
+                      "id": "D08:D01",
+                      "minutes": 7,
+                      "origin": "S08",
+                      "tie": "S08:S01"
+                    }
+                  ],
+                  "ok": true,
+                  "period_end": 1440,
+                  "period_start": 360,
+                  "totals": {
+                    "boarded": 4860,
+                    "completed": 4852,
+                    "operating_cost": 108000,
+                    "predicted_fare": 485200,
+                    "requested": 4860,
+                    "unboarded": 0
+                  }
+                }
+              },
+              "reason": ""
+            }
+          }
+        }
+      ],
+      "current_binding": {
+        "plan_revision": 2,
+        "prediction_input_revision": 3,
+        "proposal_id": "run--9223371989173926443:proposal:P-A"
+      },
+      "current_demand_profile": {
+        "business_identity_id": "run--9223371989173926443:business:P-A",
+        "effective_at": 2040,
+        "fact_id": "run--9223371989173926443:review:000002:decision:E01",
+        "multiplier": [
+          5,
+          4
+        ],
+        "origin_districts": [
+          "D01",
+          "D02",
+          "D03",
+          "D04",
+          "D08"
+        ],
+        "revision": 1
+      },
+      "current_od_pairs": [],
+      "envelope": {
+        "model_snapshot_revision": 16,
+        "observation": {
+          "data_version": "1.3",
+          "day_id": 2,
+          "observation_phase": "T_COMPLETE",
+          "simulation_minute": 2072,
+          "snapshot_revision": 12520
+        },
+        "run_scope": "run--9223371989173926443",
+        "view_revision": 15
+      },
+      "fact_supply": {
+        "available": true,
+        "facts": [
+          {
+            "basis_decision_id": "run--9223371989173926443:review:000002:decision",
+            "basis_plan_revision": 1,
+            "basis_station_ids": [
+              "S01",
+              "S02",
+              "S03",
+              "S04",
+              "S08",
+              "S12"
+            ],
+            "business_identity_id": "run--9223371989173926443:business:P-A",
+            "consumed_at": null,
+            "consumed_by": "",
+            "decision_id": "run--9223371989173926443:review:000002:decision",
+            "effect_at": 2040,
+            "fact_id": "run--9223371989173926443:review:000002:decision:E01",
+            "failed_at": 600,
+            "kind": "E01",
+            "occurred_at": 2040,
+            "origin_districts": [
+              "D01",
+              "D02",
+              "D03",
+              "D04",
+              "D08"
+            ],
+            "scheduled_at": 2040,
+            "slot_id": "P-A",
+            "target_od_ids": [
+              "D01:D02",
+              "D02:D03",
+              "D03:D04",
+              "D04:D05",
+              "D08:D01"
+            ],
+            "used": false
+          }
+        ],
+        "scheduled": [],
+        "status": "READY"
+      },
+      "funds": {
+        "available_cash": 1000000,
+        "cash": 1000000,
+        "free_cash": 1000000,
+        "reserved": 0,
+        "reserved_by_project": {},
+        "restricted": 0,
+        "restricted_by_project": {},
+        "unpaid": 0
+      },
+      "general_government_action": {
+        "allowed": false,
+        "reason_codes": [
+          "PREDICTION_NOT_CURRENT"
+        ]
+      },
+      "historical_authority_decisions": [
+        {
+          "business_identity_id": "run--9223371989173926443:business:P-A",
+          "completed_at": 600,
+          "consumed_fact_id": null,
+          "decision_id": "run--9223371989173926443:review:000002:decision",
+          "fact_pending": {
+            "decision_id": "run--9223371989173926443:review:000002:decision",
+            "earliest_at": 2040,
+            "fact_created": false,
+            "fact_id": "run--9223371989173926443:review:000002:decision:E01",
+            "status": "E01_SCHEDULED"
+          },
+          "kind": "GOVERNMENT",
+          "outcome": "REJECTED",
+          "target_decision_id": "run--9223371989173926443:review:000001:decision"
+        }
+      ],
+      "kind": "ACTUAL_SESSION_API",
+      "ledger_canonical_sha256": "fdf4a9c4889a5db3541047320ff7cefff21e793b4014b20c201767b5085fc6ce",
+      "ledger_entry_count": 1564,
+      "prediction_input_revision": 3,
+      "prediction_status": "NOT_CALCULATED",
+      "retry_state": {
+        "allowed": false,
+        "applicable": true,
+        "fact_id": "run--9223371989173926443:review:000002:decision:E01",
+        "failure_decision_id": "run--9223371989173926443:review:000002:decision",
+        "reason_codes": [
+          "PREDICTION_NOT_CURRENT"
+        ]
+      },
+      "rng_draws": [
+        {
+          "command_id": "gov",
+          "decision_id": "run--9223371989173926443:review:000002:decision",
+          "domain": [
+            0,
+            99
+          ],
+          "draw_index": 1,
+          "kind": "GOVERNMENT",
+          "minute": 600,
+          "outcome": "REJECTED",
+          "phase": "REVIEW_COMPLETE",
+          "review_id": "run--9223371989173926443:review:000002",
+          "sample": 97,
+          "seed": "1",
+          "state_after": "6844932353678761266",
+          "state_before": "-1966449618399012673"
+        }
+      ]
+    }
+  },
+  "separate_business_facts": [
+    {
+      "basis_decision_id": "P1-MODEL:review:000002:decision",
+      "basis_plan_revision": 1,
+      "basis_station_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S08",
+        "S12"
+      ],
+      "business_identity_id": "P1-MODEL:business:P-A",
+      "consumed_at": null,
+      "consumed_by": "",
+      "decision_id": "P1-MODEL:review:000002:decision",
+      "effect_at": 1892,
+      "fact_id": "P1-MODEL:review:000002:decision:E01",
+      "failed_at": 452,
+      "kind": "E01",
+      "occurred_at": 1892,
+      "origin_districts": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D08"
+      ],
+      "scheduled_at": 1892,
+      "slot_id": "P-A",
+      "target_od_ids": [
+        "D01:D02",
+        "D02:D03",
+        "D03:D04",
+        "D04:D05",
+        "D08:D01"
+      ],
+      "used": false
+    },
+    {
+      "basis_decision_id": "P1-MODEL:review:000004:decision",
+      "basis_plan_revision": 1,
+      "basis_station_ids": [
+        "S01",
+        "S05",
+        "S09",
+        "S10",
+        "S11",
+        "S12"
+      ],
+      "business_identity_id": "P1-MODEL:business:P-B",
+      "consumed_at": null,
+      "consumed_by": "",
+      "decision_id": "P1-MODEL:review:000004:decision",
+      "effect_at": 1984,
+      "fact_id": "P1-MODEL:review:000004:decision:E01",
+      "failed_at": 544,
+      "kind": "E01",
+      "occurred_at": 1984,
+      "origin_districts": [
+        "D01",
+        "D05",
+        "D06",
+        "D07",
+        "D08"
+      ],
+      "scheduled_at": 1984,
+      "slot_id": "P-B",
+      "target_od_ids": [
+        "D01:D02",
+        "D05:D06",
+        "D06:D07",
+        "D07:D08",
+        "D08:D01"
+      ],
+      "used": false
+    }
+  ],
+  "source_sha256": {
+    "assets/data/gate2_w01_v1_3.json": "1bce97486fdcc81101332f24eb508e10f089204ab78fe79fa6bdc66d19c7594a",
+    "assets/data/gate2_w03_demand_v1_3.json": "e9f6ab030ece12558d05f812963b368f3aadac49e39debb9bcc6ce4a0716fe23",
+    "assets/data/stage3_proposals_v1_4.json": "de4f0f68f0b25bcd0b55e4ca12d4758f9d60d228630022c93aed952d7036578d",
+    "project.godot": "558ba7d9da54e1e8cf193c15c1347ff8fa25674f2f2d2cbc439f735756c9dc11",
+    "scripts/model/company_proposal.gd": "df98e91032512e9e7c61cb78ddd56726879ae31c9ba3fc9433046089961d3b37",
+    "scripts/model/operating_line.gd": "fda975cd8f5bf96a2960d27fe00156f1ac9e6a496d5db13066fb5911fe137a97",
+    "scripts/simulation/business_sources.gd": "fe695a69d9b19988c7f19b3fe9fa664d93714c594a9d657b608e3788e4334069",
+    "scripts/simulation/demand_predictor.gd": "974963ab6db43e1f4e573b4a1b620d1d6109e8c7bafe6274ef926a854247c40e",
+    "scripts/simulation/minute_pipeline.gd": "c5dc7727af512f23f4515b7a524e91a5e5039edd50efe7e3ad508408d8b56d27",
+    "scripts/simulation/operations_service.gd": "6b29ae3dcc3bf706275d283d5fbd6408dcc453b49cf52693b726acfe4703c07d",
+    "scripts/simulation/proposal_demand_profile.gd": "c96e067b0581d727055ab88e5115d4bfbf0faddeed9670814b39e037314b9629",
+    "scripts/simulation/proposal_demand_profile.gd.uid": "d1bcc40eaeeca93b11471a8cfbc820e6694619b1a01bfd647d5833a61008f8a2",
+    "scripts/simulation/proposal_service.gd": "f6f79dbd068d8cfba9668494e6b9e42c87d6613ea5a745c63a53d802a064c795",
+    "scripts/ui/s01_observation_contract.gd": "4ccd042106ef7d7fe90137368f9c4809e1f330927dd2e203dc6987b452061b8a",
+    "scripts/ui/stage1_session.gd": "8cb8dc7efd990b81662d574a3430081f7ea53668579b7c470307f2245c3f4172",
+    "tests/game/run_proposal_ui_tests.gd": "9410cf67470e10320c4212d29ca50c7fea0bc914e7b02765e09c0c666cb30868",
+    "tests/game/run_proposal_view_tests.gd": "4cd54e91f448b002b1320b7fa8828a62d249054bf03b7bd43ef77cd955ce67c4",
+    "tests/game/run_vs02_tests.gd": "17987915f72c4e469c377f7429616eb54cce951cdf9129d05dc9bda7b8ba2f03",
+    "tests/game/run_w03_tests.gd": "c6248435469e5a362a976e7b7256c31fd37c2cf439ae795fe19859b482fc4835",
+    "tests/game/run_w04b_tests.gd": "240e6c62d17e566e8eeea47c7f0bd6a69aaac4cfb83a29bab8329700e9ee8c25",
+    "tests/game/run_w06_tests.gd": "6d59d4bffdf70dfaf8feece84b1d4dad55421faca7d1bbb791604497e7de4aed",
+    "tests/game/w04b_fixtures.gd": "6507504c453719f1315474ec2255e24085643f765ae31fdb5407626bfbc59a3f"
+  },
+  "status": {
+    "affected_screen_integration": "L2_PENDING",
+    "build_export": "NOT_RUN",
+    "d1": "LOCAL_IMPLEMENTED_AUTOMATICALLY_VERIFIED",
+    "d2": "LOCAL_L2_PACKET_READY",
+    "dev_os_gui": "NOT_RUN",
+    "f08": "FINAL_SPEC_PENDING",
+    "independent_gui": "NOT_RUN",
+    "natural_vs02": "NOT_RUN",
+    "product_acceptance": "PENDING",
+    "remote_ci": "NOT_RUN",
+    "s3_12": "FINAL_ACCEPTANCE_PENDING",
+    "spec_change_request": "NONE"
+  },
+  "task_id": "DEV-027"
+}

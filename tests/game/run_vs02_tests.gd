@@ -22,6 +22,7 @@ func _run() -> void:
 	else:
 		_test_initialization()
 		_test_chain()
+		_test_di03_operations()
 		_test_source_isolation()
 		_test_phase_order()
 	var output := "res://.local/validation/DEV-027/session-pipeline/vs02-auto.json"
@@ -175,6 +176,65 @@ func _test_chain() -> void:
 		true
 	)
 	_samples.L09_report_and_next = {"session": FX.sample(value), "query": query}
+
+
+func _test_di03_operations() -> void:
+	var value := FX.session(1, 508)
+	value.enable_construction_ui()
+	value.enable_operations_ui()
+	FX.session_prepare(value)
+	value.request_proposal(FX.session_command(value, "city", "submit_city_review"))
+	FX.advance(value, 539)
+	value.request_proposal(FX.session_command(value, "government", "submit_government_review"))
+	FX.advance(value, 600)
+	_expect(
+		"DI03/operation_prereq_rejected", FX.session_row(value).decisions.back().outcome, "REJECTED"
+	)
+	FX.advance(value, 2040)
+	value.request_proposal(FX.session_command(value, "forecast", "predict_proposal"))
+	value.request_proposal(FX.session_command(value, "retry-city", "submit_city_review"))
+	FX.advance(value, 2071)
+	var row := FX.session_row(value)
+	var prediction: Dictionary = row.draft.prediction.current.value
+	var retry := FX.session_command(value, "retry", "submit_government_review")
+	retry["fact_id"] = row.government_retry_state.fact_id
+	value.request_proposal(retry)
+	FX.advance(value, 2132)
+	_expect(
+		"DI03/permission_after_fact", FX.session_row(value).decisions.back().outcome, "APPROVED"
+	)
+	value.request_proposal(FX.session_command(value, "sign", "sign_proposal_contract"))
+	FX.advance(value, 2133)
+	var business: Dictionary = FX.session_row(value).business_contract
+	_expect("DI03/sealed_profile", business.permitted_plan.demand_profile, row.draft.demand_profile)
+	_construction(value, "contract")
+	_construction(value, "start")
+	FX.advance(value, int(_project(value).started_at) + 2880)
+	_construction(value, "trial")
+	FX.advance(value, value.pipeline.clock.minute + 60)
+	_construction(value, "safety")
+	FX.advance(value, value.pipeline.clock.minute + 60)
+	_construction(value, "open")
+	var ops := value.pipeline.operations_snapshot()
+	_expect("DI03/ready_service", ops.service_ready, true)
+	_expect("DI03/operation_profile", ops.source.demand_profile, row.draft.demand_profile)
+	_expect("DI03/forecast_operation_od_parity", ops.od_pairs, prediction.od_pairs)
+	_expect("DI03/actual_carry_denominator", ops.carry_denominator, 43200)
+	_expect("DI03/actual_first_boarding_carry", ops.carry["D08:D01"], 8000)
+	var first_minute: int = value.pipeline.clock.minute
+	var ledger_hash := JSON.stringify(value.pipeline.ledger.entries()).sha256_text()
+	FX.advance(value, first_minute + 1)
+	var next := value.pipeline.operations_snapshot()
+	_expect("DI03/next_boarding_keeps_prior_carry", next.carry["D08:D01"], 16000)
+	_expect("DI03/first_actual_arrival", next.daily.completed > 0, true)
+	_samples.DI03_operation = {
+		"kind": "ACTUAL_SESSION_OPERATIONS",
+		"prediction_od_pairs": prediction.od_pairs,
+		"opening": ops,
+		"next": next,
+		"ledger_at_open_sha256": ledger_hash,
+		"ledger_next_sha256": JSON.stringify(value.pipeline.ledger.entries()).sha256_text(),
+	}
 
 
 func _test_source_tamper(value: FX.Session) -> void:

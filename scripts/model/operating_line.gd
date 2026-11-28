@@ -3,11 +3,13 @@ extends RefCounted
 ## 실제 OD/carry/cohort와 일별 운행 실적만 소유한다. 현금은 Pipeline의 원장이 소유한다.
 
 const Predictor = preload("res://scripts/simulation/demand_predictor.gd")
+const Profile = preload("res://scripts/simulation/proposal_demand_profile.gd")
 const MAX_INT: int = 9223372036854775807
 
 var _source: Dictionary
 var _pairs: Array[Dictionary]
 var _carry: Dictionary = {}
+var _demand_scale: int = 1
 var _cohorts: Array[Dictionary] = []
 var _days: Dictionary = {}
 var _closed: Dictionary = {}
@@ -19,6 +21,8 @@ var _last_arrival: int = -1
 func _init(source: Dictionary, pairs: Array[Dictionary]) -> void:
 	_source = source.duplicate(true)
 	_pairs = pairs.duplicate(true)
+	if not source.get("demand_profile", {}).is_empty():
+		_demand_scale = Profile.BASE_UNITS
 	_pairs.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return a.id < b.id)
 	for pair: Dictionary in _pairs:
 		_carry[pair.id] = 0
@@ -27,7 +31,11 @@ func _init(source: Dictionary, pairs: Array[Dictionary]) -> void:
 ## 권위 ID/역은 고정하고 조건 revision과 개통 시각만 전진시킨다.
 func reconcile_source(source: Dictionary) -> bool:
 	for key: String in [
-		"project_id", "business_contract_id", "construction_contract_id", "station_ids"
+		"project_id",
+		"business_contract_id",
+		"construction_contract_id",
+		"station_ids",
+		"demand_profile"
 	]:
 		if source.get(key) != _source.get(key):
 			return false
@@ -58,12 +66,11 @@ func board(minute: int, allowed: bool, capacity: int) -> Dictionary:
 	_ensure_day(day)
 	var counts := {"requested": 0, "boarded": 0, "unboarded": 0}
 	var remaining := capacity if allowed else 0
+	var denominator := Predictor.DENOMINATOR * _demand_scale
 	for pair: Dictionary in _pairs:
-		var numerator: int = (
-			_carry[pair.id] + pair.daily_demand * Predictor.selection_tenths(pair.minutes)
-		)
-		var requested: int = numerator / Predictor.DENOMINATOR
-		_carry[pair.id] = numerator % Predictor.DENOMINATOR
+		var numerator: int = _carry[pair.id] + Predictor.demand_increment(pair, _demand_scale)
+		var requested: int = numerator / denominator
+		_carry[pair.id] = numerator % denominator
 		var boarded := mini(requested, remaining)
 		remaining -= boarded
 		counts.requested += requested
@@ -145,7 +152,7 @@ func close_day(day: int) -> Dictionary:
 
 
 func snapshot() -> Dictionary:
-	return {
+	var value := {
 		"source": _source.duplicate(true),
 		"od_pairs": _pairs.duplicate(true),
 		"carry": _carry.duplicate(true),
@@ -153,6 +160,9 @@ func snapshot() -> Dictionary:
 		"cohorts": _cohorts.duplicate(true),
 		"satisfaction": _satisfaction.duplicate()
 	}
+	if _demand_scale > 1:
+		value["carry_denominator"] = Predictor.DENOMINATOR * _demand_scale
+	return value
 
 
 ## 약분 후에도 int64에 담을 수 없으면 자료 실패를 반환하며 근사값을 만들지 않는다.
