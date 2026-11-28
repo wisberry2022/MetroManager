@@ -130,3 +130,42 @@ Task-ID: DEV-027
 | F04:wheel_down:1:return_p07 | 127→215 | 127→127 |
 
 바깥 세로 스크롤바에 직접 전달한 휠도 추가 검증했다. clamp와 내부 목록 이동은 바깥 읽기 세대를 갱신하지 않으며 저장 복원이 적용된다. P05 무입력 복귀에서 출발 버튼·저장 위치와 복귀 직후 동일 버튼 포커스/가시성을 자동 확인했다. 보완본의 Design 재수용 및 P05 첫 관측 보완은 대기한다. F01 OS RACE INCONCLUSIVE, 전체 PARTIAL, DI-03 HOLD, S3-12 최종 인수 대기다. 원 trace·판정은 [기존 증거](../evidence/DEV-027_F04_RESTORE_RESULTS.json)에 남아 있다. [새 휠 실행 증거](../evidence/DEV-027_F04_WHEEL_RESULTS.json)
+
+
+## 8. PR #182 Track A/B 한정 수용과 재무 클릭 복귀 대조 — 2026-11-28
+
+DEV-027 / AGT-DEV-0004. 시험본은 PR #182 병합 SHA `d0f49eb33ec6bd0efebf5352de315b4b16a3ae07`이다. 로컬 문서 기준은 원격 main `5a99869046b00b5cd39ecc0ee82c158ade9a49f0`이다. 두 SHA의 차이는 기획 문서 3개다. §1~7의 당시 실패·PARTIAL·INCONCLUSIVE를 원문으로 보존하고, 현재 처분은 아래에 추가한다. [Track A 심사](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7218342889) · [Track B 심사](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7218774784)
+
+| 대상 | 현재 처분 | 증거 범위와 잔여 |
+| --- | --- | --- |
+| §7의 휠 6행과 `F04:wheel_bar:0:restore` | **A/B 한정 수용**. 지정 6행의 보완 대기 해소 | 기존 전후 253/7→253/0, Track A 고정본 독립 253/0(exit 0). A의 JSON 252/0은 증거 저장 단언 직전 같은 실행이다. B 신규 자동 0. 실제 이동·같은 문맥·명령/모델 무효과·5프레임 보존을 연결한다. [DEV 실행](../evidence/DEV-027_F04_WHEEL_RESULTS.json) |
+| W-G01·02 및 P05 무입력 복귀 | **관측 범위 수용**. PR #178 P05 당시 PARTIAL은 보존하고 PR #182의 관측한 무입력 경로에는 후속 해소를 추가 | 바깥 콘텐츠/세로 바 휠·Tab 가시성, 내부 목록만 이동하는 휠과 이동 0인 clamp를 구분한다. A의 P05 062/064/065는 동일 JPEG, B의 055/057/058은 별도 실행에서 같은 버튼 테두리·비영점·사업 문맥을 관측했다. 1055는 출발 로그 값이다. 반환 수치와 엔진 첫 프레임은 NOT_VERIFIED |
+| W-G03 키보드 재무→제안 | **Track B 가시 복귀 한정 수용** | 이미 포커스가 보인 067에서 Return으로 진입한 후 070/071에서 같은 기준점·thumb·버튼 테두리를 확인했다. 정확한 내부 수치, P07 내부 고정일1 중첩 복귀와 보고일/key·본문·확인 사본은 이 증거 범위 밖이다 |
+| W-G03 마우스 클릭으로 재무 진입 후 제안으로 복귀 | **PARTIAL / NOT_VERIFIED** | 063→066/067의 화면 위치 차이는 확인했다. 실제 저장값과 반환값 대조는 미관측이다. 아래의 코드 검토 결과를 적용한다 |
+| F01 OS 경쟁·RP-03/04 내부 수명 | OS RACE **INCONCLUSIVE**, 내부 callback·옛 scope/재바인딩의 독립 OS 직접 확인은 기존 **PARTIAL / NOT_VERIFIED** | 결정적 자동·가시 복귀 증거는 각각 관측 범위에서 재사용한다. 지정 경로 전체의 반복 실행은 A/B 검수 조건에 없다 |
+
+### 8.1 재무 클릭 복귀 약 21px 대조
+
+**원본 캡처·로그.** Track B 패킷의 `inputs.jsonl`, `captures.jsonl`, `focus-index.json`, `gui.stdout.log`, `RECORD_CORRECTIONS.md`와 원본 JPEG를 대조했다. 063은 휠로 비영점에 옮긴 뒤 찍은 클릭 전 화면이며 상단의 재무·보고 버튼 일부가 잘려 있다. 실제 클릭은 12:41:32.354–32.490 UTC, 좌표 (164, 44)다. 064/065는 재무 화면, 066/067은 뒤로에서 Return을 누른 뒤 동일 P-A/S12·가시 포커스·비영점을 보여준다. 원본 1440×852 JPEG의 x=200에서 같은 청록 노선의 중심 행을 읽으면 063 y=291, 066/067 y=312로 아래쪽 **21 캡처 픽셀**이다. 066/067/070/071의 JPEG 바이트는 서로 일치한다. 070/071의 기준 출발 화면은 이미 버튼 포커스가 있는 067이다. 캡처 픽셀과 게임 viewport의 scroll 값은 별도다.
+
+**저장·복원 순서.** 제품 `stage1_view.gd`의 `_input`/읽기 입력 보조 함수(L650, L689)는 제안 화면에서 일반 마우스 버튼 이벤트가 GUI에 도달하기 전에 `follow_focus`를 켠다. Godot 4.7.2에서 왼쪽 버튼 down의 새 포커스 부여는 버튼 GUI 처리보다 앞선다. 새 포커스 신호를 받은 ScrollContainer는 `follow_focus=true`이고 대상이 자식일 때 버튼을 보이도록 스크롤을 조정할 수 있다. 제품의 재무 버튼은 기본 Button의 `pressed`를 사용하며 기본 release 동작을 바꾸지 않는다. 따라서 클릭으로 새 포커스와 가시화가 적용되는 경우에는 release의 `pressed`에 연결된 `_open_reading`이 화면 전환 전에 **그 시점**의 owner·바깥 scroll·제안 문맥을 저장한다(L710, L753). [제품 버튼 생성](https://github.com/wisberry2022/MetroManager/blob/d0f49eb33ec6bd0efebf5352de315b4b16a3ae07/scripts/ui/operations_view.gd#L107) · [Godot 입력 순서](https://github.com/godotengine/godot/blob/ed1daf0bf001b61586d9930840f2f1394092c079/scene/main/viewport.cpp#L3275) · [클릭 포커스](https://github.com/godotengine/godot/blob/ed1daf0bf001b61586d9930840f2f1394092c079/scene/main/viewport.cpp#L1827) · [포커스 가시화](https://github.com/godotengine/godot/blob/ed1daf0bf001b61586d9930840f2f1394092c079/scene/gui/scroll_container.cpp#L327) · [버튼 기본 동작](https://github.com/godotengine/godot/blob/ed1daf0bf001b61586d9930840f2f1394092c079/scene/gui/base_button.h#L45)
+
+뒤로에서 `_return_reading`이 저장 문맥을 꺼내고, `_restore_reading`은 제안 화면 전환 뒤 두 `process_frame`을 기다린다. 바인딩·화면 이동/읽기 세대·화면/owner 조건을 확인한 다음 유효한 저장 owner 또는 대체 owner로 포커스를 잡는다. 이어 `follow_focus=false`로 두고 `context.scroll`을 적용한다. 따라서 잘린 버튼이 **저장 전에** 보이도록 조정됐다면, 저장값이 정상 복원되어도 063과 다른 화면 위치가 나올 수 있다. 이는 현재 코드와 관측 방향에 부합하는 설명이며 해당 클릭 실행에서 수치나 내부 경합이 측정된 것은 아니다. [고정 제품 저장·복원 코드](https://github.com/wisberry2022/MetroManager/blob/d0f49eb33ec6bd0efebf5352de315b4b16a3ae07/scripts/ui/stage1_view.gd#L753)
+
+**기존 자동으로 입증되는 경계.** `read_return_scroll`과 `F01:return_p07:return_p07`은 버튼의 `pressed.emit()`으로 진입한다. F01의 저장값 215는 제안으로 돌아온 뒤 22에서 215로 복원된다. 복귀 중 유효 휠을 내는 F04 행에서는 22→127이 유지된다. 이 행들은 저장값/새 입력의 우선순위를 입증한다. 마우스 down의 hit·포커스 가시화는 직접 신호 발행에 포함되지 않는다. K11은 Tab으로 목표 포커스를 얻고 Enter로 진입해 명령·모델의 무효과를 검사한다. GUI 로그의 seq26~31은 이미 재무 안에서 `P07_refresh`·`P07_back`의 focus-region 처리 값(240 또는 275)이다. 그 숫자를 클릭 출발이나 제안 복귀 scroll로 사용할 수 없다. [고정 자동 검사](https://github.com/wisberry2022/MetroManager/blob/d0f49eb33ec6bd0efebf5352de315b4b16a3ae07/tests/game/run_proposal_view_tests.gd#L765) · [기존 자동 trace](../evidence/DEV-027_F04_WHEEL_RESULTS.json)
+
+**판정과 필요한 관측.** 클릭 경로의 정확한 저장 위치 보존은 PARTIAL/NOT_VERIFIED다. 현재 근거로 제품 결함이나 휠 회귀를 확정할 수 없다. 정확한 클릭 복귀가 최종 수용 조건이면, 해당 경로에서만 ① 클릭 직전 제안의 바깥 scroll·owner 및 버튼/viewport 경계 ② down 후 포커스/가시화와 `_open_reading`이 실제 저장한 scroll·owner ③ 새 읽기 입력 전 복원 적용 직후의 scroll·owner·세로 범위를 연결한다. 저장값과 복원값이 일치하면 클릭 전과 저장 시점의 차이를 설명할 수 있다. 다르면 복원 보호 조건과 적용 시점의 범위 제한을 확인한다. 별도 관측·제품 변경은 Owner 승인 대상이다.
+
+### 8.2 증거 출처·보존 확인
+
+- **실행 시점과 고정 제출 SHA.** 이 로컬 대조에서는 고정 시험 Git blob·현재 사본의 소스 163개가 최종 색인과 일치했다. DEV 당시 실행별 `source-sha256.json`의 범위는 161개이며 `stage1_reading_scroll.gd`와 UID 2개의 동시 채집 해시는 **NOT_PROVIDED**다. 제출 때 추가한 2개에 현재 무결성 확인을 연결하고, 과거 실행 시점 바이트의 독립 확인은 미제공 상태로 남긴다.
+- **Track A 캐시 66개.** A 제출 시 manifest 1,522개 일치와 B 심사 시 A 캐시 66개 조회 부재·나머지 1,456개 일치는 당시 기록으로 보존한다. 이번 로컬 일반 경로 조회에서도 shader_cache 66개가 조회되지 않았다. 경로 길이 309~338자의 같은 항목을 Windows 확장 길이 경로로 읽어 **66개 모두 존재·해시 일치**, A manifest 전체 **1,522/1,522**를 확인했다. B 심사 당시 환경·조회 방법·부재 원인은 NOT_VERIFIED로 남긴다. A manifest SHA256 `65175f0f027a6d7f663a27d44fd8d845467442a36d698076711af8acf7c84f24`.
+- **Track B 집계와 실행 기록.** B manifest **103/103** 일치. SHA256SUMS 104개는 manifest를 포함한 집계다. B manifest SHA256 `9bcb6c8b7e1be11dcd52eae5b2cf3532bd417211af07d116f47462c17642765f`. A/B 격리 doctor 실패 및 check 성공, A import의 Unicode 메시지 3건과 B의 오류 0은 각 실행 기록을 따른다. 원본 패킷·이미지·로그·색인은 읽기 전용으로 대조했다.
+
+### 8.3 로컬 검토 범위
+
+추적 변경은 이 공동 잔여표의 §8 한 곳이다. 개발 정적 대조에는 Git 소스 비교, 기존 JSON·로그/입력 대조, 원본 JPEG 읽기 및 픽셀 기준점 확인, manifest 재해시를 사용했다. 이번 게임 자동 검사·프로젝트 로드·게임 플레이·추가 GUI·빌드·원격 CI는 각각 NOT_RUN이다. 새 명세 변경 요청은 없다. 제품 수정·추가 GUI·Commit·Push·PR은 별도 승인 사항이다.
+
+`policy.py doctor`, `policy.py check`(821파일, GDScript 69개), `git diff --check` 통과. 기존 본문 바이트와 F04 실행 JSON·공유 데이터 2개 해시를 대조했다. 로컬 읽기 전용 감사 결과는 `.local/validation/DEV-027/pr182-review-followup/read-only-audit.json`에 있다.
+
+DI-03 종속 구현·검증 **HOLD**, B06-02/전체 **PARTIAL**, 기존 미관측 및 F08 최종 규격 대기, S3-12/HQ·Owner 최종 인수 대기를 유지한다. §8의 기록과 마우스 클릭 복귀 처분을 로컬 검토 대상으로 제출한다.
