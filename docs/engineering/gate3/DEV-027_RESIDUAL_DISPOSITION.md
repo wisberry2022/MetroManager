@@ -169,3 +169,24 @@ DEV-027 / AGT-DEV-0004. 시험본은 PR #182 병합 SHA `d0f49eb33ec6bd0efebf535
 `policy.py doctor`, `policy.py check`(821파일, GDScript 69개), `git diff --check` 통과. 기존 본문 바이트와 F04 실행 JSON·공유 데이터 2개 해시를 대조했다. 로컬 읽기 전용 감사 결과는 `.local/validation/DEV-027/pr182-review-followup/read-only-audit.json`에 있다.
 
 DI-03 종속 구현·검증 **HOLD**, B06-02/전체 **PARTIAL**, 기존 미관측 및 F08 최종 규격 대기, S3-12/HQ·Owner 최종 인수 대기를 유지한다. §8의 기록과 마우스 클릭 복귀 처분을 로컬 검토 대상으로 제출한다.
+
+
+## 9. W-G03 재무 클릭 복귀 DEV GUI 보완 관측 — 2026-11-28
+
+DEV-027 / AGT-DEV-0004. [PR #183](https://github.com/wisberry2022/MetroManager/pull/183)은 제출 head `0d47d6dc0afc8cc5bd249f1f31b5f1499767100d`의 `policy`·`department-policy` 성공 후 main `556d04e7cf420c883838ea2bf0416fab42bc36c0`에 반영된 것을 확인했다. 새 실행은 이 병합 SHA의 격리 사본에서 `stage1_view.gd`의 시점별 로그와 시험 창 제목만 추가해 수행했다. Godot 4.7.2, Windows D3D12/Forward+, 최대화 창 캡처 1440×852, W04B seed 2를 사용했다.
+
+회사 제안에서 P-A와 S12 정보를 선택하고 바깥 콘텐츠에서 휠 한 칸을 내려 재무·보고 버튼을 일부 가렸다. 노출된 버튼을 실제 마우스로 누르고, 재무에서 Tab으로 뒤로를 선택한 후 Enter로 돌아왔다. 아래 수치는 엔진의 바깥 스크롤 값이다.
+
+| 시점 | 엔진 프레임 | scroll / 최댓값 | 포커스 owner |
+| --- | ---: | ---: | --- |
+| 클릭 down의 GUI 처리 전 | 6964 | 79 / 631 | `ProposalStation_S12` |
+| 마우스 down으로 재무 버튼 포커스 획득 | 6964 | 62 / 631 | `open_finance` |
+| release에서 화면 전환 직전 문맥 저장 | 6964 | 62 / 631 | `open_finance` |
+| 뒤로에서 반환 요청 | 7482 | 저장값 62 | 저장 owner `open_finance` |
+| 제안 화면에서 복원 적용 직후 | 7483 | 62 / 631 | `open_finance` |
+
+처리 전 버튼 상단 y=-5, 스크롤 컨테이너 상단 y=12로 17 엔진 단위가 가려져 있었다. 클릭으로 포커스를 받으며 `follow_focus`가 켜진 상태에서 79→62로 이동했고, 그때의 62를 저장하고 그대로 복원했다. 가로 캡처 배율 1440/1152 기준 17 단위는 약 21 캡처 픽셀로 §8의 관측 방향과 크기에 부합한다. 복귀 화면에서 버튼 테두리와 P-A/S12를 확인했다. 같은 위치에서 이미 포커스된 재무 버튼을 Enter로 열고 같은 방식으로 복귀한 대조 실행도 저장 62(8117프레임)→복원 62(8666프레임), owner `open_finance`였다. 두 실행에서 게임분 418·revision 64·P-A/S12가 유지됐다.
+
+**DEV 판정.** 관측한 클릭·키보드 경로에서 저장 당시의 위치와 버튼 포커스가 복원됐다. 클릭 전 화면과의 위치 차이는 문맥 저장 전에 발생했다. 이번 경로에는 제품 수정이나 명세 변경이 필요하지 않다. §8의 Track B 원본에는 저장·반환 수치가 없으므로 당시 판정과 원본 증거를 보존한다. 새 증거 범위는 위 DEV 추가 GUI 2회다. DI-03 **HOLD**, B06-02/전체 **PARTIAL**, 기존 미관측·F08 최종 규격 대기, S3-12/HQ·Owner 최종 인수 대기를 유지한다.
+
+**실행과 증거.** 격리 사본의 `--headless --editor --quit` 프로젝트 로드와 `--maximized -- --w04b-seed=2` 실제 GUI(클릭·키보드 복귀) 모두 exit 0. 로컬 실행 디렉터리는 `.local/validation/DEV-027/finance-click-556d04e/`이다. `source.json`에 고정 SHA와 사본 해시, `gui.stdout.log` 583~637행과 690~743행에 원시 시점 이벤트를 보관했다. 로그 SHA256은 `776250fa5fccbbbe6b959353e2db1534f3f7dce94af99d0a0d7958215d8adf01`이다. 이 후속의 게임 자동 회귀·전체 자연 플레이·독립 GUI/Design 검수·빌드는 각각 NOT_RUN이다. 추적 변경은 이 문서의 §9 추가 한 곳이다.
