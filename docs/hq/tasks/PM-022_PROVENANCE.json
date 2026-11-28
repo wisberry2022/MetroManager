@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "task_id": "PM-022",
+  "primary_agent_id": "AGT-PM-0002",
+  "base_sha": "1c4481187980fe6b37de0fec8e0019f2736ce1f2",
+  "artifacts": [
+    {
+      "path": "docs/hq/PM-020_STAGE3_EXECUTION_PLAN.md",
+      "change_type": "modify",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "AGT-PM-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-022_S3_12_DI03_TRANSITION.md#owner-요청과-승인-범위",
+        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7236141995",
+        "https://github.com/wisberry2022/MetroManager/issues/185",
+        "https://github.com/wisberry2022/MetroManager/issues/186"
+      ],
+      "blob_sha": "e4f94ecceb691f48c8e1cce866fb915171b9c95d",
+      "old_blob_sha": "f6d248a218ebb10df012a79e095fd441fdce8f74"
+    },
+    {
+      "path": "docs/hq/README.md",
+      "change_type": "modify",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "UNKNOWN",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-022_S3_12_DI03_TRANSITION.md#owner-요청과-승인-범위",
+        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7236141995",
+        "https://github.com/wisberry2022/MetroManager/issues/185",
+        "https://github.com/wisberry2022/MetroManager/issues/186"
+      ],
+      "blob_sha": "d1767d3aad91333d08e5c2acf780c2ffdc00eff9",
+      "old_blob_sha": "54d0d0f04dbf92b1d2d41ee8a02ef15a95877649"
+    },
+    {
+      "path": "docs/hq/requests/PM-022_DI03_DEPARTMENT_REQUESTS.md",
+      "change_type": "add",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "AGT-PM-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-022_S3_12_DI03_TRANSITION.md#owner-요청과-승인-범위",
+        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7236141995",
+        "https://github.com/wisberry2022/MetroManager/issues/185",
+        "https://github.com/wisberry2022/MetroManager/issues/186"
+      ],
+      "blob_sha": "58a06a9e5a60002fc9518b4cb01f623ea529585e"
+    },
+    {
+      "path": "docs/hq/STAGE3_S3_12_ACCEPTANCE_SCOPE.md",
+      "change_type": "add",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "AGT-PM-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-022_S3_12_DI03_TRANSITION.md#owner-요청과-승인-범위",
+        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7236141995",
+        "https://github.com/wisberry2022/MetroManager/issues/185",
+        "https://github.com/wisberry2022/MetroManager/issues/186"
+      ],
+      "blob_sha": "d9001f0d6e8f41421843aa44997a12ff5407446c"
+    },
+    {
+      "path": "docs/hq/tasks/PM-022_RESULT.md",
+      "change_type": "add",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "AGT-PM-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-022_S3_12_DI03_TRANSITION.md#owner-요청과-승인-범위",
+        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7236141995",
+        "https://github.com/wisberry2022/MetroManager/issues/185",
+        "https://github.com/wisberry2022/MetroManager/issues/186"
+      ],
+      "blob_sha": "59facde5354baf7a54dfb2961cd8eed0beb68313"
+    },
+    {
+      "path": "docs/hq/tasks/PM-022_S3_12_DI03_TRANSITION.md",
+      "change_type": "add",
+      "agent_id": "AGT-PM-0002",
+      "modified_by": "AGT-PM-0002",
+      "created_by": "AGT-PM-0002",
+      "contributors": [],
+      "source_refs": [
+        "docs/hq/tasks/PM-022_S3_12_DI03_TRANSITION.md#owner-요청과-승인-범위",
+        "https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7236141995",
+        "https://github.com/wisberry2022/MetroManager/issues/185",
+        "https://github.com/wisberry2022/MetroManager/issues/186"
+      ],
+      "blob_sha": "75e1ed4486a469951b3d279463dd12cb7f0e44fb"
+    }
+  ],
+  "notes": "REPORT_ONLY, not identity/approval/test authentication. Original department verdicts and historical authorship preserved. Manifest excludes itself."
+}
