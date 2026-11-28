@@ -1,11 +1,12 @@
 class_name ProposalService
 extends RefCounted
-## W04B 모델·공유 분 단계 경계. E01 수요 효과와 화면 통합은 포함하지 않는다.
+## W04B 심사·사업·E01의 공유 분 단계 경계.
 
 const Loader = preload("res://scripts/data/proposal_data_loader.gd")
 const Network = preload("res://scripts/model/administrative_network.gd")
 const Proposal = preload("res://scripts/model/company_proposal.gd")
 const Predictor = preload("res://scripts/simulation/demand_predictor.gd")
+const Profile = preload("res://scripts/simulation/proposal_demand_profile.gd")
 const Ledger = preload("res://scripts/model/company_ledger.gd")
 const ACTIONS := {
 	"submit_city_review": "CITY",
@@ -27,6 +28,8 @@ var _commands: Dictionary = {}
 var _reviews: Array[Dictionary] = []
 var _draws: Array[Dictionary] = []
 var _links: Dictionary = {}
+var _e01_by_slot: Dictionary = {}
+var _network: Network
 var _errors: Array[String] = []
 var _contract_complete: bool = true
 
@@ -38,6 +41,7 @@ func _init(network: Network, data: Dictionary, context: Dictionary) -> void:
 		_errors = ["INVALID_PROPOSAL_CONTEXT"]
 		return
 	_terms = checked.data
+	_network = network
 	_scope = context.run_scope
 	_minute = context.completed_minute
 	_seed = context.seed
@@ -65,6 +69,7 @@ func edit(slot: String, stops: Array[String], name: String = "") -> Dictionary:
 		return {"accepted": false, "reason": "INVALID_SLOT"}
 	var changed: Dictionary = _models[slot].edit(stops, name, _minute)
 	if changed.accepted:
+		_refresh_demand_profiles()
 		_revision += 1
 	return changed
 
@@ -140,6 +145,7 @@ func process_review_phase(minute: int) -> Dictionary:
 	_minute = minute
 	_contract_complete = false
 	_complete_due()
+	_occur_due_facts()
 	_admit_due(false)
 	return {"accepted": true, "changes": _revision - before}
 
@@ -161,13 +167,24 @@ func snapshot() -> Dictionary:
 		var actions: Dictionary = {}
 		for action: String in ACTIONS:
 			var reason := _action_error(slot, ACTIONS[action])
+			# UI-1은 사실 지정 재접수를 연결하기 전까지 기존 표시 사유를 사용한다.
+			if reason == "NEW_FACT_REQUIRED":
+				reason = "NEW_FACT_REQUIRED_DI03_PENDING"
 			actions[action] = {"allowed": reason.is_empty(), "reason_codes": [reason]}
 			if reason.is_empty():
 				actions[action].reason_codes = []
 		row.action_states = actions
 		row.business_alias_slots = _related_slots(slot)
-		row.di03_status = "DEPENDENT_SCOPE_PENDING"
+		row["government_retry_state"] = _retry_state(slot, row.business_alias_slots)
+		row["di03_status"] = "MODEL_SUPPLIED"
 		rows.append(row)
+	var occurred: Array[Dictionary] = []
+	var scheduled: Array[Dictionary] = []
+	for fact: Dictionary in _e01_by_slot.values():
+		if fact.occurred_at == null:
+			scheduled.append(fact.duplicate(true))
+		else:
+			occurred.append(fact.duplicate(true))
 	return {
 		"available": _errors.is_empty(),
 		"errors": _errors.duplicate(),
@@ -187,7 +204,13 @@ func snapshot() -> Dictionary:
 			"draws": _draws.duplicate(true),
 			"engine": Engine.get_version_info().string,
 		},
-		"fact_supply": {"available": false, "status": "DI03_PENDING", "facts": []},
+		"fact_supply":
+		{
+			"available": _errors.is_empty(),
+			"status": "READY" if _errors.is_empty() else "UNAVAILABLE",
+			"scheduled": scheduled,
+			"facts": occurred,
+		},
 	}
 
 
@@ -225,10 +248,20 @@ func _command_error(command: Dictionary) -> String:
 				"action",
 				"binding",
 				"decision_id",
+				"fact_id",
 				"expected_snapshot_revision"
 			]
 		):
 			return "UNSUPPORTED_COMMAND_FIELD"
+	if (
+		command.has("fact_id")
+		and (
+			ACTIONS[command.action] != "GOVERNMENT"
+			or not command.fact_id is String
+			or command.fact_id.is_empty()
+		)
+	):
+		return "INVALID_FACT"
 	return _binding_error(command)
 
 
@@ -246,10 +279,10 @@ func _binding_error(command: Dictionary) -> String:
 			or command.decision_id != decision.get("decision_id", "")
 		):
 			return "STALE_DECISION"
-	return _action_error(command.slot_id, kind)
+	return _action_error(command.slot_id, kind, command.get("fact_id", ""))
 
 
-func _action_error(slot: String, kind: String) -> String:
+func _action_error(slot: String, kind: String, fact_id: String = "") -> String:
 	var model: Proposal = _models[slot]
 	var row := model.snapshot()
 	var related := _related_slots(slot)
@@ -259,7 +292,7 @@ func _action_error(slot: String, kind: String) -> String:
 	if kind == "CITY":
 		return model.preparation_error()
 	if kind in ["GOVERNMENT", "PERSUASION"]:
-		return _review_eligibility(model, kind, related)
+		return _review_eligibility(model, kind, related, fact_id)
 	var permit := _target_decision(model, "CONTRACT")
 	if permit.get("outcome") != "APPROVED":
 		return "PERMISSION_REQUIRED"
@@ -283,40 +316,83 @@ func _identity_error(row: Dictionary, related: Array[String]) -> String:
 	return ""
 
 
-func _review_eligibility(model: Proposal, kind: String, related: Array[String]) -> String:
+func _review_eligibility(
+	model: Proposal, kind: String, related: Array[String], fact_id: String
+) -> String:
 	if kind == "GOVERNMENT":
-		var prep := model.preparation_error()
-		if not prep.is_empty():
-			return prep
-		var city := model.latest_decision("CITY")
-		if city.get("outcome") != "APPROVED" or city.submission.binding != model.binding():
-			return "CURRENT_CITY_APPROVAL_REQUIRED"
-		return _government_error(related)
-	if kind == "PERSUASION":
-		var held := model.latest_decision("GOVERNMENT")
-		if held.get("outcome") != "HELD":
-			return "HELD_DECISION_REQUIRED"
-		if held.decision_id in model.snapshot().persuasion_used_for:
-			return "PERSUASION_ALREADY_USED"
-	return ""
+		return _government_eligibility(model, related, fact_id)
+	var held := model.latest_decision("GOVERNMENT")
+	if held.get("outcome") != "HELD":
+		return "HELD_DECISION_REQUIRED"
+	return (
+		"PERSUASION_ALREADY_USED"
+		if held.decision_id in model.snapshot().persuasion_used_for
+		else ""
+	)
 
 
-func _government_error(related: Array[String]) -> String:
+func _government_eligibility(model: Proposal, related: Array[String], fact_id: String) -> String:
+	var prep := model.preparation_error()
+	if not prep.is_empty():
+		return prep
+	var city := model.latest_decision("CITY")
+	if city.get("outcome") != "APPROVED" or city.submission.binding != model.binding():
+		return "CURRENT_CITY_APPROVAL_REQUIRED"
+	var latest := _latest_government_decision(related)
+	match latest.get("outcome", ""):
+		"APPROVED":
+			return "BUSINESS_ALREADY_AUTHORIZED"
+		"HELD":
+			return "PERSUASION_REQUIRED"
+		"REJECTED":
+			return _retry_fact_error(related, latest, fact_id)
+	return "" if fact_id.is_empty() else "FACT_NOT_REQUIRED"
+
+
+func _latest_government_decision(related: Array[String]) -> Dictionary:
 	var latest: Dictionary = {}
 	for slot: String in related:
-		var row: Dictionary = _models[slot].snapshot()
-		for decision: Dictionary in row.decisions:
-			if decision.kind == "CITY":
-				continue
-			if latest.is_empty() or decision.decision_order > latest.decision_order:
-				latest = decision
-	if latest.is_empty():
-		return ""
-	if latest.outcome == "APPROVED":
-		return "BUSINESS_ALREADY_AUTHORIZED"
-	if latest.outcome == "HELD":
-		return "PERSUASION_REQUIRED"
-	return "NEW_FACT_REQUIRED_DI03_PENDING"
+		var decision: Dictionary = _models[slot].latest_authority_decision()
+		if (
+			not decision.is_empty()
+			and (latest.is_empty() or decision.decision_order > latest.decision_order)
+		):
+			latest = decision
+	return latest
+
+
+func _retry_fact_error(related: Array[String], failure: Dictionary, id: String) -> String:
+	if id.is_empty():
+		return "NEW_FACT_REQUIRED"
+	for slot: String in related:
+		var fact: Dictionary = _e01_by_slot.get(slot, {})
+		if fact.get("fact_id") == id:
+			if fact.occurred_at == null:
+				return "FACT_NOT_OCCURRED"
+			return Proposal.fact_error(fact, failure, _minute)
+	return "UNRELATED_FACT"
+
+
+## 기존 일반 제출과 DI-03 사실 지정 재접수의 명령을 나눈다.
+func _retry_state(slot: String, related: Array[String]) -> Dictionary:
+	var failure := _latest_government_decision(related)
+	var state := {
+		"applicable": failure.get("outcome") == "REJECTED",
+		"allowed": false,
+		"reason_codes": ["RETRY_NOT_REQUIRED"],
+		"failure_decision_id": "",
+		"fact_id": "",
+	}
+	if not state.applicable:
+		return state
+	state.failure_decision_id = failure.decision_id
+	var fact: Dictionary = _e01_by_slot.get(failure.slot_id, {})
+	if not fact.is_empty() and fact.decision_id == failure.decision_id:
+		state.fact_id = fact.fact_id
+	var reason := _action_error(slot, "GOVERNMENT", state.fact_id)
+	state.allowed = reason.is_empty()
+	state.reason_codes = [] if state.allowed else [reason]
+	return state
 
 
 func _target_decision(model: Proposal, kind: String) -> Dictionary:
@@ -324,12 +400,7 @@ func _target_decision(model: Proposal, kind: String) -> Dictionary:
 		return model.latest_decision("CITY")
 	if kind == "PERSUASION":
 		return model.latest_decision("GOVERNMENT")
-	var row := model.snapshot()
-	for index: int in range(row.decisions.size() - 1, -1, -1):
-		var decision: Dictionary = row.decisions[index]
-		if decision.kind in ["GOVERNMENT", "PERSUASION"]:
-			return decision
-	return {}
+	return model.latest_authority_decision()
 
 
 func _related_slots(slot: String) -> Array[String]:
@@ -385,6 +456,8 @@ func _admit_due(contracts: bool) -> void:
 func _start_review(command: Dictionary, record: Dictionary) -> void:
 	var model: Proposal = _models[command.slot_id]
 	var kind: String = ACTIONS[command.action]
+	if kind == "GOVERNMENT" and command.has("fact_id"):
+		_consume_fact(command, record)
 	var submitted: Dictionary = record.submission
 	var target := _target_decision(model, kind)
 	if kind == "PERSUASION":
@@ -404,11 +477,14 @@ func _start_review(command: Dictionary, record: Dictionary) -> void:
 		"completed": false,
 	}
 	record.review_id = review.review_id
+	if record.has("consumed_fact_id"):
+		review["consumed_fact_id"] = record.consumed_fact_id
 	_reviews.append(review)
 	var key := Proposal.station_key(submitted.plan.station_ids)
 	if key not in _links[command.slot_id]:
 		_links[command.slot_id].append(key)
 	model.admit(review)
+	_refresh_demand_profiles()
 
 
 func _complete_due() -> void:
@@ -427,16 +503,96 @@ func _complete_due() -> void:
 				_terms.government if review.kind == "GOVERNMENT" else _terms.persuasion_government
 			)
 		if review.kind != "CITY" and decision.outcome == "REJECTED":
-			decision.fact_pending = {
-				"status": "DI03_PENDING",
-				"earliest_at": _minute + _terms.fact_delay_minutes,
-				"decision_id": decision.decision_id,
-				"fact_created": false,
-			}
+			_schedule_e01(decision)
 		review.completed = true
 		decision.completed = true
 		_models[review.slot_id].complete(decision)
 		_revision += 1
+
+
+func _schedule_e01(decision: Dictionary) -> void:
+	var slot: String = decision.slot_id
+	for related: String in _related_slots(slot):
+		if _e01_by_slot.has(related):
+			return
+	var stops: Array = decision.submission.plan.station_ids.duplicate()
+	var districts := Profile.target_districts(_network, stops)
+	var fact := {
+		"fact_id": decision.decision_id + ":E01",
+		"kind": "E01",
+		"slot_id": slot,
+		"business_identity_id": decision.business_identity_id,
+		"decision_id": decision.decision_id,
+		"basis_decision_id":
+		decision.target_decision_id if decision.kind == "PERSUASION" else decision.decision_id,
+		"basis_station_ids": stops,
+		"basis_plan_revision": decision.submission.plan.plan_revision,
+		"origin_districts": districts,
+		"target_od_ids": Profile.od_ids(districts),
+		"failed_at": _minute,
+		"scheduled_at": _minute + _terms.fact_delay_minutes,
+		"occurred_at": null,
+		"effect_at": null,
+		"used": false,
+		"consumed_at": null,
+		"consumed_by": "",
+	}
+	_e01_by_slot[slot] = fact
+	decision.fact_pending = {
+		"status": "E01_SCHEDULED",
+		"earliest_at": fact.scheduled_at,
+		"decision_id": decision.decision_id,
+		"fact_id": fact.fact_id,
+		"fact_created": false,
+	}
+
+
+func _occur_due_facts() -> void:
+	var changed := false
+	for fact: Dictionary in _e01_by_slot.values():
+		if fact.occurred_at == null and fact.scheduled_at == _minute:
+			fact.occurred_at = _minute
+			fact.effect_at = _minute
+			_revision += 1
+			changed = true
+	if changed:
+		_refresh_demand_profiles()
+
+
+func _refresh_demand_profiles() -> void:
+	for slot: String in _models:
+		var model: Proposal = _models[slot]
+		var active := {}
+		for related: String in _related_slots(slot):
+			var fact: Dictionary = _e01_by_slot.get(related, {})
+			if fact.get("occurred_at") == null:
+				continue
+			if active.is_empty() or fact.failed_at < active.failed_at:
+				active = fact
+		var profile := {}
+		if not active.is_empty():
+			profile = {
+				"business_identity_id": model.submission().identity.business_identity_id,
+				"fact_id": active.fact_id,
+				"effective_at": active.effect_at,
+				"origin_districts": active.origin_districts,
+				"multiplier": [Profile.BOOST_UNITS, Profile.BASE_UNITS],
+				"revision": 1,
+			}
+		model.update_demand_profile(profile, _minute)
+
+
+## 검증 직후 성공 접수에서만 호출한다. 수요판은 사용 여부를 읽지 않는다.
+func _consume_fact(command: Dictionary, record: Dictionary) -> void:
+	for slot: String in _related_slots(command.slot_id):
+		var fact: Dictionary = _e01_by_slot.get(slot, {})
+		if fact.get("fact_id") == command.fact_id:
+			fact.used = true
+			fact.consumed_at = _minute
+			fact.consumed_by = command.command_id
+			record["consumed_fact_id"] = fact.fact_id
+			record["fact_consumed_at"] = _minute
+			return
 
 
 func _outcome(review: Dictionary, decision_id: String) -> String:

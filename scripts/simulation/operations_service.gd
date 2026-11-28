@@ -90,7 +90,10 @@ func bind_sources(tenders: Dictionary, construction: Dictionary, minute: int) ->
 	elif source.opened_at != null:
 		var stops: Array[String] = []
 		stops.assign(source.station_ids)
-		_line = Line.new(source, Predictor.od_pairs(_network, stops, _parameters.daily_demand))
+		var pairs := Predictor.od_pairs(
+			_network, stops, _parameters.daily_demand, source.get("demand_profile", {})
+		)
+		_line = Line.new(source, pairs)
 		_bound = true
 	if source.opened_at == null:
 		return _unavailable("SERVICE_NOT_READY")
@@ -288,6 +291,8 @@ func _source(project: Dictionary, tenders: Dictionary, minute: int) -> Dictionar
 		if row.has("source_kind"):
 			result["source_kind"] = row.source_kind
 			result["source_id"] = row.source_id
+		if row.has("demand_profile"):
+			result["demand_profile"] = row.demand_profile.duplicate(true)
 		return result
 	return {}
 

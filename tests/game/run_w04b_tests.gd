@@ -4,6 +4,7 @@ const Loader = preload("res://scripts/data/proposal_data_loader.gd")
 const Proposal = preload("res://scripts/model/company_proposal.gd")
 const Service = preload("res://scripts/simulation/proposal_service.gd")
 const Sources = preload("res://scripts/simulation/business_sources.gd")
+const Predictor = preload("res://scripts/simulation/demand_predictor.gd")
 const Clock = preload("res://scripts/simulation/game_clock.gd")
 const FX = preload("res://tests/game/w04b_fixtures.gd")
 const TenderFX = preload("res://tests/game/w04a_fixtures.gd")
@@ -32,6 +33,7 @@ func _run() -> void:
 		_test_contracts_and_sources()
 		_test_time_and_observation()
 		_test_fact_boundaries()
+		_test_di03_exact_carry()
 		_test_malformed_boundaries()
 		_test_pipeline_phases()
 		_write_evidence()
@@ -202,11 +204,7 @@ func _test_rng_branches() -> void:
 			_persuade_branch(service, branch)
 		elif branch == "REJECT":
 			var retry := FX.command(service, "retry", "submit_government_review")
-			_expect(
-				"W4B-14/failure_restriction",
-				service.submit(retry).reason,
-				"NEW_FACT_REQUIRED_DI03_PENDING"
-			)
+			_expect("W4B-14/failure_restriction", service.submit(retry).reason, "NEW_FACT_REQUIRED")
 		_records[branch] = service.snapshot()
 
 
@@ -235,6 +233,11 @@ func _persuade_branch(service: Service, branch: String) -> void:
 	)
 	service.submit(command)
 	_expect("persuasion_duplicate_no_draw", service.snapshot().rng.draw_count, 2)
+	if branch == "HELD_FAIL":
+		var scheduled: Dictionary = service.snapshot().fact_supply.scheduled[0]
+		_expect("DI03/persuasion_held_basis", scheduled.basis_decision_id, held.decision_id)
+		_expect("DI03/persuasion_held_stops", scheduled.basis_station_ids, FX.ROUTE_A)
+		_expect("DI03/persuasion_occurs_from_failure", scheduled.scheduled_at, 1923)
 
 
 func _test_identity_history() -> void:
@@ -247,7 +250,7 @@ func _test_identity_history() -> void:
 	_expect(
 		"W4B-03/name_keeps_failure",
 		service.submit(FX.command(service, "renamed", "submit_government_review")).reason,
-		"NEW_FACT_REQUIRED_DI03_PENDING"
+		"NEW_FACT_REQUIRED"
 	)
 	var reverse := FX.ROUTE_A.duplicate()
 	reverse.reverse()
@@ -256,7 +259,7 @@ func _test_identity_history() -> void:
 	_expect(
 		"W4B-03/cross_slot_unordered_set",
 		service.submit(FX.command(service, "cross-slot", "submit_government_review", "P-B")).reason,
-		"NEW_FACT_REQUIRED_DI03_PENDING"
+		"NEW_FACT_REQUIRED"
 	)
 	# 두 슬롯이 연결된 이후 둘 다 역을 바꾸어도 과거 계보를 잃지 않는다.
 	FX.prepare(service, "P-A", FX.ROUTE_B)
@@ -270,18 +273,27 @@ func _test_identity_history() -> void:
 			. submit(FX.command(service, "alias-edited", "submit_government_review", "P-B"))
 			. reason
 		),
-		"NEW_FACT_REQUIRED_DI03_PENDING"
+		"NEW_FACT_REQUIRED"
 	)
 	service.advance_to(int(failed.completed_at) + 1441)
 	_expect("W4B-14/time_no_reset", service.snapshot().rng.draw_count, 1)
-	_expect("DI03/no_generated_fact", service.snapshot().fact_supply.facts, [])
-	_expect("DI03/preserved_pending", service.snapshot().fact_supply.status, "DI03_PENDING")
+	var facts: Array = service.snapshot().fact_supply.facts
+	_expect("DI03/aliases_share_one_fact", facts.size(), 1)
+	_expect("DI03/no_edited_basis", facts[0].basis_station_ids, FX.ROUTE_A)
+	_expect(
+		"DI03/alias_uses_same_fact",
+		FX.row(service, "P-B").draft.demand_profile.fact_id,
+		facts[0].fact_id
+	)
+	_expect("DI03/impact_invalidates_prediction", FX.row(service).draft.prediction.available, false)
+	service.predict("P-A")
+	FX.city(service, "P-A", "boosted-city")
 	_expect(
 		"W4B-03/same_slot_replacement",
 		service.submit(FX.command(service, "same-slot-edited", "submit_government_review")).reason,
-		"NEW_FACT_REQUIRED_DI03_PENDING"
+		"NEW_FACT_REQUIRED"
 	)
-	var distinct: Service = FX.bundle(_seeds.REJECT.seed).service
+	var distinct: Service = FX.bundle(4).service
 	FX.prepare(distinct)
 	FX.city(distinct)
 	FX.government(distinct)
@@ -296,7 +308,27 @@ func _test_identity_history() -> void:
 		),
 		true
 	)
+	distinct.advance_to(1983)
+	_expect(
+		"DI03/separate_business_has_no_early_effect",
+		FX.row(distinct, "P-B").draft.demand_profile,
+		{}
+	)
+	distinct.advance_to(1984)
+	var separate: Array = distinct.snapshot().fact_supply.facts
+	_expect("DI03/independent_facts", separate.size(), 2)
+	_expect(
+		"DI03/independent_fact_a",
+		FX.row(distinct).draft.demand_profile.fact_id,
+		separate[0].fact_id
+	)
+	_expect(
+		"DI03/independent_fact_b",
+		FX.row(distinct, "P-B").draft.demand_profile.fact_id,
+		separate[1].fact_id
+	)
 	_records.identity_history = service.snapshot()
+	_records.di03_distinct_facts = separate
 
 
 func _test_contracts_and_sources() -> void:
@@ -464,6 +496,41 @@ func _test_fact_boundaries() -> void:
 	_expect("W4B-16/malformed", Proposal.fact_error({}, failure, 2040), "INVALID_FACT")
 
 
+func _test_di03_exact_carry() -> void:
+	var data := FX.Data.load_data()
+	var network := FX.Network.new(data.data)
+	var params := Predictor.load_parameters()
+	params.daily_demand.D08 = 101
+	var profile := {
+		"business_identity_id": "P1-MODEL:business:P-A",
+		"fact_id": "carry-fixture:E01",
+		"origin_districts": ["D01", "D08"],
+		"effective_at": 2040,
+		"revision": 1,
+		"multiplier": [5, 4],
+	}
+	var first := Predictor.predict(network, FX.ROUTE_A, params, 2039, 2040)
+	var active := Predictor.predict(network, FX.ROUTE_A, params, 2040, 2041, first.carry, profile)
+	var od: Dictionary = active.od_pairs.back()
+	_expect("DI03/carry_fixture_OD", od.id, "D08:D01")
+	_expect("DI03/exact_101_x_5_4", od.effective_daily_demand, [505, 4])
+	_expect("DI03/non_target_od_unscaled", active.od_pairs[1].has("effective_daily_demand"), false)
+	_expect("DI03/carry_before", first.carry.remainders[od.id], 808)
+	_expect("DI03/carry_exact_units", active.carry.remainders[od.id], 7272)
+	_expect("DI03/pending_arrival_before", first.carry.pending_arrivals.size(), 3)
+	_expect("DI03/old_cohort_arrives_after_effect", active.totals.completed, 3)
+	var split := Predictor.predict(network, FX.ROUTE_A, params, 2041, 2047, active.carry, profile)
+	var joint := Predictor.predict(network, FX.ROUTE_A, params, 2040, 2047, first.carry, profile)
+	_expect("DI03/boosted_split_carry", split.carry, joint.carry)
+	var zero_params := params.duplicate(true)
+	zero_params.daily_demand.D08 = 0
+	var zero := Predictor.predict(network, FX.ROUTE_A, zero_params, 2040, 2041, {}, profile)
+	_expect("DI03/zero_remains_zero", zero.od_pairs.back().effective_daily_demand, [0, 4])
+	_records.di03_exact_carry = {
+		"kind": "ISOLATED_PREDICTOR_FIXTURE", "before": first, "at_effect": active, "zero": zero
+	}
+
+
 func _test_malformed_boundaries() -> void:
 	var data: Dictionary = Loader.load_data().data
 	for key: String in data:
@@ -585,7 +652,7 @@ func _write_evidence() -> void:
 							"assertions": _assertions,
 							"normal_rng_seeds": _seeds,
 							"records": _records,
-							"di03": "DEPENDENT_SCOPE_PENDING",
+							"di03": "MODEL_SUPPLY_TESTED",
 							"product_integration": "NOT_RUN",
 							"gui_design_vs02": "NOT_RUN",
 						},

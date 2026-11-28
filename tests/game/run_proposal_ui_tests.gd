@@ -23,6 +23,8 @@ func _run() -> void:
 		_test_branches()
 		_test_guard()
 		_test_prediction()
+		_test_di03_timing_and_retry()
+		_test_di03_failed_admission()
 		for id: String in _samples:
 			var sample: Dictionary = _samples[id]
 			if sample.kind == "ACTUAL_SESSION_API":
@@ -227,15 +229,184 @@ func _test_branches() -> void:
 		else:
 			FX.advance(value, value.pipeline.clock.minute + 1440)
 			_expect(
-				"DI03_unavailable", value.pipeline.proposal_snapshot().fact_supply.available, false
+				"DI03_supply_ready", value.pipeline.proposal_snapshot().fact_supply.available, true
 			)
-			_expect("DI03_no_facts", value.pipeline.proposal_snapshot().fact_supply.facts, [])
+			_expect("DI03_one_fact", value.pipeline.proposal_snapshot().fact_supply.facts.size(), 1)
 			_expect(
 				"DI03_no_retry",
 				FX.session_row(value).action_states.submit_government_review.allowed,
 				false
 			)
-			_samples["L07_pending_" + str(seed_value)] = FX.sample(value)
+			_samples["L07_occurred_" + str(seed_value)] = FX.sample(value)
+
+
+func _di03_first_failure(seed_value: int) -> FX.Session:
+	var value := FX.session(seed_value, 508)
+	FX.session_prepare(value)
+	value.request_proposal(FX.session_command(value, "city", "submit_city_review"))
+	FX.advance(value, 539)
+	value.request_proposal(FX.session_command(value, "gov", "submit_government_review"))
+	FX.advance(value, 600)
+	return value
+
+
+func _di03_prepare_retry(value: FX.Session, city_minute: int) -> void:
+	value.request_proposal(FX.session_command(value, "forecast", "predict_proposal"))
+	value.request_proposal(FX.session_command(value, "retry-city", "submit_city_review"))
+	FX.advance(value, city_minute)
+
+
+func _test_di03_timing_and_retry() -> void:
+	var value := _di03_first_failure(4)
+	var failure: Dictionary = FX.session_row(value).decisions.back()
+	var scheduled: Dictionary = value.pipeline.proposal_snapshot().fact_supply.scheduled[0]
+	_expect("DI03/failure_T600", [failure.outcome, failure.completed_at], ["REJECTED", 600])
+	_expect("DI03/schedule_T2040", scheduled.scheduled_at, 2040)
+	_expect("DI03/fixed_origins", scheduled.origin_districts, ["D01", "D02", "D03", "D04", "D08"])
+	_expect("DI03/fixed_disabled_od", "D04:D05" in scheduled.target_od_ids, true)
+	var other := FX.session_command(value, "other-edit", "edit_proposal", "P-B")
+	other.station_ids = FX.ROUTE_B.duplicate()
+	value.request_proposal(other)
+	value.request_proposal(FX.session_command(value, "other-forecast", "predict_proposal", "P-B"))
+	var other_before := FX.session_row(value, "P-B")
+	var ledger := value.pipeline.ledger.snapshot()
+	FX.advance(value, 2039)
+	var closed_day := value.pipeline.reports.report(1)
+	var early := FX.session_command(value, "early-retry", "submit_government_review")
+	early["fact_id"] = scheduled.fact_id
+	_expect(
+		"DI03/early_fact_cannot_admit", value.request_proposal(early).reason, "FACT_NOT_OCCURRED"
+	)
+	_expect("DI03/T2039_no_fact", value.pipeline.proposal_snapshot().fact_supply.facts, [])
+	_samples.DI03_T2039 = FX.sample(value)
+	value.dispatch({"command_id": "di03-pause", "action": "pause"})
+	FX.advance(value, 2040)
+	_expect("DI03/pause_keeps_T2039", value.pipeline.clock.minute, 2039)
+	_expect("DI03/paused_no_fact", value.pipeline.proposal_snapshot().fact_supply.facts, [])
+	value.dispatch({"command_id": "di03-resume", "action": "resume"})
+	FX.advance(value, 2040)
+	var occurred: Dictionary = value.pipeline.proposal_snapshot().fact_supply.facts[0]
+	_expect(
+		"DI03/occur_and_effect_at_T2040", [occurred.occurred_at, occurred.effect_at], [2040, 2040]
+	)
+	_expect("DI03/fact_unused_at_effect", occurred.used, false)
+	_expect("DI03/forecast_invalidated", FX.session_row(value).draft.prediction.available, false)
+	_expect("DI03/distinct_forecast_unchanged", FX.session_row(value, "P-B"), other_before)
+	_samples.DI03_T2040 = FX.sample(value)
+	var trace: Array[Dictionary] = value.pipeline.snapshot().trace.filter(
+		func(stage: Dictionary) -> bool: return stage.effective_at == 2040
+	)
+	_samples.DI03_T2040["phase_trace"] = trace
+	_expect(
+		"DI03/effect_keeps_phase_order",
+		trace.map(func(stage: Dictionary) -> String: return stage.phase),
+		[
+			"PREVIOUS_INTERVAL",
+			"CONTRACT",
+			"PROGRESS",
+			"VALIDATION",
+			"ARRIVAL",
+			"SETTLEMENT",
+			"BOARDING"
+		]
+	)
+	_expect(
+		"DI03/effect_revision_visible_at_contract",
+		trace[1].snapshot_revision - trace[0].snapshot_revision,
+		2  # 기본 단계 전진 1회와 E01 발생 1회
+	)
+	FX.advance(value, 2041)
+	_expect(
+		"DI03/T2041_no_second_effect",
+		value.pipeline.proposal_snapshot().fact_supply.facts,
+		[occurred]
+	)
+	_di03_prepare_retry(value, 2072)
+	var row := FX.session_row(value)
+	var boosted: Dictionary = row.draft.prediction.current.value
+	var by_od := {}
+	for pair: Dictionary in boosted.od_pairs:
+		by_od[pair.id] = pair
+	_expect(
+		"DI03/D08_twice_in_plan_boosted_once", by_od["D08:D01"].effective_daily_demand, [1000, 4]
+	)
+	_expect("DI03/D04_no_access", by_od.has("D04:D05"), false)
+	_expect("DI03/actual_retry_available", row.government_retry_state.allowed, true)
+	_expect(
+		"DI03/legacy_action_requires_fact",
+		row.action_states.submit_government_review.allowed,
+		false
+	)
+	_samples.DI03_ready = FX.sample(value)
+	var foreign := value.snapshot()
+	foreign.proposal_ui.snapshot.fact_supply.facts[0].business_identity_id = "foreign:business:P-A"
+	var guard := Guard.proposal_region(foreign, value.observation_scope())
+	_expect("DI03/foreign_fact_region_rejected", guard.available, false)
+	_expect(
+		"DI03/foreign_fact_does_not_invalidate_funds",
+		Guard.inspect(foreign, value.observation_scope(), 0).regions.funds,
+		true
+	)
+	FX.advance(value, 2099)
+	var retry := FX.session_command(value, "retry", "submit_government_review")
+	retry["fact_id"] = row.government_retry_state.fact_id
+	_expect("DI03/T2099_queue", value.request_proposal(retry).pending, true)
+	_expect(
+		"DI03/registration_not_consumed",
+		value.pipeline.proposal_snapshot().fact_supply.facts[0].used,
+		false
+	)
+	_samples.DI03_queued = FX.sample(value)
+	FX.advance(value, 2100)
+	_expect("DI03/consumed_T2100", value.proposal_result("retry").fact_consumed_at, 2100)
+	_expect("DI03/consume_link", value.proposal_result("retry").consumed_fact_id, occurred.fact_id)
+	_expect(
+		"DI03/duplicate_original_result",
+		value.request_proposal(retry),
+		value.proposal_result("retry")
+	)
+	_samples.DI03_T2100 = FX.sample(value)
+	FX.advance(value, 2160)
+	var last: Dictionary = FX.session_row(value).decisions.back()
+	_expect("DI03/refailure_T2160", [last.outcome, last.completed_at], ["REJECTED", 2160])
+	_expect("DI03/retry_no_new_schedule", last.has("fact_pending"), false)
+	FX.advance(value, 3600)
+	var facts: Dictionary = value.pipeline.proposal_snapshot().fact_supply
+	_expect("DI03/T3600_only_first_fact", facts.facts.size(), 1)
+	_expect(
+		"DI03/after_use_stays_used", [facts.facts[0].used, facts.facts[0].consumed_at], [true, 2100]
+	)
+	_expect(
+		"DI03/consumption_does_not_change_profile",
+		FX.session_row(value).draft.demand_profile,
+		row.draft.demand_profile
+	)
+	_expect("DI03/no_money_side_effect", value.pipeline.ledger.snapshot(), ledger)
+	_expect("DI03/closed_report_unchanged", value.pipeline.reports.report(1), closed_day)
+	_expect("DI03/repeat_exact_draws", value.pipeline.proposal_snapshot().rng.draw_count, 2)
+	_samples.DI03_T3600 = FX.sample(value)
+
+
+func _test_di03_failed_admission() -> void:
+	var value := _di03_first_failure(1)
+	FX.advance(value, 2040)
+	_di03_prepare_retry(value, 2071)
+	var retry := FX.session_command(value, "stale-retry", "submit_government_review")
+	retry["fact_id"] = FX.session_row(value).government_retry_state.fact_id
+	_expect("DI03/stale_fixture_registered", value.request_proposal(retry).pending, true)
+	var edit := FX.session_command(value, "edit-pending", "edit_proposal")
+	edit.station_ids = FX.ROUTE_B.duplicate()
+	value.request_proposal(edit)
+	FX.advance(value, 2072)
+	var rejected := value.proposal_result("stale-retry")
+	_expect("DI03/admission_binding_rechecked", rejected.reason, "STALE_PLAN_OR_PREDICTION")
+	_expect(
+		"DI03/admission_no_consumption",
+		value.pipeline.proposal_snapshot().fact_supply.facts[0].used,
+		false
+	)
+	_expect("DI03/admission_no_draw", value.pipeline.proposal_snapshot().rng.draw_count, 1)
+	_samples.DI03_rejected_admission = FX.sample(value)
 
 
 func _test_guard() -> void:

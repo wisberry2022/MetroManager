@@ -3,6 +3,7 @@ extends RefCounted
 ## 실제 계약/거래를 대조하는 읽기 전용 경계. W04A/W04B 출처를 명시적으로 연결한다.
 
 const Ledger = preload("res://scripts/model/company_ledger.gd")
+const Profile = preload("res://scripts/simulation/proposal_demand_profile.gd")
 const REVISION := "DEV027-BUSINESS-1"
 
 
@@ -93,6 +94,7 @@ static func _source(row: Dictionary, contract: Dictionary, kind: String) -> Dict
 	var stops: Array = []
 	var source_id: String = ""
 	var permission := {}
+	var profile := {}
 	if kind == "PUBLIC_TENDER":
 		var terms: Variant = row.get("terms")
 		if not terms is Dictionary or not terms.get("station_ids") is Array:
@@ -135,6 +137,18 @@ static func _source(row: Dictionary, contract: Dictionary, kind: String) -> Dict
 			return {}
 		source_id = contract.source_id
 		stops = permitted.plan.station_ids
+		var supplied: Variant = permitted.get("demand_profile", {})
+		if not supplied is Dictionary or not Profile.valid(supplied):
+			return {}
+		if (
+			not supplied.is_empty()
+			and (
+				supplied.business_identity_id != contract.project_id
+				or supplied.effective_at > permission.admitted_at
+			)
+		):
+			return {}
+		profile = supplied
 	if source_id.is_empty() or stops.size() < 6 or stops.size() > 8:
 		return {}
 	var seen: Dictionary = {}
@@ -142,7 +156,7 @@ static func _source(row: Dictionary, contract: Dictionary, kind: String) -> Dict
 		if not station is String or station.is_empty() or seen.has(station):
 			return {}
 		seen[station] = true
-	return {
+	var result := {
 		"source_kind": kind,
 		"source_id": source_id,
 		"project_id": contract.project_id,
@@ -153,6 +167,9 @@ static func _source(row: Dictionary, contract: Dictionary, kind: String) -> Dict
 		"permission": permission,
 		"fare": 100,
 	}
+	if not profile.is_empty():
+		result["demand_profile"] = profile.duplicate(true)
+	return result
 
 
 static func _error(reason: String) -> Dictionary:

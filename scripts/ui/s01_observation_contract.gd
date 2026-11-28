@@ -2,6 +2,7 @@ extends RefCounted
 ## DEV-026 소비 경계. 값을 계산/보정하지 않고 영역별로 확인한다.
 
 const REVISION := "DEV026-S01-EX-v0.1"
+const Profile = preload("res://scripts/simulation/proposal_demand_profile.gd")
 const FUNDS := ["cash", "restricted", "free_cash", "reserved", "available_cash", "unpaid"]
 const DAILY := ["operating_cost", "payment", "debt_payment", "cash_payment"]
 
@@ -432,16 +433,11 @@ static func proposal_region(state: Variant, scope: String, previous: Dictionary 
 	):
 		return invalid
 	var facts := dictionary(model.get("fact_supply"))
-	if (
-		not is_same(facts.get("available"), false)
-		or not text_equal(facts.get("status"), "DI03_PENDING")
-	):
-		return invalid
-	if not facts.get("facts") is Array or not facts.facts.is_empty():
+	if not _fact_supply_valid(facts, scope, model.simulation_minute):
 		return invalid
 	var seen := {}
 	for row: Variant in model.proposals:
-		if not _proposal_row_valid(row):
+		if not _proposal_row_valid(row) or not _proposal_fact_links(row, facts):
 			return invalid
 		var id: String = row.identity.slot_id
 		if (
@@ -467,6 +463,89 @@ static func proposal_region(state: Variant, scope: String, previous: Dictionary 
 		):
 			return invalid
 	return {"available": true, "reason": ""}
+
+
+static func _fact_supply_valid(supply: Dictionary, scope: String, minute: int) -> bool:
+	if (
+		not enabled(supply.get("available"))
+		or not text_equal(supply.get("status"), "READY")
+		or not supply.get("scheduled") is Array
+		or not supply.get("facts") is Array
+	):
+		return false
+	var seen := {}
+	for fact: Variant in supply.scheduled + supply.facts:
+		if not _fact_valid(fact, scope, minute):
+			return false
+		if seen.has(fact.fact_id) or (fact.occurred_at == null) != (fact in supply.scheduled):
+			return false
+		seen[fact.fact_id] = true
+	return true
+
+
+static func _fact_valid(fact: Variant, scope: String, minute: int) -> bool:
+	if not fact is Dictionary or not integers(fact, ["failed_at", "scheduled_at"]):
+		return false
+	if (
+		not text_equal(fact.get("kind"), "E01")
+		or fact.get("slot_id") not in ["P-A", "P-B"]
+		or not text_equal(fact.get("business_identity_id"), scope + ":business:" + fact.slot_id)
+		or not fact.get("decision_id") is String
+		or not fact.decision_id.begins_with(scope + ":review:")
+		or not text_equal(fact.get("fact_id"), fact.decision_id + ":E01")
+		or not strings(fact.get("basis_station_ids"))
+		or not integers(fact, ["basis_plan_revision"])
+		or not Profile.valid_targets(fact.get("origin_districts"))
+		or not strings(fact.get("target_od_ids"))
+		or fact.scheduled_at != fact.failed_at + 1440
+		or fact.failed_at > minute
+		or not fact.get("used") is bool
+		or not fact.get("consumed_by") is String
+	):
+		return false
+	var districts: Array[String] = []
+	districts.assign(fact.origin_districts)
+	if fact.target_od_ids != Profile.od_ids(districts):
+		return false
+	if fact.scheduled_at > minute:
+		if fact.get("occurred_at") != null or fact.get("effect_at") != null or fact.used:
+			return false
+	elif not (
+		is_same(fact.get("occurred_at"), fact.scheduled_at)
+		and is_same(fact.get("effect_at"), fact.scheduled_at)
+	):
+		return false
+	if fact.used:
+		return (
+			fact.get("consumed_at") is int
+			and fact.consumed_at > fact.scheduled_at
+			and fact.consumed_at <= minute
+			and not fact.consumed_by.is_empty()
+		)
+	return fact.get("consumed_at") == null and fact.consumed_by.is_empty()
+
+
+static func _proposal_fact_links(row: Dictionary, supply: Dictionary) -> bool:
+	var profile: Variant = row.draft.get("demand_profile")
+	if not profile is Dictionary or not Profile.valid(profile):
+		return false
+	var retry: Dictionary = row.government_retry_state
+	var active: bool = profile.is_empty()
+	var related: bool = retry.fact_id.is_empty()
+	for fact: Dictionary in supply.scheduled + supply.facts:
+		if not profile.is_empty() and fact.fact_id == profile.fact_id:
+			active = (
+				profile.business_identity_id == row.identity.business_identity_id
+				and fact.effect_at == profile.effective_at
+				and fact.origin_districts == profile.origin_districts
+			)
+		if fact.fact_id == retry.fact_id:
+			related = (
+				retry.applicable
+				and fact.decision_id == retry.failure_decision_id
+				and (not retry.allowed or (fact.occurred_at != null and not fact.used))
+			)
+	return active and related
 
 
 static func _proposal_row_valid(row: Variant) -> bool:
@@ -515,6 +594,15 @@ static func _proposal_row_valid(row: Variant) -> bool:
 	for key: String in ["edit_state", "predict_state"]:
 		if not _proposal_action(row.get(key)):
 			return false
+	var retry := dictionary(row.get("government_retry_state"))
+	if (
+		not _proposal_action(retry)
+		or not retry.get("applicable") is bool
+		or not retry.get("failure_decision_id") is String
+		or not retry.get("fact_id") is String
+		or (retry.allowed and (not retry.applicable or retry.fact_id.is_empty()))
+	):
+		return false
 	for key: String in [
 		"submit_city_review",
 		"submit_government_review",
