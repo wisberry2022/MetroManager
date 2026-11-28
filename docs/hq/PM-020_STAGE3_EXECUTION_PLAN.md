@@ -1,11 +1,13 @@
 # PM-020 — Stage 3 실행 계획·통합 인수표
 
-- 최초 계획: HQ / AGT-PM-0002 / 2026-11-15. 최신 갱신: **PM-021 / 2026-11-21 (Asia/Seoul)**.
+- 최초 계획: HQ / AGT-PM-0002 / 2026-11-15. 최신 갱신: **PM-022 / 2026-11-28 (Asia/Seoul)**.
 - 현재 F-08: **O01_O07_OWNER_DIRECTION_APPROVED / FINAL_SPEC_PENDING / PRODUCT_APPLICATION_SCOPE_PENDING / F08_OPEN**.
-- 최신 확인 main: `74cd75045feb1369aa429feaec64fd3558c14813`. 최초 PM-020 기준 `96c51ae6c3352195b9a8e8b89f92dd51c13be81c` 및 [PR #145](https://github.com/wisberry2022/MetroManager/pull/145) 병합 이력은 보존한다.
+- 최신 확인 main: `1c4481187980fe6b37de0fec8e0019f2736ce1f2`. 최초 PM-020 기준 `96c51ae6c3352195b9a8e8b89f92dd51c13be81c` 및 [PR #145](https://github.com/wisberry2022/MetroManager/pull/145) 병합 이력은 보존한다.
 - [이번 Owner 승인·HQ Git 범위](tasks/PM-021_STAGE3_F08_DIRECTIONS.md) / [검증 결과](tasks/PM-021_RESULT.md) / [최초 요청](tasks/PM-020_STAGE3_ENTRY_PLAN.md).
 
-이번 갱신은 [#92 Owner 결정](https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057405335)을 실행 계획과 §6 인수표에 반영한다. **O-01~07 방향 선택은 완료**됐으며 같은 선택을 재승인 대기로 돌리지 않는다. 구체 규격·실제 제품 적용·검증·S3-10 전체 수용·Stage 3 DONE은 별개다. O-02/O-07의 구체 수치 결정을 뒤로 두는 방향도 승인된 선택이다.
+> **PM-022 현재 적용:** [OD-S312-01·02 승인](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7236141995)으로 DEV-027 DI-03 비의존 구현·관측된 국소 검수는 한정 종료한다. [S3-12 상세 행/증거/처분](STAGE3_S3_12_ACCEPTANCE_SCOPE.md)과 [DI-03 부서 착수 요청](requests/PM-022_DI03_DEPARTMENT_REQUESTS.md)을 현재 정본으로 적용한다. DI-03은 Stage 3 필수 유지, HQ 착수 가능 판단으로 범위 내 로컬 구현·검증을 시작한다. #185는 DI-03, #186은 S3-12→S3-11, #104는 RP/EX 관측 한계, #92는 F-08 잔여를 관리한다. #146은 비의존 협의/검수의 종료 기록으로 보존한다. 아래 PM-020/021 당시의 미래 공급·HOLD·전체 진척 미평가 표현은 그 시점의 이력이며 현재 결정을 되돌리지 않는다. **DEV-027 전체 DONE·전체 Design·S3-12/Stage 최종 인수는 대기**다.
+
+PM-021 갱신은 [#92 Owner 결정](https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057405335)을 실행 계획과 §6 인수표에 반영한다. **O-01~07 방향 선택은 완료**됐으며 같은 선택을 재승인 대기로 돌리지 않는다. 구체 규격·실제 제품 적용·검증·S3-10 전체 수용·Stage 3 DONE은 별개다. O-02/O-07의 구체 수치 결정을 뒤로 두는 방향도 승인된 선택이다.
 
 Stage 2 DONE과 DEV-026의 Stage 3 공식 편입은 유지한다. DEV-026은 [현재 공급 한정 수용·P07 구분 승인](https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7057161624) 및 PR #158 병합까지 반영하되 원본 PARTIAL·미관측·W04B 미래 공급과 S3-12 최종 인수 대기는 보존한다. §2.1은 최초 편입 당시 판단 이력이다. W04B·VS-02의 전체 최신 실행 결과를 이번 F-08 문서 작업에서 재평가하지 않는다. 초기 계획의 미실행 기록은 당시 사실이며 후속 부서 증거를 NOT_RUN으로 되돌리는 근거가 아니다.
 
@@ -17,7 +19,7 @@ Stage 2 DONE과 DEV-026의 Stage 3 공식 편입은 유지한다. DEV-026은 [�
 | DEV-025 | PR #143 공급과 [#97 기술 종료](https://github.com/wisberry2022/MetroManager/issues/97#issuecomment-7052796254), PR #157 Track B 심사 게시·병합 완료 [R10] | **기술 공급/심사 완료**. 동일 실험·첫 심사를 다시 요청하지 않음. 최종 제품 규격과 구별. |
 | F-08 / #92 | [O-01~07 권고 방향 전부 Owner 승인](https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057405335) [R10] | 방향 결정 대기 해소. **FINAL_SPEC_PENDING / #92 OPEN**. §2.2·§6.1의 실제 적용 전제와 잔여를 추적. |
 | DEV-026 / #104 | [현재 공급 한정 수용·P07 일반 재진입/문맥 복귀 구분 승인](https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7057161624), PR #158 main 반영 [R11] | **OWNER_APPROVED_LIMITED_ACCEPTANCE / OVERALL_PARTIAL**. 동일 승인/GUI 반복 비요구. W04B 미래 공급·분담 수용 연결·S3-12/Stage 최종 인수 별도. |
-| W04B / VS-02 | 승인 MVP의 자체 제안 경로가 Stage 2에서 이월됨 [R04]. 최초 PM-020은 구현 수용 NOT_VERIFIED·HQ 실행 NOT_RUN으로 기록 | 이번 갱신의 전체 진척 재평가 대상 밖. 후속 DEV-027 등 실제 공급·시험 SHA별 결과를 연결하며 초기 미실행 표현으로 진행을 되돌리지 않음. |
+| W04B / VS-02 | 승인 MVP의 자체 제안 경로가 Stage 2에서 이월됨 [R04]. 최초 PM-020은 구현 수용 NOT_VERIFIED·HQ 실행 NOT_RUN으로 기록 | PM-022: P3-A/P3-B·자연 VS-02 및 후속 국소 수용을 상세 N행/E01~08로 연결. 비의존 한정 종료 승인, DI-03 #185는 실제 구현·검증 착수, 전체 인수 #186 별도. |
 | INF-012 / #139 | Owner 정본·보관 담당 확정, 백업/복구 이월 승인 [R08] | Stage 3 진입의 공통 차단조건으로 올리지 않음. 이월 의무·NOT_RUN 유지. |
 
 **권고:** Stage 3의 필수 경로는 **회사 자체 제안 W04B → 기존 시공·운행 기반 연결 → 독립 VS-02 완주**로 둔다. 공통 UI 안정성을 위한 **DEV-026 구현·제품 검증을 필수 범위로 함께 수행**하고, 완료된 DEV-025 Design 심사와 F-08 승인 방향의 적용 준비를 연결한다. 최종 아트·환경 규격이 미확정이라는 이유로 W04B 의미 검토·순수 모델·최소 기능 UI 준비 전체를 멈추지 않는다. 다만 그 규격을 실제로 채택하거나 관련 제품 UI를 바꾸는 작업은 해당 결정/계약을 먼저 확인한다.
@@ -92,17 +94,16 @@ Stage 2 DONE과 DEV-026의 Stage 3 공식 편입은 유지한다. DEV-026은 [�
 
 계약·난수·입력 의미가 모호하거나 구현과 승인 명세가 충돌할 때만 [RFC 절차](../templates/RFC_AND_DECISION.md)로 해당 쟁점·영향·대안을 상정한다. 기존 Owner 결정 전체를 다시 승인 대기로 돌리지 않는다.
 
-## 5. 작업 순서와 부서별 첫 산출물
+## 5. 현재 작업 순서 — PM-022
 
 | 우선순위 | 수행·결과 | 의존성과 종료 신호 |
 | --- | --- | --- |
-| P0 — 현재 F-08 후속 | Track B·DEV가 승인 방향→현재 충족/공백→정확한 경로→최소 검증·권한을 공통 적용표로 제출. Track A는 영향 행 연결 | 첫 심사·방향 선택은 완료. 현재 충족한 부분은 변경0 가능. 같은 파일 변경은 순차 통합. W04B 후속 업무와 별도 추적. |
-| P1 — 모델·공통 계약 | W04B 모델/자동 경계와 DEV-026 실제 공급·지역 제한·실행 소속/보고·복귀 계약 대조 | 의미 차이·RP-01~08 직접 영향 및 실행/Git 범위 해결. 기술 구조는 DEV가 정하며 신규 화면은 확정된 공통 계약을 소비. |
-| P2 — DEV-026·제품 UI | DEV-026 guard/생명주기/복귀 구현·자동/실제 GUI와 W04B 화면 통합. 공통 파일 변경은 순차 반영 | Track B/Track A 역할별 영향 행을 한 패킷으로 수용. 최소 기능 UI 사용 가능; F-08 규격 종속 변경만 관련 결정을 적용. |
-| P3 — VS-02·회귀 | DEV-026 공통 변경을 포함한 시험본에서 독립 초기 VS-02 완주, 실패/경계·정상 RNG 계보와 기존 경로 영향 회귀 | 한 고정 패킷을 S3·AC·VP에 공동 연결. DEV-026의 새 Session/누락 반례와 자연 완주를 구분하며 관측 범위만 공동 사용. |
-| P4 — 통합·최종 결정 | HQ가 S3 인수표·MVP 차이·F-08 판단/이월·CI를 취합하여 Owner에 제출 | 부서 수용과 최종 Stage 3 결정 후 종료. 납기/공수는 담당 분해 전 **NOT_ESTIMATED**. |
+| P0 | #185 DEV-027 DI-03 로컬 모델·실제 공급·자동 경계 착수 | 정책 A1+B1 확정. 범위 내 실행은 현재 Owner 조건부 지시/HQ 판단 적용. 최신 base·선택 경로·명령 기록 |
+| P1 | 실제 payload의 A/B L2 → 해당 화면 통합 → 신규/직접 영향 검수 | 공급 생성 전 L2를 요구하지 않음. 미래 Git·독립 GUI 유효 원문은 해당 단계 전에 연결 |
+| 병행 | #104 RP/EX 한계 보존, #92 F-08 실제 공급·최종 규격/적용 준비 | OD-S312-02로 현재 관측 한계 추가 GUI 비차단. F-08 미결은 유지, DI-03 모델 전체를 막지 않음 |
+| P2 | #186 S3-12 취합 → S3-01~10/AC·VP/CI·미해결·이월 → S3-11 Owner 결정 | DI-03 실제 필수 수용과 F-08 적용/이월 정리 후 최종 판단. 기존 자연 VS-02·국소 GUI 반복 없음 |
 
-경로 B의 현재 순서: **DEV-025 공급·Track B 심사 완료 → O-01~07 방향 승인 완료 → Track B·DEV 공통 적용표 → 실제 필요한 최종 규격/적용 단위·권한 확인 → 해당 제품 변경·영향 행 검증**. 규격에 종속되지 않는 W04B 준비는 진행할 수 있다. DEV-026 현재 공급의 한정 수용은 유지하며 F-08 전체 결론을 새 일괄 차단으로 추가하지 않는다.
+정확한 경로·부서 역할·검증·권한은 [PM-022 요청](requests/PM-022_DI03_DEPARTMENT_REQUESTS.md)을 따른다. 공수/일정은 NOT_ESTIMATED. 최초 P0~P4 및 PM-021 계획 이력은 이전 고정 SHA에서 보존한다.
 
 ## 6. Stage 3 종료 기준안
 
@@ -114,14 +115,14 @@ Stage 2 DONE과 DEV-026의 Stage 3 공식 편입은 유지한다. DEV-026은 [�
 | S3-02 | 자체 제안 편집·예측·동일성·잠금 | AC-04의 정상/비정상 노선·revision·재접수 우회 방지, 자동/해당 실제 UI. DEV·Planning·Track A |
 | S3-03 | 시청 승인/거부·수정 재제출 | 0 포함 비음수/음수 경계, 시청과 정부 제한 구분, 요청·효력·기간의 명세 대응. DEV·Planning·Track A |
 | S3-04 | 정부3분기·설득·감액 | 정상 RNG 경로와 별도 강제 분기 검증 분리, 설득1회·실패/재클릭·정산/기간·재접수 제한. DEV·Planning |
-| S3-05 | RNG 재현·E01 발생/소비 | 실제 seed/엔진/추출 이력, 동일 입력 재현, 조회/중복 무효과, 판정 전후/미사용/소비/접수 실패 경계. DEV·Planning |
+| S3-05 | RNG 재현·E01 발생/소비 | 실제 seed/엔진/추출 이력, 동일 입력 재현, 조회/중복 무효과, 판정 전후/미사용/소비/접수 실패 경계. DEV·Planning. 기존 RNG 증거 재사용; E01 실제 D01-01~05는 #185 실행/수용 대기 |
 | S3-06 | 사업 허가·계약·지급과 W05/W06 연결 | 같은 사업 ID·효력시각·원장, 단회 지급·자금 보호·표준 공사·시험/안전·개통·실제 영업의 연속 증거. DEV |
-| S3-07 | 신규 실제 UI 독립 수용 | 정상/거부/대기/보류/실패/자료 없음/0·허용 행동/사유·표시 선택/포커스/revision·복귀 의미를 확인. Track A L2/독립 실행 근거 심사·영향 행 판정 |
-| S3-08 | VS-02 독립 초기 상태 실제 완주 | 회사 제안→시청→정상 정부 적합→계약/지급→표준 공사→시범/안전→개통→실제 완료 통행/영업 실적 보고→다음 후보 조회. 독립 실행/Design 심사와 DEV 자체 실행 구별 |
-| S3-09 | 기존 경로 회귀·MVP 증거 대응 | 실제 공통 변경의 W01~03/W04A/W05/W06/W07·VS-01 영향 회귀, AC-01~10·VP-01/02의 충족/재사용/잔여 표. 전체 동일 GUI 재실행을 기본값으로 두지 않음 |
+| S3-07 | 신규 실제 UI 독립 수용 | 정상/거부/대기/보류/실패/자료 없음/0·허용 행동/사유·표시 선택/포커스/revision·복귀 의미를 확인. Track A/B 기존 N행 한정 수용 재사용. DI-03 실제 UI11/12는 #185 L2/신규 영향 행 수용 대기 |
+| S3-08 | VS-02 독립 초기 상태 실제 완주 | 회사 제안→시청→정상 정부 적합→계약/지급→표준 공사→시범/안전→개통→실제 완료 통행/영업 실적 보고→다음 후보 조회. 독립 실행/Design 심사와 DEV 자체 실행 구별. PM-022 E03 자연 관측 수용 연결, 추가 전체 반복 비요구; 상위 최종 인수 #186 |
+| S3-09 | 기존 경로 회귀·MVP 증거 대응 | 실제 공통 변경의 W01~03/W04A/W05/W06/W07·VS-01 영향 회귀, AC-01~10·VP-01/02의 충족/재사용/잔여 표. 기존 E02/E04~08 회귀 재사용, DI-03 직접 영향 #185 및 최종 대응 #186. 전체 동일 GUI 재실행 비요구 |
 | S3-10 | F-08 심사·규격 결정 또는 적용 시점 명시 | **심사 게시·방향 승인 완료 [R10] / FINAL_SPEC_PENDING / 적용 범위 취합 대기**. §2.2 결정표·§6.1 하위 인수표 적용. 실제 미확정 규격에 종속되는 변경만 수용 보류. F-08 전체 CLOSED를 Stage 종료의 자동 조건으로 추가하지 않음. S3-10 전체 PASS는 아님 |
-| S3-11 | 통합 기록·필수 CI·Owner 최종 수용 | **S3-12 DEV-026을 포함한 필수 범위**의 실행 SHA별 증거·부서 수용·CI·미해결/이월·HQ 보고·Owner Stage 3 결정. 전체 MVP 최종 수용은 실제 남은 범위와 별도 판단 |
-| S3-12 | DEV-026 공통 UI 예외 처리·실행 소속·복귀 수용 | **현재 공급 OWNER_APPROVED_LIMITED_ACCEPTANCE / P07_BOUNDARY_OWNER_APPROVED [R11]**, 전체 OVERALL_PARTIAL·S3-12 최종 인수 대기. 실제 공급/EX·RP·X별 증거, 필요한 Track A 분담·W04B 미래 공급·HQ 취합을 연결. 기존 승인/GUI를 반복하지 않으며 F-08 방향 승인으로 전체 PASS 처리하지 않음 |
+| S3-11 | 통합 기록·필수 CI·Owner 최종 수용 | **S3-12 DEV-026을 포함한 필수 범위**의 실행 SHA별 증거·부서 수용·CI·미해결/이월·HQ 보고·Owner Stage 3 결정. 전체 MVP 최종 수용은 실제 남은 범위와 별도 판단. #186 FINAL_ACCEPTANCE_PENDING |
+| S3-12 | DEV-026 공통 UI 예외 처리·실행 소속·복귀 수용 | [PM-022 상세 인수표](STAGE3_S3_12_ACCEPTANCE_SCOPE.md): N01~14 기존 증거와 N15 취합, OD-S312-01 비의존 한정 종료·02 관측 한계 비차단 승인. 원 OVERALL_PARTIAL·P07 구분 유지. 실제 W04B 비의존 공급은 수용 연결 완료; DI-03 #185 신규 필수, F-08 #92 별도. **최종 인수 #186 PENDING** |
 
 S3-12는 기존 번호를 보존하여 추가한 필수 행이며 **S3-11 최종 결정 전에 완료**한다. EX-05 소비 fixture 한정·EX-16 일반 S01 대기 제외·EX-18 격리 외부역 입력을 유지한다. RP는 대조 식별자, X는 검증 묶음이며 새 독립 GUI 횟수나 전체 조합 의무가 아니다. P07 FIXED_DAY에 S01 직전일 조건을 일괄 적용하지 않는다.
 
@@ -167,7 +168,7 @@ HQ는 회신의 중복/누락·같은 파일 동시 변경·범위/일정 충돌
 
 - [GUI 검수 지침](GUI_REVIEW_PROTOCOL.md) 준수: 고정 SHA·조건·입력→기대→실제·authority/원장·종료/로그·해시를 한 패킷으로 연결한다. 합의된 범위를 한 번에 심사하고 필수 누락·결함·권고를 분리한다. SHA 진전/기록 정정만으로 이미 수용한 GUI를 반복하지 않는다.
 - #97 기술 종료·PR #157 심사와 O-01~07 방향 승인은 완료 [R10]. #92는 최종 규격/제품 적용 잔여로 OPEN 유지한다. 기존 심사·방향 선택을 재요청하지 않으며 이번 PR에서 Issue를 닫지 않는다.
-- #104 DEV-026은 Stage 3 필수 범위이며 현재 공급 한정 수용·P07 구분 승인과 PR #158을 연결한다 [R11]. 원본 PARTIAL·미관측·W04B 미래 공급·필요한 분담 수용·HQ/S3-12 최종 취합은 별도다. F-08 승인이나 문서 SHA 진전만으로 동일 GUI를 다시 요구하지 않는다.
+- #104 DEV-026은 Stage 3 필수 범위이며 현재 공급 한정 수용·P07 구분 승인과 PR #158을 연결한다 [R11]. 원본 PARTIAL·미관측은 보존하고 W04B 비의존 공급/분담 수용은 PM-022 N행에 연결했다. DI-03 #185·HQ/S3-12 최종 취합 #186은 별도다. F-08 승인이나 문서 SHA 진전만으로 동일 GUI를 다시 요구하지 않는다.
 - #139는 현재 정본/Owner 보관·백업 이월 상태를 유지한다. 백업 없음·복구 NOT_RUN·일정 NOT_SCHEDULED; 다음 재사용/인계 시 이월 전달·재확인, 대상/접근/일정 마련 후 수행. 일반 통상 인계는 INF-009 간소화 절차를 사용한다. [R08, R09]
 - 과거 DPI/물리 신원·보조 도구 바이트 NOT_VERIFIED, Q12/EXIT 등 NOT_CAPTURED, requested_exit NOT_PROVIDED와 실패 이력은 사실대로 유지한다. 실제 새 신뢰성 문제의 영향 행만 검토한다.
 
@@ -189,3 +190,5 @@ HQ는 회신의 중복/누락·같은 파일 동시 변경·범위/일정 충돌
 
 - **R10 — F-08 최신 결정 계보:** [#97 기술 종료](https://github.com/wisberry2022/MetroManager/issues/97#issuecomment-7052796254), [PR #157](https://github.com/wisberry2022/MetroManager/pull/157) merge `c5000c7094f987a84beb10b2ac2b9219117ceee9`, [Track B 전달](https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057347487), [Owner O-01~07 결정](https://github.com/wisberry2022/MetroManager/issues/92#issuecomment-7057405335). 심사·선택안 원본은 위 merge SHA에 고정. 기존 `OPTIONS_NOT_APPROVED`는 승인 전 이력. 출처 보고 REPORT_ONLY/MANIFEST_NOT_FOUND를 인증 PASS로 바꾸지 않음.
 - **R11 — DEV-026 최신 한정 수용:** [Owner 승인](https://github.com/wisberry2022/MetroManager/issues/104#issuecomment-7057161624), [PR #158](https://github.com/wisberry2022/MetroManager/pull/158) merge `74cd75045feb1369aa429feaec64fd3558c14813`, [DEV 결과](../engineering/tasks/DEV-026_RESULT.md). 문서 병합 SHA이며 새 제품 시험 SHA가 아님. 기존 시험본 `ae614d922c837eddf4e615fda985bd978e217461`의 관측 한계·원본 PARTIAL 보존.
+
+- **R12 — PM-022 현재 결정:** [Owner/HQ 기록](https://github.com/wisberry2022/MetroManager/issues/146#issuecomment-7236141995), [상세 인수표](STAGE3_S3_12_ACCEPTANCE_SCOPE.md), [DI-03 실행 요청](requests/PM-022_DI03_DEPARTMENT_REQUESTS.md), [티켓](tasks/PM-022_S3_12_DI03_TRANSITION.md). 과거 계획의 HOLD/미공급 표현보다 최신 결정·행별 증거를 우선한다.
